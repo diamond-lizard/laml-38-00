@@ -1,0 +1,28 @@
+<html><head><link href="stylesheets/program.css" rel="stylesheet" title="program" type="text/css"/> <title>Source file</title></head><body bgcolor = "#ffffff" text = "#000000" link = "#000000" vlink = "#000000"  ><font size = "2"  ><pre><div class = "schemedoc-abstract-comment"  >;;;; .title SchemeDoc Demo
+;;;; .author Kurt Normark
+;;;; .affiliation Aalborg University, Denmark
+;;;; This is a brief example of a Scheme 
+;;;; program with multi-semicolon SchemeDoc comments.</div>
+<span class = "comment"  >; This comment is not extracted.</span><br/>
+<div class = "schemedoc-section-comment"  >;;; Factorials. 
+;;; .section-id fac-stuff
+;;; This section demonstrates a plain function.</div>
+<a name="fac"></a><div class = "schemedoc-definition-comment"  >;; The factorial function. Also known as n!
+;; .parameter n An integer
+;; .pre-condition n &gt;= 0
+;; .returns n * (n-1) * ... * 1</div><a name="fac"></a><span><span><a href="prog1-LARGE.html#fac"><img src="./images/small-square.gif" title="Show source file in large font" alt="" border="0"/></a></span> <span><a href="cross-reference-index.html#fac" target="control-frame"><img src="./images/small-green-up-triangle.gif" title="In prog1: Link from fac to it&#39;s cross reference table entry" alt="" border="0"/></a></span> <a href="documentation.html#intro" target="documentation-frame"><img src="./images/doc-left-weak.gif" title="1.1. Introduction" alt="" border="0"/></a></span><br/>(<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_7.html#IDX173" target="documentation-frame" title="R5RS Scheme form">define</a> <span class = "signature"  >(fac n)</span>
+ (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX103" target="documentation-frame" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX235" target="documentation-frame" title="R5RS Scheme form">=</a> n 0) 1 (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX250" target="documentation-frame" title="R5RS Scheme form">*</a> n (<a class="applied-name" href="prog1.html#fac" title="prog1">fac</a> (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX251" target="documentation-frame" title="R5RS Scheme form">-</a> n 1)))))
+
+<div class = "schemedoc-section-comment"  >;;; List selection functions.
+;;; .section-id list-stuff
+;;; This section demonstrates two aliased functions.</div>
+<a name="head"></a><div class = "schemedoc-definition-comment"  >;; An alias of car. 
+;; .returns The first component of a cons cell
+;; .form (head pair)
+;; .parameter pair A cons cell</div><a name="head"></a><span><span><a href="prog1-LARGE.html#head"><img src="./images/small-square.gif" title="Show source file in large font" alt="" border="0"/></a></span> <span><a href="cross-reference-index.html#head" target="control-frame"><img src="./images/small-green-up-triangle.gif" title="In prog1: Link from head to it&#39;s cross reference table entry" alt="" border="0"/></a></span> <a href="documentation.html#intro" target="documentation-frame"><img src="./images/doc-left-weak.gif" title="1.1. Introduction" alt="" border="0"/></a></span><br/>(<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_7.html#IDX173" target="documentation-frame" title="R5RS Scheme form">define</a> <span class = "signature"  >head</span> <a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX321" target="documentation-frame" title="R5RS Scheme form">car</a>)
+
+<a name="tail"></a><div class = "schemedoc-definition-comment"  >;; An alias of cdr.
+;; .returns The second component of a cons cell
+;; .form (tail pair)
+;; .parameter pair A cons cell</div><a name="tail"></a><span><span><a href="prog1-LARGE.html#tail"><img src="./images/small-square.gif" title="Show source file in large font" alt="" border="0"/></a></span> <span><a href="cross-reference-index.html#tail" target="control-frame"><img src="./images/small-green-up-triangle.gif" title="In prog1: Link from tail to it&#39;s cross reference table entry" alt="" border="0"/></a></span> <a href="documentation.html#intro" target="documentation-frame"><img src="./images/doc-left-weak.gif" title="1.1. Introduction" alt="" border="0"/></a></span><br/>(<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_7.html#IDX173" target="documentation-frame" title="R5RS Scheme form">define</a> <span class = "signature"  >tail</span> <a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX322" target="documentation-frame" title="R5RS Scheme form">cdr</a>)
+</pre></font><div>&nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p></div></body></html>

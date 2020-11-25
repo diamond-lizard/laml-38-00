@@ -1,0 +1,61 @@
+; A 4/4 style.
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/midi/midi")
+(load (string-append laml-dir "styles/xml-in-laml/midi/midi-laml-processing-lib.scm"))
+
+; The identity scaling function
+(define sc-id
+  (make-scale-function-by-xy-points
+           (from-percent-points 
+             '((0 100) (100 100)))))
+
+(define (steel delta-time note-name section-name velocity)
+  (let ((f (generate-mega-voice-function steel-guitar-megavoice-map)))
+    (cons delta-time (f note-name section-name velocity))))
+
+(define (c-major-1 vel)
+  (list (steel 40 'c4 'strum-noice 30) (steel 240 'c4 'open-soft 40)   (steel 240 'e4 'hammer 50) (steel 40 'e4 'strum-noice 30)
+        (steel 240 'g4 'open-soft vel) (steel 240 'b4 'open-soft vel) 
+        (steel 240 'c5 'open-soft vel) (steel 240 'e5 'open-soft vel) (steel 40 'e5 'strum-noice 25)  (steel 40 'e0 'fret-noice 20)))
+
+(define (c-major-2 vel)
+  (list (steel 40 'c4 'strum-noice 30) (steel 240 'c4 'open-soft vel) (steel 240 'e4 'open-soft vel) (steel 40 'c1 'strum-noice 35)
+        (steel 240 'g4 'open-soft vel) (steel 240 'b4 'open-soft vel) 
+        (steel 240 'c5 'open-soft vel) (steel 240 'e5 'open-soft vel) (steel 40 'e5 'strum-noice 25)))
+
+(define (c-major-3 vel)
+  (list (steel 240 'c4 'open-soft vel) (steel 240 'e4 'open-soft vel) ; (steel 40 'c1 'strum-noice 35)
+        (steel 240 'g4 'slide vel) (steel 240 'b4 'open-soft vel) 
+        (steel 240 'c5 'dead (- vel 15)) (steel 240 'e5 'open-soft vel) (steel 40 'e5 'strum-noice 25) (steel 40 'e0 'fret-noice 10)))
+
+(define (c-major-4 vel)
+  (list (steel 240 'c4 'open-soft vel) (steel 240 'e4 'open-soft vel) ; (steel 40 'c1 'strum-noice 35)
+        (steel 240 'g4 'slide vel) (steel 240 'b4 'open-soft vel) 
+        (steel 240 'c5 'dead (- vel 15)) (steel 240 'e5 'slide (- vel 15)) (steel 40 'e5 'strum-noice 25) (steel 40 'e0 'fret-noice 10)))
+
+
+
+(StandardMidiFile
+   (MidiHeader 'format "0" 'numberOfTracks "1" 'pulsesPerQuarterNote "1920" 'mode "deltaTime")
+   (MidiTrack
+    (Meta 'deltaTime "0" 'type "81" (tempo= 55))
+    (ControlChange 'deltaTime "0" 'info "0:0:0 Channel volume MSB" 'channel "1" 'control "7" 'value "80")        
+    (voice 1 8 0 1)  ; Tyros Mega voice Steel Guitar
+
+    (repeat-messages 4
+       ;     Dir   Stretch   Vel   Total-lgt   Vel-scale     Time-scale  Transp  Ch  Base-dur  Time-note-list
+       (beat 'down 0.31      70     960        sc-id         sc-id       0       1   960       (c-major-1 117))
+       (beat 'up   0.1       64     960        sc-id         sc-id       0       1   960       (c-major-3 20))
+       (beat 'down 0.15      64     960        sc-id         sc-id       0       1   960       (c-major-2 40))
+       (beat 'up   0.1       64     960        sc-id         sc-id       0       1   960       (c-major-3 20))
+       (beat 'down 0.16      64     960        sc-id         sc-id       0       1   960       (c-major-2 40))
+       (beat 'up   0.19      64     960        sc-id         sc-id       0       1   960       (c-major-4 20))
+       (beat 'down 0.1       64     960        sc-id         sc-id       0       1   960       (c-major-2 40))
+       (beat 'up   0.13      64     960        sc-id         sc-id       0       1   960       (c-major-3 20))
+    )
+
+    (Meta 'deltaTime "1920" 'type "47" "")   ; End of track
+   )
+)
+
+;;; 1892

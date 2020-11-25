@@ -1,0 +1,40 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+
+(define file-list 
+  (list "initial-flat-html-document" "rule1-2-3-a" "rule4-a" "rule5-a" "rule5-b"
+         "rule6-a" "discussion-a" "table-example-a" "table-figure" "abstracted-html-document"))
+
+(write-text-file
+  (page
+  "Overview of JFP Examples"
+  (con-par
+    (laml-top-banner)
+    (h 1 "Overview of PLAN-x examples")
+
+    (con "These examples accompany the paper (in progress)"
+          (a-tag "http://www.cs.auc.dk/~normark/laml/papers/plan-x.pdf" (em "XML in LAML - Web programming in Scheme")) _ ".")
+   
+    "The following examples exist in this directory:"
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 200 200 200 200)
+        (list
+          (map b (list "Example"   "LAML"                   "HTML"))
+
+          (list "xxx"         (a-tag "rule1-2-3-a.laml")   (a-tag "rule1-2-3-a.html"))          
+          
+        )))
+
+    (con "The " (a-tag "index.laml" "LAML script") " that generates this page.")
+
+    (font-size 2 (em "If your browser will not present files with 'laml' or 'scm' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files."))
+  ))
+  (full-source-path-with-extension "html")
+)
+
+(end-laml)

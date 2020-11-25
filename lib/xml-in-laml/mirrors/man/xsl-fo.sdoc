@@ -1,0 +1,40 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/schemedoc-2/schemedoc")
+
+(define manual-element-order 
+  '(section-id section-title section-body title library kind form xml-in-laml-example-form description content-model cross-references attributes 
+    pre-condition parameters xml-in-laml-attributes returns post-condition examples misc comment))
+
+(define element-name-url-map  '(("fo:root" . "slice6.html#fo_root") ("fo:declarations" . "slice6.html#fo_declarations") ("fo:color-profile" . "slice6.html#fo_color-profile") ("fo:page-sequence" . "slice6.html#fo_page-sequence") ("fo:layout-master-set" . "slice6.html#fo_layout-master-set") ("fo:page-sequence-master" . "slice6.html#fo_page-sequence-master") ("fo:single-page-master-reference" . "slice6.html#fo_single-page-master-reference") ("fo:repeatable-page-master-reference" . "slice6.html#fo_repeatable-page-master-reference") ("fo:repeatable-page-master-alternatives" . "slice6.html#fo_repeatable-page-master-alternatives") ("fo:conditional-page-master-reference" . "slice6.html#fo_conditional-page-master-reference") ("fo:simple-page-master" . "slice6.html#fo_simple-page-master") ("fo:region-body" . "slice6.html#fo_region-body") ("fo:region-before" . "slice6.html#fo_region-before") ("fo:region-after" . "slice6.html#fo_region-after") ("fo:region-start" . "slice6.html#fo_region-start") ("fo:region-end" . "slice6.html#fo_region-end") ("fo:flow" . "slice6.html#fo_flow") ("fo:static-content" . "slice6.html#fo_static-content") ("fo:title" . "slice6.html#fo_title")  ("fo:block" . "slice6.html#fo_block") ("fo:block-container" . "slice6.html#fo_block-container") ("fo:bidi-override" . "slice6.html#fo_bidi-override") ("fo:character" . "slice6.html#fo_character") ("fo:initial-property-set" . "slice6.html#fo_initial-property-set") ("fo:external-graphic" . "slice6.html#fo_external-graphic") ("fo:instream-foreign-object" . "slice6.html#fo_instream-foreign-object") ("fo:inline" . "slice6.html#fo_inline") ("fo:inline-container" . "slice6.html#fo_inline-container") ("fo:leader" . "slice6.html#fo_leader") ("fo:page-number" . "slice6.html#fo_page-number") ("fo:page-number-citation" . "slice6.html#fo_page-number-citation")  ("fo:table-and-caption" . "slice6.html#fo_table-and-caption") ("fo:table" . "slice6.html#fo_table") ("fo:table-column" . "slice6.html#fo_table-column") ("fo:table-caption" . "slice6.html#fo_table-caption") ("fo:table-header" . "slice6.html#fo_table-header") ("fo:table-footer" . "slice6.html#fo_table-footer") ("fo:table-body" . "slice6.html#fo_table-body") ("fo:table-row" . "slice6.html#fo_table-row") ("fo:table-cell" . "slice6.html#fo_table-cell")  ("fo:list-block" . "slice6.html#fo_list-block") ("fo:list-item" . "slice6.html#fo_list-item") ("fo:list-item-body" . "slice6.html#fo_list-item-body") ("fo:list-item-label" . "slice6.html#fo_list-item-label")  ("fo:basic-link" . "slice6.html#fo_basic-link") ("fo:multi-switch" . "slice6.html#fo_multi-switch") ("fo:multi-case" . "slice6.html#fo_multi-case") ("fo:multi-toggle" . "slice6.html#fo_multi-toggle") ("fo:multi-properties" . "slice6.html#fo_multi-properties") ("fo:multi-property-set" . "slice6.html#fo_multi-property-set") ("fo:float" . "slice6.html#fo_float") ("fo:footnote" . "slice6.html#fo_footnote") ("fo:footnote-body" . "slice6.html#fo_footnote-body")))
+
+(define (xsl-fo-element-name-to-w3c-specification-url el-name) 
+  (let ((res (assoc el-name element-name-url-map)))
+    (if res
+       (string-append "http://www.w3.org/TR/xsl/" (cdr res))
+       #f)))
+
+(manual
+  (manual-front-matters
+    (manual-title "Reference Manual of the XSL-FO mirror")
+    (kn-manual-settings
+     (manual-abstract
+      (div 
+       (p "This is a manual of the XSL-FO" " mirror, as derived from the" (a 'href "http://www.renderx.com/tools/validators.html" "RenderX XSLT-FO DTD") _ "." "
+       The manual contains information which is present in the DTD: information about attributes
+       and the content model. In contrast to the DTD, however, the information in this manual is fully expanded
+       (without the macros defined by 'entities'). In addition, it contains systematic references to the elements of XSL-FO specification on the W3C web site.")
+
+
+       )))
+    'laml-resource "true"
+    'attribute-sorting "by-attribute-name"
+
+    'element-cross-reference-url-fn "xsl-fo-element-name-to-w3c-specification-url"
+    'element-cross-reference-anchor-text "XSL FO Specification Details"
+    
+  )
+
+  (manual-from-xml-dtd 'src "../../../../tools/dtd-parser/dtds/fo.lsp")
+
+)
+

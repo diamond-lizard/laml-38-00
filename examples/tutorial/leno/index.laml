@@ -1,0 +1,90 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+(define language-preference 'english)
+
+(load (in-startup-directory "../tutorial-common.scm"))
+
+(generic-page
+  "LENO Examples"
+  (con-par
+    (laml-top-banner)
+    (h 1 "LENO Tutorial Examples")
+    
+    (p "The following examples exist in this directory:")
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 250 300 300)
+        (list
+          (map b (list "Example"   "LENO source files"    "HTML files"))
+
+          (list "Single Lecture material - initial without content"      (a-tag "single-lecture/single.leno")         (a-tag "single-lecture/html/single.html"))
+          (list "Single Lecture material - with items, point, opposing, image, and source-program"        (a-tag "single-lecture-content/single-with-content.leno")
+                                                                                                                   (a-tag "single-lecture-content/html/single-with-content.html"))
+
+          (list "Multi Lecture material"                (con (a-tag "multi-lecture/multi-1.leno") (br)  
+                                                             (a-tag "multi-lecture/multi-2.leno" "multi-2.leno") (br)
+                                                             (a-tag "multi-lecture/multi-3.leno" "multi-3.leno") (br)
+                                                             (a-tag "multi-lecture/pre-notes.scm" (b "pre-notes.scm")))
+                                                                                                                     (a-tag "multi-lecture/html/index.html"))
+
+          (list "Refactored multi lecture material"     (con (a-tag "multi-lecture-1/multi-1.leno") (br)
+                                                             (a-tag "multi-lecture-1/multi-2.leno" "multi-2.leno") (br) 
+                                                             (a-tag "multi-lecture-1/multi-3.leno" "multi-3.leno") (br)
+                                                             (a-tag "multi-lecture-1/pre-notes.scm" "pre-notes.scm") (br)
+                                                             (a-tag "multi-lecture-1/shared-front-matters-stuff.scm" (b "shared-front-matters-stuff.scm")))
+                                                                                                                     (a-tag "multi-lecture-1/html/index.html"))
+
+
+          (list "Trail of multi lecture material"      (con (a-tag "multi-lecture-trail/multi-1.leno" (b "multi-lecture-trail/multi-1.leno")) (br)
+                                                             (a-tag "multi-lecture-trail/trail-edited.leno" (b "trail-edited.leno"))
+                                                             (a-tag "multi-lecture-trail/multi-2.leno" "multi-2.leno") (br) 
+                                                             (a-tag "multi-lecture-trail/multi-3.leno" "multi-3.leno") (br)
+                                                             (a-tag "multi-lecture-trail/pre-notes.scm" "pre-notes.scm") (br)
+                                                             (a-tag "multi-lecture-1/shared-front-matters-stuff.scm" "shared-front-matters-stuff.scm"))
+                                                                                                                     (a-tag "multi-lecture-trail/html/tutorial-trail.html"))
+
+          (list "Trivial embedding of a single Lecture in a trail"        (a-tag "single-lecture-content-trail/single-with-content.leno")
+                                                                                                                   (a-tag "single-lecture-content-trail/html/trail.html"))
+
+
+          (list "Multi lecture material with thematic presentation"
+                                                             (con 
+                                                             (a-tag "multi-lecture-themes/multi-1_themes.leno") (br)
+                                                             (a-tag "multi-lecture-themes/multi-2_themes.leno" "multi-2_themes.leno") (br) 
+                                                             (a-tag "multi-lecture-themes/multi-3_themes.leno" "multi-3_themes.leno") (br)
+                                                             (a-tag "multi-lecture-themes/multi-1.leno") (br)
+                                                             (a-tag "multi-lecture-themes/multi-2.leno" "multi-2.leno") (br) 
+                                                             (a-tag "multi-lecture-themes/multi-3.leno" "multi-3.leno") (br)
+                                                             (a-tag "multi-lecture-themes/pre-notes.scm" "pre-notes.scm") (br)
+                                                             (a-tag "multi-lecture-themes/shared-front-matters-stuff.scm" (b "shared-front-matters-stuff.scm")))
+                                                                                                                     (a-tag "multi-lecture-themes/html/index.html"))
+
+          (list "Single Lecture material with audio"        (con (a-tag "single-lecture-audio/single-audio.leno") (br)
+                                                                 (a-tag "single-lecture-audio/sound/sources/new-sound-copy.laml" "new-sound-copy.laml") )
+
+                                                                                                                   (a-tag "single-lecture-audio/html/single-audio.html"))
+          
+        )))
+
+
+    (p (a 'href (laml-tutorial-url "leno") "The accompanying part of the LAML tutorial"))
+
+    (p "The examples are available in the LAML distribution in 
+        the directory" (kbd "examples/tutorial/leno/") )
+
+    (p (a 'href "../index.html" "Index of tutorial examples."))
+
+    (p (em "If you modify the examples in this directory, or in one of the subdirectories, you may break or destroy
+       your local copy of the LAML tutorial. Therefore you are encouraged to make a copy of the examples
+       before modifying them."))
+
+    (font-size 2 (em "If your browser will not present files with 'laml' or 'scm' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files."))
+  )
+  white black blue blue
+)
+
+(end-laml)

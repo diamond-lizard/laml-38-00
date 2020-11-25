@@ -1,0 +1,47 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/midi/midi")
+(load (string-append laml-dir "styles/xml-in-laml/midi/midi-laml-processing-lib.scm"))
+
+(StandardMidiFile
+   (MidiHeader 'format "0" 'numberOfTracks "1" 'pulsesPerQuarterNote "480" 'mode "absTime" 'counterTransposition "0")
+   (MidiTrack
+      (Meta 'deltaTime "0" 'type "81" "07 A1 20")
+
+
+
+      (clean-for-sectional-playing 'abs-time 10 #f 
+        (select-channels #t
+          (Meta 'absTime "38178" 'info "20:3:258 Marker" 'type "6" "C-29  #1: Start of chord: F maj 11")
+     (ControlChange 'absTime "38178" 'info "20:3:258 Hold pedal (sustain) off" 'channel "1" 'control "64" 'value "6")
+     (ControlChange 'absTime "38188" 'info "20:3:268 Hold pedal (sustain) off" 'channel "1" 'control "64" 'value "54")
+     (ControlChange 'absTime "38198" 'info "20:3:278 Hold pedal (sustain) on" 'channel "1" 'control "64" 'value "100")
+     (ControlChange 'absTime "38209" 'info "20:3:289 Hold pedal (sustain) on" 'channel "1" 'control "64" 'value "127")
+     (Meta 'absTime "38331" 'info "20:3:411 Marker" 'type "6" "M-9 ")
+     (NoteOn 'absTime "38678" 'info "21:0:278 G1" 'channel "1" 'note "43" 'velocity "83" 'duration "138")
+     (NoteOn 'absTime "38688" 'info "21:0:288 C3" 'channel "1" 'note "60" 'velocity "99" 'duration "205")
+     (NoteOn 'absTime "38694" 'info "21:0:294 E2" 'channel "1" 'note "52" 'velocity "93" 'duration "193")
+     (NoteOn 'absTime "38945" 'info "21:1:65 A#2" 'channel "1" 'note "58" 'velocity "83" 'duration "161")
+     (NoteOn 'absTime "39156" 'info "21:1:276 G2" 'channel "1" 'note "55" 'velocity "95" 'duration "81")
+     (NoteOn 'absTime "39398" 'info "21:2:38 F0" 'channel "1" 'note "29" 'velocity "85" 'duration "226")
+     (ControlChange 'absTime "39439" 'info "21:2:79 Hold pedal (sustain) on" 'channel "1" 'control "64" 'value "106")
+     (ControlChange 'absTime "39449" 'info "21:2:89 Hold pedal (sustain) off" 'channel "1" 'control "64" 'value "44")
+     (NoteOn 'absTime "39454" 'info "21:2:94 A3" 'channel "1" 'note "69" 'velocity "106" 'duration "918")
+     (NoteOn 'absTime "39459" 'info "21:2:99 F3" 'channel "1" 'note "65" 'velocity "95" 'duration "747")
+     (ControlChange 'absTime "39461" 'info "21:2:101 Hold pedal (sustain) off" 'channel "1" 'control "64" 'value "0")
+     (NoteOn 'absTime "39461" 'info "21:2:101 C4" 'channel "1" 'note "72" 'velocity "112" 'duration "913")
+     (ControlChange 'absTime "39594" 'info "21:2:234 Hold pedal (sustain) off" 'channel "1" 'control "64" 'value "30")
+     (ControlChange 'absTime "39604" 'info "21:2:244 Hold pedal (sustain) on" 'channel "1" 'control "64" 'value "76")
+     (ControlChange 'absTime "39613" 'info "21:2:253 Hold pedal (sustain) on" 'channel "1" 'control "64" 'value "126")
+     (ControlChange 'absTime "39623" 'info "21:2:263 Hold pedal (sustain) on" 'channel "1" 'control "64" 'value "127")
+     (NoteOn 'absTime "40181" 'info "21:3:341 F2" 'channel "1" 'note "53" 'velocity "91" 'duration "598")
+     (NoteOn 'absTime "40417" 'info "22:0:97 F3" 'channel "1" 'note "65" 'velocity "85" 'duration "124")
+     (NoteOn 'absTime "40650" 'info "22:0:330 A3" 'channel "1" 'note "69" 'velocity "89" 'duration "100")
+     (NoteOn 'absTime "40657" 'info "22:0:337 F3" 'channel "1" 'note "65" 'velocity "42" 'duration "44")
+     
+        )
+      )
+
+      (Meta 'deltaTime "4800" 'type "47" "")
+   )
+)
+

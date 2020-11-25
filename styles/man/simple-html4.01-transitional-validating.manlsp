@@ -1,0 +1,8 @@
+(((kind "manual-page") (description "A list of four colors: the background, the text, the link, and the visited link colors.
+") (title "default-bg-text-link-vlink-colors") (form default-bg-text-link-vlink-colors)) ((kind "manual-page") (cross-references (reference "similar procedure" "write-html" "../../man/laml.html#write-html")) (description "Make a generic WWW page.
+Title and body are the title and body of the page.
+In the body you can use all the functions from the LAML html4.0 libraries.
+Colors is an optional list of four parameters.
+If given, it must be a list of exactly four colors: 
+Background color, text color (foreground color), link color, and visited link color. 
+A color can be made by the function make-color.") (misc "We do not recommend this procedure anymore. Instead, insert the generic page template via the Emacs Laml menu.") (title "generic-page") (form (generic-page title body . colors))) ((kind "manual-page") (cross-references (reference "similar procedure" "write-html" "../../man/laml.html#write-html")) (description "A more user friendly version of generic-page, in which the title also is used as header of the page.") (misc "We do not recommend this procedure anymore. Instead, insert the generic page template via the Emacs Laml menu.") (title "generic-page-1") (form (generic-page-1 title body . colors))))

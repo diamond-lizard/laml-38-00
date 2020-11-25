@@ -1,0 +1,51 @@
+; A script that produces a mirrors of XHTML 1.0 transitional based on a parsed DTD.
+
+(load (string-append laml-dir "laml.scm"))
+
+; Guile:
+; I have experieced stack overflow in Guile. In the guile compatibilty file we do (debug-set! stack 200000)
+; to alleviate this and similar problems
+
+; ----------------------------------------------------------------------------------------------------------------
+
+; Make an XHTML mirror. variant is either strict, transitional, or frameset.
+(define (make-xhtml-mirror variant doc-type-declaration-string xml-non-transliteration-elements xml-preformatted-text-elements)
+ (display-message (string-append "Making xhtml10-" variant " " "mirror"))
+ (laml-tool-load "xml-in-laml/xml-in-laml.scm")  ; to reset generation tool for each run
+
+ (set! default-xml-non-transliteration-elements xml-non-transliteration-elements) ; the 2. parameter
+ (set! default-xml-preformatted-text-elements xml-preformatted-text-elements) ; the 3. parameter
+ (set! default-document-type-declaration (string-it doc-type-declaration-string))
+
+ (set! validation-predicate-names 'normal) 
+
+ (let* (
+        (mirror-name (string-append "xhtml10-" variant))
+
+        (parsed-dtd-path
+          (string-append laml-dir "/tools/dtd-parser/sample-dtd/" mirror-name ".lsp"))
+
+        (mirror-target-dir 
+           (string-append laml-dir "lib/xml-in-laml/mirrors/"))
+
+        (mirror-destination-file (string-append mirror-target-dir mirror-name "-mirror" ".scm"))
+
+      )
+
+  (generate-mirror 
+    parsed-dtd-path mirror-destination-file mirror-name)
+
+  (display-message "DONE") (display-message "")
+ )
+)
+
+; ----------------------------------------------------------------------------------------------------------------
+
+
+(define transitional-document-type-declaration 
+ "<!DOCTYPE html PUBLIC \\\"-//W3C//DTD XHTML 1.0 Transitional//EN\\\" \\\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\\\">")
+
+(define xml-non-transliteration-elements (as-quoted-string (list 'list "script" "style")))
+(define xml-preformatted-text-elements (as-quoted-string (list 'list "pre" "script" "style")))
+
+(make-xhtml-mirror "transitional" transitional-document-type-declaration xml-non-transliteration-elements xml-preformatted-text-elements)

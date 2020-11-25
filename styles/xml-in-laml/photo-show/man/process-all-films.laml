@@ -1,0 +1,28 @@
+; This script processes all laml files in all film directories
+; of the current directory.
+
+(load (string-append laml-dir "laml.scm"))
+
+(define (process-laml-files-in-directory dir)
+  (let* ((file-list (directory-list dir))
+         (laml-file-list (filter (lambda (f) (equal? (file-name-extension f) "laml")) file-list))
+        )
+    (laml-cd dir)
+    (for-each laml laml-file-list)))
+
+(define (is-laml-photo-dir? path)
+  (file-exists? (string-append path "internal/" "film-description-entry.lsp")))
+
+(define (film-directory-list dir)
+ (let* ((dir-list (directory-list dir))
+        (full-path-dir-list (map (lambda (sub) (string-append dir sub "/")) dir-list)))
+   (filter is-laml-photo-dir? full-path-dir-list)))
+        
+
+(let ((current-dir (startup-directory)))
+ (for-each
+  process-laml-files-in-directory
+  (film-directory-list (startup-directory))))
+
+
+

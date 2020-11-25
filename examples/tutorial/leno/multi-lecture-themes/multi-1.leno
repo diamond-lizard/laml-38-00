@@ -1,0 +1,142 @@
+(load (string-append laml-dir "laml.scm"))       
+(laml-style "xml-in-laml/lecture-notes/lecture-notes")
+(load (in-startup-directory "shared-front-matters-stuff.scm"))
+
+(leno-front-matters
+  (front-title "Lecture 1 of Multi Demo")           
+  (front-author multi-author)           
+  (front-affiliation multi-affiliation)  
+  (front-abstract "This is the first lecture of the tutorial multi demo material")  
+
+  shared-front-matters-attributes
+
+  'process-all-lectures "true"
+)
+
+(begin-notes)
+
+(note-page 'id "sec1"
+  (section-title "Section one")
+)
+
+(note-page 'id "page1"
+  (title (main-text "First page in first lecture")
+         (annotation "")
+  )
+
+  (point 'id "pt1"
+   (main-text
+    "This is the first page"
+    )
+   (annotation
+    ""
+    )
+  )
+
+  (items 'id "it1"
+   (item 
+    (main-text "Item 1"
+               )
+    (items 
+     (item 
+      (main-text "Subitem 1"
+                 ))))
+   (item 
+    (main-text "Item 2"
+               )
+    (items 
+     (item 
+      (main-text "Subitem 2"
+                 ))))
+   (item 
+    (main-text "Item 3"
+               )
+    (items 
+     (item 
+      (main-text "Subitem 3"
+  )))))
+
+
+
+)
+
+(note-page 'id "page2"
+  (title (main-text "Second page in first lecture")
+         (annotation "")
+  )
+
+  (items 'id "it1"
+   (item 
+    (main-text "First item on page 2"
+               ) 
+    (annotation "There are no annotations - 
+                 no real ones, at least"
+                ))
+   (item 
+    (main-text "Second item on page 2"
+               ) 
+    (annotation ""
+  )))
+)
+
+(note-page 'id "page3"
+
+  (title (main-text "Third page in first lecture")
+         (annotation "")
+  )
+
+  (point 'id "pt1"
+   (main-text
+    "Some point on page 3"
+    )
+   (annotation
+    ""
+    )
+  )
+
+  (tabular 'id "ta1"
+   'border "1"
+   (row-widths
+    (cell "150") (cell "150") (cell "150")  )
+   (row (cell "A cell") (cell "A cell") (cell "A cell"))
+   (row (cell "A cell") (cell "A cell") (cell "A cell"))
+   (row (cell "A cell") (cell "A cell") (cell "A cell"))
+   (row (cell "A cell") (cell "A cell") (cell "A cell"))
+
+   (annotation
+    "Some table"
+    )
+  )
+
+)
+
+(note-page 'id "page4"
+  (title (main-text "Fourth page in first lecture")
+         (annotation "")
+  )
+
+  (synopsis 'id "sy1"
+   (synopsis-item  
+    (main-text "Synopsis item 1"
+               ) 
+    (annotation "Synopsis annotaton 1"
+                ))
+   (synopsis-item  
+    (main-text "Synopsis item 2"
+               ) 
+    (annotation "Synopsis annotation 2"
+  )))
+
+
+)
+
+
+
+
+
+
+
+
+(end-notes)
+
+

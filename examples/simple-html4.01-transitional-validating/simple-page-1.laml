@@ -1,0 +1,66 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+
+(define (document ttl body-form)
+ (html (head (title ttl))
+  (body (con (h1 ttl) body-form))))
+
+(define map (curry-generalized map))
+(define row list)
+
+(define (grey-numeric x)
+ (if (not (and (string? x) (numeric-string? x)))
+     (list x 'bgcolor (rgb-color 200 200 200))
+     x))
+
+(define validate-html? #t)
+(define check-html-attributes? #t)
+(define transliterate-character-data? #t)
+
+(write-html 'raw
+ (document
+  "A simple page"
+  (con
+     (p "This page demonstrates a few of the functions in the HTML 4.0 loose library.")
+
+     (em (p "This paragraph has been emphasized by means of the" 
+         (b "em") "function" _ ".") "Notice the use of space suppressing to avoid white
+         space between" (string-it "function") "and" (string-it ".") )
+
+     (p (b "The above paragraph is not valid, because we emphasize a p element using the em element.
+      It should be the other way around: emphasizing the contents of the pagragraph, like done here..."))
+
+     (p "Let us also show a simple table, which is one of the real convenient 
+      elements in LAML. Here we use one of the convenience functions:")
+
+     (p 
+      (table-1
+       2 ; border 
+       (list 100 200 100)
+       (list red green blue)
+       (list
+         (list "Here" "is" "some")
+         (list "tabular" "text" ""))))
+
+     "Above, we see a table in a paragraph - within a p element. This is not allowed - 
+     and the validator finds out of course."
+
+     (p "Let us make another table, using the HTML elements directly. This is 
+      quite attractive using the new HTML mirror library, because the element contents can
+      be a list (to any depth):")
+
+     (table 
+	 'border "1" 
+	 (tbody 
+	  (map (compose tr (map (compose td grey-numeric)))
+	       (list
+		(row (list "This" 'rowspan "2") "is" "row" "1")
+		(row                            "is" "row" "2")
+		(row "This"                     "is" "row" "3")
+		(row "This"                     "is" "row"  "4")))))
+
+     (p (b "This ends this simple page" _ ".")))
+  )
+  (full-source-path-with-extension "html"))
+
+(end-laml)

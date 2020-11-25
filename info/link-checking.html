@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+      <meta name="Generator" content="LAML" />
+      <title>Link Checking in LAML</title></head>
+   <body bgcolor="#ffffbf" text="#000000" link="#0000ff" vlink="#0000ff">
+      <table border="0px" cellpadding="0" cellspacing="0" width="100%">
+         <tbody>
+            <tr>
+               <td width="33%" align="left" valign="top">
+                  <font size="2">Generated: Thursday, January 26, 2006, 23:38:52</font></td>
+               <td width="34%" align="center" valign="top">
+                  <font size="2"><span>Copyright &copy; 2006, Kurt N&#248;rmark</span></font></td>
+               <td width="33%" align="right" valign="top">
+                  <font size="2">
+                     <a href="../index.html" title="The local LAML software home page" target="_top">
+                        <img src="../images/laml-home.gif" alt="The local LAML software home page"
+                             border="0" /></a></font></td></tr></tbody></table>
+      <h1>Link Checking in LAML</h1>
+      <p>The facilities described below are available from LAML version 29.</p>
+      <p>
+         For a long time, LAML has been able to validate attributes and contents. Recently also
+         checking for proper use of ID attributes has been introduced.</p>
+      <p>
+         Linking errors are a major source of frustration in web documents. Concretely, we have
+         the problem if an URL points to a non-existing web resource. Therefore it
+         is - from a practical point of view - very useful to check all links when
+         the document is generated. This is now possible in LAML. LAML is able to check
+         for relative links, with and without an explicitly given base URL (given by
+         the
+         <a href="../lib/xml-in-laml/mirrors/man/xhtml10-transitional-mirror.html#base">
+            base</a>
+         element of XHTML, for instance) and absolute links. Checking for absolute links requires
+         an implementation of the LAML compatibility function
+         <a href="../lib/compatibility/man/mzscheme-compat.html#url-target-exists?">
+            url-target-exists?</a>.
+         (If you use MzScheme, LAML has such an implementation. However, in LAML version 29
+         this function does not give accurate results!)</p>
+      <p>
+         The variable
+         <a href="../lib/xml-in-laml/man/xml-in-laml.html#xml-link-checking">
+            xml-link-checking</a>
+         (in the library lib/xml-in-laml/xml-in-laml.scm) controls the amount of link checking.
+         You can ask for no link checking, checking of relative links, checking of
+         absolute links, and checking of all links. See the documentation of the variable
+         <a href="../lib/xml-in-laml/man/xml-in-laml.html#xml-link-checking">
+            xml-link-checking</a>.</p>
+      <p>
+         When you use an XHTML language in LAML everything is provided for you. The default
+         value of
+         <a href="../lib/xml-in-laml/man/xml-in-laml.html#xml-link-checking">
+            xml-link-checking</a>
+         provides for checking of relative links. </p>
+      <p>
+         Some supported XML languages in LAML come with an URL extractor function, and a base
+         URL extractor function. They are returned by the higher-order functions
+         <a href="../lib/xml-in-laml/man/xml-in-laml.html#url-extractor-of-xml-language">
+            url-extractor-of-xml-language</a>
+         and 
+         <a href="../lib/xml-in-laml/man/xml-in-laml.html#base-url-extractor-of-xml-language">
+            base-url-extractor-of-xml-language</a>.
+         The function
+         <a href="../lib/xml-in-laml/man/xml-in-laml.html#set-xml-link-checking-functions">
+            set-xml-link-checking-functions</a>
+         is used to define the URL extractor function and a base URL extractor function.
+         The mirror function library calls this function with appropriate URL extractor functions.</p>
+      <p>Link checking in LAML works as follows:</p>
+      <ol>
+         <li style="margin-bottom:4mm;">
+            <b>Document generation</b>
+            <br />
+            The document is generated as usual. This gives a LAML AST of the document.</li>
+         <li style="margin-bottom:4mm;">
+            <b>Link collection</b>
+            <br />
+            The function
+            <a href="../lib/xml-in-laml/man/xml-in-laml.html#collect-links-for-later-checking-in-ast!">
+               collect-links-for-later-checking-in-ast!</a>
+            is called on the AST. This function collects all URLs, which must be
+            checked. Two global variables
+            <kbd>relative-url-list-for-later-checking</kbd>
+            and
+            <kbd>absolute-url-list-for-later-checking</kbd>
+             are hereby assigned. The second parameter of
+            <a href="../lib/xml-in-laml/man/xml-in-laml.html#collect-links-for-later-checking-in-ast!">
+               collect-links-for-later-checking-in-ast!</a>
+            gives the absolute file path of the location, where the file is written
+            in the file system (the base URL). This information is important for
+            checking of relative links in static web documents. Notice that the
+            collection of links cannot be done before we know the file location of the document.</li>
+         <li style="margin-bottom:4mm;">
+            <b>Relative link checking</b>
+            <br />
+            The function
+            <a href="../lib/xml-in-laml/man/xml-in-laml.html#check-relative-url-list!">
+               check-relative-url-list!</a>
+            checks the existence of resources addressed by the URLs in
+            <kbd>relative-url-list-for-later-checking</kbd>.
+            This boils down to file and directory existence checks.
+            Problems are addressed via the function
+            <a href="../lib/xml-in-laml/man/xml-in-laml.html#xml-check-error">
+               xml-check-error</a>.
+            Notice that link checking should be done as late as possible, after all more or
+            less dependent files have been written.</li>
+         <li style="margin-bottom:4mm;">
+            <b>Absolute link checking</b>
+            <br />
+            The function
+            <a href="../lib/xml-in-laml/man/xml-in-laml.html#check-absolute-url-list!">
+               check-absolute-url-list!</a>
+            checks the existence of resources addressed by the URLs in
+            <kbd>absolute-url-list-for-later-checking</kbd>.
+            This function relies on the LAML compatibility function
+            <a href="../lib/compatibility/man/mzscheme-compat.html#url-target-exists?">
+               url-target-exists?</a>
+            (for which we do not yet have a good implementation in the LAML distribution).
+            Errors are reported as for relative links.</li></ol>
+      <p>
+         In the standard LAML setup, step 2 is done by
+         <a href="../man/laml.html#write-html">write-html</a>,
+         when a document is rendered (linearized and written to a file). You can alternatively
+         do it &#39;manually&#39; from other contexts, of course.</p>
+      <p>
+         Step 3 and 4 are done from the function
+         <a href="../man/laml.html#end-laml">end-laml</a>.
+          Again, you can check the collected links yourself, using the functions described
+         about, if you need to.</p>
+      <p>Notice that anchor parts, following &#39;#&#39; in a URL, are not checked by LAML.</p>
+      <p>
+         The link checking framework, as described in this document, can be used on pre-existing
+         XML languages as well as on your own XML languages. Just provide URL extractor
+         functions for you own XML language, install them with
+         <a href="../lib/xml-in-laml/man/xml-in-laml.html#set-xml-link-checking-functions">
+            set-xml-link-checking-functions</a>,
+         and arrange for link collection and link checking (using the functions from above).
+         Notice, however, that your own XML language typically is translated to XHTML, which
+         will check it&#39;s links. Therefore, it is not always necessary to do a lot of
+         link checking in your own, high-level XML languages.</p>
+      <p>
+         A single end remark for relative links. It is better to prevent errors than to find
+         them at a later point in time. When you make relative links in LAML, the Emacs
+         command
+         <b>M-x insert-relative-file-path</b>
+         is
+         <em>very useful</em>
+         together with the embedding Emacs command (with
+         <b>M-x embed</b>).</p>
+      <div>
+         &nbsp;
+         <br />
+         Kurt N&#248;rmark
+         <br />
+         <a href="mailto:normark@cs.aau.dk">normark@cs.aau.dk</a>
+         <br />
+         <a href="http://www.cs.aau.dk/~normark/">http://www.cs.aau.dk/~normark/</a>
+         <br /></div></body></html>

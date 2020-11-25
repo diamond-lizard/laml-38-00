@@ -1,0 +1,57 @@
+<html><head><link href="stylesheets/program.css" rel="stylesheet" title="program" type="text/css"/> <title>Source file</title></head><body bgcolor = "#9bffff" text = "#000000" link = "#000000" vlink = "#000000"  ><font size = "3"  ><pre>(<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX468" target="documentation-frame" title="R5RS Scheme form">load</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" target="documentation-frame" title="R5RS Scheme form">string-append</a> laml-dir "laml.scm"))
+(<a class="schemedoc-name" href="../../../man/laml.html#laml-style" target="documentation-frame" title="Manual: laml">laml-style</a> "simple-xhtml1.0-transitional-validating")
+<a name="meta-props"></a><span class = "comment"  >; (lib-load "xhtml1.0-convenience.scm")</span><br/>
+<a name="meta-props"></a><span><span><a href="char-ref.html#meta-props"><img src="./images/small-square.gif" title="Show source file in small font" alt="" border="0"/></a></span> <span><a href="cross-reference-index-m.html#meta-props" target="control-frame"><img src="./images/small-green-up-triangle.gif" title="In char-ref: Link from meta-props to it&#39;s cross reference table entry" alt="" border="0"/></a></span> </span><br/>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" target="documentation-frame" title="R5RS Scheme form">define</a> <span class = "signature"  >meta-props</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX332" target="documentation-frame" title="R5RS Scheme form">list</a> 'http-equiv "Content-Type"
+                         'content "text/html; charset=iso-8859-1"))
+<a name="html-props"></a><span><span><a href="char-ref.html#html-props"><img src="./images/small-square.gif" title="Show source file in small font" alt="" border="0"/></a></span> <span><a href="cross-reference-index-h.html#html-props" target="control-frame"><img src="./images/small-green-up-triangle.gif" title="In char-ref: Link from html-props to it&#39;s cross reference table entry" alt="" border="0"/></a></span> </span><br/>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" target="documentation-frame" title="R5RS Scheme form">define</a> <span class = "signature"  >html-props</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX332" target="documentation-frame" title="R5RS Scheme form">list</a> 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX106" target="documentation-frame" title="R5RS Scheme form">set!</a> <a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#xml-validate-contents?" target="documentation-frame" title="Manual: xml-in-laml">xml-validate-contents?</a> #t)
+(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX106" target="documentation-frame" title="R5RS Scheme form">set!</a> <a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#xml-check-attributes?" target="documentation-frame" title="Manual: xml-in-laml">xml-check-attributes?</a> #t)
+
+(<a class="schemedoc-name" href="../../../man/laml.html#write-html" target="documentation-frame" title="Manual: laml">write-html</a> '(pp prolog)
+ (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-strict-mirror.html#html" target="documentation-frame" title="Manual: xhtml10-strict-mirror">html</a> <a class="applied-name" href="char-ref-LARGE.html#html-props" title="char-ref">html-props</a>
+  (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-strict-mirror.html#head" target="documentation-frame" title="Manual: xhtml10-strict-mirror">head</a> 
+   (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-strict-mirror.html#meta" target="documentation-frame" title="Manual: xhtml10-strict-mirror">meta</a> <a class="applied-name" href="char-ref-LARGE.html#meta-props" title="char-ref">meta-props</a>) (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-strict-mirror.html#title" target="documentation-frame" title="Manual: xhtml10-strict-mirror">title</a> "Character reference example"))
+  (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-strict-mirror.html#body" target="documentation-frame" title="Manual: xhtml10-strict-mirror">body</a> 
+
+    (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-strict-mirror.html#p" target="documentation-frame" title="Manual: xhtml10-strict-mirror">p</a> "When we write &#39;&lt;&#39; and &#39;&gt;&#39; these characters are translated to HTML
+        character references &amp;lt; and &amp;gt;" )
+
+    (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-strict-mirror.html#p" target="documentation-frame" title="Manual: xhtml10-strict-mirror">p</a> "Notice, in the LAML source, how the previous paragraph is written.
+        We make good use of the HTML transformation table." )
+
+    (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-strict-mirror.html#p" target="documentation-frame" title="Manual: xhtml10-strict-mirror">p</a> "The character &lt; can also be written as a character entity" 
+       (<a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#char-ref" target="documentation-frame" title="Manual: xml-in-laml">char-ref</a> 60)  "or" (<a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#char-ref" target="documentation-frame" title="Manual: xml-in-laml">char-ref</a> "lt") <a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#_" target="documentation-frame" title="Manual: xml-in-laml">_</a> "."
+       "This looks strange in the rendered page,
+        but take a look in the LAML source.")
+
+    (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-strict-mirror.html#p" target="documentation-frame" title="Manual: xhtml10-strict-mirror">p</a> "Special characters can also be used, for instance"
+       (<a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#char-ref" target="documentation-frame" title="Manual: xml-in-laml">char-ref</a> "Lambda") "and" (<a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#char-ref" target="documentation-frame" title="Manual: xml-in-laml">char-ref</a> 937) <a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#_" target="documentation-frame" title="Manual: xml-in-laml">_</a> "."
+       "Please take a look in the LAML source.") 
+
+    (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-strict-mirror.html#p" target="documentation-frame" title="Manual: xhtml10-strict-mirror">p</a> 'id "XM&amp;Lambda;" "Attribute values can also contain 
+        character entities.  We illustrate this with the id of
+        the enclosing paragraph.")
+
+    (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-strict-mirror.html#p" target="documentation-frame" title="Manual: xhtml10-strict-mirror">p</a> 'id "&lt;XM&amp;Lambda;&gt;" "Attributes values may even contain the
+           &#39;&lt;&#39; character. The reason is that LAML converts it to"
+           (<a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#char-ref" target="documentation-frame" title="Manual: xml-in-laml">char-ref</a> "amp") <a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#_" target="documentation-frame" title="Manual: xml-in-laml">_</a> "amp;" <a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#_" target="documentation-frame" title="Manual: xml-in-laml">_</a> "."
+           "See again the attribute of the enclosing paragraph."
+    )
+
+    (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-strict-mirror.html#br" target="documentation-frame" title="Manual: xhtml10-strict-mirror">br</a> 'id "XM&amp;Lambda;")
+
+    (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-strict-mirror.html#p" target="documentation-frame" title="Manual: xhtml10-strict-mirror">p</a> 'css:x "y&amp;oslash;z" 
+       "In the id of this paragraph we test character references in
+        css attribute values. This is not useful, however, and probably
+        even in conflict with the basic CSS syntax.
+        We should really include some basic CSS validation in LAML
+        to deal with this problem.
+       ")
+
+  )
+ )
+)
+
+
+(<a class="schemedoc-name" href="../../../man/laml.html#end-laml" target="documentation-frame" title="Manual: laml">end-laml</a>)</pre></font><div>&nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p></div></body></html>

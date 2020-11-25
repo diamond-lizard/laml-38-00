@@ -1,0 +1,35 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.1-validating")
+
+(begin-laml)
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(write-html '(pp prolog)
+  (html 
+   (head 
+     (title "Hello World") 
+   )
+   (body 
+     (p "Here is the body text of the most simple WWW page," 
+        "you have ever seen!!")
+
+     (p 'id "x" "Here is a link to" (a 'href "../../index.html" "LAML") _ ".")
+
+     (p 'id "y" "And a link to" (a 'href "http://www.w3c.org" "W3C") _ ".")
+
+     (p (laml-power-icon 0 'large))
+
+   )
+  )
+)
+
+(end-laml)
+
+
+
+
+
+
+

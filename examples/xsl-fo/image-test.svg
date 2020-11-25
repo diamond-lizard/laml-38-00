@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<svg contentScriptType="text/ecmascript" width="576.0"
+     xmlns:xlink="http://www.w3.org/1999/xlink" zoomAndPan="magnify"
+     contentStyleType="text/css" height="792.0"
+     preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
+     version="1.0">
+    <g id="Page-1" style="font-family:sanserif;font-size:12"
+       transform="translate(0,0.0)">
+        <rect width="576.0" x="0.0" height="792.0" y="0.0"
+              style="fill:none;stroke:black"/>
+        <text x="50.4" y="66.400024" style="font-family:Times;font-size:20.0">
+            XSL-FO
+        </text>
+        <text x="132.107" y="66.400024" style="font-family:Times;font-size:20.0">
+            Image
+        </text>
+        <text x="198.913" y="66.400024" style="font-family:Times;font-size:20.0">
+            test
+        </text>
+        <a xlink:href="#svgView(viewBox(0, 0.0, 576, 792))" xlink:type="simple"
+           xlink:actuate="onRequest" xlink:show="replace"
+           xmlns:xlink="http://www.w3.org/1999/xlink">
+            <rect width="288.0" x="0.0" height="792.0" y="0.0"
+                  style="fill:blue;visibility:hidden"/>
+        </a>
+    </g>
+</svg>

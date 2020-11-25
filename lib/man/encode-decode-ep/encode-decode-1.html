@@ -1,0 +1,374 @@
+<html><head><link href="../../../css-stylesheets/elucidator/program.css" rel="stylesheet" title="program" type="text/css" /> <title>Source file</title></head><body bgcolor="#ffffff" text="#000000" link="#000000" vlink="#000000"><font size="2"><pre><span class="comment">; The LAML library and programs written by Kurt Normark, Aalborg University, Denmark.
+; Copyright (C) 1999  Kurt Normark.
+;
+; This program is free software; you can redistribute it and/or modify
+; it under the terms of the GNU General Public License as published by
+; the Free Software Foundation; either version 2 of the License, or
+; (at your option) any later version.
+;
+; This program is distributed in the hope that it will be useful,
+; but WITHOUT ANY WARRANTY; without even the implied warranty of
+; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+; GNU General Public License for more details.
+;
+; You should have received a copy of the GNU General Public License
+; along with this program; if not, write to the Free Software
+; Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA</span><br />
+
+<div class="schemedoc-abstract-comment">;;;; URLs are encoded in order to avoid special characters causing problems in an Internet adresss. 
+;;;; This library provides functions to encode and decode parts of an URL. The main functions are
+;;;; encode-a-list and string-decode (also known as extract-attributes). The library also supports
+;;;; decoding of the multipart/form-data format, which can be used for file uploading. The main function
+;;;; in this area is multipart-decode.
+;;;; Encode-a-list takes an association list and encodes it to a string with '=' and '&' representation.
+;;;; string-decode (extract-attributes) takes a string, such as produced by encode-a-list, and returns an association list.
+;;;; Thus, each of the two functions are inverse version of the other function.&lt;p&gt;
+;;;; This library requires the &lt;a href = "color.html"&gt; color library&lt;/a&gt;  to be loaded (not for coloring purpose, but in order to get access to the 
+;;;; the function that convert hexadecimal numbers to decimal numbers). In case multipart-decode is used, also the &lt;a href="collect-skip.html"&gt;collect-skip library&lt;/a&gt;
+;;;; is required.&lt;p&gt;
+;;;; This library is used by the accompanying &lt;a href = "cgi.html"&gt;CGI library&lt;/a&gt;.&lt;p&gt;
+;;;; .title Reference Manual of the URL Encode and Decode Library</div>
+<div class="schemedoc-section-comment">;;; Encoding stuff. </div>
+<a name="encode-vector"></a>
+<a name="encode-vector"></a><span><a href="../encode-decode.html#encode-vector"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">encode-vector</span>
+  (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX407" title="R5RS Scheme form">list-&gt;vector</a> 
+    '("%00" "%01" "%02" "%03" "%04" "%05" "%06" "%07" "%08" "%09" "%0a" "%0b" "%0c" "%0d" "%0e" "%0f" "%10" "%11" "%12" "%13" "%14" "%15" "%16" "%17" "%18" "%19" "%1a" "%1b" "%1c" "%1d" "%1e" "%1f" "%20" "%21" "%22" "%23" "%24" "%25" "%26" "%27" "%28" "%29" "%2a" "%2b" "%2c" "%2d" "%2e" "%2f" "0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "%3a" "%3b" "%3c" "%3d" "%3e" "%3f" "%40" "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z" "%5b" "%5c" "%5d" "%5e" "%5f" "%60" "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z" "%7b" "%7c" "%7d" "%7e" "%7f")))
+
+<a name="encode-char"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(encode-char char)</span>
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX122" title="R5RS Scheme form">let*</a> ((<span class="local-name-binding">n</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX367" title="R5RS Scheme form">char-&gt;integer</a> char)))
+   (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX117" title="R5RS Scheme form">and</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX239" title="R5RS Scheme form">&gt;=</a> n 0) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX238" title="R5RS Scheme form">&lt;=</a> n 128))
+       (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX404" title="R5RS Scheme form">vector-ref</a> <a class="applied-name" href="encode-decode-1.html#encode-vector" title="encode-decode">encode-vector</a> n)
+       (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> "%" (<a class="schemedoc-name" href="../../../lib/man/general.html#number-in-base" title="Manual: general">number-in-base</a> n 16)))))
+
+<a name="encode-string"></a><a name="encode-string"></a><span><a href="../encode-decode.html#encode-string"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(encode-string str)</span>
+  (<a class="applied-name" href="encode-decode-1.html#encode-string-help" title="encode-decode">encode-string-help</a> str 0 "") )
+
+<a name="encode-string-help"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(encode-string-help str i res)</span>
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX235" title="R5RS Scheme form">=</a> i (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX378" title="R5RS Scheme form">string-length</a> str))
+      res
+      (<a class="applied-name" href="encode-decode-1.html#encode-string-help" title="encode-decode">encode-string-help</a> str (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX249" title="R5RS Scheme form">+</a> i 1)
+        (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> res (<a class="applied-name" href="encode-decode-1.html#encode-char" title="encode-decode">encode-char</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX379" title="R5RS Scheme form">string-ref</a> str i))))))
+
+<a name="encode-a-list"></a><a name="encode-a-list"></a><span><a href="../encode-decode.html#encode-a-list"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(encode-a-list a-list)</span>
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">res</span> (<a class="applied-name" href="encode-decode-1.html#encode-a-list-1" title="encode-decode">encode-a-list-1</a> a-list)))
+    (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX304" title="R5RS Scheme form">not</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX330" title="R5RS Scheme form">null?</a> a-list))  <span class="comment">; remove traling &</span><br />        (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX391" title="R5RS Scheme form">substring</a> res 0 (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX251" title="R5RS Scheme form">-</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX378" title="R5RS Scheme form">string-length</a> res) 1))
+        res)))
+
+<a name="encode-a-list-1"></a><span class="comment">; helping operation to encode-a-list, doing the real work</span><br /><a name="encode-a-list-1"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(encode-a-list-1 a-list)</span>
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX330" title="R5RS Scheme form">null?</a> a-list)
+      ""
+      (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">key</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX321" title="R5RS Scheme form">car</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX321" title="R5RS Scheme form">car</a> a-list)))
+            (<span class="local-name-binding">val</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX322" title="R5RS Scheme form">cdr</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX321" title="R5RS Scheme form">car</a> a-list))))
+        (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> (<a class="applied-name" href="encode-decode-1.html#encode-string" title="encode-decode">encode-string</a> (<a class="schemedoc-name" href="../../../lib/man/general.html#as-string" title="Manual: general">as-string</a> key))
+                       "="
+                       (<a class="applied-name" href="encode-decode-1.html#encode-string" title="encode-decode">encode-string</a> (<a class="schemedoc-name" href="../../../lib/man/general.html#as-string" title="Manual: general">as-string</a> val))
+                       "&amp;"
+                       (<a class="applied-name" href="encode-decode-1.html#encode-a-list-1" title="encode-decode">encode-a-list-1</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX322" title="R5RS Scheme form">cdr</a> a-list)))))) 
+         
+  
+
+<span class="comment">; ================================================================================================================</span><br />
+<div class="schemedoc-section-comment">;;; Decoding stuff. 
+;;; Because spaces and certain special characters may not appear in URLs, an
+;;; encoding scheme is used when it is necessary to generate a URL that
+;;; includes them:  Each space is converted to a plus sign, and each special
+;;; character is replaced by a triplet of characters consisting of a percent
+;;; sign and two hexadecimal digits, which together identify the ASCII code
+;;; for the character.</div>
+<a name="decode-out-string"></a><span class="comment">; An internal string in which the individual strings of the alist are represented.</span><br /><a name="decode-out-string"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">decode-out-string</span> "")
+
+<a name="string-decode"></a><a name="string-decode"></a><span><a href="../encode-decode.html#string-decode"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(string-decode str-a-list)</span>
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX106" title="R5RS Scheme form">set!</a> <a class="applied-name" href="encode-decode-1.html#decode-out-string" title="encode-decode">decode-out-string</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX375" title="R5RS Scheme form">make-string</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX378" title="R5RS Scheme form">string-length</a> str-a-list) #\space))
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">res</span> (<a class="applied-name" href="encode-decode-1.html#decode-string-alist-1" title="encode-decode">decode-string-alist-1</a> str-a-list 0 (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX378" title="R5RS Scheme form">string-length</a> str-a-list) <a class="applied-name" href="encode-decode-1.html#decode-out-string" title="encode-decode">decode-out-string</a> 0 '() "" 'in-key-or-value)))
+    (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">cond</a> ((<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX117" title="R5RS Scheme form">and</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX235" title="R5RS Scheme form">=</a> 1 (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX333" title="R5RS Scheme form">length</a> res)) (<a class="schemedoc-name" href="../../../lib/man/general.html#empty-string?" title="Manual: general">empty-string?</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX321" title="R5RS Scheme form">car</a> res))) '())
+          (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">else</a> (<a class="schemedoc-name" href="../../../lib/man/general.html#propertylist-to-alist" title="Manual: general">propertylist-to-alist</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX335" title="R5RS Scheme form">reverse</a> res))))
+))
+
+<a name="extract-attributes"></a><a name="extract-attributes"></a><span><a href="../encode-decode.html#extract-attributes"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">extract-attributes</span> <a class="applied-name" href="encode-decode-1.html#string-decode" title="encode-decode">string-decode</a>)
+
+<a name="decode-string-alist-1"></a><span class="comment">; The helping function of decode-string-alist, which drives the underlying state machine</span><br /><a name="decode-string-alist-1"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(decode-string-alist-1 instr inptr inlength outstr outptr prop-list collected current-state)</span>
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX235" title="R5RS Scheme form">=</a> inptr inlength)
+
+      (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">cond</a> 
+            ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> current-state 'in-key-or-value) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX391" title="R5RS Scheme form">substring</a> outstr 0 outptr) prop-list))  <span class="comment">; include the last string</span><br />            ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> current-state 'hex3) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX391" title="R5RS Scheme form">substring</a> outstr 0 outptr) prop-list))             <span class="comment">; also here</span><br />            ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> current-state 'equal-accepted) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> "" prop-list))                            <span class="comment">; include a trailing empty string</span><br />            ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> current-state 'ampersand-accepted) prop-list)                                  <span class="comment">; just return prop-list</span><br />            (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">else</a> (error "decode-string-a-list-1: Strange end of string input")))
+                
+      (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX122" title="R5RS Scheme form">let*</a> ((<span class="local-name-binding">inch</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX379" title="R5RS Scheme form">string-ref</a> instr inptr))
+             (<span class="local-name-binding">trans-res</span> (<a class="applied-name" href="encode-decode-1.html#decode-string-transition" title="encode-decode">decode-string-transition</a> current-state inch collected))
+             (<span class="local-name-binding">next-state</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX321" title="R5RS Scheme form">car</a> trans-res))
+             (<span class="local-name-binding">next-collected</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX322" title="R5RS Scheme form">cdr</a> trans-res))
+            )
+
+       (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">cond</a> 
+          ((<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX117" title="R5RS Scheme form">and</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> next-state 'in-key-or-value) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> inch #\+)) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX380" title="R5RS Scheme form">string-set!</a> outstr outptr #\space))  <span class="comment">; handle '+'</span><br />          ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> next-state 'in-key-or-value) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX380" title="R5RS Scheme form">string-set!</a> outstr outptr inch))                          <span class="comment">; normal case</span><br />          ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> next-state 'hex3) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX380" title="R5RS Scheme form">string-set!</a> outstr outptr next-collected))                           <span class="comment">; insert hex conversion</span><br />       )
+
+       (<a class="applied-name" href="encode-decode-1.html#decode-string-alist-1" title="encode-decode">decode-string-alist-1</a> instr (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX249" title="R5RS Scheme form">+</a> 1 inptr) inlength
+                              outstr 
+                              (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">cond</a> ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> next-state 'equal-accepted) 0)
+                                    ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> next-state 'ampersand-accepted) 0)
+                                    ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> next-state 'hex1) outptr)
+                                    ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> next-state 'hex2) outptr)
+                                    (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">else</a>  (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX249" title="R5RS Scheme form">+</a> outptr 1)))
+                              (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX118" title="R5RS Scheme form">or</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> next-state 'equal-accepted) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> next-state 'ampersand-accepted))
+                                  (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX391" title="R5RS Scheme form">substring</a> outstr 0 outptr) prop-list)
+                                  prop-list)
+                              next-collected
+                              next-state)
+   )))
+
+
+
+<a name="hex1-state"></a><span class="comment">; STATES in underlying state machine
+; equal-accepted:          Just accepted a = character
+; ampersand-accepted:      Just accepted a & character
+; in-key-or-value:         Just accepted a non hex char in a key or value
+; hex1, hex2, hex3:        Just accepted first, second and third char of a hex decoding</span><br />
+<a name="hex1-state"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">hex1-state</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> 'hex1 ""))
+<a name="equal-accepted-state"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">equal-accepted-state</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> 'equal-accepted ""))
+<a name="ampersand-accepted-state"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">ampersand-accepted-state</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> 'ampersand-accepted ""))
+<a name="in-key-or-value-state"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">in-key-or-value-state</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> 'in-key-or-value ""))
+
+
+<a name="decode-string-transition"></a><span class="comment">; The state machine transition function.
+; The third parameter is only used when reading %xy. We collect the x and y characters in this parameter.</span><br /><a name="decode-string-transition"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(decode-string-transition in-state ch hex-collect)</span>
+ (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">char</span> (<a class="schemedoc-name" href="../../../lib/man/general.html#as-string" title="Manual: general">as-string</a> ch)))
+   (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">cond</a> 
+         ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> in-state 'in-key-or-value)
+            (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">cond</a> 
+                  ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX196" title="R5RS Scheme form">eqv?</a> ch #\%)                                           <a class="applied-name" href="encode-decode-1.html#hex1-state" title="encode-decode">hex1-state</a>)
+                  ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX196" title="R5RS Scheme form">eqv?</a> ch #\=)                                           <a class="applied-name" href="encode-decode-1.html#equal-accepted-state" title="encode-decode">equal-accepted-state</a>)
+                  ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX196" title="R5RS Scheme form">eqv?</a> ch #\&)                                           <a class="applied-name" href="encode-decode-1.html#ampersand-accepted-state" title="encode-decode">ampersand-accepted-state</a>)
+                  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">else</a>                                                   <a class="applied-name" href="encode-decode-1.html#in-key-or-value-state" title="encode-decode">in-key-or-value-state</a>)
+             ))
+
+         ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> in-state 'hex1)
+                                                                          (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> 'hex2 (<a class="schemedoc-name" href="../../../lib/man/general.html#as-string" title="Manual: general">as-string</a> ch)))
+
+         ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> in-state 'hex2)
+                                                                          (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> 'hex3
+                                                                                (<a class="applied-name" href="encode-decode-1.html#two-digit-hex-to-char" title="encode-decode">two-digit-hex-to-char</a>
+                                                                                   (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> hex-collect (<a class="schemedoc-name" href="../../../lib/man/general.html#as-string" title="Manual: general">as-string</a> ch)))))
+
+         ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> in-state 'hex3)
+             (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">cond</a> 
+                   ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX196" title="R5RS Scheme form">eqv?</a> ch #\&)                                          <a class="applied-name" href="encode-decode-1.html#ampersand-accepted-state" title="encode-decode">ampersand-accepted-state</a>)
+                   ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX196" title="R5RS Scheme form">eqv?</a> ch #\=)                                          <a class="applied-name" href="encode-decode-1.html#equal-accepted-state" title="encode-decode">equal-accepted-state</a>)
+                   ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX196" title="R5RS Scheme form">eqv?</a> ch #\%)                                          <a class="applied-name" href="encode-decode-1.html#hex1-state" title="encode-decode">hex1-state</a>)
+                   (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">else</a>                                                  <a class="applied-name" href="encode-decode-1.html#in-key-or-value-state" title="encode-decode">in-key-or-value-state</a>)
+             ))
+
+         ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> in-state 'ampersand-accepted)
+            (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">cond</a> 
+                  ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX196" title="R5RS Scheme form">eqv?</a> ch #\%)                                           <a class="applied-name" href="encode-decode-1.html#hex1-state" title="encode-decode">hex1-state</a>)
+                  ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX196" title="R5RS Scheme form">eqv?</a> ch #\=)                                           <a class="applied-name" href="encode-decode-1.html#equal-accepted-state" title="encode-decode">equal-accepted-state</a>)
+                  ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX196" title="R5RS Scheme form">eqv?</a> ch #\&)                                           <a class="applied-name" href="encode-decode-1.html#ampersand-accepted-state" title="encode-decode">ampersand-accepted-state</a>)
+                  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">else</a>                                                   <a class="applied-name" href="encode-decode-1.html#in-key-or-value-state" title="encode-decode">in-key-or-value-state</a>)
+             ))
+
+         ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> in-state 'equal-accepted)
+            (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">cond</a> 
+                  ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX196" title="R5RS Scheme form">eqv?</a> ch #\%)                                           <a class="applied-name" href="encode-decode-1.html#hex1-state" title="encode-decode">hex1-state</a>)
+                  ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX196" title="R5RS Scheme form">eqv?</a> ch #\=)                                           <a class="applied-name" href="encode-decode-1.html#equal-accepted-state" title="encode-decode">equal-accepted-state</a>)
+                  ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX196" title="R5RS Scheme form">eqv?</a> ch #\&)                                           <a class="applied-name" href="encode-decode-1.html#ampersand-accepted-state" title="encode-decode">ampersand-accepted-state</a>)
+                  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">else</a>                                                   <a class="applied-name" href="encode-decode-1.html#in-key-or-value-state" title="encode-decode">in-key-or-value-state</a>)
+             ))
+
+
+
+         (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">else</a>                                                            (error (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> 
+                                                                                    "decode-string-transition: Unknown state: "
+                                                                                    (<a class="schemedoc-name" href="../../../lib/man/general.html#as-string" title="Manual: general">as-string</a> in-state))))
+
+  )))
+    
+
+<a name="two-digit-hex-to-char"></a><span class="comment">; A specialized two digit hex to char conversion function.</span><br /><a name="two-digit-hex-to-char"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(two-digit-hex-to-char two-char-string)</span>
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX235" title="R5RS Scheme form">=</a> 2 (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX378" title="R5RS Scheme form">string-length</a> two-char-string))
+      (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">c1</span> (hex-ciffer->decimal-ciffer (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX379" title="R5RS Scheme form">string-ref</a> two-char-string 0)))
+            (<span class="local-name-binding">c2</span> (hex-ciffer->decimal-ciffer (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX379" title="R5RS Scheme form">string-ref</a> two-char-string 1)))
+           )
+       (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX368" title="R5RS Scheme form">integer-&gt;char</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX249" title="R5RS Scheme form">+</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX250" title="R5RS Scheme form">*</a> c1 16) c2)))
+      (error "two-digit-hex-to-char: First parameter must be a string of length two")))
+
+
+<span class="comment">; ================================================================================================================================</span><br /><div class="schemedoc-section-comment">;;; Multipart form decoding (file uploading).
+;;; The main function in this part is multipart-decode, which is able to extract keyword value pairs,
+;;; as done by string-decode. In addition, multipart-decode will save uploaded files in a particular
+;;; directory on the server. The directory is given as a hidden field of the accompanying
+;;; HTML form, called multipart-form.</div>
+<a name="multipart-decode"></a><a name="multipart-decode"></a><span><a href="../encode-decode.html#multipart-decode"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(multipart-decode cur-time)</span>
+ (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX122" title="R5RS Scheme form">let*</a> ((<span class="local-name-binding">c-and-b</span> (<a class="applied-name" href="encode-decode-1.html#content_type-and-boundary" title="encode-decode">content_type-and-boundary</a>))
+        (<span class="local-name-binding">content_type</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX321" title="R5RS Scheme form">car</a> c-and-b))
+        (<span class="local-name-binding">boundary</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> "--" (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX322" title="R5RS Scheme form">cdr</a> c-and-b))))  <span class="comment">; HACK!!!  ; boundary is wrong - not long enough - read it from first line.</span><br />  (<a class="applied-name" href="encode-decode-1.html#display-mes-if-debugging" title="encode-decode">display-mes-if-debugging</a> boundary)
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX200" title="R5RS Scheme form">equal?</a> content_type "multipart/form-data")
+      (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX125" title="R5RS Scheme form">begin</a>
+        (<a class="applied-name" href="encode-decode-1.html#pass-next-boundary!" title="encode-decode">pass-next-boundary!</a> boundary) <span class="comment">; now right after the boundary</span><br />        (<a class="applied-name" href="encode-decode-1.html#multipart-decode-1!" title="encode-decode">multipart-decode-1!</a> cur-time boundary)
+      )
+      (error (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> "multipart-decode: content_type must be &#39;multipart-decode&#39;")))))
+
+<a name="debugging-multiform-decode"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">debugging-multiform-decode</span> #f) <a name="debug-port"></a><span class="comment">; normally #f</span><br />
+<a name="debug-port"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">debug-port</span>
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> <a class="applied-name" href="encode-decode-1.html#debugging-multiform-decode" title="encode-decode">debugging-multiform-decode</a>
+      (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX445" title="R5RS Scheme form">open-output-file</a> "/user/aabudd/.public_html/cgi-bin/debug-info")
+      #f))
+
+<a name="display-mes-if-debugging"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(display-mes-if-debugging mes)</span>
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> <a class="applied-name" href="encode-decode-1.html#debugging-multiform-decode" title="encode-decode">debugging-multiform-decode</a>
+      (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX461" title="R5RS Scheme form">display</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> (<a class="schemedoc-name" href="../../../lib/man/general.html#as-string" title="Manual: general">as-string</a> mes) (<a class="schemedoc-name" href="../../../lib/man/general.html#as-string" title="Manual: general">as-string</a> #\newline)) <a class="applied-name" href="encode-decode-1.html#debug-port" title="encode-decode">debug-port</a>)))
+
+<a name="collected-form-alist"></a><span class="comment">; In this variable we collect key value pairs</span><br /><a name="collected-form-alist"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">collected-form-alist</span> '())
+
+<a name="multiform-file-path"></a><span class="comment">; In this variable we catch the file path information from a (hidden) HTML field.</span><br /><a name="multiform-file-path"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">multiform-file-path</span> #f)
+
+<a name="multiform-dir-url"></a><span class="comment">; In this variable we catch the directory URL information from a (hidden) HTML field.</span><br /><a name="multiform-dir-url"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">multiform-dir-url</span> #f)
+
+<a name="multipart-decode-1!"></a><span class="comment">; Precondition:we have just passed a boundary</span><br /><a name="multipart-decode-1!"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(multipart-decode-1! cur-time boundary)</span>
+ (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX304" title="R5RS Scheme form">not</a> (<a class="applied-name" href="encode-decode-1.html#at-end-of-form-input" title="encode-decode">at-end-of-form-input</a>)) <span class="comment">; <span><a name="multipart-decode-1!-@c"></a> @c</span></span><br />  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">content-disposition</span> (<a class="applied-name" href="encode-decode-1.html#read-content-disposition" title="encode-decode">read-content-disposition</a>))
+        (<span class="local-name-binding">name</span> (<a class="applied-name" href="encode-decode-1.html#read-name" title="encode-decode">read-name</a>))
+        (<span class="local-name-binding">file-name</span> (<a class="applied-name" href="encode-decode-1.html#read-possible-filename" title="encode-decode">read-possible-filename</a>))  <span class="comment">; full path on client's file system</span><br />       )
+    (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">cond</a> ((<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX117" title="R5RS Scheme form">and</a> file-name (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX304" title="R5RS Scheme form">not</a> (<a class="schemedoc-name" href="../../../lib/man/general.html#blank-string?" title="Manual: general">blank-string?</a> file-name))) <span class="comment">; <span><a name="multipart-decode-1!-@a"></a> @a</span></span><br />            (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX122" title="R5RS Scheme form">let*</a> ((<span class="local-name-binding">possible-content-type</span> (<a class="applied-name" href="encode-decode-1.html#read-possible-content-type" title="encode-decode">read-possible-content-type</a>)) 
+                   (<span class="local-name-binding">extension</span> (<a class="schemedoc-name" href="../../../lib/man/general.html#file-name-extension" title="Manual: general">file-name-extension</a> file-name))
+                   (<span class="local-name-binding">proper-filename</span> (<a class="schemedoc-name" href="../../../lib/man/general.html#file-name-proper" title="Manual: general">file-name-proper</a> file-name))
+                   (<span class="local-name-binding">target-file-path</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> <a class="applied-name" href="encode-decode-1.html#multiform-file-path" title="encode-decode">multiform-file-path</a> (<a class="applied-name" href="encode-decode-1.html#upload-target-filename" title="encode-decode">upload-target-filename</a> proper-filename extension cur-time)))
+                   (<span class="local-name-binding">op</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX445" title="R5RS Scheme form">open-output-file</a> target-file-path))
+                   )
+              (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX106" title="R5RS Scheme form">set!</a> <a class="applied-name" href="encode-decode-1.html#collected-form-alist" title="encode-decode">collected-form-alist</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> name (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX332" title="R5RS Scheme form">list</a> file-name target-file-path possible-content-type <a class="applied-name" href="encode-decode-1.html#multiform-dir-url" title="encode-decode">multiform-dir-url</a>)) <a class="applied-name" href="encode-decode-1.html#collected-form-alist" title="encode-decode">collected-form-alist</a>))
+              (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#read-a-string" title="Manual: collect-skip">read-a-string</a> 4)         <span class="comment">; CR LF CR LF - interspacing before file content</span><br />              (<a class="applied-name" href="encode-decode-1.html#pass-uploaded-file!" title="encode-decode">pass-uploaded-file!</a> op boundary) <span class="comment">; now boundary has just been passed</span><br />              (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX447" title="R5RS Scheme form">close-output-port</a> op)
+              (<a class="applied-name" href="encode-decode-1.html#multipart-decode-1!" title="encode-decode">multipart-decode-1!</a> cur-time boundary) <span class="comment">; ITERATE</span><br />              ))
+        ((<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX117" title="R5RS Scheme form">and</a> file-name (<a class="schemedoc-name" href="../../../lib/man/general.html#blank-string?" title="Manual: general">blank-string?</a> file-name))  <span class="comment">; <span><a name="multipart-decode-1!-@d"></a> @d</span>drop name, skip possible file until and including next boundary.</span><br />            (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#skip-until-string" title="Manual: collect-skip">skip-until-string</a> boundary #t) <span class="comment">; include boundary</span><br />            (<a class="applied-name" href="encode-decode-1.html#multipart-decode-1!" title="encode-decode">multipart-decode-1!</a> cur-time boundary) <span class="comment">; ITERATE</span><br />        )
+        (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">else</a>
+          (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">value</span> (<a class="applied-name" href="encode-decode-1.html#read-value" title="encode-decode">read-value</a> boundary)))
+            (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX125" title="R5RS Scheme form">begin</a>
+              (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX106" title="R5RS Scheme form">set!</a> <a class="applied-name" href="encode-decode-1.html#collected-form-alist" title="encode-decode">collected-form-alist</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> name value) <a class="applied-name" href="encode-decode-1.html#collected-form-alist" title="encode-decode">collected-form-alist</a>))
+              (<a class="applied-name" href="encode-decode-1.html#catch-possible-file-path!" title="encode-decode">catch-possible-file-path!</a> name value) <span class="comment">; <span><a name="multipart-decode-1!-@b"></a> @b</span></span><br />              (<a class="applied-name" href="encode-decode-1.html#catch-possible-directory-url!" title="encode-decode">catch-possible-directory-url!</a> name value)
+              (<a class="applied-name" href="encode-decode-1.html#pass-next-boundary!" title="encode-decode">pass-next-boundary!</a> boundary)
+              (<a class="applied-name" href="encode-decode-1.html#multipart-decode-1!" title="encode-decode">multipart-decode-1!</a> cur-time boundary) <span class="comment">; ITERATE</span><br />            )
+          )
+        )
+    )
+  )
+  (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX335" title="R5RS Scheme form">reverse</a> <a class="applied-name" href="encode-decode-1.html#collected-form-alist" title="encode-decode">collected-form-alist</a>)  <span class="comment">; returns the form alist.</span><br /> )
+)
+
+
+<a name="pass-uploaded-file!"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(pass-uploaded-file! op boundary)</span>
+  (<a class="applied-name" href="encode-decode-1.html#pass-uploaded-file-1!" title="encode-decode">pass-uploaded-file-1!</a> op boundary 0 (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX378" title="R5RS Scheme form">string-length</a> boundary))
+)  
+
+<a name="pass-uploaded-file-1!"></a><span class="comment">; we have matched match-pos chars in boundary. I.e., all charters from position
+; 0 through match-pos - 1 match the boundary prefix</span><br /><a name="pass-uploaded-file-1!"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(pass-uploaded-file-1! op boundary match-pos boundary-lgt)</span>
+ (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX235" title="R5RS Scheme form">=</a> boundary-lgt match-pos) <span class="comment">; <span><a name="pass-uploaded-file-1!-@a"></a> @a</span></span><br />     'done
+     (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">ch</span> (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#read-a-char" title="Manual: collect-skip">read-a-char</a>))
+	   (<span class="local-name-binding">match-ch</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX379" title="R5RS Scheme form">string-ref</a> boundary match-pos))
+	   )
+       (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">cond</a> ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX196" title="R5RS Scheme form">eqv?</a> ch match-ch)
+	      (<a class="applied-name" href="encode-decode-1.html#display-mes-if-debugging" title="encode-decode">display-mes-if-debugging</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> "Matches " (<a class="schemedoc-name" href="../../../lib/man/general.html#as-string" title="Manual: general">as-string</a> ch) " match-pos: " (<a class="schemedoc-name" href="../../../lib/man/general.html#as-string" title="Manual: general">as-string</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX249" title="R5RS Scheme form">+</a> match-pos 1))))
+	      (<a class="applied-name" href="encode-decode-1.html#pass-uploaded-file-1!" title="encode-decode">pass-uploaded-file-1!</a> op boundary (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX249" title="R5RS Scheme form">+</a> match-pos 1) boundary-lgt))
+	     ((<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX117" title="R5RS Scheme form">and</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX304" title="R5RS Scheme form">not</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX196" title="R5RS Scheme form">eqv?</a> ch match-ch)) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX237" title="R5RS Scheme form">&gt;</a> match-pos 0))
+	      (<a class="applied-name" href="encode-decode-1.html#display-mes-if-debugging" title="encode-decode">display-mes-if-debugging</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> "Writing " (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX391" title="R5RS Scheme form">substring</a> boundary 0 match-pos) "to op"))
+	      (<a class="schemedoc-name" href="../../../lib/man/file-read.html#write-string-to-port" title="Manual: file-read">write-string-to-port</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX391" title="R5RS Scheme form">substring</a> boundary 0 match-pos) op) <span class="comment">; (@) write matched part of boundary</span><br />	      (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX466" title="R5RS Scheme form">write-char</a> ch op)
+	      (<a class="applied-name" href="encode-decode-1.html#pass-uploaded-file-1!" title="encode-decode">pass-uploaded-file-1!</a> op boundary 0 boundary-lgt))
+	     ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX304" title="R5RS Scheme form">not</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX196" title="R5RS Scheme form">eqv?</a> ch match-ch)) 
+	      (<a class="applied-name" href="encode-decode-1.html#display-mes-if-debugging" title="encode-decode">display-mes-if-debugging</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> "Passing " (<a class="schemedoc-name" href="../../../lib/man/general.html#as-string" title="Manual: general">as-string</a> ch) " through"))
+	      (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX466" title="R5RS Scheme form">write-char</a> ch op)
+	      (<a class="applied-name" href="encode-decode-1.html#pass-uploaded-file-1!" title="encode-decode">pass-uploaded-file-1!</a> op boundary 0 boundary-lgt))
+	     ))))
+
+
+<a name="pass-next-boundary!"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(pass-next-boundary! boundary)</span>
+  (<a class="applied-name" href="encode-decode-1.html#display-mes-if-debugging" title="encode-decode">display-mes-if-debugging</a> "pass-next-boundary")
+  (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#skip-string" title="Manual: collect-skip">skip-string</a> boundary "Boundary expected"))  
+
+<a name="read-value"></a><span class="comment">; first skip two line shifts and then return the string before next boundary</span><br /><a name="read-value"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(read-value boundary)</span>
+  (<a class="applied-name" href="encode-decode-1.html#display-mes-if-debugging" title="encode-decode">display-mes-if-debugging</a> "read-value")
+  (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#read-a-string" title="Manual: collect-skip">read-a-string</a> 4) <span class="comment">; CR LF CR LF</span><br />  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX122" title="R5RS Scheme form">let*</a> ((<span class="local-name-binding">val</span> (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#collect-until-string" title="Manual: collect-skip">collect-until-string</a> boundary))
+         (<span class="local-name-binding">lgt</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX378" title="R5RS Scheme form">string-length</a> val)))
+    (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX239" title="R5RS Scheme form">&gt;=</a> lgt 2)
+        (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX391" title="R5RS Scheme form">substring</a> val 0 (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX251" title="R5RS Scheme form">-</a> lgt 2))  <span class="comment">; exclude trailing CR LF</span><br />        val)))
+
+<a name="read-possible-content-type"></a><span class="comment">; return a Content-Type, or #f if there is no such clause</span><br /><a name="read-possible-content-type"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(read-possible-content-type)</span>
+  (<a class="applied-name" href="encode-decode-1.html#display-mes-if-debugging" title="encode-decode">display-mes-if-debugging</a> "read-possible-content-type")
+  (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#ensure-look-ahead" title="Manual: collect-skip">ensure-look-ahead</a> 16)
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="schemedoc-name" href="../../../lib/man/general.html#substring-index" title="Manual: general">substring-index</a> (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#look-ahead-prefix" title="Manual: collect-skip">look-ahead-prefix</a> 16) 0 "Content-Type") <span class="comment">; is there a content type ahead</span><br />      (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX125" title="R5RS Scheme form">begin</a> 
+        (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#skip-while" title="Manual: collect-skip">skip-while</a> <a class="schemedoc-name" href="../../../lib/man/collect-skip.html#is-white-space?" title="Manual: collect-skip">is-white-space?</a>)
+        (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#skip-string" title="Manual: collect-skip">skip-string</a> "Content-Type" "Content-Type expected")
+        (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#skip-while" title="Manual: collect-skip">skip-while</a> <a class="schemedoc-name" href="../../../lib/man/collect-skip.html#is-white-space?" title="Manual: collect-skip">is-white-space?</a>)
+        (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#skip-while" title="Manual: collect-skip">skip-while</a> (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#char-predicate" title="Manual: collect-skip">char-predicate</a> #\:))
+        (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#skip-while" title="Manual: collect-skip">skip-while</a> <a class="schemedoc-name" href="../../../lib/man/collect-skip.html#is-white-space?" title="Manual: collect-skip">is-white-space?</a>)
+        (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">contenttype</span> (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#collect-until" title="Manual: collect-skip">collect-until</a> <a class="schemedoc-name" href="../../../lib/man/collect-skip.html#is-white-space?" title="Manual: collect-skip">is-white-space?</a>))) <span class="comment">; now at first white char after the content type</span><br />          contenttype)
+      )
+      #f))
+
+<a name="is-white-space-or-semicolon?"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(is-white-space-or-semicolon? ch)</span>
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX118" title="R5RS Scheme form">or</a> (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#is-white-space?" title="Manual: collect-skip">is-white-space?</a> ch) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX196" title="R5RS Scheme form">eqv?</a> #\; ch)))
+
+<a name="read-possible-filename"></a><span class="comment">; return a filename path if there, or #f if there is no such clause</span><br /><a name="read-possible-filename"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(read-possible-filename)</span>
+  (<a class="applied-name" href="encode-decode-1.html#display-mes-if-debugging" title="encode-decode">display-mes-if-debugging</a> "read-possible-filename")
+  (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#skip-while" title="Manual: collect-skip">skip-while</a> (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#char-predicate" title="Manual: collect-skip">char-predicate</a> #\;))
+  (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#ensure-look-ahead" title="Manual: collect-skip">ensure-look-ahead</a> 9)
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX200" title="R5RS Scheme form">equal?</a> (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#look-ahead-prefix" title="Manual: collect-skip">look-ahead-prefix</a> 9) " filename")        (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX125" title="R5RS Scheme form">begin</a>
+        (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#skip-while" title="Manual: collect-skip">skip-while</a> <a class="schemedoc-name" href="../../../lib/man/collect-skip.html#is-white-space?" title="Manual: collect-skip">is-white-space?</a>)
+        (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#skip-string" title="Manual: collect-skip">skip-string</a> "filename" "filename expected")
+        (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#skip-while" title="Manual: collect-skip">skip-while</a> <a class="schemedoc-name" href="../../../lib/man/collect-skip.html#is-white-space?" title="Manual: collect-skip">is-white-space?</a>)
+        (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#skip-while" title="Manual: collect-skip">skip-while</a> (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#char-predicate" title="Manual: collect-skip">char-predicate</a> #\=))
+        (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#skip-while" title="Manual: collect-skip">skip-while</a> <a class="schemedoc-name" href="../../../lib/man/collect-skip.html#is-white-space?" title="Manual: collect-skip">is-white-space?</a>)
+        (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#skip-string" title="Manual: collect-skip">skip-string</a> (<a class="schemedoc-name" href="../../../lib/man/general.html#as-string" title="Manual: general">as-string</a> #\") "String quote expected after &#39;filename=&#39;")
+        (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">filename</span> (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#collect-until" title="Manual: collect-skip">collect-until</a> (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#char-predicate" title="Manual: collect-skip">char-predicate</a> #\"))))
+          (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#skip-string" title="Manual: collect-skip">skip-string</a> (<a class="schemedoc-name" href="../../../lib/man/general.html#as-string" title="Manual: general">as-string</a> #\") "String quote expected after &#39;name=...&#39;")
+          filename)
+      )
+      #f))
+
+<a name="at-end-of-form-input"></a><span class="comment">; at end if there are two trailing dashes RIGHT AFTER the boundary (always correct?)</span><br /><a name="at-end-of-form-input"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(at-end-of-form-input)</span>
+  (<a class="applied-name" href="encode-decode-1.html#display-mes-if-debugging" title="encode-decode">display-mes-if-debugging</a> "at-end-of-form-input")
+  (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#ensure-look-ahead" title="Manual: collect-skip">ensure-look-ahead</a> 2)
+  (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX200" title="R5RS Scheme form">equal?</a> (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#look-ahead-prefix" title="Manual: collect-skip">look-ahead-prefix</a> 2) "--"))
+ 
+
+<a name="read-content-disposition"></a><span class="comment">; read a content-disposition clause and return its value (normally "form-data").
+; leaves the position right after the trailing semicolon.</span><br /><a name="read-content-disposition"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(read-content-disposition)</span>
+  (<a class="applied-name" href="encode-decode-1.html#display-mes-if-debugging" title="encode-decode">display-mes-if-debugging</a> "read-content-disposition")
+  (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#skip-until-string" title="Manual: collect-skip">skip-until-string</a> "Content-Disposition:" #t)
+  (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#skip-while" title="Manual: collect-skip">skip-while</a> <a class="schemedoc-name" href="../../../lib/man/collect-skip.html#is-white-space?" title="Manual: collect-skip">is-white-space?</a>)
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">val</span> (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#collect-until" title="Manual: collect-skip">collect-until</a> (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#char-predicate" title="Manual: collect-skip">char-predicate</a> #\;))))
+    (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#skip-string" title="Manual: collect-skip">skip-string</a> ";" "Semicolon expected after content-Disposition form data")
+    val))
+
+<a name="read-name"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(read-name)</span>
+  (<a class="applied-name" href="encode-decode-1.html#display-mes-if-debugging" title="encode-decode">display-mes-if-debugging</a> "read-name")
+  (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#skip-until-string" title="Manual: collect-skip">skip-until-string</a> "name=" #t)
+  (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#skip-while" title="Manual: collect-skip">skip-while</a> <a class="schemedoc-name" href="../../../lib/man/collect-skip.html#is-white-space?" title="Manual: collect-skip">is-white-space?</a>)
+  (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#skip-string" title="Manual: collect-skip">skip-string</a> (<a class="schemedoc-name" href="../../../lib/man/general.html#as-string" title="Manual: general">as-string</a> #\") "String quote expected after &#39;name=&#39;")
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">val</span> (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#collect-until" title="Manual: collect-skip">collect-until</a> (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#char-predicate" title="Manual: collect-skip">char-predicate</a> #\"))))
+    (<a class="schemedoc-name" href="../../../lib/man/collect-skip.html#skip-string" title="Manual: collect-skip">skip-string</a> (<a class="schemedoc-name" href="../../../lib/man/general.html#as-string" title="Manual: general">as-string</a> #\") "String quote expected after &#39;name=...&#39;")
+    val))
+
+<a name="upload-target-filename"></a><a name="upload-target-filename"></a><span><a href="../encode-decode.html#upload-target-filename"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(upload-target-filename proper-name extension cur-time)</span>
+  (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> proper-name "-" (<a class="schemedoc-name" href="../../../lib/man/general.html#as-string" title="Manual: general">as-string</a> cur-time)
+                 (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX304" title="R5RS Scheme form">not</a> (<a class="schemedoc-name" href="../../../lib/man/general.html#empty-string?" title="Manual: general">empty-string?</a> extension)) "." "") extension)) 
+
+<a name="content_type-and-boundary"></a><span class="comment">; return the cons pair of contents type and boundary string from environment variable CONTENT_TYPE.</span><br /><a name="content_type-and-boundary"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(content_type-and-boundary)</span>
+ (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX122" title="R5RS Scheme form">let*</a> ((<span class="local-name-binding">content-type</span> (getenv "CONTENT_TYPE"))
+        (<span class="local-name-binding">pos</span> (<a class="schemedoc-name" href="../../../lib/man/general.html#find-in-string" title="Manual: general">find-in-string</a> content-type #\; 0)))
+   (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> pos
+     (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX122" title="R5RS Scheme form">let*</a> ((<span class="local-name-binding">real-content-type</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX391" title="R5RS Scheme form">substring</a> content-type 0 pos))
+            (<span class="local-name-binding">pos1</span> (<a class="schemedoc-name" href="../../../lib/man/general.html#skip-chars-in-string" title="Manual: general">skip-chars-in-string</a> content-type <a class="schemedoc-name" href="../../../lib/man/general.html#white-space-char-list" title="Manual: general">white-space-char-list</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX249" title="R5RS Scheme form">+</a> pos 1)))
+            (<span class="local-name-binding">pos2</span> (<a class="schemedoc-name" href="../../../lib/man/general.html#find-in-string" title="Manual: general">find-in-string</a> content-type #\= pos1)))
+       (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> pos2 
+         (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">boundary</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX391" title="R5RS Scheme form">substring</a> content-type (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX249" title="R5RS Scheme form">+</a> 1 pos2) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX378" title="R5RS Scheme form">string-length</a> content-type))))
+           (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> real-content-type boundary))
+         (error (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> "multipart-decode: unexpected content type - case 1: " content-type)))
+     )
+     (error (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> "multipart-decode: unexpected content type - case 2: " content-type))
+   )))
+
+<a name="catch-possible-file-path!"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(catch-possible-file-path! name value)</span>
+  (<a class="applied-name" href="encode-decode-1.html#display-mes-if-debugging" title="encode-decode">display-mes-if-debugging</a> "catch-possible-file-path!")
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX200" title="R5RS Scheme form">equal?</a> name "target-directory!!!")
+      (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX106" title="R5RS Scheme form">set!</a> <a class="applied-name" href="encode-decode-1.html#multiform-file-path" title="encode-decode">multiform-file-path</a> value)))
+
+
+<a name="catch-possible-directory-url!"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(catch-possible-directory-url! name value)</span>
+  (<a class="applied-name" href="encode-decode-1.html#display-mes-if-debugging" title="encode-decode">display-mes-if-debugging</a> "catch-possible-directory-url!")
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX200" title="R5RS Scheme form">equal?</a> name "target-directory-url!!!")
+      (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX106" title="R5RS Scheme form">set!</a> <a class="applied-name" href="encode-decode-1.html#multiform-dir-url" title="encode-decode">multiform-dir-url</a> value)))
+</pre></font><div>&nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p></div></body></html>

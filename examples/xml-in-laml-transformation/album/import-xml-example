@@ -1,0 +1,10 @@
+; Produce the raw LAML source from the XML source of the paper.
+; Afterwards we do some manual work on it to make it a little nicer.
+
+(load (string-append laml-dir "laml.scm"))
+
+(xml-parse "album-ex")
+(parse-tree-to-laml resulting-parse-tree "album-ex-raw.laml")
+(scheme-pp "album-ex-raw.laml")
+
+(end-laml)

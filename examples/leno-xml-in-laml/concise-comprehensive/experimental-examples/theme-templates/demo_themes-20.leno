@@ -1,0 +1,42 @@
+(load (string-append laml-dir "laml.scm"))
+
+(laml-style "xml-in-laml/lecture-notes-themes/lecture-notes-themes")
+
+(leno-themes-front-matters 
+  
+)
+
+(begin-themes)
+
+(theme 'id "intro-sec"
+  (leno-element 'lecture-id "demo" 'page-id "intro-sec" 'element-type "section-title" 'element-number "1" )
+)
+
+(theme 'id "model-sec"
+  (leno-element 'lecture-id "demo" 'page-id "model-sec" 'element-type "section-title" 'element-number "1" )
+
+  (leno-element 'lecture-id "demo" 'page-id "primsec" 'element-type "title" 'element-number "1" )
+  (leno-element 'lecture-id "demo" 'page-id "primsec" 'element-type "concept-list" 'element-id "con1" )
+  (leno-element 'lecture-id "demo" 'page-id "primsec" 'element-type "items" 'element-id "it1" )
+  (leno-element 'lecture-id "demo" 'page-id "primsec" 'element-type "point" 'element-id "pt1" )
+)
+
+(theme 'id "leno-sec"
+  (leno-element 'lecture-id "demo" 'page-id "leno-sec" 'element-type "section-title" 'element-number "1" )
+
+  (leno-element 'lecture-id "demo" 'page-id "leno-prim" 'element-type "title" 'element-number "1" )
+  (leno-element 'lecture-id "demo" 'page-id "leno-prim" 'element-type "point" 'element-id "pt1" )
+  (leno-element 'lecture-id "demo" 'page-id "leno-prim" 'element-type "cross-references" 'element-id "cr1" )
+  (leno-element 'lecture-id "demo" 'page-id "leno-prim" 'element-type "items" 'element-id "it1" )
+  (leno-element 'lecture-id "demo" 'page-id "leno-prim" 'element-type "point" 'element-id "pt2" )
+**(leno-element 'lecture-id "demo" 'page-id "leno-prim" 'element-type "items" 'element-id "in" )
+
+  (leno-element 'lecture-id "demo" 'page-id "leno-seco" 'element-type "title" 'element-number "1" )
+  (leno-element 'lecture-id "demo" 'page-id "leno-seco" 'element-type "point" 'element-id "pt1" )
+  (leno-element 'lecture-id "demo" 'page-id "leno-seco" 'element-type "items" 'element-id "it1" )
+  (leno-element 'lecture-id "demo" 'page-id "leno-seco" 'element-type "point" 'element-id "pt2" )
+)
+
+
+
+(end-themes)

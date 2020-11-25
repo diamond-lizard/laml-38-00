@@ -1,0 +1,1310 @@
+(load (string-append laml-dir "laml.scm"))       
+(laml-style "xml-in-laml/lecture-notes/lecture-notes")
+
+(leno-front-matters
+  (front-title "Meta Lecture Notes")           
+  (front-subtitle "")   
+  (front-author "Kurt Normark")           
+  (front-affiliation "Department of Computer Science, Aalborg University, Denmark")  
+  (front-abstract (con "This set of lecture notes illustrate each of the means of expressions in LENO
+    by giving access to the LAML source in a very convenient way. As a distinguished feature you 
+    can access the LAML form which created the HTML page(s). The source-program clause is used
+    to read the LENO LAML source in a novel way. Also notice the cross references to the relevant manual
+    clauses in the " (a-tag "../../lecture-notes.html" "LENO XML-in-LAML Reference Manual") ". "
+    "The Scheme suffix file of this lecture is " (a 'href "../post-notes.scm" "post-notes.scm") "." ))  
+
+  'scheme-suffix "post-notes.scm"
+  'course-home-url "../../lecture-notes.html"
+  'author-home-url "http://www.cs.auc.dk/~normark/"   
+  'note-download-url ""   
+  'logo-url "http://www.auc.dk/"  
+  'note-contents-description ""    
+  'slide-header "normal"  ; minimal/normal/none 
+  'trail-of-lecture "false"  
+  'language "english"      
+  'show-and-speak "true" 
+    'default-showing-time "2"    
+    'additional-showing-time "0" 
+    'sound-source "wave-file" 
+    'speak-url-prefix "../../speak/"
+  'exercise-model "make-indexes-and-solutions-per-lecture"   
+  'mouse-advancement "double-press" 
+  'word-index "true"  
+  'css-prestylesheet "normal-size"
+  'css-stylesheet "original"
+  'news-flash-string  "This is a meta level LENO demo"  
+  'news-flash-level   "2"
+  'quiz-support "true"   
+  'verbosity-level "1"
+) ; end leno-front-matters
+
+(begin-notes)
+
+
+(note-page 'id "front"
+ 
+  (section-title "LENO Front matters")
+
+)
+
+
+
+(note-page 'id "leno-front-matters"
+  (title (main-text "leno-front-matters")
+         (annotation "This pages gives access to the LENO front matters, which is a very important part
+                      of a LENO LAML file.")
+  )
+
+
+
+  (cross-references
+   (internet-reference 'href (man-entry "leno-front-matters")
+   (main-text "Manual entry")))
+
+)
+
+
+
+
+
+
+
+(note-page 'id "section-title"
+ 
+  (section-title "This is a section title - goto next page to see source")
+
+) ; end note-page
+
+
+
+(note-page 'id "title"
+  (title (main-text "This is a title")
+         (annotation "This is an annotation or comment of the title")
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"section-title\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of the previous page" )
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"title\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page" )
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "title")
+   (main-text "Manual entry")))
+
+
+) ; end note-page
+
+
+(note-page 'id "text"
+  (title (main-text "Text")
+         (annotation "A note page that illustrate the text clause")
+  )
+
+  (text
+   (main-text
+    "Primary text"
+    )
+   (annotation
+    "Secondary text"
+    )
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"text\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page" )
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "text")
+   (main-text "Manual entry")))
+
+) ; end note-page
+
+
+(note-page 'id "slide-text"
+  (title (main-text "Slide-text")
+         (annotation "An illustration of the slide-text clause")
+  )
+
+  (slide-text
+   "Slide text - no annotation possible"
+  )
+
+ (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"slide-text\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page" )
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "slide-text")
+   (main-text "Manual entry")))
+
+) ; end note-page
+
+
+(note-page 'id "note-text"
+  (title (main-text "Note-text")
+         (annotation "An illustration of note-text")
+  )
+
+  (note-text
+   "Note text - does not affect slide view"
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"note-text\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page" )
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "note-text")
+   (main-text "Manual entry")))
+
+) ; end note-page
+
+(note-page 'id "theme-text"
+  (title (main-text "Theme-text")
+         (annotation "An illustration of theme-text. A theme-text clause contributes with textual contents to the theme view.
+                      As such, the theme-text clause does not leave any trace in slide/note/book view.")
+  )
+
+  (theme-text
+   "Theme text - does not affect slide/note/book views. Is meant to go directly to the theme view"
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"theme-text\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page" )
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "theme-text")
+   (main-text "Manual entry")))
+
+) ; end note-page
+
+(note-page 'id "meta-text"
+  (title (main-text "Meta-text")
+         (annotation "An illustration of meta-text. A meta-text can be of the types readers-guide or normal (with the latter as the default).
+                      The text does not leave any trace in slide view.")
+  )
+
+  (meta-text  'type "normal"
+   "Meta text - does not affect slide views."
+  )
+
+  (meta-text 'type "readers-guide"
+   "Meta text - Reader's guide to the material."
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"meta-text\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page" )
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "meta-text")
+   (main-text "Manual entry")))
+
+) ; end note-page
+
+
+
+
+(note-page 'id "items"
+  (title (main-text "Items")
+         (annotation "An illutration of items and item")
+  )
+
+  (items 
+   (item 
+    (main-text "Item 1"
+               ) 
+    (annotation "Item 1 annotation"
+                )
+    (items 
+     (item 
+      (main-text "Sub item 1"
+                 ) 
+      (annotation "Sub item 1 annotation"
+                  ))
+     (item 
+      (main-text "Sub item 2"
+                 ) 
+      (annotation "Sub item 2 annotation"
+                  ))
+     (item 
+      (main-text "Sub item 3"
+                 ) 
+      (annotation "Sub item 3 annotation"
+  )))))
+
+ (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"items\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page" )
+ )
+
+ (cross-references
+   (internet-reference 'href (man-entry "items")
+   (main-text "Manual entry")))
+
+)  ; end note-page
+
+(note-page 'id "point"
+  (title (main-text "Point")
+         (annotation "Illustraion of a point clause")
+  )
+
+  (point
+   (main-text
+    "Primary point"
+    )
+   (annotation
+    "Secondary point"
+    )
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"point\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page" )
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "point")
+   (main-text "Manual entry")))
+
+)  ; end note-page
+
+
+(note-page 'id "example"
+  (title (main-text "Example")
+         (annotation "An illustration of example")
+  )
+
+  (example
+   (main-text
+    "Example text"
+    )
+   (annotation
+    "Annotation of the example"
+    )
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"example\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page" )
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "example")
+   (main-text "Manual entry")))
+
+) ; end note-page
+
+(note-page 'id "opposing"
+  (title (main-text "Opposing items and its subclauses")
+         (annotation "An illustration of opposing items")
+  )
+
+  (opposing
+   (opposing-item 
+    (left-item "Left item 1"
+               ) 
+    (right-item "Right item 1"
+                ))
+   (opposing-item 
+    (left-item "Left item 2"
+               ) 
+    (right-item "Right item 2"
+  )))
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"opposing\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page" )
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "opposing")
+   (main-text "Manual entry")))
+
+) ; end note-page 
+
+(note-page 'id "comment"
+  (title (main-text "Comment")
+         (annotation "An illustration of comment")
+  )
+
+  (comment
+   "The comment text"
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"comment\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page" )
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "comment")
+   (main-text "Manual entry")))
+
+) ; end note-page 
+
+(note-page 'id "index-words"
+  (title (main-text "Index-words")
+         (annotation "An illustration of index-words and its subclause")
+  )
+
+  (index-words
+   (index-word "word1")
+   (index-word "word2" )
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"index-word\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page. The index-word clause leaves no immedate trace in the material, but
+     the words are put in the index. Take a look!" )
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "index-word")
+   (main-text "Manual entry")))
+
+) ; end note-page 
+
+
+(note-page 'id "concept-list"
+  (title (main-text "Concept-list and its subclause")
+         (annotation "Illustrates the concept-list form and its subclauses")
+  )
+
+  (concept-list 
+   (concept 'concept-name "concept" 
+             (main-text "This is the definition of the first concept") 
+             (annotation "Here we explain the first concept"))
+   (concept 'concept-name "another concept" 
+             (main-text "This is the definition of another concept"
+                        ) 
+             (annotation "Here we explain the anoter concept")))
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"concept-list\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page")
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "concept-list")
+   (main-text "Manual entry")))
+
+) ; end note-page 
+
+(note-page 'id "quotation"
+  (title (main-text "Quotation")
+         (annotation "An illustration of a quotation")
+  )
+
+  (quotation
+   (main-text
+    "Main quotation text"
+    )
+   (annotation
+    "Comments about quotation"
+    )
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"quotation\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page")
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "quotation")
+   (main-text "Manual entry")))
+
+) ; end note-page 
+
+(note-page 'id "image"
+  (title (main-text "Image - two instances of image")
+         (annotation "An illustration of an image clause")
+  )
+
+  (image
+   'src "test-image-1.gif"
+   (main-text
+    "The image caption of the first image"
+   )
+  )
+
+  (image
+   'src "test-image-2.gif"
+   'alignment "vertical"
+   'first "picture"
+   'second "text"
+   (main-text
+    "The image caption of the second image"
+    )
+  )
+
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"image\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page")
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "image")
+   (main-text "Manual entry")))
+
+) ; end note-page 
+
+
+(note-page 'id "svg-image"
+  (title (main-text "Svg-image - Scalable Vector Graphics")
+         (annotation "An illustration of an svg-image clause. Svg is the XML language for scalable vector graphics")
+  )
+
+  (svg-image 
+   'src "hilbert.svg"
+   'width "500" 'height "500"
+   (main-text
+    "The SVG image caption"
+   )
+  )
+
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"svg-image\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page")
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "svg-image")
+   (main-text "Manual entry")))
+
+) ; end note-page
+
+
+
+
+(note-page 'id "slide-image"
+  (title (main-text "Slide-image")
+         (annotation "This is an illustration of the slide-image clause")
+  )
+
+  (slide-image
+   'src "test-image-2.gif"
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"slide-image\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page")
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "slide-image")
+   (main-text "Manual entry")))
+) ; end note-page
+
+(note-page 'id "image-series"
+  (title (main-text "Image-series and subclauses")
+         (annotation "This is an illustration of the image-series element and its subclauses")
+  )
+
+  (image-series
+   'title "This is an image series, which is shown external to the slide view"
+   (image-series-item
+    'src "test-image-1.gif"
+    "This is the caption of the first image in the series" )
+   (image-series-item
+    'src "test-image-2.gif"
+    "This is the caption of the second image in the series" )
+   'slide-mode "external"
+   'book-mode "inline"
+  )
+
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"image-series\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page")
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "image-series")
+   (main-text "Manual entry")))
+
+
+) ; end note-page
+
+(note-page 'id "cross-references"
+  (title (main-text "Cross references and subclauses")
+         (annotation "Here we illustrate the use of cross-references and its subclauses")
+  )
+
+  (cross-references
+   (internet-reference
+    'href "http://www.cs.auc.dk/~normark/laml/"
+    (main-text "An Internet reference to the LAML home page")
+    (location-hints (hint "My Hint"))
+   )
+
+   (note-reference
+    'lecture-id "meta-lecture-notes"
+    'page-id "title"
+    (main-text "A reference to the second note page in this lecture"))
+
+   (informal-reference
+    'title "Structure and Interpretation of Computer Programs"
+    (main-text "A reference to non-web material (such as a book)"))
+
+   (bibtex-reference
+    'key "Meyer97")
+  )
+
+
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"cross-references\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page")
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "cross-references")
+   (main-text "Manual entry")))
+) ; end note-page
+
+
+(note-page 'id "language-syntax"
+  (title (main-text "Language Syntax")
+         (annotation "An illustration of the Language Syntax clause")
+  )
+
+  (language-syntax
+   (main-text
+    (read-text-file (in-startup-directory "includes/if-then-else-syntax")))
+   (annotation
+    "This is the syntax of a Scheme conditional expression ala if-then-else" )
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"language-syntax\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page")
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "language-syntax")
+   (main-text "Manual entry")))
+
+) ; end note-page
+
+(note-page 'id "source-program"
+  (title (main-text "Source-program and its subclauses")
+         (annotation "An illustration of the important source-program clause")
+  )
+
+  (source-program
+   'src "includes/source-demo.scm"
+   'from-mark ";start here"
+   'to-mark ";end here"
+   'slide-mode "inline"
+   'book-mode "inline"
+   'background-color (rgb-color-encoding 200 200 200)
+   (color-decorations 
+     (color-decoration 'from-mark "document" 'to-mark "" 'color "red" 'face "bold" )
+     (color-decoration 'from-mark "(define validate-html? #t)" 
+                        'to-mark "(define check-element-prohibitions? #t)"
+                        'color (rgb-color-encoding 0 0 255) 'face "italic" )
+   )
+   (main-text
+    "An excerpt of a skeleton LAML document" )
+   (annotation
+    "We have illustrate both seletion of a source program, a coloring of the inserted part." )
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"source-program\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page")
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "source-program")
+   (main-text "Manual entry")))
+
+) ; end note-page
+
+
+
+(note-page 'id "exercise"
+  (title (main-text "Exercise clause and its subclauses")
+         (annotation "")
+  )
+
+  (exercise
+   'id "ex1"
+   'title "Sample exercise"
+   (formulation
+    "Write a LENO lecture yourself, and try the system out. Notice that
+     this lecture's exercise model is make-indexes-and-solutions-per-lecture. This means that
+     the solutions will be easily available." )
+   (solution
+    "See the source of these pages for solutions..." )
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"exercise\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page")
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "exercise")
+   (main-text "Manual entry")))
+
+) ; end note-page
+
+(note-page 'id "tabular"
+  (title (main-text "Tabular and its subclauses")
+         (annotation "This page illustrates the tabular clause and its subclauses")
+  )
+
+  (tabular
+   'border "2"
+   (row-widths
+    (cell "100")
+    (cell "200")
+    (cell "300") )
+   (row
+    (cell "Row")
+    (cell "number")
+    (cell "one"))
+   (row
+    (cell "Row")
+    (cell "number")
+    (cell "two"))
+   (row
+    (cell "Row")
+    (cell "number")
+    (cell "three"))
+   (annotation
+    "A comment to the table")
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"tabular\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page")
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "tabular")
+   (main-text "Manual entry")))
+
+) ; end note-page
+
+(note-page 'id "applet-program"
+  (title (main-text "Applet-program")
+         (annotation "An illustration of applet program")
+  )
+
+  (applet-program
+   'code "ColorPresenter.class"
+   'code-base "applets/"
+   'height "400"
+   'width "250"
+   (main-text
+    "A color chooser"
+   )
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"applet-program\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page")
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "applet-program")
+   (main-text "Manual entry")))
+
+) ; end note-page
+
+(note-page 'id "synopsis"
+  (title (main-text "Synopsis and subclauses")
+         (annotation "This illustrates the synopsis clause")
+  )
+
+  (synopsis 
+   (synopsis-item  
+    (main-text "This is synopsis item 1"
+               ) 
+    (annotation "First synopsis annotation"
+                ))
+   (synopsis-item  
+    (main-text "This is synopsis item 2"
+               ) 
+    (annotation "Second synopsis annotation"
+  )))
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"synopsis\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page")
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "synopsis")
+   (main-text "Manual entry")))
+) ; end note-page
+
+(note-page 'id "quiz"
+  (title (main-text "Quiz")
+         (annotation "This illustrates the quiz clause. Notice that there is no note page contribution 
+                      of a quiz clause. Rather, an internal structure in the internal directory is defined.")
+  )
+
+  (quiz
+   (question
+    "Do you like LENO" )
+   (answers
+    (answer 'correctness "100"
+       (answer-possibility "yes" ) (answer-clarification "I am glad to hear..." ))
+    (answer 'correctness "0"
+       (answer-possibility "no" ) (answer-clarification "An impossible answer..." ))
+    (answer 'correctness "50"
+       (answer-possibility "maybe" ) (answer-clarification "Really - I am surprised :-)" ))
+   )
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"quiz\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page")
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "quiz")
+     (main-text "Manual entry"))
+   (internet-reference 'href "http://www.cs.auc.dk/~normark/cgi-bin/quiz/show-quiz.cgi?quiz%2dfilename=%2fuser%2fnormark%2fscheme%2fstyles%2fxml%2din%2dlaml%2flecture%2dnotes%2fman%2fmeta%2dexample%2finternal%2fmeta%2dlecture%2dnotes%2equiz&activation%2dmode=present"
+     (main-text "The quiz itself - requires connection to the Internet")))
+) ; end note-page
+
+
+(note-page 'id "show-and-speak"
+  (title (main-text "Show-and-speak and subclauses")
+         (annotation "This illustrate the show and speak facility in LENO. Notice, as for quizzes, that this does 
+                      not affect the generated note pages directly, as does most other note page clauses.
+                      Try out 'show-and-speak' from slide view by activating top leftmost 'spinning atom' icon.
+                      You will notice that first the slide is show, then the program, and finally the slide again.
+                      Currently, we have not made a sound file to play in the background.")
+  )
+
+  (show-and-speak
+   (slide-part
+    'number "1"
+    'seconds "5" )
+   (program-part
+    'number "1"
+    'seconds "5" )
+   (image-series-part
+     'number "1"
+     (image-part 'seconds "6")
+     (image-part 'seconds "7")
+   )
+   (slide-part
+    'number "2"
+    'seconds "6" )
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"show-and-speak\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page")
+  )
+
+  (image-series
+   'title "This is an image series, which is shown external to the slide view"
+   (image-series-item
+    'src "test-image-1.gif"
+    "This is the caption of the first image in the series" )
+   (image-series-item
+    'src "test-image-2.gif"
+    "This is the caption of the second image in the series" )
+   'slide-mode "external"
+   'book-mode "inline"
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "show-and-speak")
+     (main-text "Manual entry"))
+   )
+
+  (index-words
+  )
+) ; end note-page
+
+
+(note-page 'id "lecturer-photos"
+  (title (main-text "Lecturer-photos")
+         (annotation "This page illustrate the lecturer-photos clause. Notice that the photos are only shown
+            in slide view as part of an automatically progressing 'show-and-speak' show. Thus, in order to see the
+            photos you should activate the 'atom spin' icon (top left) in slide view. ")
+  )
+
+  (lecturer-photos
+   'start-number "1"
+   'number-of-photos "2"
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"lecturer-photos\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page")
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "lecturer-photos")
+     (main-text "Manual entry"))
+  )
+
+) ; end note-page
+
+(note-page 'id "lecturer-photos-and-logo"
+  (title (main-text "Lecturer-photos-and-logo")
+         (annotation "This slide illustrates the lecturer-photos-and-loge clause, which is similar to the
+                      lecturer-photos clause")
+  )
+
+  (lecturer-photos-and-logo
+   'start-number "1"
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"lecturer-photos-and-logo\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page")
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "lecturer-photos-and-logo")
+     (main-text "Manual entry"))
+  )
+
+) ; end note-page 
+
+
+(note-page 'id "elucidate"
+  (title (main-text "Elucidate")
+         (annotation "This page illustrates the elucidate clause.")
+  )
+
+  (elucidate
+   "The elucidate caption - showing a part of the LAML tutorial"
+   'href "../../../../../../tutorial/getting-started/getting-started.html"
+   'target "elucidator"
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"elucidate\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page")
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "elucidate")
+     (main-text "Manual entry"))
+  )
+
+  (index-words
+  )
+) ; end note-page
+
+
+
+(note-page 'id "splice-page-with"
+  (title (main-text "Splice-page-with")
+         (annotation "This page illustrates the clause splice-page-with. We splice the syntax element of the syntax page.")
+  )
+
+  (splice-page-with
+   'lecture-id "meta-lecture-notes"
+   'page-id "syntax"
+   (leno-elements (element-name "language-syntax"))
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"splice-page-with\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page")
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "splice-page-with")
+     (main-text "Manual entry"))
+   (note-reference
+    'lecture-id "meta-lecture-notes"
+    'page-id "syntax"
+    (main-text "The syntax page")
+   )
+  )
+
+) ; end note-page
+
+
+(note-page 'id "splice-page-without"
+  (title (main-text "Splice-page-without")
+         (annotation "This page illustrates the clause splice-page-without, which is similar to splice-page-with.
+                      We splice the elements of the syntax page, but not the source-program, the title, and the cross-references")
+  )
+
+  (splice-page-without
+   'lecture-id "meta-lecture-notes"
+   'page-id "syntax"
+   (leno-elements
+    (element-name "source-program" )
+    (element-name "cross-references" )
+    (element-name "title" )
+   )
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"splice-page-without\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page")
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "splice-page-without")
+     (main-text "Manual entry"))
+   (note-reference
+    'lecture-id "meta-lecture-notes"
+    'page-id "syntax"
+    (main-text "The syntax page")
+   )
+  )
+) ; end note-page
+
+(note-page 'id "side-track"
+  (title (main-text "Side-track")
+         (annotation "An illustration of side-track")
+  )
+
+  (side-track
+   (main-text
+    "These lecture notes used as a side track" )
+   (annotation
+    "In real situations we would not use a lecture as a side track to itself. This is just handy in this demo situation." )
+   'track-lecture-id "meta-lecture-notes"
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"side-track\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page")
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "side-track")
+     (main-text "Manual entry"))
+
+  )
+) ; end note-page
+
+
+(note-page 'id "side-track-1"
+  (title (main-text "More side-track")
+         (annotation "An illustration of side-track with references to a remote side track starting point.")
+  )
+
+  (side-track
+   (main-text
+    "The LAML tutorial - used as a side track" )
+   (annotation
+   "Just for illustrative purposes" )
+   'track-url "../../../../../../tutorial/index.html"
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"side-track-1\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page")
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "side-track")
+     (main-text "Manual entry"))
+
+  )
+) ; end note-page
+
+(note-page 'id "slide-space"
+  (title (main-text "Slide-space")
+         (annotation "This illustrates the (obsoleted) slide-space element")
+  )
+
+  (slide-space
+  )
+
+  (source-program
+   'src "meta-lecture-notes.laml"
+   'from-mark "(note-page 'id \"slide-space\""
+   'to-mark end-mark 
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+   )
+   (main-text
+    "The LAML source of this page")
+  )
+
+  (cross-references
+   (internet-reference 'href (man-entry "slide-space")
+     (main-text "Manual entry"))
+
+  )
+) ; end note-page
+
+
+
+
+
+
+
+
+(end-notes)
+
+

@@ -1,0 +1,32 @@
+(load (string-append laml-dir "laml.scm"))
+(lib-load "xml-in-laml/xml-in-laml.scm")
+(laml-style "xml-in-laml/photo-show/photo-show")
+
+(photo-show
+  'time "8"
+  'language "english"
+  'transition "blend"
+  'html-mode "pp"
+  'home-path "../"
+
+  'tabular-overview-dimension "3"
+  'before-first "none"
+  'after-last "stop-page"
+
+  (title-of-show "My Best Photos")
+  (upper-caption 'size "6" "")
+  (lower-caption 'size "3" "")
+  
+
+  (photo-list
+    (photo 'time "3" 'path "../Film34/" 'file "109_0957.JPG" 'size "auto" (upper-caption 'size "6" "") )
+    (photo 'time "3" 'path "../Film34/" 'file "109_0960.JPG" 'size "auto" (upper-caption 'size "6" "") ) 
+    (photo 'time "3" 'path "../Film34/" 'file "109_0968.JPG" 'size "auto" (upper-caption 'size "6" "") )
+    (photo 'time "3" 'path "../Film34/" 'file "109_0974.JPG" 'size "auto" (upper-caption 'size "6" "") )   
+    (photo 'time "3" 'path "../Film34/" 'file "109_0975.JPG" 'size "auto" (upper-caption 'size "6" "") ) 
+    (photo 'time "3" 'path "../Film32/" 'file "109_0915.JPG" 'size "auto" (upper-caption 'size "6" "") )
+
+  )
+
+)
+

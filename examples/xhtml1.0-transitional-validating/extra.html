@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <!--aaa-->
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+      <meta name="Generator" content="LAML" />
+      <script type="js"><![CDATA[Code here]]></script>
+      <!--bbb-->
+      <title>Extra XML aspects</title></head>
+   <?my-app xxx yyy 5?>
+   <body>
+      <h1>Extra XML aspects</h1>
+      <h2>Character references</h2>
+      <p>
+         LAML supports character references, such as
+         &aring;
+         directly.
+         &#39;Strange characters&#39;, such as
+         &gt;
+         and
+         &#60;
+         can be reached in this way.
+         Please consult the LAML source to see how character references are given in the LAML
+         source.</p>
+      <h2>XML comments</h2>
+      <p>
+         In case the real document source is an LAML file (written in Scheme), we can and should
+         use Scheme comments. However, in some cases it is desirable to have real XML
+         comments in the generated HTML/SVG/LENO file. If you view the underlying HTML
+         code of this page, you will see several XML comments.
+         The LAML source shows how to write XML comments in your original source.
+         <!--<p> xxx </p> 7 x--></p>
+      <h2>CDATA Sections</h2>
+      <p>
+         CDATA Sections are typcially used for style and script contents that contain &lt;, &amp;,
+         or &gt; characters: Here follows a CDATA section, which you can see in the HTML
+         source, but not in the rendered text:
+         <![CDATA[<x> 7 xx </xx>]]>
+         .
+         Notice, however, in this context, that LAML is very helpful for conversion of &lt;, &amp;
+         and &gt;. This is done via use of the HTML character transformation table.</p>
+      <![CDATA[if (ok(x)) &x else &y]]>
+      <h2>Processing Instructions</h2>
+      <p>
+         A processing instruction is an XML technicality for telling something to an application,
+         which processes the document. Here is an example:
+         <?my-app xxx yyy 5?></p>
+      <?my-app xxx yyy 5?>
+      Generated: Monday, November 14, 2011, 09:23:36</body></html>

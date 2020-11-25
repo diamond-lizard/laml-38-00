@@ -1,0 +1,16 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+
+
+(write-html 'pp
+ (html
+  (head 
+    (title "Demo of Rule 5")
+  )
+
+  (body 
+    (let ((attributes (list 'start "3" 'css:list-style-type "lower-roman"))
+          (contents (map li (list "one" "two" "three"))))
+      (ol 'id "demo" contents (li "final") attributes))
+  )
+ ))

@@ -1,0 +1,4 @@
+  (point
+    "A text with a" 
+    (a "link" 'href "subsection/sec.html")
+    "to a" (b "subsection") _ ".")

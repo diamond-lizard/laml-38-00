@@ -1,0 +1,36 @@
+The sdoc scripts in this directory generate XML DTD documentation of selected DTDs.
+
+Before you can use the sdoc scripts in this directory, make sure that
+the DTDs are parsed.
+
+Some selected DTDs are found in  tools/dtd-parser/dtds  in your laml dir.
+Activate the appropriate parsing scripts, such as svg11-parser.laml, before you attempt
+to generate documentation.
+
+---------------------------------------------------------------------------------------
+
+SVG manual:
+Make it by the local LAML script 
+
+   svg11-mirror.sdoc
+
+XHTML1.1 manual
+   xhtml11-mirror.sdoc
+
+XHTML 1.0 manuals (strict, frameset, transitional):
+   xhtml10-strict-mirror.sdoc
+   xhtml10-transitional-mirror.sdoc
+   xhtml10-frameset-mirror.sdoc
+
+
+----------------------------------------------------------------------------------------
+
+Internal remark:
+  NOW OBSOLETE:
+
+  EARLIER: Made automatically by the LAML toolscript  
+
+    tools/xml-in-laml/xhtml10/make-xhtml10-all-manuals.laml
+
+
+

@@ -1,0 +1,74 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+
+(define file-list 
+  (map in-startup-directory (list "initial-flat-html-document" "rule1-2-3-a" "rule4-a" "rule5-a" "rule5-b"
+         "rule6-a" "discussion-a" "table-example-a" "table-figure" "abstracted-html-document")))
+
+(write-text-file
+  (page
+  "Overview of JFP Examples"
+  (con-par
+    (laml-top-banner)
+    (h 1 "Overview of functional programming  examples")
+
+    (con "These examples accompany the paper" (a-tag "http://www.cs.auc.dk/~normark/laml/papers/jfp.pdf" (em "WEB Programming in Scheme - the LAML approach")) _ ".")
+   
+    (con "Some of the HTML code files shown in the column 'Verbatim HTML' have been pretty printed for improved readability. 
+     The pretty printing is done by an " 
+     (a-tag "http://www.cs.auc.dk/~normark/scheme/tools/xml-html-support/man/html-support.html" "LAML tool parsing and pretty printing tool") _ ".")
+
+    "The following examples exist in this directory:"
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 200 200 200 200)
+        (list
+          (map b (list "Example"   "LAML"                   "HTML - for browser"  "Verbatim HTML"))
+
+          (list "Flat HTML example"  (a-tag "initial-flat-html-document.laml")  (a-tag "initial-flat-html-document.html")  
+                                                                              (a-tag "initial-flat-html-document-protected.html"))          
+
+          (list "Rule 1, 2, and 3" (a-tag "rule1-2-3-a.laml")   (a-tag "rule1-2-3-a.html")  (a-tag "rule1-2-3-a-protected.html"))          
+          (list "Rule 4"      (a-tag "rule4-a.laml")        (a-tag "rule4-a.html")   (a-tag "rule4-a-protected.html"))          
+          (list "Rule 5"      (a-tag "rule5-a.laml")        (a-tag "rule5-a.html")   (a-tag "rule5-a-protected.html"))          
+          (list "Rule 5"      (a-tag "rule5-b.laml")        (a-tag "rule5-b.html")   (a-tag "rule5-b-protected.html"))          
+          (list "Rule 6"      (a-tag "rule6-a.laml")        (a-tag "rule6-a.html")   (a-tag "rule6-a-protected.html"))          
+
+          (list "Mirror discussion"  (a-tag "discussion-a.laml")  (a-tag "discussion-a.html")  (a-tag "discussion-a-protected.html"))          
+
+          (list "Table examples"  (a-tag "table-example-a.laml")  (a-tag "table-example-a.html")  (a-tag "table-example-a-protected.html"))
+
+          (list "All tables - figure"  (a-tag "table-figure.laml")  (a-tag "table-figure.html")  (a-tag "table-figure-protected.html"))          
+          (list "Ad hoc abstracted document"  (a-tag "abstracted-html-document.laml")  
+                                              (a-tag "abstracted-html-document.html")  (a-tag "abstracted-html-document-protected.html"))
+
+          (list "LENO - original syntax" (a-tag "leno-original/sample.laml") (a-tag "leno-original/html/sample.html") "-")
+
+          (list "LENO - XML in LAML syntax" (a-tag "leno-xml-in-laml/sample.laml") (a-tag "leno-xml-in-laml/html/sample.html") "-")
+          
+        )))
+
+    (con "The " (a-tag "index.laml" "LAML script") " that generates this page.")
+
+    (con "The examples can be found in the directory" (kbd "examples/jfp/") "of the LAML download bundle.")
+
+    (font-size 2 (em "If your browser will not present files with 'laml' or 'scm' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files."))
+  ))
+  (full-source-path-with-extension "html")
+)
+
+(for-each (lambda (f) (laml f)) file-list)
+
+(define (make-protected-edition file)
+ (write-text-file
+   (render (pre (html-protect (read-text-file (string-append file ".html")))))
+   (string-append file "-protected" ".html")))
+
+; (for-each (lambda (f) (make-protected-edition f)) file-list)
+
+
+(end-laml)

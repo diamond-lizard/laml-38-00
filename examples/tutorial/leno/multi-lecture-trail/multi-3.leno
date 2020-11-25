@@ -1,0 +1,83 @@
+(load (string-append laml-dir "laml.scm"))       
+(laml-style "xml-in-laml/lecture-notes/lecture-notes")
+(load (in-startup-directory "shared-front-matters-stuff.scm"))
+
+(leno-front-matters
+  (front-title "Lecture 3 of Multi Demo")           
+  (front-author "Kurt Nørmark")           
+  (front-affiliation "Department of Computer Science, Aalborg University, Denmark")  
+  (front-abstract "This is the third lecture of the tutorial multi demo material")    
+
+    shared-front-matters-attributes
+)
+
+(begin-notes)
+
+
+(note-page 'id "sec1"
+  (section-title "Section one")
+)
+
+(note-page 'id "page1"
+  (title (main-text "First page in the third lecture")
+         (annotation "")
+  )
+
+  (point
+   (main-text
+    "This is the first page"
+    )
+   (annotation
+    ""
+    )
+  )
+
+  (slide-text
+   "Some slide text on first page in third lecture"
+  )
+
+)
+
+(note-page 'id "page2"
+  (title (main-text "Second page in third lecture")
+         (annotation "")
+  )
+
+  (items 
+   (item 
+    (main-text "First item on page 2"
+               ) 
+    (annotation "There are no annotations - 
+                 no real ones, at least"
+                ))
+   (item 
+    (main-text "Second item on page 2"
+               ) 
+    (annotation ""
+  )))
+)
+
+(note-page 'id "page3"
+  (title (main-text "Third page in third lecture")
+         (annotation "Annotation")
+  )
+
+  (slide-text
+   "Some slide text"
+  )
+
+  (note-text
+   "Some note text"
+  )
+
+
+)
+
+
+
+
+
+
+(end-notes)
+
+

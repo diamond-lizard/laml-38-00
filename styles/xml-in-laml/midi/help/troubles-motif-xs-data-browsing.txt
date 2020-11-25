@@ -1,0 +1,21 @@
+IN CASE OF PROBLEMS WITH MOTIF XS VOICE OR ARP BROWSING:
+
+Is the PC and the Motif XS connected by USB cable?
+
+Instrument: 
+  Is the instrument in Song Mode?
+  Is the Arpeggio On/Off button in off position?
+
+Instrument: Does the instrument receive from the USB port:
+  Util > Control Midi: 
+    Midi In/Out: USB
+    Bank Select: On
+    Program Change: On 
+    Local Control: On (?)
+
+PC: Is Caps Lock unselected?
+
+-----------------------------------------------------------------------------
+
+NB: It is not necessary to select instrument nor MIDI output port when using
+the voice or arp browser.

@@ -1,0 +1,42 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-svg11")
+
+(begin-laml)
+
+(define xml-validate-contents? #t)
+(define xml-check-attributes? #t)
+(define xml-transliterate-character-data? #t)
+
+(define (f-path f domain-list)
+  (svg-path (map (lambda (x) (cons x (f x))) domain-list)))
+
+(define (svg-path pair-list)
+  (string-append 
+    "M "
+    (list-to-string
+     (map 
+      (lambda (pair) (string-append (as-string (car pair)) " " (as-string (cdr pair)) ))
+      pair-list)
+     " L ")))
+
+(define (fn x) (+ (* 3 x x)  5))
+
+
+(write-html 'raw
+
+  (svg 'width "800" 'height "600" 'viewBox "-50 1 50 0"
+   (g 'stroke "black" 'fill "white"
+    (path 'd (f-path fn (number-interval -50 50))))
+  )
+
+  (full-source-path-with-extension "svg")
+)
+
+(end-laml)
+
+
+
+
+
+
+

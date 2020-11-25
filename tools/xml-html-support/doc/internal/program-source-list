@@ -1,0 +1,1 @@
+(((key "xml-parser") (file-location "/user/normark/scheme/tools/xml-html-support/xml-support.scm") (language "scheme") (group "parser")) ((key "collect-skip") (file-location "/user/normark/scheme/lib/collect-skip.scm") (language "scheme") (group "lib")))

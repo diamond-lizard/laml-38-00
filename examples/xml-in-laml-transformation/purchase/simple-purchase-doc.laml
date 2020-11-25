@@ -1,0 +1,14 @@
+(load (string-append laml-dir "laml.scm"))
+(lib-load "xml-in-laml/xml-in-laml.scm")
+
+; Width of pretty printed output
+(set! preferred-maximum-width 30)
+
+(load (in-startup-directory "purchase-transformation.scm"))
+(load (in-startup-directory "purchases-mirror.scm"))
+
+(purchase
+  (p "4 thinkers")
+)
+
+(end-laml)

@@ -1,0 +1,34 @@
+;; .schemedoc-dependencies  "~/scheme/lib/man/svg-extensions"
+
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-svg11")
+(lib-load "svg-extensions.scm")
+
+(write-html '(pp prolog)
+
+  (svg standard-svg-1-1-element-attributes 'width "400" 'height "400" 
+     (let* ((x1 100) (x2 (+ x1 100)) (x3 (+ x2 100))
+            (y1 100) (y2 (+ y1 100)) 
+            (stroke-props  (list 'stroke "black" 'stroke-width "1"))
+           )
+       (let* ((node-a (svg-node rectangular x1 y2 "A"))
+              (node-b (svg-node rectangular x2 y1 "B"))
+              (node-c (svg-node rectangular x3 y2 "C"))
+
+              (edge1 (svg-edge node-a "ct" node-b "lc" stroke-props))
+              (edge2 (svg-edge node-b "rc" node-c "ct" stroke-props)) )
+         (svg-graph 
+          (list node-a node-b node-c)
+          (list edge2 edge1) ))))
+
+  (full-source-path-with-extension "svg")
+)
+
+(end-laml)
+
+
+
+
+
+
+

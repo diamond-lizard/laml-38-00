@@ -1,0 +1,29 @@
+(load (string-append laml-dir "laml.scm"))
+
+(laml-style "simple")
+
+(generic-page
+  "Index of questionnaire examples"
+  (con-par
+    (laml-top-banner)
+    (h 1 "Questionnarie examples")
+
+    "The following simple examples exists in this directory:"
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 250 200 200)
+        (list
+          (map b (list "Example" "LAML" "HTML"))
+          (list "A questionnaire page"    (a-tag "questionnaire-ex-1.laml")      (a-tag "questionnaire-ex-1.html"))
+        )))
+
+    (font-size 2 (em "If your browser will not present files with 'laml' or 'scm' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files."))
+  )
+  white black blue blue
+)
+
+(end-laml)

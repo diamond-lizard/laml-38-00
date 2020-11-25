@@ -1,0 +1,66 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "The LAML Manual"))
+  (body 
+    (laml-top-banner)
+    (h1 "LAML SchemeDoc and Elucidator 2 examples")
+
+    (p "This page holds the examples of the paper")
+
+    (ul (li (em "Scheme Program Documentation Tools") "(" _ (a 'href "http://www.cs.auc.dk/~normark/laml/papers/documentation-tools.pdf" "PDF") _ ")"))
+
+    (p "Notice that the Scheme Elucidator example given below is extended slightly compared with the version from the paper.")
+
+    (indent-pixels 10
+     (let ((schemedoc-url 
+             (lambda (suf) 
+               (string-append "../../schemedoc/scheme-documentation-tools/" suf))))
+       (table 'border "1"
+              (tr (td (b "Example")) (td (b "LAML/SDOC")) (td (b "Scheme sources")) (td (b "HTML")))
+
+              (tr (td "SchemeDoc example -" (br) "multi-semicolon style")
+                  (td (a 'href (schemedoc-url "man/prog1.laml") "LAML SchemeDoc source"))
+                  (td (a 'href (schemedoc-url "prog1.scm") "prog1.scm"))
+                  (td (a 'href (schemedoc-url "man/prog1.html") "SchemeDoc documentation")))
+
+              (tr (td "SchemeDoc example - " (br) "documentation-mark style")
+                  (td (a 'href (schemedoc-url "man/prog1a.laml") "LAML SchemeDoc source"))
+                  (td (a 'href (schemedoc-url "prog1a.scm") "prog1a.scm"))
+                  (td (a 'href (schemedoc-url "man/prog1a.html") "SchemeDoc documentation")))
+
+              (tr (td "Elucidator Example")
+                  (td (a 'href "demo.laml" "LAML source"))
+                  (td (a 'href (schemedoc-url "prog1.scm") "prog1.scm") (br)
+                      (a 'href "src/prog2.scm" "prog2.scm"))
+                  (td (a 'href "html/index.html" "Elucidative program")))
+
+
+              )))
+
+    (p (a 'href "http://www.cs.aau.dk/~normark/schemedoc/" "The SchemeDoc Home Page"))
+    (p (a 'href "http://www.cs.aau.dk/~normark/elucidative-programming/index.html" "The Elucdative Programming Home Page"))
+    (p (a 'href "http://www.cs.auc.dk/~normark/scheme/styles/elucidator/doc/html/index.html" "The elucidative program of The Scheme Elucidator 1"))
+    (p (a 'href "../index.html" "Other Elucidator 2 examples"))
+    (p (a 'href "../../schemedoc/index.html" "SchemeDoc examples"))
+  
+
+  )
+ )
+)
+
+
+(end-laml)

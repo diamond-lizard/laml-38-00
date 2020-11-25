@@ -1,0 +1,57 @@
+DIV.elucidator-abstract{
+  background: rgb(210,210,210);
+  margin-bottom: 1.5cm;
+}
+
+DIV.elucidator-section{
+  background: rgb(0,204,255);
+  margin-bottom: 1.0cm;
+}
+
+DIV.elucidator-entry{
+  margin-bottom: 1.0cm;
+}
+
+DIV.elucidator-entry-head{
+  background: rgb(0,204,255);
+  margin-bottom: 0.2cm;
+}
+
+/* References */
+
+SPAN.none-reference{
+  color: rgb(70,70,70);              /* Grey */
+  font-family: Courier;
+}
+
+A.program-file-reference-strong{
+  font-weight: bold;
+  font-family: Courier;
+  color: rgb(255,0,0);
+  text-decoration: none;
+}
+
+A.program-file-reference-weak{
+  font-weight: bold;
+  font-family: Courier;
+  color: rgb(0,0,255);
+  text-decoration: none;
+}
+
+A.program-reference-strong{
+  font-family: Courier;
+  color: rgb(255,0,0);
+  text-decoration: none;
+}
+
+A.program-reference-weak{
+  font-family: Courier;
+  color: rgb(0,0,255);
+  text-decoration: none;
+}
+
+A.manual-reference{
+  font-family: Courier;
+  color: rgb(0,90,0);               /* Dark green *(
+  text-decoration: none;
+}

@@ -1,0 +1,60 @@
+(load (string-append laml-dir "laml.scm"))
+
+(laml-style "simple-html4.0-loose")
+(lib-load "file-read.scm")
+
+(define _ #f)                    ; white-space suppress
+
+(define (html-write html-string)
+  (write-text-file
+    html-string
+    (string-append 
+      (startup-directory) (source-filename-without-extension) "." "html")))
+
+(html-write
+ (html
+  (head 
+    (title "Surface Demo")
+  )
+
+  (body 'css:font-family "helvetica"
+    (h1 "CSS surface example")
+
+     (p "This page demonstrates the use of the " 
+        (em 'css:letter-spacing "0.3cm" 'css:text-decoration "overline" 'css:background-color "yellow"
+            'css:color "red" "surface mirror") " with css attributes.
+         We use the font helvetica as an attribute on the body.")
+
+     "Here we enumerate the css attributes used in this example:"
+
+     (ol 'css:list-style-type "lower-roman"
+       (li "As mentioned, the font-famlily attribute on the body")
+       (li "Red emphasis using the css color attribute")
+       (li "Yellow background color of emphasis")
+       (li "Large letter spacing in emphasis")
+       (li "Sub and superscript")
+       (li "Text transformation to uppper case")
+       (li "Ordered list with lower roman numbers")
+       (li "links with bacground color and no underlining")
+       (li "Borders")
+     )
+
+    "Here we see " (span 'css:vertical-align "sub" "sub") " and " (span 'css:vertical-align "super" "super") " text." (p)
+
+    (div 'css:border "solid red" 'css:text-transform "uppercase" "An this text is entered in lower case, but rendered in upper case") (p)
+
+    (a 'css:text-decoration "none" 'css:background-color "yellow" 'href "index.html" "A link to the table of contents") _ "." (p)
+
+    (hr 'width "50%") (p)
+
+    (frame-width
+      (con (div 'css:text-align "left" "Left justified text in" (br) "a frame-width LAML form") 
+           (div 'css:text-align "right" "Here is some right" (br) "justified text")
+      )
+      400
+    )
+  ) 
+ )
+)
+
+(end-laml)

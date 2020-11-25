@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="800" height="800">
+   <g transform="scale(1.0)">
+      <g>
+         <defs>
+            <marker id="OpenArrowhead" viewBox="0 0 10 10" refX="10" refY="5" stroke="black" stroke-width="1"
+                    fill="white" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="15" orient="auto"
+                    preserveAspectRatio="none">
+               <path d="M 0 0 L 10 5 L 0 10 z" />
+            </marker>
+         </defs>
+         <defs>
+            <marker id="OpenDiamond" viewBox="0 -5 10 10" refX="10" refY="0" stroke="black" stroke-width="1"
+                    fill="white" markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="22.5" orient="auto"
+                    preserveAspectRatio="none">
+               <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+            </marker>
+         </defs>
+         <defs>
+            <marker id="FilledArrowhead" viewBox="0 0 10 10" refX="10" refY="5" fill="black" markerUnits="userSpaceOnUse"
+                    markerWidth="20" markerHeight="15" orient="auto" preserveAspectRatio="none">
+               <path d="M 0 0 L 10 5 L 0 10 z" />
+            </marker>
+         </defs>
+         <defs>
+            <marker id="FilledDiamond" viewBox="0 -5 10 10" refX="10" refY="0" fill="black" markerUnits="userSpaceOnUse"
+                    markerWidth="30" markerHeight="22.5" orient="auto" preserveAspectRatio="none">
+               <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+            </marker>
+         </defs>
+         <g>
+            <g>
+               <rect x="80.0" y="80.0" width="40.0" height="40" stroke-width="1" stroke="black" fill="yellow"
+                     id="head-cell" />
+               <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black"
+                     x="100.0" text-anchor="middle" y="106.0">
+                  a
+               </text>
+            </g>
+            <g>
+               <rect x="120.0" y="80.0" width="40" height="40" stroke-width="1" stroke="black" fill="yellow"
+                     id="tail-cell" />
+               <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black"
+                     x="140.0" text-anchor="middle" y="106.0" />
+            </g>
+         </g>
+         <g>
+            <g>
+               <rect x="230.0" y="80.0" width="40.0" height="40" stroke-width="1" stroke="black" fill="white"
+                     id="head-cell" />
+               <text font-family="times-roman" font-size="22" stroke="red" color="red" fill="red" x="250.0"
+                     text-anchor="middle" y="106.0">
+                  b
+               </text>
+            </g>
+            <g>
+               <rect x="270.0" y="80.0" width="40" height="40" stroke-width="1" stroke="black" fill="white"
+                     id="tail-cell" />
+               <text font-family="times-roman" font-size="22" stroke="red" color="red" fill="red" x="290.0"
+                     text-anchor="middle" y="106.0" />
+            </g>
+         </g>
+         <g>
+            <g>
+               <rect x="380.0" y="80.0" width="40.0" height="40" stroke-width="1" stroke="black" fill="white"
+                     id="head-cell" />
+               <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black"
+                     x="400.0" text-anchor="middle" y="106.0">
+                  c
+               </text>
+            </g>
+            <g>
+               <rect x="420.0" y="80.0" width="40" height="40" stroke-width="1" stroke="black" fill="white"
+                     id="tail-cell" />
+               <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black"
+                     x="440.0" text-anchor="middle" y="106.0" />
+            </g>
+         </g>
+         <g>
+            <path id="line-1" stroke-dasharray="3 4" stroke="black" fill="none" d="M 140.0 100.0 L 230.0 100.0 "
+                  stroke-width="1" marker-end="url(#FilledArrowhead)" />
+            <path id="line-2" stroke-dasharray="3 4" stroke="black" fill="none" d="M 230.0 100.0 L 140.0 100.0 "
+                  stroke-width="1" marker-end="url(#FilledArrowhead)" style="visibility:hidden;" />
+            <text font-family="times-roman" font-size="30" font-style="normal" stroke="black" color="black"
+                  fill="black" x="185.0" y="100.0" />
+         </g>
+         <g>
+            <path id="line-3" stroke="black" fill="none" d="M 290.0 100.0 L 380.0 100.0 " stroke-width="1"
+                  marker-end="url(#FilledArrowhead)" />
+            <path id="line-4" stroke="black" fill="none" d="M 380.0 100.0 L 290.0 100.0 " stroke-width="1"
+                  marker-end="url(#FilledArrowhead)" style="visibility:hidden;" />
+            <text font-family="times-roman" font-size="30" font-style="normal" stroke="black" color="black"
+                  fill="black" x="335.0" y="100.0" />
+         </g>
+      </g>
+   </g>
+</svg>

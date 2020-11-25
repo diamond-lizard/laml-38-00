@@ -1,0 +1,52 @@
+; A LAML script that processes all LAML examples.
+; Uses the process-all.laml files in sub-directories
+; and the common stuff in example-processing.scm in this directory.
+
+(load (string-append laml-dir "laml.scm"))
+(load (in-startup-directory "example-processing.scm"))
+
+(for-each 
+  process-part
+  ' (
+     "xml-parser-and-pretty-printer"
+     "xhtml11"
+     "tutorial" "svg11"  "svg-extensions"
+     "article" "bibtex"  
+;     "elucidator-2" 
+;     "html-parser-and-pretty-printer"
+     "manual" "photo-show" "questionnaire" "simple-pages" "simple-html4.0-loose"  "processing"     
+     "html4.01-transitional-basic-validating" "xhtml1.0-strict-validating" 
+     "xhtml1.0-frameset-validating" "xhtml1.0-transitional-validating"
+     "simple-html4.01-transitional-validating" "html4.01-transitional-convenience-validating"
+     "schemedoc"
+     "leno-xml-in-laml" "course-plan-xml-in-laml" "calendar-xml"
+     "plan-x" "jfp"
+     "xml-in-laml-transformation" "photo-show-xml-in-laml" "chords" 
+;    "midi"
+     "xsl-fo" 
+
+  ))
+
+(if (equal? "development" (laml-version-kind))
+ (begin
+  (display-message "Development examples:")
+
+  (for-each 
+   process-part
+   '( "xsl-fo" "program-dissection"
+;     "leno"
+;      "elucidator" 
+;      "course-plan"
+      "semester-evaluation"
+      "calendar"
+      ))))
+
+
+; SchemeDoc: Arrange that the Argentina style sheet is activiated:
+(laml-cd "..") (laml-cd "css-stylesheets") (laml-cd "manual") (laml-cd "change-manual-stylesheet")
+(laml "argentina")
+(laml-cd "..") (laml-cd "..") (laml-cd "..") (laml-cd "examples")
+
+
+
+(end-laml)

@@ -1,0 +1,34 @@
+ABOUT LIVE CURSOR
+
+When the tempo is low (slow playing) it makes sense to follow the
+playing with a moving cursor in Emacs. This is called 'Live
+Cursor'. It works together with the command line player.
+
+Live cursor movement is tricky in the MIDI LAML Emacs because the
+cursor movement and the playing is not really synchronized. Emacs does not
+have access to real-time MIDI playing! We simulate a moving cursor by pre-calculating
+the cursor move pattern.
+
+It is possible to tune the live cursor movement paramters with a couple of
+commands.  They are found in the menu
+
+    MIDL > Live Cursor > ...
+
+The following editor commands are also relevant:
+
+  - The M-x set-instrument command attempts to estimate the startup
+    latency of the command line player.
+
+  - The startup latency can be set by the command M-x live-cursor-set-startup-latency,
+    which - before setting - informs about the current setting.
+
+The Keypad  + and -  keys are bound the fastening and slowing the live cursor.
+
+The Keypad  Del  key toggle use of live cursor. 
+
+The following Emacs commands may also be useful
+
+  M-x live-cursor-manual-setup    Enter the startup latency and speedup factor as numbers.  
+                                  Stacks old values for convenient recovery.
+  M-x live-cursor-recover-settings
+  M-x live-cursor-info

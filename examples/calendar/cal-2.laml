@@ -1,0 +1,27 @@
+(load (string-append laml-dir "laml.scm"))
+
+(laml-style "simple")
+
+(load (string-append software-directory "tools/calendar/calendar.scm"))
+(set! calendar-font-size 1)
+
+(define calendar-events 
+  (list
+    (list (second-count 1999 12 31 0 0 0) (second-count 2000 1 2 0 0 0) "Party" "" red "")))
+
+(define language-preference 'english)
+(define week-separator-of-calendar 'thin)
+(define month-width 200)
+
+(generic-page
+  "Calendar example"
+ (con
+  (h 1 "Calendar example")
+  (calendar 1999 6 18))
+  white black blue blue
+)
+
+
+
+
+

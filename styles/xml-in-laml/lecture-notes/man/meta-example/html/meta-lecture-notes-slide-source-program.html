@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><head><meta http-equiv = "Content-Type" content = "text/html; charset = ISO-8859-1"><meta name = "Generator" content = "LAML"><meta name = "description" lang = "en-us" content = ""><link href = "stylesheets/stylesheet.css" rel = "stylesheet" title = "stylesheet" type = "text/css"><title>Source-program and its subclauses</title><script src = "javascript/lenonavigate.js" type = "text/javascript"></script></head><body onload = "lenoNavigate('meta-lecture-notes-slide-language-syntax.html', 'meta-lecture-notes-slide-exercise.html', 'meta-lecture-notes.html', 'meta-lecture-notes-note-source-program.html', 'meta-lecture-notes-show-source-program-1.html', '../../speak/meta-lecture-notes-source-program-slide-part-1.wav', '', ['meta-lecture-notes-source-program-slide-program-1.html'])" class = "leno-slide" id = "source-program"><a name = "slide-start"></a><table border = "0" cellpadding = "0" cellspacing = "0" width = "100%"><tr><td width = "33%" align = "left" valign = "top"><a href = "meta-lecture-notes-show-source-program-1.html"><img src = "./images/atomspin-freeze.gif" title = "Play audio slide show -- Keyboard shortcut: 'x'" alt = "Play audio slide show -- Keyboard shortcut: 'x'" border = "0"></a>&nbsp;&nbsp;<a href = "meta-lecture-notes.html"><img src = "./images/nav-up.gif" title = "Lecture overview -- Keyboard shortcut: 'u'" alt = "Lecture overview -- Keyboard shortcut: 'u'" border = "0"></a>&nbsp;&nbsp;<a href = "meta-lecture-notes-slide-language-syntax.html"><img src = "./images/nav-left.gif" title = "Previous page: Language Syntax -- Keyboard shortcut: 'p'" alt = "Previous page: Language Syntax -- Keyboard shortcut: 'p'" border = "0"></a>&nbsp;&nbsp;<a href = "meta-lecture-notes-slide-exercise.html"><img src = "./images/nav-right.gif" title = "Next page: Exercise clause and its subclauses -- Keyboard shortcut: 'n'" alt = "Next page: Exercise clause and its subclauses -- Keyboard shortcut: 'n'" border = "0"></a>&nbsp;&nbsp;<a href = "meta-lecture-notes-book.html#source-program"><img src = "./images/nav-book.gif" title = "Lecture notes - all slides and notes together" alt = "Lecture notes - all slides and notes together" border = "0"></a>&nbsp;&nbsp;<a href = "meta-lecture-notes-note-source-program.html"><img src = "./images/nav-notes.gif" title = "Annotated slide -- Keyboard shortcut: 't'" alt = "Annotated slide -- Keyboard shortcut: 't'" border = "0"></a>&nbsp;&nbsp;<a href = "note-index.html"><img src = "./images/index.gif" title = "Alphabetic index" alt = "Alphabetic index" border = "0"></a>&nbsp;&nbsp;<a href = "leno-help-and-about.html"><img src = "./images/question.gif" title = "Help page about these notes" alt = "Help page about these notes" border = "0"></a>&nbsp;&nbsp;<a href = "../../lecture-notes.html"><img src = "./images/nav-home.gif" title = "Course home" alt = "Course home" border = "0"></a>&nbsp;&nbsp;<img src = "./images/speaker-empty.gif" title = "" alt = "" border = "0">&nbsp;&nbsp;&nbsp;&nbsp;</td><td width = "34%" align = "center" valign = "top"><em><font size = "2" color = "#919191"></font></em></td><td width = "33%" align = "right" valign = "top"><font size = "3" color = "#919191"><b>Slide 24 : 38</b></font></td></tr></table><br><div class = "leno-slide-title"> Source-program and its subclauses</div><div class = "leno-slide-source-program"> <div  style = "background-color: #c8c8c8;"> <pre>;start here
+
+(define (<b><font color = "#ff0000" >document</font></b> ttl body-form)
+ (html html-props
+  (head 
+   (meta meta-props) (title ttl))
+  (body 
+    body-form)))
+
+<i><font color = "#0000ff" >(define validate-html? #t)
+(define check-html-attributes? #t)
+(define transliterate-character-data? #t)
+(define check-element-prohibitions? #t)</font></i>
+
+; Write a WWW page with title and body to f.html, provided
+; that this file is located in f.laml.  You must write this buffer
+; to a file, such as f.laml, before you LAML process it.
+(write-html '(raw prolog)
+ (document
+  "TITLE"
+  "BODY"
+ )
+)
+
+;end here</pre></div></div><table class = "leno-slide-source-program"><tr><td width = "110"><a href = "meta-lecture-notes-source-program-slide-program-1.html"><img src = "./images/program-icon.gif" title = "meta-lecture-notes.laml" alt = "meta-lecture-notes.laml" border = "0"></a></td> <td width = "900"><div class = "leno-slide-source-program-caption"> The LAML source of this page.</div></td></tr></table><div class = "leno-slide-cross-reference"> <ul><li type = "disc"><div class = "leno-slide-cross-reference-item"> <a href = "../../lecture-notes.html#source-program">Manual entry</a></div></li></ul></div><a name = "slide-end"></a></body></html><!-- Generated from a LAML source file. Version 29.0 (July 26, 2005, development). LAML is designed and implemented by Kurt Nørmark, normark@cs.auc.dk. -->
+<!-- LAML source file: /user/normark/scheme/styles/xml-in-laml/lecture-notes/man/meta-example/meta-lecture-notes; Scheme system: mzscheme-200; Scheme library directory: /user/normark/scheme/lib/; Style Scheme file: /user/normark/scheme/styles/xml-in-laml/lecture-notes/lecture-notes.scm; -->

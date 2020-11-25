@@ -1,0 +1,8 @@
+(load (string-append laml-dir "laml.scm"))
+(load (in-startup-directory "../example-processing.scm"))
+
+(begin-laml)
+
+(apply process-list (all-laml-files))
+
+(end-laml)

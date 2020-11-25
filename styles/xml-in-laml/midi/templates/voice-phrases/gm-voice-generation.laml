@@ -1,0 +1,55 @@
+; Caches selected voice phrases used by the Emacs GM Voice browser.
+; Cached inside the midi directory of LAML.
+
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/midi/midi")
+(load (string-append laml-dir "styles/xml-in-laml/midi/midi-laml-processing-lib.scm"))
+
+; --------------------------------------------------------------------------------------------------------
+; Parameters:
+
+(define ppqn 480)
+(define voice-cache-directory (string-append laml-dir "styles/xml-in-laml/midi/" "data/gm/Midi-voice-phrases/"))
+(define data-list-dir (string-append laml-dir "styles/xml-in-laml/midi/data/"))
+(define target-ch 16)
+
+; --------------------------------------------------------------------------------------------------------
+
+(define (octave-phrase msb lsb pc)
+  (StandardMidiFile
+     (MidiHeader 'format "0" 'numberOfTracks "1" 'pulsesPerQuarterNote ppqn 'mode "deltaTime")
+     (MidiTrack
+        (voice target-ch msb lsb pc)
+
+        (map
+          (lambda (n)
+            (SysEx 'deltaTime "0" 'info "0:0:0 GM Reset: 7E 7F 09 01 F7" "05 7E 7F 09 01 F7")
+            (NoteOn 'deltaTime (/ ppqn 2) 'channel target-ch 'note n 'velocity "100" 'duration (/ ppqn 2))
+          )
+          (number-interval 60 72)
+        )
+        (Meta 'deltaTime ppqn 'type "47" "")   ; End of track  
+     )
+  ))
+
+(define (cache-gm-voice-phrases)
+  (let ((voice-list (file-read (string-append data-list-dir "general-midi-voices.dat"))))
+    (for-each
+      (lambda (voice-entry)
+        (let ((msb (first voice-entry))
+              (lsb (second voice-entry))
+              (pc (third voice-entry)))
+
+          (ensure-directory-existence! voice-cache-directory "octave")
+          (let ((path (string-append voice-cache-directory "octave/" (as-string msb) "-" (as-string lsb) "-" (as-string pc) "." "mid")))
+            (if (file-exists? path) (delete-file path))
+            (display-message msb lsb pc)
+            (write-text-file
+             (standard-midi-file-ast-to-bin (octave-phrase msb lsb pc)) path
+            ))
+         )
+      )
+      voice-list)))
+
+(cache-gm-voice-phrases)
+        

@@ -1,0 +1,86 @@
+£1.TITLE       title
+.AUTHOR      author
+.EMAIL       email
+.AFFILIATION affiliation
+.ABSTRACT
+abstract
+.END£1
+
+£2.SECTION id
+.TITLE title
+.BODY
+body-text
+.END£2
+
+£3.ENTRY id
+.TITLE title
+.BODY
+body-text
+.END£3
+
+£4
+.TITLE       Making Sublists of a List
+.AUTHOR      Kurt Nørmark
+.EMAIL       normark@cs.auc.dk
+.AFFILIATION Department of Computer Science, Aalborg University, Denmark
+.ABSTRACT
+This documentation describes a few selected functions from the general.scm library, which
+we use throughout the LAML software packages. The functions deal with the problem of making
+a list of sublists from a list. The purpose of the documentation is primarily to demonstrate
+the Scheme elucidator on a simple example.
+.END
+
+---------------------------------------------------------------------------------------------------
+
+.SECTION the-problem-section
+.TITLE The sublist problem
+.BODY
+In this first section we formulate the general problem we are dealing with, and we motivate it
+in terms of a possible usage of the solution. 
+.END
+
+---------------------------------------------------------------------------------------------------
+
+.ENTRY the-problem
+.TITLE The problem
+.BODY
+We will start with a formulation of the general problem we are dealing with. Our 
+starting point is a list such as
+
+<pre>
+  (a b c d e f g h i j)
+</pre>
+
+which we want to split into a number of sublists, such as
+
+<pre>
+  ((a b) (c d) (e f) (g h) (i j))
+</pre>
+    
+Our concrete motiation for this 'sublisting of a list' is to provide for multi-column
+presentation of indexes in HTML via tables. In LAML terms we can write
+<pre>
+  (table
+   (sublist-by-rows 
+     3
+     (map as-string '(a b c d e f g h i))
+     )
+  1)
+ </pre>
+This is translated to a HTML table, which you can se <a href="table1.html">here</a>. We can also use a sublisting by column:
+<pre>
+  (table
+   (sublist-by-columns 
+     3
+     (map as-string '(a b c d e f g h i))
+     "-")
+   1)
+ </pre>
+the result of which can be seen <a href="table2.html">here</a>. <p>
+
+The functions sublist-by-rows and sublist-by-column are both discussed in subsequent sections.
+.END
+
+---------------------------------------------------------------------------------------------------
+£4
+

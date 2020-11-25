@@ -1,0 +1,24 @@
+(load (string-append laml-dir "laml.scm"))       
+(laml-style "xml-in-laml/chords/chords")
+
+(song-front-matters
+  'transposition "0"
+  'font-size "125"   ; percentage
+  'indentation "25"  ; pixels
+  'compact-lines "false"
+  'chord-color "red"
+  (song-title "")
+  (song-author "")
+)
+
+
+(song-verses
+
+  (verse
+    (line (c "Op") (c "al") (am "den") (dm "ting") (g "som") (c "Gud") (dm "har") (c "gjort") )
+    (line "hans" (am "her_") (g "lig_") (c "hed") "at" (c) (d 'x "sus" "pri_") (g "se") _ ",")
+    (line (c "det") (c "mindste") (f "han") (a "har") (dm "skabt") (c "er") (g "stor") )
+    (line "og" (c "kan") "hans" (f "magt") (am "be_") (f) (g 'x "sus" "vi_") (g)  (c "se!") )
+  )
+
+)

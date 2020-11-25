@@ -1,0 +1,70 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+; (lib-load "xhtml1.0-convenience.scm")
+
+(begin-laml)
+
+(define current-xml-language 'xhtml10-transitional)
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+(set-xml-accept-only-string-valued-attributes-in 'xhtml10-transitional #f)
+
+(define ttl "An adapting page") 
+
+(define laml-url "http://www.cs.aau.dk/~normark/laml/")
+(define schemedoc-url "http://www.cs.aau.dk/~normark/schemedoc/")
+
+(define (menu-part)
+  (div 'internal:part-id "menu"
+   (a 'href "http://www.cs.aau.dk/~normark/" "Kurt Nørmark") (br)
+   (a 'href laml-url "LAML") (br)
+   (a 'href schemedoc-url "SchemeDoc") (br)
+   (a 'href "http://www.dr.dk" "DR") (br)
+   (a 'href "http://www.tv2.dk" "TV 2") (br)
+  )
+)
+
+(define (in-a-laml-context? root-ast)
+ (let* ((menu-spotter 
+         (lambda (ast) 
+          (and (equal? (ast-element-name ast) "div")
+               (equal? (ast-internal-attribute ast 'part-id #f) "menu"))))
+        (menu-part (traverse-and-collect-first-from-ast root-ast menu-spotter id-1)))
+   (if menu-part
+       (let* ((anchor-elements (find-asts menu-part "a"))
+	      (url-list (map (lambda (a-ast) (ast-attribute a-ast 'href #f)) anchor-elements)))
+	 (or (member laml-url url-list)
+	     (member schemedoc-url url-list)))
+       #f)))
+
+(define (main-part root-ast parent-ast)
+  (if (in-a-laml-context? root-ast)
+      (div "This page is shown in an LAML context, because it references 
+            either the LAML home page or the SchemeDoc home page.")
+      (div "This page is not shown in an LAML context. Thus we better have to refer
+            to the" (a 'href laml-url "LAML home") 
+           "page here." )))
+    
+
+(write-html '(pp prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title ttl))
+  (body 
+    (h1 ttl)
+
+    (p "Below, the left part is a menu of links.  The right part is a text, which
+        adapts itself to the properties of the menu. This page illustrates delayed
+        procedural content items and internal AST attributes." ) 
+
+    (table 'border 0
+      (tr 
+        (td 'width 250 (menu-part))
+        (td main-part)))
+  )
+))
+
+
+(end-laml)

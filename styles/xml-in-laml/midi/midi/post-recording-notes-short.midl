@@ -1,0 +1,11 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/midi/midi")
+(load (string-append laml-dir "styles/xml-in-laml/midi/midi-laml-processing-lib.scm"))
+
+(StandardMidiFile
+  (MidiHeader 'format "0" 'numberOfTracks "1" 'pulsesPerQuarterNote "960" 'mode "deltaTime" 'counterTransposition "0")
+  (MidiTrack
+     (NoteOn 'deltaTime "1575" 'info "0:2:531 C1" 'channel "1" 'note "36" 'velocity "3" 'duration "300")
+     (Meta 'deltaTime "2500" 'info "1:1:224 End of track" 'type "47")
+  )
+)

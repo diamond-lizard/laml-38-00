@@ -1,0 +1,23 @@
+DIV.elucidator-abstract{
+  background: rgb(210,10,10);
+  margin-bottom: 0.5cm;
+  font-style: italic; 
+}
+
+/* References */
+
+A.program-reference-strong{
+  font-family: Courier;
+  color: rgb(255,0,255);
+  text-decoration: underline;
+  font-size: 90%;
+}
+
+A.program-reference-weak{
+  font-family: Courier;
+  color: rgb(0,255,0);
+  text-decoration: underline;
+  font-size: 90%;
+}
+
+

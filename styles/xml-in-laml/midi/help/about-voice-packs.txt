@@ -1,0 +1,18 @@
+VOICE COLLECTIONS:
+
+In the'Voice Browser, the COL column shows the collection to which a given voice entry belongs.
+
+The menu entry  'Motif XS Voices > Select User Voices'  allows selection of a given collection of voices
+to be shown in the browser. In particular, it is possible to show all known and supported voices.
+
+Here is an overview of the voice collections. The COL column in the browser shows the abbreviated
+voices collection names:
+
+ABBREVIATION   DESCRIPTION                                              FILE NAME                         SIZE      REMARK
+xs             A native, predefined voice in the Motif XS.
+eyv            XSpand your world collection.                            XSpandYourWorld All.X0A           400MB     Free
+orc            Complete Orchestra                                       Complete Orchestra.X0A            221MB     Pay
+el2            European Loyalty                                         EuropeanLoyaltyV2.X0A             167MB     Free
+pip            Majestic Pipes                                           MAJESTIC PIPES.X0A                 75MB     Pay
+org            Organ Sesssion                                           OrganSession_XS.X0A               158MB     Pay
+or-            Organ Sessions without samples                           OrganSession_MR.X0E                 1MB     Pay - load via editor

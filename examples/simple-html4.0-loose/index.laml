@@ -1,0 +1,38 @@
+(load (string-append laml-dir "laml.scm"))
+
+(laml-style "simple-html4.0-loose")
+
+(generic-page
+  "Overview of HTML4.0 examples"
+  (con-par
+    (laml-top-banner)
+    (h 1 "Overview of HTML4.0 examples")
+    (con "The examples in this directory use the simple-html4.0-loose style.  It means that they use 
+     one of the most advanced HTML mirror in Scheme, without validation, however. The first examples illustrate the same pages
+     as in " (a-tag "../simple-pages/index.html" "simple pages") ".")
+
+    "The following simple examples exists in this directory:"
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 250 200 200)
+        (list
+          (map b (list "Example"   "LAML"                            "HTML"))
+          (list "This index"       (a-tag "index.laml")              (a-tag "index.html"))
+          (list "Hello world"      (a-tag "hello-world.laml")        (a-tag "hello-world.html"))
+          (list "A simple page"    (a-tag "simple-page-1.laml")      (a-tag "simple-page-1.html"))
+          (list "A simple page with surface forms"    (a-tag "surface-1.laml")      (a-tag "surface-1.html"))          
+          (list "A page with css attributes"    (a-tag "surface-css.laml")      (a-tag "surface-css.html"))          
+          (list "A page done with write-html"    (a-tag "write-dome-1.laml")      (a-tag "write-demo-1.html"))          
+          
+        )))
+
+    (font-size 2 (em "If your browser will not present files with 'laml' or 'scm' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files."))
+  )
+  white black blue blue
+)
+
+(end-laml)

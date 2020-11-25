@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- The material in this file is copyrighted (c) by KN &copy;, AAU.  All rights reserved.-->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="900" height="900"
+     viewBox="0 0 900 900">
+   <g>
+      <defs>
+         <marker id="OpenArrowhead" viewBox="0 0 10 10" refX="10" refY="5" stroke="black" stroke-width="1"
+                 fill="white" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="15" orient="auto"
+                 preserveAspectRatio="none">
+            <path d="M 0 0 L 10 5 L 0 10 z" />
+         </marker>
+      </defs>
+      <defs>
+         <marker id="OpenDiamond" viewBox="0 -5 10 10" refX="10" refY="0" stroke="black" stroke-width="1"
+                 fill="white" markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="22.5" orient="auto"
+                 preserveAspectRatio="none">
+            <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+         </marker>
+      </defs>
+      <defs>
+         <marker id="FilledArrowhead" viewBox="0 0 10 10" refX="10" refY="5" fill="black" markerUnits="userSpaceOnUse"
+                 markerWidth="20" markerHeight="15" orient="auto" preserveAspectRatio="none">
+            <path d="M 0 0 L 10 5 L 0 10 z" />
+         </marker>
+      </defs>
+      <defs>
+         <marker id="FilledDiamond" viewBox="0 -5 10 10" refX="10" refY="0" fill="black" markerUnits="userSpaceOnUse"
+                 markerWidth="30" markerHeight="22.5" orient="auto" preserveAspectRatio="none">
+            <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+         </marker>
+      </defs>
+      <g>
+         <path d="M 50 380 L 74 392 L 50 404 Z" fill="grey" id="forward-button-id-1" style="visibility:visible;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-2.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-1.click"
+                 fill="freeze" />
+         </path>
+      </g>
+      <g>
+         <path d="M 0 392 L 24 380 L 24 404 Z" fill="grey" id="backward-button-id-2" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-1.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-3.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-2.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-2.click"
+                 fill="freeze" />
+         </path>
+         <path d="M 50 380 L 74 392 L 50 404 Z" fill="grey" id="forward-button-id-2" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-1.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-3.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-2.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-2.click"
+                 fill="freeze" />
+         </path>
+      </g>
+      <g>
+         <path d="M 0 392 L 24 380 L 24 404 Z" fill="grey" id="backward-button-id-3" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-2.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-4.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-3.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-3.click"
+                 fill="freeze" />
+         </path>
+         <path d="M 50 380 L 74 392 L 50 404 Z" fill="grey" id="forward-button-id-3" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-2.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-4.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-3.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-3.click"
+                 fill="freeze" />
+         </path>
+      </g>
+      <g>
+         <path d="M 0 392 L 24 380 L 24 404 Z" fill="grey" id="backward-button-id-4" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-3.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-5.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-4.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-4.click"
+                 fill="freeze" />
+         </path>
+         <path d="M 50 380 L 74 392 L 50 404 Z" fill="grey" id="forward-button-id-4" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-3.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-5.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-4.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-4.click"
+                 fill="freeze" />
+         </path>
+      </g>
+      <g>
+         <path d="M 0 392 L 24 380 L 24 404 Z" fill="grey" id="backward-button-id-5" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-4.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-5.click"
+                 fill="freeze" />
+         </path>
+      </g>
+      <g style="visibility:visible;opacity:1;">
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-0.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="backward-button-id-2.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="forward-button-id-1.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="backward-button-id-1.click" />
+         <text font-family="times-roman" font-size="20" stroke="black" color="black" fill="black" x="150"
+               y="400">
+            The start situation. We see an empty list, denoted ().
+         </text>
+      </g>
+      <g style="visibility:visible;opacity:0;">
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-1.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="backward-button-id-3.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="forward-button-id-2.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="backward-button-id-2.click" />
+         <text font-family="times-roman" font-size="20" stroke="black" color="black" fill="black" x="150"
+               y="400">
+            We allocate a cons cell with head c and the empty list in the tail: (cons &#39;c &#39;()).
+            
+         </text>
+      </g>
+      <g style="visibility:visible;opacity:0;">
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-2.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="backward-button-id-4.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="forward-button-id-3.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="backward-button-id-3.click" />
+         <text font-family="times-roman" font-size="20" stroke="black" color="black" fill="black" x="150"
+               y="400">
+            Similarly, we allocated a cons cell with head b, and the cons cell from the previous
+            step as the tail.
+         </text>
+      </g>
+      <g style="visibility:visible;opacity:0;">
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-3.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="backward-button-id-5.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="forward-button-id-4.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="backward-button-id-4.click" />
+         <text font-family="times-roman" font-size="20" stroke="black" color="black" fill="black" x="150"
+               y="400">
+            An once again, here allocating a cons cell with head a.
+         </text>
+      </g>
+      <g style="visibility:visible;opacity:0;">
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-4.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="backward-button-id-6.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="forward-button-id-5.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="backward-button-id-5.click" />
+         <text font-family="times-roman" font-size="20" stroke="black" color="black" fill="black" x="150"
+               y="400">
+            Just replicating the list from above - not very illustrative.
+         </text>
+      </g>
+      <g>
+         <g style="visibility:visible;opacity:0;">
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-3.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze" begin="forward-button-id-1000000.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-1000001.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-4.click" />
+            <rect x="30.0" y="80.0" width="40.0" height="40" stroke-width="1" stroke="black" fill="white"
+                  id="car-cell">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="50.0"
+                  text-anchor="middle" y="106.0">
+               a
+            </text>
+         </g>
+         <g style="visibility:visible;opacity:0;">
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-3.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze" begin="forward-button-id-1000000.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-1000001.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-4.click" />
+            <rect x="70.0" y="80.0" width="40" height="40" stroke-width="1" stroke="black" fill="white"
+                  id="cdr-cell">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="90.0"
+                  text-anchor="middle" y="106.0">
+               
+            </text>
+         </g>
+      </g>
+      <g>
+         <g style="visibility:visible;opacity:0;">
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-2.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze" begin="forward-button-id-1000000.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-1000001.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-3.click" />
+            <rect x="180.0" y="80.0" width="40.0" height="40" stroke-width="1" stroke="black" fill="white"
+                  id="car-cell">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="200.0"
+                  text-anchor="middle" y="106.0">
+               b
+            </text>
+         </g>
+         <g style="visibility:visible;opacity:0;">
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-2.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze" begin="forward-button-id-1000000.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-1000001.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-3.click" />
+            <rect x="220.0" y="80.0" width="40" height="40" stroke-width="1" stroke="black" fill="white"
+                  id="cdr-cell">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="240.0"
+                  text-anchor="middle" y="106.0">
+               
+            </text>
+         </g>
+      </g>
+      <g>
+         <g style="visibility:visible;opacity:0;">
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-1.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze" begin="forward-button-id-1000000.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-1000001.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-2.click" />
+            <rect x="330.0" y="80.0" width="40.0" height="40" stroke-width="1" stroke="black" fill="white"
+                  id="car-cell">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="350.0"
+                  text-anchor="middle" y="106.0">
+               c
+            </text>
+         </g>
+         <g style="visibility:visible;opacity:0;">
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-1.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze" begin="forward-button-id-1000000.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-1000001.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-2.click" />
+            <rect x="370.0" y="80.0" width="40" height="40" stroke-width="1" stroke="black" fill="white"
+                  id="cdr-cell">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="390.0"
+                  text-anchor="middle" y="106.0">
+               
+            </text>
+         </g>
+      </g>
+      <g>
+         <g style="visibility:visible;opacity:0;">
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-4.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze" begin="forward-button-id-1000000.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-1000001.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-5.click" />
+            <rect x="30.0" y="180.0" width="40.0" height="40" stroke-width="1" stroke="black" fill="white"
+                  id="car-cell">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="50.0"
+                  text-anchor="middle" y="206.0">
+               d
+            </text>
+         </g>
+         <g style="visibility:visible;opacity:0;">
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-4.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze" begin="forward-button-id-1000000.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-1000001.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-5.click" />
+            <rect x="70.0" y="180.0" width="40" height="40" stroke-width="1" stroke="black" fill="white"
+                  id="cdr-cell">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="90.0"
+                  text-anchor="middle" y="206.0">
+               
+            </text>
+         </g>
+      </g>
+      <g>
+         <g style="visibility:visible;opacity:0;">
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-4.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze" begin="forward-button-id-1000000.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-1000001.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-5.click" />
+            <rect x="180.0" y="180.0" width="40.0" height="40" stroke-width="1" stroke="black" fill="white"
+                  id="car-cell">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="200.0"
+                  text-anchor="middle" y="206.0">
+               e
+            </text>
+         </g>
+         <g style="visibility:visible;opacity:0;">
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-4.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze" begin="forward-button-id-1000000.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-1000001.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-5.click" />
+            <rect x="220.0" y="180.0" width="40" height="40" stroke-width="1" stroke="black" fill="white"
+                  id="cdr-cell">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="240.0"
+                  text-anchor="middle" y="206.0">
+               
+            </text>
+         </g>
+      </g>
+      <g>
+         <g style="visibility:visible;opacity:0;">
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-4.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze" begin="forward-button-id-1000000.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-1000001.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-5.click" />
+            <rect x="330.0" y="180.0" width="40.0" height="40" stroke-width="1" stroke="black" fill="white"
+                  id="car-cell">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="350.0"
+                  text-anchor="middle" y="206.0">
+               f
+            </text>
+         </g>
+         <g style="visibility:visible;opacity:0;">
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-4.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze" begin="forward-button-id-1000000.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-1000001.click" />
+            <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-5.click" />
+            <rect x="370.0" y="180.0" width="40" height="40" stroke-width="1" stroke="black" fill="white"
+                  id="cdr-cell">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="390.0"
+                  text-anchor="middle" y="206.0">
+               
+            </text>
+         </g>
+      </g>
+      <g style="visibility:visible;opacity:1;">
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-0.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze" begin="forward-button-id-1000000.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="0.5s" fill="freeze" begin="backward-button-id-1000001.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.5s" fill="freeze" begin="backward-button-id-1.click" />
+         <rect x="473.52941176470586" y="80.0" width="52.94117647058824" height="40" stroke="none" stroke-width="1"
+               fill="white">
+            <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                     fill="freeze" />
+            <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                     fill="freeze" />
+         </rect>
+         <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="500.0"
+               text-anchor="middle" y="110.0">
+            ( )
+         </text>
+      </g>
+      <g style="visibility:visible;opacity:0;">
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-3.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze" begin="forward-button-id-1000000.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="0.5s" fill="freeze" begin="backward-button-id-1000001.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.5s" fill="freeze" begin="backward-button-id-4.click" />
+         <path id="line-47" stroke="black" fill="none" d="M 90.0 100.0 L 180.0 100.0 " stroke-width="1"
+               marker-end="url(#FilledArrowhead)" />
+         <path id="line-48" stroke="black" fill="none" d="M 180.0 100.0 L 90.0 100.0 " stroke-width="1"
+               marker-end="url(#FilledArrowhead)" style="visibility:hidden;" />
+         <text font-family="times-roman" font-size="30" font-style="normal" stroke="black" color="black"
+               fill="black" x="135.0" y="100.0" />
+      </g>
+      <g style="visibility:visible;opacity:0;">
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-2.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze" begin="forward-button-id-1000000.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="0.5s" fill="freeze" begin="backward-button-id-1000001.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.5s" fill="freeze" begin="backward-button-id-3.click" />
+         <path id="line-49" stroke="black" fill="none" d="M 240.0 100.0 L 330.0 100.0 " stroke-width="1"
+               marker-end="url(#FilledArrowhead)" />
+         <path id="line-50" stroke="black" fill="none" d="M 330.0 100.0 L 240.0 100.0 " stroke-width="1"
+               marker-end="url(#FilledArrowhead)" style="visibility:hidden;" />
+         <text font-family="times-roman" font-size="30" font-style="normal" stroke="black" color="black"
+               fill="black" x="285.0" y="100.0" />
+      </g>
+      <g style="visibility:visible;opacity:0;">
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-1.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze" begin="forward-button-id-1000000.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="0.5s" fill="freeze" begin="backward-button-id-1000001.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.5s" fill="freeze" begin="backward-button-id-2.click" />
+         <path id="line-53" stroke="black" fill="none" d="M 390.0 100.0 L 473.52941176470586 100.0 "
+               stroke-width="1" marker-end="url(#FilledArrowhead)" />
+         <path id="line-54" stroke="black" fill="none" d="M 473.52941176470586 100.0 L 390.0 100.0 "
+               stroke-width="1" marker-end="url(#FilledArrowhead)" style="visibility:hidden;" />
+         <text font-family="times-roman" font-size="30" font-style="normal" stroke="black" color="black"
+               fill="black" x="431.7647058823529" y="100.0" />
+      </g>
+      <g style="visibility:visible;opacity:0;">
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-4.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze" begin="forward-button-id-1000000.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="0.5s" fill="freeze" begin="backward-button-id-1000001.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.5s" fill="freeze" begin="backward-button-id-5.click" />
+         <path id="line-55" stroke="black" fill="none" d="M 90.0 200.0 L 180.0 200.0 " stroke-width="1"
+               marker-end="url(#FilledArrowhead)" />
+         <path id="line-56" stroke="black" fill="none" d="M 180.0 200.0 L 90.0 200.0 " stroke-width="1"
+               marker-end="url(#FilledArrowhead)" style="visibility:hidden;" />
+         <text font-family="times-roman" font-size="30" font-style="normal" stroke="black" color="black"
+               fill="black" x="135.0" y="200.0" />
+      </g>
+      <g style="visibility:visible;opacity:0;">
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-4.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="1s" fill="freeze" begin="forward-button-id-1000000.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="0.5s" fill="freeze" begin="backward-button-id-1000001.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.5s" fill="freeze" begin="backward-button-id-5.click" />
+         <path id="line-57" stroke="black" fill="none" d="M 240.0 200.0 L 330.0 200.0 " stroke-width="1"
+               marker-end="url(#FilledArrowhead)" />
+         <path id="line-58" stroke="black" fill="none" d="M 330.0 200.0 L 240.0 200.0 " stroke-width="1"
+               marker-end="url(#FilledArrowhead)" style="visibility:hidden;" />
+         <text font-family="times-roman" font-size="30" font-style="normal" stroke="black" color="black"
+               fill="black" x="285.0" y="200.0" />
+      </g>
+   </g>
+</svg>

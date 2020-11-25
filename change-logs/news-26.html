@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+      <meta name="Generator" content="LAML"/>
+      <title>News in LAML version 26</title>
+      <link rel="SHORTCUT ICON" href="../images/16-16-icon.ico"/>
+   </head>
+   <body bgcolor="#ffffbf" text="#000000" link="#0000ff" vlink="#0000ff">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+         <tbody>
+            <tr>
+               <td width="33%" align="left" valign="top">
+                  <font size="2">Generated: May 6, 2005, 17:20:42</font>
+               </td>
+               <td width="34%" align="center" valign="top">
+                  <font size="2"><span>Copyright &copy; 2005, Kurt N&oslash;rmark</span></font>
+               </td>
+               <td width="33%" align="right" valign="top">
+                  <font size="2">
+                     <a href="../index.html" title="The local LAML software home page" target="_top">
+                        <img src="../images/laml-home.gif" alt="The local LAML software home page"
+                             border="0"/>
+                     </a>
+                  </font>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+      <h1>What is new in LAML</h1>
+      <h3>News in version 26:</h3>
+      <p>
+         LAML has been tested positively with MzScheme version 299 on Windows (2000). However
+         see the
+         <a href="../info/notes/mzscheme-300-windows.html">notes about MzScheme 299</a>.
+          If you use this new version of PLT, you should configure LAML as mzscheme-300.
+         There is also now (partial) support of LAML in Gambit (see
+         <a href="../info/notes/gambit.html">Gambit notes</a>
+         ). 
+      </p>
+      <ol>
+         <li style="margin-bottom:4mm;">
+            Mirror generation: It is now possible to generate mirror functions named with a
+            given prefix. It is also possible the generate a mirror in which the
+            functions are only available through the language map. See new configuration
+            variables in tools/xml-in-laml/xml-in-laml.scm. The impact on SchemeDoc
+            manuals is still pending.
+         </li>
+         <li style="margin-bottom:4mm;">
+            XML-in-LAML: It is now possible to eliminate duplicate attributes in an XML attribute
+            list (represented as a property list). This is configured in the mirror
+            generation tool. The function xml-duplicated-attribute-handling, which
+            takes a language parameter, returns the processing mode.
+         </li>
+         <li style="margin-bottom:4mm;">
+            The new macros
+            <a href="../lib/xml-in-laml/man/xml-in-laml.html#with-xml-language">
+               with-xml-language
+            </a>
+            and
+            <a href="../lib/xml-in-laml/man/xml-in-laml.html#with-xml-language">
+               with-xml-language!
+            </a>
+            in lib/xml-in-laml/xml-in-laml.scm allow the author to focus exclusively on document
+            generation in single XML language. With use of this macro, name clashes
+            with other XML languages are avoided. This is very helpful if you, in
+            a distinguished part of your program, make use a mirror which overlaps
+            with other mirrors.
+         </li>
+         <li style="margin-bottom:4mm;">
+            The semantics of the function
+            <a href="../man/laml.html#optional-parameter">optional-parameter</a>
+            has been changed slightly. It is now possible to pass a value that serves as a
+            <em>non passed value</em>,
+            hereby asking to use the default value of the parameter.
+         </li>
+         <li style="margin-bottom:4mm;">
+            LAML now assumes that the Scheme reader is case sensitive. More specifically,
+            a case sensitive Scheme reader turns out to be the best solution for XML languages
+            that rely on case sensitivity. If you do not deal with case sensitive
+            XML DTDs, you can still use a standard non-cases sensitive R5RS Scheme
+            system for LAML. We arrange for case sensitivity in the Scheme compatibility
+            files in
+            <kbd>lib/compatibility/</kbd>.
+            MzSchme 200+ and Guile are setup to be case sensitive in the LAML compatibility
+            files.
+         </li>
+         <li style="margin-bottom:4mm;">
+            The LAML DTD parser is now able to handle conditional sections of the DTD. With
+            this it is possible to parse the SVG1.1 DTD and the XHTML1.1 DTD.
+         </li>
+         <li style="margin-bottom:4mm;">
+            SchemeDoc: A new front-matters option allows for alphabetic sorting of XML attributes.
+         </li>
+         <li style="margin-bottom:4mm;">
+            Via redefinition of the function
+            <a href="../lib/xml-in-laml/man/xml-in-laml.html#extraordinary-allow-element?">
+               <kbd>extraordinary-allow-element?</kbd>
+            </a>
+            from
+            <kbd>lib/xml-in-laml/xml-in-laml.scm</kbd>
+            it is now possible to allow a certain element to appear within another element.
+            This introduces a hook into the XML validation apparatus. Motivation:
+            Sometimes it is useful to allow certain elements within an XHTML context,
+            which are eventually transformed to XHTML.
+         </li>
+         <li style="margin-bottom:4mm;">
+            The Scheme Elucidator 2 has been extended to support multiple source file versions.
+            This is a significant update and improvement of this tool. See an
+            <a href="../examples/elucidator-2/versions/version-demo.html">example</a>.
+         </li>
+         <li style="margin-bottom:4mm;">
+            <p>
+               LAML SchemeDoc now supports a boolean attribute,
+               <kbd>scheme-source-linking</kbd>.
+               With use of this attribute it is possible to link from a SchemeDoc manual, which
+               is extracted from a Scheme source program, to a rendering of the
+               Scheme source program itself. The documentation of most LAML libraries
+               make use of this new feature.
+               <a href="../lib/man/general.html#as-string">Example</a>
+               (follow link of &#39;Scheme source file&#39;).
+            </p>
+            <p>
+               The Scheme source program itself provides for rich linking, both internally
+               and externally. The Scheme source program HTML page is created via the Scheme
+               Elucidator. With this new feature, the integration of SchemeDoc and
+               the Scheme Elucidator has been made more complete. Recall, in this
+               context, that the Scheme Elucidator already is able to link from Scheme
+               source files to SchemeDoc resources.
+            </p>
+         </li>
+         <li style="margin-bottom:4mm;">
+            LENO: The element syntax has been renamed to language-syntax. In Guile, it gives
+            problem to (re)define the name syntax.
+         </li>
+         <li style="margin-bottom:4mm;">
+            A new XML-in-LAML style,
+            <a href="../styles/xml-in-laml/chords/man/chords.html">LAML Chords</a>,
+            has been added. With this style, you can write simple song text, and annotate it
+            with chords. 
+            <a href="../examples/chords/index.html">Examples</a>.
+             The LAML chords system outputs an HTML file, in which the chords are
+            placed above song lines. As a convenient facility, the LAML chords system
+            is able to automatically transpose a song from one key to another. The
+            LAML Chords facility comes with a set of supporting Emacs commands.
+         </li>
+         <li style="margin-bottom:4mm;">
+            The emacs support stuff in the directory
+            <kbd>emacs-support/</kbd>
+            has been reorganized a bit. The file
+            <kbd>laml-template.el</kbd>
+            has been included in
+            <kbd>laml-mode.el</kbd>.
+            This simplifies the organization of the LAML Emacs stuff. In addition, your
+            <kbd>.emacs</kbd>
+            file will now load the file
+            <kbd>emacs-support/laml-emacs-support.el</kbd>
+            (instead of
+            <kbd>emacs-support/dot-emacs-support.el</kbd>
+            ). If you have an old LAML installation, you will need to delete the loading of
+            <kbd>emacs-support/dot-emacs-support.el</kbd>.
+         </li>
+         <li style="margin-bottom:4mm;">
+            LAML emacs support: We have added an Emacs command,
+            <b>M-x insert-relative-file-path</b>,
+            which is useful for insertion of file paths, which are relative to the
+            current directory. Use this command when you link from one (HTML) file
+            to another. The command
+            <b>insert-relative-file-path</b>
+            is probably useful in many non-LAML contexts as well. You find insert-relative-file-path
+            in
+            <kbd>emacs-support/laml-mode.el</kbd>
+         </li>
+         <li style="margin-bottom:4mm;">
+            <a href="../lib/xml-in-laml/mirrors/man/xhtml11-mirror.html">XHTML1.1</a>
+            is now supported by LAML.
+            <a href="../examples/xhtml11/index.html">Examples</a>.
+         </li>
+         <li style="margin-bottom:4mm;">
+            The Emacs customization facility for LAML has been updated. Some old stuff has been
+            deleted. Try
+            <b>M-x laml-customize</b>
+            in Emacs.
+         </li>
+      </ol>
+      <h3>News in version 26.1</h3>
+      <ol>
+         <li style="margin-bottom:4mm;">
+            <a href="../man/laml.html#laml-version-functions">New functions</a>
+            in laml.scm which provide version information about the actual LAML installation.
+         </li>
+         <li style="margin-bottom:4mm;">
+            New functions in lib/xml-in-laml.scm that make it possible to have XML comment,
+            CDATA sections and Processing Instructions in LAML documents.
+         </li>
+      </ol>
+      <div>
+         &nbsp;
+         <br/>
+         Kurt N&oslash;rmark
+         <br/>
+         <a href="mailto:normark@cs.aau.dk">normark@cs.aau.dk</a>
+         <br/>
+         <a href="http://www.cs.auc.dk/~normark/">http://www.cs.auc.dk/~normark/</a>
+      </div>
+   </body>
+</html>
+<!-- Generated from a LAML source file. Version 27.0 (April 18, 2005, development). LAML is designed and implemented by Kurt Nørmark, normark@cs.auc.dk. -->

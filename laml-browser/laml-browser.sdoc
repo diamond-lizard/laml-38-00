@@ -1,0 +1,87 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/schemedoc-index/schemedoc-index")
+
+
+(define (in-laml sf) (string-append (laml-dir-prefix (startup-directory))  sf))
+(define (in-lib-man sf) (string-append (laml-dir-prefix (startup-directory)) "lib/man/" sf))
+
+(manual-index
+  (manual-index-front-matters
+    (manual-index-title "LAML & Scheme Browser")
+    'browser-type "two-steps"
+    'left-frame-width "290px"
+    'top-frame-height "250px"
+    'initial-manual-frame "info"
+    'scheme-report-version "r5rs"
+    'scheme-report "include" ; none, include, merge
+    'source-destination-delta "html/"
+  )
+
+  (manual-index-contributions
+
+    (manual-index-contribution 
+       'informative-name "LAML Root Library"
+       'path (in-laml "man/laml"))
+
+
+    (manual-index-contribution 
+       'informative-name "General LAML Library"
+       'path (in-lib-man "general"))
+
+    (manual-index-contribution 
+       'informative-name "XML-in-LAML Library"
+       'path (in-laml "lib/xml-in-laml/man/xml-in-laml"))
+
+    (manual-index-contribution 
+       'informative-name "LAML Compatibility"
+       'path (in-lib-man "mzscheme"))
+
+    (manual-index-contribution 
+       'informative-name "XHTML Transitional"
+       'path (in-laml "lib/xml-in-laml/mirrors/man/xhtml10-transitional-mirror"))
+
+    (manual-index-contribution 
+       'informative-name "XHTML Convenience"
+       'path (in-lib-man "xhtml10-convenience"))
+
+    (manual-index-contribution 
+       'informative-name "Textual File IO"
+       'path (in-lib-man "file-read"))
+
+    (manual-index-contribution 
+       'informative-name "Color"
+       'path (in-lib-man "color"))
+
+    (manual-index-contribution 
+       'informative-name "Time"
+       'path (in-lib-man "time"))
+
+    (manual-index-contribution 
+       'informative-name "Buffered Input Streams"
+       'path (in-lib-man "collect-skip"))
+
+    (manual-index-contribution 
+       'informative-name "String Make Up"
+       'path (in-lib-man "string-make-up"))
+
+    (manual-index-contribution 
+       'informative-name "Simple Cryptation"
+       'path (in-lib-man "crypt"))
+
+    (manual-index-contribution 
+       'informative-name "Scheme Pretty Printing"
+       'path (in-lib-man "scheme-pretty-printing"))
+
+    (manual-index-contribution 
+       'informative-name "Finite State Automata"
+       'path (in-lib-man "final-state-automaton"))
+
+    (manual-index-contribution 
+       'informative-name "CGI"
+       'path (in-lib-man "cgi"))
+
+
+
+  )
+)
+

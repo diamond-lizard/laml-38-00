@@ -1,0 +1,1 @@
+((element "text" "-" "-" (mixed-content (choice pcdata "text")) "") (attribute "text" (("count" "CDATA" "#IMPLIED"))))

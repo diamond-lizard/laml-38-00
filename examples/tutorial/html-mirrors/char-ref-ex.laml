@@ -1,0 +1,58 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+; (lib-load "xhtml1.0-convenience.scm")
+
+(define meta-props (list 'http-equiv "Content-Type"
+                         'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(write-html '(pp prolog)
+ (html html-props
+  (head 
+   (meta meta-props) (title "Character reference example"))
+  (body 
+
+    (p "When we write '<' and '>' these characters are translated to HTML
+        character references &lt; and &gt;" )
+
+    (p "Notice, in the LAML source, how the previous paragraph is written.
+        We make good use of the HTML transformation table." )
+
+    (p "The character < can also be written as a character entity"   
+       (char-ref 60)  "or" (char-ref "lt") _ "."
+       "This looks strange in the rendered page,
+        but take a look in the LAML source.")
+
+    (p "Special characters can also be used, for instance"
+       (char-ref "Lambda") "and" (char-ref 937) _ "."
+       "Please take a look in the LAML source.") 
+
+    (p 'id "XM&Lambda;" "Attribute values can also contain 
+        character entities.  We illustrate this with the id of
+        the enclosing paragraph.")
+
+    (p 'id "<XM&Lambda;>" "Attributes values may even contain the
+           '<' character. The reason is that LAML converts it to"
+           (char-ref "amp") _ "amp;" _ "."
+           "See again the attribute of the enclosing paragraph."
+    )
+
+    (br 'id "XM&Lambda;")
+
+    (p 'css:x "y&oslash;z" 
+       "In the id of this paragraph we test character references in
+        css attribute values. This is not useful, however, and probably
+        even in conflict with the basic CSS syntax.
+        We should really include some basic CSS validation in LAML
+        to deal with this problem.
+       ")
+
+  )
+ )
+)
+
+
+(end-laml)

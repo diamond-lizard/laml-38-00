@@ -1,0 +1,55 @@
+; Manual of the Scm library
+
+(load (string-append laml-dir "laml.scm"))
+
+; ---------------------------------------------------------------------------------------------------
+; LOADING
+
+(load (string-append software-directory "tools/schemedoc" "/" "schemedoc.scm"))
+
+; ---------------------------------------------------------------------------------------------------
+; FILES:
+
+(define manual-source-file (string-append the-library "compatibility/" "star_star_scm.scm"))
+(define manual-destination-directory (string-append the-library "man/"))
+
+
+; ---------------------------------------------------------------------------------------------------
+; COMMENT EXTRACTING
+(define delete-comment-file? #f)
+
+(define doc-list (extract-documentation-from-scheme-file manual-source-file))
+
+; extracted-manual-abstract implicitly defined
+
+; ---------------------------------------------------------------------------------------------------
+; MANUAL PRODUCTION
+
+(style "manual/manual")      ; if this style is loaded initially, something becomes reloaded, and the manual stuff does not work anymore!!
+
+(set-manual-title "Reference Manual of the SCM compatibility library")
+
+(set-manual-author "Kurt Nørmark" "normark@cs.auc.dk" "Department of Computer Science" "Aalborg University" "Denmark")
+
+(set-manual-abstract extracted-manual-abstract)
+
+(set-home-url "http://www.cs.auc.dk/~normark/laml/laml-overview.html")
+(set-manual-master-index "../ALL.html")
+
+(set-manual-name "scm")
+
+; a redefinition from manual
+(define manual-index-width-list  (list 180 320 350))
+
+; another redefinition from manual
+(define end-remark "This documentation has been extracted automatically from the Scheme source file by means of the Schemedoc tool")
+
+(make-manual doc-list 'manual-from-scheme-file manual-destination-directory "lib/compatibility/star_star_scm.")
+
+
+
+
+
+
+
+

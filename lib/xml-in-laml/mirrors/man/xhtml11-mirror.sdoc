@@ -1,0 +1,37 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/schemedoc-2/schemedoc")
+
+(manual
+  (manual-front-matters
+    (manual-title "Reference Manual of the XHTML 1.1 mirror")
+    (kn-manual-settings
+     (manual-abstract
+      (div 
+       (p "This is a manual of the " (a-tag "http://www.w3.org/TR/xhtml11/" "XHTML 1.1") " mirror, as derived from the flat XHTML 1.1 DTD.
+       The manual only contains information which is present in the DTD: information about attributes
+       and the content model. In contrast to the DTD, however, the information in this manual is fully expanded
+       (without the macros defined by 'entities').")
+
+     (p "This mirror validates both the attributes and content composition. It also checks the links in
+         the document when the document is rendered with" 
+        (a 'href "../../../../man/laml.html#write-html" "write-html")_ "," 
+        "and when" (a 'href "../../../../man/laml.html#end-laml" "end-laml") "is called.
+        Link checking depends on the value of the variable" (a 'href "../../man/xml-in-laml.html#xml-link-checking" "xml-link-checking") _ "." )
+
+       (p "For simple and conveninent loading of the XHTML1.1 mirror library, as well as accompanying libraries, you can just load" (kbd "simple-xhtml1.1-valditing.scm") _ ":")
+
+       (pre "   (laml-style \"simple-xhtml1.1-validating\")")
+
+       (p "More specifically, this LAML style loads the generic XML-in-LAML library, the XHTML 1.1 mirror library, color.scm, time.scm, and file-read.scm.") 
+
+
+       )))
+    'laml-resource "true"
+    'attribute-sorting "by-attribute-name"
+    
+  )
+
+  (manual-from-xml-dtd 'src "../../../../tools/dtd-parser/dtds/xhtml11-flat.lsp")
+
+)
+

@@ -1,0 +1,68 @@
+; A 3/4 style.
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/midi/midi")
+(load (string-append laml-dir "styles/xml-in-laml/midi/midi-laml-processing-lib.scm"))
+
+; The identity scaling function
+(define sc-id
+  (make-scale-function-by-xy-points
+           (from-percent-points 
+             '((0 100) (100 100)))))
+
+; Every second note is strum sound in a Tyros mega voice (the ones with a 108 note value).
+(define strummed-c-major 
+  '((280 C2) (0 96 35)  (280 E2) (0 96 35)  (280 G2) (0 96 35)  (280 B2) (0 96 35)  (280 C3) (0 96 35) (280 E3) (0 96 35)))
+
+(define strummed-fret-c-major 
+  '((280 C2) (0 123 30)  (280 E2) (0 96 35)  (280 G2) (0 96 35)  (280 B2) (0 96 35)  (280 C3) (0 96 35) (0 123 25) (280 E3) (0 96 35)))
+
+(define strummed-c-major-short
+  '((240  -) (0 96 35)  (280 E2)            (280 G2) (0 96 35)  (280 B2) (0 96 35)  (280  -)           (280 E3) (0 96 35)))
+
+(define strummed-c-major-xshort
+  '((240  C2) (0 96 35)  (280 -)            (280  -) (0 96 35)  (280 B2) (0 96 35)  (280  -)           (280  -) (0 96 35)))
+
+(define strummed-c-major-yshort
+  '((240   -) (0 96 35)  (280 E2)           (280  -) (0 96 35)  (280 -) (0 96 35)  (280  -)           (280  E3) (0 96 35)))
+
+
+(StandardMidiFile
+   (MidiHeader 'format "0" 'numberOfTracks "1" 'pulsesPerQuarterNote "1920" 'mode "deltaTime")
+   (MidiTrack
+    (Meta 'deltaTime "0" 'type "81" (tempo= 125))
+    (ControlChange 'deltaTime "0" 'info "0:0:0 Channel volume MSB" 'channel "1" 'control "7" 'value "70")        
+    (voice 1 8 1 2)  ; Tyros Mega voice
+
+    (repeat-messages 4
+       ;     Dir   Stretch   Vel   Total-lgt   Vel-scale     Time-scale  Transp  Ch  Base-dur  Time-note-list
+       (beat 'down 0.4       74    1920        sc-id         sc-id       0       1   960       strummed-c-major)
+       (beat 'up   0.2       64     960        sc-id         sc-id       0       1   960       strummed-c-major)
+       (beat 'down 0.2       64     960        sc-id         sc-id       0       1   960       strummed-c-major-short)
+       (beat 'up   0.2       64     960        sc-id         sc-id       0       1   960       strummed-c-major-xshort)
+       (beat 'down 0.2       64     960        sc-id         sc-id       0       1   960       strummed-c-major)
+
+       (beat 'down 0.4       70    1920        sc-id         sc-id       0       1   960       strummed-fret-c-major)
+       (beat 'up   0.2       64     960        sc-id         sc-id       0       1   960       strummed-c-major-short)
+       (beat 'down 0.2       64     960        sc-id         sc-id       0       1   960       strummed-c-major)
+       (beat 'up   0.2       64     960        sc-id         sc-id       0       1   960       strummed-c-major-short)
+       (beat 'down 0.2       64     960        sc-id         sc-id       0       1   960       strummed-c-major)
+
+       (beat 'down 0.4       72    1920        sc-id         sc-id       0       1   960       strummed-c-major)
+       (beat 'up   0.2       64     960        sc-id         sc-id       0       1   960       strummed-c-major-xshort)
+       (beat 'down 0.2       64     960        sc-id         sc-id       0       1   960       strummed-c-major)
+       (beat 'up   0.2       64     960        sc-id         sc-id       0       1   960       strummed-c-major-yshort)
+       (beat 'down 0.2       64     960        sc-id         sc-id       0       1   960       strummed-c-major)
+
+       (beat 'down 0.2       70     960        sc-id         sc-id       0       1   960       strummed-c-major)
+       (beat 'down 0.2       70     960        sc-id         sc-id       0       1   960       strummed-c-major-yshort)
+       (beat 'up   0.2       60     960        sc-id         sc-id       0       1   960       strummed-c-major)
+       (beat 'down 0.2       60     960        sc-id         sc-id       0       1   960       strummed-c-major)
+       (beat 'up   0.2       60     960        sc-id         sc-id       0       1   960       strummed-c-major-short)
+       (beat 'down 0.2       60     960        sc-id         sc-id       0       1   960       strummed-c-major)
+    )
+
+    (Meta 'deltaTime "1920" 'type "47" "")   ; End of track
+   )
+)
+
+;;; 1345

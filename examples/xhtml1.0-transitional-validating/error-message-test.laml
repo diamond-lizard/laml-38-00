@@ -1,0 +1,66 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+; (laml-style "simple-xhtml1.0-strict-validating")
+; (lib-load "xhtml1.0-convenience.scm")
+
+(begin-laml)
+
+(define current-xml-language 'xhtml10-transitional)
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+; LAML processing options:
+(set! xml-validate-contents? #t)  
+(set! xml-check-attributes? #t)
+(set! xml-check-language-overlap? #t)
+(set! xml-error-truncation-length 130)
+(set-xml-transliterate-character-data-in current-xml-language #t) 
+(set-xml-char-transformation-table-in current-xml-language html-char-transformation-table) 
+(set-xml-accept-only-string-valued-attributes-in current-xml-language #t)
+(set-xml-accept-extended-contents-in  current-xml-language #f)
+(define xml-check-error display-xml-warning)  ; display-xml-warning or laml-error
+
+
+; Insert the LAML template "Processing Options" here
+; if you need variations in the LAML processing
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title (p "Error message test page")))      ; Only text allowed in title
+  (body 
+
+    (p (b "The rendering of this page looks absolutely weird.
+        Take a look at the LAML source, however."))
+
+    (table (caption "cap"))                    ; Abrupt termination
+    (table "xxx")                              ; Textual contents not allowed
+    (table (tr (td "el")) (caption "cap"))     ; Misplaced caption element
+
+    (p "xxx" (p) "yyy")                        ; Misplaced p i mixed contents
+
+    (br (em "eee"))                            ; Contents in empty element
+
+    (img "xxx")                                ; Missing required attributes
+    (a 'xxx "yyy")                             ; Unknown attribute
+
+    (a 'href "xxx" 'href "yyy" "zzz")          ; Multiple occurences of href attribute 
+                                               ; Linking to non-existing file
+    
+    (a 'href "xxx" 'href "yyy" 
+       'name "aaa" 'name "bbb" "zzz")          ; Ditto
+ 
+
+    (p 'id (em "xxx"))                         ; Element content item as attribute value
+    (p 'id 5)                                  ; Number as attribute value
+    
+;    (p 'id)                                   ; Fatal error
+
+  )
+ )
+)
+
+
+(end-laml)

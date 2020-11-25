@@ -1,0 +1,66 @@
+Support of optional parameters in fundamental setup.
+
+New optional parameter to style and laml-style in fundamental setup.
+
+emacs-support/laml-template.el
+The function split-string renamed to split-string-into-three.
+There was a conflict between split-string and another function used by Emacs info.
+Only local consequences i laml-template.
+In general, all the emacs functions should be prefixed with LAML.
+Already proposed by a user, but not done yet. Large amounts of work.
+
+new function make-mutator-function in general lib.
+
+improved documentation of the function of the function multipart-decode in the encode-decode library.
+This is the crucial function for file upload.
+
+An error in file-uplaod in html4.0/convenience was corrected. Too many string qoutes around the encoding.
+
+The variable general-page-message has been introduced in html4.0/convenience. This allows us to put
+a message on top of every page in a large collection.
+
+A new emacs lisp command laml-process-file introduced as a cousin to laml-process-buffer. Both are asynchronous.
+laml-proces-file is only introduced in the configuration cs-unix-configuration-solaris-7.
+I use laml-proces-file for indirect processing via an laml file, if I hit C-o on a scheme or lisp buffer.
+This is quite special, and probably not of interest to other people. Still, the elisp function 
+laml-proces-file may be useful.
+
+The emacs lisp command run-laml-interactively works as run-scheme-interactively, but in addition
+run-laml-interactively sets up LAML to run in the current directory. Thus, it sets laml-dir, loads laml.scm,
+and sets the startup directory.
+
+The Scheme function schemedoc (in laml.scm) is a top-level procedure which in an easy way extract interface comments
+and producdes an HTML manual page. 
+
+The LAML questionnaire style has been improved, and the documentation has been shined up.
+
+A LAML tool for parsing and HTML presentation of simple bibtex files have been added to the LAML software package.
+
+A LAML tool for parsing simple XML files have been added to the LAML tools.
+
+A LAML tool for parsing of HTML has been added to the LAML tools.
+
+A Scheme and Lisp pretty printing library has been added to the LAML libraries.
+A laml procedure scheme-pp has been added to laml.scm. Using this function it is easy and convenient
+to pretty print Lisp and Scheme files from a LAML an interactive LAML prompt.
+
+It is much easier to install LAML version 15 than earlier versions. Based on the
+experience with students in Goerlitz, Germany, the LAML installation program now corrects
+simple mistakes without requiring the installer to deal with them. In case everything is
+in good shape, you only get a single message about successful installation. The updating
+of the .emacs file with LAML support is now automatic, based on the configuration variable
+emacs-init-file.
+
+Improved and more up-to-date manual page for the Scheme elucidator. An additional
+example of elucidative programming is also provide, the purpose of which is to 
+demonstrate the means of expression in elucidative Scheme programming.
+
+The very important emacs lisp command embed has been improved.
+A new unembed command has been introduced, which is meant to be the reverse command of embed.
+
+December 13, 22:00, version 15.01.
+Based on feedback from Aubrey Jaffer I improved the laml-config/laml-config-internal.scm program.
+The error messages are now slightly improved compared to version 15. No .emacs file entry
+is made in case there are problems with the Emacs lisp exec-stuff in laml-config/exec-stuff.
+Furthermore I have made an exact table on the laml software home page with information about
+the combinations of scheme-system, platform, and operating system supported.

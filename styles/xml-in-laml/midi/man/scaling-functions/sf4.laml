@@ -1,0 +1,19 @@
+(load (string-append laml-dir "laml.scm"))
+(load "scaling-function-common.scm")
+
+(begin-laml)
+
+; ---------------------------------------------------------------------------------------------------
+; The scaling function
+
+(define sf4
+   (make-scale-fn-pol-one-pol 'down 'down 4.5 0.35)
+)
+
+
+; ---------------------------------------------------------------------------------------------------
+
+(make-svg-drawing sf4 1000 -1.2 1.2)
+
+(end-laml)
+

@@ -1,0 +1,145 @@
+
+<html><head><title> documentation</title></head><body bgcolor = "#ffecd9" text = "#000000" link = "#000000" vlink = "#000000" ><a name="START"><h1><font color = "#0000ff">Time Conversion</font></h1><h3>Kurt Nørmark &copy;&nbsp;&nbsp;&nbsp;&nbsp;normark@cs.auc.dk&nbsp;&nbsp;&nbsp;&nbsp;Department of Computer Science, Aalborg University, Denmark&nbsp;&nbsp;&nbsp;&nbsp;</h3><p><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#d2d2d2"><em><b>Abstract. </b>This program transforms time from one representation to another.
+The source representation is the number of seconds elapsed since January 1, 1970,
+00:00:00. The target representation is a vector of (year, month, day, hour, minute, second)
+all normalized in the sense introduced below.<p>
+This program is written as a demo program of elucidative programming in connection to
+the paper <b>An Elucidative Programming Environment for Scheme</b>
+intended for the Nordic Workshop on Programmming Language Research, NWPER'2000
+in Lillehammer, Norway, June 2000.</em></td></tr></table><p>&nbsp;<p><a name="intro-section"><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#00ccff"><a href = "documentation.html#START"><img src = "./images/small-up.gif" alt = "" border = "0" ></a>&nbsp;<img src = "./images/small-prev-blind.gif" alt = "" border = "0" >&nbsp;<a href = "documentation.html#solution-section"><img src = "./images/small-next.gif" alt = "The solution" border = "0" ></a>&nbsp;<br><b><font size = 5>1&nbsp;&nbsp;Introduction</font></b><br>In this introductory section we first discuss time system formats and a function
+in Scheme which returns the current time.
+Then we discuss the issue of normalization and two possible ways to attack the
+problem.</td></tr></table><table border = 0><tr><td width = 10 valign = top ></td><td width = * valign = top ><font size = 2>1.1&nbsp;&nbsp;<a href = "documentation.html#time-systems" target = documentation-frame><font color = "#000000">Time systems and functions </font></a></font><br><font size = 2>1.2&nbsp;&nbsp;<a href = "documentation.html#attack-plan" target = documentation-frame><font color = "#000000">The plan of attack</font></a></font><br></td></tr></table>&nbsp;<p><a name="time-systems"><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#00ccff"><a href = "documentation.html#intro-section"><img src = "./images/small-up.gif" alt = "Introduction" border = "0" ></a>&nbsp;<img src = "./images/small-prev-blind.gif" alt = "" border = "0" >&nbsp;<a href = "documentation.html#attack-plan"><img src = "./images/small-next.gif" alt = "The plan of attack" border = "0" ></a>  <br> <b><font size = 4>1.1&nbsp;&nbsp;Time systems and functions </font></b></td></tr></table>There are several different standards for representation of time 
+on a Computer. <em>Universal Time</em> refers to a standard which counts the seconds
+since January 1, 1900 (midnight, GMT). In this paper we will use another fix point, namely
+January 1, 1970. <p>
+As an introductory observation, it is worthwhile to notice that the number of 
+seconds since January 1, 1970  can is returned by the Scheme function <font color = "#464646"><kbd>current-time</kbd></font> (taking
+no parameters) in some Scheme systems (SCM, for instance). The Scheme system gets this
+number from the underlying operating system, of course.<p>
+As an example, the current time was 948450887 at the moment of when these words were written.
+Furthermore
+<pre>
+  (<a href = "time.html#time-decode" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>time-decode</kbd></font></a> 948450887) = (2000 1 21 10 34 47)
+</pre>
+See details about <font color = "#464646"><kbd>time-decode</kbd></font> in the next section.
+Please be aware of the problems of time zones and daylight saving time, cf. section
+<a href = "documentation.html#postscriptum" style = "{text-decoration: underline;}" target = "documentation-frame" title = "Final remarks" ><font color = "#0000ff">3.1</font></a>.&nbsp;<p>&nbsp;<p><a name="attack-plan"><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#00ccff"><a href = "documentation.html#intro-section"><img src = "./images/small-up.gif" alt = "Introduction" border = "0" ></a>&nbsp;<a href = "documentation.html#time-systems"><img src = "./images/small-prev.gif" alt = "Time systems and functions " border = "0" ></a>&nbsp;<img src = "./images/small-next-blind.gif" alt = "" border = "0" >  <br> <b><font size = 4>1.2&nbsp;&nbsp;The plan of attack</font></b></td></tr></table>We first decide to solve the problem using the functional programming paradigm.
+This is natural when we program in a Lisp Dialect. But it is also natural because of
+the problem, as defined above, calls for a function with well-defined input and output (and no side effects).
+Let us call the overall function <a href = "time.html#time-decode" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>time-decode</kbd></font></a>.<p>
+Scheme is weak with respect to static typing
+so let us here give the signature of the function:
+<font size = "-1">
+<pre>
+  time-decode: integer -> (year x month x day x hour x minute x second)
+</pre>
+</font>
+The type <font color = "#464646"><kbd>year</kbd></font> represents an integer greater than or equal to 1970, <font color = "#464646"><kbd>month</kbd></font> is the interval [1..12],
+<font color = "#464646"><kbd>day</kbd></font> is [1..31], <font color = "#464646"><kbd>hour</kbd></font> is [0..23], and both <font color = "#464646"><kbd>minute</kbd></font> and <font color = "#464646"><kbd>second</kbd></font> belong to [0..59]. 
+The vector on the right hand side will be represented as a list in our program. <p>
+As a matter of terminology,
+the integer at the left hand side of the signature will be called the <em>second counter</em>.
+We say that an integer value is <em>T-normalized</em> if it is contained in the interval of type T.
+Thus, for instance, the integer 25 is not <em>hour-normalized</em>, but 1 is (leaving us with 24 hours
+which can be changed to one extra day).<p>
+In the one extreme we can imagine the conversions to be done via a (presumably complicated) formula 
+which realizes an efficient <em>calculation</em> of the result, using arithmetic operators.
+In the other extreme we can imagine a simple solution based on successive <em>counting</em> and subtracting of
+well-defined time intervals such as years (with and without leap days), months (in four variations),
+days, and hours from the second counter. This would be a less efficient solution, but if reliability
+and trust are emphasized, this will provide for a transparent and easy to follow solution. <p>
+In the solution presented in section <a href = "documentation.html#solution-section" style = "{text-decoration: underline;}" target = "documentation-frame" title = "The solution" ><font color = "#0000ff">2</font></a> we will allow "counting",
+but for some simple sub-problems we use solutions based on "calculation" with formulas involving simple arithmetic operators.&nbsp;<p>&nbsp;<p><a name="solution-section"><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#00ccff"><a href = "documentation.html#START"><img src = "./images/small-up.gif" alt = "" border = "0" ></a>&nbsp;<a href = "documentation.html#intro-section"><img src = "./images/small-prev.gif" alt = "Introduction" border = "0" ></a>&nbsp;<a href = "documentation.html#final-section"><img src = "./images/small-next.gif" alt = "Post Scriptum" border = "0" ></a>&nbsp;<br><b><font size = 5>2&nbsp;&nbsp;The solution</font></b><br>In this section we describe the solutions in a number of natural subsection.
+First we find the year. The last information we extract is the month.</td></tr></table><table border = 0><tr><td width = 10 valign = top ></td><td width = * valign = top ><font size = 2>2.1&nbsp;&nbsp;<a href = "documentation.html#years" target = documentation-frame><font color = "#000000">Dealing with years</font></a></font><br><font size = 2>2.2&nbsp;&nbsp;<a href = "documentation.html#days-hours-minutes-seconds" target = documentation-frame><font color = "#000000">Dealing with days, hours, minutes, and seconds</font></a></font><br><font size = 2>2.3&nbsp;&nbsp;<a href = "documentation.html#months" target = documentation-frame><font color = "#000000">Dealing with months</font></a></font><br><font size = 2>2.4&nbsp;&nbsp;<a href = "documentation.html#all" target = documentation-frame><font color = "#000000">Putting it all together</font></a></font><br></td></tr></table>&nbsp;<p><a name="years"><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#00ccff"><a href = "documentation.html#solution-section"><img src = "./images/small-up.gif" alt = "The solution" border = "0" ></a>&nbsp;<img src = "./images/small-prev-blind.gif" alt = "" border = "0" >&nbsp;<a href = "documentation.html#days-hours-minutes-seconds"><img src = "./images/small-next.gif" alt = "Dealing with days, hours, minutes, and seconds" border = "0" ></a>  <br> <b><font size = 4>2.1&nbsp;&nbsp;Dealing with years</font></b></td></tr></table>The first subproblem is to find the year represented by the second counter.
+We will use the 'count and subtract' approach to find the year. Is is critical that
+we deal correctly with leap years. Therefore we start our programming with
+a function predicate <a href = "time.html#leap-year" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>leap-year</kbd></font></a> that determines whether a year is a leap year. 
+The rule is that y is a leap year if it is divisible by 4, it is not a leap year
+if it is divisible by 100, but - as yet an exception - a leap year if it is divisible
+by 400. I do not know whether there are more exceptions, but we can be confident that
+these will not be relevant in our life time, nor in this program's life time.
+Notice, that the most extreme exception listed above is relevant in this year, 2000.<p>
+Now the function <a href = "time.html#years-and-seconds" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#ff0000"><kbd>years-and-seconds</kbd></font></a> solves the problem. The underlying counting
+is an iterative process, which we in Scheme handle by a tail-recursive function.
+This function is called <a href = "time.html#cycle-years" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#ff0000"><kbd>cycle-years</kbd></font></a>. The "cycling" starts from
+<a href = "time.html#base-year" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#ff0000"><kbd>base-year</kbd></font></a>. (<a href = "time.html#cycle-years" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>cycle-years</kbd></font></a> n y r) maintains the invariant
+<pre>
+  n + r = C
+</pre>
+where C is the start value of r. n is increased and r is decreased by the the number
+of seconds in the actual year y. y is increased by one for each iteration.
+When the rest r becomes less than the seconds in the
+actual year, we return y and the rest seconds (as a list of two elements).<p>
+The function <font color = "#464646"><kbd>cycle-years</kbd></font> 
+depends on the constants <a href = "time.html#seconds-in-a-leap-year" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#ff0000"><kbd>seconds-in-a-leap-year</kbd></font></a> and <a href = "time.html#seconds-in-a-normal-year" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#ff0000"><kbd>seconds-in-a-normal-year</kbd></font></a>
+which are easily pre-calculated using a pocket calculator.&nbsp;<p>&nbsp;<p><a name="days-hours-minutes-seconds"><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#00ccff"><a href = "documentation.html#solution-section"><img src = "./images/small-up.gif" alt = "The solution" border = "0" ></a>&nbsp;<a href = "documentation.html#years"><img src = "./images/small-prev.gif" alt = "Dealing with years" border = "0" ></a>&nbsp;<a href = "documentation.html#months"><img src = "./images/small-next.gif" alt = "Dealing with months" border = "0" ></a>  <br> <b><font size = 4>2.2&nbsp;&nbsp;Dealing with days, hours, minutes, and seconds</font></b></td></tr></table>Now we have reduced the problem to finding the normalized months,
+days, hours, minutes and seconds from a rest second counter <em>r</em>
+that is less than the number of seconds in a year. It would be natural
+to find the month next, but doing so would call for yet another
+<em>counting</em> process, because a month is an irregular time
+interval (some months have 31 days, others 30, February has normally
+28 days, but there is 29 days in leap years).<p>
+It is easy to find the unnormalized number of days, and the normalized
+hours, minutes, and seconds from <em>r</em>. This is done by <em>quotient
+and modulo calculations</em>. The function
+<a href = "time.html#how-many-days-hours-minutes-seconds" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#ff0000"><kbd>how-many-days-hours-minutes-seconds</kbd></font></a> does that. We first find the
+(non day-normalized) number of days by dividing the parameter <font color = "#464646"><kbd>n</kbd></font> by
+<a href = "time.html#seconds-in-a-day" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>seconds-in-a-day</kbd></font></a> (<a href = "time.html#how-many-days-hours-minutes-seconds-@a" target = program-frame><img src = "./images/source-mark-red.gif" alt = "A link to a program source marker in how-many-days-hours-minutes-seconds" border = "0" ></a><a name="days-hours-minutes-seconds-@a">). The remainder, called <font color = "#464646"><kbd>n-rest-1</kbd></font> (<a href = "time.html#how-many-days-hours-minutes-seconds-@b" target = program-frame><img src = "./images/source-mark-green.gif" alt = "A link to a program source marker in how-many-days-hours-minutes-seconds" border = "0" ></a><a name="days-hours-minutes-seconds-@b">) is
+used to find the hour-normalized number of hours by division of
+<font color = "#464646"><kbd>n-rest-1</kbd></font> by <a href = "time.html#seconds-in-an-hour" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>seconds-in-an-hour</kbd></font></a> (<a href = "time.html#how-many-days-hours-minutes-seconds-@c" target = program-frame><img src = "./images/source-mark-blue.gif" alt = "A link to a program source marker in how-many-days-hours-minutes-seconds" border = "0" ></a><a name="days-hours-minutes-seconds-@c">).  Again the remainder,
+<font color = "#464646"><kbd>n-rest-2</kbd></font> (<a href = "time.html#how-many-days-hours-minutes-seconds-@d" target = program-frame><img src = "./images/source-mark-black.gif" alt = "A link to a program source marker in how-many-days-hours-minutes-seconds" border = "0" ></a><a name="days-hours-minutes-seconds-@d">) is found, and this quantum is used to find the
+minute-normalized number of minutes (<a href = "time.html#how-many-days-hours-minutes-seconds-@e" target = program-frame><img src = "./images/source-mark-maroon.gif" alt = "A link to a program source marker in how-many-days-hours-minutes-seconds" border = "0" ></a><a name="days-hours-minutes-seconds-@e">). Finally the number of
+seconds are found in the last modulo calculation (<a href = "time.html#how-many-days-hours-minutes-seconds-@f" target = program-frame><img src = "./images/source-mark-grey.gif" alt = "A link to a program source marker in how-many-days-hours-minutes-seconds" border = "0" ></a><a name="days-hours-minutes-seconds-@f">).
+We use a sequential name-biding form <font color = "#464646"><kbd>let</kbd></font>* to find the results in a
+sequential fashion. Still we are entirely within the functional
+paradigm, of course. The function returns the list of days, hours,
+minutes, and seconds.&nbsp;<p>&nbsp;<p><a name="months"><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#00ccff"><a href = "documentation.html#solution-section"><img src = "./images/small-up.gif" alt = "The solution" border = "0" ></a>&nbsp;<a href = "documentation.html#days-hours-minutes-seconds"><img src = "./images/small-prev.gif" alt = "Dealing with days, hours, minutes, and seconds" border = "0" ></a>&nbsp;<a href = "documentation.html#all"><img src = "./images/small-next.gif" alt = "Putting it all together" border = "0" ></a>  <br> <b><font size = 4>2.3&nbsp;&nbsp;Dealing with months</font></b></td></tr></table>In section <a href = "documentation.html#days-hours-minutes-seconds" style = "{text-decoration: underline;}" target = "documentation-frame" title = "Dealing with days, hours, minutes, and seconds" ><font color = "#0000ff">2.2</font></a> we almost solved the rest of
+the problems. However, we still have to find the month component from
+a non day-normalized number of days. As an example, we may have 45
+days, which should represent February 14. As another example, day
+counter 60 represents February 29 in a leap year, and March 1 in
+non-leap years. Thus, we clearly see that we need to take the actual
+year into account when finding the normalized months and days from a
+day counter.<p>
+The function <a href = "time.html#day-and-month" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#ff0000"><kbd>day-and-month</kbd></font></a> solves the problem. Like in section
+<a href = "documentation.html#years" style = "{text-decoration: underline;}" target = "documentation-frame" title = "Dealing with years" ><font color = "#0000ff">2.1</font></a> we go for a counting solution. This is done by the
+tail-recursive helping function <a href = "time.html#day-and-month-help" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#ff0000"><kbd>day-and-month-help</kbd></font></a>. A call of
+<pre>
+ (day-and-month-help n m y c)
+</pre>
+involves that in year <font color = "#464646"><kbd>y</kbd></font> and month <font color = "#464646"><kbd>m</kbd></font> we are taking
+<pre>
+  (<a href = "time.html#days-in-month" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>days-in-month</kbd></font></a> m y)
+</pre>
+days from c and adding a month to m.  The function <a href = "time.html#days-in-month" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#ff0000"><kbd>days-in-month</kbd></font></a>
+relies on a table of month lengths (for a normal year) called
+<a href = "time.html#month-length-normal-year" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#ff0000"><kbd>month-length-normal-year</kbd></font></a>. The iteration goes on as long as the rest
+days, c, is less than the number of days in the actual month m (in the
+year y).<p>
+In the function <a href = "time.html#day-and-month" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#ff0000"><kbd>day-and-month</kbd></font></a> we pass the expression <font color = "#464646"><kbd>(+ 1
+day-count)</kbd></font> to the formal day counter parameter c in
+<a href = "time.html#day-and-month-help" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>day-and-month-help</kbd></font></a>. The reason is that one day into January brings
+us to some point in time at January 2, not January 1.  Thus, because c
+will be the day of the month, c can never be 0. In the tail-recursive
+call, we know that c > (days-in-month m y), thus ensuring this
+property recursively.&nbsp;<p>&nbsp;<p><a name="all"><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#00ccff"><a href = "documentation.html#solution-section"><img src = "./images/small-up.gif" alt = "The solution" border = "0" ></a>&nbsp;<a href = "documentation.html#months"><img src = "./images/small-prev.gif" alt = "Dealing with months" border = "0" ></a>&nbsp;<img src = "./images/small-next-blind.gif" alt = "" border = "0" >  <br> <b><font size = 4>2.4&nbsp;&nbsp;Putting it all together</font></b></td></tr></table>We have now solved all parts of the problem, and we need to put them together.
+This is done by the function <a href = "time.html#time-decode" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#ff0000"><kbd>time-decode</kbd></font></a>. In a sequential name binding form, 
+<font color = "#464646"><kbd>let*</kbd></font>, we apply <a href = "time.html#years-and-seconds" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>years-and-seconds</kbd></font></a> from section <a href = "documentation.html#years" style = "{text-decoration: underline;}" target = "documentation-frame" title = "Dealing with years" ><font color = "#0000ff">2.1</font></a> (<a href = "time.html#time-decode-@a" target = program-frame><img src = "./images/source-mark-red.gif" alt = "A link to a program source marker in time-decode" border = "0" ></a><a name="all-@a">),  
+<a href = "time.html#how-many-days-hours-minutes-seconds" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>how-many-days-hours-minutes-seconds</kbd></font></a> from section <a href = "documentation.html#days-hours-minutes-seconds" style = "{text-decoration: underline;}" target = "documentation-frame" title = "Dealing with days, hours, minutes, and seconds" ><font color = "#0000ff">2.2</font></a> (<a href = "time.html#time-decode-@b" target = program-frame><img src = "./images/source-mark-green.gif" alt = "A link to a program source marker in time-decode" border = "0" ></a><a name="all-@b">), and
+<a href = "time.html#day-and-month" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>day-and-month</kbd></font></a> from section <a href = "documentation.html#months" style = "{text-decoration: underline;}" target = "documentation-frame" title = "Dealing with months" ><font color = "#0000ff">2.3</font></a> (<a href = "time.html#time-decode-@c" target = program-frame><img src = "./images/source-mark-blue.gif" alt = "A link to a program source marker in time-decode" border = "0" ></a><a name="all-@c">). The hours, minutes, seconds, and days
+are extracted from the respective return values of helping functions by means
+of list selectors, which we call <a href = "general.html#first" target = "program-frame" title = "general" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>first</kbd></font></a>, <a href = "general.html#second" target = "program-frame" title = "general" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>second</kbd></font></a>, <a href = "general.html#third" target = "program-frame" title = "general" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>third</kbd></font></a>, and <a href = "general.html#fourth" target = "program-frame" title = "general" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>fourth</kbd></font></a> (these
+function are found in an external library called general.scm).&nbsp;<p>&nbsp;<p><a name="final-section"><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#00ccff"><a href = "documentation.html#START"><img src = "./images/small-up.gif" alt = "" border = "0" ></a>&nbsp;<a href = "documentation.html#solution-section"><img src = "./images/small-prev.gif" alt = "The solution" border = "0" ></a>&nbsp;<img src = "./images/small-next-blind.gif" alt = "" border = "0" >&nbsp;<br><b><font size = 5>3&nbsp;&nbsp;Post Scriptum</font></b><br>In this section we will make a final remark to the time conversion program.</td></tr></table><table border = 0><tr><td width = 10 valign = top ></td><td width = * valign = top ><font size = 2>3.1&nbsp;&nbsp;<a href = "documentation.html#postscriptum" target = documentation-frame><font color = "#000000">Final remarks</font></a></font><br><font size = 2>3.2&nbsp;&nbsp;<a href = "documentation.html#id" target = documentation-frame><font color = "#000000">title</font></a></font><br></td></tr></table>&nbsp;<p><a name="postscriptum"><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#00ccff"><a href = "documentation.html#final-section"><img src = "./images/small-up.gif" alt = "Post Scriptum" border = "0" ></a>&nbsp;<img src = "./images/small-prev-blind.gif" alt = "" border = "0" >&nbsp;<a href = "documentation.html#id"><img src = "./images/small-next.gif" alt = "title" border = "0" ></a>  <br> <b><font size = 4>3.1&nbsp;&nbsp;Final remarks</font></b></td></tr></table>As a final remark it may be noticed that time zones and daylight saving time
+may cause problems for the time conversion. Being in a specific time zone, 
+or going from normal "winter time" to daylight saving time does probably
+not change the second counter in the computer. Consequently, we need to 
+take corrective actions in the program in order to return the right time from the conversion function .<p>
+The easiest counter measure is to add or subtract an hour (3600 seconds) in <a href = "time.html#time-decode" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#ff0000"><kbd>time-decode</kbd></font></a>
+just after the parameter n (the second counter) has been passed as parameter.<p>
+This concludes the time conversion example.<p>
+It would be possible - and natural - to continue the example with the reverse transformation,
+by calculation of the weekday, and by transformation of time intervals. Most of these can
+be found in the LAML library called Time, cf. the <a target ="_top" href="http://www.cs.auc.dk/~normark/scheme/lib/man/time.html">LAML libraries</a>.&nbsp;<p>&nbsp;<p><a name="id"><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#00ccff"><a href = "documentation.html#final-section"><img src = "./images/small-up.gif" alt = "Post Scriptum" border = "0" ></a>&nbsp;<a href = "documentation.html#postscriptum"><img src = "./images/small-prev.gif" alt = "Final remarks" border = "0" ></a>&nbsp;<img src = "./images/small-next-blind.gif" alt = "" border = "0" >  <br> <b><font size = 4>3.2&nbsp;&nbsp;title</font></b></td></tr></table>Nu begynder vi at skrive om <a href = "time.html#time-decode" target = "program-frame" title = "time" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>time-decode</kbd></font></a>, &nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p></body> </html>
+<!-- Generated from an LAML (Lisp Abstracted Markup Language) source file. Version 27.0 (June 2, 2005, development). LAML is designed and implemented by Kurt Nørmark, normark@cs.auc.dk. Time of generation: June 2, 2005 09:27:25-->
+

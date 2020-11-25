@@ -1,0 +1,21 @@
+(load (string-append laml-dir "laml.scm"))
+(load "scaling-function-common.scm")
+
+(begin-laml)
+
+; ---------------------------------------------------------------------------------------------------
+; The scaling function
+
+(define sf2
+   (multiply-scaling-function 1.0
+          (make-scale-function-by-xy-points
+           (from-permille-points '((0 -250) (500 -150) (750 -75) (800 -50) (900 -10) (1000 0)))
+          )))
+
+
+; ---------------------------------------------------------------------------------------------------
+
+(make-svg-drawing sf2 1000 -1 1)
+
+(end-laml)
+

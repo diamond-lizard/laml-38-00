@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html onkeypress = "lenoNavigate('', '', 'meta-lecture-notes-note-image-series.html')" ><head><meta http-equiv = "Content-Type" content = "text/html; charset = ISO-8859-1" ><meta name = "Generator" content = "LAML" ><meta name = "description" lang = "dk" content = "A meta demonstration of the Scheme-based LENO lecture note system, describing its own format" ><title>Program</title></head><script src = "javascript/lenonavigate.js" ></script><body bgcolor = "#ffffff" text = "#000000" link = "#000000" vlink = "#000000" ><a href = "meta-lecture-notes-note-image-series.html"><img src = "./images/nav-up.gif" alt = "Back to notes
+Keyboard shortcut: 'u'" border = "0" ></a>&nbsp;<p><table border = 0><tr><td width = 10 valign = top ></td><td width = * valign = top ><font size = 3><pre>(note-page 'image-series
+  (title "Image-series"
+         "A cartoon-like series of images, which can be shown via 
+          a reference button or inlined in the slides and/or in the notes"
+  )
+
+  (image-series 
+      "An overall description of the image series"
+      (list 
+         (list "test-image.gif" "A description of the first image")
+         (list "test-image-1.gif" "A description of the next image")
+         (list "test-image-2.gif" "A description of the last image")
+      )
+     '(slide-external book-inline)
+  )  
+
+  (source-program this-source-file  (list "(note-page 'image-series" end-marker)
+       (list
+       )
+       '(slide-external book-external)
+       "The underlying LAML program. This shows the underlying source of this part of the notes"
+  )
+
+  (index-words "image-series")
+
+) ; end page</pre></font></td></tr></table></body></html><!-- Generated from an LAML (Lisp Abstracted Markup Language) source file. LAML is designed and implemented by Kurt Nørmark, normark@cs.auc.dk. Time of generation: 23.5.1999 23:24:59-->
+<!-- LAML source file: c:/Users/Kurt/scheme//styles/lecture-notes/man/meta-lecture-notes.laml; Scheme system: mzscheme; Scheme library directory: c:/Users/Kurt/scheme/lib4/; Style Scheme file: c:/Users/Kurt/scheme/styles/lecture-notes/lecture-notes.scm; -->

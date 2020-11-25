@@ -1,0 +1,17 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+
+
+(write-html 'raw
+ (html
+  (head 
+    (title "Demo of Rule 4")
+  )
+
+  (body 
+
+    (p "Use" (kbd "HTML") _ ","  (kbd "XHTML") _ ","
+        (kbd "XML")_ "," "or" (kbd "LAML") _ ".")
+   
+  )
+ ))

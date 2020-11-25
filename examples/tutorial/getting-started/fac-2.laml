@@ -1,0 +1,27 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+
+(define (fac2 n)
+  (if (= 0 n) 1 (* n (fac2 (- n 1)))))
+
+(write-html '(pp prolog)
+ (html
+  (head 
+    (title "More factorials"))
+  (body
+    (h1 "More factorials")
+
+    (table 'border "1"
+     (thead (tr (td (b "n")) (td (b "(fac n)"))))
+     (tbody
+      (map tr
+       (map 
+         (lambda (n) 
+           (list 
+            (td (as-string n))
+            (td (as-string (fac2 n)))))
+         (number-interval 1 50))))
+    ))))
+
+
+(end-laml)

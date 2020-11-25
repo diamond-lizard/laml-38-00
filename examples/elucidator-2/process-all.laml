@@ -1,0 +1,12 @@
+(load (string-append laml-dir "laml.scm"))
+(load  (in-startup-directory "../example-processing.scm"))
+
+(apply process-list (all-laml-files))
+
+(laml-cd "time") (laml "time") (laml-cd "..")
+(laml-cd "simple") (laml "simple") (laml-cd "..")
+(laml-cd "versions") (laml "version-demo") (laml-cd "..")
+(laml-cd "name-binding") (laml "name-binding") (laml-cd "..")
+(laml-cd "scheme-documentation-tools") (laml "demo") (laml-cd "..")
+
+(end-laml)

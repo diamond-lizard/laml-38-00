@@ -1,0 +1,42 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/schemedoc-2/schemedoc")
+
+; A map of SVG1.1 element name to a W3C url that describes the element.
+; Extracted from  http://www.w3.org/TR/SVG11/eltindex.html
+(define element-name-url-map '(("a" . "http://www.w3.org/TR/SVG11/linking.html#AElement") ("altGlyph" . "http://www.w3.org/TR/SVG11/text.html#AltGlyphElement") ("altGlyphDef" . "http://www.w3.org/TR/SVG11/text.html#AltGlyphDefElement") ("altGlyphItem" . "http://www.w3.org/TR/SVG11/text.html#AltGlyphItemElement") ("animate" . "http://www.w3.org/TR/SVG11/animate.html#AnimateElement") ("animateColor" . "http://www.w3.org/TR/SVG11/animate.html#AnimateColorElement") ("animateMotion" . "http://www.w3.org/TR/SVG11/animate.html#AnimateMotionElement") ("animateTransform" . "http://www.w3.org/TR/SVG11/animate.html#AnimateTransformElement") ("circle" . "http://www.w3.org/TR/SVG11/shapes.html#CircleElement") ("clipPath" . "http://www.w3.org/TR/SVG11/masking.html#ClipPathElement") ("color-profile" . "http://www.w3.org/TR/SVG11/color.html#ColorProfileElement") ("cursor" . "http://www.w3.org/TR/SVG11/interact.html#CursorElement") ("definition-src" . "http://www.w3.org/TR/SVG11/fonts.html#DefinitionSrcElement") ("defs" . "http://www.w3.org/TR/SVG11/struct.html#DefsElement") ("desc" . "http://www.w3.org/TR/SVG11/struct.html#DescElement") ("ellipse" . "http://www.w3.org/TR/SVG11/shapes.html#EllipseElement") ("feBlend" . "http://www.w3.org/TR/SVG11/filters.html#feBlendElement") ("feColorMatrix" . "http://www.w3.org/TR/SVG11/filters.html#feColorMatrixElement") ("feComponentTransfer" . "http://www.w3.org/TR/SVG11/filters.html#feComponentTransferElement") ("feComposite" . "http://www.w3.org/TR/SVG11/filters.html#feCompositeElement") ("feConvolveMatrix" . "http://www.w3.org/TR/SVG11/filters.html#feConvolveMatrixElement") ("feDiffuseLighting" . "http://www.w3.org/TR/SVG11/filters.html#feDiffuseLightingElement") ("feDisplacementMap" . "http://www.w3.org/TR/SVG11/filters.html#feDisplacementMapElement") ("feDistantLight" . "http://www.w3.org/TR/SVG11/filters.html#feDistantLightElement") ("feFlood" . "http://www.w3.org/TR/SVG11/filters.html#feFloodElement") ("feFuncA" . "http://www.w3.org/TR/SVG11/filters.html#feFuncAElement") ("feFuncB" . "http://www.w3.org/TR/SVG11/filters.html#feFuncBElement") ("feFuncG" . "http://www.w3.org/TR/SVG11/filters.html#feFuncGElement") ("feFuncR" . "http://www.w3.org/TR/SVG11/filters.html#feFuncRElement") ("feGaussianBlur" . "http://www.w3.org/TR/SVG11/filters.html#feGaussianBlurElement") ("feImage" . "http://www.w3.org/TR/SVG11/filters.html#feImageElement") ("feMerge" . "http://www.w3.org/TR/SVG11/filters.html#feMergeElement") ("feMergeNode" . "http://www.w3.org/TR/SVG11/filters.html#feMergeNodeElement") ("feMorphology" . "http://www.w3.org/TR/SVG11/filters.html#feMorphologyElement") ("feOffset" . "http://www.w3.org/TR/SVG11/filters.html#feOffsetElement") ("fePointLight" . "http://www.w3.org/TR/SVG11/filters.html#fePointLightElement") ("feSpecularLighting" . "http://www.w3.org/TR/SVG11/filters.html#feSpecularLightingElement") ("feSpotLight" . "http://www.w3.org/TR/SVG11/filters.html#feSpotLightElement") ("feTile" . "http://www.w3.org/TR/SVG11/filters.html#feTileElement") ("feTurbulence" . "http://www.w3.org/TR/SVG11/filters.html#feTurbulenceElement") ("filter" . "http://www.w3.org/TR/SVG11/filters.html#FilterElement") ("font" . "http://www.w3.org/TR/SVG11/fonts.html#FontElement") ("font-face" . "http://www.w3.org/TR/SVG11/fonts.html#FontFaceElement") ("font-face-format" . "http://www.w3.org/TR/SVG11/fonts.html#FontFaceNameElement") ("font-face-name" . "http://www.w3.org/TR/SVG11/fonts.html#FontFaceNameElement") ("font-face-src" . "http://www.w3.org/TR/SVG11/fonts.html#FontFaceSrcElement") ("font-face-uri" . "http://www.w3.org/TR/SVG11/fonts.html#FontFaceNameElement") ("foreignObject" . "http://www.w3.org/TR/SVG11/extend.html#ForeignObjectElement") ("g" . "http://www.w3.org/TR/SVG11/struct.html#GElement") ("glyph" . "http://www.w3.org/TR/SVG11/fonts.html#GlyphElement") ("glyphRef" . "http://www.w3.org/TR/SVG11/text.html#GlyphRefElement") ("hkern" . "http://www.w3.org/TR/SVG11/fonts.html#HKernElement") ("image" . "http://www.w3.org/TR/SVG11/struct.html#ImageElement") ("line" . "http://www.w3.org/TR/SVG11/shapes.html#LineElement") ("linearGradient" . "http://www.w3.org/TR/SVG11/pservers.html#LinearGradientElement") ("marker" . "http://www.w3.org/TR/SVG11/painting.html#MarkerElement") ("mask" . "http://www.w3.org/TR/SVG11/masking.html#MaskElement") ("metadata" . "http://www.w3.org/TR/SVG11/metadata.html#MetadataElement") ("missing-glyph" . "http://www.w3.org/TR/SVG11/fonts.html#MissingGlyphElement") ("mpath" . "http://www.w3.org/TR/SVG11/animate.html#mpathElement") ("path" . "http://www.w3.org/TR/SVG11/paths.html#PathElement") ("pattern" . "http://www.w3.org/TR/SVG11/pservers.html#PatternElement") ("polygon" . "http://www.w3.org/TR/SVG11/shapes.html#PolygonElement") ("polyline" . "http://www.w3.org/TR/SVG11/shapes.html#PolylineElement") ("radialGradient" . "http://www.w3.org/TR/SVG11/pservers.html#RadialGradientElement") ("rect" . "http://www.w3.org/TR/SVG11/shapes.html#RectElement") ("script" . "http://www.w3.org/TR/SVG11/script.html#ScriptElement") ("set" . "http://www.w3.org/TR/SVG11/animate.html#SetElement") ("stop" . "http://www.w3.org/TR/SVG11/pservers.html#StopElement") ("style" . "http://www.w3.org/TR/SVG11/styling.html#StyleElement") ("svg" . "http://www.w3.org/TR/SVG11/struct.html#SVGElement") ("switch" . "http://www.w3.org/TR/SVG11/struct.html#SwitchElement") ("symbol" . "http://www.w3.org/TR/SVG11/struct.html#SymbolElement") ("text" . "http://www.w3.org/TR/SVG11/text.html#TextElement") ("textPath" . "http://www.w3.org/TR/SVG11/text.html#TextPathElement") ("title" . "http://www.w3.org/TR/SVG11/struct.html#TitleElement") ("tref" . "http://www.w3.org/TR/SVG11/text.html#TRefElement") ("tspan" . "http://www.w3.org/TR/SVG11/text.html#TSpanElement") ("use" . "http://www.w3.org/TR/SVG11/struct.html#UseElement") ("view" . "http://www.w3.org/TR/SVG11/linking.html#ViewElement") ("vkern" . "http://www.w3.org/TR/SVG11/fonts.html#VKernElement")))
+
+(define (svg11-element-name-to-w3c-specification-url el-name) 
+  (let ((res (assoc el-name element-name-url-map)))
+    (if res
+       (cdr res)
+       #f)))
+
+(define manual-element-order 
+  '(section-id section-title section-body title library kind form xml-in-laml-example-form description content-model cross-references attributes 
+    pre-condition parameters xml-in-laml-attributes returns post-condition examples misc comment))
+
+(manual
+  (manual-front-matters
+    (manual-title "Reference Manual of the SVG 1.1 mirror")
+    (kn-manual-settings
+     (manual-abstract
+      (div 
+       (p "This is a manual of the " (a-tag  "http://www.w3.org/Graphics/SVG/" "SVG 1.1") " mirror, as derived from the SVG1.1 DTD.
+       The manual contains information which is present in the DTD together with links to the SVG 1.1 specification for each SVG element.
+       In contrast to the DTD, however, the information in this manual is fully expanded.")
+       ))
+    )
+
+    'laml-resource "true"
+    'attribute-sorting "by-attribute-name"
+
+    'element-cross-reference-url-fn "svg11-element-name-to-w3c-specification-url"
+    'element-cross-reference-anchor-text "SVG 1.1 Specification Details"
+
+    
+  )
+
+  (manual-from-xml-dtd 'src "../../../../tools/dtd-parser/dtds/svg11.lsp")
+
+)
+

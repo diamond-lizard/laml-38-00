@@ -1,0 +1,53 @@
+;; .schemedoc-dependencies  "~/scheme/lib/man/svg-extensions"
+
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-svg11")
+(lib-load "svg-extensions.scm")
+
+(write-html '(pp prolog)
+
+  (svg standard-svg-1-1-element-attributes 'width "400" 'height "400" 
+
+    (with-animation 'step-buttons-walk-through-edge-motion
+     (let* ((x1 100) (x2 (+ x1 100)) (x3 (+ x2 100))
+            (y1 100) (y2 (+ y1 100)) 
+            (stroke-props  (list 'stroke "black" 'stroke-width "1"))
+           )
+       (let* ((node-a (svg-node rectangular x1 y2 "A" 'steps "1,9"))
+              (node-b (svg-node rectangular x2 y1 "B" 'steps "3,7"))
+              (node-c (svg-node rectangular x3 y2 "C" 'step "5"))
+
+              (edge1 (svg-edge node-a "ct" node-b "lc" stroke-props 'steps "2,8"))
+              (edge2 (svg-edge node-b "rc" node-c "ct" stroke-props 'steps "4,6"))
+             )
+         (svg-graph 'from-step 1 'to-step 9
+          (list node-a node-b node-c)
+          (list edge2 edge1)
+
+          (explanations 'x 10 'y 350 'width 380  'height 50
+                      'font-size 18
+           (explanation 'step 0 "The graph before we start.")
+           (explanation 'step 1 "Node A ...")
+           (explanation 'step 2 "is connected to ...")
+           (explanation 'step 3 "node B, ...")
+           (explanation 'step 4 "which in turn is connected to ...")
+           (explanation 'step 5 "node C.")
+           (explanation 'step 6 "Back again ...")
+           (explanation 'step 7 "via B ...")
+           (explanation 'step 8 "to ...")
+           (explanation 'step 9 "the initial node, A.")
+        )
+
+ )))))
+
+  (full-source-path-with-extension "svg")
+)
+
+(end-laml)
+
+
+
+
+
+
+

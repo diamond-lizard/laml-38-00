@@ -1,0 +1,801 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- The material in this file is copyrighted (c) by KN &copy;, AAU.  All rights reserved.-->
+<svg width="800" height="800" viewBox="0 0 800 800">
+   <g transform="scale(1.0)">
+      <g>
+         <defs>
+            <marker id="Arrowhead" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="20"
+                    markerHeight="15" orient="auto" preserveAspectRatio="none">
+               <path d="M 0 0 L 10 5 L 0 10 z"></path>
+            </marker>
+         </defs>
+         <g>
+            <rect rx="7" x="375.0" y="80.0" width="50" height="40" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="400.0"
+                  text-anchor="middle" y="110.0">
+               A
+            </text>
+         </g>
+         <g>
+            <rect rx="7" x="175.0" y="180.0" width="50" height="40" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="200.0"
+                  text-anchor="middle" y="210.0">
+               B
+            </text>
+         </g>
+         <g>
+            <rect rx="7" x="575.0" y="180.0" width="50" height="40" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="600.0"
+                  text-anchor="middle" y="210.0">
+               C
+            </text>
+         </g>
+         <g>
+            <rect rx="7" x="75.0" y="280.0" width="50" height="40" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="100.0"
+                  text-anchor="middle" y="310.0">
+               D
+            </text>
+         </g>
+         <g>
+            <rect rx="7" x="275.0" y="280.0" width="50" height="40" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="300.0"
+                  text-anchor="middle" y="310.0">
+               E
+            </text>
+         </g>
+         <g>
+            <rect rx="7" x="475.0" y="280.0" width="50" height="40" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="500.0"
+                  text-anchor="middle" y="310.0">
+               F
+            </text>
+         </g>
+         <g>
+            <rect rx="7" x="675.0" y="280.0" width="50" height="40" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="700.0"
+                  text-anchor="middle" y="310.0">
+               G
+            </text>
+         </g>
+         <g>
+            <rect rx="7" x="25.0" y="380.0" width="50" height="40" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="50.0"
+                  text-anchor="middle" y="410.0">
+               H
+            </text>
+         </g>
+         <g>
+            <rect rx="7" x="125.0" y="380.0" width="50" height="40" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="150.0"
+                  text-anchor="middle" y="410.0">
+               I
+            </text>
+         </g>
+         <g>
+            <rect rx="7" x="225.0" y="380.0" width="50" height="40" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="250.0"
+                  text-anchor="middle" y="410.0">
+               J
+            </text>
+         </g>
+         <g>
+            <rect rx="7" x="325.0" y="380.0" width="50" height="40" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="350.0"
+                  text-anchor="middle" y="410.0">
+               K
+            </text>
+         </g>
+         <g>
+            <rect rx="7" x="425.0" y="380.0" width="50" height="40" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="450.0"
+                  text-anchor="middle" y="410.0">
+               L
+            </text>
+         </g>
+         <g>
+            <rect rx="7" x="525.0" y="380.0" width="50" height="40" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="550.0"
+                  text-anchor="middle" y="410.0">
+               M
+            </text>
+         </g>
+         <g>
+            <rect rx="7" x="625.0" y="380.0" width="50" height="40" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="650.0"
+                  text-anchor="middle" y="410.0">
+               N
+            </text>
+         </g>
+         <g>
+            <rect rx="7" x="725.0" y="380.0" width="50" height="40" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="750.0"
+                  text-anchor="middle" y="410.0">
+               O
+            </text>
+         </g>
+         <g>
+            <path id="line-49" stroke-width="1" stroke="black" fill="none" d="M 400.0 120.0 L 200.0 180.0 ">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+            <path id="line-50" stroke-width="1" stroke="black" fill="none" d="M 200.0 180.0 L 400.0 120.0 "
+                  style="visibility:hidden;">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+         </g>
+         <g>
+            <path id="line-51" stroke-width="1" stroke="black" fill="none" d="M 400.0 120.0 L 600.0 180.0 ">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+            <path id="line-52" stroke-width="1" stroke="black" fill="none" d="M 600.0 180.0 L 400.0 120.0 "
+                  style="visibility:hidden;">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+         </g>
+         <g>
+            <path id="line-53" stroke-width="1" stroke="black" fill="none" d="M 200.0 220.0 L 100.0 280.0 ">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+            <path id="line-54" stroke-width="1" stroke="black" fill="none" d="M 100.0 280.0 L 200.0 220.0 "
+                  style="visibility:hidden;">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+         </g>
+         <g>
+            <path id="line-55" stroke-width="1" stroke="black" fill="none" d="M 200.0 220.0 L 300.0 280.0 ">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+            <path id="line-56" stroke-width="1" stroke="black" fill="none" d="M 300.0 280.0 L 200.0 220.0 "
+                  style="visibility:hidden;">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+         </g>
+         <g>
+            <path id="line-57" stroke-width="1" stroke="black" fill="none" d="M 600.0 220.0 L 500.0 280.0 ">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+            <path id="line-58" stroke-width="1" stroke="black" fill="none" d="M 500.0 280.0 L 600.0 220.0 "
+                  style="visibility:hidden;">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+         </g>
+         <g>
+            <path id="line-59" stroke-width="1" stroke="black" fill="none" d="M 600.0 220.0 L 700.0 280.0 ">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+            <path id="line-60" stroke-width="1" stroke="black" fill="none" d="M 700.0 280.0 L 600.0 220.0 "
+                  style="visibility:hidden;">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+         </g>
+         <g>
+            <path id="line-61" stroke-width="1" stroke="black" fill="none" d="M 100.0 320.0 L 50.0 380.0 ">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+            <path id="line-62" stroke-width="1" stroke="black" fill="none" d="M 50.0 380.0 L 100.0 320.0 "
+                  style="visibility:hidden;">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+         </g>
+         <g>
+            <path id="line-63" stroke-width="1" stroke="black" fill="none" d="M 100.0 320.0 L 150.0 380.0 ">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+            <path id="line-64" stroke-width="1" stroke="black" fill="none" d="M 150.0 380.0 L 100.0 320.0 "
+                  style="visibility:hidden;">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+         </g>
+         <g>
+            <path id="line-65" stroke-width="1" stroke="black" fill="none" d="M 300.0 320.0 L 250.0 380.0 ">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+            <path id="line-66" stroke-width="1" stroke="black" fill="none" d="M 250.0 380.0 L 300.0 320.0 "
+                  style="visibility:hidden;">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+         </g>
+         <g>
+            <path id="line-67" stroke-width="1" stroke="black" fill="none" d="M 300.0 320.0 L 350.0 380.0 ">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+            <path id="line-68" stroke-width="1" stroke="black" fill="none" d="M 350.0 380.0 L 300.0 320.0 "
+                  style="visibility:hidden;">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+         </g>
+         <g>
+            <path id="line-69" stroke-width="1" stroke="black" fill="none" d="M 500.0 320.0 L 450.0 380.0 ">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+            <path id="line-70" stroke-width="1" stroke="black" fill="none" d="M 450.0 380.0 L 500.0 320.0 "
+                  style="visibility:hidden;">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+         </g>
+         <g>
+            <path id="line-71" stroke-width="1" stroke="black" fill="none" d="M 500.0 320.0 L 550.0 380.0 ">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+            <path id="line-72" stroke-width="1" stroke="black" fill="none" d="M 550.0 380.0 L 500.0 320.0 "
+                  style="visibility:hidden;">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+         </g>
+         <g>
+            <path id="line-73" stroke-width="1" stroke="black" fill="none" d="M 700.0 320.0 L 650.0 380.0 ">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+            <path id="line-74" stroke-width="1" stroke="black" fill="none" d="M 650.0 380.0 L 700.0 320.0 "
+                  style="visibility:hidden;">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+         </g>
+         <g>
+            <path id="line-75" stroke-width="1" stroke="black" fill="none" d="M 700.0 320.0 L 750.0 380.0 ">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+            <path id="line-76" stroke-width="1" stroke="black" fill="none" d="M 750.0 380.0 L 700.0 320.0 "
+                  style="visibility:hidden;">
+               <animate attributeType="XML" attributeName="stroke-width" from="1" to="4" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke-width" to="1" from="4" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" from="black" to="red" dur="1s" begin="mouseover"
+                        fill="freeze">
+                  
+               </animate>
+               <animate attributeType="XML" attributeName="stroke" to="black" from="red" dur="0.5s" begin="mouseout"
+                        fill="freeze">
+                  
+               </animate>
+            </path>
+         </g>
+      </g>
+   </g>
+</svg>

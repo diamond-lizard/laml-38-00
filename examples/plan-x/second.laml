@@ -1,0 +1,45 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-strict-validating")
+
+(define meta-props 
+  (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(define (kn)
+  (p "Kurt Normark" (br) 
+      (span 'css:background-color "aqua" "normark@cs.auc.dk")))
+
+(define (normark-url suffix)
+ (string-append "http://www.cs.auc.dk/~normark/" suffix))
+
+(define view 'programmer)
+
+(write-html '(pp prolog)
+ (let* ((as-anchor (lambda (e) (a 'href (second e) (third e))))
+        (entry list)
+
+        (doc-header (h1 "LAML Info"))
+        (doc-substance 
+         (div
+          (p "Here you find a number of" 
+             (cond ((eq? view 'programmer) "programmer related")
+                   ((eq? view 'general) "general")
+                   (else "???"))
+             "links to LAML information:")
+          (ul 
+           (map (compose li as-anchor)
+            (filter (lambda (e) (eq? (first e) view))
+             (list
+              (entry 'general (normark-url "laml/") "General LAML info")
+              (entry 'programmer (normark-url "laml/zip-distribution/") "LAML download")
+              (entry 'programmer (normark-url "scheme/index.html") "Info for programmers")))))))
+        (doc-trailer (kn)))
+
+  (html html-props 
+    (head (meta meta-props) (title "Second page"))
+    (body doc-header doc-substance doc-trailer))
+ )
+)
+
+(end-laml)

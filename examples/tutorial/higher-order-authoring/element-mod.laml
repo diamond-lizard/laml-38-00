@@ -1,0 +1,56 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+
+(define normark-url "http://www.cs.auc.dk/~normark/")
+
+(define ol-alpha (xml-modify-element ol 'type "A"))
+(define (a-target t) (xml-modify-element a 'target t))
+
+(define ol-attributes 
+    (list 'css:list-style-type "lower-roman" 'start "3"))
+
+(define ol-roman-3 (xml-modify-element ol ol-attributes))
+
+(define sli (xml-modify-element li (p)))
+
+(define !!-li (xml-modify-element-prepend li "!!"))
+
+
+(write-html '(prolog raw)
+ (html 
+  (head 
+    (title "Element Modification Examples"))
+  (body
+    (h1 "Element Modification Examples")
+
+    (hr)
+
+    (p "Using ol-alpha:")
+    (ol-alpha (li "One") (li "Two") (li "Three"))
+
+    (hr)
+
+    (p "Using a-target - will show target page in new window:")
+    ((a-target "new") 'href normark-url "Kurt Nørmark")
+
+    (hr)
+
+    (p "Ordered list with roman numbers - starting from 3 - with ol-roman-3:")
+    (ol-roman-3 (li "One") (li "Two") (li "Three"))
+
+    (hr)
+
+    (p "Spacy lists with sli :")
+    (ul (sli "One") (sli "Two") (sli "Three"))
+
+    (hr)
+
+    (p "lists with !!-li :")
+    (ul (!!-li "One") (!!-li "Two") (!!-li "Three"))
+
+    (hr)
+
+
+)))
+
+(end-laml)

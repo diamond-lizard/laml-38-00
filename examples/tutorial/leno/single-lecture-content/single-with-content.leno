@@ -1,0 +1,233 @@
+(load (string-append laml-dir "laml.scm"))       
+(laml-style "xml-in-laml/lecture-notes/lecture-notes")
+
+(leno-front-matters
+  (front-title "LENO Tutorial Demo")           
+  (front-subtitle "Note page content")   
+  (front-author "Kurt Nørmark")           
+  (front-affiliation "Department of Computer Science, Aalborg University, Denmark")  
+  (front-abstract "This is a LENO demo lecture, which is part of the LAML tutorial.")  
+
+  'slide-view "true"  
+  'annotated-slide-view "true"
+  'aggregated-view "true" 
+  'primary-view "slide-view"
+
+  'scheme-suffix "post-notes.scm"
+  'course-home-url "http://www.cs.auc.dk/~normark/scheme/tutorial/leno/leno.html"   
+  'author-home-url "http://www.cs.auc.dk/~normark/"   
+  'note-download-url ""   
+  'logo-url "http://www.auc.dk/"  
+  'note-contents-description "Part of the LAML LENO tutorial"    
+  'slide-header "normal"  ; minimal/normal/none 
+  'trail-of-lecture "false"  
+  'language "english"      
+
+  'show-and-speak "false" 
+  'default-showing-time "2"    
+  'additional-showing-time "0" 
+  'sound-source "real-audio" 
+  'speak-url-prefix "../../speak/"
+
+  'exercise-model "none"   
+  'mouse-advancement "double-press" 
+  'word-index "true"  
+  'css-stylesheet ""
+  'news-flash-string  ""  
+  'news-flash-level   "2"
+  'quiz-support "false"   
+  'verbosity-level "1"
+
+)
+
+(begin-notes)
+
+; ::first-section::
+
+(note-page 'id "easy-section"
+ 
+  (section-title "The easy section")
+
+)
+
+
+; ::first-page::
+
+(note-page 'id "first-page"
+  (title (main-text "The first page")
+         (annotation "Title annotation of the first page")
+  )
+
+  (point
+   (main-text
+    "We have now started the" (em "real authoring process") _ "."
+    )
+   (annotation
+    "We did this by" (b "M-x") (kbd "leno-insert-point,") 
+    "or from the LENO Emacs menu: '" (kbd "Insert Point") "'"
+    )
+  )
+
+  (items 
+   (item 
+    (main-text "This is an item"
+               ) 
+    (annotation "It is also possible to make the item from the Emacs LENO menu, 
+                 using 'Insert items' or 'Insert simple items'."
+                )
+    (items 
+     (item 
+      (main-text "with a single subitem"
+                 ) 
+      (annotation ""
+                  ))))
+   (item 
+    (main-text "We made it with" (kbd "M-x leno-insert-items") _ "." ) 
+    (annotation ""
+                )
+    (items 
+     (item 
+      (main-text "The" (kbd "leno-insert-items") "prompts us for the number of 
+                 items and the number of subitems"
+                 ) 
+      (annotation ""
+  )))))
+
+  (concept-list
+   (concept 'concept-name "programmatic authoring" 
+            (main-text "By programmatic authoring we mean authoring of documents 
+                        via use of  programmaing programming expressions"
+                       ) 
+            (annotation "In LENO we use programmatic authoring."
+                        ))
+  )
+
+  (opposing
+   (opposing-item 
+    (left-item (b "LENO")
+               ) 
+    (right-item (b "Latex")
+                ))
+   (opposing-item 
+    (left-item "Programmatic authoring in Scheme"
+               ) 
+    (right-item "Authoring in a TeX language"
+  )))
+
+)
+
+; ::second-page::
+
+(note-page 'id "graphics-page"
+  (title (main-text "A page with graphics")
+         (annotation "We will now make a page with a graphical image")
+  )
+
+  (image ; @a
+   'src "first-image.gif"
+   (main-text
+    "The first image - the most basic form of the image clause.  
+     The first-image.gif file must be located in  
+     the graphics and graphics/small directories."
+    )
+  )
+
+  (image ; @b
+   'margin-top "3cm"
+   'src "second-image.gif"
+   'alignment "vertical"
+   'first "text"
+   'second "picture"
+   (main-text
+    "Another graphics example using the image clause. 
+     In this example we use a few attributes of
+     the image mirror function."
+    )
+  )
+
+
+)
+
+; ::third-page::
+
+(note-page 'id "source-program-page"
+  (title (main-text "A page with a source program")
+         (annotation "LENO is often used for teaching material about programming.
+            Therefore the source-program LENO element is important.")
+  )
+
+  (source-program
+   'src (in-tutorial-dir "schemedoc/prog3.scm")
+   'from-mark "(define (negate"
+   'to-mark ")))"
+   'slide-mode "inline"
+   'book-mode "external"
+   (color-decorations
+    (color-decoration 'from-mark "negate" 'to-mark "" 'color "blue" 'face "bold" )
+    (color-decoration 'from-mark "(if" 'to-mark "#t)" 'color "red" 'face "italic" )
+    (color-decoration 'from-mark "lambda" 'to-mark "" 'color "purple" 'face "bold" )
+   )
+   (main-text
+    "The negate function" )
+   (annotation
+    "This function is really from the SchemeDoc part of the LAML tutorial." )
+  )
+
+  (source-program
+   'src (in-tutorial-dir "schemedoc/prog3.scm")
+   'from-mark ";; Calculate the factorial"
+   'to-mark ")))))"
+   'slide-mode "inline"
+   'book-mode "inline"
+   (color-decorations
+    (color-decoration 'from-mark "fac " 'to-mark "" 'color "red" 'face "bold" 'repetition "2" )
+   )
+   (main-text
+    "The fac function" )
+   (annotation
+    "This is the classical recursive edition of fac." )
+  )
+
+  (source-program
+   'src (in-tutorial-dir "schemedoc/prog3.scm")
+   'from-mark "(define (fib"
+   'to-mark "))))))"
+   'slide-mode "external"
+   'book-mode "external"
+   (color-decorations
+    (color-decoration 'from-mark "fib " 'to-mark "" 'color "red" 'face "bold" 'repetition "3" )
+   )
+   (main-text
+    "The fib function" )
+   (annotation
+    "This is the classical recursive edition of fib, which is very time consuming." )
+  )
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(end-notes)
+
+

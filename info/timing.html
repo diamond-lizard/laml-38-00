@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+      <meta name="Generator" content="LAML" />
+      <title>Speed of LAML Programs</title>
+   </head>
+   <body bgcolor="#ffffbf" text="#000000" link="#0000ff" vlink="#0000ff">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+         <tbody>
+            <tr>
+               <td width="33%" align="left" valign="top">
+                  <font size="2">Generated: August 5, 2005, 11:07:08</font>
+               </td>
+               <td width="34%" align="center" valign="top">
+                  <font size="2"><span>Copyright &copy; 2005, Kurt N&oslash;rmark</span></font>
+               </td>
+               <td width="33%" align="right" valign="top">
+                  <font size="2">
+                     <a href="../index.html" title="The local LAML software home page" target="_top">
+                        <img src="../images/laml-home.gif" alt="The local LAML software home page"
+                             border="0" />
+                     </a>
+                  </font>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+      <h1>Speed of LAML Programs</h1>
+      <p>
+         In order to get an impression of the speed of LAML and Scheme on different platforms
+         we have meassured the total run time (with current-time) of a long-running
+         LAML script in the development version of LAML. The script parses a number
+         of XML DTDs (3 XHTML, SVG), generates the LAML tutorial, generates all mirrors in
+         LAML of various markup languages, generates all manuals of LAML software,
+         and processes all LAML examples. The major time consumption stems from the
+         generation of the mirrors (DFA generation), and the processing of a large number of
+         examples. 
+      </p>
+      <p>
+         Here are the results. We give the absolute times, although the relative times are the
+         ones to watch:
+      </p>
+      <p><b>Solaris-8 on a Sun workstation:</b></p>
+      <div style="margin-left:10px;">
+         <table border="1">
+            <tr>
+               <td><b>Scheme System</b></td>
+               <td><b>Absolute time (sec)</b></td>
+               <td><b>Relative time</b></td>
+            </tr>
+            <tr><td>MzScheme 101</td> <td>935</td> <td>100</td></tr>
+            <tr><td>MzScheme 203</td> <td>1369</td> <td>146</td></tr>
+            <tr><td>Guile 1.3.4</td> <td>2202</td> <td>236</td></tr>
+            <tr><td>Guile 1.4</td> <td>2034</td> <td>217</td></tr>
+            <tr><td>Guile 1.6.3</td> <td>1779</td> <td>190</td></tr>
+         </table>
+      </div>
+      &nbsp;
+      <p><b>Thinkpad laptop from 1999, Red Hat Linux:</b></p>
+      <div style="margin-left:10px;">
+         <table border="1">
+            <tr>
+               <td><b>Scheme System</b></td>
+               <td><b>Absolute time (sec)</b></td>
+               <td><b>Relative time</b></td>
+            </tr>
+            <tr><td>MzScheme 20?</td> <td>1796</td> <td>100</td></tr>
+            <tr><td>Guile 1.4</td> <td>2910</td> <td>162</td></tr>
+            <tr><td>SCM 5d7</td> <td>1844</td> <td>103</td></tr>
+         </table>
+      </div>
+      &nbsp;
+      <p><b>PC from 2002, Windows 2000:</b></p>
+      <div style="margin-left:10px;">
+         <table border="1">
+            <tr>
+               <td><b>Scheme System</b></td>
+               <td><b>Absolute time (sec)</b></td>
+               <td><b>Relative time</b></td>
+            </tr>
+            <tr><td>MzScheme 103</td> <td>785</td> <td>100</td></tr>
+            <tr><td>MzScheme 204</td> <td>968</td> <td>123</td></tr>
+         </table>
+      </div>
+   </body>
+</html>

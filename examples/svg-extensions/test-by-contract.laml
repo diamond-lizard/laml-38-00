@@ -1,0 +1,72 @@
+;; .schemedoc-dependencies  "~/scheme/lib/man/svg-extensions"
+
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-svg11")
+(lib-load "svg-extensions.scm")
+
+(define txt-lgt 31)
+
+(define (aggregate-text-box . text-list)
+ (let ((y-list (map (mult 60) (number-interval 1 (length text-list)))))
+  (with-xml-language! svg-language '(filter)
+   (g (map (lambda (txt y)
+	    (svg-node rectangular 0 y (pad-with-spaces txt-lgt txt) 'text-align "lc"))
+	  text-list y-list)))))
+
+(define (mult n)
+ (lambda (x)
+   (* n x)))
+
+(define (pad-with-spaces lgt txt)
+  (let ((txt-lgt (string-length txt)))
+    (string-append txt
+                  (if (>= lgt txt-lgt)
+                      (make-string (- lgt txt-lgt) #\space)
+                      ""))))
+
+(define prog-box (aggregate-text-box "Some code" "User text cases" "Tool options"))
+(define tool-box (aggregate-text-box "Instrumented code" "Partition transition graph" "Candidate object creation table" "Tool test case"))
+(define box-4 (aggregate-text-box "Partition coverage log" "Junit log" "Object creation table"))
+(define box-3 (aggregate-text-box "Partition coverage table" "Partition transition graph" "Junit reports"))
+
+
+(define testing-process
+ (with-xml-language! svg-language '(filter)
+  (let* ((x1 120) (x2 400)
+	 (y1 100) (y2 300)
+         )
+   (with-animation '(node-emphasize edge-emphasize step-buttons-walk-through-edge-motion) ; step-buttons-reveal, step-buttons-walk-through-edge-motion,  step-buttons-walk-through
+    (let*
+        ((node-a (svg-composite-node x1 y1 prog-box  'width 180 'padding 10 'steps "1,13"))
+         (node-b (svg-composite-node x2 y1 tool-box  'width 180 'padding 10 'steps "3,7"))
+         (node-c (svg-composite-node x1 y2 box-3  'width 180 'padding 10 'step 11))
+         (node-d (svg-composite-node x2 y2 box-4  'width 180 'padding 10 'steps "5,9"))
+
+         (edge1 (svg-edge node-a "rc" node-b "lc" 'stroke-width "2" 'stroke "black" 'arrow "yes" 'step 2))
+         (edge2 (svg-edge node-b "lb" node-d "lt" 'dx 30 'stroke-width "2" 'stroke "black" 'arrow "yes" 'steps "4,8"))
+         (edge2-r (svg-edge node-d "rt" node-b "rb" 'dx -30 'stroke-width "2" 'stroke "black" 'arrow "yes" 'step 6))
+         (edge3 (svg-edge node-d "lc" node-c "rc" 'stroke-width "2" 'stroke "black" 'arrow "yes" 'step 10))
+         (edge4 (svg-edge node-c "ct" node-a "cb" 'stroke-width "2" 'stroke "black" 'arrow "yes" 'step 12))
+  
+	 )
+      (svg-graph 'from-step 1 'to-step 14
+		 (list node-a node-b node-c node-d)
+		 (list edge1 edge2 edge2-r edge3 edge4)
+       )
+      )
+    ))))
+
+(write-html '(pp prolog)
+  (svg standard-svg-1-1-element-attributes 'width "800" 'height "800" 
+    (g 'transform "scale(1.5)" testing-process))
+  (full-source-path-with-extension "svg")
+)
+
+(end-laml)
+
+
+
+
+
+
+

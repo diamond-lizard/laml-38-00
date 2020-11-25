@@ -1,0 +1,46 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+
+; FOP
+(lib-load "xml-in-laml/mirrors/xsl-fo-mirror.scm")
+(lib-load "xml-in-laml/transformations/xhtml-to-xsl-fo.scm")
+
+(begin-laml)
+
+(define current-xml-language 'xhtml10-transitional)
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(define ttl "XSL-FO Image test")
+
+(process-xml
+ (list
+   (list "html" id-1 'raw 'prolog)
+   (list "fo" (lambda (ast) (transform-ast xhtml-to-xsl-fo ast)) 'pp))
+ (in-startup-directory (source-filename-without-extension))
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title ttl))
+  (body 
+   (h1 ttl)
+
+
+    (table 'border "1px"
+	    (tr (td "1" 'width "0.5cm" ) (td "2" 'width "1.5cm") (td "3" 'width "1.5cm"))  
+	    (tr (td 'colspan "3" "4"))  
+	   )
+
+   
+    (table 'border "0px"
+	    (tr (td "10" 'width "0.5cm" ) (td "2" 'width "1.5cm" 'rowspan "2") (td "3" 'width "1.5cm"))  
+	    (tr (td "4"))  
+	   )
+
+  )
+ )
+)
+
+
+(end-laml)

@@ -1,0 +1,65 @@
+(load (string-append laml-dir "laml.scm"))
+
+(lib-load "xml-in-laml/xml-in-laml.scm")
+(lib-load "xml-in-laml/mirrors/xhtml10-frameset-mirror.scm")
+(lib-load "xml-in-laml/mirrors/xhtml10-transitional-mirror.scm")
+
+(begin-laml)
+
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+(set! xml-check-language-overlap? #t)
+
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (title "Second frameset example"))
+
+   (frameset 
+    (frame 'name "fr2" 'src "transitional-1.html")
+    (frame 'name "fr2" 'src "transitional-2.html")
+    'cols "40%,60%"
+
+    (noframes
+     (body 
+       (p "Frames are" (em "unfortunately") "not available")))
+  )
+ )
+)
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (title "Left frame"))
+
+   (body 
+     (p "This is the left frame"))
+ )
+ (in-startup-directory "transitional-1.html")
+)
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (title "Left frame"))
+
+   (body 
+     (p "This is the right frame. ")
+
+     (p "This example illustrates a lot of language overlap, namely between
+         XHTML1.0 frameset and transitional. Try processing it.")
+
+     (p "The" (a 'href "frameset-3.html" "third frameset example" 'target "_top") "shows the appropriate solution.")
+
+   )
+ )
+ (in-startup-directory "transitional-2.html")
+)
+
+
+
+
+(end-laml)

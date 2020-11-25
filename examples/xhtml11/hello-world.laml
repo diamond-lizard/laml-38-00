@@ -1,0 +1,29 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.1-validating")
+
+(begin-laml)
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(write-html '(pp prolog)
+  (html 
+   (head 
+     (title "Hello World") 
+   )
+   (body 
+     (p "Here is the body text of the most simple WWW page," 
+        "you have ever seen!!")
+
+   )
+  )
+)
+
+(end-laml)
+
+
+
+
+
+
+

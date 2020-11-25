@@ -1,0 +1,78 @@
+(load (string-append laml-dir "laml.scm"))
+
+(lib-load "xml-in-laml/xml-in-laml.scm")
+(lib-load "xml-in-laml/mirrors/xhtml10-frameset-mirror.scm")
+(lib-load "xml-in-laml/mirrors/xhtml10-transitional-mirror.scm")
+
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+(set! xml-check-language-overlap? #t)
+
+; We use a strange character transformation table for frameset stuff.
+; It only affects the title.
+; Try instead to use it on 'xhtml10-transitional...
+(set-xml-transliterate-character-data-in 'xhtml10-frameset #t) 
+
+; A chacter transformation table that replaces each character
+; with "ab"
+(set-xml-char-transformation-table-in 'xhtml10-frameset 
+ (list->vector (append (make-list 256 "ab")))
+   ) 
+
+; Insist that only string valued attributes are used in xhtml10-frameset
+(set-xml-accept-only-string-valued-attributes-in 'xhtml10-frameset #t) 
+
+
+(write-html '(raw prolog)
+ ((xhtml10-frameset 'html) html-props
+  ((xhtml10-frameset 'head) 
+   ((xhtml10-frameset 'title) "Fourth frameset example"))
+
+   (frameset 
+    (frame 'name "1" 'src "transitional-5.html")
+    (frame 'name "2" 'src "transitional-6.html")
+    'cols "40%,60%"
+
+    ((xhtml10-frameset 'noframes)
+     ((xhtml10-frameset 'body) 
+       ((xhtml10-frameset 'p) "Frames are" ((xhtml10-frameset 'em) "unfortunately") "not available")))
+  )
+ ))
+
+
+(write-html '(raw prolog)
+ ((xhtml10-transitional 'html) html-props
+  ((xhtml10-transitional 'head) 
+   ((xhtml10-transitional 'title) "Left frame"))
+
+   ((xhtml10-transitional 'body) 
+     ((xhtml10-transitional 'p) "This is the left frame"))
+ )
+ (in-startup-directory "transitional-5.html")
+)
+
+(write-html '(raw prolog)
+ ((xhtml10-transitional 'html) html-props
+  ((xhtml10-transitional 'head) 
+   ((xhtml10-transitional 'title) "Left frame"))
+
+   ((xhtml10-transitional 'body) 
+     ((xhtml10-transitional 'p) "This is the right frame. ")
+
+     ((xhtml10-transitional 'p) "This example illustrates another possible way to deal with the language overlap.
+         Again, try process it.")
+
+     ((xhtml10-transitional 'p) "The" 
+        ((xhtml10-transitional 'a) 'href "frameset-3.html" "third frameset example" 'target "_top") "shows an alternative.")
+
+   )
+ )
+ (in-startup-directory "transitional-6.html")
+)
+
+
+
+
+(end-laml)

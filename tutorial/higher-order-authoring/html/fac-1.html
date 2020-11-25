@@ -1,0 +1,29 @@
+<!-- Generated from an LAML (Lisp Abstracted Markup Language) source file. Version 19.00 (September 6, 2002) development. LAML is designed and implemented by Kurt Nørmark, normark@cs.auc.dk. Time of generation: 13. November 2002 11:39:53-->
+
+<html><head><title>Source file</title></head><body bgcolor = "#ffffff" text = "#000000" link = "#000000" vlink = "#000000" ><font size = "2"  ><pre>(<a href = "../../../r4rs/r4rs_8.htm#IDX646" style = "{text-decoration: none;}" target = "documentation-frame" title = "R4RS Scheme form" ><font color = "#a64700">load</font></a> (<a href = "../../../r4rs/r4rs_8.htm#IDX510" style = "{text-decoration: none;}" target = "documentation-frame" title = "R4RS Scheme form" ><font color = "#a64700">string-append</font></a> laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+
+<a name="fac"><a href = "fac-1-LARGE.html#fac"><img src = "./images/small-square.gif" alt = "Show source file in large font" border = "0" ></a>&nbsp;<a href = "cross-reference-index-f.html#fac" target = control-frame><img src = "./images/small-green-up-triangle.gif" alt = "In fac-1: Link from fac to it's cross reference table entry" border = "0" ></a>&nbsp;<br>(<a href = "../../../r4rs/r4rs_7.htm#SEC42" style = "{text-decoration: none;}" target = "documentation-frame" title = "R4RS Scheme form" ><b>define</b></a> <b><font color = "#ff0000"  >(fac n)</font></b>
+  (<a href = "../../../r4rs/r4rs_6.htm#SEC31" style = "{text-decoration: none;}" target = "documentation-frame" title = "R4RS Scheme form" ><b>if</b></a> (<a href = "../../../r4rs/r4rs_8.htm#IDX351" style = "{text-decoration: none;}" target = "documentation-frame" title = "R4RS Scheme form" ><font color = "#a64700">=</font></a> 0 n) 1 (<a href = "../../../r4rs/r4rs_8.htm#IDX368" style = "{text-decoration: none;}" target = "documentation-frame" title = "R4RS Scheme form" ><font color = "#a64700">*</font></a> n (<a href = "fac-1.html#fac" title = "fac-1" style = "{text-decoration: none;}" ><font color = "#000080">fac</font></a> (<a href = "../../../r4rs/r4rs_8.htm#IDX369" style = "{text-decoration: none;}" target = "documentation-frame" title = "R4RS Scheme form" ><font color = "#a64700">-</font></a> n 1)))))
+
+(write-html '(raw)
+ (html 
+  (head 
+    (title "Factorials"))
+  (body
+    (h1 "Factorials")
+
+    (table 'border "1"
+     (tbody
+      (tr 
+        (td "1") (td (as-string (<a href = "fac-1.html#fac" title = "fac-1" style = "{text-decoration: none;}" ><font color = "#000080">fac</font></a> 1))))
+      (tr 
+        (td "2") (td (as-string (<a href = "fac-1.html#fac" title = "fac-1" style = "{text-decoration: none;}" ><font color = "#000080">fac</font></a> 2))))
+      (tr 
+        (td "3") (td (as-string (<a href = "fac-1.html#fac" title = "fac-1" style = "{text-decoration: none;}" ><font color = "#000080">fac</font></a> 3))))
+      (tr 
+        (td "4") (td (as-string (<a href = "fac-1.html#fac" title = "fac-1" style = "{text-decoration: none;}" ><font color = "#000080">fac</font></a> 4))))))
+ ))
+)
+
+(end-laml)</pre></font>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p></body></html>

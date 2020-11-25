@@ -1,0 +1,59 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+; (lib-load "xhtml1.0-convenience.scm")
+
+(define current-xml-language 'xhtml10-transitional)
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+; Insert the LAML template "Processing Options" here
+; if you need variations in the LAML processing
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "Derived Secondary Document"))
+  (body 
+    (pre
+"<leno-themes>
+   <leno-themes-front-matters ...
+                              make-print-page=\"false\" slide-view=\"true\" annotated-slide-view=\"false\"
+                              aggregated-view=\"true\" author-mode=\"false\" presentation-medium=\"web\"
+                              language=\"english\"/>
+   <begin-themes/>
+   <theme id=\"intro-sec\">
+      <leno-element lecture-id=\"demo\" page-id=\"intro-sec\" element-type=\"section-title\" element-number=\"1\"/>
+      <leno-element lecture-id=\"demo\" page-id=\"intro\" element-type=\"title\" element-number=\"1\"/>
+      <leno-element lecture-id=\"demo\" page-id=\"intro\" element-type=\"point\" element-id=\"pt1\"/>
+      <leno-element lecture-id=\"demo\" page-id=\"intro\" element-type=\"items\" element-id=\"it1\"/>
+   </theme>
+   <theme id=\"model-sec\">
+      <leno-element lecture-id=\"demo\" page-id=\"model-sec\" element-type=\"section-title\" element-number=\"1\"/>
+      <leno-element lecture-id=\"demo\" page-id=\"primsec\" element-type=\"title\" element-number=\"1\"/>
+      <leno-element lecture-id=\"demo\" page-id=\"primsec\" element-type=\"concept-list\" element-id=\"con1\"/>
+      <leno-element lecture-id=\"demo\" page-id=\"primsec\" element-type=\"items\" element-id=\"it1\"/>
+      <leno-element lecture-id=\"demo\" page-id=\"primsec\" element-type=\"point\" element-id=\"pt1\"/>
+   </theme>
+   <theme id=\"leno-sec\">
+      <leno-element lecture-id=\"demo\" page-id=\"leno-sec\" element-type=\"section-title\" element-number=\"1\"/>
+      <leno-element lecture-id=\"demo\" page-id=\"leno-prim\" element-type=\"title\" element-number=\"1\"/>
+      <leno-element lecture-id=\"demo\" page-id=\"leno-prim\" element-type=\"point\" element-id=\"pt1\"/>
+      <leno-element lecture-id=\"demo\" page-id=\"leno-prim\" element-type=\"cross-references\" element-id=\"cr1\"/>
+      <leno-element lecture-id=\"demo\" page-id=\"leno-prim\" element-type=\"items\" element-id=\"it1\"/>
+      <leno-element lecture-id=\"demo\" page-id=\"leno-prim\" element-type=\"point\" element-id=\"pt2\"/>
+      <leno-element lecture-id=\"demo\" page-id=\"leno-seco\" element-type=\"title\" element-number=\"1\"/>
+      <leno-element lecture-id=\"demo\" page-id=\"leno-seco\" element-type=\"point\" element-id=\"pt1\"/>
+      <leno-element lecture-id=\"demo\" page-id=\"leno-seco\" element-type=\"items\" element-id=\"it1\"/>
+      <leno-element lecture-id=\"demo\" page-id=\"leno-seco\" element-type=\"point\" element-id=\"pt2\"/>
+   </theme>
+  <end-themes/>
+</leno-themes>")
+
+  )
+ )
+)
+
+
+(end-laml)

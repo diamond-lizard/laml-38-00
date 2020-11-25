@@ -1,0 +1,55 @@
+* The function copyright-clause is moved from the general library to laml.scm in the LAML root.
+
+* The variable language-preference and the function text-choice have been moved from the 
+  general library to laml.scm in the LAML root.
+
+* The function date-time in lib/time.scm has been refined to give better displays of
+  the year 2000 dates. Also, it takes the variable language-preference into account.
+
+* The library lib/html4.0-loose/convenience.scm now corresponds to lib/html.scm.
+  convenience.scm uses the accurate html4.0-loose mirror as basis.
+
+* In lib/html4.0-loose/basis.scm (and the tool that generates it, in particular):
+  We now support css inline style attributes side by side with ordinary attributes.
+  Example:
+      (em 'css:letter-spacing "0.3cm" 'css:text-decoration "overline" 'css:background-color "yellow"
+          'css:color "red" "Emphasized text")
+
+* laml.scm: Support of URL and anchor tag to the relative or absolute LAML home page (Aalborg University).
+  Relevant function: laml-home-button.
+  This is based on the function directory-level-difference in the lib/general.scm library.
+
+* We have moved the Scheme compatibility files from lib to lib/compatibility. We have also
+  changed the naming of compatibility files from
+     <scheme-system>.scm 
+  to
+     <laml-platform>_<operating-system>_<scheme-system>.scm 
+
+* The style function in laml.scm has been supplied with an optional style-base directory parameter.
+
+* A browser of the R4RS Scheme Report has been included. Likewise, a browser of the LAML libraries
+  now constitute a good alternative to the master index.
+
+* Schemedoc now accepts internal and specialized tags for structure documentation of 
+  parameters, pre-condition, etc. See the manual page of Schemedoc for details.
+  In that way it is possible to use the full expressive
+  power of the manual style via Schemdoc. Recall that Schemedoc is the tool which extracts
+  particular comments from a Scheme program. Schemdoc transfers this information to the 
+  the manaual tool, which presents it on a WWW page. Most LAML manuals are produced by SchemeDoc.
+
+* The CGI library now supports file uploading.
+
+* The following libraries are new in the distribution: string-make-up.scm, crypt.scm, collect-skip.scm.
+  The collect-skip library is essential for the file uploading mentioned above.
+
+* LENO (The Lecture Note System) has been converted to the HTML4.0 libraries.
+
+* The directory html-doc contains a copy of the html4.01 documentation.
+  The file html-map.scm maps tag names to partial URLs in the HTML documentation.
+  This is used in the LAML basic and surface libraries to link to the full HTML documentation.
+
+* laml.scm:  There is a name clash between the LAML style loading function and the
+  HTML mirror function style. To remedy this, laml-style is now an alias of the style loading
+  function.
+
+* A photo show style has been added.

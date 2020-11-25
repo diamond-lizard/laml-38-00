@@ -1,0 +1,1259 @@
+(load (string-append laml-dir "laml.scm"))
+
+; ---------------------------------------------------------------------------------------------------
+; FILES:
+
+(define manual-source-directory (string-append (string-append software-directory "styles/elucidator" "/")))
+(define manual-destination-directory (string-append manual-source-directory "man/"))
+
+(define elucidator-example-directory (string-append laml-dir "examples/elucidator/"))
+
+; ---------------------------------------------------------------------------------------------------
+
+(laml-style "manual/original-manual")
+
+
+; ---------------------------------------------------------------------------------------------------
+; PREAMBLE:
+
+(set-manual-title "Reference manual of the Scheme Elucidator")
+
+(set-manual-author "Kurt Nørmark" "normark@cs.auc.dk" "Department of Computer Science" "Aalborg University" "Denmark")
+
+(set-manual-abstract
+  (con-par 
+ 
+  (con (b (con "This is the documentation of the original Scheme Elucidator, which now is obsolete.
+      Please consult the " (a-tag "../../xml-in-laml/elucidator/man/elucidator.html" "Reference Manual of the Scheme Elucidator 2") _ ".")))
+
+  (con "The Scheme Elucidator is a program development tool which produces internal documentation of a Scheme program.
+  The Scheme Elucidator is part of the LAML software package, and it is available from the " (a-tag "http://www.cs.auc.dk/~normark/laml/" "LAML home page") _ "." (p)
+  "Internal documentation is seen as a contrast to interface documentation, which can be made by means of " (a-tag "../../../tools/schemedoc/man/schemedoc.html" "SchemeDoc") ". "
+  "The produced documentation consist of a number of HTML files, to be shown in an Internet browser.
+  The sources of the produced documentation
+  is a number of scheme program files, a documentation file in a simple text format, and an LAML setup file.
+  The the root of the resulting HTML files is located in the same directory as the documentation and the setup file.
+  The documentation is produced when the LAML file is processed. Taken together these files form a so-called " (b "documentation bundle") ".")
+  
+  "An elucidator is a kind of a literate programming tool, which connects the documentation and the program by means of links instead of
+   physically embedding the program fragments in the documentation.
+   To emphasize this difference, we talk about elucidative programming instead of  literate programming."
+
+  "The Scheme elucidator produces web documentation. There is also editor support of producing
+  the documentation. Currently we support elucidative Scheme programming via the Emacs text editor. 
+  Below we will also summarize the editor commands which we use in Emacs for elucidative programming."
+
+  (con "There exists (incomplete) " 
+        (a-tag-target "http://www.cs.auc.dk/~normark/scheme/styles/elucidator/doc/html/index.html" "internal documentation" "_top")
+        " of the Scheme Elucidator (on the www.cs.auc.dk site) in terms of an elucidative program.
+   There is also a brief " (a-tag "../doc/html/elucidator-help.html" "user guide")  ", which describes how to navigate the Elucidator in a WWW browser.
+  Please also take a look of the " (a-tag "../../../examples/elucidator/index.html" "examples") ", in particular the example called 'Small Meta Demo', which in 
+  simple way illustrates all the different facilities in the Scheme elucidator. The " (a-tag "../../../tutorial/index.html" "LAML tutorial") " is written as a set of elucidative programs, and as such
+  it also makes up a good example.
+  ")
+
+  "If you are a new user of the Elucidator start reading the section 'Practical Introduction' below the table."
+  )
+)
+
+(set-home-url "")
+
+(set-manual-name "elucidator")
+
+; ---------------------------------------------------------------------------------------------------
+; THE MANUAL: a number of manual-section and manual-page forms.
+
+
+(manual-section
+
+ (section-title "Practical Introduction")
+
+ (section-body 
+   (con-par "When you have installed LAML on your computer you also have a full installation of
+             the Scheme elucidator, including Emacs support of elucidative programming."
+
+            "The emacs command M-x make-elucidator helps you establish a fresh elucidator. Follow
+             the direction given from this command. From Emacs
+             type C-e ? to get brief help on the Elucidator editor commands. For more complete information
+             see the section 'Elucidator editor support using Emacs' in this manual."
+
+            "The command M-x elucidate (or C-e C-o) on an elucidator buffer activates the Elucidator from Emacs. The Elucidator is the tool
+             which produces the WWW pages which presents the documentation bundle in an Internet browser.
+             The main file is found in html/index.html. In addition, if the setup file is called f.laml,
+             the main file is available as f.html in the source directory."
+
+            "When you read the Elucidator WWW pages navigate to the Help page via one of the 'Question Mark Icons'
+             to get help on the possibilities offered by the Elucidator tool.")))
+
+
+
+(manual-section
+
+ (section-title "Forms in the setup file")
+
+ (section-body "The setup file must be a file with laml file extension. This is the file which
+  connects all the files in a documentation bundle. In this section we will describe the important and primary
+  functions and forms, which may be found in the setup file. In the next section we document a number of less important
+  forms. We start with the most important setup forms")
+)
+
+
+
+(manual-page 
+ 'documentation-intro
+ (title "documentation-intro")
+
+ (form 
+  '(documentation-intro title author email affiliation abstract)
+  )
+
+ (description "Define the documentation introduction in terms of a title, author, email, affiliation, and abstract")
+
+ (parameters
+  (parameter "title" "The title of the documentation (a string)")
+
+  (parameter "author" "The author of the documentation (a string)")
+
+  (parameter "email" "The email address of the author (a string)")
+
+  (parameter "affliation" "The affiliation of the author (a string)")
+
+  (parameter "abstract" "The abstract of the documentation (a string)")
+
+  )
+
+ )
+
+(manual-page 
+ 'program-source
+ (title "program-source")
+
+ (form 
+  '(program-source . elements)
+  )
+
+ (description "Define a program source file to be part of this documentation bundle.
+               A program source file is defined in terms of a key name, a file location, the programming language used,
+               and a group name. The key name nick names the file for use in an elucidative program (in order
+               to avoid using the full file name or file path). The file location should be the full
+               path to the program file (including extension). The programming language must be Scheme.
+               Finally, group defines the belonging of this source file to a group of logically related 
+               source files. This is used for background coloring purposes.
+               One or more program-source forms may be present the the LAML setup file")
+
+ (parameters
+  (parameter "elements" "an element may be a key, file-location and language forms")
+
+  )
+
+
+ (cross-references
+  (internal-references  "Constituents" "key" "file-location" "language" "group")
+  )
+)
+
+(manual-page 
+ 'manual-source
+ (title "manual-source")
+
+ (form 
+  '(manual-source . elements)
+  )
+
+ (description "Declare a LAML manual file to be part of the documentation. 
+               This causes links to be created from the programs to relevant manual entries.
+               File-location clauses must address '-.lsp' files which are generated by the manual document style.")
+
+ (parameters
+  (parameter "elements" "an element may be a file-location or a url-location")
+
+  )
+
+
+ (cross-references
+  (internal-references  "Constituents" "file-location" "url-location")
+  )
+)
+
+(manual-page 
+ 'begin-documentation
+ (title "begin-documentation")
+
+ (form 
+  '(begin-documentation)
+  )
+
+ (description "Starts the section of the documentation in which documentation-entry and documentation-section
+               forms may appear.")
+
+)
+
+(manual-page 
+ 'end-documentation
+ (title "end-documentation")
+
+ (form 
+  '(end-documentation)
+  )
+
+ (description "Ends the section of the documentation which contains documentation-entry and documentation-section forms")
+
+ (misc "This form initiates far the majority of the processing of the Elucidator. As such, end-documentation is
+        a very important form")
+)
+
+(manual-page 
+ 'documentation-from
+ (title "documentation-from")
+
+ (form 
+  '(documentation-from documentation-file)
+  )
+
+ (description "Parses and extracts documentation from a separate, textual format which we define in a subsequent section 
+               of this manual. 
+               The documentation-file is opened in the source-directory.
+               This form is entirely equivalent to a number of of documentation-entry and documentation-section forms.
+               In fact, the extracted information is passed into the documentation-entry and documentation-section forms,
+               after which these are evaluated by means of the Lisp eval.")
+
+ (parameters
+  (parameter "documentation-file" "The name of the documentation file (a string). No path information must be present.
+                                   However, a possible file extension must be included.")
+
+  )
+
+
+ (cross-references
+  (internal-references "See also" "set-source-directory")
+  (internal-references "Equivalent Lisp forms" "documentation-entry" "documentation-section")
+  )
+)
+
+
+(manual-page 
+ 'elucidator-verbose-mode
+ (title "elucidator-verbose-mode")
+
+ (form 
+  'elucidator-verbose-mode
+  )
+
+ (description "A variable controling the amount of output written while eludicating a documentation bundle.
+               The type of the variable is boolean. If #t, a bunch of output is written on standard output 
+               while processing. The default value is #t.")
+
+
+ (misc "If necessary, set this variable with a Scheme define form")
+)
+
+
+(manual-page 
+ 'set-source-directory
+ (title "set-source-directory")
+
+ (form 
+  '(set-source-directory dir)
+  )
+
+ (description "Defines the source directory to be dir. The source directory is the directory which
+               contains the documentation laml setupfile, and the path typically ends in doc. Ends in a slash.
+               You must setup the source directory by means of this function.")
+
+ (parameters
+  (parameter "dir" "The full path of the directory with the laml setup file")
+
+  )
+
+)
+
+(manual-page 
+ 'set-documentation-name
+ (title "set-documentation-name")
+
+ (form 
+  '(set-documentation-name name)
+  )
+
+ (description "Define the name of the documentation. Per convention, this is the same
+               as the file name of the laml file, without extension.")
+
+ (parameters
+  (parameter "name" "The name of the documentation (a string)")
+
+  )
+
+)
+
+(manual-page 
+ 'make-all-indexes
+ (title "make-all-indexes")
+
+ (form 
+  '(make-all-indexes)
+  )
+
+ (description "Ask for generation of both duplicate name index, cross reference index, and defining name index")
+
+
+ (cross-references
+  (internal-references "Opposite function" "make-no-indexes")
+ )
+
+ (misc "This variable assigns values to the boolean variables make-duplicated-name-index?, make-cross-reference-index?,
+        and make-defining-name-index?")
+)
+
+
+(manual-page 
+ 'make-no-indexes
+ (title "make-no-indexes")
+
+ (form 
+  '(make-no-indexes)
+  )
+
+ (description "Ask for generation of no indexes")
+
+
+ (cross-references
+  (internal-references "Opposite function" "make-all-indexes")
+ )
+
+ (misc "This variable assigns values to the boolean variables make-duplicated-name-index?, make-cross-reference-index?,
+        and make-defining-name-index?")
+)
+
+(manual-page 
+ 'process-only
+ (title "process-only")
+
+ (form 
+  '(process-only . source-keys)
+  )
+
+ (description "Controls which of the sources files to process.
+               Only process the sources whose keys are given in the parameter.
+               If no parameteres are given, process no sources
+               If this form does not appear, process all sources.")
+
+ (parameters
+  (parameter "source-keys" "a number of source-keys, as specified in the program-source clauses")
+ )
+
+ (cross-references
+  (internal-references "See also" "program-source")
+ )
+)
+
+
+(manual-page 
+ 'minimum-processing
+ (title "minimum-processing")
+
+ (form 
+  '(minimum-processing)
+  )
+
+ (description "Ask for minimum processing of the documentation bundle.
+               This means make no indexes, process no of the source files (but read information from last processing, if any),
+               and make no large font source files")
+
+
+
+ (cross-references
+  (internal-references "Opposite function" "maximum-processing")
+ )
+
+)
+
+(manual-page 
+ 'maximum-processing
+ (title "maximum-processing")
+
+ (form 
+  '(maximum-processing)
+  )
+
+ (description "Ask for maximum processing of the documentation bundle.
+               This means make all indexes, process all the source files (but read information from last processing, if any),
+               and make large font source files")
+
+
+
+ (cross-references
+  (internal-references "Opposite function" "minimum-processing")
+ )
+
+)
+
+
+
+
+(manual-page 
+ 'key
+ (title "key")
+
+ (form 
+  '(key key-val)
+  )
+
+ (description "Sets the key to key-val. The key of a program-source is a convenient string which allows us to reference
+               to a particular source file without using file name or file path")
+
+ (parameters
+  (parameter "key-val" "a string")
+
+  )
+
+ (pre-condition "Must be part of a program-source form")
+
+ (cross-references
+    (internal-references  "Neighbor forms"  "file-location" "language" "group")
+    (internal-references  "Part of" "program-source")
+  )
+
+)
+
+(manual-page 
+ 'file-location
+ (title "file-location")
+
+ (form 
+  '(file-location path)
+  )
+
+ (description "Sets the file location of a program source to be path")
+
+ (parameters
+  (parameter "path" "The full path of a source file in the documentation bundle")
+ )
+
+ (pre-condition "Must be part of a program-source or manual-source form")
+
+ (cross-references
+    (internal-references  "Neighbor forms"  "key" "language" "group")
+    (internal-references  "Part of" "program-source" "manual-source")
+  )
+)
+
+(manual-page 
+ 'url-location
+ (title "url-location")
+
+ (form 
+  '(url-location path)
+  )
+
+ (description "Sets the url address of a manual-source to be path")
+
+ (parameters
+  (parameter "path" "The absolute or relative url of a manual HTML file. Relative to the html directory.")
+ )
+
+ (pre-condition "Must be part of a manual-source form")
+
+ (cross-references
+    (internal-references  "Neighbor forms"  "file-location")
+    (internal-references  "Part of" "manual-source")
+  )
+)
+
+(manual-page 
+ 'language
+ (title "language")
+
+ (form 
+  '(language lang)
+  )
+
+ (description "Defines the programming language used in a program source")
+
+ (parameters
+  (parameter "lang" "a string")
+
+  )
+ (pre-condition "Must be part of a program-source form")
+
+ (cross-references
+    (internal-references  "Neighbor forms"  "key" "file-location" "group")
+    (internal-references  "Part of" "program-source")
+  )
+)
+
+(manual-page 
+ 'language
+ (title "group")
+
+ (form 
+  '(group group-name)
+  )
+
+ (description "Defines the group to which a source file belongs. This is used for
+               background coloring purposes."
+ )
+
+ (parameters
+  (parameter "group-name" "a string")
+
+  )
+ (pre-condition "Must be part of a program-source form")
+
+ (cross-references
+    (internal-references  "Neighbor forms"  "key" "file-location" "language")
+    (internal-references  "Part of" "program-source")
+  )
+)
+
+
+(manual-section
+
+ (section-title "Secondary setup")
+
+ (section-body "In this section we document a number of less important setup possibilities. ")
+                
+)
+
+(manual-page 
+ 'end-file-empty-lines
+ (title "end-file-empty-lines")
+
+ (form 
+  'end-file-empty-lines
+  )
+
+ (description "The number of empty lines in the bottom of an html file,
+               Allow navigation to bottom stuf.")
+
+ (misc "If necessary, set this variable with a Scheme define form")
+
+)
+
+(manual-page 
+ 'browser-pixel-width
+ (title "browser-pixel-width")
+
+ (form 
+  'browser-pixel-width
+  )
+
+ (description "A variable defining the width of the browser in pixels")
+
+ (misc "If necessary, set this variable with a Scheme define form")
+)
+
+(manual-page 
+ 'control-frame-pixel-height
+ (title "control-frame-pixel-height")
+
+ (form 
+  'control-frame-pixel-height
+  )
+
+ (description "The pixel height of the (top level) control frame")
+
+ (misc "If necessary, set this variable with a Scheme define form")
+)
+
+(manual-page 
+ 'p-link-prefix-char
+ (title "p-link-prefix-char")
+
+ (form 
+  'p-link-prefix-char
+  )
+
+ (description "A variable defining the program link prefix character. Default is '{'")
+
+ (misc "If necessary, set this variable with a Scheme define form")
+)
+
+(manual-page 
+ 'p-link-suffix-char
+ (title "p-link-suffix-char")
+
+ (form 
+  'p-link-suffix-char
+  )
+
+ (description "A variable defining the program link suffix character. Default is '}'")
+
+ (misc "If necessary, set this variable with a Scheme define form")
+)
+
+(manual-page 
+ 'd-link-prefix-char
+ (title "d-link-prefix-char")
+
+ (form 
+  'd-link-prefix-char
+  )
+
+ (description "A variable defining the documentation link prefix character. Default is '['")
+
+ (misc "If necessary, set this variable with a Scheme define form")
+)
+
+(manual-page 
+ 'd-link-suffix-char
+ (title "d-link-suffix-char")
+
+ (form 
+  'd-link-suffix-char
+  )
+
+ (description "A variable defining the documentation link prefix character. Default is ']'")
+
+ (misc "If necessary, set this variable with a Scheme define form")
+)
+
+(manual-page 
+ 'copy-image-files?
+ (title "copy-image-files?")
+
+ (form 
+  'copy-image-files?
+  )
+
+ (description "A variable which controls whether to copy  image icons from the software directory to the source (documentation) directory.")
+
+ (misc "If necessary, set this variable with a Scheme define form")
+)
+
+(manual-page 
+ 'make-large-source-files?
+ (title "make-large-source-files?")
+
+ (form 
+  'make-large-source-files?
+  )
+
+ (description "A boolean variable which controls the generation of a source file with large fonts.")
+
+
+ (cross-references
+  (internal-references "Affected by" "minimum-processing" "maximum-processing" )
+ )
+
+ (misc "If necessary, set this variable with a Scheme define form")
+)
+
+(manual-page 
+ 'present-hidden-ids?
+ (title "present-hidden-ids?")
+
+ (form 
+  'present-hidden-ids?
+  )
+
+ (description "Controls whether to present the identification of sections and entries, hidden using the background color. 
+               If you knows theses are presented, it may be useful to copy them from the browser to the editor during the programming and
+               documentation process.
+               Thye type of the variable is boolean.")
+
+ (misc "If necessary, set this variable with a Scheme define form")
+)
+
+(manual-page 
+ 'source-marker-kind
+ (title "source-marker-kind")
+
+ (form 
+  'source-marker-kind
+  )
+
+ (description "A variable which deterimens the 'style' of source markers on the documentation page.
+              The value must be one of the symbols as-text, as-colored-text, as-image. as-image is recommended (default).")
+
+ (misc "If necessary, set this variable with a Scheme define form")
+)
+
+(manual-page 
+ 'elucidator-marker-char
+ (title "elucidator-marker-char")
+
+ (form 
+  'elucidator-marker-char
+  )
+
+ (description "A char valued variable which defines the character used as source marker char. The default value is '@', which in Scheme is denoted by #\\@")
+
+ (misc "If necessary, set this variable with a Scheme define form")
+
+)
+
+(manual-page 
+ 'alphabetic-cross-reference-index?
+ (title "alphabetic-cross-reference-index?")
+
+ (form 
+  'alphabetic-cross-reference-index?
+  )
+
+ (description "A boolean variale controlling whether to split the cross reference index in alphabetic files.
+               If false, make one large cross reference index.
+               Default value is true")
+
+ (misc "If necessary, set this variable with a Scheme define form")
+)
+
+(manual-page 
+ 'alphabetic-cross-reference-index?
+ (title "alphabetic-defined-name-index?")
+
+ (form 
+  'alphabetic-defined-name-index?
+  )
+
+ (description "A boolean variale controlling whether to split the defined name  index in alphabetic files.
+               If false, make one large cross reference index.
+               Default value is true")
+
+ (misc "If necessary, set this variable with a Scheme define form")
+)
+
+(manual-page 
+ 'link-definitions-to-cross-reference-index?
+ (title "link-definitions-to-cross-reference-index?")
+
+ (form 
+  'link-definitions-to-cross-reference-index?
+  )
+
+ (description "A boolean variable which controls whether to link from program definitions to
+               the corresponding entry in the cross reference index.")
+
+ (misc "If necessary, set this variable with a Scheme define form")
+)
+
+(manual-page 
+ 'elucidator-color-scheme
+ (title "elucidator-color-scheme")
+
+ (form 
+  'elucidator-color-scheme
+  )
+
+ (description (con "An association list that maps group strings to colors. The group string can be defined
+               side by side with key, file-location, and language in a program-source form. The
+               color can be a LAML color. Typically we use one of the symbolic name documentation-background-color
+               or program-background-color-" (em "i")  ", " (em "i") " in [1..7].
+               "))
+
+ (cross-references
+  (internal-references  "Related form" "program-source")
+ )
+
+ (misc "Use a define form to set this variable.")
+)
+
+(manual-page 
+ 'rs4r-url-prefix
+ (title "rs4r-url-prefix")
+
+ (form 
+  'rs4r-url-prefix
+  )
+
+ (description "Define the URL prefix to the LAML distribution directory that contains
+               the 'Scheme knowledge'. This is the 'r4rs/ directory in the LAML distribution.
+               The value of this varibale should be an absolute or relative file path from
+               the elucidator html directory to the 'Scheme knowledge directory'.")
+
+ (misc "Use a define form to set this variable. Unfortunately, I have used a slightly 
+        inconsistent abbreviations for this URL prefix property.")
+)
+
+(manual-page 
+ 'elucidator-home-url
+ (title "elucidator-home-url")
+
+ (form 
+  'elucidator-home-url
+  )
+
+ (description "Define the home URL of the elucidator.
+               This 'home page' may serve as a common page for a number of elucidators.
+               If false (#f) no home icon is included.
+              ")
+
+ (misc "Use a define form to set this variable.")
+)
+
+(manual-page 
+ 'default-program-font-size
+ (title "default-program-font-size")
+
+ (form 
+  'default-program-font-size
+  )
+
+ (description "Set the default font size of the programs presented in this elucidator. 
+               The value is either the symbol small or large. Defaults to small")
+
+ (misc "Use a define form to set this variable.")
+)
+
+(manual-page 
+ 'default-table-of-content
+ (title "default-table-of-content")
+
+ (form 
+  'default-table-of-content
+  )
+
+ (description "Set the default table of contents of this elucidator.
+               Possible values are either the symbol overall or detailed.
+               Defaults to overall."
+ )
+
+ (misc "Use a define form to set this variable.")
+)
+
+(manual-page 
+ 'default-program-link
+ (title "default-program-link")
+
+ (form 
+  'default-program-link
+  )
+
+ (description "A variable that determines the default kind of linking from documentation to program.
+               The default is used if no +, *, or - is used as the first character in {...}.
+               The value is one of the symbols 'weak, 'strong, or 'none."
+ )
+
+ (misc "Use a define form to set this variable.")
+)
+
+(manual-page 
+ 'manual-frame-from-program
+ (title "manual-frame-from-program")
+
+ (form 
+  'manual-frame-from-program
+  )
+
+ (description "A variable that determines the name of the browser frame used when we address manual
+               entries from the program. Possible values are \"documentation-frame\", \"program-frame\",
+               or another frame name (causing a new window to be created)."
+
+ )
+
+ (cross-references
+  (internal-references  "Related form" "manual-frame-from-documentation")
+ )
+
+ (misc "Use a define form to set this variable.")
+)
+
+(manual-page 
+ 'manual-frame-from-documentation
+ (title "manual-frame-from-documentation ")
+
+ (form 
+  'manual-frame-from-documentation 
+  )
+
+ (description "A variable that determines the name of the browser frame used when we address manual
+               entries from the documentation. This frame is also used to display Scheme manual - R4RS - information.
+               Possible values are \"documentation-frame\", \"program-frame\",
+               or another frame name (causing a new window to be created)."
+
+ )
+
+ (cross-references
+  (internal-references  "Related form" "manual-frame-from-program")
+ )
+
+ (misc "Use a define form to set this variable.")
+)
+
+
+
+
+(manual-section
+
+ (section-title "Lisp level documentation functions")
+
+ (section-body "The functions in this section document the Lisp level documentation-entry and documentation-section functions.
+                Normally, these functions are not used. Instead we rely on the simple, textual (and non-Lisp) format
+                of documentation found in a separate file. However, it is perfectly possible to avoid the
+                separate documentation file, and to use the two functions below (and their constituent forms). In fact,
+                the format of the separate, textual documentation file is parsed and transformed to calls of 
+                documentation-entry and documentation-section")
+)
+
+
+(manual-page 
+ 'documentation-section
+ (title "documentation-section")
+
+ (form 
+  '(documentation-section . elements)
+  )
+
+ (description "Define the elements of a documentation section. The possible elements are id, title, and intro, all
+               of which are defined in the last part of this section")
+
+ (parameters
+  (parameter "elements" "constituents of the documentation section ")
+  )
+
+ (cross-references
+    (internal-references  "Constituents forms" "id" "title" "intro")
+    (internal-references  "Similar form" "documentation-entry")
+  )
+)
+
+
+(manual-page 
+ 'documentation-entry
+ (title "documentation-entry")
+
+ (form 
+  '(documentation-entry . elements)
+  )
+
+ (description "Define the elements of a documentation entry. An entry is a subsection of a section. The possible elments of an
+               entry are id, title, and body")
+
+ (parameters
+  (parameter "elements" "constituents of the documentation section ")
+ )
+
+ (cross-references
+    (internal-references  "Constituents forms" "id" "title" "body")
+    (internal-references  "Similar form" "documentation-section")
+  )
+)
+
+(manual-page 
+ 'id
+ (title "id")
+
+ (form 
+  '(id id-symbol)
+  )
+
+ (description "Defines the identification of a documentation-entry or documentation-section")
+
+ (parameters
+  (parameter "id-symbol" "A unique symbol which identifies a documentation-entry or documentation-section")
+  )
+
+ (cross-references
+  (internal-references  "Part of" "documentation-section" "documentation-entry")
+  )
+
+)
+
+(manual-page 
+ 'title
+ (title "title")
+
+ (form 
+  '(title t)
+  )
+
+ (description "Defines the title of a documentation-entry or documentation-section")
+
+ (parameters
+  (parameter "t" "The title (a string)")
+  )
+
+ (cross-references
+  (internal-references  "Part of" "documentation-section" "documentation-entry")
+  )
+)
+
+(manual-page 
+ 'body
+ (title "body")
+
+ (form 
+  '(body b)
+  )
+
+ (description "Defines the body of a documentation-entry. The body may contain program references in curly brackets {...} and documentation
+               references in brackets [...]")
+
+ (parameters
+  (parameter "b" "The body (a string)")
+  )
+
+ (cross-references
+  (internal-references  "Part of" "documentation-entry")
+  )
+)
+
+(manual-page 
+ 'intro
+ (title "intro")
+
+ (form 
+  '(intro i)
+  )
+
+ (description "Defines the introductory text of a documentation-entry. Also this text may contain program references in curly brackets {...} and documentation
+               references in brackets [...]")
+
+ (parameters
+  (parameter "i" "The introductory text (a string)")
+  )
+
+ (cross-references
+  (internal-references  "Part of" "documentation-section")
+  )
+)
+
+
+(manual-section
+
+ (section-title "The textual documentation file")
+
+ (section-body (con-par
+                (con-space "Here we describe the format of the textual and separate documentation format. The textual format is inserted
+                into the documentation by means of the function " (internal-ref "documentation-from") ". If the textual documentation form is used, the functions
+                defined in the previous sections are typically not used. However, it is perfectly possible to use the textual format (and
+                documentation-from) side by side with " (internal-ref "documentation-entry") (con-space " and " (internal-ref "documentation-section forms") ".
+                Such a mixed style may be attractive
+                for people who want to take advantage of LAML expressions instead of HTML expressions, which can be used in the textual 
+                documentation format."))
+
+                (con-space "First we describe the documentation intro (corresponding to the function " (internal-ref "documentation-intro") "):")
+                  (indent-pixels 10 (pre (read-text-file-between-marks (string-append manual-destination-directory "elucidator-manual-inclusions") "£1")))
+
+                (con-space "After the documentation intro comes a number of documentation sections: 
+                (corresponding to the function " (internal-ref "documentation-section") "):")
+
+                  (indent-pixels 10 (pre (read-text-file-between-marks (string-append manual-destination-directory "elucidator-manual-inclusions") "£2")))
+
+                (con-space "Finally, in between sections we have documentation entries 
+                 (corresponding to the function "(internal-ref "documentation-entry") ")")
+
+                  (indent-pixels 10 (pre (read-text-file-between-marks (string-append manual-destination-directory "elucidator-manual-inclusions") "£3")))
+
+                "The templates shown above corresponds exactly to the insertions done by the Emacs lisp template functions, which
+                 are described in the last part of this manual."
+
+                (con "Inside the body text of sections and entries you can make links to program fragments, or more precisely, to the definitions in 
+                 a Scheme program."
+
+                 (ul (list
+                 (con "Using the notation " (kbd "{+f}") " a weak link to the definition of " (kbd "f") " is created. Here we just mention " (kbd "f") " without explaining it.")
+                 (con "Using " (kbd "{*f}") " creates a strong link at a place, where " (kbd "f") " is explained.")
+                 (con "Using " (kbd "{-f}") " creates a typographical emphasis of " (kbd "f") ", but  no linking")
+                 (con "In all three cases above we can qualify f with a file name. The general format of program reference is"
+                   (pre "    {modifier-char file $ name} ")
+                 "where modifier is a single key '*', '+', or '-'. File is a key name which refers to a file, as defined in a program-source form. 
+                  name is the name of a definition in a Scheme file.")
+
+                 (con "The notation " (kbd "[d]") " creates a link to another documentation section or entry;
+                 " (kbd "d") " is the " (kbd "id") " if the section/entry.")))
+
+                )
+
+                (con "If " (kbd "{f}") " is used without a leading +, *, or -, the value of the variable " (kbd "default-program-link") "
+                      determines the default kind of linking from documentation to program. 
+                      Possible values of " (kbd "default-program-link") " is one of the symbols " 
+                      (kbd "weak") ", " (kbd "strong") ", or " (kbd "none") ".")
+
+                (con "If " (kbd "{f}") ", " (kbd "{+f}") ", " (kbd "{*f}") ", or " 
+                      (kbd "{file:f}") "  does not refer to a program name in the documentation bundle,
+                      as defined by the " (kbd "program-source") " clauses, we attempt to link to a manual entry, as defined 
+                      by the " (kbd "manual-source") " clauses.")
+
+                (con "It is possible to mark a particular place in program by means of a source marker. A source marker in a program must be at a comment place,
+                 and it is denoted by " (kbd "@") (em "x") ", where " (em "x") " is a letter in the interval [a..o]. A source marker in a program, such as " (kbd "@a")
+                ", must be followed by blank space (a space, CR, etc). Source markers can also be used in the documentation, in which they link to the detailed
+                program place via the closest, preceding strong documentation/program link. Make sure that you do not use the same source marker to refer to places in
+                different definitions within a single section or entry in the documentation.")
+    
+               )
+
+  )
+)
+
+
+
+(manual-section
+
+ (section-title "The setup file"
+
+
+ )
+
+ (section-body   
+               (con-par "Here follows an example of a complete setup file. The example is taken from 
+                         the from the LAML example directory:"
+
+                  (indent-pixels 10 
+                    (font 2 brown (pre (read-text-file (string-append elucidator-example-directory "meta-demo/meta-demo.laml")))))
+ 
+                ))
+ )
+
+(manual-section
+
+ (section-title "The program files"
+
+
+  )
+
+ (section-body 
+   (con-par
+      "The program files are normal Scheme files. There are only a few things to observe:"
+
+      (ul (list
+
+         "There should be no comments in between let, let*, lecrec and the name bindings."
+  
+         "There should be no comments in between define and the name (or form) being defined"
+      ))
+
+      "In addition the rules about the use of source marker in the scheme program should be observed:"
+
+      (ul (list
+
+         "Source markers are found in Scheme comments. A source marker is implicitly related to the enclosing, top-level definition."
+
+         (con "A source marker is of the form @" (em "x")  ", where " (em "x") " is a single character in the interval ['a'..'o'].")
+
+         "A source marker in a program comment must be followed by a blank character (space, CR, or a similar character)."
+
+         (con "A comment which is started with ::" (em "sectional-comment-id") "::  (a name in double colon) names the subsequent Scheme form(s). Such
+               a comment is called a sectional comment.")
+
+      ))
+ ))
+)
+
+(manual-section
+
+ (section-title "An example of a complete documentation file")
+
+ (section-body (con-par 
+                (con
+                 "In this section we show an example of complete documentation file. The example is taken from the "
+                 (a-tag "../../../examples/elucidator/meta-demo/meta-demo.html" "meta demo example")
+                 " in the elucidator example directory.")
+
+                 (indent-pixels 10 
+                    (font 2 blue 
+                      (pre (html-protect (read-text-file (string-append  elucidator-example-directory "meta-demo/meta-demo.txt"))))))
+
+               )
+ )
+)
+
+
+(manual-section
+
+ (section-title "Elucidator editor support using Emacs")
+
+ (section-body (con-par 
+
+               (con-space (a-name "emacs") "Using Emacs (GNU Emacs on either windows or unix)
+                 there exists a substantial support of elucidative programming.
+                 The main idea is to keep track of all the files in a bundle, and to help author a documentation bundle in a
+                 a safe and convenient way. We support a splitted frame, with documentation in the top-most window, and a program
+                 in the bottom window in an Emacs frame.")
+
+                "We will now describe the Emacs editor commands which support elucidative programming.
+                These are defined in the Emacs lisp file 'elucidator.el' which resides in the same directory
+                as the 'elucidator.scm' program (which defines the Elucidator tool)."
+
+               (table-1
+                 1
+                 (list 300 100 400)
+                 (make-list 3  white)
+                 (list 
+                   (map b (list "Command" "Key binding" "Effect"))
+                   (list "make-elucidator" (em "none") "Make the directory structure of a new elucidator and establish a setup file based on
+                                            information retrieved via prompting. Also make a template of the documentation file.
+                                            As the first thing you should call elucidate on the setup buffer. This will cause the rest of the
+                                            files to be created, including the necessary gif icons. Finally you should use setup-elucidator to
+                                            make all the elucidator editor buffers, and to prepare for the programming and documentation
+                                            process")
+
+                   (list "setup-elucidator" (em "none") "Set up the elucidator on an existing laml setup file, which must be an laml file.
+                                                        If f.laml is selected, the textual documentation is assumed to in file f.txt.
+                                                        Both files are brought up in editor buffers." )
+
+                   (list "refresh-elucidator" "C-e r"  "Refresh the program knowledge established by the laml processing
+                                                 part of the elucidator. This affect the cross referencing capabilities
+                                                 of the editor part, and it (re)defines the source files on which the elucidator
+                                                 works. The information is taken from the internal directory.")
+
+                   (list "reset-elucidator"   "C-e C-r"  "Reestablish a situation where the documentation and program is shown in a two window
+                                                configuration, the documentation above the program")
+
+                   (list "goto"                (con "C-e g" (br) "C-e C-h")
+                                                "A generic navigation command which can be used inside the textual documentation format.
+                                                If used inside curly bracket navigate to a program unit. If used in brackets navigate to another
+                                                documentation unit. If used on a defined name in the head of a Scheme define form go to
+                                                the place this definition is documented. If used on an applied name go to the definition of 
+                                                the name.")
+
+                   (list "back"              "C-e C-b"  "Reverse the effect of the previous goto")
+ 
+                   (list "prog-ref"        "C-e C-p"   "Insert a program reference (in curly brackets) in the documentation. Uses completion for entering of
+                                                a program identification")
+
+                   (list "doc-ref"         "C-e C-d"  "Insert a documentation reference (in brackets) in the documentation. Uses completion for entering of
+                                                a documentation identification")
+
+                   (list "surround-prog-ref" "C-e C-q" "Surround an identifier with curly brackets in order to make a relation from a place in the documentation
+                                              to a program unit. This function is an alternative to prog-ref, in situations where there is 
+                                              an existing program unit name in the documentation")
+
+                   (list "show-setup"      "C-e C-u" "Show the setup LAML file")
+
+                   (list "show-program"    "C-e p" "Show a program. You are prompted for one of the programs in the documentation bundle")
+
+                   (list "elucidate"       "C-e C-o"  "Run the elucidator on the setup file of the current documentation bundle. This command can
+                                             be activated from an arbitrary buffer in the documentation bundle")
+
+                   (list "save-elucidator-buffers" (em "none") "Saves all the buffers in the documentation bundle")
+
+                   (list "quit-elucidator" (em "none") "Save elucidator buffers and kill them all. Reset the state of elucidator.")
+
+                   (list "elucidator-help" "C-e ?" "Shows brief elucidator help information in Emacs")
+
+                 )
+               )
+
+               "In addition, we support a number of insert functions which allows template insertion. These functions are all defined
+               as part of  LAML emacs lisp template facility. The template insertions commands are:"
+               (table-1
+                 1
+                 (list 300 100 400)
+                 (make-list 3 white)
+                 (list 
+                   (map b (list "Command" "Key binding" "Effect"))
+                   (list "insert-documentation-intro" (em "none") "Insert a documentation intro using the textual format" )
+                   (list "insert-documentation-section" "C-e C-x" "Insert a documentation section using the textual format" )
+                   (list "insert-documentation-entry" "C-e C-c" "Insert a documentation entry using the textual format" )
+
+                   (list "insert-lispstyle-documentation-section" (em "none") "Insert a documentation section using the LAML format" )
+                   (list "insert-lispstyle-documentation-entry" (em "none") "Insert a documentation entry using the LAML format" )
+                 )
+               )
+
+               "Any command described above is activated by M-x command (i.e., Esc X command) or via the keyboard bindings.
+               Notice that the prefix of the elucidator keyboard bindings is C-e. Usually C-e runs the command end-of-line.
+               This commands has been moved to C-e C-e when the elucidator is loaded into Emacs."
+
+           )
+ )
+)
+
+
+
+; ---------------------------------------------------------------------------------------------------
+; Make the manual from the sections and entries above
+
+(make-manual manual-page-list manual-destination-directory "styles/elucidator/elucidator.scm")
+
+

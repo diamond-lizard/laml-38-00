@@ -1,0 +1,56 @@
+(load (string-append laml-dir "laml.scm"))       
+(laml-style "lecture-notes/leno")
+
+(leno-front-matters
+  (front-title "TITLE")           
+  (front-subtitle "SUBTITLE")   
+  (front-author "AUTHOR NAME")           
+  (front-affiliation "INSTITUTION")  
+  (front-abstract "")  
+
+  'scheme-suffix "post-notes.scm"
+  'course-home-url "http://www.cs.auc.dk/~normark/"   
+  'author-home-url "http://www.cs.auc.dk/~normark/"   
+  'note-download-url ""   
+  'logo-url "http://www.auc.dk/"  
+  'note-contents-description ""    
+  'slide-header "minimal"  ; minimal/normal/none 
+  'trail-of-lecture "false"  
+  'language "danish"      
+  'show-and-speak "false" 
+    'default-showing-time "2"    
+    'additional-showing-time "0" 
+    'sound-source "real-audio" 
+    'speak-url-prefix "../../speak/"
+  'exercise-model "none"   
+  'mouse-advancement "double-press" 
+  'word-index "true"  
+  'apply-css-styling "false"
+  'news-flash-string  ""  
+  'news-flash-level   "2"
+  'quiz-support "false"   
+  'verbosity-level "1"
+)
+
+(begin-notes)
+
+
+  (note-page 'id "sec-id"
+    (section-title "TITLE")
+  )
+  
+  (note-page 'id "page-id"
+    (title (main-text "TITLE")
+           (annotation "ANNOTATION")
+    )
+
+    (point
+     (main-text "TEXT OF POINT")
+     (annotation "ANNOTATION OF POINT")
+    )
+  )
+
+
+(end-notes)
+
+

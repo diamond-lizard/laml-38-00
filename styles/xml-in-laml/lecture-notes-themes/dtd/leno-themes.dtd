@@ -1,0 +1,138 @@
+<!--
+   LENO - LAML Lecture Notes.
+
+   Copyright (c) 2002  Kurt Nørmark.
+   All Rights Reserved. 
+-->
+
+<!ENTITY % Number "CDATA">
+    <!-- one or more digits -->
+
+<!ENTITY % Symbol "CDATA">
+    <!-- a name without spaces -->
+
+<!ENTITY % Measure "CDATA">
+    <!-- A length unit, as defined in chapter 6 of CSS level 1 specification -->
+
+<!ENTITY % URI "CDATA">
+    <!-- a Uniform Resource Identifier, see [RFC2396] -->
+
+<!ENTITY % Note-page-element-attributes
+   "id             %Symbol;     #IMPLIED
+    margin         %Measure;    #IMPLIED
+    margin-left    %Measure;    #IMPLIED
+    margin-right   %Measure;    #IMPLIED
+    margin-bottom  %Measure;    #IMPLIED
+    margin-top     %Measure;    #IMPLIED
+    drop          (true|false)  'false'"
+>
+    
+<!ENTITY % id-only
+   "id             %Symbol;     #IMPLIED">
+
+<!ENTITY % File-path "CDATA">
+    <!-- an absolute or relative file path -->
+
+<!ENTITY % Color "CDATA">
+    <!-- A legal color name -->
+
+
+<!ENTITY % Target "CDATA">
+    <!-- A browser target name -->
+
+
+
+
+<!ELEMENT leno-themes
+  (leno-themes-front-matters, 
+   begin-themes,
+   theme*,
+   end-themes) >
+
+<!ATTLIST leno-themes
+>
+
+<!ELEMENT leno-themes-front-matters EMPTY
+>
+<!ATTLIST leno-themes-front-matters
+  scheme-prefix                       %File-path;                   #IMPLIED
+  scheme-suffix                       %File-path;                   #IMPLIED
+
+  course-home-url                     %URI;                         #REQUIRED
+  author-home-url                     %URI;                         #REQUIRED
+  logo-url                            %URI;                         #REQUIRED
+
+  author-mode                         (true | false)                "false"
+
+  show-and-speak                      (true|false)                  "false"
+  sound-source                        (real-audio|wave-file|mp3-file)  #IMPLIED
+  speak-url-prefix                    %URI;                         #IMPLIED
+  speak-file-prefix                   %File-path;                   #IMPLIED
+
+  language                            (danish|english)              "english"
+
+  slide-view                          (true | false)                "true"
+  annotated-slide-view                (true | false)                "false"
+  aggregated-view                     (true | false)                "false"
+  exercise-linking                    (true | false)                "true"
+  program-linking                     (true | false)                "true"
+
+  presentation-medium                 (web | paper)                 "web"
+  make-print-page                     (true | false)                "false"
+  make-cross-reference-section        (true | false)                "true"
+
+  treat-svg-images-as                 (svg| png | png-if-exist)     "svg"
+
+  news-flash-string                   CDATA                         #IMPLIED
+  news-flash-level                    %Number;                      "1"
+  news-flash-url                      %URI;                         #IMPLIED
+
+  use-doc-comments                    (true | false)                "false"
+  doc-comment-prefix                  CDATA                         #IMPLIED
+
+  program-text-font-size              CDATA                         #IMPLIED
+
+>
+
+<!ELEMENT begin-themes EMPTY >
+<!ATTLIST begin-themes
+>
+
+<!ELEMENT end-themes EMPTY >
+<!ATTLIST end-themes
+>
+
+<!ELEMENT theme (theme-index-table | leno-element | theme-text | theme-side-box)* >
+<!ATTLIST theme
+   id         %Symbol;              #REQUIRED
+>
+
+<!ELEMENT theme-text (#PCDATA) >
+<!ATTLIST theme-text
+>
+
+<!ELEMENT theme-side-box (#PCDATA) >
+<!ATTLIST theme-side-box
+   id         %Symbol;              #REQUIRED
+   title      CDATA                 #REQUIRED
+>
+
+<!ELEMENT theme-index-table EMPTY >
+<!ATTLIST theme-index-table
+>
+
+
+<!ELEMENT leno-element EMPTY >
+<!ATTLIST leno-element
+  lecture-id         %Symbol;                             #REQUIRED
+  page-id            %Symbol;                             #REQUIRED
+  element-type       %Symbol;                             #REQUIRED
+  element-id         %Symbol;                             #IMPLIED
+  element-number     %Symbol;                             #IMPLIED
+  annotations        (unfold-before | unfold-after | 
+                      ignore | keep | merge)              "unfold-after"
+  select             (all | subitems)                     "all"
+  theme-bg-color     %Color;                              #IMPLIED  
+  drop               (true|false)                         "false"
+>
+

@@ -1,0 +1,85 @@
+It is possible to define and process the entire course-plan structure
+monolithically.
+
+  (course-plan
+
+   (lecture-intro 
+     "intro")
+  
+   (course-info
+     ...
+  
+     (time-list
+       ...
+     )
+  
+     (lecture-list
+       ...
+     )
+  
+  
+     (subject-list
+      ...
+     )
+  
+  
+     (index-links
+       ...
+     )
+    
+     (bottom-links
+       ....
+     )
+   )
+
+   (lecture-plan-list
+     (lecture-plan 'lecture-id "xxx" 'subject-id "sss"
+      (literature ...)
+      (exercises ...)
+      (misc ...))
+
+     ...
+   )
+   
+  )
+
+
+
+It is also possible to process the course intro and the individual lecture plans
+individually:
+
+  (course-plan
+   
+    (course-info
+     'make-overview-pages "true" 
+     ; include rest
+    )
+    
+    (course-intro 
+       "intro")
+      
+  )
+
+And similary for a given lecture-plan (ugeseddel):
+
+  (course-plan
+   
+    (course-info
+     'make-overview-pages "false" 
+     ; include rest
+    )
+    
+    (lecture-plan 'lecture-id "xxx" 'subject-id "sss"
+      ...
+    )
+      
+  )
+
+
+With this solution there will be a common-course-info file with 
+a list of informations to include - like the current common front matters
+stuff of LENO lectures.
+
+
+
+

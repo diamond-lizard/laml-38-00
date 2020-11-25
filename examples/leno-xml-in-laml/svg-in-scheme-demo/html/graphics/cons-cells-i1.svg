@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- The material in this file is copyrighted (c) by KN &copy;, AAU.  All rights reserved.-->
+<svg width="900" height="900" viewBox="0 0 900 900">
+   <g>
+      <defs>
+         <marker id="Arrowhead" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="20"
+                 markerHeight="15" orient="auto" preserveAspectRatio="none">
+            <path d="M 0 0 L 10 5 L 0 10 z"></path>
+         </marker>
+      </defs>
+      <g>
+         <g>
+            <rect stroke-width="1" x="30.0" y="80.0" width="40" height="40" stroke="black" fill="white"
+                  id="car-cell">
+               
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="50.0"
+                  text-anchor="middle" y="106.0">
+               a
+            </text>
+         </g>
+         <g>
+            <rect stroke-width="1" x="70.0" y="80.0" width="40" height="40" stroke="black" fill="white"
+                  id="cdr-cell">
+               
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="90.0"
+                  text-anchor="middle" y="106.0">
+               
+            </text>
+         </g>
+      </g>
+      <g>
+         <g>
+            <rect stroke-width="1" x="180.0" y="80.0" width="40" height="40" stroke="black" fill="white"
+                  id="car-cell">
+               
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="200.0"
+                  text-anchor="middle" y="106.0">
+               b
+            </text>
+         </g>
+         <g>
+            <rect stroke-width="1" x="220.0" y="80.0" width="40" height="40" stroke="black" fill="white"
+                  id="cdr-cell">
+               
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="240.0"
+                  text-anchor="middle" y="106.0">
+               
+            </text>
+         </g>
+      </g>
+      <g>
+         <g>
+            <rect stroke-width="1" x="330.0" y="80.0" width="40" height="40" stroke="black" fill="white"
+                  id="car-cell">
+               
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="350.0"
+                  text-anchor="middle" y="106.0">
+               c
+            </text>
+         </g>
+         <g>
+            <rect stroke-width="1" x="370.0" y="80.0" width="40" height="40" stroke="black" fill="white"
+                  id="cdr-cell">
+               
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="390.0"
+                  text-anchor="middle" y="106.0">
+               
+            </text>
+         </g>
+      </g>
+      <g>
+         <g>
+            <rect stroke-width="1" x="30.0" y="180.0" width="40" height="40" stroke="black" fill="white"
+                  id="car-cell">
+               
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="50.0"
+                  text-anchor="middle" y="206.0">
+               d
+            </text>
+         </g>
+         <g>
+            <rect stroke-width="1" x="70.0" y="180.0" width="40" height="40" stroke="black" fill="white"
+                  id="cdr-cell">
+               
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="90.0"
+                  text-anchor="middle" y="206.0">
+               
+            </text>
+         </g>
+      </g>
+      <g>
+         <g>
+            <rect stroke-width="1" x="180.0" y="180.0" width="40" height="40" stroke="black" fill="white"
+                  id="car-cell">
+               
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="200.0"
+                  text-anchor="middle" y="206.0">
+               e
+            </text>
+         </g>
+         <g>
+            <rect stroke-width="1" x="220.0" y="180.0" width="40" height="40" stroke="black" fill="white"
+                  id="cdr-cell">
+               
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="240.0"
+                  text-anchor="middle" y="206.0">
+               
+            </text>
+         </g>
+      </g>
+      <g>
+         <g>
+            <rect stroke-width="1" x="330.0" y="180.0" width="40" height="40" stroke="black" fill="white"
+                  id="car-cell">
+               
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="350.0"
+                  text-anchor="middle" y="206.0">
+               f
+            </text>
+         </g>
+         <g>
+            <rect stroke-width="1" x="370.0" y="180.0" width="40" height="40" stroke="black" fill="white"
+                  id="cdr-cell">
+               
+            </rect>
+            <text font-family="times-roman" font-size="22" stroke="black" color="black" fill="black" x="390.0"
+                  text-anchor="middle" y="206.0">
+               
+            </text>
+         </g>
+      </g>
+      <g>
+         <rect stroke="none" x="477.5" y="80.0" width="45" height="40" stroke-width="1" fill="white">
+            
+         </rect>
+         <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="500.0"
+               text-anchor="middle" y="110.0">
+            ( )
+         </text>
+      </g>
+      <g>
+         <path id="line-37" stroke="black" fill="none" d="M 90.0 100.0 L 180.0 100.0 " marker-end="url(#Arrowhead)">
+            
+         </path>
+         <path id="line-38" stroke="black" fill="none" d="M 180.0 100.0 L 90.0 100.0 " marker-end="url(#Arrowhead)"
+               style="visibility:hidden;">
+            
+         </path>
+      </g>
+      <g>
+         <path id="line-39" stroke="black" fill="none" d="M 240.0 100.0 L 330.0 100.0 " marker-end="url(#Arrowhead)">
+            
+         </path>
+         <path id="line-40" stroke="black" fill="none" d="M 330.0 100.0 L 240.0 100.0 " marker-end="url(#Arrowhead)"
+               style="visibility:hidden;">
+            
+         </path>
+      </g>
+      <g>
+         <path id="line-43" stroke="black" fill="none" d="M 390.0 100.0 L 477.5 100.0 " marker-end="url(#Arrowhead)">
+            
+         </path>
+         <path id="line-44" stroke="black" fill="none" d="M 477.5 100.0 L 390.0 100.0 " marker-end="url(#Arrowhead)"
+               style="visibility:hidden;">
+            
+         </path>
+      </g>
+      <g>
+         <path id="line-45" stroke="black" fill="none" d="M 90.0 200.0 L 180.0 200.0 " marker-end="url(#Arrowhead)">
+            
+         </path>
+         <path id="line-46" stroke="black" fill="none" d="M 180.0 200.0 L 90.0 200.0 " marker-end="url(#Arrowhead)"
+               style="visibility:hidden;">
+            
+         </path>
+      </g>
+      <g>
+         <path id="line-47" stroke="black" fill="none" d="M 240.0 200.0 L 330.0 200.0 " marker-end="url(#Arrowhead)">
+            
+         </path>
+         <path id="line-48" stroke="black" fill="none" d="M 330.0 200.0 L 240.0 200.0 " marker-end="url(#Arrowhead)"
+               style="visibility:hidden;">
+            
+         </path>
+      </g>
+   </g>
+</svg>

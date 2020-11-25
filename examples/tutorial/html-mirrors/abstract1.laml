@@ -1,0 +1,40 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-strict-validating")
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+(set-xml-accept-only-string-valued-attributes-in 'xhtml10-strict #t)
+
+(load (in-startup-directory "cd-stuff.scm"))
+
+(define page-title "My CD Archive")
+
+; ::document-body::
+; Writing the cd archive to a file.
+
+(write-html '(raw)
+  (cd-archive  ;@a
+    (cd-entry            ;@b
+      (cd-number "1")
+      (cd-artist "Paul Simon")
+      (cd-title "Graceland")
+      (cd-playing-time 45 37)
+    )
+
+    (cd-entry            ;@c
+      (cd-number "2")
+      (cd-artist "Elvis Presley")
+      (cd-title "Elvis Christmas Classics")
+      (cd-playing-time 37 38)
+    )
+
+    (cd-entry            ;@d
+      (cd-number "3")
+      (cd-artist "Elvis Presley")
+      (cd-title "Elvis No1 Hits")
+      (cd-playing-time 63 45)
+    )
+  )
+) 
+
+(end-laml)

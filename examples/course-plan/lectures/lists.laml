@@ -1,0 +1,25 @@
+(load (string-append laml-dir "laml.scm"))
+(style "course-plan/course-plan")
+(load (string-append (startup-directory scheme-system) "../" "course-description.scm"))
+(init-course-plan)
+
+(lecture-plan 'lists
+   (literature (con "Chapter 3 of "  "'Structure and Interpretation of Computer Programs'" " ") )
+   (guide "Read it all carefully")
+   (exercises  
+     (brl (list 
+            "Exercise 10"
+            "Exercise 11"
+            (course-exercise-ref 'ex1 "A" 'lists)
+          ))
+   )
+
+   (references 
+     (brl (list 
+           (a-tag "???" "Slides to this lecture"))))
+  
+)
+
+(course-exercise 'ex1 "A"
+  "Write a function which merges the elements of two lists, such that elements in the
+   resulting lists alternates")

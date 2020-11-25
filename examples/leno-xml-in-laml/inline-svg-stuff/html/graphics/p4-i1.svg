@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- The material in this file is copyrighted (c) by KN, AAU.  All rights reserved.-->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" height="400"
+     viewBox="0 0 400 400">
+   <g>
+      <defs>
+         <marker id="OpenArrowhead" viewBox="0 0 10 10" refX="10" refY="5" stroke="black" stroke-width="1"
+                 fill="white" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="15" orient="auto"
+                 preserveAspectRatio="none">
+            <path d="M 0 0 L 10 5 L 0 10 z" />
+         </marker>
+      </defs>
+      <defs>
+         <marker id="OpenDiamond" viewBox="0 -5 10 10" refX="10" refY="0" stroke="black" stroke-width="1"
+                 fill="white" markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="22.5" orient="auto"
+                 preserveAspectRatio="none">
+            <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+         </marker>
+      </defs>
+      <defs>
+         <marker id="FilledArrowhead" viewBox="0 0 10 10" refX="10" refY="5" fill="black" markerUnits="userSpaceOnUse"
+                 markerWidth="20" markerHeight="15" orient="auto" preserveAspectRatio="none">
+            <path d="M 0 0 L 10 5 L 0 10 z" />
+         </marker>
+      </defs>
+      <defs>
+         <marker id="FilledDiamond" viewBox="0 -5 10 10" refX="10" refY="0" fill="black" markerUnits="userSpaceOnUse"
+                 markerWidth="30" markerHeight="22.5" orient="auto" preserveAspectRatio="none">
+            <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+         </marker>
+      </defs>
+      <g>
+         <rect x="69.21052631578948" y="80.0" width="61.578947368421055" height="40" stroke="none" stroke-width="1"
+               fill="white" />
+         <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="100.0"
+               text-anchor="middle" y="110.0">
+            x:
+         </text>
+      </g>
+      <g>
+         <rect x="195.5263157894737" y="80.0" width="108.94736842105263" height="40" stroke-width="1"
+               stroke="black" fill="coral" />
+         <text font-style="italic" font-family="times-roman" font-size="30" stroke="black" color="black"
+               fill="black" x="250.0" text-anchor="middle" y="110.0">
+            7 
+         </text>
+      </g>
+      <g>
+         <rect x="53.421052631578945" y="140.0" width="93.15789473684211" height="40" stroke="none" stroke-width="1"
+               fill="white" />
+         <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="100.0"
+               text-anchor="middle" y="170.0">
+            yyy:
+         </text>
+      </g>
+      <g>
+         <rect x="195.5263157894737" y="140.0" width="108.94736842105263" height="40" stroke-width="1"
+               stroke="black" fill="coral" />
+         <text font-style="italic" font-family="times-roman" font-size="30" stroke="black" color="black"
+               fill="black" x="250.0" text-anchor="middle" y="170.0">
+            9 
+         </text>
+      </g>
+   </g>
+</svg>

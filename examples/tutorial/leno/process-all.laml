@@ -1,0 +1,49 @@
+(load (string-append laml-dir "laml.scm"))
+
+(define (process-list . lst)
+ (for-each (lambda (f) (display f) (newline) (newline) (laml f)) lst))
+
+(laml-cd "multi-lecture-trail")
+(laml "multi-1.leno")
+(laml "trail-edited.leno")
+(laml-cd "..")
+
+(display-message "Multi lecture")
+(laml-cd "multi-lecture")
+(laml "multi-1.leno")
+(laml-cd "..")
+
+(display-message "Multi lecture 1")
+(laml-cd "multi-lecture-1")
+(laml "multi-1.leno")
+(laml-cd "..")
+
+(display-message "Multi lecture with themes")
+(laml-cd "multi-lecture-themes")
+(laml "multi-1.leno")
+(laml-cd "..")
+
+(display-message "Single lecture")
+(laml-cd "single-lecture")
+(laml "single.leno")
+(laml-cd "..")
+
+(display-message "Single lecture with audio")
+(laml-cd "single-lecture-audio")
+(laml "single-audio.leno")
+(laml-cd "..")
+
+(display-message "Single lecture with contents")
+(laml-cd "single-lecture-content")
+(laml "single-with-content.leno")
+(laml-cd "..")
+
+(display-message "Single lecture with trail")
+(laml-cd "single-lecture-content-trail")
+(laml "single-with-content.leno")
+(laml-cd "..")
+
+(process-list "index")
+
+
+(end-laml)

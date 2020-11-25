@@ -1,0 +1,190 @@
+<html><head><link href="../../../../css-stylesheets/elucidator/program.css" rel="stylesheet" title="program" type="text/css" /> <title>Source file</title></head><body bgcolor="#ffffff" text="#000000" link="#000000" vlink="#000000"><font size="2"><pre><span class="comment">; The LAML library and programs are written by Kurt Normark, Aalborg University, Denmark.
+; Copyright (C) 1999-2006  Kurt Normark, normark@s.aau.dk.
+;
+; This program is free software; you can redistribute it and/or modify
+; it under the terms of the GNU General Public License as published by
+; the Free Software Foundation; either version 2 of the License, or
+; (at your option) any later version.
+;
+; This program is distributed in the hope that it will be useful,
+; but WITHOUT ANY WARRANTY; without even the implied warranty of
+; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+; GNU General Public License for more details.
+;
+; You should have received a copy of the GNU General Public License
+; along with this program; if not, write to the Free Software
+; Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA</span><br />
+
+
+<div class="schemedoc-abstract-comment">;;;; This is a non-validating HTML parser built on top of the simple XML parser for LAML. 
+;;;; In addition there are HTML pretty printing procedures in this tool.
+;;;; The implementation of the parser is done by redefining functions from the XML parser.
+;;;; Most of the xml-parser stuff is reused in this parser.&lt;p&gt;
+;;;; The top-level node is called a html-tree, which may hold top level comment nodes and
+;;;; declaration nodes (docttype nodes).
+;;;; The parser represents HTML comments within the document as special comment nodes.&lt;p&gt;
+;;;; The parser will be very confused if it meets a less than or greater than character which isn't part of tag symbol.
+;;;; Such character must be HTML protected (use the special character entities in HTML).&lt;p&gt;
+;;;; As of LAML version 31, the parser is able to parse certain non-wellfored HTML document
+;;;; (documents with crossing tags).
+;;;; This tool assumes that &lt;kbd&gt; laml.scm &lt;/kbd&gt; and the general library are loaded. 
+;;;; The tool loads xml-support (which is the starting of this html support tool), collect-skip and file-read libraries.&lt;p&gt;
+;;;; See &lt;a href="xml-support.html"&gt;the XML support&lt;/a&gt; for information about the format of 
+;;;; parse trees and variables that control the pretty printing. See also
+;;;; the illustrative
+;;;; &lt;a href="../../../examples/html-parser-and-pretty-printer/index.html"&gt;examples &lt;/a&gt; 
+;;;; of the HTML parsing and pretty printing tools. &lt;p&gt;
+;;;; The typographical rebreaking and re-indenting of running text is still missing.&lt;p&gt;</div>
+<div class="schemedoc-abstract-comment">;;;; The LAML interactive tool procedures &lt;kbd&gt; html-pp &lt;/kbd&gt; and &lt;kbd&gt; html-parse &lt;/kbd&gt;
+;;;; in &lt;kbd&gt; laml.scm &lt;/kbd&gt; are convenient top-level pretty printing and parse procedures respectively.&lt;p&gt;
+;;;; .title Reference Manual of the HTML parser and pretty printer for LAML</div>
+<div class="schemedoc-abstract-comment">;;;; Known problem: The handling of spaces after the start tag and before the end tag is not correct.&lt;p&gt;</div>
+<div class="schemedoc-abstract-comment">;;;; Please notice that this is not a production quality parser and pretty printer! It is currently used for
+;;;; internal purposes.</div>
+<span class="comment">; Missing good support of pre tag, where a contents sting is not allowed to be rebroken.
+; Cf. the function white-space-preserving-context?</span><br />
+(<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX468" title="R5RS Scheme form">load</a> (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> laml-dir "tools/xml-html-support/" "xml-support.scm"))
+
+<span class="comment">; ---------------------------------------------------------------------------------------------------</span><br />
+<div class="schemedoc-section-comment">;;; Top level HTML parsing function.</div>
+<a name="parse-html-file"></a><a name="parse-html-file"></a><span><a href="../html-support.html#parse-html-file"><img src="../../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(parse-html-file in-file-path out-file-path)</span>
+ (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX122" title="R5RS Scheme form">let*</a> ((<span class="local-name-binding">init-in-path</span> (<a class="schemedoc-name" href="../../../../lib/man/general.html#file-name-initial-path" title="Manual: general">file-name-initial-path</a> in-file-path))
+        (<span class="local-name-binding">in-file-name-prop</span> (<a class="schemedoc-name" href="../../../../lib/man/general.html#file-name-proper" title="Manual: general">file-name-proper</a> in-file-path))
+        (<span class="local-name-binding">in-ext</span> (<a class="schemedoc-name" href="../../../../lib/man/general.html#file-name-extension" title="Manual: general">file-name-extension</a> in-file-path))
+      )
+   (reset-xml-parser)
+   (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX122" title="R5RS Scheme form">let*</a> ((<span class="local-name-binding">input-port</span> (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX444" title="R5RS Scheme form">open-input-file</a> (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> init-in-path in-file-name-prop "." (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="schemedoc-name" href="../../../../lib/man/general.html#empty-string?" title="Manual: general">empty-string?</a> in-ext) "html" in-ext)))))
+      (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX106" title="R5RS Scheme form">set!</a> ip input-port)
+      (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">parse-tree</span> (<a class="applied-name" href="html-support-1.html#parse-html-ip" title="html-support">parse-html-ip</a>))
+            (<span class="local-name-binding">target-file-name</span> out-file-path))
+       (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX106" title="R5RS Scheme form">set!</a> <a class="schemedoc-name" href="../xml-support.html#resulting-parse-tree" title="Manual: xml-support">resulting-parse-tree</a> parse-tree)
+       (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (file-exists? target-file-name) (delete-file target-file-name))
+       (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">op</span> (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX445" title="R5RS Scheme form">open-output-file</a> target-file-name)))
+         (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX459" title="R5RS Scheme form">write</a> parse-tree op)
+         (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX447" title="R5RS Scheme form">close-output-port</a> op)))
+
+      (<a class="schemedoc-name" href="../../../../lib/man/general.html#display-message" title="Manual: general">display-message</a> (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> "DONE. The parse tree is in " out-file-path))
+      (<a class="schemedoc-name" href="../../../../lib/man/general.html#display-message" title="Manual: general">display-message</a> "Use (scheme-pp &lt;file&gt;) to pretty pring the parse tree.")
+      (<a class="schemedoc-name" href="../../../../lib/man/general.html#display-message" title="Manual: general">display-message</a> "The result is also in the variable resulting-parse-tree for interactive use.")
+      (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX446" title="R5RS Scheme form">close-input-port</a> ip))))
+
+<a name="parse-html"></a><a name="parse-html"></a><span><a href="../html-support.html#parse-html"><img src="../../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(parse-html file-path)</span>
+ (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">init-path</span> (<a class="schemedoc-name" href="../../../../lib/man/general.html#file-name-initial-path" title="Manual: general">file-name-initial-path</a> file-path))
+       (<span class="local-name-binding">file-name-prop</span> (<a class="schemedoc-name" href="../../../../lib/man/general.html#file-name-proper" title="Manual: general">file-name-proper</a> file-path))
+       (<span class="local-name-binding">ext</span> (<a class="schemedoc-name" href="../../../../lib/man/general.html#file-name-extension" title="Manual: general">file-name-extension</a> file-path))
+      )
+   (reset-xml-parser)
+   (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX122" title="R5RS Scheme form">let*</a> ((<span class="local-name-binding">input-port</span> (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX444" title="R5RS Scheme form">open-input-file</a> (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> init-path file-name-prop "." (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="schemedoc-name" href="../../../../lib/man/general.html#empty-string?" title="Manual: general">empty-string?</a> ext) "html" ext)))))
+      (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX106" title="R5RS Scheme form">set!</a> ip input-port)
+      (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">parse-tree</span> (<a class="applied-name" href="html-support-1.html#parse-html-ip" title="html-support">parse-html-ip</a>)))
+        (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX446" title="R5RS Scheme form">close-input-port</a> ip)
+        parse-tree))))
+
+<a name="parse-html-ip"></a><span></span>(<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(parse-html-ip)</span>
+  (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX304" title="R5RS Scheme form">not</a> end-of-file?) (skip-white-space))
+  (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX304" title="R5RS Scheme form">not</a> end-of-file?)
+      (<a class="applied-name" href="html-support-1.html#parse-iteratively-html" title="html-support">parse-iteratively-html</a>)
+      '()  <span class="comment">; the empty tree</span><br />  )
+)
+
+<a name="parse-iteratively-html"></a><span></span>(<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(parse-iteratively-html)</span>
+  (parse-message "Parsing html iteratively.")
+  (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX304" title="R5RS Scheme form">not</a> end-of-file?) (skip-white-space))
+ 
+  (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">cond</a> ((<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX117" title="R5RS Scheme form">and</a> end-of-file? (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX304" title="R5RS Scheme form">not</a> (parse-stack-empty?)) (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX239" title="R5RS Scheme form">&gt;=</a> (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX333" title="R5RS Scheme form">length</a> parse-stack) 1))
+           (aggregate-final-parse-tree 'html-tree))  <span class="comment">; aggregate the stack to a single parse tree</span><br />        ((<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX117" title="R5RS Scheme form">and</a> (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX304" title="R5RS Scheme form">not</a> end-of-file?) (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> 'tag (what-is-ahead)))
+           (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX122" title="R5RS Scheme form">let*</a> ((<span class="local-name-binding">tag</span> (read-tag)) 
+                  (<span class="local-name-binding">kind</span> (kind-of-tag-structure tag)))
+             (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">cond</a> ((<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> kind 'start)
+                     (parse-stack-push tag)
+                     (<a class="applied-name" href="html-support-1.html#parse-iteratively-html" title="html-support">parse-iteratively-html</a>)
+                   )
+                   ((<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> kind 'start-end)
+                     (parse-stack-push tag)
+                     (<a class="applied-name" href="html-support-1.html#parse-iteratively-html" title="html-support">parse-iteratively-html</a>)
+                   )
+                   ((<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> kind 'end)
+                     (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">tree</span> (<a class="applied-name" href="html-support-1.html#build-html-tree-from-stack" title="html-support">build-html-tree-from-stack</a> (tag-of-tag-structure tag))))
+                       (parse-stack-push tree) 
+                       (<a class="applied-name" href="html-support-1.html#parse-iteratively-html" title="html-support">parse-iteratively-html</a>)))
+                   (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">else</a> (<a class="schemedoc-name" href="../../../../lib/man/general.html#laml-error" title="Manual: general">laml-error</a> "parse-iteratively-html: Unknown kind of tag" kind))
+             )))
+        ((<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX117" title="R5RS Scheme form">and</a> (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX304" title="R5RS Scheme form">not</a> end-of-file?) (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> 'contents-string (what-is-ahead)))
+           (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">contents-string</span> (read-contents-string #f)))
+                   (parse-stack-push contents-string)
+                   (<a class="applied-name" href="html-support-1.html#parse-iteratively-html" title="html-support">parse-iteratively-html</a>)))
+        ((<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX117" title="R5RS Scheme form">and</a> (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX304" title="R5RS Scheme form">not</a> end-of-file?) (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> 'comment (what-is-ahead)))
+           (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">comment-string</span> (read-comment)))
+                   (parse-stack-push (make-comment-structure comment-string))
+                   (<a class="applied-name" href="html-support-1.html#parse-iteratively-html" title="html-support">parse-iteratively-html</a>)))
+        ((<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX117" title="R5RS Scheme form">and</a> (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX304" title="R5RS Scheme form">not</a> end-of-file?) (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> 'declaration (what-is-ahead)))
+           (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">declaration-structure</span> (read-declaration)))
+                   (parse-stack-push 
+                    (make-declaration-structure 
+                     (kind-of-declaration-structure declaration-structure)
+                     (value-of-declaration-structure declaration-structure)))
+                   (<a class="applied-name" href="html-support-1.html#parse-iteratively-html" title="html-support">parse-iteratively-html</a>)))
+        ((<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX117" title="R5RS Scheme form">and</a> (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX304" title="R5RS Scheme form">not</a> end-of-file?) (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> 'xml-declaration (what-is-ahead)))
+           (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">declaration-structure</span> (read-xml-declaration)))
+                   (parse-stack-push 
+                    (make-xml-declaration-structure declaration-structure))
+                   (<a class="applied-name" href="html-support-1.html#parse-iteratively-html" title="html-support">parse-iteratively-html</a>)))
+        (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">else</a> (parse-error "parse-iteratively-html: Parse problem."))))
+
+
+<a name="build-html-tree-from-stack"></a><span></span>(<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(build-html-tree-from-stack end-tag-name)</span>
+  (parse-message "building tree: " end-tag-name)
+  (<a class="applied-name" href="html-support-1.html#build-html-tree-from-stack-1" title="html-support">build-html-tree-from-stack-1</a> end-tag-name '()))
+
+<a name="non-end-tags"></a><span class="comment">; The list of tags which cannot have end tags.</span><br /><a name="non-end-tags"></a><span></span>(<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">non-end-tags</span> (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX332" title="R5RS Scheme form">list</a> "meta" "base" "isindex" "frame" "th" "td" "tr" "col" "colgroup" "tfoot" "thead" "option" "input" "li" "dd" "dt" "p" "hr" "param" "img" "link" "area" "br" "basefont"))
+
+<a name="build-html-tree-from-stack-1"></a><span></span>(<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(build-html-tree-from-stack-1 end-tag-name tree-list)</span>
+  (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">top</span> (parse-stack-top-and-pop)))
+    (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">cond</a> ((<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX117" title="R5RS Scheme form">and</a> (start-tag-entry? top) (matches-stack-entry top end-tag-name))
+             (make-parse-tree top tree-list)) <span class="comment">; finish</span><br />           ((<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX117" title="R5RS Scheme form">and</a> (start-tag-entry? top) (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX304" title="R5RS Scheme form">not</a> (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX340" title="R5RS Scheme form">member</a> (<a class="schemedoc-name" href="../../../../lib/man/general.html#downcase-string" title="Manual: general">downcase-string</a> (tag-of-tag-structure top)) <a class="applied-name" href="html-support-1.html#non-end-tags" title="html-support">non-end-tags</a>))) 
+              <span class="comment">; Generic end tag matching. Non-empty element instances are allowed to match an arbitrary end tag.
+; Allows for parsing of documents which are not well-formed.</span><br />              (make-parse-tree top tree-list)) 
+          ((<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX117" title="R5RS Scheme form">and</a> (start-tag-entry? top)) <span class="comment">; no matching - iterate. de facto an empty (start-end) tag</span><br />             (<a class="applied-name" href="html-support-1.html#build-html-tree-from-stack-1" title="html-support">build-html-tree-from-stack-1</a> end-tag-name (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> (<a class="applied-name" href="html-support-1.html#make-it-empty" title="html-support">make-it-empty</a> top) tree-list)))
+          (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">else</a> (<a class="applied-name" href="html-support-1.html#build-html-tree-from-stack-1" title="html-support">build-html-tree-from-stack-1</a> end-tag-name (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> top tree-list))))))  <a name="make-it-empty"></a><span class="comment">; iterate</span><br />
+<a name="make-it-empty"></a><span></span>(<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(make-it-empty tag)</span>
+  (make-tag-structure 'start-end (tag-of-tag-structure tag) (attributes-of-tag-structure tag)))
+
+
+
+<span class="comment">; ------------------------------------------------------------------------------------------------------------------------</span><br /><div class="schemedoc-section-comment">;;; HTML pretty printing functions.</div>
+<span class="comment">; The tool xml-support, which is loaded by this file, contains the majority of the parsing
+; stuff. Only the top level functions and a few redefinitions are done in this section.</span><br />
+<span class="comment">; Still missing single line support and meassuring. 
+; Move to xml-support, because most of it applies to XML as well as HMTL.</span><br />
+<a name="pretty-print-html-parse-tree-file"></a><a name="pretty-print-html-parse-tree-file"></a><span><a href="../html-support.html#pretty-print-html-parse-tree-file"><img src="../../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(pretty-print-html-parse-tree-file in-file-path . optional-parameters)</span>
+ (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">out-file-path</span> (<a class="schemedoc-name" href="../../../../lib/man/general.html#optional-parameter" title="Manual: general">optional-parameter</a> 1  optional-parameters in-file-path)))
+  (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">parse-tree</span> (<a class="schemedoc-name" href="../../../../lib/man/general.html#file-read" title="Manual: general">file-read</a> in-file-path)))
+   (<a class="schemedoc-name" href="../../../../lib/man/file-read.html#write-text-file" title="Manual: file-read">write-text-file</a>
+    (<a class="applied-name" href="html-support-1.html#pretty-print-html-parse-tree" title="html-support">pretty-print-html-parse-tree</a> parse-tree) 
+    out-file-path))))
+
+<a name="pretty-print-html-parse-tree"></a><a name="pretty-print-html-parse-tree"></a><span><a href="../html-support.html#pretty-print-html-parse-tree"><img src="../../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(pretty-print-html-parse-tree parse-tree)</span>
+ (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX106" title="R5RS Scheme form">set!</a> res '())
+ (pretty-print-xml-html-parse-tree-1 parse-tree 0 #f)
+ (linearize-pp-result (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX335" title="R5RS Scheme form">reverse</a> res)))
+
+<a name="pretty-print-empty-tag"></a><span class="comment">; A redefinition from xml-support</span><br /><a name="pretty-print-empty-tag"></a><span></span>(<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(pretty-print-empty-tag tag-structure start-col single-lining?)</span>
+  (pretty-print-start-tag tag-structure start-col single-lining?))
+
+<a name="white-space-preserving-context?"></a><span class="comment">; Look up through the parse stack to find out if we are in a pre tag context.</span><br /><a name="white-space-preserving-context?"></a><span></span>(<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(white-space-preserving-context? parse-stack)</span>
+  (<a class="schemedoc-name" href="../../../../lib/man/general.html#find-in-list" title="Manual: general">find-in-list</a>
+    (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX98" title="R5RS Scheme form">lambda</a> (<span class="local-name-binding">x</span>)
+       (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX117" title="R5RS Scheme form">and</a> (tag-entry? x) (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX200" title="R5RS Scheme form">equal?</a> "pre" (<a class="schemedoc-name" href="../../../../lib/man/general.html#downcase-string" title="Manual: general">downcase-string</a> (tag-of-tag-structure x)))))
+    parse-stack))
+
+  
+<a name="parse-html-string"></a><a name="parse-html-string"></a><span><a href="../html-support.html#parse-html-string"><img src="../../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(parse-html-string str)</span>
+  (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX122" title="R5RS Scheme form">let*</a> ((<span class="local-name-binding">name</span> "html-temp.html")
+         (<span class="local-name-binding">temp-file-path</span> (<a class="scheme-procedure-name" href="../../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> (<a class="schemedoc-name" href="../../../../man/laml.html#laml-temp-file-path" title="Manual: laml">laml-temp-file-path</a>) name))
+         (<span class="local-name-binding">tree</span> #f)
+        )
+    (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (file-exists? temp-file-path) (delete-file temp-file-path))
+    (<a class="schemedoc-name" href="../../../../lib/man/file-read.html#write-text-file" title="Manual: file-read">write-text-file</a> str temp-file-path)
+    (<a class="scheme-syntax-name" href="../../../../r5rs/r5rs_6.html#IDX106" title="R5RS Scheme form">set!</a> tree (<a class="applied-name" href="html-support-1.html#parse-html" title="html-support">parse-html</a> temp-file-path))
+    (delete-file temp-file-path)
+    tree))</pre></font><div>&nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p></div></body></html>

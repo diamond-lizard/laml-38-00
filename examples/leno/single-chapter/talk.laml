@@ -1,0 +1,216 @@
+(load (string-append laml-dir "laml.scm"))       
+
+(define note-source-directory (startup-directory))
+
+(define current-lecture 1)
+
+(define lecture-sections
+  (list
+    (list  "talk" "Talk about LENO")
+   )
+)
+
+(define note-abstract "Abstract")
+
+(define notes-title (cadr (car lecture-sections)))
+
+(define course-home-url "../../../../index.html")
+
+(define author-home-url "http://www.cs.auc.dk/~normark/")
+
+(define note-download-url "")                     
+
+(define (cross-reference-location-hints location-list)  ; No location hints 
+  "")
+
+                                                       ; A parameter-less function returns A list of meta-tag contribution       
+(define (meta-tag-clauses)
+   (list (list 'HTTP-EQUIV "Content-Type" 'content "text/html; charset = ISO-8859-1")  
+         (list 'name "Generator" 'content "LAML")
+         (list 'name "description" 
+                     'lang (meta-language language-preference)
+                     'content "LENO single chapter example")
+   )
+)
+
+
+(laml-style "lecture-notes/lecture-notes")
+
+(define front-index? #f)             
+(define slide-header? 'none)
+(define trail-of-lecture? #t)                
+
+(set-language 'english)                              
+
+(set-lecture-name (car (car lecture-sections)))      
+(set-lecture-number 1)                               
+
+(define check-html-attributes? #f)
+
+(lecture-intro "Talk about LENO"                     
+  (list 
+    (copyright-owner "Kurt Nørmark")
+    "Department of Computer Science"
+    "Aalborg University"
+    )
+  "This is very brief talk about LENO. The purpose of these 'quick and dirty pages' is just to 
+   give an example of a very simple LENO single chapter slide set."
+)
+
+(begin-notes)
+
+
+(note-page 'intro-section
+  (section-title "Introduction")
+)
+
+(note-page 'motivation
+  (title "Motivation"
+         "We start with the motivation behind LENO"
+  )
+
+  (point
+   "I have used Powerpoint during nearly ten years"
+   "Here I could write about good and bad things..."
+  )
+
+  (items 
+   (item "Powerpoint strengths"
+         ""
+
+         (items 
+          (item "Good for graphics"
+                ""
+                )
+          )
+         )
+
+   (item "Powerpoint weaknesses"
+         ""
+
+         (items 
+          (item "Bad for internet support"
+                ""
+                )
+          )
+         )
+
+   (item "Why abstraction is important"
+         ""
+
+         (items 
+          (item "In order to deal with many details without loosing the overview"
+                ""
+                )
+          )
+         )
+
+   (item "The role of programming"
+         ""
+
+         (items 
+          (item "Programming languages provide abstraction mechanisms"
+                ""
+                )
+          )
+         )
+  )
+
+
+  (index-words)
+
+)
+
+(note-page 'main-section
+  (section-title "Main section")
+)
+
+(note-page 'leno-features
+  (title "Leno features"
+         "Here we will first give an overview of LENO features"
+  )
+
+  (concept-list
+   (concept "LENO"
+            "LENO is Scheme and LAML based text formatting oriented towards production of teaching material in HTML"
+            "Here goes a broader explanation and definition..."
+            )
+  )
+
+  (items 
+   (item "LENO Characteristics"
+         ""
+
+         (items 
+          (item "Based on a functional programming language"
+                "Something about the role of functional programming"
+                )
+
+          (item "Produces pure HTML"
+                "Something about HTML..."
+                )
+
+          (item "Is supported by the Emacs editor"
+                "Emacs is a powerful, classic pure text editor based on a Lisp dialect for extension purposes..."
+                )
+
+          (item "Produces three different views at various levels of abstraction and aggregations"
+                "About the three views..."
+                )
+          )
+         )
+  )
+
+
+  (index-words)
+
+)
+
+
+
+(note-page 'concl-section
+  (section-title "Conclusions")
+)
+
+(note-page 'id
+  (title "Conclusions"
+         ""
+  )
+
+  (items 
+   (item "Concluding remarks:"
+         ""
+
+         (items 
+          (item "Problems with images"
+                ""
+                )
+
+          (item "Strengths when it comes to abstraction"
+                ""
+                )
+
+          (item "Other features..."
+                ""
+                )
+          )
+         )
+  )
+
+  (cross-references
+   (list 
+     (internet-reference "The LAML Home Page" "http://www.cs.auc.dk/~normark/laml/")
+   )
+  )
+
+
+  (index-words)
+
+)
+
+(end-notes)
+
+
+
+
+

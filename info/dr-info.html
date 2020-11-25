@@ -1,0 +1,18 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>LAML Guide for DrScheme Users</title></head> <body bgcolor = "#ffffbf" text = "#000000" link = "#0000ff" vlink = "#0000ff"> <table border = "0" cellpadding = "0" cellspacing = "0" width = "100%"><tbody><tr><td width = "33%" align = "left" valign = "top"><font size = "2">Generated: Friday, November 25, 2005, 10:36:17</font></td> <td width = "34%" align = "center" valign = "top"><font size = "2">Copyright &copy; 2005 , Kurt N&oslash;rmark</font></td> <td width = "33%" align = "right" valign = "top"><font size = "2"><a href = "../index.html" title = "The local LAML software home page" target = "_top"><img src = "../images/laml-home.gif" alt = "The local LAML software home page" border = "0"></a></font></td></tr></tbody></table> <h1>LAML Guide for DrScheme Users</h1> <p>I do not use LAML with DrScheme, because it is slow and relatively inconvenient. For novices, however, DrScheme may be a good choice 
+     because it is very helpful and pedagogical. Here is how you do it.</p> <p>First choose language level using the menu point &#39;language&gt;choose language...&#39;. Set the language level to  <b>&quot;PLT &gt; textual (MzScheme, includes R5RS)&quot;</b>. Restart DrScheme after this.</p> <p>Then follow the  <a href = "../index.html#starting-laml-non-emacs">general advice on how to use LAML from a Scheme interpreter</a>. Issue the commands in the Interactions window of DrScheme. This procedure allows you to use the  <kbd>laml</kbd>  procedure and the  <a href = "../man/laml.html#SECTION6">other high level LAML commands</a></p> <p>In case you want to process an existing laml file (a file with &#39;laml&#39; extension) by  <b>simply executing it</b>  from DrScheme, the first few lines of the file must be modified slightly.
+      Usually, the start of a LAML file goes like this:</p> <pre>
+   (load (string-append laml-dir &quot;laml.scm&quot;))
+   (laml-style &quot;simple-html4.01-transitional-validating&quot;)
+   ...</pre> <p>If we assume - as an example - that the you want to process the file <kbd>index.laml</kbd> in the directory <kbd>c:/users/kurt/</kbd> you should 
+      in general replace this prefix part with something similar to:</p> <pre>
+   (define laml-dir &quot;c:/laml/&quot;)
+   (load (string-append laml-dir &quot;laml.scm&quot;))
+   (fake-startup-parameters &quot;index&quot; &quot;c:/users/kurt/&quot;)
+   (laml-style &quot;simple-html4.01-transitional-validating&quot;)
+   ...</pre> <p>It is quite tedious to write these slightly redundant informations in each and every LAML file.
+   The other modes of LAML activation take care of these details for you. But this cannot easily be arranged for in DrScheme. At least, I do not know how to do it...</p> <p>In the first line, you should of course set <kbd>laml-dir</kbd> to the path corresponding to the directory in which you installed LAML. Remember the terminating forward slash.</p> <p>In line 3, use the actual source file name without extension as the first parameter of <kbd>fake-startup-parameters</kbd>. Use the directory in which the LAML source file is located (the so-called LAML startup directory) - full path - as the second parameter.
+   Notice that the startup directory is usually different from laml-dir, as defined in the first line.
+   Remember to <b>terminate all directories with a forward slash</b>, and never use backward slashes in
+   directory paths. Also remember a trailing forward slash at the end of a directory path, such as &quot;dir1/dir2<font color = "#ff0000"><b>/</b></font> &quot;.</p> <p><a href = "../index.html#starting-laml-non-emacs">Back to main LAML page.</a></p></body></html>

@@ -1,0 +1,1004 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/schemedoc-2/schemedoc")
+
+; (set-xml-char-transformation-table-in 'xhtml10-transitional (list->vector (number-interval 0 255)))
+
+(define delta-time-description 
+  "The delta time of this MIDI message. Relative to the previous MIDI message. If a deltaTime attribute appears a absTime attribute is not allowed.")
+(define abs-time-description
+  "The time absolute. If an absTime attribute appears a deltaTime attribute is not allowed.")
+(define midi-info "This attribute represents information from the MIDI specification.")
+(define channel-info (list "The channel number between 1 and 16. Internally we subtract one channel when binary MIDI files are created."
+                           midi-info))
+(define note-info (list "The note number, between 0 and 127. Typically shown as a note name in the info attribute." midi-info))
+(define info-info (list "Helpful information derived from other attributes. You should never modify this attribute, because it is not 
+                                           processed in any way. Always change the attributes which have direct MIDI counterparts."))
+
+(define delete-channels-expl "A comma separated list of channel numbers between 1 and 16. Avoid space between numbers.")
+
+(define specialized-control-change-event 
+  "A specialized ControlChange event, which happens to have its own name (because of the XML starting point from MIDI Manufacturers Association).")
+
+(define jglatt-url-prefix "http://home.roadrunner.com/~jgglatt/")
+
+(define (jglatt-url suffix)
+  (string-append jglatt-url-prefix "tech/midispec/" suffix))
+  
+; Redefined next, to empty text version. The jglatt link has its own external See also clause.
+(define (message-details where)
+  (list "See details" (a 'href (jglatt-url where) "here") _ "."))
+
+(define (message-details where)
+  "")
+
+
+(define wierzba-bedesem (span "Formulations taken from Wierzba and Bedesem"))
+
+(define (midi-info-fn e)
+  (cond ((equal? "NoteOn" e) (jglatt-url "noteon.htm"))
+        ((equal? "NoteOff" e) (jglatt-url "noteoff.htm"))
+        ((equal? "PolyKeyPressure" e) (jglatt-url "aftert.htm"))
+        ((equal? "ProgramChange" e) (jglatt-url "pgm.htm"))
+        ((equal? "ChannelKeyPressure" e) (jglatt-url "pressure.htm"))
+        ((equal? "PitchBendChange" e) (jglatt-url "wheel.htm"))
+        ((equal? "ControlChange" e) (jglatt-url "ctl.htm"))
+        ((equal? "AllSoundOff" e) (jglatt-url "sndoff.htm"))
+        ((equal? "ResetAllControllers" e) (jglatt-url "ctloff.htm"))
+        ((equal? "LocalControl" e) (jglatt-url "local.htm"))
+        ((equal? "AllNotesOff" e) (jglatt-url "ntnoff.htm"))
+        ((equal? "OmniOff" e) (jglatt-url "omoff.htm"))
+        ((equal? "OmniOn" e) (jglatt-url "omon.htm"))
+        ((equal? "MonoMode" e) (jglatt-url "mono.htm"))
+        ((equal? "PolyMode" e) (jglatt-url "poly.htm"))
+        ((equal? "SysEx" e) (jglatt-url "sysex.htm"))
+        ((equal? "MTCQuarterFrame" e) (jglatt-url "frame.htm"))
+        ((equal? "SongPositionPointer" e) (jglatt-url "ssp.htm"))
+        ((equal? "SongSelect" e) (jglatt-url "songsel.htm"))
+        ((equal? "TuneRequest" e) (jglatt-url "tune.htm"))
+        ((equal? "TimingClock" e) (jglatt-url "clock.htm"))
+        ((equal? "Start" e) (jglatt-url "start.htm"))
+        ((equal? "Stop" e) (jglatt-url "stop.htm"))
+        ((equal? "ActiveSensing" e) (jglatt-url "sense.htm"))
+        ((equal? "Meta" e) "http://www.borg.com/~jglatt/tech/midifile.htm")
+        (else #f)))
+
+(manual
+  (manual-front-matters
+    (manual-title "MIDI LAML - Midi Sequencing in Scheme")
+    (manual-author "Kurt Nørmark")
+    (manual-affiliation "Department of Computer Science, Aalborg University, Denmark.")
+    (manual-abstract 
+         (div  
+            (p "This page documents the Standard MIDI File DTD as provided for Scheme via LAML. The starting point of this DTD
+                was the already" (a 'href "http://www.midi.org/dtds/midi_xml.shtml" "existing MIDI
+                XML DTD") "from the" (a 'href "http://www.midi.org" "MIDI Manufacturers Association") _ "."
+               "I have extended the DTD in various ways, and for various purposes." 
+
+            )
+
+            (p "The Standard MIDI File language is made available as a Scheme library
+                of functions that mirror the DTD. (In this context," 
+               (a 'href "http://www.schemers.org" "Scheme")
+               "is the name of a programming language). This is the same approach
+                as used for many other DTDs supported by" 
+               (a 'href "http://www.cs.aau.dk/~normark/laml/" "LAML")_ "." 
+               "The advantage of providing the language as Scheme functions is that
+                the Scheme programming language can be used to modify the MIDI contents
+                via programmed solutions. Thus, the main idea with this facility is
+                to convert MIDI files to Scheme programs, in which the musical contents
+                can manipulated by Scheme functions."  "The MIDI LAML facilities can be regarded as 
+                support of" (em "Midi Sequencing in Scheme") "on the basis of XML."
+                "When the Scheme program is executed the corresponding standard MIDI file is generated.
+                 As for many other parts of LAML, the Scheme Midi sequencer is - operationally - supported by
+                 an environment in Emacs.
+                "
+            )
+
+            (p 
+              "In this document we do" (b "not") "describe any MIDI details. Please consult other resources,
+               for instance the excellent descriptions of MIDI topics at" 
+               (a 'href jglatt-url-prefix jglatt-url-prefix) _ "." "For each MIDI element documented below, we refer
+               to a particular page of this very useful MIDI documentation" _ "."
+            )
+
+;             (p 
+;                "There exists some examples of MIDI files together with their representation in Scheme and LAML.
+;                 See" (a 'href "../../../../examples/midi/index.html" "examples") _ "."
+;              )
+
+             (p "The" (a 'href "midi-laml-processing-lib.html" "Midi Function Library") "provides useful functionality for various transformation of midi files.")
+
+         ))
+    'css-prestylesheet "normal"
+    'css-stylesheet "argentina"
+    'laml-resource "true"
+    'xml-protected-descriptions "true"
+    'element-cross-reference-url-fn "midi-info-fn"
+    'element-cross-reference-anchor-text "MIDI specification details"
+  )
+
+  (manual-section 'id "processing"
+    (section-title "Practical Introduction") 
+    (section-body
+      (div
+        (p "It is possible to convert at standard (binary) MIDI file to a Scheme expression, which
+            uses the functions documented below on this page. The most flexible way to produce the
+            Scheme XML-in-LAML form is to activate M-x midi-to-laml on an entry in an Emacs dired buffer.
+            There is also a dired operate menu entry for this purpose. The midi-to-laml command produces 
+            a Scheme source file (with extension midl - abbreviating for midi laml) which you can edit. Please notice that the LAML Scheme 
+            source files with MIDI contents becomes very large, often more than one mega byte for 
+            a single song. Therefore it can take relatively long time to generate the LAML Scheme files.")
+
+        (p 
+          "If you do not use Emacs with LAML you should start your Scheme system, load laml.scm and
+           midi.scm, and call the function midi-file-to-laml. This approach is a little more complicated.
+           The function midi-file-to-laml is documented below."
+        )
+
+        (p "When you the process the LAML file produced the way described above
+            a (binary) standard MIDI file is created. The processing can be initiated as any other
+            LAML processing (via Emacs, in an interactive Scheme shell, or from the command prompt of
+            the operating system).")
+
+        (p "Thus, in summary, we provide for parsing of binary MIDI files to a Scheme expression.
+            If you are a Scheme programmer it will be easy for you to modify the MIDI contents via this expression.
+            When you are done, you can evaluate the Scheme expression. In this way you produce a variant of
+            the original MIDI file.")
+      )
+    )
+  ) 
+
+  (manual-section 'id "smf"
+    (section-title "Standard MIDI File structure")
+    (section-body
+       (div 
+         (p "As described in the attributes of MidiHeader we can use several modes
+             when we generate the XML-in-LAML source file. The raw mode is not very
+             interesting, because it is too low-level. Raw mode Scheme expressions
+             reflect the underlying MIDI file directly, with both NoteOn and NoteOff
+             messages." )
+
+         (p "The deltaTime or absTime modes are recommended. In these modes NoteOff messages do not exists.
+             Instead, each NoteOn messages has a duration. In absTime
+             mode you can include messages with  deltaTime attributes as well. Such messages becomes
+             relative the either the previous message (which again can be a message with a
+             deltaTime attribute, or it can be a message with an absTime attribute)." )
+
+         (p "In deltaMode you cannot include messages with absTime attributes.")
+       )
+    )
+  )
+
+  (manual-page 'name "StandardMidiFile"
+    (description "This is the general purpose top-level construct for description of a Standard MIDI File.")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "TyrosMultiPad"
+    (description "This is a special purpose top-level construct for description of a Yamaha Tyros Multipad that consists of four tracks")
+    (attribute-descriptions 
+      (attribute-description 'name "mode" "Either absolute or relative timing")       
+      (attribute-description 'name "image" "An icon name")       
+      (attribute-description 'name "play-only" "A track/multipad number (either 1, 2, 3, or 4). If provided, play only this track.
+                                                Alternatively, a boolean play-only attribute can be put on one of the MidiTrack elements.
+                                                The TyrosMultiPad play-only dominates a MidiTrack play-only attribute.
+                                                If no TyrosMultiPad play-only or no MidiTrack play-only attribute is given, play all tracks.
+                                               ")       
+    )
+  )
+
+  (manual-page 'name "TyrosStyle"
+    (description "This is a special purpose top-level construct for description of a Yamaha Styles - which a Midi Format 0 files in front of a non-midi suffix.
+The Yamaha style format control the automatic accompaniment of an instrument.")
+    (attribute-descriptions 
+      (attribute-description 'name "mode" "")
+      (attribute-description 'name "image" "An encoding of an icon name")
+      (attribute-description 'name "extension" "")
+      (attribute-description 'name "pulsesPerQuarterNote" "")
+    )
+    (external-reference 'category "Example" 'href "../examples/style-creation/country-waltz/original/baseline-1.midl" "Deleting from existing style")
+    (external-reference 'category "Example" 'href "../examples/style-creation/basic-1/basic-1/baseline-1.midl" "Adding pieces to an empty style - See MainA.")
+    (external-reference 'category "Useful function" 'href "midi-laml-processing-lib.html#icon"  "The function icon which returns possible values for the image attribute.")
+  )
+
+  (manual-page 'name "MidiHeader"
+    (description "The header construct of a standard MIDI file. Holds some front matters information which apply to the entire MIDI file.")
+    (attribute-descriptions 
+      (attribute-description 'name "format" "Represent the format of the midi LAML document.
+                                             Per default, this corresponds to the format of the parsed midi file.
+                                             In case of track separation, the value of this attribute will be 1.
+                                             This corresponds directly to the three different formats of MIDI files. Either 0 or 1.
+                                             Midi format 2 is not supported at all in this sofware.")
+      (attribute-description 'name "target-format" "The format of the midi file, which can be generated by this tool. Either 0 or 1.
+                                                    Defaults to the value of the format attribute.
+                                                    It is not (yet) possible to generate a format 1 file from a format 0 midi laml document.
+                                                   ")
+      (attribute-description 'name "numberOfTracks" "Represents the number of tracks. A MIDI format 0 file always has one track.")
+      (attribute-description 'name "pulsesPerQuarterNote" "The resolution of a quarter note. Value as it appears in a read midi file.")
+      (attribute-description 'name "target-pulsesPerQuarterNote" "The resolution of a quarter note. Value to be used when generating a midi file.")
+      (attribute-description 'name "mode" 
+                             "The mode of the generated LAML file.  The value raw
+                              means that the LAML MIDI file is a direct reflection
+                              of the underlying MIDI file, with both NoteOn and NoteOff
+                              messages. The value deltaTime means that the time of
+                              an event is relative to the previous event, and that
+                              the NoteOff messages therefore have been elimiated. The duration attribute is used.
+                              The value absTime means that the time of each event is absolute,
+                              and in addition that the NoteOff messages 
+                              have been eliminated. The duration attribute is used." )
+                              
+      (attribute-description 'name "counterTransposition" "An amount of transposition introduced to show note info that corresponds to actual playing at the keyboard.
+                                                           If you transpose n at the keyboard, give -n as counter transposition for this attribute.")
+    )
+  )
+
+  (manual-page 'name "MidiTrack"
+    (description "There must be as many MidiTrack constituents as prescribed by the numberOfTracks attribute
+                  in the MidiHeader element. The subelements of MidiTrack are elements that represent
+                  the individual MIDI messages.")
+    (attribute-descriptions
+       (attribute-description 'name "play-only" "If true, play only this track. If no play-only attribute is given, play all tracks.
+                                                 The TyrosMultiPad play-only dominates a MidiTrack play-only attribute.
+                                                 ")
+    )
+  )
+
+  (manual-page 'name "NonMidiSuffix"
+    (description "Trailing non-midi data which happens to be at the end of the standard midi file. 
+                  CASM data in Yamaha styles files is example of such data. 
+                  Represented in hexadecimal notation. 
+                 ")
+    (attribute-descriptions
+
+    )
+  )
+
+  (manual-section 'id "midi-ch-mes"
+    (section-title "MIDI Channel Messages")
+    (section-body "In this section we describe the XML elements which corresponds to standard MIDI messages.
+                   Notice that the documentation of many attributes are repetitive (the same information is given for each element).
+                   In general, a channel is in between 1 and 16 at the LAML source level (0 and 15 at the binary MIDI level).
+                   You can use channels below 1 and above 16 for intermediate results, but only channels between 1 and 16
+                   are taken into account when binary midi content is generated.
+                  "
+                  
+                  )
+  )
+
+  (manual-page 'name "NoteOn"
+    (description (span "A Note On MIDI message. Exactly one of attributes absTime and deltaTime must be present." (message-details "noteon.htm")) )
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "channel" channel-info)
+      (attribute-description 'name "note" note-info)
+      (attribute-description 'name "info" info-info)
+      (attribute-description 'name "velocity" "The velocity, between 0 and 127." midi-info )
+      (attribute-description 'name "duration" "Only used in deltaTime and absTime mode. The duration of raw mode is represented by pairs of NoteOn and NoteOff elements." midi-info)
+      (attribute-description 'name "chord" "A chord formed as an immediate concatenation of a root node and a chord type. 
+                                           This is not an essential attribute, and it does not itself affect the binary midi generated from this element.
+                                           Root note is one of \"C\" \"C#\" \"D\" \"D#\" \"E\" \"F\" \"F#\" \"G\" \"G#\" \"A\" \"A#\" \"B\" (a string).
+                                           Chord type is one of \"1+8\" \"1+5\" \"M\" \"6\" \"M7\" \"M7b5\" \"M7(#11)\" \"9\" \"M7_9\" \"6_9\" \"b5\" \"aug\" \"7aug\" \"M7aug\" \"m\" \"m6\" \"m7\" \"m7b5\" \"m(9)\" \"m7(9)\" \"m7(11)\" \"mM7b5\" \"mM7\" \"mM7(9)\" \"dim\" \"dim7\" \"7\" \"7sus4\" \"7(9)\" \"7(#11)\" \"7(13)\" \"7b5\" \"7(b9)\" \"7(b13)\" \"7(#9)\" \"sus4\" \"sus2\" (a string).")
+      (attribute-description 'name "strum-length" "A special purpose attribute used for strumming. An integer.")
+    )
+  )
+
+  (manual-page 'name "NoteOff"
+    (description "A Note Off MIDI message. NoteOff elements cannot be used in detaTime and in absTime mode. Only use NoteOff elements in raw mode."
+                 (message-details "noteoff.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "channel" channel-info)
+      (attribute-description 'name "note" note-info)
+      (attribute-description 'name "info" info-info)
+      (attribute-description 'name "velocity" "The velocity, between 0 and 127." midi-info)
+    )
+  )
+
+  (manual-page 'name "PolyKeyPressure"
+    (description "" (message-details "aftert.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "channel" channel-info)
+      (attribute-description 'name "note" note-info)
+      (attribute-description 'name "info" info-info)
+      (attribute-description 'name "pressure" "The amount of pressure, between 0 and 127." midi-info)
+    )
+  )
+
+  (manual-page 'name "ProgramChange"
+    (description "Change of instrument (also known as Patch) of a particular channel." (message-details "pgm.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "channel" channel-info)
+      (attribute-description 'name "number" "A program change number. A GM instrument number. Between 0 and 127." midi-info)
+    )
+    (external-reference 'category "Instrument numbers" 'href "http://www.borg.com/~jglatt/tutr/gm.htm#Patch" "Table")
+  )
+
+  (manual-page 'name "ChannelKeyPressure"
+    (description ""(message-details "pressure.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "channel" channel-info)
+      (attribute-description 'name "pressure" "")
+      (attribute-description 'name "info" info-info)
+    )
+  )
+
+  (manual-page 'name "PitchBendChange"
+    (description "" (message-details "wheel.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "channel" channel-info)
+      (attribute-description 'name "value" "")
+      (attribute-description 'name "info" info-info)
+
+    )
+  )
+
+
+  (manual-section 'id "control"
+    (section-title "MIDI channel messages: Control change") )
+
+  (manual-page 'name "ControlChange"
+    (description "Sets the value of a particular controller, such as modulation wheel, bank selection, or pan." (message-details "ctl.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "channel" channel-info)
+      (attribute-description 'name "control" "")
+      (attribute-description 'name "value" "")
+      (attribute-description 'name "info" info-info)
+
+    )
+  )
+
+  (manual-page 'name "AllSoundOff"
+    (description "All sounds currently played are muted." (message-details "sndoff.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "channel" channel-info)
+      (attribute-description 'name "info" info-info)
+
+    )
+  )
+
+  (manual-page 'name "ResetAllControllers"
+    (description specialized-control-change-event (message-details "ctloff.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "channel" channel-info)
+      (attribute-description 'name "info" info-info)
+
+    )
+  )
+
+  (manual-page 'name "LocalControl"
+    (description specialized-control-change-event (message-details "local.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "channel" channel-info)
+      (attribute-description 'name "value" "")
+      (attribute-description 'name "info" info-info)
+
+    )
+  )
+
+  (manual-page 'name "AllNotesOff"
+    (description "All notes currently played are muted. If, however, sustain or sostenuto is on, notes will continue sounding until these are turned off." 
+                  (message-details "ntnoff.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "channel" channel-info)
+      (attribute-description 'name "info" info-info)
+
+    )
+  )
+
+  (manual-page 'name "OmniOff"
+    (description specialized-control-change-event 
+                "A channel mode message, which is a subcategory of the control change messages. The control number is 124." (message-details "omff.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "channel" channel-info)
+      (attribute-description 'name "info" info-info)
+
+    )
+  )
+
+  (manual-page 'name "OmniOn"
+    (description specialized-control-change-event (message-details "omon.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "channel" channel-info)
+      (attribute-description 'name "info" info-info)
+
+    )
+  )
+
+  (manual-page 'name "MonoMode"
+    (description specialized-control-change-event (message-details "mono.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "channel" channel-info)
+      (attribute-description 'name "value" "")
+      (attribute-description 'name "info" info-info)
+
+    )
+  )
+
+  (manual-page 'name "PolyMode"
+    (description specialized-control-change-event  (message-details "poly.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "channel" channel-info)
+      (attribute-description 'name "info" info-info)
+
+    )
+  )
+
+
+  ; ---------------------------------------------------------------------------------------------------------------
+
+  (manual-section 'id "system"
+    (section-title "System messages")
+    (section-body "System messages are not particular to any midi channel.")
+  )
+
+  (manual-page 'name "SysEx"
+    (description "" (message-details "sysex.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "info" info-info)
+
+    )
+  )
+
+  (manual-page 'name "MTCQuarterFrame"
+    (description ""(message-details "frame.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "messageType" "")
+      (attribute-description 'name "dataNibble" "")
+      (attribute-description 'name "info" info-info)
+
+    )
+  )
+
+  (manual-page 'name "SongPositionPointer"
+    (description "" (message-details "ssp.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "position" "")
+      (attribute-description 'name "info" info-info)
+
+    )
+  )
+
+  (manual-page 'name "SongSelect"
+    (description ""(message-details "songsel.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "number" "")
+      (attribute-description 'name "info" info-info)
+
+    )
+  )
+
+  (manual-page 'name "TuneRequest"
+    (description ""(message-details "tune.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "info" info-info)
+
+    )
+  )
+
+  (manual-page 'name "TimingClock"
+    (description "" (message-details "clock.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "info" info-info)
+
+    )
+  )
+
+  (manual-page 'name "Start"
+    (description "" (message-details "start.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "info" info-info)
+
+    )
+  )
+
+  (manual-page 'name "Continue"
+    (description ""(message-details "continue.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "info" info-info)
+
+    )
+  )
+
+  (manual-page 'name "Stop"
+    (description ""(message-details "stop.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "info" info-info)
+
+    )
+  )
+
+  (manual-page 'name "ActiveSensing"
+    (description ""(message-details "sense.htm"))
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "info" info-info)
+
+    )
+  )
+
+  (manual-page 'name "Meta"
+    (description "")
+    (attribute-descriptions 
+      (attribute-description 'name "deltaTime" delta-time-description)
+      (attribute-description 'name "absTime" abs-time-description)
+      (attribute-description 'name "type" "")
+      (attribute-description 'name "info" info-info)
+
+    )
+  )
+
+  (manual-page 'name "MidiSection"
+    (description "The midi section of a style. Intended to be side by side with other sections, such as the CASM section (to come).
+                  The attributes of this section are inherited to the individual sections, but is probably not very useful for the current set of attributes.")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "StyleInit"
+    (description "The part of the style before the SFF1 marker")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "StyleId"
+    (description "The part of the style after the SFF1 marker (but before the SInt marker) ")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "StyleSetup"
+    (description "The part of the style after the SInt marker. Intended for Controller and Program Change events (instrument setup).")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "IntroA"
+    (description "Introduktion A")
+    (misc "Same attributes as Main A etc.")
+  )
+
+  (manual-page 'name "IntroB"
+    (description "Introduction B")
+    (misc "Same attributes as Main A etc.")
+  )
+
+  (manual-page 'name "IntroC"
+    (description "Introduction C")
+    (misc "Same attributes as Main A etc.")
+  )
+
+  (manual-page 'name "MainA"
+    (description "Main A")
+    (attribute-descriptions 
+      (attribute-description 'name "deleteChannels" "A comma separated list of channel numbers between 1 and 16. Avoid space between numbers.")
+      (attribute-description 'name "limitQN" "A cut-off length, measured in quarter notes. 
+                                              If a piece (after ppqn adaption and repetition) is longer than limitQN, it is cut off.
+                                              FillIn sections are automatically cut off to one bar (which can be 4 QN = 4 quarter notes if the signature is 4:d).")
+
+      (attribute-description 'name "addMidiPart1" "An absolute file path a midi part piece (an ordinary midi file).")
+      (attribute-description 'name "addAsChannel1" "The channel assigned to the added midi part.")
+      (attribute-description 'name "repetitions1" "The number of repetions of the added part.
+                                                  Each repetition is forced to have a length of partLengthQN (measured in quarter notes).
+                                                  If the pieces length is less than partLengthQN, a pause is added before the next repetition.")
+      (attribute-description 'name "partLengthQN1" "The required minimum length of the added part
+                                                   Measured in quarter notes. Only used together with the attribute repetitions
+                                                   Mandatory if the attribute repetitions is used.")
+
+
+      (attribute-description 'name "addMidiPart2" "")
+      (attribute-description 'name "addMidiPart3" "")
+      (attribute-description 'name "addMidiPart4" "")
+      (attribute-description 'name "addMidiPart5" "")
+      (attribute-description 'name "addMidiPart6" "")
+      (attribute-description 'name "addMidiPart7" "")
+      (attribute-description 'name "addMidiPart8" "")
+      (attribute-description 'name "addMidiPart9" "")
+      (attribute-description 'name "addMidiPart10" "")
+      (attribute-description 'name "addMidiPart11" "")
+      (attribute-description 'name "addMidiPart12" "")
+      (attribute-description 'name "addMidiPart12" "")
+      (attribute-description 'name "addMidiPart14" "")
+      (attribute-description 'name "addMidiPart15" "")
+      (attribute-description 'name "addMidiPart16" "")
+
+      (attribute-description 'name "addAsChannel2" "")
+      (attribute-description 'name "addAsChannel3" "")
+      (attribute-description 'name "addAsChannel4" "")
+      (attribute-description 'name "addAsChannel5" "")
+      (attribute-description 'name "addAsChannel6" "")
+      (attribute-description 'name "addAsChannel7" "")
+      (attribute-description 'name "addAsChannel8" "")
+      (attribute-description 'name "addAsChannel9" "")
+      (attribute-description 'name "addAsChannel10" "")
+      (attribute-description 'name "addAsChannel11" "")
+      (attribute-description 'name "addAsChannel12" "")
+      (attribute-description 'name "addAsChannel13" "")
+      (attribute-description 'name "addAsChannel14" "")
+      (attribute-description 'name "addAsChannel15" "")
+      (attribute-description 'name "addAsChannel16" "")
+
+      (attribute-description 'name "repetitions2" "")
+      (attribute-description 'name "repetitions3" "")
+      (attribute-description 'name "repetitions4" "")
+      (attribute-description 'name "repetitions5" "")
+      (attribute-description 'name "repetitions6" "")
+      (attribute-description 'name "repetitions7" "")
+      (attribute-description 'name "repetitions8" "")
+      (attribute-description 'name "repetitions9" "")
+      (attribute-description 'name "repetitions10" "")
+      (attribute-description 'name "repetitions11" "")
+      (attribute-description 'name "repetitions12" "")
+      (attribute-description 'name "repetitions13" "")
+      (attribute-description 'name "repetitions14" "")
+      (attribute-description 'name "repetitions15" "")
+      (attribute-description 'name "repetitions16" "")
+
+      (attribute-description 'name "partLengthQN2" "")
+      (attribute-description 'name "partLengthQN3" "")
+      (attribute-description 'name "partLengthQN4" "")
+      (attribute-description 'name "partLengthQN5" "")
+      (attribute-description 'name "partLengthQN6" "")
+      (attribute-description 'name "partLengthQN7" "")
+      (attribute-description 'name "partLengthQN8" "")
+      (attribute-description 'name "partLengthQN9" "")
+      (attribute-description 'name "partLengthQN10" "")
+      (attribute-description 'name "partLengthQN11" "")
+      (attribute-description 'name "partLengthQN12" "")
+      (attribute-description 'name "partLengthQN13" "")
+      (attribute-description 'name "partLengthQN14" "")
+      (attribute-description 'name "partLengthQN15" "")
+      (attribute-description 'name "partLengthQN16" "")
+
+    )
+  )
+
+  (manual-page 'name "MainB"
+    (description "Main B")
+    (misc "Same attributes as Main A etc.")
+  )
+
+  (manual-page 'name "MainC"
+    (description "Main C")
+    (misc "Same attributes as Main A etc.")
+  )
+
+  (manual-page 'name "MainD"
+    (description "Main C")
+    (misc "Same attributes as Main A etc.")
+  )
+
+  (manual-page 'name "EndingA"
+    (description "Ending A")
+    (misc "Same attributes as Main A etc.")
+  )
+
+  (manual-page 'name "EndingB"
+    (description "Ending B")
+    (misc "Same attributes as Main A etc.")
+  )
+
+  (manual-page 'name "EndingC"
+    (description "Ending C")
+    (misc "Same attributes as Main A etc.")
+  )
+
+  (manual-page 'name "FillInAA"
+    (description "Fill In AA")
+    (misc "Same attributes as Main A etc.")
+  )
+
+  (manual-page 'name "FillInBB"
+    (description "Fill In BB")
+    (misc "Same attributes as Main A etc.")
+  )
+
+  (manual-page 'name "FillInCC"
+    (description "Fill In CC")
+    (misc "Same attributes as Main A etc.")
+  )
+
+  (manual-page 'name "FillInDD"
+    (description "Fill In DD")
+    (misc "Same attributes as Main A etc.")
+  )
+
+  (manual-page 'name "FillInBA"
+    (description "Finn In BA - Break")
+    (misc "Same attributes as Main A etc.")
+  )
+
+  (manual-page 'name "FillInAB"
+    (description "Fill In AB - Not used on Tyros 1")
+    (misc "Same attributes as Main A etc.")
+  )
+
+  (manual-section 'id "casm"
+    (section-title "CASM Section.")
+    (section-body "The CASM section is specific to Yamaha styles (automatic accompaniments). The CASM
+                   section maps (up to) 16 source channels to 8 destination channels, and it controls
+                   a variety of parameters of the automatic accompaniment. The best available documentation
+                   of the CASM section is found in" 
+                  (a 'href "http://www.wierzba.homepage.t-online.de/stylefiles_v100.pdf" "Style Files - Introduction and Details")
+                  "by Peter Wierzba and Michael P. Bedesem. Some formulations below are taken directly
+                   from this document." )
+  )
+
+  (manual-page 'name "CasmSection"
+    (description "The root construct of the CASM section")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "cseg"
+    (description "The CASM section of a style consists of up to 16 CSEG structures. A CSEG structure defines
+                  common style parameters for a number of style parts (such as Main A, Main B, Intro A, etc)." )
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "sdec"
+    (description "The SDEC structure defines the style parts, for which the sibling CTAB and CNTT, applies. The contents of a SDEC is a comma separated list
+                  of style parts. The possible style parts are Intro A, Intro B, Intro C, Intro D, Main A, Main B, Main C, Main D, Fill In AA, Fill In BB, Fill In CC, Fill In DD, Fill In BA, Ending A, Ending B, Ending C, Ending D.")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "ctab"
+    (description "A CTAB structure maps one source channel to one destination channel, and it sets a number of parameter of this mapping.
+                  There is one CTAB structure for each source channel. The CTAB structures apply for the style parts of the enclosing CSEG structure.")
+    (attribute-descriptions 
+      (attribute-description 'name "source-channel" "The source channel.")
+      (attribute-description 'name "name" "A name of this CTAB structure. Max 8 characters.")
+      (attribute-description 'name "destination-channel" "The destination channel. A integer between 9 and 16.")
+      (attribute-description 'name "editable" "Is the data in this source channel editable on the instrument.")
+      (attribute-description 'name "source-chord-key" "Controls the original key of the source channel, together with the attribute source-chord-type.")
+      (attribute-description 'name "source-chord-type" "Controls the original key of the source channel, together with the attribute source-chord-key.")
+      (attribute-description 'name "autostart-enable" "If enabeled, the channel will play before a chord is pressed.")
+      (attribute-description 'name "note-transposition-rule" 
+                             "root-transposition: When transposed the pitch relationship between notes
+                              is maintained, i.e. the same inversion of the chord is used. For example,
+                              the notes C3, E3, and G3 in the key of C will become F3, A3, and C4 when
+                              transposed to F. Use this setting for parts that contain melodic lines."
+                              (br) "root-fixed: The note is kept as close as possible to the previous note
+                              range, i.e. a different inversion of the chord may be used. For example,
+                              the notes C3, E3, and G3 in the key of C will become C3, F3, and A3 when
+                              transposed to F. Use this setting for chordal parts, e.g. for rhythm guitar
+                              parts." wierzba-bedesem)
+      (attribute-description 'name "note-transposition-table" 
+                             "Specifies the method for source pattern transposition." (br) "bypass: Playback
+                              is independent on the chord used during playback. Used for drum channels." (br) 
+                              "melody: Used for melodic channels, which typically are assigned to target
+                              channel 15 or 16 (Phrase 1 or Phrase 2)." (br) "chord: Typically used for chord-oriented
+                              channels that are assinged to target channel 12 or 13 (Chord 1 or Chord
+                              2). " (br) "bass: Typically used for bass channels assigned to target channel
+                              11 (Bass)." (br) "melodic-minor: Typically used for melodic channels assigned
+                              to target channel 15 or 16 (Phrase 1 or phrase 2) where only major/minor
+                              chars are played. For intros and endings." (br) "harmonic-minor: Typically used
+                              for melodic channels assigned to target channel 15 or 16 (Phrase 1 or phrase
+                              2) where only major/minor chars are played. For intros and endings." wierzba-bedesem)
+      (attribute-description 'name "high-key" 
+                             "Specifies the upper root limit. The letter case of the attribute value is not important.
+                              Chords whith a root higher than the specified
+                              limit will be played in the octave immediately below the high-key limit.
+                              This setting does only apply when the note-transposition-rule is set to
+                              root-transposition." wierzba-bedesem )
+      (attribute-description 'name "note-low-limit" 
+                             "'Note Low Limit' and 'Note High Limit' specify the low and high note limits
+                              for all notes played in the specified part. A note name, such as C-2 (= C in octave -2) or G8. If a transposed note is outside
+                              this range, then the note is transposed to the nearest octave within the
+                              range. The range must be at least one octave. This can be used to ensure
+                              that only notes are played that are in the range of the respective instrument." wierzba-bedesem)
+      (attribute-description 'name "note-high-limit" 
+                             "'Note Low Limit' and 'Note High Limit' specify the low and high note limits
+                              for all notes played in the specified part. A note name, such as C-2 (= C in octave -2) or G8. If a transposed note is outside
+                              this range, then the note is transposed to the nearest octave within the
+                              range. The range must be at least one octave. This can be used to ensure
+                              that only notes are played that are in the range of the respective instrument." wierzba-bedesem)
+      (attribute-description 'name "retrigger-rule" 
+                             "stop: The note is stopped." (br) "pitch-shift: The pitch of the note will bend
+                              without attack to match the type of the new chord." (br) "pitch-shift-to-root:
+                              The pitch of the note will bend without attack to match the root of the
+                              new chord." (br) "retrigger: The note is retriggered with attack at a new pitch
+                              matching the new chord type." (br) "retrigger-to-root: The note is retriggered
+                              with attack at a new pitch matching the new chord root." (br) "note-generator:
+                              This setting will only be available if programmed in the original style.
+                              A designated note is produced with designated pitch, length, and velocity
+                              matching the new chord." wierzba-bedesem )
+    )
+  )
+
+  (manual-page 'name "note-mute"
+    (description "Mute the accompaniment if one of the listed notes are played. The muting is done after transposition at the instrument.
+                  A comma-separated list of C, CS, D, Eb, E, F, FS, G, GS, A, Bb, B.
+                  The letter case is not important. The order of the notes is arbitrary. Spaces are allowed before or after the commas.")
+    (attribute-descriptions 
+
+    )
+    (misc "note-complement is a useful helping function which accepts and returns a comma separated list of note names")
+  )
+
+  (manual-page 'name "chord-mute"
+    (description "Mute the accompaniment if one of the listed chors are played. A comma-separated list of maj, maj6, maj7, maj7s11, maj9, maj7-9, maj6-9, aug, min, min6, min7, min7b5, min-9, min7-9, min7-11, min-maj7, min-maj7-9, dim, dim7, 7th, 7sus4, 7b5, 7-9, 7s11, 7-13, 7-b9, 7-b13, 7-s9, maj7aug, 7aug, 1-plus-8, 1-plus-5, sus4, 1-plus-2-plus-5.
+The letter case is not important. The order of the chords are arbitrary. Spaces are allowed before or after the commas.")
+    (attribute-descriptions 
+
+    )
+    (misc "chord-complement is a useful helping function which accepts and returns a comma separated list of chord names")
+  )
+
+  (manual-page 'name "cntt"
+    (description "")
+    (attribute-descriptions 
+      (attribute-description 'name "source-channel" "The source channel.")
+      (attribute-description 'name "bass-on-off" "If on, recognize on-bass chords allowed in fingered-on-bass fingering regardless of NTT setting.")
+      (attribute-description 'name "note-transposition-table" 
+                             "Overrides similar attribtue in the ctab section. Specifies the method for source pattern transposition." (br) "bypass: Playback
+                              is independent on the chord used during playback. Used for drum channels." (br) 
+                              "melody: Used for melodic channels, which typically are assigned to target
+                              channel 15 or 16 (Phrase 1 or Phrase 2)." (br) "chord: Typically used for chord-oriented
+                              channels that are assinged to target channel 12 or 13 (Chord 1 or Chord
+                              2). " (br) "bass: Typically used for bass channels assigned to target channel
+                              11 (Bass)." (br) "melodic-minor: Typically used for melodic channels assigned
+                              to target channel 15 or 16 (Phrase 1 or phrase 2) where only major/minor
+                              chars are played. For intros and endings." (br) "harmonic-minor: Typically used
+                              for melodic channels assigned to target channel 15 or 16 (Phrase 1 or phrase
+                              2) where only major/minor chars are played. For intros and endings. In addition 
+                               harmonic-minor-5, natural-minor,  natural-minor-5, 
+                              dorian-minor, and dorian-minor-5" wierzba-bedesem)
+    )
+  )
+
+  (manual-section 'id "other-functions"
+    (section-title "Other functions ") )
+
+  (manual-page 'name "midi-file-to-laml"
+    (form "(midi-file-to-laml midi-file-path laml-file-path mode)")
+    (description "Convert a binary MIDI file, located at midi-file-path, to a LAML file with a single Scheme expression
+                  which represents the MIDI file. Write the Scheme expression to a text file located at laml-file-path.
+                  mode is either raw, absTime or deltaTime. raw: delta times with NoteOn and NoteOff. absTime: absolute times with durations.
+                  deltaTime: delta times with duration.")
+  )
+
+  (manual-page 'name "midi-files-to-laml-files"
+    (form "(midi-files-to-laml-files input-dir midi-file-list output-dir mode)")
+    (description "Do bulk conversion of a list of midi files to LAML source files.")
+  )
+
+  (manual-page 'name "note-number-to-note-name"
+    (form "(note-number-to-note-name n)")
+    (description "Convert at note number to a note name. The inverse function is note-name-to-note-number.")
+  )
+
+  (manual-page 'name "note-name-to-note-number"
+    (form "(note-name-to-note-number name)")
+    (description "Convert at note name to a note number. The inverse function is note-number-to-note-name.
+                  The note names in, for instance octave number 3, are C3, C#3, D3, D#3, E3, F3, F#3, G3, G#3, A3, A#3, and B3.
+                  Both upper and lower case note names are OK.")
+  )
+
+  (manual-section 'id "internal-stuff"
+    (section-title "Internal Matters")
+    (section-body 
+      (p "Internally the MIDI LAML program relies on a number of AST transformations,
+          which converts a midi AST from one form to another." (a 'href "transformation-overview.png" "Overview of transformations") _ ".")
+
+      (p "The transformations are numbered as #n in the Scheme source code for easy source code nativation. n refers to the
+          numbers given in the graphical overview, and the numbers 1-6 given below.")
+
+      (p "Notice that that the transformations 1-3 are important at the end of the parsing process.")
+
+      (p "The transformations 4-6 are part of the unparsing process, and have largely been replaced by a single,
+          efficient transformation, see the function" (b "generalized-transform-track-to-raw-mode") _ ".")
+           
+
+      (ol
+        (lis (b "track-delta-to-abs-time:") (br)
+            "Straightforward traversal of the raw midi delta time AST, as generated from the parse midi file.
+             deltaTime attributes are converted to absTime attributes. Both NoteOn and NoteOff messages appear in the result.
+             Adds info attribute about beats (measures).
+             Currently implemented without tail recursion.")
+
+        (lis (b "track-abs-time-on-off-to-abs-time-with-duration:")(br)
+            "As the name indicates, this transformation gives absTime with duration. Thus, NoteOff messages are eliminated.
+             Basically a linear traversal of the list of AST.
+             In a quite expensive way, however, we search for the NoteOff messages corresponding
+             to a given NoteOn message. This is done by looking forward in the list. As for transformation 1, we do not use tail recursion.")
+
+        (lis (b "track-abs-time-with-duration-to-delta-time-with-duration:") (br)
+             "Again a straightforward traversal (with an initial, unnecessary(?) filtering.
+              Calculates deltaTime attributes, and keeps the duration attributes.
+              Not tail recursive.")
+
+        (lis (b "track-delta-with-duration-to-abs-time-with-duration:") (br)
+             "The reverse transformation of 3. A single pass, not tail recursive.
+              Currently only used in track separation and joining.")
+
+        (lis (b "track-abs-time-with-duration-to-abs-time-on-off:") (br)
+             "Not used any more. Calls stable-sort-list.")
+
+        (lis (b "track-abs-to-delta-time:") (br)
+             "Is in reality not used any more. Straightforward traversal. Not tail recursive.")
+      )
+
+
+      (p "As part of the MIDI parsing process, it is possible to do" (em "track separation") _ "," "hereby making a MIDI format 1 file from a MIDI format 0 file.
+          The function" (b "track-separated-standard-midi-file-ast") "does this:")
+
+      (ul
+         (lis "absTime mode: Track separation involves a simple filtering.")
+
+         (lis "deltaTime mode: Is done via internal conversion to absTime mode.
+               Therefore the transformations 3 and 4 are involved.")
+      )
+
+      (p "The other way around, the the MIDI unparsing proces, the function" (b "track-joined-standard-midi-file-ast") "
+          is able to" (em "join") "channels:")
+
+      (ul
+         (lis "absTime mode: Amounts to a flatting of channels followed by a stable sorting.")
+
+         (lis "deltaTime mode: As for track separtion, the joining is internally done in absTime mode.
+               This therefore involves transformation 3 and 4. Involves sorting.")
+      )      
+          
+          
+    )
+
+  )
+
+  (merged-manual-from-xml-dtd 'src "../dtd/standard-midi-file")
+
+)

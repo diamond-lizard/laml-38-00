@@ -1,0 +1,2 @@
+<!ELEMENT purchase (p*)>
+<!ELEMENT p (#PCDATA)>

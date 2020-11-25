@@ -1,0 +1,52 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+(define language-preference 'english)
+
+(load (in-startup-directory "../tutorial-common.scm"))
+
+(generic-page
+  "CGI programming examples"
+  (con-par
+    (laml-top-banner)
+    (h 1 "HTML mirror function examples")
+    
+    (p "The following examples exist in this directory:")
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 250 200 200 )
+        (list
+          (map b (list "Example"   "LAML"  "HTML" ))
+
+          (list "Initial document" (a-tag "doc0.laml") (a-tag "doc0.html") )
+          (list "Mirror example 1" (a-tag "mirror1.laml") (a-tag "mirror1.html") )
+          (list "Mirror example 2" (a-tag "mirror2.laml") (a-tag "mirror2.html") )
+          (list "Mirror example 3" (a-tag "mirror3.laml") (a-tag "mirror3.html") )
+          (list "Char ref example" (a-tag "char-ref-ex.laml") (a-tag "char-ref-ex.html") )
+          (list "Mirror example 4 - Invalid" (a-tag "mirror4.laml") (a-tag "mirror4.html") )
+          (list "Mirror example 5 - char transformed" (a-tag "mirror5.laml") (a-tag "mirror5.html") )
+          (list "CD abstract document" (a-tag "abstract1.laml") (a-tag "abstract1.html") )
+          
+        )))
+
+    (p (a 'href (laml-tutorial-url "html-mirrors") "The accompanying part of the LAML tutorial"))
+
+
+    (p "The examples are available in the LAML distribution in 
+        the directory" (kbd "examples/tutorial/html-mirrors/") )
+
+    (p (a 'href "../index.html" "Index of tutorial examples."))
+
+    (p (em "If you modify the examples in this directory, or in one of the subdirectories, you may break or destroy
+       your local copy of the LAML tutorial. Therefore you are encouraged to make a copy of the examples
+       before modifying them."))
+
+    (font-size 2 (em "If your browser will not present files with 'laml' or 'scm' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files."))
+  )
+  white black blue blue
+)
+
+(end-laml)

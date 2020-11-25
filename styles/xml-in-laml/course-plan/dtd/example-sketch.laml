@@ -1,0 +1,72 @@
+(course-plan
+
+ (course-info
+   'language-preference "english"
+   'color-scheme "..."
+   'course-title "..."
+   'brief-course-title "..."
+   'course-semester "..."
+   'brief-course-semester "..."
+   'teacher-name "..."
+   'course-url-prefix "..."
+   'make-overview-pages "true/false"
+
+   (time-list
+     (time 'year "y" 'month "m" 'day "d" 'hour "h" 'minute "m" 'seconds "s")
+     ...
+   )
+
+   (lecture-list
+     (lecture 
+       (time ...)  ; overwrites corresponding time in time-list - normally not give
+       'lecture-id "lid" 'subject-id "sid" 
+       'exercise-start "relsec" 'exercise-length "sec"
+       'plenum-start "relsec"   'plenum-length "sec"
+       'room "room"
+     )
+     ...
+
+   )
+
+
+   (subject-list
+    (subject 
+     'id "xxx"
+     'title "ttt"
+     "description 1")
+
+    ...
+   )
+
+
+   (index-links
+     (link-entry 'href "hhh" 'target "ttt" "anchor")
+     ...
+   )
+  
+   (bottom-links
+     (link-entry 'href "hhh" 'target "ttt" "anchor")
+     ....
+   )
+
+ )
+
+ (course-intro 
+   (description "..."))
+
+ (lecture-plan 'lecture-id "xxx" 'subject-id "sss"
+   (literature ...)
+   (exercises ...)
+   (misc ...))
+
+
+ (lecture-plan 'lecture-id "yyy" 'subject-id "ttt"
+   (literature ...)
+   (exercises ...)
+   (misc ...))
+
+ ...
+
+
+)
+

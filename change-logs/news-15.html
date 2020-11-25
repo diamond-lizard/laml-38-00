@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><head><meta name = "Generator" content = "LAML"><title>What is new in LAML</title></head><body bgcolor = "#ffffbf" text = "#000000" link = "#0000ff" vlink = "#0000ff"><table border = "0" cellpadding = "0" cellspacing = "0" width = "100%"><tr><td width = "33%" align = "left" valign = "top"><font size = "2">Generated: March 26, 2002, 12:57:32</font></td><td width = "34%" align = "center" valign = "top"><font size = "2">Copyright &copy; 2000, Kurt Nørmark</font></td><td width = "33%" align = "right" valign = "top"><font size = "2"><a href = "../index.html" title = "The local LAML software home page" target = "_top"><img src = "../images/laml-home.gif" alt = "The local LAML software home page" border = "0"></a></font></td></tr></table><table border = "0"><tr><td width = "740" valign = "top"><h1>What is new in LAML</h1><p><h3>News in version 15:</h3><p><ol><li>The <a href = "../laml-easy-installation.html">LAML configuration and installation procedure</a> has been simplified. 
+        It is now easier to install LAML than in version 14.<p></li><li>The LAML systems has been extended with an <a href = "../tools/xml-html-support/man/html-support.html">HTML parser</a> and a <em>simple</em> <a href = "../tools/xml-html-support/man/xml-support.html">XML parser</a>. Both of these
+        are non-validating and generic. It means that they do not depend on any DTD information. 
+        The result of the parsers are LISP abstract syntax trees (see the XML parser for information about
+        the <a href = "../tools/xml-html-support/man/xml-support.html#SECTION1">format</a>).  
+        The procedures <a href = "../man/laml.html#html-parse">html-parse</a> and <a href = "../man/laml.html#xml-parse">xml-parse</a> are convenient high-level commands that allow you
+        to parse HTML files and XML files. <p>
+        The HTML and XML parsers are still young, and there could be minor errors and inconveniences if you use them.
+        I intend to use the XML parser for future XML interfaces to some LAML styles and tools.
+        We provide both <a href = "../examples/xml-parser-and-pretty-printer/index.html">XML examples</a> and <a href = "../examples/html-parser-and-pretty-printer/index.html">HTML examples</a>.<p></li><li>The procedure <a href = "../man/laml.html#html-to-laml">html-to-laml</a> transforms an HTML file to the similar LAML file.
+        This can be used as the first step in a (mainly manual) re-engineering procedure for conversion of HTML
+        files to LAML.<p></li><li>Together with the parsers mentioned above, there is an <a href = "../tools/xml-html-support/man/html-support.html#SECTION2">HTML pretty printer</a> and an <a href = "../tools/xml-html-support/man/xml-support.html#SECTION4">XML pretty printer</a>. Both pretty print
+        the syntax trees produced by the parsers described above.  
+        The procedures <a href = "../man/laml.html#html-pp">html-pp</a> and <a href = "../man/laml.html#xml-pp">xml-pp</a> are high level pretty printing command that are easy to use.
+        The examples from above also
+        illustrate the pretty printing capabilities (<a href = "../examples/html-parser-and-pretty-printer/index.html">HTML</a>, <a href = "../examples/xml-parser-and-pretty-printer/index.html">XML</a>)<p></li><li>A parser and pretty printer for <a href = "../tools/bibtex/man/bibtex.html">bibtex</a> has been included. Bibtex is the bibliographic support for LaTeX.
+        As of now, the bibtex pretty printer
+        is still incomplete. The <a href = "../man/laml.html#bibtex">bibtex</a> procedure is a convenient
+        high level way of activating the bibtex support in LAML.  Please also consult the <a href = "../examples/bibtex/index.html">bibtex examples</a>.
+        I use this stuff to handle my CV and other matters that require access
+        to my bibtex file.<p></li><li>There is a new <a href = "../lib/man/scheme-pretty-printing.html">Scheme pretty printer</a> in LAML. It can be used as a general pretty printer of
+        Lisp files. However, there is particular support for the Scheme special forms.
+        The <a href = "../man/laml.html#scheme-pp">scheme-pp</a> procedure of the general LAML setup facility is a convenient high-level procedure
+        for pretty printing of Scheme and Lisp files. This procedure preserves semicolon comments.
+        The variant <a href = "../man/laml.html#scheme-pp-simple">scheme-pp-simple</a> does not preserve such comments.
+        Therefore it is simpler, and it should
+        be preferred for pretty printing of complicated Lisp expressions, such as syntax trees from the HTML
+        and XML parsers.
+        <p></li><li>The Emacs command <b><kbd>M-x run-laml-interactively</kbd></b> starts a Scheme interpreter from Emacs which - as the first thing -
+        automatically loads the fundamental LAML support. Thus, in such as set up, you can immediately 
+        use the most fundamental LAML stuff.<p></li><li>The Emacs command M-x unembed is a natural inverse operation of embed. These
+        two Emacs commands are very important for easy and secure authoring of LAML material from Emacs.
+        The unembed command is new. Both are described in the <a href = "../index.html#emacs-support">Emacs support overview</a> of the overall index file.<p></li><li>If you use LAML from outside Emacs there is now a <a href = "../index.html#starting-laml-non-emacs">simplified way of loading LAML into your scheme system</a>.<p></li><li>Please also notice the new paper on LAML: <b><em>A Programmatic Approach to WWW Authoring using Functional Programming</em></b> (<a href = "http://www.cs.auc.dk/~normark/laml/papers/programmatic-approach.ps">postscript</a>, <a href = "http://www.cs.auc.dk/~normark/laml/papers/programmatic-approach.pdf">pdf</a>) which is available from the <a href = "http://www.cs.auc.dk/~normark/laml/">LAML home page</a>.<p></li></ol><p><em>Besides the major improvemens listed above, a lot of small improvements have been made throughout the styles, tools, and libraries. 
+        See a  <a href = "version-14-to-15.txt">more detailed log</a>  for further details. Notice however that some changes has been performed
+        without any logging...</em><p><p><p>&nbsp;<p><p>Kurt Nørmark <br> Aalborg University <br> normark@cs.auc.dk</td></tr></table>&nbsp;<p>&nbsp;<p><font size = "1" color = "#ff0000">Generated: March 26, 2002, 12:57:32</font></body></html>
+<!-- Generated from a LAML source file. Version 17.00 (March 25, 2002 - alpha). LAML is designed and implemented by Kurt Nørmark, normark@cs.auc.dk. -->
+

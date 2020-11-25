@@ -1,0 +1,43 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+
+(define validate-html? #t)
+(define check-html-attributes? #t)
+(define transliterate-character-data? #t)
+
+(write-html '(raw prolog epilog)
+  (html 
+    (head  (title "Convenience table test") 
+
+    )
+
+    (body
+ 
+      (table-0 (list (list (em "a") "b" "c") (list "d" (font-size 6"e") "f"))) (p)
+
+      (table-1 2 (list 10 20 30) (list red green blue) (list (list (em "a") "b" "c") (list "d" "e" "f"))) (p)
+
+      (table-2 2 (list 10 20 30) (list red green blue) (list "x" (font-size 6 "y") "z") (list (list "a" (b "b") "c") (list "d" "e" "f"))) (p)
+
+      (table-3 2 (list 10 20 30) (list (list "a" "b" "c") (list "d" "e" "f"))) (p)
+
+      (table-4 2 (list 10 20 30) (list red green blue grey) (list (list "a" "b" "c") (list "d" "e" "f") (list "a" "b" "c") (list "d" "e" "f")))
+      (p)
+
+      (table-5 2 (list 10 20 30) 
+                 (list (list red blue grey) (list grey red blue) (list red grey blue) (list red blue grey))
+                 (list (list "a" "b" "c") (list "d" "e" "f") (list "a" "b" "c") (list "d" "e" "f"))) (p)
+
+      (left-middle-right-banner "Left" "Middle" "Right") (p)
+
+      (left-right-banner "Left" "Right") (p)
+
+      (laml-top-banner)
+
+      (mini-menu 
+        (list '("Entry 1" "URL1") '("Entry 2" "URL2") (list (b "Entry 2") "URL2")) black)
+
+
+    )))
+
+(end-laml)

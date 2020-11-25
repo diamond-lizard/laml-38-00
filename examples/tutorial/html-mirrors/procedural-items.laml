@@ -1,0 +1,42 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(define (link-index root-ast parent-ast)
+ (let ((a-asts (find-asts root-ast "a")))
+   (multi-column-list 3 a-asts 700)))
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "Delayed Procedural Content Items"))
+  (body 
+
+    link-index  ; @a
+
+    (hr) 
+
+    (p "Here is a document with a few links to other documents. Let us first link
+        to the" (a 'href "http://www.cs.aau.dk/~normark/laml/" "LAML home page") _
+       "," "next to the" 
+       (a 'href "../../../tutorial/index.html" "LAML tutorial")
+       "of this LAML distribution, and finally to the" 
+       (a 'href "http://www.cs.auc.dk/~normark/scheme/info/laml-pre-registration.html" "Download page of LAML")
+       _"." )
+
+    (p "Here, in another paragraph, there are more links. First to" 
+       (a 'href "http://www.w3c.org" "W3C")_ "," "next to" 
+       (a 'href "http://www.acm.org" "ACM")_ "," "and finally to" 
+       (a 'href "http://www.google.com" "Google")_ "." )
+
+  )
+ )
+)
+
+
+(end-laml)

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+   <head><title>Purchase/text Example</title></head>
+   <body>
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+         <tbody>
+            <tr>
+               <td width="33%" align="left" valign="top">
+                  <font size="2">Generated: October 28, 2003, 14:37:25</font>
+               </td>
+               <td width="34%" align="center" valign="top">
+                  <font size="2"><span>Copyright &copy; 2003, Kurt N&oslash;rmark</span></font>
+               </td>
+               <td width="33%" align="right" valign="top">
+                  <font size="2">
+                     <a href="../../../index.html" title="The local LAML software home page" target="_top">
+                        <img src="../../../images/laml-home.gif" alt="The local LAML software home page"
+                             border="0"/>
+                     </a>
+                  </font>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+      <h1>Purchase/text Example</h1>
+      <p>
+         This example shows how to transform a linear list of p elements to a nested list of
+         text elements. The example comes from 
+         <em>Transformation-by-Example for XML</em>
+          by Shriram Krishnamurthi, Kathryn Gray, and Paul Graunke, PADL 2000, Lecture
+         Notes in Computer Science 1753.
+         It is also present in the paper
+         <em> SXLT: Manipulation Languge for XML </em>
+         by Oleg Kiselyov and Shriram Krishnamurthi, PADL 2003, Lecture Notes in Computer Science
+         2562. The 
+         <a href="http://link.springer.de/link/service/series/0558/">
+            Lecture Notes in Computer Science
+         </a>
+          volumes are available from Springer Verlag if you have the the appropriate
+         privileges. 
+      </p>
+      <p>Examples and explations of the example is found below the table.</p>
+      <p>
+         The twist of the example is to introduce comma separation between the paragraphs, &#39;and&#39;
+         between the two last ones, and a count attribute on outer text element instance.
+      </p>
+      <div style="margin-left:10px;">
+         <table border="1">
+            <tbody>
+               <tr>
+                  <td width="350" valign="top"><b>Example</b></td>
+                  <td width="200" valign="top"><b>DTD</b></td>
+                  <td width="200" valign="top"><b>Scheme</b></td>
+                  <td width="200" valign="top"><b>LAML</b></td>
+                  <td width="200" valign="top"><b>XML</b></td>
+               </tr>
+               <tr>
+                  <td width="350" valign="top">The purchase DTD</td>
+                  <td width="200" valign="top">
+                     <a href="purchase.dtd">purchase.dtd</a>
+                  </td>
+                  <td width="200" valign="top">-</td>
+                  <td width="200" valign="top">-</td>
+                  <td width="200" valign="top">-</td>
+               </tr>
+               <tr>
+                  <td width="350" valign="top">The text DTD</td>
+                  <td width="200" valign="top"><a href="text.dtd">text.dtd</a></td>
+                  <td width="200" valign="top">-</td>
+                  <td width="200" valign="top">-</td>
+                  <td width="200" valign="top">-</td>
+               </tr>
+               <tr>
+                  <td width="350" valign="top">The DTD parsing script</td>
+                  <td width="200" valign="top">-</td>
+                  <td width="200" valign="top">-</td>
+                  <td width="200" valign="top">
+                     <a href="parse-dtds.laml">parse-dtds.laml</a>
+                  </td>
+                  <td width="200" valign="top">-</td>
+               </tr>
+               <tr>
+                  <td width="350" valign="top">The XML-in-LAML mirroring script</td>
+                  <td width="200" valign="top">-</td>
+                  <td width="200" valign="top">-</td>
+                  <td width="200" valign="top">
+                     <a href="make-mirrors.laml">make-mirrors.laml</a>
+                  </td>
+                  <td width="200" valign="top">-</td>
+               </tr>
+               <tr>
+                  <td width="350" valign="top">The generated purchase mirror</td>
+                  <td width="200" valign="top">-</td>
+                  <td width="200" valign="top">
+                     <a href="purchases-mirror.scm">purchases-mirror.scm</a>
+                  </td>
+                  <td width="200" valign="top">-</td>
+                  <td width="200" valign="top">-</td>
+               </tr>
+               <tr>
+                  <td width="350" valign="top">The generated text mirror</td>
+                  <td width="200" valign="top">-</td>
+                  <td width="200" valign="top">
+                     <a href="txt-mirror.scm">txt-mirror.scm</a>
+                  </td>
+                  <td width="200" valign="top">-</td>
+                  <td width="200" valign="top">-</td>
+               </tr>
+               <tr>
+                  <td width="350" valign="top">
+                     A simple purchase document and its transformation
+                  </td>
+                  <td width="200" valign="top">-</td>
+                  <td width="200" valign="top">
+                     <a href="purchase-transformation.scm">purchase-transformation.scm</a>
+                  </td>
+                  <td width="200" valign="top">
+                     <a href="simple-purchase-doc.laml">simple-purchase-doc.laml</a>
+                  </td>
+                  <td width="200" valign="top">
+                     <a href="simple-purchase-doc.xml">simple-purchase-doc.xml</a>
+                  </td>
+               </tr>
+               <tr>
+                  <td width="350" valign="top">
+                     Another purchase document and its transformation
+                  </td>
+                  <td width="200" valign="top">-</td>
+                  <td width="200" valign="top">
+                     <a href="purchase-transformation.scm">purchase-transformation.scm</a>
+                  </td>
+                  <td width="200" valign="top">
+                     <a href="purchase-doc.laml">purchase-doc.laml</a>
+                  </td>
+                  <td width="200" valign="top">
+                     <a href="purchase-doc.xml">purchase-doc.xml</a>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+      <p>Example of input and output. The simple clause</p>
+      <div style="margin-left:10px;">
+         <pre>&lt;purchase&gt;
+ &lt;p&gt;4 thinkers&lt;/p&gt;
+&lt;/purchase&gt;</pre>
+      </div>
+      <p>is transformed to</p>
+      <div style="margin-left:10px;">
+         <pre>
+&lt;text count=&quot;1&quot;&gt;
+   4 thinkers
+&lt;/text&gt;</pre>
+      </div>
+      <p>The slightly more complicated input clause</p>
+      <div style="margin-left:10px;">
+         <pre>
+            
+&lt;purchase&gt;
+ &lt;p&gt;4 thinkers&lt;/p&gt;
+ &lt;p&gt;5 tailors&lt;/p&gt;
+ &lt;p&gt;2 soldiers&lt;/p&gt;
+ &lt;p&gt;1 spy&lt;/p&gt;
+&lt;/purchase&gt;
+         </pre>
+      </div>
+      <p>is translated to</p>
+      <div style="margin-left:10px;">
+         <pre>
+            
+&lt;text count=&quot;4&quot;&gt;
+   4 thinkers,
+   &lt;text&gt;
+      5 tailors,
+      &lt;text&gt;
+         2 soldiers
+         and
+         &lt;text&gt;1 spy&lt;/text&gt;
+      &lt;/text&gt;
+   &lt;/text&gt;
+&lt;/text&gt;
+         </pre>
+      </div>
+      <p></p>
+      <hr/>
+      <p></p>
+      <p>Our conclusions are the following:</p>
+      <ul>
+         <li>
+            For a competent Scheme programmer it is easier to understand the LAML solution given
+            above than the solutions based on pattern matching and replacement in
+            the papers referred in the top of this document. In our solution we use very few
+            functions that are specific to the LAML transformation apparatus. The
+            remaining functions are either mirror functions or standard Scheme functions. The
+            key function
+            <kbd>p-&gt;text</kbd>
+            is very easy to program - almost a &#39;first timer&#39; - for any trained Scheme programmer.
+         </li>
+      </ul>
+      <p></p>
+      <hr/>
+      <p></p>
+      <p>
+         For a tutorial discussion of XML-in-LAML (and all the stuff illustrated above) please
+         have a look at 
+         <a href="../../../tutorial/xml-in-laml/xml-in-laml.html">
+            the appropriate part of the LAML tutorial
+         </a>.
+      </p>
+      <p>
+         <font size="2">
+            <em>
+               If your browser will not present files with &#39;laml&#39;, &#39;scm&#39;, or &#39;dtd&#39; extensions
+               you should disable any special handling of these extensions
+               on your system. In that way they are treated as pure
+               text files.
+            </em>
+         </font>
+      </p>
+      <p><a href="../index.html">Transformation example index.</a></p>
+   </body>
+</html>

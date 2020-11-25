@@ -1,0 +1,78 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "Elucidator 2 Examples")
+   (laml-shortcut-icon (laml-home-url-prefix))
+  )
+  (body 
+    (laml-top-banner)
+    (h1 "Elucidator 2 examples")
+
+    (p "The following elucidator examples exist in this directory:")
+
+    (indent-pixels 10
+      (table 'border "1"
+
+          (tr (map (compose td b) (list "Example"  "Setup file" "Documentation file"    "HTML" "Program files")))
+
+          (tr  (td "Simple example")
+               (td (a-tag "simple/simple.laml"))
+               (td (a-tag "simple/simple.laml"))
+               (td (b (a-tag "simple/simple.html")))
+               (td (span (a-tag "simple/sample.scm") (br)))
+          )
+
+          (tr  (td "Time conversion")
+               (td (a-tag "time/time.laml"))
+               (td (a-tag "time/time.txt"))
+               (td (b (a-tag "time/time.html")))
+               (td (span (a-tag "time/scheme/time.scm") (br) (a-tag "time/scheme/general-lib.scm")))
+          )
+
+          (tr  (td "Name bindings")
+               (td (a-tag "name-binding/name-binding.laml"))
+               (td (a-tag "name-binding/name-binding.laml"))
+               (td (b (a-tag "name-binding/name-binding.html")))
+               (td (span (a-tag "name-binding/demo.scm")))
+          )
+
+          (tr  (td "Versioning and program evolution")
+               (td (a-tag "versions/version-demo.laml"))
+               (td (a-tag "versions/version-demo.laml"))
+               (td (b (a-tag "versions/version-demo.html")))
+               (td (span (a-tag "versions/src/prog1.scm") "and" (a-tag "versions/src/prog2.scm")))
+          )
+
+        ))
+
+    (p "See also the" 
+        (a 'href "scheme-documentation-tools/index.html" "examples" ) "related to the paper"
+                 (a 'href "http://www.cs.auc.dk/~normark/laml/papers/documentation-tools.pdf" (em "Scheme Program Documentation tools")) )
+
+    (p 
+      "The" (a 'href "http://www.cs.aau.dk/~normark/elucidative-programming/index.html" "Scheme Elucidator Home Page") "is also relevant."
+    ) 
+
+    (vertical-space 1) (font 'color "red" 'size "2" (when-generated))
+
+  )
+ )
+)
+
+
+(end-laml)
+
+

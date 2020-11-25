@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+      <meta name="Generator" content="LAML"/>
+      <title>News in LAML version 23</title>
+      <link rel="SHORTCUT ICON" href="../images/16-16-icon.ico"/>
+   </head>
+   <body bgcolor="#ffffbf" text="#000000" link="#0000ff" vlink="#0000ff">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+         <tbody>
+            <tr>
+               <td width="33%" align="left" valign="top">
+                  <font size="2">Generated: May 6, 2005, 17:20:57</font>
+               </td>
+               <td width="34%" align="center" valign="top">
+                  <font size="2"><span>Copyright &copy; 2005, Kurt N&oslash;rmark</span></font>
+               </td>
+               <td width="33%" align="right" valign="top">
+                  <font size="2">
+                     <a href="../index.html" title="The local LAML software home page" target="_top">
+                        <img src="../images/laml-home.gif" alt="The local LAML software home page"
+                             border="0"/>
+                     </a>
+                  </font>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+      <h1>What is new in LAML</h1>
+      <p>
+         Version 22 was never officially released, so I decided to bring all the recent changes
+         out as version 23.
+      </p>
+      <h3>News in version 23:</h3>
+      <ol>
+         <li style="margin-bottom:4mm;">
+            It is now possible to use numbers and characters as element contents items. Change
+            processing mode with
+            <kbd>(set-xml-accept-extended-contents-in language value)</kbd>.
+             It is also possible to affect the possible attribute values. Change
+            processing mode with
+            <kbd>(set-xml-accept-only-string-valued-attributes-in language value)</kbd>.
+             The XHTML LAML templates now makes it easy to use the various LAML processing
+            options via the introduction of the a new LAML template &#39;
+            <b>Processing options</b>
+            &#39; in the LAML Emacs menu. 
+         </li>
+         <li style="margin-bottom:4mm;">
+            The reporting of errors in case of XML validation problems has been improved. As
+            part of the error messages, problematic document fragments are reported using Scheme
+            syntax. Earlier, native XML syntax was used.
+         </li>
+         <li style="margin-bottom:4mm;">
+            The Emacs keybindings are now available in two different versions. The
+            <kbd>original</kbd>
+            keybindings are still maintained. A new set of keybindings, called
+            <kbd>hygienic</kbd>
+            keybindings, has been introduced. Most of these start with C-c (control
+            C). As such, they do not conflict with existing and important Emacs
+            keybindings. The choice of keybindings can be controlled in the LAML
+            configuration file laml-config/configuration via the configuration property called
+            <kbd>emacs-keybindings</kbd>.
+            It is also possible to configure LAML without Emacs keybindings, by using
+            the value
+            <kbd>none</kbd>.
+         </li>
+         <li style="margin-bottom:4mm;">
+            The internal document representation now exists in two version:
+            <kbd>laml</kbd>
+            and
+            <kbd>sxml</kbd>.
+             Use of
+            <kbd>sxml</kbd>
+            is still experimental (but it works well throughout all LAML software). The
+            choice of representation is made in
+            <kbd>lib/xml-in-laml/xml-in-laml.scm</kbd>
+            via the variable
+            <kbd>laml-internal-representation</kbd>.
+            In a future version, the choice of internal representation may be a
+            configuration option.
+         </li>
+         <li style="margin-bottom:4mm;">
+            It is now possible to get access to the element content models, the action
+            procedures, and the validation procedures through the a number of new maps in
+            <kbd>lib/xml-in-laml/xml-in-laml.scm</kbd>.
+            The procedure
+            <kbd>validate-ast!</kbd>
+            does explicit validation of an AST. In normal use of LAML, the XML validation
+            is integrated into the mirror functions. If the AST is not created through
+            the mirror functions it is useful to apply the procedure 
+            <kbd>validate-ast!</kbd>
+            for full XML validation.
+            Similarly the procedure
+            <kbd>process-ast!</kbd>
+            processes an AST by means of the designated action procedures. Notice
+            that the mirror libraries will have to be loaded in order to use
+            <kbd>validate-ast!</kbd>
+            and 
+            <kbd>process-ast!</kbd>.
+            Notice that it is no longer necessary to define the action procedures before loading
+            of the mirror functions.
+         </li>
+         <li style="margin-bottom:4mm;">
+            Filenames with &#39;&lt;&#39; and &#39;&gt;&#39; cause problems in Windows XP. From this version
+            of LAML, the Scheme Elucidator does not emit such file names.
+         </li>
+         <li style="margin-bottom:4mm;">
+            A new XML-in-LAML
+            <a href="../styles/xml-in-laml/manual/man/manual.html">manual facility</a>
+            has been developed. It can be used to write manuals for Scheme software. It
+            also serves as a convenient interface to SchemeDoc, which extracts interface document
+            from Scheme source programs. Finally, the new LAML manual facility can
+            be used to extract and format document from an XML DTD.
+            <p></p>
+            The new LAML manual facility uses XHTML and CSS stylesheets. You can
+            easily change the manual stylesheet for all LAML manuals by executing one
+            of the scripts in the directory
+            <kbd>css-stylesheets/change-manual-stylesheet/</kbd>.
+            You can also make your own CSS stylesheets for you manuals.
+            <p></p>
+            The 
+            <a href="../tutorial/schemedoc/schemedoc.html">
+               LAML tutorial chapter on SchemeDoc and the LAML manual
+            </a>
+             has been rewritten to take the new manual facilities into account.
+            <p></p>
+            See also the new
+            <a href="http://www.cs.auc.dk/~normark/schemedoc/">SchemeDoc home page</a>.
+         </li>
+         <li style="margin-bottom:4mm;">
+            A new interactive command,
+            <a href="../man/laml.html#xml-dtd-manual"><kbd>xml-dtd-manual</kbd></a>,
+            can be used to make a LAML manual (in SchemeDoc) style of an XML DTD.
+            This command can be used from an interactive LAML prompt, such as obtained by M-x
+            <kbd>run-laml-interactively</kbd>
+            in Emacs.
+            The command
+            <kbd>xml-dtd-manual</kbd>
+            is defined and documented in the fundamental LAML setup file laml.scm.
+         </li>
+         <li style="margin-bottom:4mm;">
+            Similarly, the
+            <a href="../man/laml.html#schemedoc"><kbd>schemedoc</kbd></a>
+            command can be used to start the SchemeDoc tool. And
+            <a href="../man/laml.html#xml-dtd-parse"><kbd>xml-dtd-parse</kbd></a>
+            can be used to parse and XML DTD. Finall, the command
+            <a href="../man/laml.html#generate-xml-mirror">generate-xml-mirror</a>
+            can be used to generate a mirror in Scheme of an XML language.
+         </li>
+         <li style="margin-bottom:4mm;">
+            In versions earlier than LAML 23, each tripple of laml-platform, operating-system,
+            scheme-system had its own Emacs file for LAML processing. This caused
+            a substantial overlap of E-lisp source definitions, and it was quite difficult
+            to make a new set of LAML processing E-lisp functions.
+            <p></p>
+            From version 22 these different files have been eliminated. Instead all the LAML
+            processing commands are joined in the file
+            <kbd>emacs-support/laml-execute.el</kbd>.
+            The variations accross platforms, operating systems, and Scheme systems are
+            accommodated in the two E-lisp functions
+            <kbd>start-laml-process</kbd>
+            and
+            <kbd>call-laml-process</kbd>.
+            Both of these are defined in the initial part of
+            <kbd>emacs-support/laml-execute.el</kbd>.
+         </li>
+         <li style="margin-bottom:4mm;">
+            It is now possible to start or call (asynchronously or synchronously) a LAML process
+            on a LAML file directly from dired. Dired is the Emacs directory editor.
+            Try
+            <b><kbd>M-x dired</kbd></b>.
+            Two new keybindings (the same used for processing a LAML files, from
+            inside a LAML file, C-c C-0 and C-c C-x C-o with the hygienic key bindings) have
+            been introduced. They are bound to the E-lisp commands
+            <kbd>laml-process-selected-file-from-dired</kbd>
+            and
+            <kbd>laml-process-selected-multiple-files-from-dired</kbd>.
+             The first processes the selected file asynchronously. The second one
+            may process several selected files synchronously. These commands are
+            also available via Dired&#39;s operate menu. 
+         </li>
+      </ol>
+      <div>
+         &nbsp;
+         <br/>
+         Kurt N&oslash;rmark
+         <br/>
+         <a href="mailto:normark@cs.aau.dk">normark@cs.aau.dk</a>
+         <br/>
+         <a href="http://www.cs.auc.dk/~normark/">http://www.cs.auc.dk/~normark/</a>
+      </div>
+   </body>
+</html>
+<!-- Generated from a LAML source file. Version 27.0 (April 18, 2005, development). LAML is designed and implemented by Kurt Nørmark, normark@cs.auc.dk. -->

@@ -1,0 +1,69 @@
+(load (string-append laml-dir "laml.scm"))
+
+(laml-style "simple")
+
+(define (concat f . elements)
+ (let ((lgt (length elements)))
+  (string-merge elements (make-list (- lgt 1) (f)))))
+
+(generic-page
+  "Overview of LENO examples"
+  (con-par
+    (laml-top-banner)
+    (h 1 "Overview of LENO examples")
+    "The following simple examples exists in this directory:"
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 250 250 200)
+        (list
+          (map b (list "Example"   "LAML"                            "HTML"))
+          (list "This index"       (a-tag "index.laml")              (a-tag "index.html"))
+
+          (list "LENO Single Chapter Example"  (concat br 
+                                                (a-tag "single-chapter/talk.laml"  "LAML source")
+                                               )
+   
+                                                                      (a-tag "single-chapter/html/talk.html" "index.html"))
+
+          (list "LENO Multi Chapter Example"  (concat br 
+                                                (a-tag "multi-chapter/ch1.laml"  "Chapter 1 LAML source")
+                                                (a-tag  "multi-chapter/ch2.laml" "Chapter 2 LAML source")
+                                                (a-tag  "multi-chapter/notes.scm" "notes.scm common definitions")
+                                                (a-tag  "multi-chapter/post-notes.scm" "post-notes.scm common definitions")
+                                               )
+   
+                                                                      (a-tag "multi-chapter/html/index.html" "index.html"))
+          (list "LENO Meta example" 
+                                (a-tag "../../styles/lecture-notes/man/meta-lecture-notes.laml" "LAML meta example")                                      
+                                        (a-tag "../../styles/lecture-notes/man/html/meta-lecture-notes.html" "HTML meta example") )
+
+          (list "Slides of LAML presentation" 
+                                (a-tag "../../slides/lugm-99-amsterdam/lugm-99.laml" "LAML source of the slides")                                      
+                                        (a-tag "../../slides/lugm-99-amsterdam/html/lugm99.html" "HTML slides") )
+
+          (list "Slides of brief LAML presentation" 
+                                (a-tag "../../slides/lugm-99-amsterdam/brief-laml-presentation.laml" "LAML source of the slides")                                      
+                                        (a-tag "../../slides/lugm-99-amsterdam/html/laml-brief.html" "HTML slides") )
+         )
+        ))
+
+
+    (con "The last two examples represent real slide sets used to present LAML in various talks. The latter of these
+    illustrates the " (b "trail facility") " of LENO via which slides from various slide sets (or lectures) can be selected
+    without making copies of the original slides. The trail facility uses a frame with a tiny navigation bar to the left of the main window.")
+
+    (font-size 2 (em "If your browser will not present files with 'laml' or 'scm' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files."))
+)
+  white black blue blue
+)
+
+(end-laml)
+
+
+
+
+

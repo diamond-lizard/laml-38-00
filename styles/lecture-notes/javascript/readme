@@ -1,0 +1,20 @@
+The keyboard navigation Javascritp scripts.
+
+Notice that there are two versions of lenonavigate.js in this directory:
+
+  lenonavigate-single.js supports mouse advancement via single mouse clicks on the background.
+  lenonavigate-double.js supports mouse advancement via double mouse clicks on the background.
+
+If dynamic loading of javascript is called for and if javascript-loading is #t,
+we copy the file lenonavigate-single.js or lenonavigate-double.js from this directory
+to html/javascript/lenonavigate.js in the notes directory. 
+
+Notice that only one of lenonavigate-single.js and lenonavigate-double.js is actually used.
+
+
+September 2002: Now only lenonavigate-double.js is used. Single/double mouse click navigation
+is not supported any more. lenonavigate-double.js now works in both mozilla, IE, and netscape.
+
+
+
+

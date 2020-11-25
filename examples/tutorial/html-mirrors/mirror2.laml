@@ -1,0 +1,44 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-strict-validating")
+
+(define laml-url "http://www.cs.auc.dk/~normark/laml/")
+
+; ::html-write-clause::
+; Writing the HTML fragment to an HTML file.
+
+(write-html 'pp
+  (html 
+   (head 
+     (title "White space handling") 
+   )
+
+   (body
+
+     (p "This is the" (em "first") "paragraph.")   ; @a
+
+     (p "This is the second" (b "paragraph") _ ".")  ; @b
+
+     (p (list (kbd "This") "is" "the" "third" 
+              "paragraph" _ "."))  ; @c
+
+     (p (list (kbd "This") "is" "the" "fourth" 
+              'class "third" "paragraph" _ "."))  ; @d
+
+     (p (list "This" 
+              (list (b "is") "the")
+              "fifth" "paragraph" _ "."))  ; @e
+
+     (p (list "This"
+               (list (b "is") "the" 'class "third")
+              "sixth" "paragraph" _ "."))  ; @f
+
+     (p (list "This" "is" "t") _
+        "h" _
+        (list "e" "seventh")
+        (list (list (list "paragraph"))) _ ".") ; @g 
+     
+   )
+  )
+)
+
+(end-laml)

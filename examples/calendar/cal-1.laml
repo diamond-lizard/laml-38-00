@@ -1,0 +1,25 @@
+(load (string-append laml-dir "laml.scm"))
+
+(laml-style "simple")
+
+(load (string-append software-directory "tools/calendar/calendar.scm"))
+(set! calendar-font-size 1)
+(set! month-width 80)
+
+(define calendar-events '())
+
+(define language-preference 'english)
+(define week-separator-of-calendar 'thin)
+
+(generic-page
+  "Calendar example"
+ (con
+  (h 1 "Calendar example")
+  (calendar 2000 1 12))
+  white black blue blue
+)
+
+
+
+
+

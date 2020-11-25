@@ -1,0 +1,30 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+
+
+(write-html 'pp
+ (html4:html
+  (con 
+   (html4:head (con (html4:title (con "A simple page"))))
+   (html4:body
+    (con 
+     (html4:p "This page demonstrates a few of the functions in the HTML 4.0 loose basic library.")
+
+     (html4:p (con (html4:em (con "This paragraph has been emphasized by means of the" " "
+         (html4:b "em") " " "function" "." ))))
+
+     (html4:p (con (html4:b "The above paragraph is not valid, because we emphasize a p element using the em element.
+      It should be the other way around: emphasizing the contents of the pagragraph, like done here...")))
+
+     (html4:p "I hope that you already have realized that the level of this library is inconvenient for most purposes.")
+
+     (html4:a "Link to index page" 'href "index.html")
+
+     (html4:p (con (html4:b (con "This ends this simple page" "."))))
+
+   ))
+  )
+ )
+ (full-source-path-with-extension "html"))
+
+(end-laml)

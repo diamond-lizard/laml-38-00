@@ -1,0 +1,321 @@
+; The elucidator laml setup file
+; Change the capital names
+
+; Load the styles file, hereby defining style function
+
+(load (string-append laml-dir "laml.scm"))
+(laml-style "elucidator/elucidator")
+
+(load (in-startup-directory "../tutorial-common.scm"))
+
+
+; Set the directory in which this file resides.
+; The directory ends in a '/'
+
+(set-source-directory (startup-directory))
+
+; Set the name of this file, without extension
+(set-documentation-name "cgi-programming")
+
+; Set the level of processing. With commenting, process all source files.
+; (process-only)
+
+; (make-no-indexes)
+(make-all-indexes)
+
+(define default-program-font-size 'large)
+; (define default-table-of-content 'detailed)
+(define make-large-source-files? #t) 
+(define toc-columns-detail 3)  
+(define present-hidden-ids? #t)
+(define underline-program-links #f)
+(define underline-documentation-links #f)
+(define show-sectional-comment-name #t)
+
+(define elucidator-home-url "../../index.html")
+
+(define previous-next-elucidators #t)
+(define elucidator-previous-url (neighbor-elucidator-url "leno"))
+(define elucidator-next-url #f)
+
+
+; The RELATIVE (back) path to the r4rs directory, which is located in the root of the LAML distribution.
+(define rs4r-url-prefix "../../../r4rs/")
+
+; Do you want a menu like selection of programs?
+(define separate-program-menu? #t)
+
+(define (laml-source-file f)
+  (string-append laml-dir f))
+
+(define elucidator-color-scheme 
+  (make-color-scheme 
+    "doc" documentation-background-color
+    "program" program-background-color-1
+    "lib" program-background-color-2
+  ))
+
+
+; Define the sourcefiles in this documentation bundle
+(program-source
+ (key "number-guess")
+ (file-location (in-startup-directory (tutorial-example-file "cgi-programming/number-guess.scm")))
+ (language "scheme")
+ (group "program")
+)
+
+(manual-source
+ (file-location (laml-file "man/laml.lsp"))
+ (url-location (laml-url "man/laml.html")))
+
+(manual-source
+ (file-location (laml-file "lib/man/general.lsp"))
+ (url-location (laml-url "lib/man/general.html")))
+
+(manual-source
+ (file-location (laml-file "lib/man/cgi.lsp"))
+ (url-location (laml-url "lib/man/cgi.html")))
+
+(manual-source
+ (file-location (laml-file "lib/man/color.lsp"))
+ (url-location (laml-url "lib/man/color.html")))
+
+(manual-source
+ (file-location (laml-file "lib/man/encode-decode.lsp"))
+ (url-location (laml-url "lib/man/encode-decode.html")))
+
+(manual-source
+  (file-location (laml-file "lib/html4.01-transitional-validating/man/basis.lsp"))
+  (url-location  (laml-url  "lib/html4.01-transitional-validating/man/basis.html"))
+)
+
+(manual-source
+  (file-location (laml-file "lib/html4.01-transitional-validating/man/surface.lsp"))
+  (url-location (laml-url "lib/html4.01-transitional-validating/man/surface.html")))
+
+(manual-source
+  (file-location (laml-file "lib/html4.01-transitional-validating/man/convenience.lsp"))
+  (url-location (laml-url "lib/html4.01-transitional-validating/man/convenience.html")))
+
+
+; Define the documentation body, here in terms of a documentation-from clause
+(begin-documentation)
+
+(documentation-intro 
+  "CGI Programming with LAML"
+  "Kurt Nørmark"
+  "normark@cs.auc.dk"
+  "Department of Computer Science, Aalborg University"
+   (con  
+   "In this chapter we give an example of a CGI program written in Scheme using
+    the LAML cgi library."))
+
+
+(documentation-section 
+  (id 'intro)
+  (title "Introduction")
+  (intro 
+   (con
+     "We are going to develop a simple number guessing game.")))
+
+(documentation-entry
+  (id 'the-game)
+  (title "The game")
+  (body 
+   (con 
+
+"The game is very simple, and it is a common demonstration of 
+a www server side program. The machine picks a secret number between 0 and 100
+which you are supposed to guess.
+Upon each guess, the machine will tell
+you if your guess is too low, too high, or correct. The machine part is running
+on an Appache WEB server on a Unix machine. " (p)
+
+"The game is operational, and it can be played from "
+(a-tag-target "http://www.cs.auc.dk/~normark/cgi-bin/number-guess/number-guess.cgi" "here" "game")
+" if you are connected to the Internet. " (p)
+
+"The pure Scheme program is available via "
+  (laml-example-link "tutorial/cgi-programming/index.html" "the tutorial example page") "."
+     
+
+   )
+  )
+)
+
+(documentation-section 
+  (id 'design-sect)
+  (title "Overall design")
+  (intro 
+   (con
+     "Although this program is simple and small we have used a structure which, in some
+respects at least, can be used for larger and more realistic CGI programs.")))
+
+(documentation-entry
+  (id 'design)
+  (title "The overall design")
+  (body 
+   (con 
+     "We decide to split the program in a tiny CGI shell and the Scheme program as such.
+The CGI shell, which must be located in the {-.public_html/cgi-bin} directory, is here:"
+
+(bq "
+#!/bin/sh
+ 
+string=? ; exec /pack/mzscheme/bin/mzscheme \\-r \\$0 \"\\$\\@\"
+
+;; This program implements a number guessing game, 
+;; which is commonly used to illustrate simple WWW
+;; server programming.
+
+(define example-tutorial-dir \"/user/normark/scheme/examples/tutorial/\")
+(load (string-append example-tutorial-dir 
+         \"cgi-programming/number-guess.scm\"))
+")
+
+"The name of the file must be {-number-guess.cgi}, and it should be file protected
+to be executable (typically with " (kbd "chmod 755") ")." (p)
+
+"This starts MzScheme via a shell script, and the load line is executed.
+It would be perfectly possible to place the entire Scheme program here, but
+we prefer in general to organize our software in a directory outside the
+.public_html catalogue. Therefore we load the number guessing program from
+the tutorial example directory in my LAML development directory, which happens to
+be {-/normark/scheme}." (p)
+
+"As another important point, we decide to organize the number guessing
+system as a single program, which in the {*number-guess$page-write}
+part branches between a game init part (@b) and a game
+playing part (@a). We could as well have written two separate CGI programs,
+which probably would have been preferable in case the 'System' is larger.
+Such an alternative organization would typically call for common definitions organized in a shared scheme
+number guessing libary file."
+
+
+   )
+  )
+)
+
+(documentation-section 
+  (id 'the-program-part)
+  (title "The program")
+  (intro 
+   (con
+     "In this section we describe the number guessing program details."
+     )))
+
+(documentation-entry
+  (id 'preamble-part)
+  (title "The preamble part")
+  (body 
+   (con 
+"We will here comment on the preamble part of the number guessing program. It
+follows the typical pattern of most Scheme CGI programs we have written." (p)
+
+"The first thing to do in the section {*number-guess$laml-loading} is to load " (kbd "laml.scm") ".In order to do so we must
+set {*number-guess$laml-dir} (@g).
+{*number-guess$laml-dir} is important, because it's value points at the root of the LAML system,
+which is used. Being at {-cs.auc.dk} it is natural to use the shared LAML system in {-/pack/laml/}.
+Alternatively, the directory address of your own LAML system can be used." (p)
+
+"Next comes the section {*number-guess$initial-constants}.
+The variable {*number-guess-url-prefix} and not least the derived function {*number-guess-url}
+are used to address the number guessing program from a browser. The function returns an URL
+with actual URL parameters - following the question mark. The function {*make-url-parameters}
+is from the cgi LAML library, and it makes a list of actual URL parameters.
+ We will meet the function {*number-guess-url} later on." (p)
+
+"Next comes the {*number-guess$additional-loading} part of the program. Here the " 
+(laml-manual-link "lib/man/cgi.html" "cgi library") " is loaded by 
+means of the {-lib-load} procedure, and a number of other libraries are loaded too. 
+The " (laml-manual-link "lib/man/encode-decode.html" "encode-decode") " library (@b) is used by {-cgi.scm}
+for encoding and decoding URL parameters." (p)
+
+"In {*number-guess$other-settings} we set the variable {*number-guess$cgi-testing} to #f and we register the current
+time in {*number-guess$cur-time}. The time is not used in this program, but it general this number is useful for
+a variety of purposes (such as making file names 'unique')." (p)
+
+"In the section {*number-guess$url-parameters} we extract the URL parameters passed to the program.
+The variable {*number-guess$language-preference} controls whether the Danish or English language
+is used in the game, with english as the default.
+The function {-text-choice} uses the variable {*number-guess$language-preference}.
+The variable {*number-guess$mode} is important because it controls the part of the program to be started; Possible values are
+the symbols {-init} or {-play}, with {-init} as the default. The function {-defaulted-get} is a function from the LAML general library." (p)
+
+"The CGI library function " (laml-manual-link "lib/man/cgi.html" "extract-url-parameters") " "
+"decodes the URL parameters.
+The variable {*number-guess$url-pars} is an association list (a list of cons pairs), such as"
+
+(bq "
+  ((language . \"english\") (mode . \"init\"))")
+
+
+"This ends the game preamble part."
+
+     
+
+   )
+  )
+)
+
+(documentation-entry
+  (id 'init-game)
+  (title "The init game part")
+  (body 
+   (con 
+"The function {*number-guess$game-init} returns a HTML body to be used in one of the branches of
+the {+number-guess$page-write} section in the program. This is the place to draw the secret number (@a)." (p)
+
+"Also notice the form element, generated by " 
+(laml-manual-link "lib/html4.01-transitional-validating/man/convenience.html" "form-1") " at (@b). This
+determines the program which will receive form input when
+submitted. Thus, when we submit a new guess this detail determines the
+receiving CGI program. Here, we reuse the same program for this
+purpose (due the outer branching discussed above), but notice
+that we switch to {-play} mode. We pass the {-language-preference} as the
+language URL parameter." (p)
+
+"After a welcome text we call {+number-guess$guess-part} (@c), which renders the form used for the user's guess." (p)
+
+"Let us now look at {*number-guess$guess-part}, which returns part of the body. 
+Most functions called by {*number-guess$guess-part} are so-called convenience functions,
+made on top of the HTML mirror libraries.
+The function {-text-line} renders
+an input field, in which the guess can be entered (@f). The secret number is passed on using
+a hidden field (@g). In a better version of the program we should protect this field from being
+read directly in the document source. The submit button is also made in this function (@h)."
+     
+
+   )
+  )
+)
+
+(documentation-entry
+  (id 'game-part)
+  (title "The game part")
+  (body 
+   (con 
+     
+"The game part, represented by {*number-guess$game-play}, is the place where we get a hint about our 
+guess, and we are allowed to make a new guess if we did not hit the number exactly."
+
+"We first have to extract the submitted form input. This is done by the CGI library {-extract-form-input}
+from the CGI library (@i), which returns an association list such as"
+(pre 
+  "((secret-number . \"42\") (players-guess . \"22\"))")
+
+"We prepare a body with a new form element (as above) (@j). The conditional (@k)
+compares the secret number with the players guess, and an appropriate hint is presented.
+Notice how {+number-guess$guess-part} is activated if no exact hit is found (@c @d). In the
+lucky case where the player guesses the number an URL is given to restart the game (@e)."
+
+
+   )
+  )
+)
+
+
+
+
+(end-documentation)
+

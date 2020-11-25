@@ -1,0 +1,11 @@
+The stylesheets in this directory can be divided in two groups.
+
+1. The font-size stylesheets:   "large-size.css" "normal-size.css"  "small-size.css" 
+   We specify such a stylesheet the the pre-stylesheet attribute.
+
+2. Stylesheets for other style elements, such as colors and graphical aspects.
+   Examples of these are "original.css" "aau1.css" "aau2.css".
+   We specify such a stylesheet with the css-stylesheet attribute.
+
+Thus, you should both include a pre-stylesheet and a css-stylesheet attribute
+in the leno-front-matters element.

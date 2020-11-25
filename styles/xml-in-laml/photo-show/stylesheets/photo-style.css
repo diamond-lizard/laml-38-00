@@ -1,0 +1,19 @@
+body
+  { 
+    scrollbar-face-color:@background-color@;
+    scrollbar-shadow-color:@background-color@;
+    scrollbar-highlight-color:@background-color@;
+    scrollbar-3dlight-color:@background-color@;
+    scrollbar-darkshadow-color:@background-color@;
+    scrollbar-track-color:@background-color@;
+    scrollbar-arrow-color:@background-color@; 
+   }
+
+a.menu-item
+  { font-size: @menu-font-size@;
+    text-decoration: none;
+  }
+
+span.menu-item
+  { font-size: @menu-font-size@;
+  }

@@ -1,0 +1,10 @@
+#!/bin/sh 
+# By Kurt Normark, normark@cs.auc.dk
+# Copied and modified by the LAML installation process - DO NOT EDIT.
+# Usage: laml file
+# Run MzScheme on file from the current directory
+# File is with extension
+#
+/pack/plt-scheme-209/bin/mzscheme -v -e '(load (string-append "/user/normark/scheme/" "laml.init"))' -f $PWD/$1 $1 $PWD/
+
+

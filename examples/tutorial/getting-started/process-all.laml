@@ -1,0 +1,14 @@
+(load (string-append laml-dir "laml.scm"))
+
+(define (process-list . lst)
+ (for-each
+   (lambda (f)
+    (display f) (newline) (newline)
+    (laml f) ; @a
+   )
+   lst))
+
+(process-list "bookmarks" "fac-1" "fac-2" "index")
+
+
+(end-laml)

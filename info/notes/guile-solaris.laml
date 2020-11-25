@@ -1,0 +1,47 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(define  index-color (make-color 255 255 191))
+(define body-props 
+   (list 'bgcolor (rgb-color-encoding index-color) 'text (rgb-color-encoding black)
+         'link (rgb-color-encoding blue) 'vlink (rgb-color-encoding blue)))
+
+
+(write-html '(pp prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "Notes about LAML with Guile on Solaris"))
+  (body body-props
+    (laml-top-banner)
+ 
+    (h1 "LAML with Guile on Sun Solaris")
+
+    (p "I have only tested LAML with Guile on Linux. But I would be surprised if it does not work on Solaris too.")
+
+    (p (b "Pre version 26 notes:"))
+
+    (p "I have tested LAML with Guile version 1.3.4, 1.4 og and 1.6.3 on Sun OS 5.8 (Solaris 8).
+     All the LAML programs and documented that I have tested are OK.")
+
+    (p "Notice that Guile is case sensitive, in contrast to for instance MzScheme. LAML is 
+        programmed to be case sensitive.")
+
+    (p "Differences regarding" (kbd "eval") "in Guile 1.6 and earlier versions caused us to introduce
+        " (kbd "eval-cur-env") "in the LAML compatibility files. In that way we are able to accommodate
+        differences among different Scheme system's parameter conventions of" (kbd "eval") _ ".")
+
+  )
+ )
+)
+
+
+(end-laml)

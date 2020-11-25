@@ -1,0 +1,11 @@
+November 13:
+
+lib/xml-in-laml.scm
+Attribute values are now converted to a string, using as-string.
+
+Example
+
+  (p 'id 5 "xx") was before  (ast "p" ("xx") (id 5) double xhtml10-transitional)
+  Now it is   (ast "p" ("xx") (id "5") double xhtml10-transitional).
+
+

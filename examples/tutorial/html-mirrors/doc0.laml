@@ -1,0 +1,24 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-strict-validating")
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+(set-xml-transliterate-character-data-in 'xhtml10-strict #t)
+
+; ::write-clause::
+; Writing the HTML fragment to an HTML file.
+
+(write-html '(raw prolog)
+  (html  ; @a
+   (head 
+     (title "Doc Title") 
+   )
+
+   (body
+     (h1 "Title")
+     (p "First paragraph")
+   )
+  )
+)
+
+(end-laml)

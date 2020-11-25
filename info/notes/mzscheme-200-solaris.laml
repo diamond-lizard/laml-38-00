@@ -1,0 +1,75 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(define  index-color (make-color 255 255 191))
+(define body-props 
+   (list 'bgcolor (rgb-color-encoding index-color) 'text (rgb-color-encoding black)
+         'link (rgb-color-encoding blue) 'vlink (rgb-color-encoding blue)))
+
+
+(write-html '(pp prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "Notes about LAML with MzScheme 200"))
+  (body body-props
+    (laml-top-banner)
+ 
+    (h1 "LAML with MzScheme 200 on Solaris.")
+
+    (p "I have tested LAML 26 on Solaris 2.9 with MzScheme 205.")
+
+    (p "As of 2009, were LAML version 35 is the current version, we do not use Solaris any more. Therefore I cannot test most recent version of LAML on Solaris.
+       ")
+
+    (p "As of January 2005 we use MzScheme version 205 on Red Hat Linux and on Solaris. 
+        Everything in LAML runs perfectly in this version of MzScheme. We also use MzScheme 205 for CGI purposes.")
+
+    (p "Version 27: Tested and OK.")
+
+    (p (b "Some historical remarks - pre version 26:"))
+
+    (p "About LAML configuration and MzScheme 200+: 
+     I have made a new compatibility file in lib/compatibility called star_star_mzscheme-200.scm.
+     Currently it covers all mzscheme 200+ needs, on both unix and windows. 
+     I have made a 'hack' in the 
+     LAML configuration program such that the exec files and the emacs stuff are taken from 
+     the old mzscheme configuration when mzscheme-200 is requested. In that way fewer files
+     are needed in the configuration part of LAML.")
+
+
+    (p "Some Scheme programs and LAML documents contain backslashes.  MzScheme 200+ has a different interpretation of the 
+     escaping backslash character in strings than version 103 and 101. In LAML version 19 and beyond we have addapted SchemeDoc
+     to deal with the strict interpretation of backslashes in strings (only \\\" and \\\\ are well-defined). In that way, both SchemeDoc, the Scheme Elucidator, and 
+     other tools  run with MzScheme200+.")
+
+    (p "When we eventually stop using MzScheme 101 on Solaris, also for CGI, we will probably make a specific compatibility file for MzScheme 200+ on Solaris.
+        Until then, the generic star_star_mzscheme-200.scm. is fine.")
+
+    (p "I have used MzScheme 200+ (all versions) on Windows 2000 since it appeared.
+        MzScheme 200+ works fine also on Solaris. However, we still use version 101 in our daily use of LAML on Solaris.
+        This also holds for CGI programs.  It would be trivial to start using MzScheme 200+ for static LAML processing.
+        It will take some efforts to convert to MzScheme 200+ with respect the LAML-based CGI programs, because they all start like this:
+        ")
+
+    (pre "#!/bin/sh
+ 
+string=? ; exec /pack/mzscheme/bin/mzscheme -r $0 \"$@\"
+")
+
+
+
+  )
+ )
+)
+
+
+(end-laml)

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+      <meta name="Generator" content="LAML"/>
+      <title>Notes about LAML on SCM</title>
+   </head>
+   <body bgcolor="#ffffbf" text="#000000" link="#0000ff" vlink="#0000ff">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+         <tbody>
+            <tr>
+               <td width="33%" align="left" valign="top">
+                  <font size="2">Generated: June 9, 2005, 13:46:15</font>
+               </td>
+               <td width="34%" align="center" valign="top">
+                  <font size="2"><span>Copyright &copy; 2005, Kurt N&oslash;rmark</span></font>
+               </td>
+               <td width="33%" align="right" valign="top">
+                  <font size="2">
+                     <a href="../../index.html" title="The local LAML software home page" target="_top">
+                        <img src="../../images/laml-home.gif" alt="The local LAML software home page"
+                             border="0"/>
+                     </a>
+                  </font>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+      <h1>LAML with SCM</h1>
+      <p>Version 27: Not yet tested with SCM</p>
+      <h2>Historical Remarks:</h2>
+      <p>
+         The notes below are all historial pre-version 26 remarks. The remarks are appropriate
+         for version 20.
+      </p>
+      <p>
+         SCM is Aubrey Jaffer&#39;s excellent Scheme system, which we used in the early days of
+         the development of LAML. Also for CGI programming efforts.
+      </p>
+      <p>
+         We left SCM, mostly because our system staff on Solaris had a hard time installing
+         new versions. The last few years I have not used SCM with LAML on Solaris.
+      </p>
+      <p>
+         I installed SCM version 5d7 and SLIB version 2d5 (most recent versions as of May 2003)
+         on Red Hat Linux. This was very easy due to existence of RPM&#39;s for
+         both, cf.
+         <a href="http://www-swiss.ai.mit.edu/~jaffer/SCM.html">Jaffer&#39;s SCM page</a>.
+      </p>
+      <p>
+         In the same way as for Guile and MzScheme-200, I adapted the existing SCM compatibility
+         file and made it generic for all platforms and all operating systems:
+         <kbd>lib/compatibility/star_star_scm.scm</kbd>.
+      </p>
+      <p>The following minor problems exist for SCM in relation to LAML:</p>
+      <ol>
+         <li>
+            I could not figure out how to implement the compatiblity function
+            <kbd>bound?</kbd>
+             A macro
+            <kbd>defined?</kbd>
+            exist in SCM, but it does not evaluate its parameter, of course. Thus
+            (as noticed in newsgroups and mailing lists),
+            <kbd>defined?</kbd>
+            in Guile and
+            <kbd>defined?</kbd>
+            in SCM differs.
+         </li>
+         <li>
+            I could not figure out how to ask for case sensitive reading. This affects the SVG
+            mirror.
+         </li>
+      </ol>
+      <p>All other aspects of LAML seems to work very well together with SCM</p>
+      <p>
+         I will assume that SCM (using the same compatibility file as for Linux) also works
+         on Solaris, but it remains to be proven.
+      </p>
+   </body>
+</html>

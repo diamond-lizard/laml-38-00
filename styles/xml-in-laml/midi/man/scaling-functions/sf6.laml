@@ -1,0 +1,23 @@
+(load (string-append laml-dir "laml.scm"))
+(load "scaling-function-common.scm")
+
+(begin-laml)
+
+; ---------------------------------------------------------------------------------------------------
+; The scaling function
+
+(define sf5
+   (multiply-two-scaling-functions 
+      (make-scale-function-by-xy-points
+         (from-percent-points '((0 100) (100 0))))
+      (lambda (x) (sin (* x 15 pi)))
+     )
+)
+
+
+; ---------------------------------------------------------------------------------------------------
+
+(make-svg-drawing sf5 1000 -1.0 1.0)
+
+(end-laml)
+

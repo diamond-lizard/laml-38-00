@@ -1,0 +1,530 @@
+<!ENTITY % ChannelRequired "#REQUIRED">
+
+<!ENTITY % Number "CDATA">
+    <!-- one or more digits -->
+
+<!ENTITY % UniversalAttributes  "deltaTime  NMTOKEN  #IMPLIED 
+                                 absTime    NMTOKEN  #IMPLIED 
+                                 info       CDATA    #IMPLIED"
+>
+
+<!ENTITY % UniversalAttributes1 "deltaTime  NMTOKEN  #IMPLIED 
+                                 info       CDATA    #IMPLIED"
+>
+
+<!-- Midi message classification -->
+
+<!ENTITY % MIDIMessage "(%MIDIChannelMessage; | %MIDISystemMessage; )">
+
+<!ENTITY % MIDIChannelVoiceMessage "NoteOn | NoteOff | PolyKeyPressure | ControlChange | ProgramChange
+	| ChannelKeyPressure | PitchBendChange">
+<!ENTITY % MIDIChannelModeMessage "AllSoundOff | ResetAllControllers | LocalControl | AllNotesOff
+	| OmniOff | OmniOn | MonoMode | PolyMode">
+<!ENTITY % MIDIChannelMessage "%MIDIChannelVoiceMessage; | %MIDIChannelModeMessage;">
+
+<!ENTITY % MIDISystemMessage "SysEx | MTCQuarterFrame | SongPositionPointer | SongSelect
+	| TuneRequest | TimingClock | Start | Continue | Stop | ActiveSensing | Meta">
+
+<!ENTITY % File-path "CDATA">
+    <!-- an absolute or relative file path -->
+
+<!ENTITY % Channel "(1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16)">
+
+<!ENTITY % CommaSeparatedNumbers "CDATA">
+    <!-- one or more numbers separated by commas -->
+
+<!-- Style related: -->
+<!ENTITY % sectionAttributes
+   "deleteChannels   %CommaSeparatedNumbers;                                            #IMPLIED 
+    limitQN          %Number;                                                           #REQUIRED
+
+    addMidiPart1     %File-path;                                                        #IMPLIED
+    addMidiPart2     %File-path;                                                        #IMPLIED
+    addMidiPart3     %File-path;                                                        #IMPLIED
+    addMidiPart4     %File-path;                                                        #IMPLIED
+
+    addMidiPart5     %File-path;                                                        #IMPLIED
+    addMidiPart6     %File-path;                                                        #IMPLIED
+    addMidiPart7     %File-path;                                                        #IMPLIED
+    addMidiPart8     %File-path;                                                        #IMPLIED
+
+    addMidiPart9     %File-path;                                                        #IMPLIED
+    addMidiPart10    %File-path;                                                        #IMPLIED
+    addMidiPart11    %File-path;                                                        #IMPLIED
+    addMidiPart12    %File-path;                                                        #IMPLIED
+
+    addMidiPart12    %File-path;                                                        #IMPLIED
+    addMidiPart14    %File-path;                                                        #IMPLIED
+    addMidiPart15    %File-path;                                                        #IMPLIED
+    addMidiPart16    %File-path;                                                        #IMPLIED
+
+    addAsChannel1    %Number;                                                           #IMPLIED
+    addAsChannel2    %Number;                                                           #IMPLIED
+    addAsChannel3    %Number;                                                           #IMPLIED
+    addAsChannel4    %Number;                                                           #IMPLIED
+
+    addAsChannel5    %Number;                                                           #IMPLIED
+    addAsChannel6    %Number;                                                           #IMPLIED
+    addAsChannel7    %Number;                                                           #IMPLIED
+    addAsChannel8    %Number;                                                           #IMPLIED
+
+    addAsChannel9    %Number;                                                           #IMPLIED
+    addAsChannel10   %Number;                                                           #IMPLIED
+    addAsChannel11   %Number;                                                           #IMPLIED
+    addAsChannel12   %Number;                                                           #IMPLIED
+
+    addAsChannel13   %Number;                                                           #IMPLIED
+    addAsChannel14   %Number;                                                           #IMPLIED
+    addAsChannel15   %Number;                                                           #IMPLIED
+    addAsChannel16   %Number;                                                           #IMPLIED
+
+    repetitions1    %Number;                                                            #IMPLIED
+    repetitions2    %Number;                                                            #IMPLIED
+    repetitions3    %Number;                                                            #IMPLIED
+    repetitions4    %Number;                                                            #IMPLIED
+
+    repetitions5    %Number;                                                            #IMPLIED
+    repetitions6    %Number;                                                            #IMPLIED
+    repetitions7    %Number;                                                            #IMPLIED
+    repetitions8    %Number;                                                            #IMPLIED
+
+    repetitions9    %Number;                                                            #IMPLIED
+    repetitions10   %Number;                                                            #IMPLIED
+    repetitions11    %Number;                                                           #IMPLIED
+    repetitions12    %Number;                                                           #IMPLIED
+
+    repetitions13    %Number;                                                           #IMPLIED
+    repetitions14    %Number;                                                           #IMPLIED
+    repetitions15    %Number;                                                           #IMPLIED
+    repetitions16    %Number;                                                           #IMPLIED
+
+    partLengthQN1     %Number;                                                          #IMPLIED
+    partLengthQN2    %Number;                                                           #IMPLIED
+    partLengthQN3    %Number;                                                           #IMPLIED
+    partLengthQN4    %Number;                                                           #IMPLIED
+
+    partLengthQN5    %Number;                                                           #IMPLIED
+    partLengthQN6    %Number;                                                           #IMPLIED
+    partLengthQN7    %Number;                                                           #IMPLIED
+    partLengthQN8    %Number;                                                           #IMPLIED
+
+    partLengthQN9    %Number;                                                           #IMPLIED
+    partLengthQN10   %Number;                                                           #IMPLIED
+    partLengthQN11    %Number;                                                          #IMPLIED
+    partLengthQN12    %Number;                                                          #IMPLIED
+
+    partLengthQN13    %Number;                                                          #IMPLIED
+    partLengthQN14    %Number;                                                          #IMPLIED
+    partLengthQN15    %Number;                                                          #IMPLIED
+    partLengthQN16    %Number;                                                          #IMPLIED
+   "
+>
+
+<!-- Standard midi file structure -->
+
+
+<!ELEMENT StandardMidiFile
+  ((MidiHeader, MidiTrack+), NonMidiSuffix?)
+>
+
+<!ELEMENT TyrosMultiPad
+  (MidiTrack+)
+>
+
+<!-- Named TyrosStyle, but is applicable in general for Yamaha PSRs. Add CASMSection etc later on -->
+<!ELEMENT TyrosStyle    
+  (MidiSection, CasmSection, NonMidiSuffix?)
+>
+
+<!ELEMENT NonMidiSuffix (#PCDATA)>	
+
+<!ATTLIST TyrosMultiPad
+   mode           (deltaTime | absTime)       #REQUIRED
+   image          CDATA         #IMPLIED
+   extension      CDATA         #IMPLIED
+
+   name-1         CDATA         #REQUIRED 
+   repeat-1       (true|false)  "false"
+   chord-match-1  (true|false)  "false"
+   image-1        CDATA         #IMPLIED
+
+   name-2         CDATA         #REQUIRED 
+   repeat-2       (true|false)  "false"
+   chord-match-2  (true|false)  "false"
+   image-2        CDATA         #IMPLIED
+
+   name-3         CDATA         #REQUIRED 
+   repeat-3       (true|false)  "false"
+   chord-match-3  (true|false)  "false"
+   image-3        CDATA         #IMPLIED
+
+   name-4         CDATA         #REQUIRED 
+   repeat-4       (true|false)  "false"
+   chord-match-4  (true|false)  "false"
+   image-4        CDATA         #IMPLIED
+
+   play-only      NMTOKEN       #IMPLIED
+>
+
+<!ATTLIST TyrosStyle
+   mode                   (deltaTime | absTime)                    #REQUIRED
+   image                  CDATA                                    #IMPLIED
+   extension              (sty | pst |  psc | sst | prs | bcs)     #IMPLIED
+   pulsesPerQuarterNote   NMTOKEN                                  #REQUIRED
+>
+
+<!ELEMENT MidiHeader EMPTY>
+
+<!ATTLIST MidiHeader
+  format                             (0 | 1 | 2)                       #REQUIRED
+  target-format                      (0 | 1)                           #IMPLIED
+  numberOfTracks                      NMTOKEN                          #REQUIRED
+  pulsesPerQuarterNote                NMTOKEN                          #REQUIRED
+  target-pulsesPerQuarterNote         NMTOKEN                          #IMPLIED
+  mode                               (raw | deltaTime | absTime)       #REQUIRED
+  counterTransposition                NMTOKEN                          #IMPLIED
+>
+<!-- other attributes for other kinds of divisions may be added -->
+
+<!ELEMENT MidiTrack %MIDIMessage;*>
+
+<!ATTLIST MidiTrack
+   play-only      (true|false)  "false"
+   fixed-part     CDATA         #IMPLIED
+>
+
+<!-- Midi stuff. Adapted from DTD located at  http://www.midi.org/dtds/midi_xml.shtml -->
+
+<!--
+	CHANNEL MESSAGES
+	
+	Attribute values:
+		Note, Velocity, Pressure, Control, Value, Number are all 0..127
+		except: PitchBend's Value is 0..16383
+-->
+
+<!ELEMENT NoteOn EMPTY>
+	<!ATTLIST NoteOn
+                %UniversalAttributes;
+		channel		(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16)	%ChannelRequired;
+		note		NMTOKEN										#REQUIRED
+		velocity	NMTOKEN										#REQUIRED
+                duration        NMTOKEN										#IMPLIED
+                chord           CDATA                                                                           #IMPLIED
+                strum-length    NMTOKEN                                                                         #IMPLIED
+        >
+
+<!ELEMENT NoteOff EMPTY>
+	<!ATTLIST NoteOff
+                %UniversalAttributes1;
+		channel		(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16)	%ChannelRequired;
+		note		NMTOKEN										#REQUIRED
+		velocity	NMTOKEN										#REQUIRED
+                duration        NMTOKEN										#IMPLIED>
+
+<!ELEMENT PolyKeyPressure EMPTY>
+	<!ATTLIST PolyKeyPressure
+                %UniversalAttributes;
+		channel		(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16)	%ChannelRequired;
+		note		NMTOKEN										#REQUIRED
+		pressure	NMTOKEN										#REQUIRED>
+
+<!ELEMENT ControlChange EMPTY>
+	<!ATTLIST ControlChange
+                %UniversalAttributes;
+		channel		(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16)	%ChannelRequired;
+		control		NMTOKEN										#REQUIRED
+		value		NMTOKEN										#REQUIRED>
+
+<!ELEMENT ProgramChange EMPTY>
+	<!ATTLIST ProgramChange
+                %UniversalAttributes;
+		channel		(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16)	%ChannelRequired;
+		number		NMTOKEN										#REQUIRED>
+
+<!ELEMENT ChannelKeyPressure EMPTY>
+	<!ATTLIST ChannelKeyPressure
+                %UniversalAttributes;
+		channel		(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16)	%ChannelRequired;
+		pressure	NMTOKEN										#REQUIRED>
+
+<!ELEMENT PitchBendChange EMPTY>
+	<!ATTLIST PitchBendChange
+                %UniversalAttributes;
+		channel		(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16)	%ChannelRequired;
+		value		NMTOKEN										#REQUIRED>
+
+<!--
+	Channel mode messages
+-->
+<!ELEMENT AllSoundOff EMPTY>
+	<!ATTLIST AllSoundOff
+                %UniversalAttributes;
+		channel		(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16)	%ChannelRequired;>
+
+<!ELEMENT ResetAllControllers EMPTY>
+	<!ATTLIST ResetAllControllers
+                %UniversalAttributes;
+		channel		(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16)	%ChannelRequired;>
+
+<!ELEMENT LocalControl EMPTY>
+	<!ATTLIST LocalControl
+                %UniversalAttributes;
+		channel		(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16)	%ChannelRequired;
+		value		(off|on)									#REQUIRED>
+
+<!ELEMENT AllNotesOff EMPTY>
+	<!ATTLIST AllNotesOff
+                %UniversalAttributes;
+		channel		(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16)	%ChannelRequired;>
+
+<!ELEMENT OmniOff EMPTY>
+	<!ATTLIST OmniOff
+                %UniversalAttributes;
+		channel		(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16)	%ChannelRequired;>
+
+<!ELEMENT OmniOn EMPTY>
+	<!ATTLIST OmniOn
+                %UniversalAttributes;
+		channel		(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16)	%ChannelRequired;>
+
+<!ELEMENT MonoMode EMPTY>
+	<!ATTLIST MonoMode
+                %UniversalAttributes;
+		channel		(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16)	%ChannelRequired;
+		value		NMTOKEN                                     #REQUIRED>
+
+<!ELEMENT PolyMode EMPTY>
+	<!ATTLIST PolyMode
+                %UniversalAttributes;
+		channel		(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16)	%ChannelRequired;>
+
+<!--
+	14-bit control changes:
+		Value is 0..16383
+	
+		ControlChange14's Control is MSB 0..31
+		RPNN and NRPN are 0..16383
+-->
+
+
+<!-- Not used. Delete? -->
+<!ELEMENT ControlChange14 EMPTY>
+	<!ATTLIST ControlChange14
+                %UniversalAttributes;
+		channel		(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16)	%ChannelRequired;
+		control		NMTOKEN										#REQUIRED
+		value		NMTOKEN										#REQUIRED>	
+
+<!-- Not used. Delete? -->
+<!ELEMENT RPNChange EMPTY>
+	<!ATTLIST RPNChange
+                %UniversalAttributes;
+		channel		(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16)	%ChannelRequired;
+		rpn			NMTOKEN										#REQUIRED
+		value		NMTOKEN										#REQUIRED>
+
+<!-- Not used. Delete? -->
+<!ELEMENT NRPNChange EMPTY>
+	<!ATTLIST NRPNChange
+                %UniversalAttributes;
+		channel		(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16)	%ChannelRequired;
+		NRPN		NMTOKEN										#REQUIRED
+		value		NMTOKEN										#REQUIRED>
+
+
+<!--
+	SYSTEM MESSAGES
+-->
+
+<!ELEMENT SysEx (#PCDATA)>	
+	<!ATTLIST SysEx
+                %UniversalAttributes; >	
+
+<!ELEMENT MTCQuarterFrame EMPTY>
+	<!ATTLIST MTCQuarterFrame
+                %UniversalAttributes;
+		value		NMTOKEN										#REQUIRED>
+
+<!ELEMENT SongPositionPointer EMPTY>
+	<!ATTLIST SongPositionPointer
+                %UniversalAttributes;
+		position	NMTOKEN		#REQUIRED>	<!-- 0-16383 -->
+
+<!ELEMENT SongSelect EMPTY>
+	<!ATTLIST SongSelect
+                %UniversalAttributes;
+		number		NMTOKEN		#REQUIRED>	<!-- 0-127 -->
+
+<!ELEMENT TuneRequest EMPTY>
+	<!ATTLIST TuneRequest
+                %UniversalAttributes; >
+
+<!ELEMENT TimingClock EMPTY>
+	<!ATTLIST TimingClock
+                %UniversalAttributes; >
+
+<!ELEMENT Start EMPTY>
+	<!ATTLIST Start
+                %UniversalAttributes; >
+
+<!ELEMENT Continue EMPTY>
+	<!ATTLIST Continue
+                %UniversalAttributes; >
+
+<!ELEMENT Stop EMPTY>
+	<!ATTLIST Stop
+                %UniversalAttributes; >
+
+<!ELEMENT ActiveSensing EMPTY>
+	<!ATTLIST ActiveSensing
+                %UniversalAttributes; >
+
+<!ELEMENT Meta (#PCDATA)>
+<!ATTLIST Meta 
+   %UniversalAttributes;
+   type                              NMTOKEN                         #REQUIRED
+>
+
+
+
+<!-- Style related: -->
+
+<!ELEMENT MidiSection
+   (StyleInit, StyleId, StyleSetup, 
+      (IntroA | IntroB | IntroC |
+       MainA | MainB | MainC | MainD |
+       EndingA | EndingB | EndingC |
+       FillInAA | FillInBB | FillInCC | FillInDD | FillInBA | FillInAB)+
+   )
+>
+
+<!ATTLIST MidiSection
+   %sectionAttributes;
+>
+
+<!ELEMENT StyleInit  %MIDIMessage;*>
+<!ELEMENT StyleId  %MIDIMessage;*>
+<!ELEMENT StyleSetup  %MIDIMessage;*>
+
+<!ELEMENT IntroA  %MIDIMessage;*>
+<!ATTLIST IntroA
+   %sectionAttributes;
+>
+
+<!ELEMENT IntroB  %MIDIMessage;*>
+<!ATTLIST IntroB
+   %sectionAttributes;
+>
+
+<!ELEMENT IntroC  %MIDIMessage;*>
+<!ATTLIST IntroC
+   %sectionAttributes;
+>
+
+<!ELEMENT MainA  %MIDIMessage;*>
+<!ATTLIST MainA
+   %sectionAttributes;
+>
+
+<!ELEMENT MainB  %MIDIMessage;*>
+<!ATTLIST MainB
+   %sectionAttributes;
+>
+
+<!ELEMENT MainC  %MIDIMessage;*>
+<!ATTLIST MainC
+   %sectionAttributes;
+>
+
+<!ELEMENT MainD  %MIDIMessage;*>
+<!ATTLIST MainD
+   %sectionAttributes;
+>
+
+<!ELEMENT EndingA  %MIDIMessage;*>
+<!ATTLIST EndingA
+   %sectionAttributes;
+>
+
+<!ELEMENT EndingB  %MIDIMessage;*>
+<!ATTLIST EndingB
+   %sectionAttributes;
+>
+
+<!ELEMENT EndingC  %MIDIMessage;*>
+<!ATTLIST EndingC
+   %sectionAttributes;
+>
+
+<!ELEMENT FillInAA  %MIDIMessage;*>
+<!ATTLIST FillInAA
+   %sectionAttributes;
+>
+
+<!ELEMENT FillInBB  %MIDIMessage;*>
+<!ATTLIST FillInBB
+   %sectionAttributes;
+>
+
+<!ELEMENT FillInCC  %MIDIMessage;*>
+<!ATTLIST FillInCC
+   %sectionAttributes;
+>
+
+<!ELEMENT FillInDD  %MIDIMessage;*>
+<!ATTLIST FillInDD
+   %sectionAttributes;
+>
+
+<!ELEMENT FillInBA  %MIDIMessage;*>
+<!ATTLIST FillInBA
+   %sectionAttributes;
+>
+
+<!ELEMENT FillInAB  %MIDIMessage;*>
+<!ATTLIST FillInAB
+   %sectionAttributes;
+>
+
+<!-- CASM Part -->
+
+<!ELEMENT CasmSection (cseg)*>
+
+<!ELEMENT cseg (sdec, ctab*, cntt*)>
+
+<!ELEMENT sdec (#PCDATA)>                    <!-- Comma separated part list: Main A, ... -->
+
+<!ELEMENT ctab (note-mute, chord-mute)>      <!-- Notice sequence of these-->
+
+<!ELEMENT note-mute (#PCDATA)>               <!-- Comma separated note list: C, CS, ... -->
+
+<!ELEMENT chord-mute (#PCDATA)>              <!-- Comma separated chord list: auto-start-enable, maj, maj6, maj7, ... -->
+
+<!ATTLIST ctab
+  source-channel           %Channel;                #REQUIRED
+  name                     CDATA                    #REQUIRED
+  destination-channel      %Channel;                #REQUIRED  
+  editable                 (true|false)             'true'
+  source-chord-key         (C | CS | D | Eb | E | F | FS | G | GS | A | Bb | B) #REQUIRED  
+  autostart-enable         (true|false)             #REQUIRED  
+  source-chord-type        (maj | maj6 | maj7 | maj7s11 |maj9 | maj7-9 | maj6-9 | aug | min | min6 | min7 | min7b5| min-9 | min7-9 | 
+                            min7-11 | min-maj7 | min-maj7-9 | dim | dim7| 7th | 7sus4 | 7b5 | 7-9 | 7s11 | 7-13 | 7-b9 | 7-b13 | 7-s9 | maj7aug | 7aug |
+                            1-plus-8 | 1-plus-5 | sus4 | 1-plus-2-plus-5 | cancel) #REQUIRED  
+  note-transposition-rule  (root-transposition | root-fixed)  #REQUIRED  
+  note-transposition-table (bypass | melody | chord | bass| melodic-minor | harmonic-minor) #REQUIRED
+  high-key                  (C | CS | D | Eb | E | F | FS | G | GS | A | Bb | B)  #REQUIRED
+  note-low-limit            CDATA   #REQUIRED           
+  note-high-limit           CDATA   #REQUIRED           
+  retrigger-rule            (stop | pitch-shift | pitch-shift-to-root | retrigger | retrigger-to-root | note-generator) #REQUIRED
+  special-feature-bytes     CDATA   #REQUIRED
+>
+
+<!ELEMENT cntt EMPTY>
+<!ATTLIST cntt
+  source-channel           %Channel;                #REQUIRED
+  bass-on-off              (on | off)               #REQUIRED
+  note-transposition-table (bypass | melody | chord | bass| melodic-minor | harmonic-minor | harmonic-minor-5| natural-minor | natural-minor-5 |
+                            dorian-minor | dorian-minor-5)  #REQUIRED
+>
+

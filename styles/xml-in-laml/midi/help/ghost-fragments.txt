@@ -1,0 +1,30 @@
+GHOST FRAGMENTS:
+
+A ghost fragment is a Scheme program fragment which has been applied at some point in time during the process of producing a song 
+with use of MIDI LAML. If the MIDL stack is discarded, a number of programmed contribution may be lost. In order to prevent such
+a situation, a collection of ghost fragments can be defined before the stack is altered (lowered) dramatically. It is possible to
+add program contributions for either the ghost elements of the MIDL stack, or for the whole stack.
+
+It may also be useful to create ghost fragment for the entire project, with the purpose of getting an overview of 
+programmed solution accross the entries of the MIDL stack.
+
+Internally, the ghost fragments are kept persistently in the project directory of a development project.
+
+Typical scenario:
+
+ - You have developed a stack with many entries, resulting from normalizing a number of programmed contribution to MIDI LAML files.
+   You have applied either your own Scheme functions, or functions from the MIDI LAML function library on your music
+
+ - You unwind the stack, and you want to make a fundamental change near the bottom of the stack.
+
+ - In order not to loose you programming efforts, as spread throughout the stack, you activate
+   MIDL Stack > Add ghost fragment and browse.
+
+ - You normalize the stack, hereby loosing all but a few stack entries.
+
+ - With use of the information in the ghost fragment browser, you re-introduce your original programmed solutions. 
+   Notice that this typically is a semi-automatic process.
+
+
+
+

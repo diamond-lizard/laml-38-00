@@ -1,0 +1,11 @@
+Be sure that
+
+  * Tyros is connected
+  * Cantabile Light is started
+  * Midi input devices is Yamaha USB IN 01
+  * In Midi Recorder: 
+      * AutoRecord is selected.
+      * Record Midi input is selected.
+
+
+  

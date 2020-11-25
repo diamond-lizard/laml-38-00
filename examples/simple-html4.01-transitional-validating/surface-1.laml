@@ -1,0 +1,39 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+
+(define (document ttl body-form)
+ (html (head (title ttl))
+  (body (con (h1 ttl) body-form))))
+
+(define validate-html? #t)
+(define check-html-attributes? #t)
+(define transliterate-character-data? #t)
+
+(write-html 'raw
+ (document
+  "Surface Demo"
+  (con
+    (p "This page demonstrates the use of the surface mirror, without any use of 
+      the convenience functions which we used in simple-page-1 above (for the first table).")
+
+     (p "Here comes the" (em "document text") _ ", with an " (b "enumeration") _ ":")
+
+     (ul 'type "square"
+        (map li 
+          (list "Item 1" "Item 2" (con "Item 3" _ "."))) 
+     )
+
+     (a 'href "index.html" "A link to the table of contents") _ "." (br)
+
+    (p "And finally some more " (kbd "text")_".")
+
+    (p (b "Notice that this page generates valid HTML."))
+
+    
+  )
+ )
+ (full-source-path-with-extension "html")
+)
+
+
+(end-laml)

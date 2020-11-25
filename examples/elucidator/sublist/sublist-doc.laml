@@ -1,0 +1,73 @@
+(load (string-append laml-dir "laml.scm")) ; laml-dir is assumed to be defined by the context
+
+(laml-style "xml-in-laml/elucidator/elucidator")
+
+(set-source-directory (startup-directory))
+
+(set-documentation-name "sublist-doc")
+
+; (process-only "general")
+; (process-only)
+
+; (make-no-indexes)
+(make-all-indexes)
+
+(define toc-columns-detail 2)
+(define toc-columns-overall 3)
+
+(define make-large-source-files? #f)
+
+; return an abolute path for f in software-base-directory
+(define (scheme-source-file f)
+  (string-append software-base-directory f))
+
+(define rs4r-url-prefix "../../../../r4rs/")
+
+(program-source
+ (key "general")
+ (file-location (scheme-source-file "lib/general.scm"))
+ (language "scheme")
+)
+
+(program-source
+ (key "file-read")
+ (file-location (scheme-source-file "lib/file-read.scm"))
+ (language "scheme")
+)
+
+; ---------------------------------------------------------------------------------------------------
+; Generating the LAML example pages:
+
+;(write-html-page (string-append source-directory "html/table1")
+;  "LAML example 1"
+;  (table
+;   (sublist-by-rows 
+;     3
+;     (map as-string '(a b c d e f g h i))
+;     )
+;  1))
+;
+;(write-html-page (string-append source-directory "html/table2")
+;  "LAML example 2"
+;  (table
+;   (sublist-by-columns 
+;     3
+;     (map as-string '(a b c d e f g h i))
+;     "-")
+;   1))
+
+; ---------------------------------------------------------------------------------------------------
+
+(begin-documentation)
+
+  (documentation-from "sublist-doc.txt")
+
+(end-documentation)
+
+
+
+
+ 
+
+
+

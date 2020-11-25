@@ -1,0 +1,52 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+(define language-preference 'english)
+
+(begin-laml)
+
+(generic-page
+  "Overview of XHTML1.0 transitional examples"
+  (con-par
+    (laml-top-banner)
+    (h 1 "Overview of XHTML1.0 transitional examples - with validation")
+    (p "The examples in this directory introduces the XHTML1.0 transitional, validating mirror.  This mirror
+     uses the XML-in-LAML framework.")
+
+    (p "In reality, the there are only little to illustrate, compared with XHTML1.0 strict.
+        However, we have added some rather important examples that illustrate XML comments, CDATA sections, use of ID attributes,
+        Processing Instructions, and delayed procedural content items." )
+
+    (p "The following examples exist in this directory:")
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 250 200 200)
+        (list
+          (map b (list "Example"   "LAML"                            "HTML"))
+          (list "Hello world"      (a-tag "hello-world.laml")        (a-tag "hello-world.html"))
+          (list "A simple page"    (a-tag "simple-1.laml")      (a-tag "simple-1.html")) 
+          (list "A page with generation and modification times"    (a-tag "times.laml")      (a-tag "times.html"))  
+          (list "A relaxed page"    (a-tag "lenient.laml")      (a-tag "lenient.html"))
+          (list "An error message text page"    (a-tag "error-message-test.laml")      (a-tag "error-message-test.html"))
+          (list "Demo of XML comments, Processing Instructions and CDATA sections"    (a-tag "extra.laml")      (a-tag "extra.html"))
+          (list "Demo of ID, IDREF, and IDREFS attributes"    (a-tag "id-idrefs.laml")      (a-tag "id-idrefs.html"))
+          (list "Demo of delayed procedural content items"    (a-tag "delayed-procedural-demo.laml")      (a-tag "delayed-procedural-demo.html"))
+          (list "Another demo of delayed procedural content items"    (a-tag "auto-meta.laml")      (a-tag "auto-meta.html"))
+          (list "A demo of an addapting page"    (a-tag "adapting-page-demo.laml")      (a-tag "adapting-page-demo.html"))
+          (list "Custom elements"    (a-tag "custom-element.laml")      (a-tag "custom-element.html"))
+          (list "Mixed LAML and XML notation"    (a-tag "mixed-laml-xml.laml")      (a-tag "mixed-laml-xml.html"))
+          (list "UTF-8 test"    (a-tag "utf-8/utf-8-test.laml")      (a-tag "utf-8/utf-8-test.html"))
+          
+        )))
+
+
+
+    (font-size 2 (em "If your browser will not present files with 'laml' or 'scm' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files."))
+  )
+  white black blue blue
+)
+
+(end-laml)

@@ -1,0 +1,49 @@
+;; .schemedoc-dependencies  "~/scheme/lib/man/svg-extensions"
+
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-svg11")
+(lib-load "svg-extensions.scm")
+
+(write-html '(pp prolog)
+
+  (svg standard-svg-1-1-element-attributes 'width "400" 'height "400" 
+
+    (with-animation 'step-buttons-reveal
+     (let* ((x1 100) (x2 (+ x1 100)) (x3 (+ x2 100))
+            (y1 100) (y2 (+ y1 100)) 
+            (stroke-props  (list 'stroke "black" 'stroke-width "1"))
+           )
+       (let* ((node-a (svg-node rectangular x1 y2 "A" 'step 1))
+              (node-b (svg-node rectangular x2 y1 "B" 'step 2))
+              (node-c (svg-node rectangular x3 y2 "C" 'step 4))
+
+              (edge1 (svg-edge node-a "ct" node-b "lc" stroke-props 'step-from 3 'step-to 4))
+              (edge2 (svg-edge node-b "rc" node-c "ct" stroke-props 'step-from 4 'step-to 5))
+             )
+         (svg-graph 'from-step 1 'to-step 5
+          (list node-a node-b node-c)
+          (list edge2 edge1)
+
+          (explanations 'x 10 'y 350 'width 380  'height 50
+                      'font-size 18
+           (explanation 'step 0 "The start situation.")
+           (explanation 'step 1 "A appears")
+           (explanation 'step 2 "B appears")
+           (explanation 'step 3 "A and B are connected")
+           (explanation 'step 4 "A and B are disconnected, C appears connected to B")
+           (explanation 'step 5 "B and C are disconnected. Only the nodes are left.")
+        )
+
+ )))))
+
+  (full-source-path-with-extension "svg")
+)
+
+(end-laml)
+
+
+
+
+
+
+

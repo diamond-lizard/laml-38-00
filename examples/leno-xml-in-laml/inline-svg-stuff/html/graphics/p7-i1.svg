@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- The material in this file is copyrighted (c) by KN, AAU.  All rights reserved.-->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="900" height="300"
+     viewBox="0 0 900 300">
+   <g transform="scale(1.0)">
+      <g>
+         <g>
+            <rect x="35.0" y="32.5" width="70.0" height="35" stroke="none" stroke-width="1" fill="white" />
+            <text font-style="italic" font-family="times-roman" font-size="25" stroke="grey" color="grey"
+                  fill="grey" x="70.0" text-anchor="middle" y="57.0">
+               1
+            </text>
+         </g>
+         <g>
+            <rect x="35.0" y="75.0" width="70.0" height="50" stroke-width="1" stroke="black" fill="white" />
+            <text font-family="times-roman" font-size="40" stroke="black" color="black" fill="black" x="70.0"
+                  text-anchor="middle" y="115.0">
+               A
+            </text>
+         </g>
+      </g>
+      <g>
+         <g>
+            <rect x="105.0" y="32.5" width="70.0" height="35" stroke="none" stroke-width="1" fill="white" />
+            <text font-style="italic" font-family="times-roman" font-size="25" stroke="grey" color="grey"
+                  fill="grey" x="140.0" text-anchor="middle" y="57.0">
+               2
+            </text>
+         </g>
+         <g>
+            <rect x="105.0" y="75.0" width="70.0" height="50" stroke-width="1" stroke="black" fill="white" />
+            <text font-family="times-roman" font-size="40" stroke="black" color="black" fill="black" x="140.0"
+                  text-anchor="middle" y="115.0">
+               B
+            </text>
+         </g>
+      </g>
+      <g>
+         <g>
+            <rect x="175.0" y="32.5" width="70.0" height="35" stroke="none" stroke-width="1" fill="white" />
+            <text font-style="italic" font-family="times-roman" font-size="25" stroke="grey" color="grey"
+                  fill="grey" x="210.0" text-anchor="middle" y="57.0">
+               3
+            </text>
+         </g>
+         <g>
+            <rect x="175.0" y="75.0" width="70.0" height="50" stroke-width="1" stroke="black" fill="white" />
+            <text font-family="times-roman" font-size="40" stroke="black" color="black" fill="black" x="210.0"
+                  text-anchor="middle" y="115.0">
+               C
+            </text>
+         </g>
+      </g>
+      <g>
+         <g>
+            <rect x="245.0" y="32.5" width="70.0" height="35" stroke="none" stroke-width="1" fill="white" />
+            <text font-style="italic" font-family="times-roman" font-size="25" stroke="grey" color="grey"
+                  fill="grey" x="280.0" text-anchor="middle" y="57.0">
+               4
+            </text>
+         </g>
+         <g>
+            <rect x="245.0" y="75.0" width="70.0" height="50" stroke-width="1" stroke="black" fill="white" />
+            <text font-family="times-roman" font-size="40" stroke="black" color="black" fill="black" x="280.0"
+                  text-anchor="middle" y="115.0">
+               D
+            </text>
+         </g>
+      </g>
+      <g>
+         <g>
+            <rect x="315.0" y="32.5" width="70.0" height="35" stroke="none" stroke-width="1" fill="white" />
+            <text font-style="italic" font-family="times-roman" font-size="25" stroke="grey" color="grey"
+                  fill="grey" x="350.0" text-anchor="middle" y="57.0">
+               5
+            </text>
+         </g>
+         <g>
+            <rect x="315.0" y="75.0" width="70.0" height="50" stroke-width="1" stroke="black" fill="white" />
+            <text font-family="times-roman" font-size="40" stroke="black" color="black" fill="black" x="350.0"
+                  text-anchor="middle" y="115.0">
+               E
+            </text>
+         </g>
+      </g>
+      <g>
+         <g>
+            <rect x="385.0" y="32.5" width="70.0" height="35" stroke="none" stroke-width="1" fill="white" />
+            <text font-style="italic" font-family="times-roman" font-size="25" stroke="grey" color="grey"
+                  fill="grey" x="420.0" text-anchor="middle" y="57.0">
+               6
+            </text>
+         </g>
+         <g>
+            <rect x="385.0" y="75.0" width="70.0" height="50" stroke-width="1" stroke="black" fill="white" />
+            <text font-family="times-roman" font-size="40" stroke="black" color="black" fill="black" x="420.0"
+                  text-anchor="middle" y="115.0">
+               F
+            </text>
+         </g>
+      </g>
+      <g>
+         <g>
+            <rect x="455.0" y="32.5" width="70.0" height="35" stroke="none" stroke-width="1" fill="white" />
+            <text font-style="italic" font-family="times-roman" font-size="25" stroke="grey" color="grey"
+                  fill="grey" x="490.0" text-anchor="middle" y="57.0">
+               7
+            </text>
+         </g>
+         <g>
+            <rect x="455.0" y="75.0" width="70.0" height="50" stroke-width="1" stroke="black" fill="white" />
+            <text font-family="times-roman" font-size="40" stroke="black" color="black" fill="black" x="490.0"
+                  text-anchor="middle" y="115.0">
+               G
+            </text>
+         </g>
+      </g>
+      <g>
+         <g>
+            <rect x="525.0" y="32.5" width="70.0" height="35" stroke="none" stroke-width="1" fill="white" />
+            <text font-style="italic" font-family="times-roman" font-size="25" stroke="grey" color="grey"
+                  fill="grey" x="560.0" text-anchor="middle" y="57.0">
+               8
+            </text>
+         </g>
+         <g>
+            <rect x="525.0" y="75.0" width="70.0" height="50" stroke-width="1" stroke="black" fill="white" />
+            <text font-family="times-roman" font-size="40" stroke="black" color="black" fill="black" x="560.0"
+                  text-anchor="middle" y="115.0">
+               H
+            </text>
+         </g>
+      </g>
+      <g>
+         <g>
+            <rect x="595.0" y="32.5" width="70.0" height="35" stroke="none" stroke-width="1" fill="white" />
+            <text font-style="italic" font-family="times-roman" font-size="25" stroke="grey" color="grey"
+                  fill="grey" x="630.0" text-anchor="middle" y="57.0">
+               9
+            </text>
+         </g>
+         <g>
+            <rect x="595.0" y="75.0" width="70.0" height="50" stroke-width="1" stroke="black" fill="white" />
+            <text font-family="times-roman" font-size="40" stroke="black" color="black" fill="black" x="630.0"
+                  text-anchor="middle" y="115.0">
+               I
+            </text>
+         </g>
+      </g>
+      <g>
+         <g>
+            <rect x="665.0" y="32.5" width="70.0" height="35" stroke="none" stroke-width="1" fill="white" />
+            <text font-style="italic" font-family="times-roman" font-size="25" stroke="grey" color="grey"
+                  fill="grey" x="700.0" text-anchor="middle" y="57.0">
+               10
+            </text>
+         </g>
+         <g>
+            <rect x="665.0" y="75.0" width="70.0" height="50" stroke-width="1" stroke="black" fill="white" />
+            <text font-family="times-roman" font-size="40" stroke="black" color="black" fill="black" x="700.0"
+                  text-anchor="middle" y="115.0">
+               J
+            </text>
+         </g>
+      </g>
+      <g>
+         <g>
+            <rect x="735.0" y="32.5" width="70.0" height="35" stroke="none" stroke-width="1" fill="white" />
+            <text font-style="italic" font-family="times-roman" font-size="25" stroke="grey" color="grey"
+                  fill="grey" x="770.0" text-anchor="middle" y="57.0">
+               11
+            </text>
+         </g>
+         <g>
+            <rect x="735.0" y="75.0" width="70.0" height="50" stroke-width="1" stroke="black" fill="white" />
+            <text font-family="times-roman" font-size="40" stroke="black" color="black" fill="black" x="770.0"
+                  text-anchor="middle" y="115.0">
+               K
+            </text>
+         </g>
+      </g>
+      <g>
+         <g>
+            <rect x="805.0" y="32.5" width="70.0" height="35" stroke="none" stroke-width="1" fill="white" />
+            <text font-style="italic" font-family="times-roman" font-size="25" stroke="grey" color="grey"
+                  fill="grey" x="840.0" text-anchor="middle" y="57.0">
+               12
+            </text>
+         </g>
+         <g>
+            <rect x="805.0" y="75.0" width="70.0" height="50" stroke-width="1" stroke="black" fill="white" />
+            <text font-family="times-roman" font-size="40" stroke="black" color="black" fill="black" x="840.0"
+                  text-anchor="middle" y="115.0">
+               L
+            </text>
+         </g>
+      </g>
+   </g>
+</svg>

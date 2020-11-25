@@ -1,0 +1,314 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/schemedoc-2/schemedoc")
+(set! xml-check-language-overlap? #f)
+
+(manual
+  (manual-front-matters
+    (manual-title "Reference Manual of LAML Photo Show Tool")
+    (kn-manual-settings)
+    (manual-abstract 
+     (div 
+       (p "This is the reference manual of the LAML Photo Show tool. This tool allows you to create a set of HTML files embedded
+           in a directory with photos (jpg files). The HTML files that surround the images provides for smooth navigation, and
+           it provides nice overviews of your pictures, all made by HTML files which can be shown in any Internet browser. Some
+           help to photo management is also provided.  This tool is based on XML-in-LAML." )
+  
+       (p "A few features of this tool depend on MzScheme.
+           Some of the more advanced features depend on" (a 'href "http://www.imagemagick.org/" "ImageMagick") _ "."
+           "In order (in order to make the MzScheme" (kbd "system") "procedure available) to initiate ImageMatick from MzScheme put" (kbd "(require (lib \"process.ss\"))") "into your .laml file."
+       )
+
+       (p "Seen from the context of LAML, the LAML Photo Show facility serves as a simple example of my personal use of LAML within the area of
+           batch photo management.")
+     
+    ))
+
+    'laml-resource "true"
+  )
+
+  (manual-section 'id "organization"
+   (section-title "Organization of photos")
+   (section-body (div 
+                (p "A LAML photo show is a directory of films. Each film is a directory itself. Films cannot be nested into each other; Thus
+                the films obey a flat organization within the top-level photo show directory. There may, however, be subdirs of the photo show directory
+                with other photo shows directories (recursive orgnization). As of now, no linking is provided to these.")
+
+                      (p "The directory corresponding to a film contains a flat list of jpg files, with arbitrary names.
+                   To use the LAML photo show generator you should put a LAML file side-by-side with the photos, which describes the 
+                   properties of the photo show, as related to the current film. This reference manual documents how this LAML is made.
+                   To make things easy, use the Emacs command M-x make-laml-photo-show (found in 'Tools>LAML>Make new photo show...') for this.")
+
+                      (p "Thus, the typical directory and file organization is like the following:")
+
+                      (indent-pixels 20 (pre 
+
+                                         "process-all-films.laml
+index.html
+Film1
+  1.jpg
+  2.jpg
+  3.jpg
+  make-show.laml
+  index.html
+  html
+   1.html
+   ...
+  internal
+   film-description-entry.lsp
+   photo-ast.lsp
+   photo-list
+Film2
+  1.jpg
+  2.jpg
+  3.jpg
+  index.html
+  make-show.laml
+  html
+   1.html
+   ...
+  internal
+   film-description-entry.lsp
+   photo-ast.lsp
+   photo-list
+Film3
+  4.jpg
+  5.jpg
+  6.jpg
+  index.html
+  make-show.laml
+  html
+   1.html
+   ...
+  internal
+   film-description-entry.lsp
+   photo-ast.lsp
+   photo-list"))
+
+                      (p "You are supposed to make to top level directory and
+      the film directories. The directory names are arbitrary. The jpg files are created by the software that transfers photos from your digital camera. You write
+      the make-show.laml files with your text editor - Emacs, for instance. The name of this file is arbitrary, but you should use the laml extension.
+      The LAML photo show generator makes the remaining files and directories.")
+
+      (p "Notice the file process-all-films.laml in the root which, when processed,
+      regenerates the photo shows for all (already once processed) films; This laml file is made automatically the first to you process one of the films.
+      If you delete it a new process-all-films.laml will appear the next time you have processed a film.
+      ")
+
+                      (p "You can use the LAML photo show generator to make collections of photos from different directories, without copying any photo.
+      To do so, make a film directory without jpg files, and address individual photos in arbitrary films from there. LAML makes it
+      easy to do so, because you can copy the necessary photo clauses from your browser into the text editor. The names of the
+      photos are linked to the appropriate photo clauses.")
+
+      (p "If some existing film is not supposed to make it into the index, place a file named 'exclude' side by side with the jpg files.")
+
+   )  ))
+
+   (manual-section 'id "top-level"
+    (section-title "The Top Level")
+    (section-body "In this section we document the top level photo-show element, and not
+                least its numerous attributes.")
+    )
+
+  (manual-page 
+   'name "photo-show"
+  
+   (description "The top level element which holds a number of attributes that affect the photo show of all pictures in a film.
+                 As constituents there is either a list of photo entries, or a directive to automatically collect the photos in the current directory.
+                ")
+  
+   (attribute-descriptions
+    (attribute-description 'name "time" "The time in second each picture is show in automatically progressing shows. 
+                                   This is a default value, which can be overwritten for each photo.")
+    (attribute-description 'name "background-color"    "The background color of photo pages. As an example \"#000000\" represent black, like in HTML.
+                                                  The LAML function rgb-color-encoding is useful to give colors.")
+    (attribute-description 'name "text-color"    "The color of the text in photo pages. As an example \"#ffffff\" represent white, like in HTML.
+                                                  The LAML function rgb-color-encoding is useful to give colors.")
+    (attribute-description 'name "home-path"    "The path to the directory with all the film. Should always be \"../\" with the current and flat organization of the films.")
+    (attribute-description 'name "previous-film"    "The to path of the previous film. The path is relative from the current directory. The path must have a trailing '/'.
+                                               Example \"../Film1/\".")
+    (attribute-description 'name "next-film"    "The path to the next film. The path is relative from the current directory. The path must have a trailing '/'.
+                                               Example \"../Film2/\".")
+    (attribute-description 'name "before-first"    "Determines what comes before the first photo in the film. 
+                                              last-picture means 'cyclic show'.
+                                              previous-film means that a link is made to the last picture in previous-film.
+                                              none means that there is nothing before the first picture.
+                                             ")
+    (attribute-description 'name "after-last"    "Determins what comes after the last photo in the film.
+                                            first-picture means 'cyclic show'.
+                                            next-film means that a link is made to the first picture of the next-film.
+                                            stop-page means that the photo show ends with a stop page.
+                                            none means that thre is is nothing after the last picture.
+                                           ")
+    (attribute-description 'name "transition"    "The browser transition used when shifting from photo to phote during automatically progressing shows.
+                                            Notice that blend only works in Internet Explorer from Microsoft.")
+    (attribute-description 'name "verbosity-level"    "A number between 0 and 2 which controls the amount of messages given by the tool. 0 is minial and 2 is maximal.")
+    (attribute-description 'name "language"    "The language of the fixed text generated by the tool")
+    (attribute-description 'name "html-mode"    "The formatting of the HTML pages generated by the tool. pp means pretty printed, and it takes appr. the double amount of 
+                                           disk space than raw. If you never read the HTML files - and why should you - you can use raw. ")
+    (attribute-description 'name "index-linking"   "Determines the kind of linking used from a film page to the photos. 
+                                              run means that the links go to automatically progressing pages.
+                                              stop means that the links go to pages without automatically progress.
+                                             ")
+    (attribute-description 'name "default-size"            "Determines the size of the photos, as presented by the tool.
+                                                      original means that the photos are presented directly, without enlarging or reducing them.
+                                                      auto means that the photos are enlarged or reduced to make them fit with the real estate of the browser.
+                                                      explicit means that we should use the witdh and height are given for each photo.
+                                                     ")
+    (attribute-description 'name "default-orientation"            "Controls the automatically enlarging or reduction, when auto is used for default-size.")
+    (attribute-description 'name "tabular-overview-dimension"            "An integer such as 1, 2, 3 or 4 which determines the tabular layout of the overview pages.
+                                                                    If, for instance, 3 is given, 9 photos are shown on each overview page.")
+    (attribute-description 'name "photo-tabular-window-width"            "The width of the photo table window (pixels). Used to determine width of n x n landscape photos in an overview overview.")
+    (attribute-description 'name "photo-tabular-window-height"            "The height of the photo table window (pixels). Used to determine height of n x n landscape photos in an overview overview.")
+
+    (attribute-description 'name "copy-film"            "A boolean attribute that controls if the photos (the jpg files) are copied to the copy-destination directories.
+                                                   Useful for photo management.")
+    (attribute-description 'name "copy-destination"            "An absolute path on the your computer which defines the target directory of photo copying. Only 
+                                                          relevant if copy-film is true.")
+
+    (attribute-description 'name "shave-resize-and-copy"            "A boolean attribute that controls shaving, resizing and copying via ImageMagic.
+                                                                    If true, first a number of pixes is shaved both at top, bottom, left, and right side.
+                                                                    At both top and bottom shave-height pixels are removed. 
+                                                                    At both left and right side shave-width pixels are removed.
+                                                                    Next, the photos are reshaped to resize-width x resize-height pixels.
+                                                                    The aspect rative is not preserved.
+                                                                    The shaved and resized pictures are copyied to the copy-destination directory.
+                                                                   ")
+
+    (attribute-description 'name "shave-width"      "The number of pixels to shave both at the left and right side. Does only apply if shave-resize-and-copy is true, and if copy-destination is provided.")
+    (attribute-description 'name "shave-height"      "The number of pixels to shave both at the the top and the bottom. Does only apply if shave-resize-and-copy is true, and if copy-destination is provided.")
+    (attribute-description 'name "resize-width"      "The exact width of the resize picture. Does only apply if shave-resize-and-copy is true, and if copy-destination is provided.")
+    (attribute-description 'name "resize-height"      "The exact height of the resize picture. Does only apply if shave-resize-and-copy is true, and if copy-destination is provided.")
+
+
+
+    (attribute-description 'name "landscape-percentage"         "An image size percentage, used to affect the width of the photo. Only used for default-size auto and default-orientation landscape. An integer between 0 and 100.")
+    (attribute-description 'name "portrait-percentage"         "An image size percentage, used to affect the height of the photo. Only used for default-size auto and default-orientation portrait. An integer between 0 and 100.")
+    (attribute-description 'name "photo-displacement-left"            "A number of pixels that act as left margin of the picture. Used for horizontal displacement of the picture. Typically used to compensate for invisible scroll bar. An integer number.")
+    (attribute-description 'name "photo-displacement-right"            "A number of pixels that act as right margin of the picture. Used for horizontal displacement of the picture.  An integer number.")
+    (attribute-description 'name "camera"            "The name of the camera. Intended for (future) special handling of camera specific features, such as automatic rotation of pictures. ")
+    (attribute-description 'name "image-transformation-software"            (span "The kind of image transformation software interfaced to from the LAML Photoshow software. Currently we make use of
+                                                                             ImageMagick for creation of thumbnails. If the value image-magick is used, you are supposed to have an installation 
+                                                                             of ImageMagick on your machine. See" (a-self-ref 'href "http://www.imagemagick.org/") _ "." "In order for this software to
+                                                                             be able to activate ImageMagick, the" (kbd "system") "function must be supported by your Scheme system. 
+                                                                             In PLT MzScheme the system function is supported if you use the" (kbd "process.ss") "library. For instance, put
+                                                                             " (kbd "(require (lib \"process.ss\"))") "in your .laml file."))
+    (attribute-description 'name "make-thumbnails-of"            (span "Controls the generation of thumbnail photos. These are small pictures that act as visual indexes. 
+                                                                  The value" (kbd "all") "means that all thumbnail photos are regenerated. 
+                                                                  The value" (kbd "non-existing") "means that only non-existing thumbnails photos are generated.
+                                                                  The value" (kbd "none") "means that no thumbnails are generated at all. 
+                                                                  "))
+    (attribute-description 'name "time-stamp"            "How to access the time stamp of a photo file. from-file-system: Take it from the file's time stamp, as provided by the oprating system.
+                                                          from-jpg-file: Take it from the initial part of the JPG file. auto: Take it from the jpg file (if there), else take it from the file.
+                                                          none: Do not access the time stamp.")
+    (attribute-description 'name "time-stamp-presentation"    "How to present the accessed time stamp of a photo file.")
+
+    (attribute-description 'name "rotate"    (span "A white-space separated sequence of rotation descriptions. A single rotation description looks like photo-file.ext:n, where n is the number of degrees to rotatethe phote. Example:" (kbd (string-it "123.jpg:90") "Typically used to rotate photos 90 degrees from landscape to portrait mode.")))
+
+   )
+  
+  
+  
+  )
+  
+  (manual-page 
+   'name "title-of-show"
+
+   (description "Determines the title (caption) of the current film")
+  )
+  
+  (manual-page 
+   'name "upper-caption"
+  
+   (attribute-descriptions
+    (attribute-description 'name "size" "The size of the upper caption. A number between 1 and 6.")
+   )
+  
+   (description "Defines the default upper caption of a photo page. Can be overruled by each photo element.")
+  )
+  
+  (manual-page 
+   'name "lower-caption"
+  
+   (attribute-descriptions
+    (attribute-description 'name "size" "The size of the lower caption. A number between 1 and 6.")
+   )
+  
+   (description "Defines the default lower caption of a photo page. Can be overruled by each photo element.")
+  )
+  
+  (manual-page 
+   'name "photos-in-current-directory"
+  
+   (description "Automatically forms a photo list of the photos in the current directory.
+                 This clause can be given instead of a photo list. It means that the tool automatically makes 
+                 a photo list of all the jpg files in the current directory. The sorting is done in a smart way, by
+                 taking the numeric part of the file names into account. Default properties are assigned to the photos. As an important practical observation, the tool
+                 will make a file photo-list in the internal directory, with a photo list. You can replace the (photos-in-current-directory) clause
+                 with this list, and thereby control the show in a much better way. ")
+  )
+  
+  (manual-page 
+   'name "photo-list"
+  
+   (description "The list of photos in the show. 
+                 Notice that the order of the photo elements in the photo-list controls the ordering of the photos in the show.
+                ")
+  )
+
+  
+  (manual-section 'id "photo-element"
+   (section-title "The photo element")
+   (section-body "In this section we document the photo element, which can be used to describe each photo in the show.
+                 ")
+  )
+  
+  (manual-page 
+   'name "photo"
+
+   (attribute-descriptions
+    (attribute-description 'name "file" "The name of a photo file, either from the current directory (current film) or from another directory (another film).
+                                   In the latter case, the path attribute must address the other film. 
+                                   The name consist of the proper name and the file extension (jpg). For instance \"1.jpg\".  ")
+    (attribute-description 'name "path"      "The path of the photo file, as given by the file attribute. The path is relative to the current directory.
+                                        It must end with a '/'. Example: \"../Film3/\", where .. means the parent directory.")
+    (attribute-description 'name "time"      "The time in second this photo is show in automatically progressing shows. 
+                                   Overrules the time in the enclosing photo-show element.")
+    (attribute-description 'name "transition"      "The browser transition used when shifting from this photo to the next.
+                                              Notice that blend only works in Internet Explorer from Microsoft. Overrules the transition in photo-element.")
+    (attribute-description 'name "size"       "Determines the size of this photo, as presented by the tool.
+                                                      original means that the photo is presented directly, without enlarging or reducing it.
+                                                      auto means that the photo is enlarged or reduced to make it fit with the real estate of the browser.
+                                                      explicit means that we should use the width and height attribute of this photo.
+                                                      Overrules the default value given in the enclosing photo-element.
+                                                     ")
+    (attribute-description 'name "orientation"      "Controls the automatically enlarging or reduction, when auto is used as size for this photo.")
+    (attribute-description 'name "width"      "The width to be used for this photo. Use the value explicit for size if you give the width.
+                                          Normally you will not want to give both width and height.")
+    (attribute-description 'name "height"      "The height to be used for this photo. Use the value explicit for size if you give the height. 
+                                          Normally you will not want to give both width and height.")
+   )
+  
+   (description "Defines the characteristics of each presented photo in the show. Some of the attributes overrules the default attributes given in the photo-show element.")
+  )
+  
+  
+  (manual-section 'id "examples"
+   (section-title "Examples")
+   (section-body 
+    (div
+     (p "In this section we show examples of LAML files.")
+  
+     (p "The first file is similar to the file produced by the Emacs command M-x M-x make-laml-photo-show:")
+  
+     (indent-pixels 10 (pre (read-text-file (in-startup-directory "examples/basic-show.laml"))))
+  
+     (p "The purpose of the next laml file is to enumerate 'the best photos' in a large collection of films and photos:")
+  
+     (indent-pixels 10 (pre (read-text-file (in-startup-directory "examples/selective-show.laml"))))
+    )
+   )
+  )
+ 
+  (merged-manual-from-xml-dtd 'src "../dtd/photo-show") 
+
+)

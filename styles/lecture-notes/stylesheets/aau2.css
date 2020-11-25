@@ -1,0 +1,217 @@
+IMG.leno-slide-image          {border-width: 0;
+                               border-style: groove;
+                               margin: 5%;
+                              }
+
+
+/* generel settings*/
+
+
+DIV.leno-slide-title         {
+                               color: blue;
+                               text-align: left;
+                               font-weight: 900;
+                               font-family: Sans-serif;
+                             }
+
+DIV.leno-slide-point P                    { margin: 0px 0px 0px 0px; padding: 0px 0px 13px 0px;}
+
+DIV.leno-slide-point         { color: red;
+                               text-align: center;
+                               border-width: thin;
+                               border-color: black;
+                               border-style: groove;
+                               padding: 2px;
+                               margin-right: 10%;
+                               margin-left: 10%;
+                               margin-top: 50px; 
+                               margin-bottom: 50px; 
+			       background: #FDFA6F;
+                              }
+
+
+
+DIV.leno-slide-example       { font-style: italic; 
+                               margin-bottom: 50px;
+                               margin-right: 7%;
+                               margin-left: 7%;
+                             }
+
+DIV.leno-slide-comment       { font-style: italic;
+                               margin-bottom: 50px; }
+
+
+DIV.leno-slide-text          { color: black;
+                               text-align: left; 
+                               margin-bottom: 50px; }
+
+DIV.leno-slide-comment       { color: black;
+                               text-align: left; 
+                               margin-bottom: 50px; }
+
+
+DIV.leno-slide-quotation     { color: black;
+                               font-style: italic;
+                               text-align: left;
+                               line-height: 2.5ex;
+                               margin-right: 20%;
+                               margin-left: 20%;
+                               margin-bottom: 50px; }
+
+
+
+DIV.leno-slide-syntax        { display: compact;
+                               font-family: monospace; 
+                               background: yellow;
+                               text-align: center;
+                               margin-right: 10%;
+                               margin-left: 10%;
+                               margin-bottom: 50px; }
+
+
+DIV.leno-slide-synopsis      { background: #99ff99;
+                               margin-right: 10%;
+                               margin-left: 10%;
+                               margin-bottom: 50px; }
+
+
+DIV.leno-slide-synopsis UL LI  { list-style-image: url("../images/yellow-ball-large.gif");
+                                 text-transform: uppercase;}     
+
+DIV.leno-slide-synopsis  UL LI:first-letter    { font-size: 200%;}
+
+DIV.leno-slide-concept-list { color: white;
+                                text-align: left;
+                                padding: 1%;
+                                background: blue;
+                                margin-top: 50px; 
+                                margin-right: 10%;
+                                margin-left: 10%;
+                                margin-bottom: 50px; }
+
+TABLE.leno-slide-tabular {margin-top: 50px;}
+TABLE.leno-slide-tabular TD { color: black;}
+TABLE.leno-slide-tabular TR { background-color: #e4a08f; }
+
+TABLE.leno-slide-opposing { border-spacing: 15pt;
+                            margin-bottom: 50px;
+                            margin-left: 5%; 
+                            margin-left: 5%; 
+                          }
+
+
+DIV.leno-slide-cross-reference { margin-left: 80%;
+                                 margin-right: 1%;}
+
+
+DIV.leno-slide-sourceprogram             { margin-left: 5%;  margin-top: 50px; }
+
+
+/* generel settings*/
+BODY.leno-slide { background: url("../images/aau-logo-light.gif");
+                  background-repeat: no-repeat; background-position: 5px 5px;
+		  margin-top: 5px;
+		  margin-bottom: 5px;
+		  margin-left: 5px;
+		  margin-right: 5px; 
+
+}
+
+BODY.leno-slide-section-start { 
+		  margin-top: 5px;
+		  margin-bottom: 5px;
+		  margin-left: 5px;
+		  margin-right: 5px; 
+
+                  background-position: bottom right;
+                  background-repeat: no-repeat;
+                  background-attachment: fixed;
+                  background-image: url("../images/aau-logo-blue-background.gif");
+
+}
+
+BODY.leno-slide-program { background: white;
+		  margin-top: 5px;
+		  margin-bottom: 5px;
+		  margin-left: 5px;
+		  margin-right: 5px; }
+
+
+DIV.leno-slide-section-title { color: red;
+                               font-variant: small-caps;
+                               font-weight: 900;
+                               margin-top: 5%;
+                               margin-bottom: 30%;
+                               margin-left: 5%;
+                               margin-right: 30%;
+                               vertical-align: middle;
+                               font-family: Arial, Helvetica, Sans-serif; 
+                              }
+
+
+
+LI.leno-slide-item	        { list-style-image: url("../images/red-half-oval.gif");
+                                }
+
+/*
+
+LI.leno-slide-item
+ LI.leno-slide-item		{ list-style-image: url("../images/yellow-ball-large.gif"); 
+                                }
+
+LI.leno-slide-item 
+ LI.leno-slide-item 
+  LI.leno-slide-item		{ list-style-image: url("../images/yellow-ball-large.gif"); 
+                                }
+
+*/
+
+
+/*DIV.leno-slide-point         { color: black;
+			       border-color: black;
+			       border-style: outset; }  */
+
+
+/* DIV.leno-slide-concept-list P { color: #FEE001;
+				border-color: black;
+				border-style: outset;
+				background: blue;}
+*/
+
+
+/* DIV.leno-slide-cross-reference	  { border-style: dotted;
+				    border-color: red;
+				    border-width: thick;
+				    color: yellow;
+				    background: blue;}
+*/
+
+TABLE.leno-slide-image-series
+{
+   margin-left: 20px;
+   margin-bottom: 20px;
+}
+
+TABLE.leno-slide-exercise
+{
+   margin-left: 20px;
+   margin-bottom: 20px;
+}
+
+TABLE.leno-slide-source-program
+{
+   margin-left: 20px;
+   margin-bottom: 20px;
+}
+
+TABLE.leno-slide-side-track
+{
+   margin-left: 20px;
+   margin-bottom: 20px;
+}
+
+TABLE.leno-slide-elucidate
+{
+   margin-left: 20px;
+   margin-bottom: 20px;
+}

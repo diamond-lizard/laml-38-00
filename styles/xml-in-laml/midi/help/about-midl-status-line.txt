@@ -1,0 +1,16 @@
+About the MIDL buffer status line. 
+
+The parts of the mode line after (MidiLaml) means the following:
+
+Marker: <char>                        The marker character in use. 
+Stack: ----*...                       Example. The MIDL stack contains four entries ---- below the current entry *. In addtion there is three ghost entries ...
+Attribute: <attr-name>                The attribute being edited by horizontal arrows. Select with Cntrl selection on an attribute name.
++ or -                                Voice context.  + means use voice context.  - means that a voice context is not taken into consideration.  Toggle via MIDL > Settings menu.
+Play/PLAY/No Play                     Controls playing when vertical arrows are used. PLAY: also play when horizontal editing arrows are used.  Toggle with F6.
+>                                     If > displayed, use live cursor. Toggle with Del Key on the key pad part of the keyboard. Or M-x toggle-use-live-cursor-movement.
+Channels: ...                         Which channels to play. Select with F7.
++FP                                   If present, the fixed residual part is played together with the notes in the buffer. M-x toggle-playing-fixed-part or Keypad-divide.
+Tempo: <number>%                      The relative playing tempo. Set with F5. Decrease with S-F5. Increase with C-M-F5. Reset with C-F5.
+(Static)/(Dynamic)                    Static: Fixed tempo as controlled with F5 is used.  Dynamic: The horizotal pointer-arrow position determines the tempo.  Toggle with F8.  
+
+After this comes information MIDI input and MIDI output port, as used by the command line player.

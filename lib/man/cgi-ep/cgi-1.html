@@ -1,0 +1,236 @@
+<html><head><link href="../../../css-stylesheets/elucidator/program.css" rel="stylesheet" title="program" type="text/css" /> <title>Source file</title></head><body bgcolor="#ffffff" text="#000000" link="#000000" vlink="#000000"><font size="2"><pre><span class="comment">; The LAML library and programs written by Kurt Normark, Aalborg University, Denmark.
+; Copyright (C) 1999  Kurt Normark.
+;
+; This program is free software; you can redistribute it and/or modify
+; it under the terms of the GNU General Public License as published by
+; the Free Software Foundation; either version 2 of the License, or
+; (at your option) any later version.
+;
+; This program is distributed in the hope that it will be useful,
+; but WITHOUT ANY WARRANTY; without even the implied warranty of
+; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+; GNU General Public License for more details.
+;
+; You should have received a copy of the GNU General Public License
+; along with this program; if not, write to the Free Software
+; Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA</span><br />
+
+<div class="schemedoc-abstract-comment">;;;; This is a collection of Scheme functions used for CGI programming purposes.
+;;;; We use the so-called POST method, according to which input to a CGI program
+;;;; is read from standard input.&lt;p&gt;
+;;;;
+;;;; The function extract-form-input reads the necessary
+;;;; amounts of input (as determined by the environment variable CONTENT_LENGT) and
+;;;; returns a Lisp association list.&lt;p&gt;
+;;;;
+;;;; The function extract-url-parameters returns and decodes the url parameters.
+;;;; The url parameters are the part of an URL found after the question mark.
+;;;; Using the CGI interface, these are passed via the environment variable QUERY_STRING.
+;;;; Like extract-form-input, the result of this function is also a Lisp association list.&lt;p&gt;
+;;;;
+;;;; The input functions (extract-form-input and extract-url-parameters) take a parameter, which
+;;;; is used for testing purposes in the situation where we are not connected to a WWW server.
+;;;; The global variable cgi-testing controls whether this parameter is used.
+;;;; The variable cgi-testing must be defined in the context of this library.&lt;p&gt;
+;;;;
+;;;;
+;;;; The function time-extend extends an association list with time and date information.
+;;;; This time stamping is quite useful when we extract data from an input form.&lt;p&gt;
+;;;;
+;;;; On the output side, the function write-page writes a page to standard output.
+;;;; If cgi-testing, the page is written to a local test-file.&lt;p&gt;
+;;;; The variable test-file must be defined in the context of this library.&lt;p&gt;
+;;;;
+;;;; The function make-url-parameters produces and encodes url paramters. This is used
+;;;; if we make an URL which passes parameters to another CGI program.
+;;;; The function make-url makes and returns an URL.&lt;p&gt;
+;;;;
+;;;;
+;;;; The CGI library depends on the accompanying &lt;a href = "encode-decode.html"&gt;URL encode and decode library&lt;/a&gt;.&lt;p&gt;
+;;;;
+;;;;
+;;;; There exists a simple &lt;a href="../../tutorial/cgi-programming/cgi-programming.html"&gt;tutorial CGI example&lt;/a&gt; in elucidative style.
+;;;; .title Reference Manual of the CGI library</div>
+
+<div class="schemedoc-section-comment">;;; CGI output functions. </div>
+<a name="cgi-write"></a><a name="cgi-write"></a><span><a href="../cgi.html#cgi-write"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(cgi-write output)</span>
+    (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> cgi-testing 
+        (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX125" title="R5RS Scheme form">begin</a>
+          (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (file-exists? test-file) (delete-file test-file))
+          (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">cond</a> 
+              ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX374" title="R5RS Scheme form">string?</a> output)
+                 (<a class="schemedoc-name" href="../../../lib/man/general.html#save-on-file" title="Manual: general">save-on-file</a> output test-file))
+              ((<a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#ast?" title="Manual: xml-in-laml">ast?</a> output)
+                 (<a class="schemedoc-name" href="../../../lib/man/general.html#save-on-file" title="Manual: general">save-on-file</a> (<a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#xml-render" title="Manual: xml-in-laml">xml-render</a> output) test-file))
+          )
+        )
+        (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">cond</a> 
+              ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX374" title="R5RS Scheme form">string?</a> output)
+                 (<a class="applied-name" href="cgi-1.html#writeln" title="cgi">writeln</a> "Content-type: text/html") (<a class="applied-name" href="cgi-1.html#writeln" title="cgi">writeln</a>)
+                 (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX461" title="R5RS Scheme form">display</a>  output)  <span class="comment">; sending it to standard output</span><br />              )
+
+              ((<a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#ast?" title="Manual: xml-in-laml">ast?</a> output)
+                 (<a class="applied-name" href="cgi-1.html#writeln" title="cgi">writeln</a> "Content-type: text/html") (<a class="applied-name" href="cgi-1.html#writeln" title="cgi">writeln</a>)
+                 (<a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#render-to-output-port" title="Manual: xml-in-laml">render-to-output-port</a> output (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX441" title="R5RS Scheme form">current-output-port</a>) 'prolog))
+
+              (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">else</a> (<a class="schemedoc-name" href="../../../lib/man/general.html#laml-error" title="Manual: general">laml-error</a> "cgi-write: You should write either string or AST"))
+        )
+    ))
+
+<a name="cgi-write-html-ast"></a><span class="comment">; Render the HTML ast to standard output.
+; This procedure corresponds to cgi-write. Use this procedure if you make use of AST-based mirrors.
+; Obsolete. Use cgi-write instead this procedure.</span><br /><a name="cgi-write-html-ast"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(cgi-write-html-ast ast)</span>
+ (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">content-type-string</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> "Content-type: text/html" (<a class="schemedoc-name" href="../../../lib/man/general.html#as-string" title="Manual: general">as-string</a> #\newline) (<a class="schemedoc-name" href="../../../lib/man/general.html#as-string" title="Manual: general">as-string</a> #\newline))))  
+  (<a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#render-to-output-port" title="Manual: xml-in-laml">render-to-output-port</a> ast (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX441" title="R5RS Scheme form">current-output-port</a>) content-type-string)))
+
+  
+
+<a name="write-page"></a><span><a href="../cgi.html#write-page"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(write-page title body . color-list)</span>
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">the-output</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX411" title="R5RS Scheme form">apply</a> page (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX334" title="R5RS Scheme form">append</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX332" title="R5RS Scheme form">list</a> title body) color-list))))
+    (<a class="applied-name" href="cgi-1.html#cgi-write" title="cgi">cgi-write</a> the-output)))
+
+<a name="writeln"></a><span><a href="../cgi.html#writeln"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">writeln</span>
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX98" title="R5RS Scheme form">lambda</a> <span class="local-name-binding">args</span>
+    (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX413" title="R5RS Scheme form">for-each</a> <a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX461" title="R5RS Scheme form">display</a> args)
+    (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX463" title="R5RS Scheme form">newline</a>)))
+
+
+<a name="end"></a><a name="end"></a><span><a href="../cgi.html#end"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(end)</span>
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX304" title="R5RS Scheme form">not</a> cgi-testing) (exit)))
+
+
+<div class="schemedoc-section-comment">;;; CGI input functions. </div>
+<span class="comment">; Read n chars from standard input and return as string (OBSOLETE).
+; Use the much more efficient version read-std-input-1
+; (define (read-std-input n)
+;  (read-n n ""))</span><br />
+<a name="read-std-input"></a><a name="read-std-input"></a><span><a href="../cgi.html#read-std-input"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(read-std-input n)</span>
+  (<a class="applied-name" href="cgi-1.html#read-n-1" title="cgi">read-n-1</a> 0 n (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX375" title="R5RS Scheme form">make-string</a> n #\space)))
+
+<a name="read-n-1"></a><span class="comment">; Reads n characters from standard input, and return result.
+; The parameter is used for a representation of the result, while reading.
+; Initially it should be some arbitrary string of length n.</span><br /><a name="read-n-1"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(read-n-1 i n str)</span>
+ (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX237" title="R5RS Scheme form">&gt;</a> n 0)
+   (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">ch</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX451" title="R5RS Scheme form">read-char</a> )))
+     (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX380" title="R5RS Scheme form">string-set!</a> str i ch)
+     (<a class="applied-name" href="cgi-1.html#read-n-1" title="cgi">read-n-1</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX249" title="R5RS Scheme form">+</a> i 1) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX251" title="R5RS Scheme form">-</a> n 1) str))  
+   str))
+
+<a name="length-of-std-input"></a><span><a href="../cgi.html#length-of-std-input"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(length-of-std-input)</span>
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX122" title="R5RS Scheme form">let*</a> ((<span class="local-name-binding">n-as-str</span> (getenv "CONTENT_LENGTH")))
+    (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX294" title="R5RS Scheme form">string-&gt;number</a> n-as-str)))
+
+
+<a name="cgi-url-input"></a><a name="cgi-url-input"></a><span><a href="../cgi.html#cgi-url-input"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(cgi-url-input . the-input)</span>
+ (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> cgi-testing
+     (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX321" title="R5RS Scheme form">car</a> the-input)
+     (getenv "QUERY_STRING")))
+
+
+<a name="read-n"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(read-n n str)</span>
+<span class="comment">; Reads n characters from standard input, and return result (OBSOLETE - too slow).
+; The parameter is used for accumulating the string iteratively.
+; Initially it should be empty</span><br /> (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX237" title="R5RS Scheme form">&gt;</a> n 0)
+   (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">ch</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX451" title="R5RS Scheme form">read-char</a>)))
+     (<a class="applied-name" href="cgi-1.html#read-n" title="cgi">read-n</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX251" title="R5RS Scheme form">-</a> n 1) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> str (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX375" title="R5RS Scheme form">make-string</a> 1 ch))))  <span class="comment">; string-append potentially very inefficient!</span><br />   str))
+
+
+<a name="extract-form-input"></a><span><a href="../cgi.html#extract-form-input"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(extract-form-input . testfile)</span>
+    (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> cgi-testing
+        (<a class="schemedoc-name" href="../../../lib/man/general.html#file-read" title="Manual: general">file-read</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX321" title="R5RS Scheme form">car</a> testfile))
+        (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX122" title="R5RS Scheme form">let*</a> ((<span class="local-name-binding">input</span> (<a class="applied-name" href="cgi-1.html#read-std-input" title="cgi">read-std-input</a> (<a class="applied-name" href="cgi-1.html#length-of-std-input" title="cgi">length-of-std-input</a>))))
+           (<a class="schemedoc-name" href="../../../lib/man/encode-decode.html#extract-attributes" title="Manual: encode-decode">extract-attributes</a> input))))
+
+<a name="time-extend"></a><a name="time-extend"></a><span><a href="../cgi.html#time-extend"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(time-extend a-list second-count)</span>
+ (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX122" title="R5RS Scheme form">let*</a> ((<span class="local-name-binding">td</span> (<a class="schemedoc-name" href="../../../lib/man/time.html#date-time" title="Manual: time">date-time</a> second-count))
+        (<span class="local-name-binding">tm</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX325" title="R5RS Scheme form">cadr</a> td))
+        (<span class="local-name-binding">dt</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX321" title="R5RS Scheme form">car</a> td))
+        (<span class="local-name-binding">extended-a-list</span>
+             (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> "date" dt) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> "time" tm) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> "second-count" (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX292" title="R5RS Scheme form">number-&gt;string</a> second-count)) a-list)))))
+  extended-a-list))
+
+
+<div class="schemedoc-section-comment">;;; Other CGI functions.</div>
+<a name="make-url-parameters-and-encode"></a><a name="make-url-parameters-and-encode"></a><span><a href="../cgi.html#make-url-parameters-and-encode"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(make-url-parameters-and-encode key-list val-list)</span>
+  (<a class="schemedoc-name" href="../../../lib/man/encode-decode.html#encode-a-list" title="Manual: encode-decode">encode-a-list</a> (<a class="schemedoc-name" href="../../../lib/man/general.html#map2" title="Manual: general">map2</a> <a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> key-list val-list)))
+
+<a name="make-url-parameters"></a><a name="make-url-parameters"></a><span><a href="../cgi.html#make-url-parameters"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(make-url-parameters key-list val-list)</span>
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX122" title="R5RS Scheme form">let*</a> ((<span class="local-name-binding">url-par-a-list</span> (<a class="schemedoc-name" href="../../../lib/man/general.html#map2" title="Manual: general">map2</a> <a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> key-list val-list))
+         (<span class="local-name-binding">url-par-string-list</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX412" title="R5RS Scheme form">map</a> (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX98" title="R5RS Scheme form">lambda</a> (<span class="local-name-binding">pair</span>) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> (<a class="schemedoc-name" href="../../../lib/man/general.html#as-string" title="Manual: general">as-string</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX321" title="R5RS Scheme form">car</a> pair)) "=" (<a class="schemedoc-name" href="../../../lib/man/general.html#as-string" title="Manual: general">as-string</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX322" title="R5RS Scheme form">cdr</a> pair)))) url-par-a-list)))
+    (<a class="schemedoc-name" href="../../../lib/man/general.html#list-to-string" title="Manual: general">list-to-string</a> url-par-string-list "&amp;")))
+    
+
+<a name="extract-url-parameters"></a><a name="extract-url-parameters"></a><span><a href="../cgi.html#extract-url-parameters"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(extract-url-parameters . the-input)</span>
+ (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX412" title="R5RS Scheme form">map</a> <a class="schemedoc-name" href="../../../lib/man/general.html#symbolize-key" title="Manual: general">symbolize-key</a>
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX304" title="R5RS Scheme form">not</a> cgi-testing)
+      (<a class="schemedoc-name" href="../../../lib/man/encode-decode.html#extract-attributes" title="Manual: encode-decode">extract-attributes</a> (<a class="applied-name" href="cgi-1.html#cgi-url-input" title="cgi">cgi-url-input</a>))
+      (<a class="schemedoc-name" href="../../../lib/man/encode-decode.html#extract-attributes" title="Manual: encode-decode">extract-attributes</a>  (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX321" title="R5RS Scheme form">car</a> the-input)))))
+
+<a name="activity-url"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(activity-url cgi-program key-list val-list)</span>
+  (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> activity-url-prefix cgi-program "?" (<a class="applied-name" href="cgi-1.html#make-url-parameters" title="cgi">make-url-parameters</a> key-list val-list)))
+
+<a name="make-url"></a><a name="make-url"></a><span><a href="../cgi.html#make-url"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(make-url url-prefix cgi-program key-list val-list)</span>
+ <span class="comment">; a more general version of activity-url</span><br />  (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> url-prefix cgi-program "?" (<a class="applied-name" href="cgi-1.html#make-url-parameters" title="cgi">make-url-parameters</a> key-list val-list)))
+
+
+<a name="save-registrations"></a><span><a href="../cgi.html#save-registrations"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(save-registrations a-list f g)</span>
+ (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">contr</span> (<a class="schemedoc-name" href="../../../lib/man/general.html#get" title="Manual: general">get</a> 'contribution a-list))
+       (<span class="local-name-binding">a-list-but-contents</span> 
+         (<a class="schemedoc-name" href="../../../lib/man/general.html#filter" title="Manual: general">filter</a> (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX98" title="R5RS Scheme form">lambda</a> (<span class="local-name-binding">a</span>) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX304" title="R5RS Scheme form">not</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX199" title="R5RS Scheme form">eq?</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX321" title="R5RS Scheme form">car</a> a) 'contribution))) a-list)))
+   (<a class="schemedoc-name" href="../../../lib/man/general.html#save-a-list" title="Manual: general">save-a-list</a> a-list-but-contents f)
+   (<a class="schemedoc-name" href="../../../lib/man/file-read.html#write-text-file" title="Manual: file-read">write-text-file</a> contr g)
+))
+
+
+<a name="split-file-name"></a><a name="split-file-name"></a><span><a href="../cgi.html#split-file-name"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(split-file-name filename)</span>
+ (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">split-points</span> (<a class="applied-name" href="cgi-1.html#split-point-list" title="cgi">split-point-list</a> filename #\_)))
+   (<a class="applied-name" href="cgi-1.html#split-string" title="cgi">split-string</a> filename split-points )))
+
+<a name="split-point-list"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(split-point-list str split-char)</span>
+  <span class="comment">; return a list of positions of the split-char as found in str.</span><br /> (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">str-lgt</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX378" title="R5RS Scheme form">string-length</a> str)))
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> <span class="local-name-binding">loop</span>
+     ((<span class="local-name-binding">pos</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX251" title="R5RS Scheme form">-</a> str-lgt 1))
+      (<span class="local-name-binding">res</span> '()) )
+   (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">cond</a> ((<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX117" title="R5RS Scheme form">and</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX235" title="R5RS Scheme form">=</a> 0 pos) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX196" title="R5RS Scheme form">eqv?</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX379" title="R5RS Scheme form">string-ref</a> str pos) split-char)) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> pos res))
+         ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX235" title="R5RS Scheme form">=</a> 0 pos) res)
+         ((<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX196" title="R5RS Scheme form">eqv?</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX379" title="R5RS Scheme form">string-ref</a> str pos) split-char)
+            (loop (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX251" title="R5RS Scheme form">-</a> pos 1) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> pos res)))
+         (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">else</a> (loop (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX251" title="R5RS Scheme form">-</a> pos 1) res))))))
+
+<a name="split-string"></a><span></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(split-string str split-list)</span>
+  <span class="comment">; str is splitted in components, separated by points in split-list
+; return the list of components.</span><br /> (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">split-list-1</span> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX320" title="R5RS Scheme form">cons</a> -1 (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX334" title="R5RS Scheme form">append</a> split-list (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX332" title="R5RS Scheme form">list</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX378" title="R5RS Scheme form">string-length</a> str))))))
+  (<a class="schemedoc-name" href="../../../lib/man/general.html#map2" title="Manual: general">map2</a>
+   (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX98" title="R5RS Scheme form">lambda</a>(<span class="local-name-binding">f</span> <span class="local-name-binding">t</span>)
+      (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX391" title="R5RS Scheme form">substring</a> str (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX249" title="R5RS Scheme form">+</a> 1 f) t))
+   split-list-1 (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX322" title="R5RS Scheme form">cdr</a> split-list-1))))
+
+
+<span class="comment">; ---------------------------------------------------------------------------------------------------------------</span><br /><div class="schemedoc-section-comment">;;; Multipart input.</div>
+<a name="extract-multipart-form-input"></a><a name="extract-multipart-form-input"></a><span><a href="../cgi.html#extract-multipart-form-input"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(extract-multipart-form-input cur-time . testfile)</span>
+ (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">input-port</span> (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> cgi-testing (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX444" title="R5RS Scheme form">open-input-file</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX321" title="R5RS Scheme form">car</a> testfile)) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX440" title="R5RS Scheme form">current-input-port</a>))))
+   (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX106" title="R5RS Scheme form">set!</a> ip input-port) <span class="comment">; defined in the library collect-skip</span><br />   (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">res</span> (<a class="schemedoc-name" href="../../../lib/man/encode-decode.html#multipart-decode" title="Manual: encode-decode">multipart-decode</a> cur-time)))
+     (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX446" title="R5RS Scheme form">close-input-port</a> input-port)
+     res
+   )))
+
+
+<span class="comment">; ---------------------------------------------------------------------------------------------------</span><br />
+<span class="comment">; (define opg #f)
+;
+; (define (do-load)
+;  (load "cgi.scm")
+;  (load "encode-decode.scm")
+;  (load "collect-skip.scm")
+;  (load "file-read.scm")
+;  (set! cgi-testing #t)
+;  (set! content_type-and-boundary (lambda () (cons "multipart/form-data" "-----------------------------7d03bb315033c")))
+;  (set! collected-form-alist '())
+;  (set! multiform-file-path #f)
+;
+; )</span><br />
+
+
+
+
+</pre></font><div>&nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p></div></body></html>

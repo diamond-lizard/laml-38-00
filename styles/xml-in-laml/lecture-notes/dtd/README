@@ -1,0 +1,5 @@
+The LENO DTD, the LAML script that parses the DTD,
+the parsed LENO DTD and the mirror production script.
+
+The LENO XML-in-LAML mirror is found in ../mirror
+

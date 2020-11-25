@@ -1,0 +1,38 @@
+(load (string-append laml-dir "laml.scm"))
+(load (in-startup-directory "shared-front-matters-stuff.scm"))
+(laml-style "xml-in-laml/lecture-notes-themes/lecture-notes-themes")
+
+
+(leno-themes-front-matters 
+  shared-themes-front-matters-attributes
+)
+
+(begin-themes)
+
+(theme 'id "sec1"
+  (leno-element 'lecture-id "multi-2" 'page-id "sec1" 'element-type "section-title" 'element-number "1" )
+  (theme-text "Introduction to another chapter.")
+  (leno-element 'lecture-id "multi-2" 'page-id "page1" 'element-type "title" 'element-number "1" )
+  (theme-text "Another thematic introduction")
+  (leno-element 'lecture-id "multi-2" 'page-id "page1" 'element-type "slide-text" 'element-id "sl1" )
+  (leno-element 'lecture-id "multi-2" 'page-id "page1" 'element-type "point" 'element-id "pt1" )
+  (leno-element 'lecture-id "multi-2" 'page-id "page2" 'element-type "title" 'element-number "1" )
+  (theme-text "Another thematic introduction")
+  (leno-element 'lecture-id "multi-2" 'page-id "page2" 'element-type "point" 'element-id "pt1" )
+  (leno-element 'lecture-id "multi-2" 'page-id "page2" 'element-type "opposing" 'element-id "op1" )
+)
+
+(theme 'id "sec2"
+  (leno-element 'lecture-id "multi-2" 'page-id "sec2" 'element-type "section-title" 'element-number "1" )
+  (theme-text "Another thematic introduction")
+  (leno-element 'lecture-id "multi-2" 'page-id "page3" 'element-type "title" 'element-number "1" )
+  (leno-element 'lecture-id "multi-2" 'page-id "page3" 'element-type "items" 'element-id "it1" )
+  (leno-element 'lecture-id "multi-2" 'page-id "page3" 'element-type "language-syntax" 'element-id "sy1" )
+  (leno-element 'lecture-id "multi-2" 'page-id "page4" 'element-type "title" 'element-number "1" )
+  (theme-text "Another thematic introduction")
+  (leno-element 'lecture-id "multi-2" 'page-id "page4" 'element-type "items" 'element-id "it1" )
+  (theme-text "End remark")
+)
+
+
+(end-themes)

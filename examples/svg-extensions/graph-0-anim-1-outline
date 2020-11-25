@@ -1,0 +1,10 @@
+(with-animation 'step-buttons-reveal
+ (let* (...)
+  (let* ((node-a (svg-node ... "A" 'step 1))
+         (node-b (svg-node ... "B" 'step 2))
+         (node-c (svg-node ...  "C" 'step 4))
+         (edge1 (svg-edge node-a "ct" node-b "lc" ... 'step-from 3 'step-to 4))
+         (edge2 (svg-edge node-b "rc" node-c "ct" ... 'step-from 4 'step-to 5)) )
+     (svg-graph 'from-step 1 'to-step 5
+           (list node-a node-b node-c)
+           (list edge2 edge1)) )))

@@ -1,0 +1,58 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define red (rgb-color-encoding 255 0 0))
+
+(define (color-string? x)
+ (and (= 7 (string-length x))
+      (eq? #\# (string-ref x 0))
+      (hex-numeric-string? (substring x 1 7))))
+
+(define (hex-numeric-string? x)
+  (string-of-char-list? x 
+   (list #\0 #\1 #\2 #\3 #\4 #\5 #\6 #\7 #\8 
+         #\9 #\a #\b #\c #\d #\e #\f)))
+
+
+
+(define new-color-frame-width
+  (let ((val! 
+         (lambda (c a) 
+           (cond ((not (numeric-string? (defaulted-get-prop 'width a #f))) 
+                  (xml-check-error 
+                   "The  width  attribute of new-color-frame-width must be numeric"))
+                 ((not (color-string? (defaulted-get-prop 'color a #f)))
+                  (xml-check-error
+                   "The  color  attribute must be a seven character string, such as #00ff77"))
+                 (else #t))))
+	(med  (lambda (c a)
+		(list c (get-prop 'color a) (get-prop 'width a))))
+       )
+    (xml-in-laml-parametrization color-frame-width
+        med val! "new-color-frame-width")))
+
+
+; ::write-html-clause-color-frame::
+
+(write-html '(raw)
+ (html 
+  (head 
+    (title "Color frame example"))
+  (body
+    (h1 "Color frame example")
+
+    (p "Original color frame")
+    (center (color-frame-width "Some text" red 100)) ; @a
+
+    (p "New color frame")
+    (center 
+     (new-color-frame-width  ; @b
+       "Some more text" 'color red 'width "a00"))
+
+   
+)))
+
+(end-laml)
+
+

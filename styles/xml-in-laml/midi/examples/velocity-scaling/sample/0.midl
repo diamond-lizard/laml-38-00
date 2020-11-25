@@ -1,0 +1,18 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/midi/midi")
+(load (string-append laml-dir "styles/xml-in-laml/midi/midi-laml-processing-lib.scm"))
+
+(StandardMidiFile
+   (MidiHeader 'format "0" 'numberOfTracks "1" 'pulsesPerQuarterNote "1920" 'mode "deltaTime")
+   (MidiTrack
+
+      ; 80 C notes
+      (map 
+        (lambda (note)
+          (NoteOn 'deltaTime 960 'channel 1 'note 60 'velocity 64 'duration 960))
+        (number-interval 1 80))  ; eight bars of eigthy C notes
+
+      (Meta 'deltaTime "30720" 'type "47" "")   ; End of track - far away
+   )
+)
+

@@ -1,0 +1,6 @@
+  (photo-list
+    (photo 'time "5" 'path "" 'file "MVC-001F.JPG" 'size "original" 'orientation "landscape" (upper-caption 'size "6" "Demo"))
+    (photo 'time "5" 'path "" 'file "MVC-002F.JPG" 'size "original" 'orientation "landscape" (upper-caption 'size "6" "Demo"))
+    (photo 'time "5" 'path "" 'file "MVC-003F.JPG" 'size "original" 'orientation "landscape" (upper-caption 'size "6" "Demo"))
+
+  )

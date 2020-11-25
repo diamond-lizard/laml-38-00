@@ -1,0 +1,30 @@
+(load (string-append laml-dir "laml.scm"))
+
+(laml-style "simple")
+
+(generic-page-1
+  "A simple page"
+  (con-par 
+     "This page demonstrates a few of the functions in the HTML library."
+
+     (em (con-space "This paragraph has been emphasized by means of the" 
+         (b "em") "function."))
+
+     "Let us also show a simple table, which is one of the real convenient 
+      elements in LAML:"
+
+     (table-1
+       2 ; border 
+       (list 100 200 100)
+       (list red green blue)
+       (list
+         (list "Here" "is" "some")
+         (list "tabular" "text" "")))
+
+     (b "This ends this simple page"))
+
+     
+  (make-color 255 255 191) black blue blue
+)
+
+(end-laml)

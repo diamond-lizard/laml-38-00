@@ -1,0 +1,114 @@
+(load (string-append laml-dir "laml.scm"))
+
+(local-load "notes.scm")                      ; Load the common set up for all chapters from notes.scm
+(laml-style "lecture-notes/lecture-notes")    ; Causes loadning the LENO software
+(local-load "post-notes.scm")                 ; Loads the post part of the common set up
+
+(define front-index? #t)                 ; Set LENO up to make a top-level front index 
+(define word-index? #t)                  ; Set LENO up make word, cross reference index
+
+(set-lecture-name "ch2")
+(set-lecture-number 2)                   ; Define the chapter number (a number)
+
+(exercise-model 'make-indexes-and-solutions-per-lecture)
+                                         ; One of the symbols none, make-indexes, make-indexes-and-solutions-per-lecture,
+                                         ; make-indexes-and-solutions-lecture-wide, synchronous-exercises, asynchronous-exercises
+
+(define slide-header? 'normal)           ; one of the symbols normal, none, or minimal
+
+(define check-html-attributes? #f)
+
+
+(lecture-intro "Chapter one of two"                   ; Define the title, author, affiliation, and the abstract
+  (list 
+    (copyright-owner "Kurt Nørmark")
+    "Department of Computer Science"
+    "Aalborg University"
+    )
+  "Sample abstract"
+)
+
+(begin-notes)                            ; End of preamble section, start of note page section
+
+
+(note-page 'section-1
+  (section-title "Section one of chapter two")
+)
+
+(note-page 'page1
+  (title "First note page"
+         "Some explanation of this page")
+
+  (point
+   "Computer Science has many areas"
+   "A comments about this"
+  )
+
+  (items 
+   (item "Computer Science"
+         ""
+
+         (items 
+          (item "Programming"
+                ""
+                )
+
+          (item "Algorithms"
+                ""
+                )
+
+          (item "Operating Systems"
+                ""
+                )
+          )
+         )
+  )
+
+
+
+  (index-words
+   "programming"
+   "algorithms"
+   "operating systems"
+  )
+
+)
+
+(note-page 'page2
+  (title "Page 2")
+  
+  (point
+   "On this page you will find some definitions"
+  )
+
+  (concept-list
+   (concept "Programming language"
+            "A programming language is a formal and artificial language used when we program a computer "
+            "Explanation of the definition"
+            )
+
+   (concept "Markup language"
+            "A markup language is a formal and articial language used to define a structured text for textual constituents"
+            "Explantions also here"
+            )
+  )
+
+
+  (exercise 'ex2 "Exercise number two"
+    (formulation "An exercise text")
+    (solution "An exercise solution text")
+  )
+
+  (cross-references
+   (list 
+     (note-reference "Reference to page 1" 'ch1 'page1)
+   )
+  )
+
+  (slide-text "This ends the example")
+)
+
+
+(end-notes)                              ; End of note page section
+
+

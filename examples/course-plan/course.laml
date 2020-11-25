@@ -1,0 +1,18 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "course-plan/course-plan")
+(load (string-append (startup-directory scheme-system) "course-description.scm"))
+(init-course-plan)
+
+(make-course-overview-pages "course-home" 2000 1 5 "Course-calender" '())
+
+(write-course-html-file
+  (course-page
+    (text-choice "Introduktion" "Introduction")
+      (con-par
+       "This course is about functional programming in Scheme."
+
+       "These pages have been made to demonstrate the LAML course plan document style" ))
+  "course-introduction")
+
+
+

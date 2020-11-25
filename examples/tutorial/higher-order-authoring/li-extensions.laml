@@ -1,0 +1,62 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+
+(define meta-props 
+  (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(define spacy-li
+  (xml-in-laml-abstraction 
+    (lambda (cont-list attr-prop-list)
+       (li (p cont-list) attr-prop-list))))
+
+(define question-li   
+  (xml-in-laml-abstraction
+    (lambda (cont-list attr-prop-list)
+     (let ((keywords (defaulted-get-prop 'keywords attr-prop-list "")))
+        (spacy-li (b cont-list) (br) (font 'size "2" keywords))))
+    (required-implied-attributes '(keywords) '() "question-li")))
+
+      
+
+; ::write-html-clause-li::
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) (title "TITLE"))
+  (body 
+
+    (p "The first list:")
+
+    (ul ; @a
+      (spacy-li "The" "first" 'id "first" 'type "A")
+      (spacy-li "The" "second" 'type "B"))
+
+    (hr)
+
+    (p "The second list:")
+
+    (ol ; @b
+      (question-li "The first exam question" 'keywords "lists, types")
+      (question-li 'keywords "functions, recursion" "The second exam question" 'x "pip")
+    )
+
+    (hr)
+
+    (p "The third list:")
+
+    (ol ; @c
+      (question-li "The first" _ "," "second" _ "," "and third" "exam question" 'keywords "lists, types")
+      (question-li 'keywords "functions, recursion" "The fourth exam question" 'x "pip")
+    )
+
+  )
+ )
+)
+
+
+(end-laml)

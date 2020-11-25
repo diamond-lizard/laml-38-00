@@ -1,0 +1,70 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define current-xml-language 'xhtml10-transitional)
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+; Insert the LAML template "Processing Options" here
+; if you need variations in the LAML processing
+
+(begin-laml)
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "SVG Graph Extension Examples")
+   (laml-shortcut-icon (laml-home-url-prefix))
+  )
+  (body 
+    (laml-top-banner)
+
+    (h1 "SVG Graph Extension examples")
+
+    (p "The examples below are used as examples of the paper" 
+       (a 'href "http://www.cs.auc.dk/~normark/laml/papers/svg-open-2007/paper.html" (em "A Graph Library Extension of SVG"))
+       "by Kurt Nørmark." )
+
+    (p "The" (a 'href "../../lib/man/svg-extensions.html" "graph extension library documentation") "may also be of interest.")
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 250 200 200 200)
+        (list
+          (map b (list "Example" "Figure in paper"   "Scheme Expression"               "SVG"))
+          (list (span "Simple geometric forms" (b "without") "abstractions")  "Figure 1"     (a-tag "ex-1.laml")        (a-tag "ex-1.svg"))
+          (list (span "Simple geometric forms" (b "with") "abstractions")  "Figure 1"     (a-tag "ex-2.laml")        (a-tag "ex-2.svg"))
+          (list "An elementary graph"  "Figure 2"     (a-tag "graph-0.laml")        (a-tag "graph-0.svg"))
+          (list "A slightly more elaborate graph"  "Figure 3"     (a-tag "graph-1.laml")        (a-tag "graph-1.svg"))
+          (list "A cons-cell graph"  "Figure 4"     (a-tag "cons-cells.laml")        (a-tag "cons-cells.svg"))
+          (list "A graph with a composite node"  "Figure 5"     (a-tag "graph-composite.laml")        (a-tag "graph-composite.svg"))
+          (list "A real life graph with composite nodes (animated with step-buttons-walk-through-edge-motion)"  "Figure 6"     (a-tag "test-by-contract.laml")        (a-tag "test-by-contract.svg"))
+          (list "Animation of type step-buttons-reval"  "Animated version of Figure 2"     (a-tag "graph-0-anim-1.laml")        (a-tag "graph-0-anim-1.svg"))
+          (list "A sample animation of Figure 3 (animated with step-buttons-reveal)" "-"     (a-tag "graph-1-anim-2.laml")        (a-tag "graph-1-anim-2.svg"))
+
+          
+        )))
+
+    (p "To see svg files in your browser, I recommend that you should install the" (a 'href "http://www.adobe.com/svg/viewer/install/" "Adobe SVG plugin") 
+       _"." "If you use Firefox be sure to install version 6.0 of the Adobe plugin - please consult" (a 'href "http://plugindoc.mozdev.org/windows-all.html#AdobeSVG" "this page") _ 
+       "." "If you use a version of Firefox with native SVG support, you will have to switch if off.  See" 
+       (a 'href "http://www.mozilla.org/projects/svg/faq.html#svg-plugin" "here")"for advice on this detail." )
+
+    (font-size 2 (em "If your browser will not present files with 'laml' or 'scm' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files."))
+
+    (vertical-space 1)
+
+    (kn-xml-in-laml)
+
+  )
+ )
+)
+
+
+(end-laml)

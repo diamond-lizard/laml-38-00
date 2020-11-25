@@ -1,0 +1,59 @@
+;; .schemedoc-dependencies  "/user/normark/scheme/lib/xml-in-laml/mirrors/man/svg11-mirror"
+
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-svg11")
+(lib-load "svg-extensions.scm")
+
+(define pi 3.14159)
+
+(define (point-list . points)
+  (list-to-string (map as-string points) ", "))
+
+(define equilateral-triangle
+ (xml-in-laml-abstraction
+   (lambda (c a) 
+    (let* ((cx (as-number (get-prop 'cx a))) (cy (as-number (get-prop 'cy a))) (r (as-number (get-prop 'r a)))
+          (d (* (* 2 r) (sin (/ pi 3)))))
+     (polygon 'points (point-list (- cx (/ d 2)) (+ cy (/ r 2))    cx (- cy r)   (+ cx (/ d 2)) (+ cy (/ r 2))) 
+                      (property-subset a '(stroke stroke-width)) 'fill "none")))
+   'non-passed-value
+   "equilateral-triangle"
+   'svg11))
+
+(define diamond
+ (xml-in-laml-abstraction
+   (lambda (c a) 
+    (let* ((cx (as-number (get-prop 'cx a))) (cy (as-number (get-prop 'cy a))) (r (as-number (get-prop 'r a))))
+     (polygon 'points (point-list (- cx r) cy   cx (- cy r)   (+ cx r) cy   cx (+ cy r))
+                      (property-subset a '(stroke stroke-width)) 'fill "none")))
+   'non-passed-value
+   "diamond"
+   'svg11))
+   
+
+(write-html '(pp prolog)
+  (svg standard-svg-1-1-element-attributes 'width "800" 'height "800" 
+   (let ((x1 100) (y1 100)   (x2 300) (y2 300)  (r 50)
+         (line-props (list 'stroke "black" 'stroke-width "3px")) )
+     (g
+      (circle 'cx x1 'cy y1 'r r line-props 'fill "none")
+      (equilateral-triangle 'cx x2 'cy y1 'r r line-props) 
+      (diamond 'cx x1 'cy y2 'r r line-props)
+      (rect 'x (- x2 r) 'y (- y2 r) 'width (* 2 r) 'height (* 2 r) line-props 'fill "none")
+
+      (line 'x1 x1 'y1 y1  'x2 x2 'y2 y1 line-props)
+      (line 'x1 x2 'y1 y1  'x2 x2 'y2 y2 line-props)
+      (line 'x1 x2 'y1 y2 'x2 x1 'y2 y2 line-props)
+      (line 'x1 x1 'y1 y2 'x2 x1 'y2 y1 line-props)
+     )))
+  (full-source-path-with-extension "svg")
+)
+
+(end-laml)
+
+
+
+
+
+
+

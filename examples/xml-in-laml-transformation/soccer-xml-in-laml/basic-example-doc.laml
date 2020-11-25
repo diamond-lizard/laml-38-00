@@ -1,0 +1,38 @@
+(load (string-append laml-dir "laml.scm"))
+(lib-load "xml-in-laml/xml-in-laml.scm")
+(load (in-startup-directory "basic-soccer-style.scm"))
+(load (in-startup-directory "soccer-mirror.scm"))
+(define xml-check-error laml-error)  ; display-xml-warning or laml-error
+
+(results 'group "A"
+ (match
+   (date "10-Jun-1998")
+   (team 'score "1" "Scotland")
+   (team 'score "2" "Brazil")
+ )
+ (match
+   (date "10-Jun-1998")
+   (team 'score "2" "Marocco")
+   (team 'score "2" "Norway")
+ )
+ (match
+   (date "16-Jun-1998")
+   (team 'score "1" "Scotland")
+   (team 'score "1" "Norway")
+ )
+ (match
+   (date "16-Jun-1998")
+   (team 'score "3" "Brazil")
+   (team 'score "0" "Marocco")
+ )
+ (match
+   (date "23-Jun-1998")
+   (team 'score "1" "Brazil")
+   (team 'score "2" "Norway")
+ )
+ (match
+   (date "23-Jun-1998")
+   (team 'score "0" "Scotland")
+   (team 'score "3" "Marocco")
+ )
+)

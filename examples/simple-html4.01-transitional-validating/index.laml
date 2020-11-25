@@ -1,0 +1,53 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+(define language-preference 'english)
+
+(define validate-html? #t)
+(define check-html-attributes? #t)
+(define transliterate-character-data? #t)
+
+(generic-page
+  "Overview of HTML4.01 examples"
+  (con-par
+    (laml-top-banner)
+    (h 1 "Overview of HTML4.01 examples - with validation")
+    (p "The examples in this directory use the simple-html4.01-transitional-validating style.  It means that they use 
+     the most advanced HTML mirror in Scheme. For illustrative purposes some of the examples document are invalid.
+     Try process the examples and experience LAML's warnings.")
+
+    (p "We use the" (a 'href "../../man/laml.html#write-html" (kbd "write-html")) "procedure from the" (kbd "laml.scm") 
+       "library to write the generated HTML form to a file.")
+
+    (p "Notice the 'prolog/epilog' example which illustrates how the usual HTML prefix and suffix are
+        easily dealt with in LAML.")
+
+    "The following simple examples exist in this directory:"
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 250 200 200)
+        (list
+          (map b (list "Example"   "LAML"                            "HTML"))
+          (list "This index"       (a-tag "index.laml")              (a-tag "index.html"))
+          (list "Hello world"      (a-tag "hello-world.laml")        (a-tag "hello-world.html"))
+          (list "Non-valid hello world"      (a-tag "hello-world-non-valid.laml")        (a-tag "hello-world-non-valid.html"))
+          (list "A simple page"    (a-tag "simple-page-1.laml")      (a-tag "simple-page-1.html"))
+          (list "A simple page with surface forms"    (a-tag "surface-1.laml")      (a-tag "surface-1.html"))          
+          (list "A page with css attributes"    (a-tag "surface-css.laml")      (a-tag "surface-css.html"))          
+          (list "Escape example"    (a-tag "escape.laml")      (a-tag "escape.html"))          
+          (list "Character entity example"    (a-tag "chararacter-entities.laml")      (a-tag "chararacter-entities.html"))          
+          (list "Prolog/Epilog example"    (a-tag "pro-epi.laml")      (a-tag "pro-epi.html"))          
+          
+        )))
+
+    (p "See also" (a "additional examples" 'href "../jfp/index.html") _ ", which are related to a recent paper about LAML.")
+
+    (font-size 2 (em "If your browser will not present files with 'laml' or 'scm' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files."))
+  )
+  white black blue blue
+)
+
+(end-laml)

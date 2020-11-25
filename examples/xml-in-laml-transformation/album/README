@@ -1,0 +1,22 @@
+From 
+  Malcolm Wallace and Colin Runciman
+  Haskell and XML: Generic Combinators or Type-Based Translation?
+
+http://www.cs.york.ac.uk/fp/HaXml/icfp99.html
+
+
+
+Before parsing:
+
+*Deleted 
+  <?xml version='1.0'?>
+  <!DOCTYPE album SYSTEM "album.dtd" [
+    ...  
+  ]>
+ surround.
+
+* Globally changed #PCDATA to CDATA
+
+
+
+

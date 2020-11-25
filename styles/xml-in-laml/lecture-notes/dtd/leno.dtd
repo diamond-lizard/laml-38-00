@@ -1,0 +1,639 @@
+<!--
+   LENO - LAML Lecture Notes.
+
+   Namespace = ???
+
+   For further information, see: http://www.w3.org/TR/xhtml1
+
+   Copyright (c) 2002 - 2008  Kurt Nørmark.
+   All Rights Reserved. 
+-->
+
+<!ENTITY % Number "CDATA">
+    <!-- one or more digits -->
+
+<!ENTITY % Symbol "CDATA">
+    <!-- a name without spaces -->
+
+<!ENTITY % Measure "CDATA">
+    <!-- A length unit, as defined in chapter 6 of CSS level 1 specification -->
+
+<!ENTITY % URI "CDATA">
+    <!-- a Uniform Resource Identifier, see [RFC2396] -->
+
+<!ENTITY % Note-page-element-attributes
+   "id             ID     #IMPLIED
+    margin         %Measure;    #IMPLIED
+    margin-left    %Measure;    #IMPLIED
+    margin-right   %Measure;    #IMPLIED
+    margin-bottom  %Measure;    #IMPLIED
+    margin-top     %Measure;    #IMPLIED
+    drop           (true|false)  'false'"
+>
+    
+<!ENTITY % id-only
+   "id             ID     #IMPLIED">
+
+<!ENTITY % File-path "CDATA">
+    <!-- an absolute or relative file path -->
+
+<!ENTITY % Proper-file-name "CDATA">
+    <!-- the proper name of a file - without initial path and without extension -->
+
+<!ENTITY % Color "CDATA">
+    <!-- A legal color name -->
+
+
+<!ENTITY % Target "CDATA">
+    <!-- A browser target name -->
+
+
+
+
+<!ELEMENT leno 
+  (leno-front-matters, 
+   begin-notes,
+   note-page*,
+   end-notes) >
+
+<!ATTLIST leno
+>
+
+<!ELEMENT leno-front-matters 
+ (front-title, front-subtitle?, front-author, front-affiliation, front-abstract)
+>
+
+<!ELEMENT front-title (#PCDATA) >
+<!ATTLIST front-title
+>
+
+<!ELEMENT front-subtitle (#PCDATA) >
+<!ATTLIST front-subtitle
+>
+
+<!ELEMENT front-author (#PCDATA) >
+<!ATTLIST front-author
+>
+
+<!ELEMENT front-affiliation (#PCDATA) >
+<!ATTLIST front-affiliation
+>
+
+<!ELEMENT front-abstract (#PCDATA) >
+<!ATTLIST front-abstract
+>
+
+<!ATTLIST leno-front-matters
+  slide-view                          (true | false)                "true"
+  annotated-slide-view                (true | false)                "true"
+  aggregated-view                     (true | false)                "true"
+  theme-view                          (true | false)                "false"
+  primary-view                        (slide-view | 
+                                       annotated-slide-view |
+                                       aggregated-view)             "slide-view"
+
+  course-home-url                     %URI;                         #REQUIRED
+  author-home-url                     %URI;                         #REQUIRED
+  note-download-url                   %URI;                         #REQUIRED
+  logo-url                            %URI;                         #REQUIRED
+  note-contents-description           CDATA                         #REQUIRED
+  slide-header                        (normal|none|minimal)         #REQUIRED
+  lecture-type                        (normal|side-track)           #IMPLIED
+  scheme-prefix                       %File-path;                   #IMPLIED
+  scheme-suffix                       %File-path;                   #IMPLIED
+  trail-of-lecture                    (true|false)                  "false"
+  language                            (danish|english)              "english"
+
+  show-and-speak                      (true|false)                  "false"
+  default-showing-time                %Number;                      #IMPLIED
+  additional-showing-time             %Number;                      #IMPLIED
+  sound-source                        (real-audio|wave-file|mp3-file)  #IMPLIED
+  speak-url-prefix                    %URI;                         #IMPLIED
+  speak-file-prefix                   %File-path;                   #IMPLIED
+  show-and-speak-author-mode          (true|false)                  "false"
+
+  exercise-model                      (none| make-indexes | 
+                                       make-indexes-and-solutions-per-lecture | 
+                                       make-indexes-and-solutions-lecture-wide |
+                                       synchronous-exercises)       "make-indexes-and-solutions-per-lecture"
+
+  mouse-advancement                   (double-press | single-press) "double-press"
+  word-index                          (true | false)                "true"
+  word-index-type                     (slide | slide-and-theme)     "slide"
+
+  css-prestylesheet                   %Proper-file-name;            #IMPLIED
+  css-stylesheet                      %Proper-file-name;            #IMPLIED
+  css-stylesheet-copying              (true | false)                "true"
+
+  news-flash-string                   CDATA                         #IMPLIED
+  news-flash-level                    %Number;                      "1"
+  news-flash-url                      %URI;                         #IMPLIED
+
+  quiz-support                        (true | false)                #IMPLIED
+  verbosity-level                     %Number;                      "1"
+
+  process-all-lectures                (true | false)                "false"
+  clean-html-directory                (true | false)                "false"
+  theme-source                        (overwrite | new | none | delta)  "none"
+  theme-auto-process                  (true | false)                "false"
+  make-print-page                     (true | false)                "false"
+  trail-source                        (overwrite | new | none)      "none"
+
+  source-destination-delta            %File-path;                   "html/"
+  html-pdf-delta                      %File-path;                   "../pdf/"
+
+  source-program-index                (true | false)                "true"
+  source-index-page                   (true | false)                "true"
+  treat-svg-images-as                 (svg| png | png-if-exist)     "svg"
+
+  presentation-medium                 (web | paper)                 "web"
+
+  use-doc-comments                    (true | false)                "false"
+  doc-comment-prefix                  CDATA                         #IMPLIED
+
+  use-note-page-importance            (true | false)                "false"
+
+  pdf-version-as-of                   CDATA                         #IMPLIED
+  >
+
+<!ELEMENT begin-notes EMPTY >
+<!ATTLIST begin-notes
+>
+
+<!ELEMENT end-notes EMPTY >
+<!ATTLIST end-notes
+>
+
+<!ELEMENT note-page
+  ((section-title, (show-and-speak | lecturer-photos | lecturer-photos-and-logo| splice-page-with | 
+                    splice-page-without | comment | index-words | quiz | theme-text )*
+   ) |
+   (title, (text | point | items | source-program | image | example | opposing | 
+            comment | language-syntax | tabular | note-text | slide-text | cross-references | exercise | 
+            index-words | image-series | slide-image | show-and-speak | lecturer-photos | 
+            lecturer-photos-and-logo | elucidate | splice-page-with | splice-page-without | 
+            side-track | slide-space | quiz | quotation | synopsis | applet-program | concept-list | svg-image |
+            flash-image | theme-text | meta-text
+           )*
+   )
+  )
+>
+
+<!ATTLIST note-page
+   id         %Symbol;              #REQUIRED
+   drop       (true|false)          "false"
+   importance %Number;              #IMPLIED
+>
+
+<!ELEMENT title (main-text, annotation?) >
+<!ATTLIST title 
+    %Note-page-element-attributes; 
+    annotations        (unfold-before |
+                        unfold-after |
+                        keep |
+                        merge |
+                        ignore)                    "unfold-after"
+>
+
+<!ELEMENT main-text (#PCDATA) >
+<!ATTLIST main-text >
+
+<!ELEMENT annotation (#PCDATA) >
+<!ATTLIST annotation >
+
+<!ELEMENT section-title (#PCDATA) >
+<!ATTLIST section-title %id-only; >
+
+<!ELEMENT point (main-text, annotation?) >
+<!ATTLIST point
+    %Note-page-element-attributes; 
+    annotations        (unfold-before |
+                        unfold-after |
+                        keep |
+                        merge |
+                        ignore)                    "unfold-after"
+>
+
+<!ELEMENT items (item)* >
+<!ATTLIST items %Note-page-element-attributes; 
+    annotations        (unfold-before |
+                        unfold-after |
+                        keep |
+                        merge |
+                        ignore)                    "unfold-after"
+
+>
+
+<!ELEMENT item (main-text, annotation?, items?) >
+<!ATTLIST item 
+   %id-only;
+   drop               (true|false)          "false"
+   annotations        (unfold-before |
+                        unfold-after |
+                        keep |
+                        merge |
+                        ignore)                    "unfold-after"
+>
+
+<!ELEMENT source-program (color-decorations?, main-text, annotation?) >
+<!ATTLIST source-program
+   %Note-page-element-attributes;
+   src                   %File-path;                  #REQUIRED
+   from-mark             CDATA                        #IMPLIED
+   to-mark               CDATA                        #IMPLIED
+   slide-mode            (inline | external)          "inline"
+   book-mode             (inline | external)          "inline"
+   background-color      %Color;                      #IMPLIED
+   indexed               (true | false)               "true"
+   index-title           CDATA                        #IMPLIED
+   kind                  (source-program | listing)   "source-program"
+   program-annotations   (true | false)               "true"
+>
+
+<!ELEMENT color-decorations (color-decoration)* >
+<!ATTLIST color-decorations
+>
+
+<!ELEMENT color-decoration EMPTY >
+<!ATTLIST color-decoration
+  from-mark              CDATA                       #REQUIRED
+  to-mark                CDATA                       #REQUIRED
+  color                  %Color;                     #REQUIRED
+  face                   (bold|italic|typewriter|
+                          underlined|plain)          #IMPLIED
+  repetition             %Number;                    #IMPLIED
+>
+
+<!ELEMENT image (main-text) >
+<!ATTLIST image
+   %Note-page-element-attributes;
+   src                   %File-path;                 #REQUIRED
+   alignment            (vertical|horizontal)        #IMPLIED
+   first                (picture|text)               #IMPLIED
+   second               (picture|text)               #IMPLIED
+>
+
+<!ELEMENT concept-list (concept)+ >
+<!ATTLIST concept-list   %Note-page-element-attributes; >
+
+
+<!ELEMENT concept (main-text, annotation?) >
+<!ATTLIST concept  
+   %id-only;
+   concept-name         CDATA                       #REQUIRED
+   annotations        (unfold-before |
+                        unfold-after |
+                        keep |
+                        merge |
+                        ignore)                    "unfold-after"
+>
+
+<!ELEMENT example (main-text, annotation?) >
+<!ATTLIST example 
+    %Note-page-element-attributes; 
+    annotations        (unfold-before |
+                        unfold-after |
+                        keep |
+                        merge |
+                        ignore)                    "unfold-after"
+>
+
+
+<!ELEMENT opposing (opposing-item)+ >
+<!ATTLIST opposing %Note-page-element-attributes; >
+
+<!ELEMENT opposing-item (left-item,right-item) >
+<!ATTLIST opposing-item
+>
+
+<!ELEMENT left-item (#PCDATA) >
+<!ATTLIST left-item
+>
+
+<!ELEMENT right-item (#PCDATA) >
+<!ATTLIST right-item
+>
+
+<!ELEMENT comment (#PCDATA) >
+<!ATTLIST comment 
+   drop               (true|false)          "false"
+>
+
+<!ELEMENT language-syntax (main-text, annotation?) >
+<!ATTLIST language-syntax 
+    %Note-page-element-attributes; 
+    annotations        (unfold-before |
+                        unfold-after |
+                        keep |
+                        merge |
+                        ignore)                    "unfold-after"
+>
+
+
+<!ELEMENT tabular (row-widths, row*, annotation?) >
+<!ATTLIST tabular
+   %Note-page-element-attributes;
+   border         %Number;     #IMPLIED
+   annotations        (unfold-before |
+                        unfold-after |
+                        keep |
+                        merge |
+                        ignore)                    "unfold-after"
+>
+
+<!ELEMENT row-widths (cell)* >
+<!ATTLIST row-widths
+>
+
+<!ELEMENT row (cell)* >
+<!ATTLIST row
+>
+
+<!ELEMENT cell (#PCDATA) >
+<!ATTLIST cell
+>
+
+<!ELEMENT text (main-text, annotation?) >
+<!ATTLIST text 
+    %Note-page-element-attributes; 
+    annotations        (unfold-before |
+                        unfold-after |
+                        keep |
+                        merge |
+                        ignore)                    "unfold-after"
+>
+
+<!ELEMENT note-text (#PCDATA) >
+<!ATTLIST note-text %Note-page-element-attributes; >
+
+<!ELEMENT slide-text (#PCDATA) >
+<!ATTLIST slide-text %Note-page-element-attributes; >
+
+<!ELEMENT cross-references (internet-reference | note-reference | informal-reference | bibtex-reference)* >
+<!ATTLIST cross-references %Note-page-element-attributes; >
+
+<!ELEMENT internet-reference (main-text,location-hints?) >
+<!ATTLIST internet-reference
+   id               %Symbol;   #IMPLIED
+   href             %URI;      #REQUIRED
+   target           %Target;   #IMPLIED
+>
+
+<!ELEMENT note-reference (main-text,location-hints?) >
+<!ATTLIST note-reference
+   id                     %Symbol;      #IMPLIED
+   lecture-id             %Symbol;      #REQUIRED
+   page-id                %Symbol;      #REQUIRED
+>
+
+<!ELEMENT informal-reference (main-text,location-hints?) >
+<!ATTLIST informal-reference
+   id                     %Symbol;   #IMPLIED
+   title                  CDATA         #REQUIRED
+>
+
+<!ELEMENT bibtex-reference (location-hints?) >
+<!ATTLIST bibtex-reference
+   key                    CDATA         #REQUIRED
+>
+
+<!ELEMENT location-hints (hint)+>
+<!ATTLIST location-hints
+>
+
+<!ELEMENT hint (#PCDATA) >
+<!ATTLIST hint
+>
+
+<!ELEMENT exercise (formulation,solution?) >
+<!ATTLIST exercise
+   id       %Symbol;       #REQUIRED
+   title    CDATA          #REQUIRED
+   rank     %Number;       #IMPLIED
+>
+
+<!ELEMENT formulation (#PCDATA) >
+<!ATTLIST formulation
+>
+
+<!ELEMENT solution (#PCDATA) >
+<!ATTLIST solution
+>
+
+<!ELEMENT index-words (index-word)* >
+<!ATTLIST index-words    drop               (true|false)          "false"
+>
+
+<!ELEMENT index-word (#PCDATA) >
+<!ATTLIST index-word
+>
+
+<!ELEMENT image-series (image-series-item)* >
+<!ATTLIST image-series
+   %Note-page-element-attributes;
+   title                 CDATA                     #REQUIRED
+   slide-mode            (inline | external)       #IMPLIED
+   book-mode             (inline | external)       #IMPLIED
+>
+
+<!ELEMENT image-series-item (#PCDATA) >
+<!ATTLIST image-series-item
+   src                   %File-path;                 #REQUIRED  >
+
+<!ELEMENT slide-image EMPTY >
+<!ATTLIST slide-image
+   %Note-page-element-attributes;
+   src                   %File-path;                 #REQUIRED 
+>
+
+<!ELEMENT show-and-speak (slide-part | program-part | image-series-part)* >
+<!ATTLIST show-and-speak    drop               (true|false)          "false"
+>
+
+<!ELEMENT slide-part EMPTY >
+<!ATTLIST slide-part
+   number                 %Number;                 #REQUIRED 
+   seconds                %Number;                 #REQUIRED 
+>
+
+<!ELEMENT program-part EMPTY >
+<!ATTLIST program-part
+   number                 %Number;                 #REQUIRED 
+   seconds                %Number;                 #REQUIRED 
+>
+
+<!ELEMENT image-series-part (image-part)* >
+<!ATTLIST image-series-part
+   number                 %Number;                 #REQUIRED 
+>
+
+<!ELEMENT image-part EMPTY >
+<!ATTLIST image-part
+   seconds                %Number;                 #REQUIRED 
+>
+
+<!ELEMENT lecturer-photos EMPTY >
+<!ATTLIST lecturer-photos
+   %Note-page-element-attributes;
+   start-number           %Number;                 #REQUIRED 
+   number-of-photos       %Number;                 #REQUIRED 
+>
+
+<!ELEMENT lecturer-photos-and-logo EMPTY >
+<!ATTLIST lecturer-photos-and-logo
+   %Note-page-element-attributes;
+   start-number           %Number;                 #REQUIRED 
+>
+
+<!ELEMENT elucidate (#PCDATA) >
+<!ATTLIST elucidate
+   %Note-page-element-attributes;
+   href             %URI;      #REQUIRED
+   target           %Target;   #IMPLIED
+>   
+
+<!ELEMENT splice-page-with (leno-elements) >
+<!ATTLIST splice-page-with
+   drop               (true|false)      "false"
+   lecture-id             %Symbol;      #REQUIRED
+   page-id                %Symbol;      #REQUIRED   
+   element-id             %Symbol;      #IMPLIED
+>
+
+<!ELEMENT splice-page-without (leno-elements) >
+<!ATTLIST splice-page-without 
+   drop               (true|false)      "false"
+   lecture-id             %Symbol;      #REQUIRED
+   page-id                %Symbol;      #REQUIRED   
+>  
+
+<!ELEMENT leno-elements (element-name)* >
+<!ATTLIST leno-elements
+>
+
+<!ELEMENT element-name (#PCDATA) >
+<!ATTLIST element-name
+>
+
+<!ELEMENT side-track (main-text, annotation?) >
+<!ATTLIST side-track
+   drop               (true|false)      "false"
+   track-lecture-id   %Symbol;          #IMPLIED
+   track-url          %URI;             #IMPLIED
+   annotations        (unfold-before |
+                        unfold-after |
+                        keep |
+                        merge |
+                        ignore)                    "unfold-after"
+> 
+
+<!ELEMENT quiz (question, answers) >
+<!ATTLIST quiz
+> 
+
+<!ELEMENT question (#PCDATA) >
+<!ATTLIST question
+>
+
+<!ELEMENT answers (answer)* >
+<!ATTLIST answers
+>
+
+<!ELEMENT answer (answer-possibility, answer-clarification) >
+<!ATTLIST answer
+   correctness      %Number;       #REQUIRED
+>
+
+<!ELEMENT answer-possibility (#PCDATA) >
+<!ATTLIST answer-possibility
+>
+
+<!ELEMENT answer-clarification (#PCDATA) >
+<!ATTLIST answer-clarification
+>
+
+<!ELEMENT applet-program (main-text, applet-param* ) >
+<!ATTLIST applet-program
+   %Note-page-element-attributes;
+   code                   %URI;               #REQUIRED
+   code-base              %URI;               #REQUIRED
+   height                 %Number;            #REQUIRED
+   width                  %Number;            #REQUIRED
+> 
+
+<!ELEMENT applet-param EMPTY>
+<!ATTLIST applet-param
+   name                   %Symbol;              #REQUIRED 
+   value                  CDATA                 #REQUIRED 
+>
+
+
+<!ELEMENT quotation (main-text, annotation?) >
+<!ATTLIST quotation 
+    %Note-page-element-attributes; 
+    annotations        (unfold-before |
+                        unfold-after |
+                        keep |
+                        merge |
+                        ignore)                    "unfold-after"
+>
+
+
+<!ELEMENT synopsis (synopsis-item)* >
+<!ATTLIST synopsis %Note-page-element-attributes; >
+
+<!ELEMENT synopsis-item (main-text, annotation?) >
+<!ATTLIST synopsis-item 
+    %id-only; 
+    annotations        (unfold-before |
+                        unfold-after |
+                        keep |
+                        merge |
+                        ignore)                    "unfold-after"
+
+>
+
+
+<!ELEMENT slide-space EMPTY >
+<!ATTLIST slide-space
+   amount                 %Number;            #IMPLIED
+>
+
+<!ELEMENT svg-image (main-text , svg-inline?) >
+<!ATTLIST svg-image
+   id             %Symbol;     #REQUIRED
+   margin         %Measure;    #IMPLIED
+   margin-left    %Measure;    #IMPLIED
+   margin-right   %Measure;    #IMPLIED
+   margin-bottom  %Measure;    #IMPLIED
+   margin-top     %Measure;    #IMPLIED
+   drop           (true|false)  'false'
+
+   width                  %Number;            #REQUIRED
+   height                 %Number;            #REQUIRED
+   src                    %File-path;         #IMPLIED
+>
+
+<!ELEMENT svg-inline (g | svg) >
+
+<!ELEMENT flash-image (main-text) >
+<!ATTLIST flash-image
+   %Note-page-element-attributes;
+   width                  %Number;            #REQUIRED
+   height                 %Number;            #REQUIRED
+   src                    %File-path;         #REQUIRED
+>
+
+<!ELEMENT meta-text (#PCDATA) >
+<!ATTLIST meta-text 
+   type          (readers-guide | normal )    "normal"
+   id             %Symbol;                    #IMPLIED
+   drop          (true|false)                 "false"
+>
+
+<!ELEMENT theme-text (#PCDATA) >
+<!ATTLIST theme-text 
+   id             %Symbol;                    #IMPLIED
+   drop          (true|false)                 "false"
+>
+

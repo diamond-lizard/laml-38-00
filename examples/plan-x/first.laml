@@ -1,0 +1,27 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-strict-validating")
+
+(define meta-props 
+  (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(write-html '(pp prolog)
+ (html html-props
+  (head 
+   (meta meta-props)
+   (title "First page"))
+  (body 
+    (h1 "LAML Info")
+
+    (p "Here you find a number of links to LAML information:")
+
+    (ul 
+      (li (a 'href "http://www.cs.auc.dk/~normark/laml/" "General LAML info"))
+      (li (a 'href "http://www.cs.auc.dk/~normark/laml/zip-distribution/" "LAML download"))
+      (li (a 'href "http://www.cs.auc.dk/~normark/scheme/index.html" "Info for programmers"))
+    )
+
+    (p  "Kurt Normark" (br) (span 'css:background-color "aqua" "normark@cs.auc.dk")))))
+
+(end-laml)

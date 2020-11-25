@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="iso-8859-1"  standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- The material in this file is copyrighted (c) by KN &copy;, AAU.  All rights reserved.-->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800" height="800" viewBox="0 0 800 800">
+   <g>
+      <g>
+         <defs>
+            <marker id="Arrowhead" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="20"
+                    markerHeight="15" orient="auto" preserveAspectRatio="none">
+               <path d="M 0 0 L 10 5 L 0 10 z"></path>
+            </marker>
+         </defs>
+         <g>
+            <rect stroke="none" x="70" y="80.0" width="30" height="40" stroke-width="1" fill="white" id="i">
+               
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="85.0"
+                  text-anchor="middle" y="110.0">
+               i:
+            </text>
+         </g>
+         <g>
+            <rect stroke-width="1" x="120" y="80.0" width="100" height="40" stroke="black" fill="coral">
+               
+            </rect>
+            <text font-style="italic" font-family="times-roman" font-size="30" stroke="black" color="black"
+                  fill="black" x="215" text-anchor="end" y="110.0">
+               55556
+            </text>
+         </g>
+      </g>
+      <g>
+         <defs>
+            <marker id="Arrowhead" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="20"
+                    markerHeight="15" orient="auto" preserveAspectRatio="none">
+               <path d="M 0 0 L 10 5 L 0 10 z"></path>
+            </marker>
+         </defs>
+         <g>
+            <rect stroke="none" x="70" y="140.0" width="30" height="40" stroke-width="1" fill="white" id="j">
+               
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="85.0"
+                  text-anchor="middle" y="170.0">
+               j:
+            </text>
+         </g>
+         <g>
+            <rect stroke-width="1" x="120" y="140.0" width="100" height="40" stroke="black" fill="coral">
+               
+            </rect>
+            <text font-style="italic" font-family="times-roman" font-size="30" stroke="black" color="black"
+                  fill="black" x="215" text-anchor="end" y="170.0">
+               7777
+            </text>
+         </g>
+      </g>
+      <g>
+         <defs>
+            <marker id="Arrowhead" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="20"
+                    markerHeight="15" orient="auto" preserveAspectRatio="none">
+               <path d="M 0 0 L 10 5 L 0 10 z"></path>
+            </marker>
+         </defs>
+         <g>
+            <rect stroke="none" x="40" y="200.0" width="60" height="40" stroke-width="1" fill="white" id="kkk">
+               
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="70.0"
+                  text-anchor="middle" y="230.0">
+               kkk:
+            </text>
+         </g>
+         <g>
+            <rect stroke-width="1" x="120" y="200.0" width="100" height="40" stroke="black" fill="coral">
+               
+            </rect>
+            <text font-style="italic" font-family="times-roman" font-size="30" stroke="black" color="black"
+                  fill="black" x="215" text-anchor="end" y="230.0">
+               pip
+            </text>
+         </g>
+      </g>
+      <g>
+         <defs>
+            <marker id="Arrowhead" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="20"
+                    markerHeight="15" orient="auto" preserveAspectRatio="none">
+               <path d="M 0 0 L 10 5 L 0 10 z"></path>
+            </marker>
+         </defs>
+         <g>
+            <rect stroke="none" x="70" y="260.0" width="30" height="40" stroke-width="1" fill="white" id="x">
+               
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="85.0"
+                  text-anchor="middle" y="290.0">
+               x:
+            </text>
+         </g>
+         <g>
+            <rect stroke-width="1" x="120" y="260.0" width="100" height="40" stroke="black" fill="coral">
+               
+            </rect>
+            <text font-style="italic" font-family="times-roman" font-size="30" stroke="black" color="black"
+                  fill="black" x="215" text-anchor="end" y="290.0">
+               88
+            </text>
+         </g>
+      </g>
+      <g>
+         <defs>
+            <marker id="Arrowhead" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="20"
+                    markerHeight="15" orient="auto" preserveAspectRatio="none">
+               <path d="M 0 0 L 10 5 L 0 10 z"></path>
+            </marker>
+         </defs>
+         <g>
+            <rect stroke="none" x="70" y="320.0" width="30" height="40" stroke-width="1" fill="white" id="y">
+               
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="85.0"
+                  text-anchor="middle" y="350.0">
+               y:
+            </text>
+         </g>
+         <g>
+            <rect stroke-width="1" x="120" y="320.0" width="100" height="40" stroke="black" fill="coral">
+               
+            </rect>
+            <text font-style="italic" font-family="times-roman" font-size="30" stroke="black" color="black"
+                  fill="black" x="215" text-anchor="end" y="350.0">
+               #t
+            </text>
+         </g>
+      </g>
+      <g>
+         <defs>
+            <marker id="Arrowhead" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="20"
+                    markerHeight="15" orient="auto" preserveAspectRatio="none">
+               <path d="M 0 0 L 10 5 L 0 10 z"></path>
+            </marker>
+         </defs>
+         <g>
+            <rect stroke="none" x="405" y="80.0" width="45" height="40" stroke-width="1" fill="white" id="ii">
+               
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="427.5"
+                  text-anchor="middle" y="110.0">
+               ii:
+            </text>
+         </g>
+         <g>
+            <rect stroke-width="1" x="470" y="80.0" width="100" height="40" stroke="black" fill="coral">
+               
+            </rect>
+            <text font-style="italic" font-family="times-roman" font-size="30" stroke="black" color="black"
+                  fill="black" x="565" text-anchor="end" y="110.0">
+               55556
+            </text>
+         </g>
+      </g>
+      <g>
+         <defs>
+            <marker id="Arrowhead" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="20"
+                    markerHeight="15" orient="auto" preserveAspectRatio="none">
+               <path d="M 0 0 L 10 5 L 0 10 z"></path>
+            </marker>
+         </defs>
+         <g>
+            <rect stroke="none" x="405" y="140.0" width="45" height="40" stroke-width="1" fill="white" id="jj">
+               
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="427.5"
+                  text-anchor="middle" y="170.0">
+               jj:
+            </text>
+         </g>
+         <g>
+            <rect stroke-width="1" x="470" y="140.0" width="100" height="40" stroke="black" fill="coral">
+               
+            </rect>
+            <text font-style="italic" font-family="times-roman" font-size="30" stroke="black" color="black"
+                  fill="black" x="565" text-anchor="end" y="170.0">
+               7777
+            </text>
+         </g>
+      </g>
+      <g>
+         <defs>
+            <marker id="Arrowhead" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="userSpaceOnUse" markerWidth="20"
+                    markerHeight="15" orient="auto" preserveAspectRatio="none">
+               <path d="M 0 0 L 10 5 L 0 10 z"></path>
+            </marker>
+         </defs>
+         <g>
+            <rect stroke="none" x="345" y="200.0" width="105" height="40" stroke-width="1" fill="white"
+                  id="kkkkkk">
+               
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="397.5"
+                  text-anchor="middle" y="230.0">
+               kkkkkk:
+            </text>
+         </g>
+         <g>
+            <rect stroke-width="1" x="470" y="200.0" width="100" height="40" stroke="black" fill="coral">
+               
+            </rect>
+            <text font-style="italic" font-family="times-roman" font-size="30" stroke="black" color="black"
+                  fill="black" x="565" text-anchor="end" y="230.0">
+               pip
+            </text>
+         </g>
+      </g>
+   </g>
+</svg>

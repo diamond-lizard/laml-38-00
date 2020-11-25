@@ -1,0 +1,184 @@
+;;; ::loading-section::
+
+(load (string-append laml-dir "laml.scm"))
+(lib-load "xml-in-laml/xml-in-laml.scm")
+(lib-load "xml-in-laml/mirrors/xhtml10-frameset-mirror.scm")
+(lib-load "xml-in-laml/mirrors/xhtml10-transitional-mirror.scm")
+(lib-load "xhtml1.0-convenience.scm")
+(lib-load "color.scm")
+(lib-load "time.scm")
+
+
+;;; ::frameset-alias-section::
+(define fr:html (xhtml10-frameset 'html)) 
+(define fr:head (xhtml10-frameset 'head)) 
+(define fr:title (xhtml10-frameset 'title))
+
+(set! language-preference 'english)
+(set! xml-check-language-overlap? #f)
+
+; ----------------------------------------------------
+; Bookmark title and data:
+
+(define page-title "Part of Kurt Nørmark's Bookmarks")
+
+(define bookmarks 
+ (file-read 
+  (string-append (startup-directory) 
+                 "bookmark-sample.lsp")))
+
+; ----------------------------------------------------
+; Common functions
+
+(define (bookmark-categories bookmark-list)
+  (bookmark-categories-iterate bookmark-list '()))
+
+; Selectors:
+(define bookmark-title-of (make-selector-function 2))
+(define bookmark-url-of (make-selector-function 3))
+(define bookmark-category-of (make-selector-function 4))
+(define bookmark-comment-of (make-selector-function 5))
+
+(define (bookmark-title-of-non-blank bm)
+ (let ((bmt (bookmark-title-of bm)))
+   (if (blank-string? bmt) "?" bmt)))
+
+; Constructor
+(define (make-bookmark ttl url cat com) 
+   (list 'bookmark ttl url cat com))
+
+
+; --------------------------------------------------------
+
+; The list of frame widths:
+(define frame-width-list '(200 *))
+
+;; ::frameset-page:: Write the index file
+
+(write-html '(prolog pp) ; @e
+ (fr:html
+  
+   (fr:head  ; @a
+    (fr:title "Bookmark Browser") ; @b
+   )
+   (frameset ; @c
+     (frame 'name "bookmark-categories" 
+            'src "bookmark-categories.html" 
+            'scrolling "auto")
+     (frame 'name "bookmark-main" 
+            'src "bookmark-contents.html"
+             'scrolling "auto")
+     
+    'cols (list-to-string 
+           (map as-string frame-width-list) ",") ; @d
+   ))
+)
+
+;; ::empty-pages:: Write the index file
+
+; A procedure that makes an empty x page.
+(define (make-empty-page! x)
+ (write-html '(prolog pp)
+  (html (head (title x)) (body (h3 x)))
+  (in-startup-directory (string-append x ".html"))))
+
+(make-empty-page! "bookmark-categories")
+(make-empty-page! "bookmark-contents")
+
+
+
+
+; --------------------------------------------------------------
+; THE LEFT HAND PAGE.
+
+(define (present-categories bml)
+ (let* ((cat-list (map bookmark-category-of bml)) ;@a
+        (cat-list-unique (remove-duplicates cat-list)) ;@b
+       )
+   (map ; @c
+      (lambda (cat) 
+        (con
+         (a 'href (string-append "bookmark-contents.html" "#" cat)
+            'target "bookmark-main"
+            cat)
+         (br))
+      )
+      (sort-list cat-list-unique 
+       (lambda (s t) 
+         (string<=? (downcase-string s) (downcase-string t)))))))
+
+;; ::left-frame-page:: Write the left frame.
+(write-html '(prolog pp)
+ (html (head (title "Bookmark Categories"))
+  (body 
+    (font-1 4 red (b "Bookmark categories")) (p)
+    (present-categories bookmarks)
+    (p)
+    (font-1 1 red (when-generated))))
+ (in-startup-directory "bookmark-categories.html")
+)
+
+; --------------------------------------------------------------
+; THE RIGHT HAND PAGE.
+
+(define sentinel-bookmark 
+  (make-bookmark "" "" 'empty "")) 
+
+(define (present-bookmarks bml)
+ (let* ((sorted-bookmarks ;@a
+         (sort-list bml
+          (lambda (bm1 bm2) ; @i
+            (string<=? 
+             (downcase-string (bookmark-category-of bm1))
+             (downcase-string (bookmark-category-of bm2)))))))
+  (present-bookmarks-1 
+   sorted-bookmarks ; @c
+   (cons sentinel-bookmark 
+     (butlast sorted-bookmarks)) ; @d
+  )
+ )
+)
+
+(define (present-bookmarks-1 bml prev-bml)
+ (map2 (lambda (bm bm-prev) ; @b
+         (if (not ; @a
+              (equal?
+               (bookmark-category-of bm)
+               (bookmark-category-of bm-prev))) 
+             (con (a-name (bookmark-category-of bm))
+                  (h3 (bookmark-category-of bm))
+                  (present-a-bookmark bm))
+             (present-a-bookmark bm)))
+        bml prev-bml))
+
+(define (present-a-bookmark bm)
+ (let ((comment (bookmark-comment-of bm)))
+   (con
+    (a 'href (bookmark-url-of bm)
+       'title comment ; @j
+       (bookmark-title-of-non-blank bm))
+    (br))))
+ 
+
+
+;; ::right-frame-page:: Write the right frame.
+(write-html '(prolog pp)
+ (html (head (title "Bookmarks"))
+  (body
+   
+  (font-1 6 red (b page-title)) (p)
+  (present-bookmarks bookmarks)
+  (vertical-space 25)))
+  (in-startup-directory "bookmark-contents.html")
+)
+
+
+
+
+
+
+
+
+
+
+

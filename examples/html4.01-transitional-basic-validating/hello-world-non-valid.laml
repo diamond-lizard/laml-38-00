@@ -1,0 +1,26 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+
+(write-html 'raw
+  (html4:html
+   (list 
+    (html4:head 
+     (list (html4:title "Hello World - ") (html4:em "Illegal text in the header.")))
+    (html4:body
+     (list 
+      (html4:p 
+        (list "Here is the body text of one of the most simple WWW pages " 
+              "you have ever seen. It shows, however, that the basic mirror 
+               performs HTML validation. Try it out!")))
+     'bgcolor (rgb-color 255 100 100) 'xxx "yyy")))
+  (full-source-path-with-extension "html")
+)
+
+(end-laml)
+
+
+
+
+
+
+

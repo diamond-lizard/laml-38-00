@@ -1,0 +1,52 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+
+; HTML attribute lists
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define body-props (list 'bgcolor (rgb-color-list white) 'text (rgb-color-list black)
+                         'link (rgb-color-list blue) 'vlink (rgb-color-list purple)))
+
+(define (document ttl body-form)
+ (html 
+  (head 
+   (meta meta-props) (title ttl))
+  (body body-props
+    (con (h1 ttl) body-form))))
+
+; Write a WWW page with title and body to f.html, provided
+; that this file is located in f.laml.  You must write this buffer
+; to a file, such as f.laml, before you LAML process it.
+
+(define validate-html? #t)
+(define check-html-attributes? #t)
+(define transliterate-character-data? #t)
+
+(write-html '(raw prolog)
+ (html 
+  (head 
+   (meta meta-props) (title "Web Programming in Scheme - the LAML approach"))
+  (body body-props
+   (con 
+ 
+     (h 3 "Paper about LAML:")
+     "Kurt Nørmark," (em (string-it "Web Programming in Scheme - the LAML approach")) ":"
+
+     (h 3 "Abtract:")
+
+     (blockquote "Functional programming fits well with the use of descriptive markup in HTML and XML.  There is also
+a good fit between S-expressions in Lisp and the means of expression in HTML and XML.  These
+similarities are exploited in LAML (Lisp Abstracted Markup Language) which is a software
+package for Scheme. LAML supports exact mirrors of different versions of HTML.  In the mirrors
+each HTML element is represented by a named function in Scheme.
+The mirror functions guaranty that the generated HTML code is valid. LAML has been used
+for both server side CGI programming and programmatic authoring of non-trivial static web materials.
+The programmatic LAML author can use the power of functional programming for the production of
+everyday web documents. Equally important, it is straightforward to define domain-specific web languages
+in Scheme syntax which parallel the advantages of XML.")
+
+     (p  (a 'href "http://www.cs.auc.dk/~normark/laml/papers/jfp.pdf" "Full paper") "in PDF format")
+
+     ))))
+
+
+(end-laml)

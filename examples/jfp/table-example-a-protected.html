@@ -1,0 +1,81 @@
+<pre>&lt;html&gt;
+   &lt;head&gt;
+      &lt;title&gt;Demonstration of higher order functions together with tables&lt;/title&gt;
+   &lt;/head&gt;
+    
+   &lt;body&gt;
+      &lt;p&gt;Original table rendering:&lt;/p&gt;
+       
+      &lt;table border="1"&gt;
+         &lt;tbody&gt;
+            &lt;tr&gt;&lt;td&gt;This&lt;/td&gt; &lt;td&gt;is&lt;/td&gt; &lt;td&gt;row&lt;/td&gt; &lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+             
+            &lt;tr&gt;&lt;td&gt;This&lt;/td&gt; &lt;td&gt;is&lt;/td&gt; &lt;td&gt;row&lt;/td&gt; &lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+             
+            &lt;tr&gt;&lt;td&gt;This&lt;/td&gt; &lt;td&gt;is&lt;/td&gt; &lt;td&gt;row&lt;/td&gt; &lt;td&gt;3&lt;/td&gt;&lt;/tr&gt;
+             
+            &lt;tr&gt;&lt;td&gt;This&lt;/td&gt; &lt;td&gt;is&lt;/td&gt; &lt;td&gt;row&lt;/td&gt; &lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
+         &lt;/tbody&gt;
+      &lt;/table&gt;
+       
+      &lt;p&gt;Switching the first and second column:&lt;/p&gt;
+       
+      &lt;table border="1"&gt;
+         &lt;tbody&gt;
+            &lt;tr&gt;&lt;td&gt;is&lt;/td&gt; &lt;td&gt;This&lt;/td&gt; &lt;td&gt;row&lt;/td&gt; &lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+             
+            &lt;tr&gt;&lt;td&gt;is&lt;/td&gt; &lt;td&gt;This&lt;/td&gt; &lt;td&gt;row&lt;/td&gt; &lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+             
+            &lt;tr&gt;&lt;td&gt;is&lt;/td&gt; &lt;td&gt;This&lt;/td&gt; &lt;td&gt;row&lt;/td&gt; &lt;td&gt;3&lt;/td&gt;&lt;/tr&gt;
+             
+            &lt;tr&gt;&lt;td&gt;is&lt;/td&gt; &lt;td&gt;This&lt;/td&gt; &lt;td&gt;row&lt;/td&gt; &lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
+         &lt;/tbody&gt;
+      &lt;/table&gt;
+       
+      &lt;p&gt;Passing certain attribute values to given cells in the table :&lt;/p&gt;
+       
+      &lt;table border="1"&gt;
+         &lt;tbody&gt;
+            &lt;tr&gt;
+               &lt;td rowspan="2"&gt;This&lt;/td&gt;
+                
+               &lt;td&gt;is&lt;/td&gt;
+                
+               &lt;td&gt;row&lt;/td&gt;
+                
+               &lt;td bgcolor="#c8c8c8"&gt;1&lt;/td&gt;
+            &lt;/tr&gt;
+             
+            &lt;tr&gt;&lt;td&gt;is&lt;/td&gt; &lt;td&gt;row&lt;/td&gt; &lt;td bgcolor="#c8c8c8"&gt;2&lt;/td&gt;&lt;/tr&gt;
+             
+            &lt;tr&gt;
+               &lt;td&gt;This&lt;/td&gt;
+                
+               &lt;td&gt;is&lt;/td&gt;
+                
+               &lt;td&gt;row&lt;/td&gt;
+                
+               &lt;td bgcolor="#c8c8c8"&gt;3&lt;/td&gt;
+            &lt;/tr&gt;
+             
+            &lt;tr&gt;
+               &lt;td&gt;This&lt;/td&gt;
+                
+               &lt;td&gt;is&lt;/td&gt;
+                
+               &lt;td&gt;row&lt;/td&gt;
+                
+               &lt;td bgcolor="#c8c8c8"&gt;4&lt;/td&gt;
+            &lt;/tr&gt;
+         &lt;/tbody&gt;
+      &lt;/table&gt;
+       
+      &lt;p&gt;
+         The modify-element example: 
+         &lt;a href="http://www.dcs.glasgow.ac.uk/jfp" target="main" title="Goes to the main window"&gt;
+            JFP
+         &lt;/a&gt;
+      &lt;/p&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+</pre>

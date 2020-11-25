@@ -1,0 +1,54 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(define (an x)
+  (a 'href x x))
+
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "Index of Bibtex examples")
+   (laml-shortcut-icon (laml-home-url-prefix))
+  )
+  (body 
+    (laml-top-banner)
+    (h1 "Bibtex page examples")
+
+    (p "The following bibtex examples exists in this directory:")
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 250 200 200 200)
+        (list
+          (map b (list "Example" "Bibtex" "Parsed Lisp file" "HTML"))
+          (list "A few bibtex entries"    (a-tag "sample.bib") (a-tag "sample.lsp")      (a-tag "sample.html"))
+        )))
+
+    (p "The sample.lsp file, which represents the parsed file, has been pretty printed in order to make it more readable.
+     It is a list of association lists.")
+
+    (p "The " (kbd "sample.html") " file represents the HTML pretty printing of the sample bibtex file, using the presentation functions
+     of the LAML bibtex tool. The " (a-tag "index.laml") " file, which creates this page, activates the LAML bibtex procedure, and it pretty prints the resulting
+     " (kbd "sample.lsp") " file, in which the association list representation resides.")
+
+
+    (vertical-space 1) (font 'color "red" 'size "2" (when-generated))
+  )
+ )
+)
+
+
+(end-laml)
+
+

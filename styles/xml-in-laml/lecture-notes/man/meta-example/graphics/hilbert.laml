@@ -1,0 +1,106 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-svg10")
+
+(load "svg-paths.scm")
+
+(define xml-validate-contents? #t)
+(define xml-check-attributes? #t)
+(define xml-transliterate-character-data? #t)
+
+(define unit-length 1000)
+
+(define (hilbert-height n)
+ (if (= n 0)
+     0
+     (+ 1 (* 2 (hilbert-height (- n 1))))))
+
+(define (up-line el) (rv-p (- el) (e-p)))
+(define (down-line el) (rv-p el (e-p)))
+(define (left-line el) (rh-p (- el) (e-p)))
+(define (right-line el) (rh-p el (e-p)))
+
+(define (hilbert n turn)
+ (let ((edge-length (quotient unit-length (hilbert-height n))))
+   (hilbert-1 n turn edge-length)))
+
+(define (hilbert-1 n turn el)
+ (cond ((= n 0)
+          (e-p))
+       ((> n 0)
+         (cond 
+             ((eq? turn 'up) 
+               (concat-p
+                 (hilbert-1 (- n 1) 'right el)  
+                 (up-line el)
+                 (hilbert-1 (- n 1) 'up el)  
+                 (right-line el)
+                 (hilbert-1 (- n 1) 'up el)  
+                 (down-line el)
+                 (hilbert-1 (- n 1) 'left el)  
+                )
+             )
+
+             ((eq? turn 'left) 
+               (concat-p
+                 (hilbert-1 (- n 1) 'down el)  
+                 (left-line el)
+                 (hilbert-1 (- n 1) 'left el)  
+                 (down-line el)
+                 (hilbert-1 (- n 1) 'left el)  
+                 (right-line el)
+                 (hilbert-1 (- n 1) 'up el)  
+                )
+             )
+
+             ((eq? turn 'right)
+               (concat-p
+                 (hilbert-1 (- n 1) 'up el)  
+                 (right-line el)
+                 (hilbert-1 (- n 1) 'right el)  
+                 (up-line el)
+                 (hilbert-1 (- n 1) 'right el)  
+                 (left-line el)
+                 (hilbert-1 (- n 1) 'down el)  
+                )
+             )
+             ((eq? turn 'down)
+               (concat-p
+                 (hilbert-1 (- n 1) 'left el)  
+                 (down-line el)
+                 (hilbert-1 (- n 1) 'down el)  
+                 (left-line el)
+                 (hilbert-1 (- n 1) 'down el)  
+                 (up-line el)
+                 (hilbert-1 (- n 1) 'right el)  
+                )
+             )
+          )
+        )
+  )
+)
+
+
+(write-html 'raw
+
+
+ (let ((hilbert-order 5))
+  (svg 'width "800" 'height "800" 'viewBox (box 0 0 (+ 10 unit-length) (+ 10 unit-length))
+   (g 'stroke "black" 'fill "white" 'stroke-width "2"
+    (path 'd (am-p 5 (- unit-length -5) (hilbert hilbert-order 'up)) 'stroke-linejoin "round") 
+    (circle 'cx "0" 'cy 0 'r "6" 'style "fill:red"
+     (animateMotion 'dur "100s"  'path (am-p 5 (- unit-length -5) (hilbert hilbert-order 'up)) 'rotate "auto" 'repeatCount "indefinite")
+    ))))
+
+
+
+  (full-source-path-with-extension "svg")
+)
+
+(end-laml)
+
+
+
+
+
+
+

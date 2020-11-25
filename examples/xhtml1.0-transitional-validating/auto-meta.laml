@@ -1,0 +1,63 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(begin-laml)
+
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+; Higher-order function that 'steels' text from the first
+; occurrence (if any) of element-name.
+(define (steel-text-from element-name)
+  (lambda (root-ast parent-ast)
+    (let ((relevant-ast (find-first-ast root-ast element-name)))
+      (if relevant-ast (ast-text-deep relevant-ast) "???"))))
+
+; Return a meta text keywords from the emphasized words in the entire document.
+(define (derived-document-meta-data-from-keywords root-ast parent-ast)
+  (let ((meta-contributions 
+          (traverse-and-collect-all-from-ast 
+             root-ast
+             (lambda (ast)
+               (and (equal? (ast-element-name ast) "span")
+                    (equal? (ast-attribute ast 'class #f) "keyword")))
+             ast-text)))
+    (meta 'name "keywords" 'content (list-to-string meta-contributions ","))))
+
+(define keyword 
+  (xml-in-laml-abstraction 
+    (lambda (c a)
+      (span 'class "keyword" c a))))
+
+
+(write-html '(pp prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   derived-document-meta-data-from-keywords
+   (title "Demo of simple document reflection"))
+  (body 
+    (h1 (steel-text-from "title"))
+
+    (p "This is a demo of simple document introspection aided by" (keyword "delayed procedural content items") _ ".")
+
+    (p "A delayed procedural content item is a" (keyword "closure") "which is evaluated at" (keyword "documentation expansion time") _ ".")
+
+    (p "We show to to steel the h1 element contents from the title contents")
+
+    (p "We also show how to extract meta keywords from designated and marked up keywords in the text.
+        Notice that the keyword element mirror function is produced by an XML-in-LAML abstraction.")
+
+    (p (em "Please take a look at the HTML page source."))
+
+    (when-generated)
+
+  )
+
+ )
+)
+
+
+(end-laml)

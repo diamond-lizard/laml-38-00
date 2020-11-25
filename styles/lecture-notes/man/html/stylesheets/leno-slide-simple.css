@@ -1,0 +1,99 @@
+/*
+* {font-size: 5px;}
+*/
+
+@import "leno-slide-font.css";
+
+/* generel settings*/
+BODY { margin-top: 5px;
+       margin-bottom: 5px;
+       margin-left: 5px;
+       margin-right: 5px; }
+
+
+DIV.leno-slide-section-title { color: blue;
+			       font-weight: 900;
+			       text-align: center;
+			       margin-top: 20%;
+			       margin-bottom: 30%;
+			       vertical-align: middle;
+			       font-family: Arial, Helvetica, Sans-serif; }
+
+/* to be removed */
+DIV.leno-slide-section-titel { color: blue;
+			       font-weight: 900;
+			       text-align: center;
+			       margin-top: 20%;
+			       margin-bottom: 30%;
+			       vertical-align: middle;
+			       font-family: Arial, Helvetica, Sans-serif; }
+
+DIV.leno-slide-title         { color: blue;
+			       text-align: left;
+			       font-weight: 900;
+			       font-family: Sans-serif;
+			       margin-bottom: 10px;}
+
+DIV.leno-slide-point         { color: red;
+			       text-align: center;
+			       border-width: thick;
+			       border-color: black;
+			       border-style: groove;
+			       margin-right: 10%;
+			       margin-left: 10%;
+			       margin-bottom: 5px; }
+
+
+DIV.leno-slide-example	     { font-style: italic; 
+			       margin-bottom: 5px; }
+
+DIV.leno-slide-comment	     { font-style: italic; }
+
+
+DIV.leno-slide-text          { color: black;
+			       text-align: left; }
+
+DIV.leno-slide-comment       { color: black;
+			       text-align: left; }
+
+DIV.leno-slide-quotation     { color: black;
+			       font-style: italic;
+			       text-align: left;
+     			       margin-right: 20%;
+			       margin-left: 20%;}
+
+
+DIV.leno-slide-syntax	     { display: compact;
+			       font-family: monospace; 
+			       background: yellow;
+			       text-align: center;
+			       margin-right: 10%;
+			       margin-left: 10%;
+			       }
+
+DIV.leno-slide-synopsis	     { background: #99ff99;
+     			       margin-right: 10%;
+			       margin-left: 10%;}
+
+DIV.leno-slide-synopsis UL LI  { list-style-image: url("../images/yellow-ball-large.gif");
+				 text-transform: uppercase;}     
+
+DIV.leno-slide-synopsis  UL LI:first-letter    { font-size: 200%;}
+
+DIV.leno-slide-concept-list P { color: white;
+			        text-align: center;
+				border-width: thick;
+			        padding: 1%;
+				background: blue;
+				margin-right: 10%;
+				margin-left: 10%; }
+
+
+TABLE.leno-slide-tabular TH { color: green; }
+
+TABLE.leno-slide-tabular TD { color: red; }
+TABLE.leno-slide-tabular TR { background-color: green; }
+
+TABLE.leno-slide-opposing { border-spacing: 15pt; }
+
+

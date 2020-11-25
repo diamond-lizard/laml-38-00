@@ -1,0 +1,376 @@
+.TITLE       The XML parser for LAML
+.AUTHOR      Kurt Nørmark
+.EMAIL       normark@cs.auc.dk
+.AFFILIATION Department of Computer Science, Aalborg University, Denmark
+.ABSTRACT
+This elucidative program documents the development of a simple XML parser for the
+LAML software package.
+This is a non-validating XML parser for LAML. As of the current version,
+the parser is by no means complete. Never the less, it is useful tool for parsing most
+everyday XML document to a Lisp data structure. <p> Given a well-formed XML document
+this parser returns a Lisp tree structure that represents the parse tree of the XML document.
+This parser skips any element of the XML prolog (front matters) including the DTD (if any).
+The parser also skips XML comments.
+The parser handles start tags, end tags, and empty tags (in this parser called start-end tags).
+Entities and their declarations are not handled at all.<p>
+The top level function is xml-parse and xml-parse-file.<p>
+See also the brief <a href="../../man/xml-parser.html" target= "_top">reference manual</a> of the XML parser.
+.END
+
+-----------------------------------------------------------------------------
+
+.SECTION intr-section
+.TITLE Introduction
+.BODY
+In this section we describe the overall parsing ideas together with examples.
+.END
+
+-----------------------------------------------------------------------------
+
+.ENTRY start-entry
+.TITLE The start
+.BODY
+We first make a top level parse function, {+xml-parser$parse-xml} (and {+xml-parser$parse-xml-file}) which we model
+after the similar function in the dtd parser, which we have made earlier.
+We decide to read the input from a text file - say f.xml. {+xml-parser$parse-xml-file}.
+The name of the resulting file is determined by the second parameter of {+parse-xml-file}.<p>
+
+We establish a parse stack, cf. {+xml-parser$parse-stack}. This is plain and ordinary stack
+to which we make a good interface. Alternatively, we could have used a generic stack ADT.<p>
+
+The function {+xml-parser$parse-xml-ip} starts the real work. After handling empty initial space 
+and front matters (the XML prefix - see section [front-and-white])
+the ball is passed to {+parse-xml-balanced-expression} which does the real job.
+More will follow in section [overall-parsing].<p>
+
+.END
+
+--------------------------------------------------------------------------------
+
+.ENTRY front-and-white
+.TITLE Handling white space, comments, and front matters.
+.BODY
+An XML document typically starts with a prolog, consisting of an XML declaration, document type defintion,
+and perhaps an inline DTD. This parser does not need to care about all that stuff.
+Thus, we only want to jump over such material. The function {*xml-parser$skip-front-matters}
+does it. Notice the skipping of XML declarations (@a) which makes use of the function
+{+collect-balanced-until} from the collect skip library. The use of this function ensures that
+we can handle embedded declarations, as long they are balanced.<p>
+
+The skipping of white space using {+skip-white-space} is simple. 
+The function {+xml-parser$skip-white-space-and-comments} also skips 
+XML comments. Notice the recursive implementation of {+xml-parser$skip-white-space-and-comments}
+which ensures that all white space - including multiple comments - may be skipped.
+
+
+.END
+
+
+--------------------------------------------------------------------------------
+
+
+
+.ENTRY tree-structure
+.TITLE The parse tree
+.BODY
+The tree structure is as follows:
+
+<pre>
+  T = (tree N ST1 ST2 ... STn)
+</pre>
+
+STi, i = 1..n are trees recursively. tree is a symbol (tagging a syntax tree). A Leaf node is denoted as
+
+<pre>
+  (tree N)
+</pre>
+
+or just N if N is a string (corresponding to textual contents) or an empty tag (a tag without contents,
+also called a start-end tag in this software).<p>
+
+An inner node of a parse tree corresponds to a tag (an element) with contents. Such a node is represented
+by the following 'tag structure':
+
+<pre>
+  (tag kind tag-name . attr-info)
+</pre>
+
+Kind is either start, start-end, or end (corresponding to the three kinds of tags).
+Tag-name is a string. Attr-info is the attribute on property list format.
+
+An terminal may be a start-end node, or just a contents string. End tags are not represented 
+in the parse tree.<p>
+
+<pre>
+  (tag start "title" role "xxx" size "5")
+</pre>
+
+The function {+xml-parser$make-tag-structure} constructs the nodes. The function {+kind-of-tag-structure}
+returns the kind of a node (tag structure); whether start or start-end. There are also functions to 
+access the constituents of a tag structure: {+tag-of-tag-structure} and {+attributes-of-tag-structure}.
+<p>
+
+If we assume that we parse the following XML fragment
+(If you are reading this in the source file, please consult the browser version):
+
+<pre>
+  &lt;title role = "xxx" size = "5"&gt;
+    Here is some contents of title
+  &lt;/title&gt;
+</pre>
+
+The tree becomes:
+
+<pre>
+  ((start "title" role "xxx" size "5")
+     "Here is some contents of title")
+</pre>
+
+A more complicated example
+<pre>
+  &lt;title role = "xxx" size = "5"&gt;
+    Here is some contents of title
+    &lt;mark number = "1" listed = "yes"/&gt;
+    More text.
+    &lt;section number = "1"&gt;
+      Section text.
+    &lt;/section&gt;
+  &lt;/title&gt;
+</pre>
+
+The tree is (slighly formatted, but accurated- actually parsed):
+<pre>
+(tree
+  (tag start "title" role "xxx" size "5")
+  "Here is some contents of title " 
+  (tag start-end "mark" number "1" listed "yes")
+   "More text. "
+  (tree 
+    (tag start "section" number "1") 
+    "Section text. "))
+</pre>
+
+.END
+
+--------------------------------------------------------------------------------
+
+.ENTRY parse-tree-functions
+.TITLE Parse tree functions
+.BODY
+The function {+xml-parser$make-parse-tree} constructs a parsetree,
+and the functions {+xml-parser$root-of-parse-tree} and {+xml-parser$subtrees-of-parse-tree}
+access the root and the subtrees of a parse tree respectively.<p>
+
+The predicate {*xml-parser$terminal-node?} tells whether a tree is considered an terminal node.
+It is an terminal node if it is a contents string (direct on convoluted in a node), or
+if it is start-end-node (which cannot have contents). The complementing function function 
+is called {+xml-parser$inner-node?}. Both of these functions assume that they are applied on
+a tree.<p>
+
+We also have prediates on nodes: {+xml-parser$start-node?} and {+xml-parser$start-end-node?}.
+
+.END
+
+----------------------------------------------------------------------------------------------------
+
+.SECTION parse-section
+.TITLE The parser
+.BODY
+Here we explain the parser as such.
+.END
+
+
+--------------------------------------------------------------------------------
+
+.ENTRY overall-parsing
+.TITLE Overall parsing functions
+.BODY
+The function {*xml-parser$parse-xml-balanced-expression}
+is supposed to return a (sub)tree, and thus read a balanced expression from the input port.
+There are three possible results: 
+<ol>
+ <li> A tree rooted of a start node.
+ <li> A terminal node of start-end node.
+ <li> A contents string.
+</ol>
+<p>
+
+The function {*xml-parser$what-is-ahead} looks ahead without really reading.
+All white space is consumed, so {+xml-parser$what-is-ahead} faces a non-blank character.
+It is easy to spot if it is a tag, starting with start angle. If not, it is a string (contents). <p>
+
+The function {*xml-parser$read-tag} is more serious. It parses a tag (start tag, end tag, or start-end tag)
+including the attributes. This function can read all kinds of tags, including an end tag. Internally, it
+is pretty straightforward. The first case to handle is the end tag (@a). In the conditional (@b) we handle
+the following three cases:
+<ol>
+ <li> An start-end tag without attributes (@c).
+ <li> A start tag (@d).
+ <li> A start-end tag with attributes (@e).
+</ol>
+
+The parsing of the attributes in the start or start-end tag is done by the function {+read-tag-attributes}.
+The rest of this last case has to do with the determination of whether we are facing a start tag or a
+start-end tag.<p>
+
+The function {+read-tag-attributes} parses a list of attributes. The task of parsing a single attribute, like
+<pre>
+  attr = "value"
+</pre>
+is done by {+read-attribute-value-pair}. Again, this is just detailed parsing work using the
+collect-skip library.<p>
+
+.END
+
+--------------------------------------------------------------------------------
+
+.ENTRY parse-balanced
+.TITLE Parsing a balanced XML expression.
+.BODY
+As already mentioned in section [overall-parsing] the function {*parse-xml-balanced-expression}
+is central. We will here examine it in more details.<p>
+
+The function assumes that all initial white space is consumed. 
+We start by finding out if we are facing a tag (start or start-end tag presumably) or textual contents (@a).<p>
+
+In case of a tag we handle the start, and start-end tag separately. The function {+read-tag} reads the tag.<p>
+
+Let us first notice that the start-end tag is easy to handle, because it is terminal; So we just return the
+node (the result returned by {+read-tag}). <p>
+
+The most interesting and important case is the start tag (@c). We push the start tag onto the stack.
+The function {+xml-parser$read-and-push-subtrees-until-end-tag} pushes additional contributions onto the stack - 
+all read recursively by {+parse-xml-balanced-expression} via {+xml-parser$read-and-push-subtrees-until-end-tag}.
+Finally the function {+xml-parser$build-tree-from-stack} takes information from the stack (and pops the stack)
+in order to build and return the parse tree. In the next section we will study {+xml-parser$read-and-push-subtrees-until-end-tag}
+and {+xml-parser$build-tree-from-stack}.<p>
+
+If we encounter an end tag (@b) there is an error which we report in the final case.
+
+.END
+
+--------------------------------------------------------------------------------
+
+.ENTRY parse-contents
+.TITLE Parsing the contents after a start tag
+.BODY
+The procedure {*xml-parser$read-and-push-subtrees-until-end-tag} must read
+all the textual contents after the start tag.  To be concrete, while parsing
+<pre>
+  &lt;title role = "xxx" size = "5"&gt;
+    Here is some contents of title
+    &lt;mark number = "1" listed = "yes"/&gt;
+    More text.
+    &lt;section number = "1"&gt;
+      Section text.
+    &lt;/section&gt;
+  &lt;/title&gt;
+</pre>
+we have just pushed information about the start tag on to the stack. 
+{+xml-parser$read-and-push-subtrees-until-end-tag} must read
+
+<ol>
+  <li> "Here is some contents of title"
+  <li> The mark terminal node.
+  <li> "More text"
+  <li> The section subtree
+</ol>
+After that it must encounter the title end tag and use this as a stopping condition. This is
+the most trickiest part of this function.<p>
+
+We establish a look ahead corresponding to the length of end tag, including the "\<", "\>", and "\\".
+This is the local name n (@a). If we encounter the end tag string (@b) we just read it - and we are done.
+If not (@c) we parse a subtree using {+parse-xml-balanced-expression}, push it on to the stack, and iterates
+tail recursively via {+xml-parser$read-and-push-subtrees-until-end-tag}.
+
+.END
+
+--------------------------------------------------------------------------------
+
+.ENTRY tree-building
+.TITLE Building the tree
+.BODY
+We are now in a possition where the constituents of the parse tree is on the stack, and we have encountered
+and read an end tag. Now we shall build the parse tree. This is done by {*xml-parser$build-tree-from-stack}. <p>
+
+Recall that {+parse-xml-balanced-expression} pushed the start tag on to the stack. Consequently, we pop the stack
+until we meet the tag corresponding to end-tag-name (the parameter of {+xml-parser$build-tree-from-stack}.)<p>
+Given our example  from section [parse-contents] the stack is (top on first line):
+<pre>
+  The section subtree
+  "More text"
+  mark start-end-tag
+  "Here is some contents of title"
+  start title tag
+</pre>
+
+This is done by {*xml-parser$build-tree-from-stack-1}, which is called in a trivial way by {+xml-parser$build-tree-from-stack}.
+{+xml-parser$build-tree-from-stack-1} pops the stack iteratively until it meets the start tag (first parameter of {+xml-parser$build-tree-from-stack-1}).
+The predicate {+start-tag-entry?} identifies a start tag entry, and the function {+xml-parser$matches-stack-entry}
+finds out if the top tag structure matches the start tag name. Notice that all stack entries are taged, such we can see if we face
+a tag structure (see the predicates {+xml-parser$tag-stack-entry?}, {+xml-parser$tree-stack-entry?}, {+xml-parser$text-contents-entry?}, 
+{+xml-parser$start-tag-stack-entry?}, and {+xml-parser$start-end-tag-stack-entry?}).
+
+.END
+
+----------------------------------------------------------------------------------------------------
+
+.SECTION html-parser
+.TITLE A HTML variant
+.BODY
+In this section we will explain the differences between the XML parser, as developed until now,
+and an HTML parser.
+.END
+
+--------------------------------------------------------------------------------
+
+.ENTRY important-diff
+.TITLE Important differences
+.BODY
+HTML is not as clean and easy to deal with as XML. The main stumbling block
+is tags which can be applied as empty tags (without end tags) as well as with an
+end tag. As an example both
+<pre>
+  &lt;body&gt;
+    Some text.
+    &lt;p&gt;
+    Some more text
+    &lt;p&gt;
+  &lt;/body&gt;
+</pre>
+and 
+<pre>
+  &lt;body&gt;
+    &lt;p&gt; Some text.&lt;/p&gt;
+    &lt;p&gt; Some more text &lt;/p&gt;
+  &lt;/body&gt;
+</pre>
+is legal. The parsing is not the same, however. The problem is that the first
+fragment we never meet the end of the two p tags. So a balanced parsing of expression
+does not work here.<p>
+
+But what works then? We use the following idea:
+
+<ul>
+ <li> Read and stack tags and contents strings until we encounter some end tag.
+ <li> When we encounter an end tag we pop the stack until we meet the closest similar start tag.
+ <li> During our way down the stack we may pass some start tags, which we now realise
+      never will be terminated by end tags. These must be converted to start-end tags (empty tags)
+ <li> We form a tree of all the elements until and including the matcing start tag.
+ <li> We push the subtree so formed.
+</ul>
+
+Is this a nice recursive algorithm? NO. It is an iterative algorithm. We run until the stack is empty.
+It becomes empty when we meet the end html tag (or a similar enclosing tag surrounding the whole document).<p>
+
+Thus, we need to re-program most of the parser, including of course the central {+parse-xml-balanced-expression}
+(which is recursive through {+read-and-push-subtrees-until-end-tag}). There is an accompanying source file,
+html-support.scm, where these contributions can be found.
+.END
+
+
+
+
+
+
+

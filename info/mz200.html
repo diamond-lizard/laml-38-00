@@ -1,0 +1,12 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta http-equiv = "Content-Type" content = "text/html; charset=iso-8859-1"> <title>LAML and MzScheme 200, 201, 202, 203, 204</title></head> <body bgcolor = "#ffffbf" text = "#000000" link = "#0000ff" vlink = "#0000ff"> <h1>LAML and MzScheme 200, 201, 202, 203, 204</h1> <p>About LAML configuration and MzScheme 200+: 
+     I have made a new compatibility file in lib/compatibility called star_star_mzscheme-200.scm.
+     Currently it covers all mzscheme 200+ needs, on both unix and windows. It may be desirable to 
+     make a slightly better unix version in the future. - I have made a &#39;hack&#39; in the 
+     LAML configuration program such that the exec files and the emacs stuff are taken from 
+     the old mzscheme configuration when mzscheme-200 is requested. In that way fewer files
+     are needed in the configuration part of LAML.</p> <p>Some Scheme programs and LAML documents contain backslashes.  MzScheme 200+ has a different interpretation of the 
+     escaping backslash character in strings than version 103 and 101. In LAML version 19 and beyond we have addapted SchemeDoc
+     to deal with the strict interpretation of backslashes in strings (only \&quot; and \\ are well-defined). In that way, both SchemeDoc and the Scheme Elucidator
+     runs with MzScheme200+.</p> <div>&nbsp; <p> Kurt N&oslash;rmark <br> <a href = "mailto:normark@cs.auc.dk">normark@cs.auc.dk</a> <br> <a href = "http://www.cs.auc.dk/~normark/">http://www.cs.auc.dk/~normark/</a></div></body></html>

@@ -1,0 +1,251 @@
+.TITLE       Making Sublists of a List
+.AUTHOR      Kurt Nørmark
+.EMAIL       normark@cs.auc.dk
+.AFFILIATION Department of Computer Science, Aalborg University, Denmark
+.ABSTRACT
+This documentation describes a few selected functions from the general.scm library, which
+we use throughout the LAML software packages. The functions deal with the problem of making
+a list of sublists from a list. The purpose of the documentation is primarily to demonstrate
+the Scheme elucidator on a simple example.
+.END
+
+---------------------------------------------------------------------------------------------------
+
+.SECTION the-problem-section
+.TITLE The sublist problem
+.BODY
+In this first section we formulate the general problem we are dealing with, and we motivate it
+in terms of a possible application of the solution. 
+.END
+
+---------------------------------------------------------------------------------------------------
+
+.ENTRY the-problem
+.TITLE The problem
+.BODY
+We will start with a formulation of the general problem we are dealing with. Our 
+starting point is a list such as
+
+<pre>
+  (a b c d e f g h i j)
+</pre>
+
+which we want to split into a number of sublists, such as
+
+<pre>
+  ((a b) (c d) (e f) (g h) (i j))
+</pre>
+    
+Our concrete motiation for this 'sublisting of a list' is to provide for multi-column
+presentation of indexes in HTML via tables. In LAML terms we can write
+<pre>
+  (table
+   (sublist-by-rows 
+     3
+     (map as-string '(a b c d e f g h i))
+     )
+  1)
+ </pre>
+This is translated to an HTML table, which you can se <a href="table1.html">here</a>. We can also use a sublisting by column:
+<pre>
+  (table
+   (sublist-by-columns 
+     3
+     (map as-string '(a b c d e f g h i))
+     "-")
+   1)
+ </pre>
+the result of which can be seen <a href="table2.html">here</a>. <p>
+
+The functions sublist-by-rows and sublist-by-column are both discussed in subsequent sections.
+.END
+
+
+---------------------------------------------------------------------------------------------------
+
+.SECTION row-solutions-section
+.TITLE Making rows out of a list
+.BODY 
+We Start with sublist functions which organize consequtive elements of a list into sublists.
+These functions maintain the ordering of elements in the list. We think of this as rows of a list,
+because of the way we use it for presentation of lists in multi-column tables.
+In section [column-solution] we will look at a variant which reorganizes the list more severely, geared towards
+a 'column solution'.
+.END
+
+---------------------------------------------------------------------------------------------------
+
+
+.ENTRY sublist-by-rows
+.TITLE The first row sublist function
+.BODY
+We start with a relatively simple sublist function, namely {*sublist-by-rows}. 
+This function takes a list {-lst} and an integer {-n}, the role of which is to decide the sublist length. 
+We decide that we do not want to deal with the special case where the length of lst is less than {-n}.
+In other words, this case is an error. <p> 
+
+The real work is done by the function {*sublist-by-rows-1}, which is tail recursive and thus in reality 'iterative'.
+The first two parameters are passed directly from {sublist-by-rows}. {-m} is the current length of the latest sublist,
+{-res} is the parameter in which we accumulate a sublist, and result is the variable in which we accumulate
+the list of sublists. <p>
+
+The third and fourth case in the conditional are the normal cases.
+In the case (@d) that {-m} (the length of the current sublist) is less than {-n} (the desired sublist length) we just put the next element (car lst) into the sublist, res.
+In the case (@c) that {-m} and {-n} are equal it is time to finish the sublist, which is done by adding the latest sublist to the result parameter. 
+We also empty the res parameter, thus preparing to start a new sublist.<p>
+
+The first two cases in the conditional are the base cases.  If both {-lst} and {-res} are empty (@a), we just return result.
+If {-lst} is empty, but there are pending elements in res (@b) (the latest sublist), we need to include the pending sublist.
+Notice that the last sublist may be of length less than {-n}. <p>
+
+The last thing to care about is all the reversing found in this function. This is the usual 'trick' in tail recursive list functions,
+where we cons elements on a list. In reality the elements should have been appended to the rear end of the list.
+To compensate, we reverse the lists before returning them. This is the case both at outer level, and at sublist level.
+.END
+
+---------------------------------------------------------------------------------------------------
+
+.ENTRY sublist-by-predicate
+.TITLE A more general function
+.BODY
+We will now make a more general variant of {sublist-by-rows}. The more general function is called
+{*sublist-by-predicate}. The idea is to pass a predicate function to the sublisting function. The predicate
+decides when to start a new sublist. Thus instead of just counting elements, we let the predicate determine
+the sublist boundaries. When the predicate holds (returns a true value), a new sublist is started. <p>
+
+In order to provide for generality, we need to decide which information the predicate works on. We decide to 
+pass the current element, the previous element (if such a one exits), and the length of list processed until now. <p>
+
+Again, the real work is done by a helping function, which is tail-recursive. But we handle two special cases, namely
+empty lists (@a) and singleton lists (@b) at top level. Handling list of length one here provides for a more regular solution
+in the helping function, because we then know that the 'previous element' makes sense. <p>
+
+And now to the helping function {*sublist-by-predicate-1}. Besides the list and the predicate it
+passes the previous element, {-previous-el}, the current list length {-n}, {-res}, and {-result} as parameters.
+The two latter parameters play the same role as above.<p>
+
+The two base cases (@d and @e) are the same as in {sublist-by-rows}. The more interesting cases are relatively straigthforward.
+If the predicate holds on <kbd>(car lst)</kbd>, {-previous-el} and {-n} (@f) we add the sublist to {-RESULT}, and we start a new sublist in {-res}
+immediately. Thus, in some sense we take two steps here: Adding to RESULT, and starting the new sublist. Notice the
+way we pass {-previous-el} to the next iteration.
+If the predicate does not hold (@g) we extend the current sublist with <kbd>(car lst)</kbd>. Just straight ahead... <p>
+
+It is interesting to notice that the general solution is less complicated than the specific solution, which we made
+in section [sublist-by-rows]. This is a pattern we often encounter.
+.END
+
+---------------------------------------------------------------------------------------------------
+
+
+.SECTION column-solution
+.TITLE Making columns out of a list
+.BODY
+The previous two functions from section [sublist-by-rows] and  [sublist-by-predicate] just organized consequtive prefixes of a list into sublists.
+We will now make a function which picks elements out of the list using another strategy.  This is a more complicated
+approach, so in section [column-details] below we will described it in more details.
+.END
+
+---------------------------------------------------------------------------------------------------
+
+
+.ENTRY column-details
+.TITLE The problem and its motivation
+.BODY
+Let us again look at a list such as 
+
+<pre>
+  (a b c d e f g h i j)
+</pre>
+
+We now want to split the list into this list
+<pre>
+  ((a f) (b g) (c h) (d i) (e j))
+</pre>
+    
+If sublists of this list are considered as rows in a table we have in reality
+achieved a sublisting of the list in two columns, where the first colum
+contains <kbd>(a b c d e)</kbd> and the second column contains <kbd>(f g h i j)</kbd>. In that respect,
+the list has been sublisted by column, and not by row.
+.END
+
+---------------------------------------------------------------------------------------------------
+
+.ENTRY sublist-by-2columns
+.TITLE A dedicated two column solution
+.BODY
+We will start by a dedicated and specialized function, which exactly realizes
+the two column solution described above.<p>
+
+The function is called {sublist-by-2columns}. The algorithmic idea is to use {sublist-by-rows}, which
+we have seen above, to split the list in a front-end and a rear-end. The two list can then easily
+be paired together to the desired result. <p>
+
+If we take a close look at {*sublist-by-2columns} we need to make sure that the length of the list
+is even. If the length is odd, we miss an element. This gives us a problem: What should the missing
+element be in case the list is of odd length? There is no good general answer, so we pass the extra, compensating
+element as a parameter to {sublist-by-2columns}. <p>
+
+Now the implementation is easy to understand. We bind the name {-row-sublst} to a list of sublists (@i). The lengths of 
+the sublists are half of the length of the original list. This accounts for the quotient form.
+We use a simple mapping (@j) on the first and second elements of {-row-sublst} in order to pair the
+elements, and in this way we get the rows of 'the column solution'.
+.END
+
+---------------------------------------------------------------------------------------------------
+
+.ENTRY sublist-by-columns
+.TITLE A more general solution
+.BODY
+The function from section [sublist-by-2columns] was quite specific. It is tempting to come up with 
+a more general solution. We now go for an n-column solution.<p>
+
+The function is {*sublist-by-columns}. The parameters are {-n} (the number of columns), the list {-lst},
+and the {-extra} filling element (as discussed above).<p>
+
+The solution is the same as in {sublist-by-2columns}: We split the list in roughly 
+L div n sublists, produced by {sublist-by-rows}. Then we make a pairing of the first elements,
+the second elements, etc. <p>
+
+The first thing that we have to ensure is that the length of the list is a multiplum of n.
+This is done by adding extra elements, if necessary, to the rear end of the list (@a). In case 
+the length of L isn't a multiplum of n we get the following calculation: If
+(length lst) = L, we need to add E =(((L div n) + 1) * n) - L extra elements.
+The reason is that L + E = n * (+ 1 (L div n)). <p>
+
+We are now left with af list of sublists, which need to be 'paired' by first elements, second
+elements, etc. Let us be concrete in terms of an example where lst is to be divided into
+n columns.
+
+<pre>
+  lst = (a b c d e f g h i j)
+
+  n = 3
+
+  Sublists = ((a b c d)
+              (e f g h)
+              (i j - -))
+
+  Result =  ((a e i)
+             (b f j)
+             (c g -)
+             (d h -))
+</pre>
+
+We see that the elements of {-lst} appear correctly in the columns of {-Result}. The elements '-' are
+the extra elements.<p>
+
+We have to make a function which takes a list of list as input, and which produces the necessary
+first element list, second element list, etc. <p>
+
+This function is {*multi-pair}. Given a list of lists it returns a list of lists. The function
+collects all first elements, etc. The program is easy to make by recursion.
+In the interesting case we map car over all the lists, giving us the list of first elements.
+We form a list of these 'cars' and a recursive solution on the cdrs.<p>
+
+For completeness we need to make {*multiplum-of}, which is trivial.<p>  
+.END
+
+
+
+
+

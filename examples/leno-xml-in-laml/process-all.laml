@@ -1,0 +1,17 @@
+(load (string-append laml-dir "laml.scm"))
+(load (in-startup-directory "../example-processing.scm"))
+
+(apply process-list (all-laml-files))
+
+(display-message ">>> Single Chapter Stuff")
+(laml-cd "single-chapter") (laml "process-all") (laml-cd "..")
+
+(display-message ">>> Multi Chapter Stuff")
+(laml-cd "multi-chapter") (laml "process-all") (laml-cd "..")
+
+(display-message ">>> SVG Stuff")
+(laml-cd "inline-svg-stuff") (laml "process-all") (laml-cd "..")
+
+; Theme stuff in concise-comprehensive not processed.
+
+(end-laml)

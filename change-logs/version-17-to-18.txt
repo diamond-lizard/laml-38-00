@@ -1,0 +1,133 @@
+Improved color.scm library with a tagged rgb color representation.
+Backward compatible with old representation. 
+
+July 30, 2002.  lib/compatibility/windows_*.scm:
+The function laml-canonical-command-line refined such that
+the third element in the result always is a forward slashed full path.
+Backward slashing causes an error for the laml command prompt in windows 2000
+(and presumably windows systems as well).
+
+July 30, 2002
+A guide for use of LAML with DrScheme has been written.
+
+July 30, 2002
+The e-lisp procedure do-process-buffer has been added emacs-support/laml-general.el.
+The command do-process-buffer supports generalized processing of buffers in Emacs, including Scheme elucidator
+processing, LAML processing, and indirect LAML processing.
+It depends on the command laml-process-file, which is not yet implemented in very many configurations.
+As of now, laml-process-file is implemented for MzScheme on Unix and Linux.
+
+July 30, 2002
+Indirect LAML processing added to emacs-support/laml-general.el.
+A Scheme or Lisp file can arrange for indirect laml processing by having a special
+Lisp comment as the first line in the file, such as ;=>index.laml
+
+August 22, 2002
+The menu bindings in the scheme major Emacs mode has been extended with
+lisp evaluation functions. This is done to make sure that any buffer in Scheme 
+mode has access to smooth interaction with the Scheme process running as 
+inferior lisp process in Emacs.
+
+If you do want this, remove the last few lines of emacs-support/dot-emacs-contribution.el
+after having installed and configured your LAML system.
+
+Summer 2002.
+A lot of extensions and extensionos of LENO has been carried out, both at kernel level
+and at the xml-in-laml level.
+
+August 22, 2002.
+The Emacs command  M-x set-interactive-laml-mirror-library  now allows you to control
+which mirror to use in  M-x run-laml-interactively.
+
+August 23, 2002.
+New simple styles (loading styles):
+The simple styles simple-xhtml1.0-transitional-validating.scm and simple-xhtml1.0-frameset-validating.scm 
+have been added for symetry reasons, and for easy loading of all three variants of XHTML.
+
+August 31, 2002.
+The names of the LENO insert-... commands have all been prefixed with "leno-" to avoid collisions
+with important Emacs 21.2 names.
+
+
+
+LAML 18.10:
+
+September 7, 2002:
+SVG: simple-svg10.scm
+It has been arranged that also for mzscheme-200, case sensitive reading is used.
+With this, the mirror function names and the attributes is case sensitive  (as needed by SVG).
+
+September 8, 2002:
+LENO: 
+A few additions have been made - of minor importance.
+
+September 9, 2002:
+XHTML:
+The following dirs have been removed from lib:
+  "xhtml1.0-strict" "xhtml1.0-transitional" "xhtml1.0-frameset"
+XHTML is covered in lib/xml-in-laml.
+
+September 9, 2002:
+A common convenience library has been introduced for XHTML:
+  lib/xhtml1.0-convenience.scm
+It was formed from the convenience library in
+  lib/html4.01-transitional-validating/convenience.scm
+This library is still somewhat experimental - but the manual pages are now included.
+
+October 1, 2002: 
+In laml.scm:
+An error in the procedure write-html has been fixed.
+The problem was that XML documents, represented as ASTs, where not pretty 
+printed correctly. We have introduced a new predicate, is-xml-ast?,
+which can figure out when we deal with XML asts. In that case we rely on
+XML pretty printing, not HTML pretty printing. 
+Thank you to Takuo YONEZAWA, i021226@coins.tsukuba.ac.jp, for pointing out
+this error.
+
+October 2002
+styles/questionnaire/questionnaire.scm
+A feedback-mesage clause has been added to the questionnaire.
+
+October 4, 2002:
+lib/genral.laml: The paramter profiles of the message and error functions have been 
+generalized. Now these functions and procedures accept a list of messages.
+
+lib/xml-in-laml/xml-in-laml.scm:
+AST traversal functions added: traverse-and-collect-all-from-ast and
+traverse-and-collect-first-from-ast. These functions are convenient
+to dig out information of an XML AST.
+
+lib/xml-in-laml/xml-in-laml.scm:
+The higher-order function xml-in-laml-parametrization has been added.
+This function generates function with flexible XML-in-LAML parameter profiles
+for old-fashioned functions. Example:
+
+  (define new-indent-pixels
+     (let ((val? (lambda (c a) (defaulted-get 'indentation a #f)))
+           (med  (lambda (c a)
+                  (list (as-number (get 'indentation a))
+                        c))))
+       (xml-in-laml-parametrization indent-pixels med val?)))
+
+
+emacs-support/laml-customize.el:
+LAML Emacs Customizations.
+
+Two new customization variables have been added:
+
+  interactive-laml-mirror-library:
+  Controls which mirror to use in run-laml-interactively.
+
+  interactive-laml-load-convenience-library (boolean):
+  Controls if a convenience library is loadedby run-laml-interactively.
+
+Do M-x laml-customize or use Laml menu to activate LAML customization.
+
+
+October 6, 2002.
+tools/calendar/xml-in-laml/calendar.scm
+A new version of the LAML calendar tool has been included. It relies
+on the XHTML mirrors (transitioanl), but it can in fact also be used with
+HTML4.01. The main asset is that with this new tool, the generated calendars
+are valid (X)HTML.
+

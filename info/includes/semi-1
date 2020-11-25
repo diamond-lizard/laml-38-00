@@ -1,0 +1,5 @@
+  <point> 
+    A text with a 
+    <a href="subsection/sec1.html">link</a> 
+    to a <b>subsection</b>.
+  </point>

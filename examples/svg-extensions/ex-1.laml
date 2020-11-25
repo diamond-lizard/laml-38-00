@@ -1,0 +1,32 @@
+;; .schemedoc-dependencies  "~/scheme/lib/man/svg-extensions" "~/scheme/lib/xml-in-laml/mirrors/man/svg11-mirror"
+
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-svg11")
+(lib-load "svg-extensions.scm")
+
+
+(write-html '(pp prolog)
+  (svg standard-svg-1-1-element-attributes 'width "800" 'height "800" 
+   (g
+     (circle 'cx 100 'cy 100 'r 50 'stroke "black" 'stroke-width "3px" 'fill "none")
+     (polygon 'points "256.7,125,  300,50,  343.3,125" 'stroke "black" 'stroke-width "3px" 'fill "none")
+     (polygon 'points "50,300,  100,250,  150,300,  100,350" 'stroke "black" 'stroke-width "3px" 'fill "none")
+     (rect 'x 250 'y 250 'width 100 'height 100 'stroke "black" 'stroke-width "3px" 'fill "none")
+
+     (line 'x1 100 'y1 100  'x2 300 'y2 100 'stroke "black" 'stroke-width "3px")
+     (line 'x1 300 'y1 100  'x2 300 'y2 300 'stroke "black" 'stroke-width "3px")
+     (line 'x1 300 'y1 300 'x2 100 'y2 300 'stroke "black" 'stroke-width  "3px")
+     (line 'x1 100 'y1 300 'x2 100 'y2 100 'stroke "black" 'stroke-width "3px")
+   )
+  )
+  (full-source-path-with-extension "svg")
+)
+
+(end-laml)
+
+
+
+
+
+
+

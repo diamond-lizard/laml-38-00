@@ -1,0 +1,1 @@
+((sec1 (section-title #f ("Section one") ())) (page1 (title #f ("First page in first lecture" "") ()) (point #f ("This is the first page" "") ())) (page2 (title #f ("Second page in first lecture" "") ()) (items #f ((item #f ("First item on page 2" "There are no annotations - \n                 no real ones, at least") ()) (item #f ("Second item on page 2" "") ())) ())))

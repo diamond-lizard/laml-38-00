@@ -1,0 +1,24 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/schemedoc-2/schemedoc")
+
+
+(manual
+  (manual-front-matters
+    (manual-title "Reference Manual of the Midi 1.0 mirror")
+    (kn-manual-settings
+     (manual-abstract
+      (div 
+       (p "This is a manual of the " "Midi" "mirror, as derived (partially) from the official MIDI 1.0 XML DTD."
+      ))))
+
+
+    'laml-resource "true"
+    'attribute-sorting "as-in-dtd"
+    'make-dtd-manual-template "true"
+    
+  )
+
+  (manual-from-xml-dtd 'src "../dtd/standard-midi-file.lsp")
+
+)
+

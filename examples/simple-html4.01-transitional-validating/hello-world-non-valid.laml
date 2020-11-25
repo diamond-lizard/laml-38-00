@@ -1,0 +1,30 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+
+(define validate-html? #t)
+(define check-html-attributes? #t)
+(define transliterate-character-data? #t)
+
+(write-html 'raw
+  (html 
+   (head 
+     (title "Hello World")
+     (p "A non-valid paragraph in the head")
+   )
+   (body
+     "Here is the body text of a simple, but" (b "non-valid") "WWW page."
+
+     (li "Here is an item outside the context of a list." 'non-existing-attr "xxx")
+   )
+  )
+  (full-source-path-with-extension "html")
+)
+
+(end-laml)
+
+
+
+
+
+
+

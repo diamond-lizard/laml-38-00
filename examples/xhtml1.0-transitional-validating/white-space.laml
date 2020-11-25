@@ -1,0 +1,36 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(begin-laml)
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(define strange-table (make-vector 256 #t))
+(set-html-char-transformation-entry! strange-table 32 "S")
+
+(write-html '(raw prolog)
+  (html 
+   (head
+     (title "Extraordinary white space and character transliteration") 
+   )
+   (body 
+     (p "Below we illustrate use of internal LAML attributes that control white space preservation and charater transformation.")
+
+     (p 'internal:white-space-preserve "true"
+        'internal:xml-char-transformation-table "strange-table" "Text with    white space
+         Preserving")
+
+   )
+  )
+)
+
+(end-laml)
+
+
+
+
+
+
+

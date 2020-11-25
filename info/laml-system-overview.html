@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta name = "Generator" content = "LAML">  <title>LAML System Overview</title> <link rel = "SHORTCUT ICON" href = "../images/16-16-icon.ico"></head> <body bgcolor = "#ffffbf" text = "#000000" link = "#0000ff" vlink = "#0000ff"> <table border = "0" cellpadding = "0" cellspacing = "0" width = "100%"><tbody><tr><td width = "33%" align = "left" valign = "top"><font size = "2">Generated: May 6, 2005, 18:55:25</font></td> <td width = "34%" align = "center" valign = "top"><font size = "2">Copyright &copy; 2005 , Kurt N&oslash;rmark</font></td> <td width = "33%" align = "right" valign = "top"><font size = "2"><a href = "../index.html" title = "The local LAML software home page" target = "_top"><img src = "../images/laml-home.gif" alt = "The local LAML software home page" border = "0"></a></font></td></tr></tbody></table> <h1>LAML System Overview</h1> <p> This description is meant to be a general overview of the LAML
+        software, with special emphasis on the installation process and
+        its consequences on a particular LAML configuration. <p> The  <a href = "laml-easy-installation.html">LAML installation process</a>  is driven by a Scheme program, which
+        must be called by the the person who install LAML. Thus, the installation of LAML is not
+        as easy as you may expect from state-of-the-art Windows installation
+        procedures.  On the other hand, our experience shows that most people
+        are able to carry through the few steps in the LAML installation procedure
+        without problems.  The installation process writes a number of
+        important files into your file system (all in the LAML directory, with the .emacs
+        file as an exception). The file  <a href = "../laml.scm">laml.scm</a>  is of
+        particular importance, see below. It is located in the root directory
+        of your LAML system. If you prepare to use Emacs for activation of
+        LAML, the  <a href = "../laml.el">laml.el</a>  file is also important (also in the LAML root).
+        The  <a href = "../emacs-support/">emacs-support/</a>  directory contains other important Emacs lisp files.
+        The installation process also produces a  <a href = "../emacs-support/dot-emacs-contribution.el">contribution</a>  to your .emacs file. <p> Each triple (scheme-system, platform, operating-system) has its own
+        compatibility file in LAML, see the directory  <a href = "../lib/compatibility">lib/compatibility</a>. A
+        compatibility file contains a few non-standard (non R4RS) Scheme functions used in
+        LAML. In addition, it contains the functions which transfer context
+        information to LAML, because the implementation of these are bound to be
+        system dependent. <p> Now about  <a href = "../laml.scm">laml.scm</a>.  This file must be loaded as the first thing in
+        any LAML program, including CGI programs that use LAML. Details about your configuration is hard-wired in
+         <kbd>laml.scm</kbd>. In addition it loads the appropriate compatibility file from
+         <kbd>lib/compatibility</kbd>  and the  <kbd>general</kbd>  library from lib. <p> After the loading of  <a href = "../laml.scm">laml.scm</a>, a style file will normally be
+        loaded. There are styles for a number of purposes in the LAML
+        distribution. And you can easily write your own style. A style should always
+        load a HTML mirror, either one of the new accurate mirrors, such as <a href = "../lib/xml-in-laml/mirrors/man/xhtml10-transitional-mirror.html">XHTML1.0</a>, or one of the other
+        mirrors. You are recommended to use  <kbd>lib/xml-in-laml/mirrors/xhtml10-transitional-mirror.scm</kbd> or one the sibling XHTML mirrors. You can use <kbd>lib/html4.01-transitional-validating/html4.scm</kbd> , but you should not use <kbd>lib/html.scm</kbd> and <kbd>lib/html-v1.scm</kbd>, which only are provided for backward compatibility. <p> As of 2003, the kernel of LAML allows you to generate mirrors of XML languages form XML DTDs.
+             XHTML and SVG are supported via such mirrors, and as part of our work with LAML we have created a number of additional XML
+             language. LAML has its own <a href = "../tools/dtd-parser/man/dtd-parser.html">XML DTD parser</a> and a <a href = "../tools/xml-in-laml/man/xml-in-laml.html">mirror generation tool</a> for creation of
+             mirrors of XML languages
+             in Scheme. Given an LAML (XML-in-LAML) document in some high-level XML language, it can be transformed
+             to a lower-level XML language. The target XML language is often XHTML. LAML provides a simple 
+              <a href = "../lib/xml-in-laml/man/xml-in-laml.html#SECTION18">transformation framework</a> for this.
+             The <a href = "../tutorial/xml-in-laml/xml-in-laml.html">XML-in-LAML tutorial</a> is a good place to start. <p> There are also a number of  <a href = "../man/laml.html#SECTION7">LAML tools</a>  for various purposes. These can
+        use a style, but they do not need to. A tool is typically started by a
+        tiny LAML file which serves as a script that calls some underlying
+        functionality implemented in Scheme. <p> In order to use LAML you make a file, say  <kbd>f.laml</kbd>. You arrange that
+         <a href = "../laml.scm">laml.scm</a>  is loaded. It is done in various ways, depending on whether
+        you work via Emacs, via command file (shell), or within a Scheme
+        system. In all cases we attempt to transfer information about the
+        startup-directory and the source file name to the LAML program. This
+        is called  <em>context information</em>. When the LAML program  <kbd>f.laml</kbd>  runs it
+        usually writes a file  <kbd>f.html</kbd>  in the same directory as  <kbd>f.laml</kbd>.  (In
+        some situations other effects can be experienced or provided for, however). The LAML Emacs
+        interface supports this process in a very flexible way (via a single key stroke). <p> If you happen to use a non-supported Scheme system or a non-supported
+        platform you will have to port LAML. There is a detailed  <a href = "porting-laml.html">cookbook</a>  for
+        this. Here we will be concerned with the overall picture. The first
+        thing is to implement the compatibility file. This is the file in the
+         <a href = "../lib/compatibility">lib/compatibility</a>  directory; A compatibility file must
+        be named in particular way, as explained in the porting
+        cookbook. This part of the porting is usually not that hard. Next
+        comes the support of various ways to activate LAML. The easiest
+        solution is just to call a procedure called  <kbd>laml</kbd>  from you Scheme
+        prompt. In the current version, this solution is quite good. 
+        You can also activate LAML from a command prompt (a shell).
+        This requires that you write a
+        template of such a shell command with a particular name. The
+        installation process will bring it to the proper place (the  <kbd>bin</kbd>  directory) in the file system and make certain
+        substitutions. The best and most ideal solution is to implement LAML
+        activation from Emacs. This is ideal, but most useful for people who
+        already are used to Emacs. In order to support this you must implement
+        three Elisp activation functions, which brings the necessary LAML
+        context from Emacs to LAML. This part of the porting process is probably
+        the most difficult. However, a number of versions exists, so you can
+        be inspirred by existing stuff. <p> <div>&nbsp; <p> Kurt N&#248;rmark <br> <a href = "mailto:normark@cs.aau.dk">normark@cs.aau.dk</a> <br> <a href = "http://www.cs.auc.dk/~normark/">http://www.cs.auc.dk/~normark/</a></div> <p> <p> <p> <a href = "http://www.cs.auc.dk/~normark/laml/"><img src = "../images/laml-power-icon-1.gif" alt = "Program Oriented Web Engineering - using LAML"></a> &nbsp; <p> &nbsp; <p> <font size = "1" color = "#ff0000">Generated: May 6, 2005, 18:55:25</font></body></html>
+<!-- Generated from a LAML source file. Version 27.0 (April 18, 2005, development). LAML is designed and implemented by Kurt Nørmark, normark@cs.auc.dk. -->
+

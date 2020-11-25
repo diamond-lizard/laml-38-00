@@ -1,0 +1,16 @@
+; Process all LAML tutorial examples.
+; Uses process-all.laml files in sub-directories.
+
+(load (string-append laml-dir "laml.scm"))
+(load (in-startup-directory "../example-processing.scm"))
+
+(laml "index")
+
+(process-part "getting-started")
+(process-part "html-mirrors")
+(process-part "higher-order-authoring")
+(process-part "leno")
+(process-part "schemedoc")
+(process-part "xml-in-laml")
+
+(end-laml)

@@ -1,0 +1,31 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(begin-laml)
+
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) (title "TITLE"))
+  (body 
+
+     ; A huge map contruct with an invalide (a ...) element as the last one encountered.
+     ((xhtml10-transitional 'map) 'id "id" 
+       (map h1 (map as-string (number-interval 1 1000)))
+       (a 'href "xxx" "yyy"))
+
+  )
+ )
+)
+
+
+
+(end-laml)

@@ -1,0 +1,76 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(define question-item
+  (xml-in-laml-abstraction 
+    (lambda (cont-list attr-prop-list)
+     (let* ((ex (get-prop 'exercise attr-prop-list))
+            (eref (defaulted-get-prop 'eref attr-prop-list #f))
+            (keywords-clause 
+               (traverse-and-collect-first-from-ast cont-list
+                  (ast-of-type? 'element-name "keywords") id-1))
+            (keywords 
+                (traverse-and-collect-all-from-ast keywords-clause
+                  (ast-of-type? 'element-name "keyword") aggregated-ast-cdata-contents))
+           )
+        (li (p (b (filter cdata? cont-list)) (br) ; @a
+               "Exercise" (if eref (a 'href eref ex) ex) (br)
+               (font 'size "2" "Keywords: " (list-to-string keywords ", "))))))
+    (required-implied-attributes '(exercise) '(eref) "question-item")
+    "question-item"))
+
+(define keywords
+  (xml-in-laml-abstraction 
+    (lambda (cont-list attr-prop-list)
+     (make-ast 'keywords cont-list attr-prop-list 'double 'adhoc))
+
+    (lambda (cont-list attr-prop-list) ; @c
+      (if (not (null? (filter (negate (ast-of-type? 'element-name "keyword")) (filter ast? cont-list))))
+	  (xml-check-error "The keywords form must only have keyword elements")))    
+    
+
+  )
+)
+
+(define keyword
+  (xml-in-laml-abstraction 
+    (lambda (cont-list attr-prop-list) 
+     (make-ast 'keyword cont-list attr-prop-list 'double 'adhoc))
+    (lambda (cont-list attr-prop-list) ; @d
+      (if (not (null? (filter ast? cont-list)))
+	  (xml-check-error "The keyword form must not have nested elements"))))
+)
+
+; ::write-html-clause-more-li::
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+    (title "TITLE"))
+  (body 
+
+  (ol
+ 
+    (question-item "Higher-order" "list functions"   ; @i
+            'exercise "4.4" 'eref "ex4.4-url"
+            (keywords 
+              (keyword  (list "the" "list")  "concept")
+              (keyword "table" "representation with lists")))
+
+    (question-item "List processing - recursion and iteration"  ; @j
+            'exercise "2.3" 'eref "ex2.3-url"
+            (keywords 
+              (keyword  "the list concept")
+              (keyword "recursive functions")
+              (keyword "iterative list traversal")))
+
+  )
+
+  )
+ )
+)
+
+
+(end-laml)

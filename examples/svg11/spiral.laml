@@ -1,0 +1,44 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-svg11")
+
+(load (in-startup-directory "svg-paths.scm"))
+
+(begin-laml)
+
+(define xml-validate-contents? #t)
+(define xml-check-attributes? #t)
+(define xml-transliterate-character-data? #t)
+
+
+(define (spiral-path n m)
+ (let ((m2 (* 2 m))
+       (m3 (* 3 m))
+       (m4 (* 4 m)))
+ (if (> n 0)
+   (rh-p n 
+    (rv-p (- n m)
+     (rh-p (- (- n m2))
+      (rv-p (- (- n m3))
+       (spiral-path (- n m4) m)))))
+   (e-p))))
+
+
+(write-html 'raw
+
+  (svg 'width "500" 'height "500" 'viewBox "0 0 110 110"
+   (g 'stroke "black" 'fill "white" 'stroke-width "0.3"
+     (path 'd (am-p 2 2 (spiral-path 100 1))
+       )))
+
+
+  (full-source-path-with-extension "svg")
+)
+
+(end-laml)
+
+
+
+
+
+
+

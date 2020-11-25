@@ -1,0 +1,223 @@
+(load (string-append laml-dir "laml.scm"))       
+(laml-style "xml-in-laml/lecture-notes/lecture-notes")
+
+(leno-front-matters
+  (front-title "Audio tutorial demo")           
+  (front-subtitle "")   
+  (front-author "Kurt Nørmark")           
+  (front-affiliation "Department of Computer Science, Aalborg University, Denmark")  
+  (front-abstract "This is a tutorial demo of the LENO audio facilities.")  
+
+  'show-and-speak "true" 
+  'show-and-speak-author-mode "true"
+  'default-showing-time "2"    
+  'additional-showing-time "2" 
+  'sound-source "wave-file" 
+  'speak-url-prefix "../sound/"
+  'speak-file-prefix "sound/"
+
+  'slide-view "true"  
+  'annotated-slide-view "true"
+  'aggregated-view "true" 
+  'primary-view "annotated-slide-view"
+
+  'scheme-suffix "post-notes.scm"
+  'course-home-url "../../../index.html"   
+  'author-home-url "http://www.cs.auc.dk/~normark/"   
+  'note-download-url ""   
+  'logo-url "http://www.auc.dk/"  
+  'note-contents-description "LENO Audio tutorial demo"    
+  'slide-header "normal"  ; minimal/normal/none 
+  'trail-of-lecture "false"  
+  'language "english"      
+
+  'exercise-model "none"   
+  'mouse-advancement "double-press" 
+  'word-index "true"  
+  'css-stylesheet ""
+  'news-flash-string  ""  
+  'news-flash-level   "2"
+  'quiz-support "false"   
+  'verbosity-level "1"
+)
+
+(begin-notes)
+
+(note-page 'id "first"
+  (title (main-text "Page 1")
+         (annotation "This is page 1")
+  )
+
+  (show-and-speak
+   (slide-part 'number "1" 'seconds "1" )
+  )
+
+  (point
+   (main-text
+    "Main point of page 1"
+    )
+   (annotation
+    ""
+    )
+  )
+
+  (items 
+   (item 
+    (main-text "Item 1"
+               )
+    (items 
+     (item 
+      (main-text "Subitem"
+                 ))))
+   (item 
+    (main-text "Item 2"
+               )
+    (items 
+     (item 
+      (main-text "Subitem"
+                 ))))
+   (item 
+    (main-text "Item 3"
+               )
+    (items 
+     (item 
+      (main-text "Subitem"
+  )))))
+
+)
+
+(note-page 'id "second"
+  (title (main-text "Page 2")
+         (annotation "This is page 2")
+  )
+
+  (show-and-speak
+   (slide-part 'number "1" 'seconds "1" )
+   (program-part 'number "1" 'seconds "1")
+   (slide-part 'number "2" 'seconds "1" )
+   (program-part 'number "2" 'seconds "1")
+   (slide-part 'number "3" 'seconds "1" )
+  )
+
+  (point
+   (main-text
+    "Main point of page 2"
+    )
+   (annotation
+    ""
+    )
+  )
+
+  (source-program
+   'src (in-tutorial-dir "schemedoc/prog3.scm")
+   'from-mark ";; Calculate the factorial"
+   'to-mark ")))))"
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+    (color-decoration 'from-mark "fac " 'to-mark "" 'color "red" 'face "bold" 'repetition "2" )
+   )
+   (main-text
+    "The fac function" )
+   (annotation
+    "This is the classical recursive edition of fac." )
+  )
+
+  (source-program
+   'src (in-tutorial-dir "schemedoc/prog3.scm")
+   'from-mark "(define (fib"
+   'to-mark "))))))"
+   'slide-mode "external"
+   'book-mode "inline"
+   (color-decorations
+    (color-decoration 'from-mark "fib " 'to-mark "" 'color "red" 'face "bold" 'repetition "3" )
+   )
+   (main-text
+    "The fib function" )
+   (annotation
+    "This is the classical recursive edition of fib, which is very time consuming." )
+  )
+
+  (point
+   (main-text
+    "End remark of page 2"
+    )
+   (annotation
+    ""
+    )
+  )
+)
+
+(note-page 'id "third"
+  (title (main-text "Page 3")
+         (annotation "This is page 3")
+  )
+
+  (show-and-speak
+   (slide-part 'number "1" 'seconds "1" )
+  )
+
+  (point
+   (main-text
+    "Main point of page 3"
+    )
+   (annotation
+    "Some annotation"
+    )
+  )
+
+
+  (items 
+   (item 
+    (main-text "Item 1"
+               )
+    (items 
+     (item 
+      (main-text "Subitem"
+                 ))))
+   (item 
+    (main-text "Item 2"
+               )
+    (items 
+     (item 
+      (main-text "Subitem"
+                 ))))
+   (item 
+    (main-text "Item 3"
+               )
+    (items 
+     (item 
+      (main-text "Subitem"
+  )))))
+
+
+  (point
+   (main-text
+    "Final end remark"
+    )
+   (annotation
+    ""
+    )
+  )
+
+
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(end-notes)
+
+

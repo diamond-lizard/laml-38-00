@@ -1,0 +1,33 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+(lib-load "time.scm")
+
+(begin-laml)
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(write-html '(raw prolog)
+  (html 
+   (head
+     (title "Hello World") 
+   )
+   (body 
+     (p "Here is the body text of the most simple web page,"  
+        "you have ever seen!!")
+
+     (p (when-modified 'updated-as-of "2005-9-14") (br) (when-generated))
+
+   )
+  )
+)
+
+(end-laml)
+
+
+
+
+
+
+

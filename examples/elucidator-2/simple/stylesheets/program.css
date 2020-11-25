@@ -1,0 +1,15 @@
+DIV.schemedoc-definition-comment{
+  color: rgb(112,168,0);
+  font-size: 100%;
+} 
+
+DIV.schemedoc-section-comment{
+  color: rgb(112,168,0);
+  font-size: 120%;
+} 
+
+DIV.schemedoc-abstract-comment{
+  color: rgb(112,168,0);
+  font-weight: bold;
+  font-size: 135%;
+} 

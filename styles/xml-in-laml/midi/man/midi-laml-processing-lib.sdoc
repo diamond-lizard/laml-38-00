@@ -1,0 +1,27 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/schemedoc-2/schemedoc")
+
+; --------------------------------------------------------------------------------------------------------------------------
+; SchemeDoc customization
+
+(define supported-manual-page-elements 
+    '(title library kind form description pre-condition post-condition parameters example cross-references misc comment returns xml-in-laml-example-form attributes content-model level xml-in-laml-attributes mode))
+
+(define manual-element-order 
+  '(section-id section-title section-body title library kind form mode xml-in-laml-example-form description content-model attributes pre-condition parameters xml-in-laml-attributes returns post-condition example cross-references misc comment))
+
+(define (schemedoc-custom-tag-presentation kind)
+  (cond ((eq? kind 'mode) "Mode")
+        (else   (as-string kind))))
+
+; ------------------------------------------------------------------------------------------------------------
+
+(manual
+  (manual-front-matters
+    (kn-manual-settings) 
+    'laml-resource "true"
+    'scheme-source-linking "true"
+  )
+
+  (manual-from-scheme-file 'src "../midi-laml-processing-lib.scm")
+)

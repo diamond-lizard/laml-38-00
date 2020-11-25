@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- The material in this file is copyrighted (c) by KN, AAU.  All rights reserved.-->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="900" height="900"
+     viewBox="0 0 900 900">
+   <g>
+      <defs>
+         <marker id="OpenArrowhead" viewBox="0 0 10 10" refX="10" refY="5" stroke="black" stroke-width="1"
+                 fill="white" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="15" orient="auto"
+                 preserveAspectRatio="none">
+            <path d="M 0 0 L 10 5 L 0 10 z" />
+         </marker>
+      </defs>
+      <defs>
+         <marker id="OpenDiamond" viewBox="0 -5 10 10" refX="10" refY="0" stroke="black" stroke-width="1"
+                 fill="white" markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="22.5" orient="auto"
+                 preserveAspectRatio="none">
+            <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+         </marker>
+      </defs>
+      <defs>
+         <marker id="FilledArrowhead" viewBox="0 0 10 10" refX="10" refY="5" fill="black" markerUnits="userSpaceOnUse"
+                 markerWidth="20" markerHeight="15" orient="auto" preserveAspectRatio="none">
+            <path d="M 0 0 L 10 5 L 0 10 z" />
+         </marker>
+      </defs>
+      <defs>
+         <marker id="FilledDiamond" viewBox="0 -5 10 10" refX="10" refY="0" fill="black" markerUnits="userSpaceOnUse"
+                 markerWidth="30" markerHeight="22.5" orient="auto" preserveAspectRatio="none">
+            <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+         </marker>
+      </defs>
+      <g>
+         <rect stroke="black" stroke-width="2" rx="15" x="50" y="100" width="220" height="158.87043189368768"
+               fill="white" />
+         <g transform="translate(60,110)">
+            <g transform="scale(0.6312292358803986,0.6312292358803986)">
+               <g transform="translate(137.89473684210526,-80.0)">
+                  <g>
+                     <g>
+                        <defs>
+                           <marker id="OpenArrowhead" viewBox="0 0 10 10" refX="10" refY="5" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="20"
+                                   markerHeight="15" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="OpenDiamond" viewBox="0 -5 10 10" refX="10" refY="0" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="30"
+                                   markerHeight="22.5" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledArrowhead" viewBox="0 0 10 10" refX="10" refY="5" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="15" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledDiamond" viewBox="0 -5 10 10" refX="10" refY="0" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="22.5" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <g>
+                           <rect x="-137.89473684210526" y="80.0" width="187.89473684210526" height="40"
+                                 stroke="none" stroke-width="1" fill="white">
+                              <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s"
+                                       begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s"
+                                       begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-family="times-roman" font-size="30" stroke="black" color="black"
+                                 fill="black" x="-43.94736842105263" text-anchor="middle" y="110.0">
+                              rentesats:
+                           </text>
+                        </g>
+                        <g>
+                           <rect x="70" y="80.0" width="100.0" height="40" stroke-width="1" stroke="black"
+                                 fill="#87ceeb">
+                              <animate attributeType="XML" attributeName="fill" from="#87ceeb" to="red"
+                                       dur="1s" begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="#87ceeb"
+                                       dur="0.5s" begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-style="italic" font-family="times-roman" font-size="30" stroke="black"
+                                 color="black" fill="black" x="165.0" text-anchor="end" y="110.0">
+                              0.02
+                           </text>
+                        </g>
+                     </g>
+                     <g>
+                        <defs>
+                           <marker id="OpenArrowhead" viewBox="0 0 10 10" refX="10" refY="5" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="20"
+                                   markerHeight="15" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="OpenDiamond" viewBox="0 -5 10 10" refX="10" refY="0" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="30"
+                                   markerHeight="22.5" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledArrowhead" viewBox="0 0 10 10" refX="10" refY="5" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="15" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledDiamond" viewBox="0 -5 10 10" refX="10" refY="0" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="22.5" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <g>
+                           <rect x="-58.94736842105263" y="140.0" width="108.94736842105263" height="40"
+                                 stroke="none" stroke-width="1" fill="white">
+                              <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s"
+                                       begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s"
+                                       begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-family="times-roman" font-size="30" stroke="black" color="black"
+                                 fill="black" x="-4.473684210526315" text-anchor="middle" y="170.0">
+                              navn:
+                           </text>
+                        </g>
+                        <g>
+                           <rect x="70" y="140.0" width="100.0" height="40" stroke-width="1" stroke="black"
+                                 fill="#98fb98">
+                              <animate attributeType="XML" attributeName="fill" from="#98fb98" to="red"
+                                       dur="1s" begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="#98fb98"
+                                       dur="0.5s" begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-style="italic" font-family="times-roman" font-size="30" stroke="black"
+                                 color="black" fill="black" x="165.0" text-anchor="end" y="170.0">
+                              Kurt
+                           </text>
+                        </g>
+                     </g>
+                     <g>
+                        <defs>
+                           <marker id="OpenArrowhead" viewBox="0 0 10 10" refX="10" refY="5" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="20"
+                                   markerHeight="15" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="OpenDiamond" viewBox="0 -5 10 10" refX="10" refY="0" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="30"
+                                   markerHeight="22.5" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledArrowhead" viewBox="0 0 10 10" refX="10" refY="5" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="15" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledDiamond" viewBox="0 -5 10 10" refX="10" refY="0" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="22.5" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <g>
+                           <rect x="-74.73684210526316" y="200.0" width="124.73684210526316" height="40"
+                                 stroke="none" stroke-width="1" fill="white">
+                              <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s"
+                                       begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s"
+                                       begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-family="times-roman" font-size="30" stroke="black" color="black"
+                                 fill="black" x="-12.368421052631582" text-anchor="middle" y="230.0">
+                              saldo:
+                           </text>
+                        </g>
+                        <g>
+                           <rect x="70" y="200.0" width="108.94736842105263" height="40" stroke-width="1"
+                                 stroke="black" fill="#87ceeb">
+                              <animate attributeType="XML" attributeName="fill" from="#87ceeb" to="red"
+                                       dur="1s" begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="#87ceeb"
+                                       dur="0.5s" begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-style="italic" font-family="times-roman" font-size="30" stroke="black"
+                                 color="black" fill="black" x="173.94736842105263" text-anchor="end"
+                                 y="230.0">
+                              100.0
+                           </text>
+                        </g>
+                     </g>
+                     <g>
+                        <defs>
+                           <marker id="OpenArrowhead" viewBox="0 0 10 10" refX="10" refY="5" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="20"
+                                   markerHeight="15" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="OpenDiamond" viewBox="0 -5 10 10" refX="10" refY="0" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="30"
+                                   markerHeight="22.5" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledArrowhead" viewBox="0 0 10 10" refX="10" refY="5" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="15" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledDiamond" viewBox="0 -5 10 10" refX="10" refY="0" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="22.5" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <g>
+                           <rect x="-43.15789473684211" y="260.0" width="93.15789473684211" height="40"
+                                 stroke="none" stroke-width="1" fill="white">
+                              <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s"
+                                       begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s"
+                                       begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-family="times-roman" font-size="30" stroke="black" color="black"
+                                 fill="black" x="3.421052631578945" text-anchor="middle" y="290.0">
+                              xxx:
+                           </text>
+                        </g>
+                        <g>
+                           <rect x="70" y="260.0" width="100.0" height="40" stroke-width="1" stroke="black"
+                                 fill="#87ceeb">
+                              <animate attributeType="XML" attributeName="fill" from="#87ceeb" to="red"
+                                       dur="1s" begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="#87ceeb"
+                                       dur="0.5s" begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-style="italic" font-family="times-roman" font-size="30" stroke="black"
+                                 color="black" fill="black" x="165.0" text-anchor="end" y="290.0">
+                              1
+                           </text>
+                        </g>
+                     </g>
+                  </g>
+               </g>
+            </g>
+         </g>
+      </g>
+      <g>
+         <rect stroke="black" stroke-width="2" rx="15" x="350" y="100" width="220" height="152.27848101265823"
+               fill="white" />
+         <g transform="translate(360,110)">
+            <g transform="scale(0.6012658227848101,0.6012658227848101)">
+               <g transform="translate(-162.10526315789474,-80.0)">
+                  <g>
+                     <g>
+                        <defs>
+                           <marker id="OpenArrowhead" viewBox="0 0 10 10" refX="10" refY="5" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="20"
+                                   markerHeight="15" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="OpenDiamond" viewBox="0 -5 10 10" refX="10" refY="0" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="30"
+                                   markerHeight="22.5" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledArrowhead" viewBox="0 0 10 10" refX="10" refY="5" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="15" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledDiamond" viewBox="0 -5 10 10" refX="10" refY="0" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="22.5" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <g>
+                           <rect x="162.10526315789474" y="80.0" width="187.89473684210526" height="40"
+                                 stroke="none" stroke-width="1" fill="white">
+                              <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s"
+                                       begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s"
+                                       begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-family="times-roman" font-size="30" stroke="black" color="black"
+                                 fill="black" x="256.0526315789474" text-anchor="middle" y="110.0">
+                              rentesats:
+                           </text>
+                        </g>
+                        <g>
+                           <rect x="370" y="80.0" width="100.0" height="40" stroke-width="1" stroke="black"
+                                 fill="#87ceeb">
+                              <animate attributeType="XML" attributeName="fill" from="#87ceeb" to="red"
+                                       dur="1s" begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="#87ceeb"
+                                       dur="0.5s" begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-style="italic" font-family="times-roman" font-size="30" stroke="black"
+                                 color="black" fill="black" x="465.0" text-anchor="end" y="110.0">
+                              0.03
+                           </text>
+                        </g>
+                     </g>
+                     <g>
+                        <defs>
+                           <marker id="OpenArrowhead" viewBox="0 0 10 10" refX="10" refY="5" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="20"
+                                   markerHeight="15" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="OpenDiamond" viewBox="0 -5 10 10" refX="10" refY="0" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="30"
+                                   markerHeight="22.5" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledArrowhead" viewBox="0 0 10 10" refX="10" refY="5" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="15" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledDiamond" viewBox="0 -5 10 10" refX="10" refY="0" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="22.5" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <g>
+                           <rect x="241.05263157894737" y="140.0" width="108.94736842105263" height="40"
+                                 stroke="none" stroke-width="1" fill="white">
+                              <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s"
+                                       begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s"
+                                       begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-family="times-roman" font-size="30" stroke="black" color="black"
+                                 fill="black" x="295.5263157894737" text-anchor="middle" y="170.0">
+                              navn:
+                           </text>
+                        </g>
+                        <g>
+                           <rect x="370" y="140.0" width="100.0" height="40" stroke-width="1" stroke="black"
+                                 fill="#98fb98">
+                              <animate attributeType="XML" attributeName="fill" from="#98fb98" to="red"
+                                       dur="1s" begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="#98fb98"
+                                       dur="0.5s" begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-style="italic" font-family="times-roman" font-size="30" stroke="black"
+                                 color="black" fill="black" x="465.0" text-anchor="end" y="170.0">
+                              Kim
+                           </text>
+                        </g>
+                     </g>
+                     <g>
+                        <defs>
+                           <marker id="OpenArrowhead" viewBox="0 0 10 10" refX="10" refY="5" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="20"
+                                   markerHeight="15" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="OpenDiamond" viewBox="0 -5 10 10" refX="10" refY="0" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="30"
+                                   markerHeight="22.5" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledArrowhead" viewBox="0 0 10 10" refX="10" refY="5" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="15" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledDiamond" viewBox="0 -5 10 10" refX="10" refY="0" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="22.5" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <g>
+                           <rect x="225.26315789473682" y="200.0" width="124.73684210526316" height="40"
+                                 stroke="none" stroke-width="1" fill="white">
+                              <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s"
+                                       begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s"
+                                       begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-family="times-roman" font-size="30" stroke="black" color="black"
+                                 fill="black" x="287.6315789473684" text-anchor="middle" y="230.0">
+                              saldo:
+                           </text>
+                        </g>
+                        <g>
+                           <rect x="370" y="200.0" width="124.73684210526316" height="40" stroke-width="1"
+                                 stroke="black" fill="#87ceeb">
+                              <animate attributeType="XML" attributeName="fill" from="#87ceeb" to="red"
+                                       dur="1s" begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="#87ceeb"
+                                       dur="0.5s" begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-style="italic" font-family="times-roman" font-size="30" stroke="black"
+                                 color="black" fill="black" x="489.7368421052632" text-anchor="end" y="230.0">
+                              3001.0
+                           </text>
+                        </g>
+                     </g>
+                     <g>
+                        <defs>
+                           <marker id="OpenArrowhead" viewBox="0 0 10 10" refX="10" refY="5" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="20"
+                                   markerHeight="15" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="OpenDiamond" viewBox="0 -5 10 10" refX="10" refY="0" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="30"
+                                   markerHeight="22.5" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledArrowhead" viewBox="0 0 10 10" refX="10" refY="5" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="15" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledDiamond" viewBox="0 -5 10 10" refX="10" refY="0" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="22.5" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <g>
+                           <rect x="256.8421052631579" y="260.0" width="93.15789473684211" height="40"
+                                 stroke="none" stroke-width="1" fill="white">
+                              <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s"
+                                       begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s"
+                                       begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-family="times-roman" font-size="30" stroke="black" color="black"
+                                 fill="black" x="303.42105263157896" text-anchor="middle" y="290.0">
+                              xxx:
+                           </text>
+                        </g>
+                        <g>
+                           <rect x="370" y="260.0" width="100.0" height="40" stroke-width="1" stroke="black"
+                                 fill="#87ceeb">
+                              <animate attributeType="XML" attributeName="fill" from="#87ceeb" to="red"
+                                       dur="1s" begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="#87ceeb"
+                                       dur="0.5s" begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-style="italic" font-family="times-roman" font-size="30" stroke="black"
+                                 color="black" fill="black" x="465.0" text-anchor="end" y="290.0">
+                              2
+                           </text>
+                        </g>
+                     </g>
+                  </g>
+               </g>
+            </g>
+         </g>
+      </g>
+      <g>
+         <rect stroke="black" stroke-width="2" rx="15" x="650" y="100" width="220" height="158.8704318936877"
+               fill="white" />
+         <g transform="translate(660,110)">
+            <g transform="scale(0.6312292358803987,0.6312292358803987)">
+               <g transform="translate(-462.10526315789474,-80.0)">
+                  <g>
+                     <g>
+                        <defs>
+                           <marker id="OpenArrowhead" viewBox="0 0 10 10" refX="10" refY="5" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="20"
+                                   markerHeight="15" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="OpenDiamond" viewBox="0 -5 10 10" refX="10" refY="0" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="30"
+                                   markerHeight="22.5" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledArrowhead" viewBox="0 0 10 10" refX="10" refY="5" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="15" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledDiamond" viewBox="0 -5 10 10" refX="10" refY="0" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="22.5" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <g>
+                           <rect x="462.10526315789474" y="80.0" width="187.89473684210526" height="40"
+                                 stroke="none" stroke-width="1" fill="white">
+                              <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s"
+                                       begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s"
+                                       begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-family="times-roman" font-size="30" stroke="black" color="black"
+                                 fill="black" x="556.0526315789474" text-anchor="middle" y="110.0">
+                              rentesats:
+                           </text>
+                        </g>
+                        <g>
+                           <rect x="670" y="80.0" width="100.0" height="40" stroke-width="1" stroke="black"
+                                 fill="#87ceeb">
+                              <animate attributeType="XML" attributeName="fill" from="#87ceeb" to="red"
+                                       dur="1s" begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="#87ceeb"
+                                       dur="0.5s" begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-style="italic" font-family="times-roman" font-size="30" stroke="black"
+                                 color="black" fill="black" x="765.0" text-anchor="end" y="110.0">
+                              0.02
+                           </text>
+                        </g>
+                     </g>
+                     <g>
+                        <defs>
+                           <marker id="OpenArrowhead" viewBox="0 0 10 10" refX="10" refY="5" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="20"
+                                   markerHeight="15" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="OpenDiamond" viewBox="0 -5 10 10" refX="10" refY="0" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="30"
+                                   markerHeight="22.5" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledArrowhead" viewBox="0 0 10 10" refX="10" refY="5" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="15" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledDiamond" viewBox="0 -5 10 10" refX="10" refY="0" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="22.5" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <g>
+                           <rect x="541.0526315789474" y="140.0" width="108.94736842105263" height="40"
+                                 stroke="none" stroke-width="1" fill="white">
+                              <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s"
+                                       begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s"
+                                       begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-family="times-roman" font-size="30" stroke="black" color="black"
+                                 fill="black" x="595.5263157894738" text-anchor="middle" y="170.0">
+                              navn:
+                           </text>
+                        </g>
+                        <g>
+                           <rect x="670" y="140.0" width="108.94736842105263" height="40" stroke-width="1"
+                                 stroke="black" fill="#98fb98">
+                              <animate attributeType="XML" attributeName="fill" from="#98fb98" to="red"
+                                       dur="1s" begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="#98fb98"
+                                       dur="0.5s" begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-style="italic" font-family="times-roman" font-size="30" stroke="black"
+                                 color="black" fill="black" x="773.9473684210526" text-anchor="end" y="170.0">
+                              Peter
+                           </text>
+                        </g>
+                     </g>
+                     <g>
+                        <defs>
+                           <marker id="OpenArrowhead" viewBox="0 0 10 10" refX="10" refY="5" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="20"
+                                   markerHeight="15" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="OpenDiamond" viewBox="0 -5 10 10" refX="10" refY="0" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="30"
+                                   markerHeight="22.5" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledArrowhead" viewBox="0 0 10 10" refX="10" refY="5" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="15" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledDiamond" viewBox="0 -5 10 10" refX="10" refY="0" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="22.5" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <g>
+                           <rect x="525.2631578947369" y="200.0" width="124.73684210526316" height="40"
+                                 stroke="none" stroke-width="1" fill="white">
+                              <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s"
+                                       begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s"
+                                       begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-family="times-roman" font-size="30" stroke="black" color="black"
+                                 fill="black" x="587.6315789473684" text-anchor="middle" y="230.0">
+                              saldo:
+                           </text>
+                        </g>
+                        <g>
+                           <rect x="670" y="200.0" width="108.94736842105263" height="40" stroke-width="1"
+                                 stroke="black" fill="#87ceeb">
+                              <animate attributeType="XML" attributeName="fill" from="#87ceeb" to="red"
+                                       dur="1s" begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="#87ceeb"
+                                       dur="0.5s" begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-style="italic" font-family="times-roman" font-size="30" stroke="black"
+                                 color="black" fill="black" x="773.9473684210526" text-anchor="end" y="230.0">
+                              300.0
+                           </text>
+                        </g>
+                     </g>
+                     <g>
+                        <defs>
+                           <marker id="OpenArrowhead" viewBox="0 0 10 10" refX="10" refY="5" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="20"
+                                   markerHeight="15" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="OpenDiamond" viewBox="0 -5 10 10" refX="10" refY="0" stroke="black"
+                                   stroke-width="1" fill="white" markerUnits="userSpaceOnUse" markerWidth="30"
+                                   markerHeight="22.5" orient="auto" preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledArrowhead" viewBox="0 0 10 10" refX="10" refY="5" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="15" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 10 5 L 0 10 z" />
+                           </marker>
+                        </defs>
+                        <defs>
+                           <marker id="FilledDiamond" viewBox="0 -5 10 10" refX="10" refY="0" fill="black"
+                                   markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="22.5" orient="auto"
+                                   preserveAspectRatio="none">
+                              <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+                           </marker>
+                        </defs>
+                        <g>
+                           <rect x="556.8421052631579" y="260.0" width="93.15789473684211" height="40"
+                                 stroke="none" stroke-width="1" fill="white">
+                              <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s"
+                                       begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s"
+                                       begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-family="times-roman" font-size="30" stroke="black" color="black"
+                                 fill="black" x="603.421052631579" text-anchor="middle" y="290.0">
+                              xxx:
+                           </text>
+                        </g>
+                        <g>
+                           <rect x="670" y="260.0" width="100.0" height="40" stroke-width="1" stroke="black"
+                                 fill="#87ceeb">
+                              <animate attributeType="XML" attributeName="fill" from="#87ceeb" to="red"
+                                       dur="1s" begin="mouseover" fill="freeze" />
+                              <animate attributeType="XML" attributeName="fill" from="red" to="#87ceeb"
+                                       dur="0.5s" begin="mouseout" fill="freeze" />
+                           </rect>
+                           <text font-style="italic" font-family="times-roman" font-size="30" stroke="black"
+                                 color="black" fill="black" x="765.0" text-anchor="end" y="290.0">
+                              3
+                           </text>
+                        </g>
+                     </g>
+                  </g>
+               </g>
+            </g>
+         </g>
+      </g>
+   </g>
+</svg>

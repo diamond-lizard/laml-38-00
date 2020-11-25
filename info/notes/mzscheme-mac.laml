@@ -1,0 +1,38 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(define  index-color (make-color 255 255 191))
+(define body-props 
+   (list 'bgcolor (rgb-color-encoding index-color) 'text (rgb-color-encoding black)
+         'link (rgb-color-encoding blue) 'vlink (rgb-color-encoding blue)))
+
+
+(write-html '(pp prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "Notes about LAML with MzScheme on Mac"))
+  (body body-props
+    (laml-top-banner)
+ 
+    (h1 "LAML with MzScheme on Mac")
+
+    (p "These days I do not use Mac any more, so I have no personal experience with LAML on the Mac platform.")
+
+    (p "The Mac version (using unix as platform, osx and operating system, and mzScheme-200 as Scheme system for LAML 19) is due to Jens Rasmussen, jens@fordimankan.dk.
+        I don't know if newer versions run satisfactory. If you try or succeed, please tell me.")
+
+  )
+ )
+)
+
+
+(end-laml)

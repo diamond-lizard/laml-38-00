@@ -1,0 +1,53 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+
+(begin-laml)
+
+; HTML attribute lists
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(define (document ttl body-form)
+ (html html-props
+  (head 
+   (meta meta-props) (title ttl))
+  (body 
+    body-form)))
+
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+
+(write-html '(pp prolog)
+ (document
+  "A ID and IDREF demo page"
+  (list
+    (h1 'id "a1" "A ID and IDREF demo page")
+
+    (p "We use this page to demonstrate the check of ID, IDREF, and IDREFS attributes in LAML. 
+        On purpose, some of the ID and IDREF contraints a violated. See the LAML and/or HTML source.")
+
+    (p "Here is the" (em "first") "paragraph.")
+    (p 'id "a1" "Below we use the font element, which is part of XHTML1.0 transitional. 
+        This element is not available in XHTML1.0 strict.")
+
+    (hr 'id "1") 
+    (p "Here is the" "second" "paragraph")
+    (hr)
+    (p "A link to the" (a 'href "index.html" (em "index") ) _ ".")
+
+    ; Just garbage in this context. Label has an IDREF attribute called for:
+    (label 'for "a1" "Some label")
+
+
+    (table 
+      (tr (td 'id "c1" "1") (td 'id "c2" "2"))
+      (tr (td 'headers "x1 c2" "3") (td "4")))
+
+
+  )
+ )
+)
+
+(end-laml)

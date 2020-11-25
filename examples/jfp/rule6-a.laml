@@ -1,0 +1,16 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+
+
+(write-html 'pp
+ (html
+  (head 
+    (title "Demo of rule 6")
+  )
+
+  (body 
+
+    (em 'css:background-color "yellow" "JFP")
+   
+  )
+ ))

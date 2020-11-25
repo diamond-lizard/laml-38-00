@@ -1,0 +1,37 @@
+(load (string-append laml-dir "laml.scm"))
+
+(laml-style "simple")
+
+(define (scheme-source-file-url f)
+  (string-append "../../" f))
+
+(generic-page
+  "Overview of elucidator examples"
+  (con-par
+   (laml-top-banner)
+   (h 1 "Overview of elucidator examples")
+   "The following elucidator examples exists in this directory:"
+
+   (indent-pixels 10
+      (table-3 
+        1
+        (list 250 200 200 200 200)
+        (list
+          (map b (list "Example"  "Setup file" "Documentation file"    "HTML" "Program files"))
+          (list "Making sublists of a list"  (a-tag "sublist/sublist-doc.laml") (a-tag "sublist/sublist-doc.txt") (b (a-tag "sublist/sublist-doc.html"))
+                (con (a-tag (scheme-source-file-url "lib/general.scm") "general-lib") (br) (a-tag (scheme-source-file-url "lib/file-read.scm") "file-read-write"))
+          )
+          (list "Time conversion"   (a-tag "time/time.laml") (a-tag "time/time.txt")    (b (a-tag "time/time.html"))
+                (con (a-tag "time/time.scm") (br) (a-tag "time/general-lib.scm"))
+
+          )
+          (list "Small meta demo"   (a-tag "meta-demo/meta-demo.laml") (a-tag "meta-demo/meta-demo.txt")  (b (a-tag "meta-demo/meta-demo.html"))
+                (con (a-tag "meta-demo/meta-demo.scm") (br) (a-tag "meta-demo/other-source.scm"))
+          )
+        )))
+
+  )
+  white black blue blue
+)
+
+(end-laml)

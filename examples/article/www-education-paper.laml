@@ -1,0 +1,538 @@
+(load (string-append laml-dir "laml.scm"))
+
+(laml-style "article/article")
+
+(define language-preference 'english)
+
+(begin-article)
+
+(article-title "A Suite of WWW-based Tools for Advanced Course Management")
+
+(article-author-and-affiliation 
+  "Kurt Nørmark"
+  "Department of Computer Science"
+  "Aalborg University" 
+  "Denmark"
+  "normark@cs.auc.dk")
+
+(define show-index? #t)
+(define _ #f)
+
+(article-abstract
+ (article-paragraphs
+  (concatenate "
+   A collection of tools for creation of advanced and comprehensive course home pages
+   is presented. The tools cover the spectrum from course overview pages, over
+   hypertext teaching materials, to interactive services that support the teaching 
+   activities during the course.
+   From the teacher's perspective the tools allow for abstraction from details and
+   automation of routine work in the authoring process.
+   Furthermore, the interactive services provide for evaluation of the actual
+   teaching activities via student feedback and collected statistics.
+   Seen from a student's perspective
+   the comprehensive linking of of course plans, teaching material, and interactive service
+   together with links to external WWW material provides for a valuable 
+   organization of a large body of information.")
+
+   (concatenate "Notice that this version is an early edition of the paper. Here it primarily
+    serves as a realistic demo of the article style. For the most up-to-date version please
+    consult the"  (a-tag "http://www.cs.auc.dk/~normark/laml/" "LAML home page") ".")
+ )
+)
+
+(article-section 'intr "Introduction"
+ (article-paragraphs
+  "
+  A course home page may in one extreme cover a single page with a course overview.
+  In the other extreme, a course home page is a network of pages with
+  a complete set of courses resources, such as plans
+  (including a calendar and overviews in various details) course reading materials (book or course notes,
+  possibly in several editions), exercises, solutions to exercises,
+  and interactive services, such as synchronous and asynchronous tools
+  which mediate a dialogue between the students and the teacher.
+  The plans, reading materials, and the interactive course services
+  are often integrated via mutual links."
+  
+  (concatenate "In this paper we will describe an integerated suite of WWW-based tools
+  which, taken together, provides an extensive and advanced support of a
+  university course in computer science. All the tools are built on the
+  same technical platform, using a technology called LAML" (cite "Normark99b" "Normark99c" "Normark99f") "which we have
+  developed as part of our efforts.  In this paper we will concentrate
+  on the course impact of the tools, hereby emphasizing organizational
+  and pedagogical issues. The technical issues involved are addressed
+  elsewhere in first two references mentioned above.")
+  
+  (concatenate "In the following sections we will discuss, and give an
+  overview of the tools we have made during the last two years, in order
+  to support a computer science programming course (object-oriented
+  programming in Java). In section" (section-ref "cp") "we describe the overall course plan system,
+  which generates the 'home page' as such together with overviews of each lecture. In section" (section-ref "leno")
+  "we go on with an overview of the lecture note system, via which it is possible
+  to create a multi-view, hypertext-based teaching material. In section" (section-ref "em") "and"
+  (section-ref "idafus") "we discuss the interactive services used on the course. Prior to the 
+  conclusion we briefly discuss a number of integration issues.")
+
+ )
+)
+
+
+
+(article-section 'cp "The Course Plan System"  
+ (article-paragraphs
+  (concatenate "As a fundamental premise, we have decided to base the entire suite of
+  tool on documents in pure HTML" (cite "html40") _ "." "This is a contrast to using
+  specialized formats (calling for browser plugins) Java applets, or
+  dynamic HTML such Java Script.  By this decision our
+  materials can seen from any machine with a modern Internet browser,
+  without having to download or install any additional software.
+  This provides for ideal availability of the materials across all platforms,
+  on university machines as well as on the student's home equipment.
+  ")
+  
+  "A typical course home page covers a network of WWW pages
+  which presents an overview of the course together
+  with detailed descriptions and presentations of individual lectures.
+  A number of details may occur redundantly on several pages.  A course home
+  page embodies knowledge about the following aspects:"
+  
+  (article-named-issue-list
+    (issue "Course constituents"
+      "Concepts such a plenum sessions, exercises, project work, and lab sessions,
+       together with the mutual structuring among theses.")
+  
+    (issue "Course content"
+      "The topics covered during the lectures of the course.")
+  
+    (issue "Course materials"
+      "Description of and references to required or recommended reading material.")
+  
+    (issue "Training plans"
+      "Proposed exercises together with resources which help the students to deal with problems during
+       the exercises.")
+  
+    (issue "Overall sequencing"
+      "The mutual ordering of the lectures in the course.")
+  
+    (issue "Spatial and temporal details"
+      "Where and when the course activities happen in terms of time slots and allocated rooms."))
+  
+  (concatenate "It is not efficient to deal with this body of information in a collection of WWW pages,
+  where also details about layout, typography, and decoration are addressed.
+  We have made a" (em "course plan system") "which as input takes a complete and clean"
+  (em "course model") _ "," "and outputs a set of pages representing the 'course home page'.
+  The course model separates relatively stable aspects of a course (such as topics covered)
+  from the more fluctuating aspects (such as room and time information). In that way
+  it becomes much easier to revise the course home page from one year to the next.
+  Similarly, it is very flexible to change the course schedule, for instance due to 
+  a necessary postponement of a number of lectures.
+  The top-level page presents an overview menu frame to the left, and some
+  selected page to the right. Figure" (figure-ref "course-plan-figure") "shows a snapshot a home page generated by the course plan system.
+  (For better readability in this verion of the paper,
+  the example is also available via an" (a-tag  "http://www.cs.auc.dk/~normark/scheme/examples/course-plan/html/course-home.html" "URL") _ ".)"
+
+  (article-figure 'course-plan-figure "course-plan-screenshot"
+    (concatenate "A snapshot of a demo course plan WWW page.") ))
+  
+  (concatenate "As one of the novel aspects of the course plan system, all information about time stems from a single list
+  of 'lecture start times' together with additional information about the course model (involving
+  details about the mutual timing of exercises and the plenum lecture).
+  The system uses a central lecture description table which relates particular lectures to topics,
+  times, and rooms. In addition, the table defines the sequencing among the lectures.
+  Several different overviews can be generated, including
+  simple listings of the course contents and calendar presentations, which plot the
+  lectures into a semester overview calendar (with a possibility of merging calendar entries for other courses, attended
+  by the students). The generated pages share a common layout, including a number of 
+  useful standard links to course relevant resources.
+  The lecture pages, which deal with details such as literature and exercises, can
+  be processed individually. Alternatively, 
+  the complete set of pages can be regenerated by executing a single command.
+  In the current system, the course model is represented
+  in a textual 'programmatic' format. We are considering a more user friendly (but probably less powerful)
+  supplementary interface based on WWW forms" (cite "html40") _ ".")
+ )
+)
+  
+(article-section 'leno "The Lecture Note System"
+ (article-paragraphs
+  (concatenate "Many teachers use transparencies and slides during a plenum lecture session. Such teaching material
+  is often produced using presentation programs, such as Powerpoint.
+  Most presentation programs were invented before the advent of the World Wide Web and the Internet.
+  These programs can produce online documents, presentable from a browser, either
+  via common documented formats (such as postscript of pdf), 
+  via vendor supplied 'browser plug ins', or as bitmapped graphics. 
+  However, none of these" (em "secondary formats") "provides for a smooth integration with the rest of
+  the resources on the Internet (for instance the course plan pages discussed above)
+  nor full utilization of the power of hypertext.")
+  
+  (concatenate "We have made an alternative to these presentation programs, which produces
+  slides in HTML as the" (em "primary format") _ "." "The system, called LENO, processes a 
+  textual input file in a particular format, and produces a set of HTML pages.
+  The practical processing procedure is similar to old fashioned text formatting, using 
+  LaTeX, for instance.
+  The input format, which is called LAML (Lisp Abstracted Markup Language" (cite "Normark99c") _ ")
+  is similar to XML" (cite "xml10") _ ","  "although different from XML when it comes to
+  the details. From a technical perspective,
+  the LENO input is a program written in the functional programming language Scheme" (cite "SchemeHome") "
+  using a particular library of Scheme functions.
+  As a consequence of this, we can provide programmatic solutions to many 
+  routine tasks, because a full-fledged programming language is available
+  anywhere in a document, and anytime during the authoring process.
+  For authors with a computer science background, this programmatic
+  approach turns out to an interesting alternative to more conventional
+  approaches, where abstraction and automation facilities are rather limited.
+  ")
+  
+  "We will here enumerate the most important virtues of LENO compared with more
+  traditional presentation programs:"
+  
+  (article-items
+
+    (item "LENO organizes a teaching material as hypertext, centered around
+      annotated slides, which can be presented by the teacher in an auditorium
+      via a labtop computer and a projector.")
+
+    (item "LENO integrates the slides of an entire course into a single, coherent
+     and interlinked collection of WWW pages. The slides are organized in a single
+     directory structure to provide for easy transportation and download.")
+  
+     (item "LENO produces pages with overlapping information contents at three
+     different levels of abstractions: As slides using a large font, as
+     annotated slides with additional comments and explanations, and as a
+     single aggregated page which contains all the lecture note information of
+     a single lecture.")
+     
+     (item (concatenate "LENO supports direct inclusion of external, textual material such as
+     program source files.  The external material is taken from
+     the external file when the HTML files are generated. Hereby we avoid
+     inconsistency situations, where program source files are represented in different
+     versions (the version in our teaching material and the version
+     demonstrated for the student, for instance).  This is a very
+     convenient alternative to 'copy and pasting' which leads to 
+     several versions of the same information.  It is possible
+     to include only part of a text file in the lecture notes.
+     Furthermore, LENO supports superposition of colors and font faces on
+     the external files, in order to emphasize particular aspects of
+     the inclusion. It is, of course, possible to include the same file more than
+     once with different emphasis."))
+     
+     (item "LENO makes it possible to make special blends of slides from different
+     lectures without any replication (copying) of material. This facility
+     is realized using the ideas of trails through existing pages in
+     different lectures (chapters). The trails are represented as HTML
+     frame pages which refer to already generated pages.")
+     
+     (item (concatenate "LENO provides for integration of exercises and exercise solutions into
+     the teaching material. In particular, it is possible to generate
+     lecture and course wide overviews of exercises and/or solutions, including
+     pages with aggregated exercise formulations, aggregated formulations and
+     solutions (in order to avoid unwanted fragmentation in paper output, for instance).
+     In addition, LENO makes it possible 
+     to open up for the exercise solutions at appropriate points of time.  As an
+     advanced feature, we can integrate the exercise part of the system
+     with synchronous and asynchronous tools for management of the student's work with
+     exercises (see section" (section-ref "em") _ ")."))
+     
+     (item "LENO supports flexible keyboard navigation from page to page on
+     selected browsers (realized via a simple Java Script program). This turns out to be
+     an essential facility when LENO is used for presentation of many slides
+     during a lecture (but it also slightly compromises our ideas of using plain and
+     simple HTML).")
+     
+     (item "With some forethought (in terms of good abstractions applied to external references)
+     it is possible to retarget all external links,
+     which for instance provides for CD editions of LENO material as well
+     as external material. We have used this for integrated collections of
+     LENO notes, Java API material, and Java Tutorial material (all of which
+     are represented in HTML).")
+  )
+  
+  "There are also a number of negative aspects inherent in our approach:"
+  (article-items
+
+     (item "The graphical illustrations in HTML are primitive (gif and jpg
+     bitmapped graphics). All graphical illustrations must be created
+     with external drawing tools, and converted to the formats which are
+     supported by the HTML image tag.")
+     
+     (item "The size of a page varies from browser to browser, and from screen to
+     screen. Consequently it is hard to avoid scrolling of pages when viewing the
+     material.")
+     
+     (item "Although all pages in a lecture can be aggregated to a single HTML
+     page, the printing of such a page does not always work out nicely. The
+     printing of advanced materials from an interenet browser is a
+     difficult endeavor, and in current browsers it is not of professional
+     quality.  We plan to make a special printed edition via a bridge from LENO to
+     a conventional text formatting system such as LaTeX.")
+     
+     (item "A teacher who uses using LENO to produce teaching material
+     does not use state of the art visual tools, but
+     rather more old fashioned text formatting tools and programmatic
+     techniques. This eliminates a large number of possible users from
+     taking advantage of the virtues discussed above.")
+  )
+     
+  (concatenate "Based on our own experience with LENO, we find that the virtues from above
+  outweigh the deficiencies. Figure" (figure-ref "leno-figure") "shows a snapshot of an annotated
+  slide from LENO.   (For better readability in this verion of the paper,
+  the example is also awailable via an" 
+  (a-tag  "http://www.cs.auc.dk/~normark/scheme/slides/lugm-99-amsterdam/html/lugm99-note-insert-quotation.html" "URL") ".)")
+
+  
+  (article-figure 'leno-figure "leno-screenshot"
+    (concatenate "A snapshot of an annotated slide generated by LENO. This particular slide includes
+          three program fragments, which are colorized in order to emphasize particular aspects of the code.") )
+
+
+ )
+)
+  
+(article-section 'em "Synchronous Exercise Management"
+ (article-paragraphs
+  (concatenate "Following each lecture, the students carry out some concrete and practical exercises.  During
+  the exercises the students get help and advice from the teacher of the course and
+  a number of teaching assistants.  Due to the problem-oriented and project-organized
+  teaching model at Aalborg University" (cite "Kjersdam94") _ "," "the students are located in many small group
+  rooms (with 6-7 students in each room).  In this particular course, there
+  were 25 groups, three teaching assistants, and the typical
+  exercises involved practical programming in Java.")
+  
+  "It is a major challenge to manage an exercises session which follows the setup described above.
+  Concretely, we see the following problems:"
+  
+  (ul-1 (list
+    "How do we know which of the groups are actively working on the exercise?"
+    "How do we ensure that a group of students get help when it is needed?"
+    "How do we evaluate the result of the exercises session (quantitatively and
+     qualitatively)?"))
+  
+  (concatenate "In order to deal with these problems we have created a WWW-based
+  interactive exercise manager.  The manager presents itself as a small
+  frame, which sticks to the window in which the exercise formulation is
+  shown. Figure" (figure-ref "em-figure") "shows an example.  LENO (as described in section" (section-ref "leno") ") be set
+  up to generate the underlying frame set. The exercise manager tool allows the student
+  to send brief, one-line messages of particular types, to the teacher via the exercise
+  manager server.")
+
+
+  (article-figure 'em-figure "em-screenshot"
+    (concatenate "A snapshot of the exercise manager, as attached to a LENO generated WWW page which shows an exercise formulation.") )
+
+  "From a student perspective, the exercise manager is used in the following way:"
+  
+  (ol-1 (list
+    "The students send an exercise start message when they start working on a particular exercise."
+    "The students send en exercise question message if a problem occurs which requires assistance from a teacher.
+     As a variant, a 'total frustration' message can be sent. The students briefly explain the nature of the problem
+     in the message field."
+    "When a group of students get help, they send a message of the type 'got help'. This makes
+     the previous question or frustration messages pertaining to a particular exercises disappear
+     from the overviews, which are regularly consulated by the teachers."
+    "An exercise finish question is sent when the students are done with the exercise.
+     As a variant, the students can send a 'gave up' message.
+     The students are encouraged to explain the outcome of the exercise in the message field."
+  ))
+  
+  "We encourage the students to use the exercise manager via the following incentives:"
+  
+  (ul-1 (list
+    "The students cannot ask for help via the system before they have sent a start message."
+
+    "When the students send a question via the system, a teaching assistant will
+     visit the students within a few minutes."
+  
+    "The students get access to a the teacher's solution (via 'opening of a link')
+    when they claim successfully to have solved the problems of the exercise."
+  ))
+
+  "From a teacher perspective, the exercise manager helps out in the following ways:"
+
+  (ul-1 (list
+    "It is possible, at a particular WWW address, to see which groups are active at a given
+    point in time. Such an overview is useful in order to plan the visits to the group rooms."
+  
+    "The teacher, who services particular groups, can get a concise overview of the groups who
+    need help. Only the latest, non-serviced questions are shown in the overview,
+    and only messages from particular groups, to which the teaching assistant is allocated,
+    are shown.
+    As of now, the teachers use the student's browser to access the list of groups that have asked
+    for help. One could alternatively imagine that the teachers would use mobile equipment."
+  
+    "After an exercises session we can generate a status, in which the questions and feedback 
+    from the groups can be surveyed. We can also evaluate the waiting times for help, and
+    the level of activity in the individual groups."
+  ))
+  
+  "The successful use of the exercise manager requires discipline from both the students
+  and teachers. One should also be aware that there may be elements of 'big brother
+  watches you' using the system. However, the experiences until now is quite
+  positive and encouraging. The students experience that they often get help a few minutes
+  after a problem is reported. And as a teacher of the course, it is possible to
+  get detailed knowledge about the success (or lack of success) of an exercises session.
+  Using the messages submitted to the system, it is also possible to plan future modifications
+  of the exercise programme, and to spot recurring problems that need to be addressed in a future
+  plenum session on the course."
+  
+  "Until now, the messages from the exercise manager are one-way, from the students to the teacher.
+  As an obvious generalization, one could imagine a two-way communication using the system.
+  This would, however, require that one of the teachers operates the system rather than
+  visiting the students face to face. We have not yet tried out such an alternative use
+  of the teacher resources."
+  
+  "The exercise manager was designed to alleviate some concrete problems
+  with exercises in many small rooms. We believe, however, that some of
+  ideas of synchronous exercise support via the WWW can be used
+  in other setting, for instance in more classical lab sessions in
+  a distributed environment."
+ )
+)
+
+(article-section 'idafus "Asynchronous Activity Management"
+ (article-paragraphs
+
+  "The exercise manager, described in the previous section, is a synchronous tool
+  designed to be used by on-campus students.
+  We are getting more and more open university students who work off-campus, and who study
+  at nights or in weekends. We have recently started to service these students
+  with an asynchronous activity management tool, called IDAFUS. IDAFUS 
+  share properties with news-group systems and conference systems. In this section 
+  we will briefly outline the most interesting properties of this system."
+  
+  (concatenate "The main concepts in IDAFUS are" (em "units") _ "," (em "activities") "and" (em "contributions") _ "."
+  "Within a given unit (such as a course) it is possible to define a number of activities
+  (such as exercises or discussion forums focussed on particular topics).
+  An activity is described in terms of a formulation, a clarification (optional),
+  a visibility of the contributions to the activity, and other properties. Contributions can be
+  private (between a student and the teacher), visible to a group or class of students,
+  or public. The contributions from the students or teachers are organized in a tree,
+  rooted in an activity, and hereby allowing that a contribution can follow up on another contribution.
+  Each contribution has a type.")
+  
+  "Contributions in IDAFUS are presented together with a photo of the
+  contributing student or teacher. This has turned out to be very important
+  in relation to seminars or lectures. Students, who have been using
+  the system a lot, are easily recognized during subsequent classes or seminars."
+  
+  "IDAFUS provides various customizable overview pages, such that users of the system
+  only needs to check a single page in order to find out whether there
+  are new contributions of interest."
+  
+  "It is important for off-campus student to get feedback on exercises.
+  IDAFUS allows 'just in time' solutions, in terms of an automatically released
+  contribution from the teacher when the student submits his or her solution.
+  The teacher's solution stems from the activity clarification, mentioned above.
+  The automatic relase of the solution also makes life easier for the teacher.
+  However, it is still important for the teacher to follow up - on an individual basis - on relevant
+  contributions from the students."
+  
+  "IDAFUS supports serial activities, in the terms of released continuation activities.
+  In the current system the serial activities are linear, but on could also imagine some kind
+  of branching structure. Serial activities mixed with released solution 
+  allows us keep the student 'on track'. In addition, it creates a feeling
+  of 'dynamics', which may cause curiosity and extra student attention."
+  
+  "Besides the WWW interface to the student, IDAFUS also provides the teacher
+  with a friendly WWW interface for activity definition and management.
+  From an administrative point of view, we support a basic WWW-based user registration
+  subsystem for IDAFUS."
+ )
+)
+ 
+
+(article-section 'integr "Integration Issues"
+ (article-paragraphs 
+  
+  "The integration of course plan pages (including calendar pages), course
+  material pages, and dialogue pages 
+  soon becomes a major concern, and a source of complexity. We support the following
+  kinds of integration:"
+
+  (ul-1 (list
+    "Export of temporal information from the course plan system to the LAML calendar tool"
+    "Export of exercise information from LENO to the course plan system and the exercise manager"
+    "Transfer of link information from the exercise manager to both LENO and the course plan system"
+  ))
+  
+  (concatenate "Currently we use very simple means to achieve the necessary integration.
+  In a future version one could imagine a more sophisticated integration approach involving a
+  central" (em "integrator component") _ "," "which embodies common knowledge of
+  the entire system.")
+ )
+)
+  
+(article-section 'conclu "Conclusions"
+ (article-paragraphs 
+
+  "We have presented a suite of tools for management of the WWW support
+  of a university course in computer science.  Taken as a whole, the tools make it possible
+  to produce and maintain a large body of material, which it would be
+  almost impossible to manage without tool support.  Our
+  material for the object-oriented programming course (using Java)
+  consists of approximately 2000 HTML pages, each with a number of internal links, and 
+  a considerable amount of links to
+  external targets.  The programmatic authoring approach relies on 
+  abstractions in order not to deal with unwanted details, and
+  automation of routine tasks.  The automation has, for instance, been used to check
+  the validity of the link targets at generation time. In addition, we
+  have been able to make and maintain several editions of the entire
+  lecture note material (including a WWW server edition, a labtop
+  teacher edition, and a CD edition distributed among the students) for which systematic redirection of
+  many external links turned out to be necessary."
+ )
+)
+ 
+(article-bibliography
+
+ (bib-item "Normark99b" 
+           (concatenate "Kurt Nørmark" _ "," 
+                 (a-tag
+                    "http://www.cs.auc.dk/~normark/laml/papers/programming-www-scheme.pdf"
+                    "Programming World Wide Web Pages in Scheme") _ ","
+             "1999. Submitted to" (em "ACM Sigplan Notices"))
+ )
+
+ (bib-item "Normark99c" 
+    (concatenate "Kurt Nørmark" _ ","
+     (a-tag 
+         "http://www.cs.auc.dk/~normark/laml/papers/lugm-laml.pdf"
+         (em "Using Lisp as a markup language - the LAML approach")) _ ","
+     "Presented at the European Lisp User Group Meeting, Amsterdam, 1999")
+ )
+
+ (bib-item "Normark99f" 
+    (concatenate "Kurt Nørmark" _ ","
+     (em "The LAML Homepage ") _ ","
+     (a-tag "http://www.cs.auc.dk/~normark/laml/")
+    )
+ )
+
+ (bib-item "html40"
+    (concatenate "The World Wide Web Consortium" _ "," (a-tag "http://www.w3.org/TR/REC-html40/" "HTML 4.0 Specification") _ "," " April 1998")
+ )
+
+ (bib-item "xml10"
+   (concatenate "The World Wide Web Consortium" _ "," (a-tag "http://www.w3.org/TR/REC-xml" "Extensible Markup Language (XML) 1.0") _ "," "February 1998")
+ )
+
+ (bib-item "SchemeHome"
+   (concatenate "The Internet Scheme Repository" _ ","  (a-tag "http://www.cs.indiana.edu/scheme-repository/home.html"))
+ )
+
+ (bib-item "Kjersdam94"
+   (concatenate "Finn Kjersdam and Stig Enemark" ", "
+        (a-tag 
+          "http://www.teknat.auc.dk/teknat_home/experiment/"
+          (em "The Aalborg Experiment -- Project Innovation in University Education")) _ ","
+        "The Faculty of Technology and Science and Aalborg University Press" _ ","
+        "Aalborg University Press, Niels Jernesvej, DK-9220 Aalborg, Denmark" _ ","
+        "1994"
+   )
+ )
+        
+
+
+; http://www.w3.org/TR/REC-xml
+
+)
+
+(end-article)

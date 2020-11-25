@@ -1,0 +1,33 @@
+; This script processes all laml files in all film directories
+; of the current directory. Recursive film directories are NOT
+; provided for. Films (directories) in which a file named exclude
+; does exists, are not processed (and not included in the photo
+; index).
+
+(load (string-append laml-dir "laml.scm"))
+
+(define (process-laml-files-in-directory dir)
+  (let* ((file-list (directory-list dir))
+         (laml-file-list (filter (lambda (f) (equal? (file-name-extension f) "laml")) file-list))
+        )
+    (laml-cd dir)
+    (for-each laml laml-file-list)))
+
+(define (is-laml-photo-dir? path)
+  (and (file-exists? (string-append path "internal/" "film-description-entry.lsp"))
+       (not (file-exists? (string-append path "exclude")))))
+
+
+(define (film-directory-list dir)
+ (let* ((dir-list (directory-list dir))
+        (full-path-dir-list (map (lambda (sub) (string-append dir sub "/")) dir-list)))
+   (filter is-laml-photo-dir? full-path-dir-list)))
+        
+
+(let ((current-dir (startup-directory)))
+ (for-each
+  process-laml-files-in-directory
+  (film-directory-list (startup-directory))))
+
+
+

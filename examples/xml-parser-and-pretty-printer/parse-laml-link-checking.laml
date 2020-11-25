@@ -1,0 +1,6 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+
+(xml-parse-file (string-append laml-dir "info/" "link-checking.html") 'xhtml10-transitional "link-checking.lsp")
+
+(end-laml)

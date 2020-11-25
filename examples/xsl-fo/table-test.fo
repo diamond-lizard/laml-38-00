@@ -1,0 +1,59 @@
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+   <fo:layout-master-set>
+      <fo:simple-page-master master-name="A4-portrait" page-height="29.7cm" page-width="21cm">
+         <fo:region-body region-name="xsl-region-body" margin="0.7in" padding="6pt" />
+         <fo:region-before region-name="xsl-region-before" extent="0.7in" />
+         <fo:region-after region-name="xsl-region-after" extent="0.7in" /></fo:simple-page-master>
+      <fo:simple-page-master master-name="A4-landscape" page-width="29.7cm" page-height="21cm">
+         <fo:region-body region-name="xsl-region-body" margin="0.7in" padding="6pt" />
+         <fo:region-before region-name="xsl-region-before" extent="0.7in" />
+         <fo:region-after region-name="xsl-region-after" extent="0.7in" /></fo:simple-page-master></fo:layout-master-set>
+   <fo:page-sequence master-reference="A4-portrait">
+      <fo:flow font-size="10pt" font-family="Times" flow-name="xsl-region-body">
+         <fo:block font-size="200%" space-after="0.6cm">XSL-FO Image test</fo:block>
+         <fo:table space-after="0.3cm" border-collapse="collapse" table-layout="fixed">
+            <fo:table-column column-width="0.5cm" />
+            <fo:table-column column-width="1.5cm" />
+            <fo:table-column column-width="1.5cm" />
+            <fo:table-body>
+               <fo:table-row keep-together="always">
+                  <fo:table-cell padding-start="3pt" padding-end="3pt" padding-before="3pt" padding-after="3pt"
+                                 border-style="solid" border-width="1px" border-color="black" number-columns-spanned="1"
+                                 number-rows-spanned="1">
+                     <fo:block>1</fo:block></fo:table-cell>
+                  <fo:table-cell padding-start="3pt" padding-end="3pt" padding-before="3pt" padding-after="3pt"
+                                 border-style="solid" border-width="1px" border-color="black" number-columns-spanned="1"
+                                 number-rows-spanned="1">
+                     <fo:block>2</fo:block></fo:table-cell>
+                  <fo:table-cell padding-start="3pt" padding-end="3pt" padding-before="3pt" padding-after="3pt"
+                                 border-style="solid" border-width="1px" border-color="black" number-columns-spanned="1"
+                                 number-rows-spanned="1">
+                     <fo:block>3</fo:block></fo:table-cell></fo:table-row>
+               <fo:table-row keep-together="always">
+                  <fo:table-cell padding-start="3pt" padding-end="3pt" padding-before="3pt" padding-after="3pt"
+                                 border-style="solid" border-width="1px" border-color="black" number-columns-spanned="3"
+                                 number-rows-spanned="1">
+                     <fo:block>4</fo:block></fo:table-cell></fo:table-row></fo:table-body></fo:table>
+         <fo:table space-after="0.3cm" border-collapse="collapse" table-layout="fixed">
+            <fo:table-column column-width="0.5cm" />
+            <fo:table-column column-width="1.5cm" />
+            <fo:table-column column-width="1.5cm" />
+            <fo:table-body>
+               <fo:table-row keep-together="always">
+                  <fo:table-cell padding-start="3pt" padding-end="3pt" padding-before="3pt" padding-after="3pt"
+                                 border-style="solid" border-width="0px" border-color="black" number-columns-spanned="1"
+                                 number-rows-spanned="1">
+                     <fo:block>10</fo:block></fo:table-cell>
+                  <fo:table-cell padding-start="3pt" padding-end="3pt" padding-before="3pt" padding-after="3pt"
+                                 border-style="solid" border-width="0px" border-color="black" number-columns-spanned="1"
+                                 number-rows-spanned="2">
+                     <fo:block>2</fo:block></fo:table-cell>
+                  <fo:table-cell padding-start="3pt" padding-end="3pt" padding-before="3pt" padding-after="3pt"
+                                 border-style="solid" border-width="0px" border-color="black" number-columns-spanned="1"
+                                 number-rows-spanned="1">
+                     <fo:block>3</fo:block></fo:table-cell></fo:table-row>
+               <fo:table-row keep-together="always">
+                  <fo:table-cell padding-start="3pt" padding-end="3pt" padding-before="3pt" padding-after="3pt"
+                                 border-style="solid" border-width="0px" border-color="black" number-columns-spanned="1"
+                                 number-rows-spanned="1">
+                     <fo:block>4</fo:block></fo:table-cell></fo:table-row></fo:table-body></fo:table></fo:flow></fo:page-sequence></fo:root>

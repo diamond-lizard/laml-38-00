@@ -1,0 +1,71 @@
+(load (string-append laml-dir "laml.scm"))
+
+(laml-style "simple")
+
+(set-file-name! "index")
+
+(define (read-local-text-file f)
+  (read-text-file (string-append (startup-directory) f)))
+
+; Make HTML protected version of the HTML file about.html
+(write-text-file
+  (page "The raw HTML page" (pre (html-protect (read-local-text-file "about.html"))))
+  (in-startup-directory "about-verbatim.html"))
+
+; Parse about.html
+(html-parse "about.html" "about.lsp")
+
+; ... and pretty print it (overwriting the original file):
+(scheme-pp "about.lsp")
+
+; Pretty print the parsed HTML file to about-pp.html
+(html-pp "about.lsp" "about-pp.html")
+
+; ... and HTML protect it 
+(write-text-file
+  (page "The raw HTML page" (pre (html-protect (read-local-text-file "about-pp.html"))))
+  (in-startup-directory "about-pp-verbatim.html"))
+
+
+(generic-page
+  "Index of manual examples"
+  (con-par
+    (laml-top-banner)
+    (h 1 "HTML examples")
+
+    "The following HTML examples exists in this directory:"
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 200 200 200 200 200)
+        (list
+          (map b (list "Original HTML file" "Original HTML file (verbatim)" "Parsed HTML file"  
+                       "Pretty Printed HTML file" "Pretty Printed HTML file (verbatim)" ))
+          (list  (a-tag "about.html") 
+                 (a-tag "about-verbatim.html")
+                 (a-tag "about.lsp")  
+                 (a-tag "about-pp.html")
+                 (a-tag "about-pp-verbatim.html"))
+        )))
+
+    (con "The example above illustrates an example html file (" (kbd "about.html") (con ") which is taken from the 
+     description of HTML 4.0. The file " (kbd "about-verbatim.html") (con " shows the HTML version of the file (verbatim,
+     with all HTML special character protected (escaped)). The file " (kbd "about.lsp") (con " is the Lisp syntax tree,
+     pretty printed with the Scheme pretty printer. The file " (kbd "about-pp.html") (con " shows a pretty printing
+     of " (kbd "about.lsp") (con ". It should render the same way as the original " (kbd "about.html") (con ". 
+     Finally, " (kbd "about-pp-verbatim.html") "
+     lets you see the HTML pretty printing (HTML protected, or escaped if you like).")))))))
+
+    (em "Please notice that only few of the links in about.html works, because the file is taken out of its context.")
+
+    (con "The LAML file, which produces this page, makes all the example files.
+         If you are curious what it looks like, it is " 
+         (a-tag "index.laml" "here") " for you to watch.")
+
+  )
+  white black blue blue
+)
+
+(end-laml)
+

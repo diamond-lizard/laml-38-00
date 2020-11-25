@@ -1,0 +1,22 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/midi/midi")
+(load (string-append laml-dir "styles/xml-in-laml/midi/midi-laml-processing-lib.scm"))
+
+(StandardMidiFile
+   (MidiHeader 'format "0" 'numberOfTracks "1" 'pulsesPerQuarterNote "1920" 'mode "deltaTime" 'counterTransposition "0")
+   (MidiTrack
+      (ControlChange 'deltaTime "0" 'info "0:2:0 Bank select MSB" 'channel "1" 'control "0" 'value "0")
+      (ControlChange 'deltaTime "0" 'info "0:2:0 Bank select LSB" 'channel "1" 'control "32" 'value "116")
+      (ProgramChange 'deltaTime "0" 'info "0:2:0 **Panel Voice GUITAR NylonGuitar Live! " 'channel "1" 'number "24")
+      (ControlChange 'deltaTime "0" 'info "0:2:0 Reverb send level" 'channel "1" 'control "91" 'value "0")
+
+      (select-channels '(1)
+        (NoteOn 'deltaTime "0" 'info "0:3:0 C2" 'channel "1" 'note "48" 'velocity "87" 'duration "22680")
+
+
+      (Meta 'deltaTime "68640" 'info "3:2:1806 End of track" 'type "47" ""))
+
+      (Meta 'deltaTime "100000" 'type "47" "")
+   )
+)
+

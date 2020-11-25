@@ -1,0 +1,21 @@
+(load (string-append laml-dir "laml.scm"))
+(style "course-plan/course-plan")
+(load (string-append (startup-directory scheme-system) "../" "course-description.scm"))
+(init-course-plan)
+
+(lecture-plan 'functions
+   (literature (con "Chapter 2 of "  "'Structure and Interpretation of Computer Programs'" " ") )
+   (guide "The first 10 pages are the most important")
+   (exercises  
+     (brl (list 
+            "Exercise 4"
+            "Exercise 5"
+            "Exercise 9"
+          ))
+   )
+
+   (references 
+     (brl (list 
+           (a-tag "???" "Slides to this lecture"))))
+  
+)

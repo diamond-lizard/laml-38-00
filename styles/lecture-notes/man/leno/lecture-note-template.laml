@@ -1,0 +1,40 @@
+                                         ; Start of preamble section
+(load (string-append laml-dir "laml.scm"))
+
+(load "notes.scm")                       ; Load the common set up for all chapters from notes.scm
+(style "lecture-notes/lecture-notes")    ; Causes loadning the LENO software
+(load "post-notes.scm")                  ; Loads the post part of the common set up
+
+(define front-index? #t)                 ; Set LENO up to make a top-level front index 
+(define word-index? #t)                  ; Set LENO up make word, cross reference index
+
+(set-lecture-name "LECTURE-NAME")        ; Define the name of this lecture, normally the same as the file name
+(set-lecture-number N)                   ; Define the chapter number (a number)
+
+(exercise-model 'make-indexes)           ; One of the symbols none, make-indexes, make-indexes-and-solutions-per-lecture,
+                                         ; make-indexes-and-solutions-lecture-wide, synchronous-exercises, asynchronous-exercises
+
+(define slide-header? 'normal)           ; one of the symbols normal, none, or minimal
+
+
+(lecture-intro "TITLE"                   ; Define the title, author, affiliation, and the abstract
+  (list 
+    (copyright-owner "AUTHOR")
+    "AFFILIATION-1"
+    "AFFILIATION-2"
+    )
+  "ABSTRACT"
+)
+
+(begin-notes)                            ; End of preamble section, start of note page section
+
+
+(note-page 'ID-OF-FIRST-SLIDE
+  (section-title "SECTION-TITLE")
+)
+
+; A NUMBER OF SUBSEQUENT NOTE PAGES
+
+
+(end-notes)                              ; End of note page section
+

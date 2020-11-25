@@ -1,0 +1,65 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple")
+(load (string-append laml-dir "lib/xml-in-laml/xml-in-laml.scm"))
+
+; SHOULD BE REWRITTEN.
+
+; Make HTML protected version of the XML file on time-xml-protected.html:
+(write-text-file
+  (page "The raw XML page" (pre (html-protect (read-text-file "time.xml"))))
+  "time-xml-protected.html")
+
+; Parse time.xml
+(xml-parse-file "time.xml" 'time "time.lsp")
+
+; ... and pretty print it (overwriting the original file):
+(scheme-pp "time.lsp")
+
+; Pretty print the parsed XML file to time-pp.xml
+(xml-pp "time.lsp" "time-pp.xml")
+
+; ... and HTML protect it 
+(write-text-file
+  (page "The raw XML page" (pre (html-protect (read-text-file "time-pp.xml"))))
+  "time-pp-protected.html")
+
+
+(generic-page
+  "Index of manual examples"
+  (con-par
+    (laml-top-banner)
+    (h 1 "XML examples")
+
+    "The following XML examples exists in this directory:"
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 200 200 200)
+        (list
+          (map b (list "Original XML file" "Parsed XML file"  "Pretty Printed XML file"))
+          (list  (a-tag "time-xml-protected.html" "time.xml")
+                 (a-tag "time.lsp")  
+                 (a-tag "time-pp-protected.html" "time-pp.xml"))
+        )))
+
+    (con "The example above illustrates an example xml file (" (kbd "time.xml") (con "), 
+     the parsed XML file (the parse tree is a Lisp structure),
+     and a pretty printing of the parse tree (" (kbd "time-pp.xml") "). 
+     Please notice that the parse tree has been pretty printed
+     with the Scheme pretty printer, which also is a LAML tool."))
+
+    (con "The files " (kbd "time.xml") (con " and " (kbd "time-pp.xml") 
+     " are in reality HTML files with protection (escaping) of all xml stuff.
+     This allows an xml file to be presented verbatim in a browser."))
+
+    (con "The LAML file, which produces this page, makes all the example files.
+         If you are curious, it is "
+         (a-tag "index.laml" "here") " for you to watch.")
+
+  )
+  white black blue blue
+)
+
+(end-laml)
+

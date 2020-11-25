@@ -1,0 +1,49 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+(define language-preference 'english)
+
+(begin-laml)
+
+(generic-page
+  "Overview of XHTML1.0 examples"
+  (con-par
+    (laml-top-banner)
+    (h 1 "Overview of XHTML1.0 examples - with validation")
+    "The examples in this directory introduces the XHTML1.0 strict, validating mirror. Notice that this mirror
+     uses the XML-in-LAML framework."
+ 
+
+    "The following simple examples exist in this directory:"
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 250 200 200)
+        (list
+          (map b (list "Example"   "LAML"                            "HTML"))
+;          (list "This index"       (a-tag "index.laml")              (a-tag "index.html"))
+          (list "Hello world"      (a-tag "hello-world.laml")        (a-tag "hello-world.html"))
+          (list "Hello world - non valid"      (a-tag "hello-world-non-valid.laml")        (a-tag "hello-world-non-valid.html"))
+          (list "A simple page"    (a-tag "simple-1.laml")      (a-tag "simple-1.html"))
+          (list "Another simple page"    (a-tag "simple-2.laml")      (a-tag "simple-2.html"))
+          (list "A page with tables"    (a-tag "tables.laml")      (a-tag "tables.html"))
+          
+        )))
+
+
+    (p "There are additional XHTML examples:")
+
+    (ul 
+      (li (a-tag "../plan-x/index.html" "Examples for the PLAN-X paper"))
+      (li (a-tag "../tutorial/html-mirrors/index.html" "Tutorial HTML mirror examples")))
+
+    
+
+    (font-size 2 (em "If your browser will not present files with 'laml' or 'scm' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files."))
+  )
+  white black blue blue
+)
+
+(end-laml)

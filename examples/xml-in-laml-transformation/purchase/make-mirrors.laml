@@ -1,0 +1,48 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-tool-load "xml-in-laml/xml-in-laml.scm")
+
+;; The name of the language for which we create a mirror
+(define mirror-name "purchases")
+
+;; The full path to the parsed DTD:
+(define parsed-dtd-path (in-startup-directory "purchase.lsp"))
+
+;; The full path of the mirror target directory
+(define mirror-target-dir (startup-directory))
+
+(define action-elements '(purchase))
+
+(let ((mirror-destination-file
+        (string-append
+           mirror-target-dir mirror-name
+           "-mirror" ".scm")))
+  (generate-mirror 
+    parsed-dtd-path
+    mirror-destination-file
+    mirror-name))
+
+
+; ---------------------------------------------------------------
+
+(load (string-append laml-dir "laml.scm"))
+(laml-tool-load "xml-in-laml/xml-in-laml.scm")
+
+;; The name of the language for which we create a mirror
+(define mirror-name "txt")
+
+;; The full path to the parsed DTD:
+(define parsed-dtd-path (in-startup-directory "text.lsp"))
+
+;; The full path of the mirror target directory
+(define mirror-target-dir (startup-directory))
+
+(define action-elements '())
+
+(let ((mirror-destination-file
+        (string-append
+           mirror-target-dir mirror-name
+           "-mirror" ".scm")))
+  (generate-mirror 
+    parsed-dtd-path
+    mirror-destination-file
+    mirror-name))

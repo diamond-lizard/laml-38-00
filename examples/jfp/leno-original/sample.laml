@@ -1,0 +1,112 @@
+(load (string-append laml-dir "laml.scm"))       
+
+(define note-source-directory (startup-directory))    
+ 
+(define current-lecture 1)
+
+(define lecture-sections
+  (list
+    (list  "sample" "LENO demonstration")           
+   )
+)
+
+(define notes-title (cadr (car lecture-sections))) 
+
+(define course-home-url "../../index.html")  
+
+(define author-home-url "http://www.cs.auc.dk/~normark/")  
+
+(define note-download-url "")         
+
+(define (cross-reference-location-hints location-list) 
+  "")
+
+(define (meta-tag-clauses)
+   (list (list 'HTTP-EQUIV "Content-Type" 'content "text/html; charset = ISO-8859-1")  
+         (list 'name "Generator" 'content "LAML")
+         (list 'name "description" 
+                     'lang (meta-language language-preference)
+                     'content "LENO Demo")
+   )
+)
+
+
+(style "lecture-notes/lecture-notes")
+
+(define front-index? #f)                          
+
+(define slide-header? 'normal) 
+(define trail-of-lecture? #f)                
+
+(set-language 'english)                              
+
+(set-lecture-name (car (car lecture-sections)))      
+(set-lecture-number 1)                               
+
+(lecture-intro "LENO Demonstration - Original Syntax"
+  (list 
+    (copyright-owner (in-danish "Kurt Nørmark"))
+    "Department of Computer Science"
+    "Aalborg University"
+    "Denmark"
+    )
+  "This is a lecture note the purpose of which is to demonstrate 
+   a note page in the paper 'WEB Programming in Scheme - the LAML approach'"
+)
+
+(begin-notes)                                      
+
+(note-page 'section-laml
+  (section-title "LAML Overview")
+)
+
+(note-page 'laml-basics
+  (title "LAML basics"
+         "On this page we describe LAML briefly")
+
+  (point
+   "LAML brings HTML and XML to the Scheme programming language"
+   "LAML is software package that supports authoring of HTML 
+    and XML documents in Scheme Syntax.")
+
+  (concept-list
+   (concept "LAML"
+            "LAML is a Lisp Abstracted Markup Language"
+            "LAML consists of HTML mirrors, document styles, and tools"
+            ))
+
+  (items 
+   (item "LAML Characteristics"
+         "We here mention a number of important LAML characteristics"
+         (items 
+          (item "Supports a number of different HTML mirrors"
+                ""
+                (items 
+                 (item "LAML 4.0 loose. 
+                        XHTML1.0 strict, transitional, and frameset"
+                       )
+                ))
+
+          (item "Supports a number of document styles"
+                ""
+                (items 
+                 (item "Domain specific WEB languages")
+                 (item "LENO, Scheme manual pages, questionnaire, ..."))))))
+
+  (index-words "LAML" "mirror" "LENO")
+)
+
+
+(end-notes)
+
+
+
+
+
+
+
+
+
+
+
+

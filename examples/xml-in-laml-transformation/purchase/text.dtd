@@ -1,0 +1,2 @@
+<!ELEMENT text (#PCDATA | text)>
+<!ATTLIST text count CDATA #IMPLIED>

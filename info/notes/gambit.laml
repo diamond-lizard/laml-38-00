@@ -1,0 +1,40 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(define  index-color (make-color 255 255 191))
+(define body-props 
+   (list 'bgcolor (rgb-color-encoding index-color) 'text (rgb-color-encoding black)
+         'link (rgb-color-encoding blue) 'vlink (rgb-color-encoding blue)))
+
+
+(write-html '(pp prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "Notes about LAML on SCM"))
+  (body body-props
+    (laml-top-banner)
+ 
+    (h1 "LAML with Gambit")
+
+    (p "A partial porting of LAML to Gambit has been done by Thomas Hafner, thomas@hafner.nl.eu.org.")
+
+    (p "Linux - Debian 3.1 was used.")
+
+    (p "In the current version, it is not possible to initiate LAML from Emacs with Gambit.")
+
+
+  )
+ )
+)
+
+
+(end-laml)

@@ -1,0 +1,139 @@
+;; .schemedoc-dependencies  "../../styles/xml-in-laml/course-plan/man/course-plan.manlsp"
+
+(load (string-append laml-dir "laml.scm"))       
+(laml-style "xml-in-laml/course-plan/course-plan")
+
+(course-plan
+
+ (course-intro 
+   "This is the intro to the example course.")
+
+ (course-info
+   'last-lecture-number "5"
+   'language-preference "english"
+   'color-scheme "blue-grey"
+   'course-title "The example course"
+   'brief-course-title "TEC"
+   'course-semester "The last semester"
+   'brief-course-semester "LAST"
+   'teacher-name "Kurt Nørmark"
+   'course-url-prefix "http://www.cs.auc.dk/~normark/courses/"
+   'author-home-url "http://www.cs.auc.dk/~normark/"
+   'exercise-model "next-exercise-slot"
+   'make-overview-pages "true"
+;   'calendar-start-year "2002"
+;   'calendar-start-month "11"
+;   'calendar-number-of-months "6"
+
+
+
+   (lecture-list
+
+     (lecture 
+       'title "Subject 1"
+       (time 'year "2002" 'month "10" 'day "1" 'hour "8" 'minute "15")
+       (description "The first subject")
+
+       'lecture-id "l1"
+       'exercise-start "120" 'exercise-length "105"
+       'plenum-start "0"   'plenum-length "105"
+       'room "room"
+
+;       (time 'year "2002" 'month "10" 'day "22" 'hour "8" 'minute "15" 'second "0")
+     )
+     (lecture 
+       'title "Subject 2"
+       (time 'year "2002" 'month "11" 'day "11" 'hour "8" 'minute "15")
+       (description "The second subject")
+
+       'lecture-id "l2"
+       'exercise-start "120" 'exercise-length "105"
+       'plenum-start "0"   'plenum-length "105"
+       'room "room"
+
+     )
+     (lecture 
+       'title "Subject 3"
+       (time 'year "2002" 'month "12" 'day "31" 'hour "8" 'minute "15")
+       (description "The third subject")
+
+       'lecture-id "l3"
+       'exercise-start "120" 'exercise-length "105"
+       'plenum-start "0"   'plenum-length "105"
+       'room "room"
+     )
+     (lecture 
+       'title "Subject 4"
+       (time 'year "2003" 'month "1" 'day "3" 'hour "8" 'minute "15")
+       (description "The third subject")
+
+       'lecture-id "l4"
+       'exercise-start "120" 'exercise-length "105"
+       'plenum-start "0"   'plenum-length "105"
+       'room "room"
+     )
+
+     (lecture 
+       'title "Subject 5"
+        (time 'year "2003" 'month "2" 'day "4" 'hour "8" 'minute "15")
+        (description "The third subject")
+
+       'lecture-id "l5"
+       'exercise-start "120" 'exercise-length "105"
+       'plenum-start "0"   'plenum-length "105"
+       'room "room"
+     )
+
+   )
+
+   (index-links
+     (link-entry 'href "http://www.cs.auc.dk/~normark/laml/" 'target "new" "LAML - in new window")
+     (link-entry 'href "http://www.w3c.org" 'target "top" "W3C - in top frame")
+     (link-entry 'href "http://www.cs.auc.dk/~normark/scheme/" 'target "main" "LAML software - main frame")
+   )
+  
+   (bottom-links
+     (link-entry 'href "http://www.cs.auc.dk/~normark/" 'target "top" "Kurt Nørmark Home")
+     (link-entry 'href "http://www.cs.auc.dk/" "CS at AAU")
+   )
+
+ )
+
+ (lecture-plan-list
+
+  (lecture-plan 'lecture-id "l1"
+   (literature (div "Chapter one of 'Rof and Rif'."))
+   (exercises 
+      (div
+       (ol (li "Exercise 1.1")
+          (li "Exercise 2.1"))
+
+      (p "More")
+
+      )
+
+   )
+   (misc (div "Important stuff")))
+
+  (lecture-plan 'lecture-id "l2"
+   (literature (div "Chapter two of 'Rof and Rif'."))
+   (exercises  (div "Exercise 1.2"))
+   (misc (p "Important stuff")))
+
+  (lecture-plan 'lecture-id "l3"
+    (literature "Chapter three of 'Rof and Rif'.")
+  )
+
+  (lecture-plan 'lecture-id "l4"
+    (literature "Chapter three of 'Rof and Rif'.")
+  )
+
+  (lecture-plan 'lecture-id "l5"
+    (literature "Chapter three of 'Rof and Rif'.")
+    (exercises "Last exercises")
+  )
+
+ )
+
+)
+

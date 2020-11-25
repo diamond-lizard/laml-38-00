@@ -1,0 +1,75 @@
+(load (string-append laml-dir "laml.scm"))       
+                                                       ; Start of preamble section
+
+
+(define note-source-directory "DIRECTORY")          ;  The directory where the note sources are located. 
+                                                       ; Full, absolute path. Must be terminated by a slash.
+
+(define current-lecture 1)
+
+(define lecture-sections
+  (list
+    (list  "CHAPTER-ID" "CHAPTER TITLE")              ; The id and title of the one and only chapter.
+   )
+)
+
+(define notes-title (cadr (car lecture-sections)))   ; Set the notes title to the chapter title, defined above.
+
+(define course-home-url "URL")                       ; The full course home URL.
+
+(define author-home-url "URL")                       ; The full author's home URL.
+
+(define note-download-url "URL")                     ; The url from which to download the set of notes. If empty string no download
+
+(define (cross-reference-location-hints location-list)  ; No location hints 
+  "")
+
+                                                       ; A parameter-less function returns A list of meta-tag contribution       
+(define (meta-tag-clauses)
+   (list (list 'HTTP-EQUIV "Content-Type" 'content "text/html; charset = ISO-8859-1")  
+         (list 'name "Generator" 'content "LAML")
+         (list 'name "description" 
+                     'lang (meta-language language-preference)
+                     'content "CONTENTS DESCRIPTION")
+   )
+)
+
+
+(style "lecture-notes/lecture-notes")
+
+(define front-index? #f)                               ; No front index; not needed because there is only one chaper.
+
+(set-language 'english)                                 ; The fixed, system defined text are in English
+
+(set-lecture-name (car (car lecture-sections)))         ; Define the name of this lecture to the chapter-id of lecture-sections (def. earlier)
+(set-lecture-number 1)                                  ; Define the lecture numerb
+
+(lecture-intro "TITLE"                                  ; Define the title, author, affiliation, and the abstract
+  (list 
+    (copyright-owner "AUTHOR")
+    "AFFILIATION-1"
+    "AFFILIATION-2"
+    )
+  "ABSTRACT"
+)
+
+(begin-notes)                                          ; End of preamble section, start of note page section
+
+
+(note-page 'ID-OF-FIRST-SLIDE
+  (section-title "SECTION-TITLE")
+)
+
+(end-notes)
+
+
+
+
+
+
+
+
+
+
+
+

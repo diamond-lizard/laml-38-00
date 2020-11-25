@@ -1,0 +1,44 @@
+;; .schemedoc-dependencies  "~/scheme/lib/man/svg-extensions"
+
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-svg11")
+(lib-load "svg-extensions.scm")
+
+(write-html '(pp prolog)
+
+  (svg standard-svg-1-1-element-attributes 'width "800" 'height "800" 
+    (g 'transform "scale(1.0)"
+     (with-animation '(step-buttons-reveal)
+      (let* ((x1 100) (x2 (+ x1 150)) (x3 (+ x2 150))
+            (y1 100) (y2 (+ y1 100)) (y3 (+ y2 100))
+            )
+       (let*
+           ((node-a (svg-node circular x1 y1 "A" 'min-width 150 'step 1))
+            (node-b (svg-node cloud x3 y1 "B" 'bg-color "olive" 'min-width 100 'step 2))
+            (node-c (svg-node diamond x1 y2 "C" 'bg-color "yellow" 'min-width "80" 'step 3))
+            (node-d (svg-node triangular x3 y2 "D" 'min-width 75 'step 4))
+            (node-e (svg-node rectangular x2 y3 "E" 'min-width 75 'step 5))
+
+            (edge1 (svg-edge node-a "rc" node-b "lc" 'break-path "l 85 -25"  'stroke "black" 'stroke-width "2" 'stroke-dasharray "3 4"  'arrow "yes" 'font-size "12" 'ldx -15 'ldy -5 "A-to-B" 'step 6 ))
+            (edge2 (svg-edge node-b "cb" node-d "ct" 'stroke "blue" 'stroke-width "3" 'stroke-dasharray "3 4" 'arrow "yes" 'font-size "12" 'ldx 10 "B-to-D" 'step 7))
+            (edge3 (svg-edge node-c "ct" node-a "cb" 'stroke "purple" 'stroke-width "3" 'stroke-dasharray "10 10 5 5" 'arrow "yes" 'font-size "12" 'ldx 5 'ldy 5 "C-to-A" 'step 8 ))
+            (edge4 (svg-edge node-c "cb" node-e "lc" 'style "vh" 'stroke "black" 'stroke-width "3" 'font-size "12" 'ldx 5 'ldy 5 "C-to-E" 'step 9)) 
+            (edge5 (svg-edge node-e "rc" node-d "cb" 'style "hv" 'stroke "black" 'stroke-width "3" 'font-size "12" 'ldx 5 'ldy 5 "E-to-D" 'step 9)) 
+           )
+          (svg-graph 'from-step 1 'to-step 9
+	   (list node-a node-b node-c node-d node-e)
+	   (list edge2 edge1 edge3 edge4 edge5)
+	   ))
+         )
+       )))
+  (full-source-path-with-extension "svg")
+)
+
+(end-laml)
+
+
+
+
+
+
+

@@ -1,0 +1,44 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+(define laml-character-encoding "utf-8")
+
+(begin-laml)
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(write-html '(pp prolog)
+  (html 
+   (head
+     (title "Hello UTF-8 World") 
+   )
+   (body 
+     (p "This is a test of UTF-8. It should be used with a Unicode based Scheme system, such as MzScheme 300+.
+         Notice the setting of the variable laml-character-encoding, which affects the encoding attribute
+         of the xml declaration of the document. Be sure to switch to UTF-8 encoding before saving the text file.
+        ")
+
+     (p "Here are the Danish characters. Upper case: ÆØÅ. Lower case: æøå.")
+
+     (p "Here are some German characters: ä, ü, \u00DF.")
+
+     (p "The use of LAML's HTML character transformation table is not necessary to obtain these.
+         If, however, we want to make use of HTML's symbolic representation of special characters, 
+         the HTML character transformation table can be used to obtain this.
+        ")
+
+     (p "Kurt Nørmark.")
+
+   )
+  )
+)
+
+(end-laml)
+
+
+
+
+
+
+

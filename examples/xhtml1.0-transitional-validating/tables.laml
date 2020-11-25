@@ -1,0 +1,36 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+
+(begin-laml)
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(write-html '(raw prolog)
+  (html 
+   (head
+     (title "Table Example") 
+   )
+   (body 
+
+    (table 'border "1"
+
+      (tr (td "aaa") (td "bbb"))
+      (tr (td 'bgcolor "black" (div 'css:height "3px")) (td 'bgcolor "red")) 
+      (tr (td "xxx") (td "yyy1"))
+
+    )
+
+
+   )
+  )
+)
+
+(end-laml)
+
+
+
+
+
+
+

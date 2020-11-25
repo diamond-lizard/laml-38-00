@@ -1,0 +1,49 @@
+(load (string-append laml-dir "laml.scm"))
+
+; We here load the mirror libraries directly instead of relying
+; on the simple LAML style "simple-xhtml1.0-strict-validating"
+; via (laml-style "simple-xhtml1.0-strict-validating")
+
+(lib-load "xml-in-laml/xml-in-laml.scm")
+(lib-load "xml-in-laml/mirrors/xhtml10-strict-mirror.scm")
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+(set-xml-transliterate-character-data-in 'xhtml10-strict #t)
+(set-xml-accept-only-string-valued-attributes-in 'xhtml10-strict #t)
+
+(define laml-url "http://www.cs.auc.dk/~normark/laml/")
+
+; ::the-write-clause::
+; Writing the HTML fragment to an HTML file.
+
+(write-html 'pp
+  (html 
+   (head 
+     (title "HTML Mirror functions") 
+   )
+
+   (body
+
+     (p "The following items all give rise to
+         the same HTML fragments:")
+
+     (let* ((my-attributes (list 'href laml-url))
+            (my-att-and-cont (cons "LAML" my-attributes))
+            (target-attributes 
+               (append (list 'target "t") my-attributes))
+           )
+
+      (ol
+       (li  (a 'href laml-url "LAML")) ; @b
+       (li  (a "LAML" 'href laml-url)) ; @c
+       (li  (a (list "LAML" 'href laml-url))) ; @d
+       (li  (a my-attributes "LAML"))  ; @e
+       (li  (a my-att-and-cont))  ; @f
+       (li  (a "LAML" target-attributes "Power"))  ; @g
+      ))
+   )
+  )
+)
+
+(end-laml)

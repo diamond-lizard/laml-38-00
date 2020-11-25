@@ -1,0 +1,15 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><head><meta name = "Generator" content = "LAML" ><title>Photo Show</title></head><script type = "text/javascript" >// Navigation upon activation of the 'p', 'n', 'u', and 't' keys resp.
+// Also '1', ..., '9' (downward navigagion).
+// Works for IE4.
+function photoNavigate(nextUrl,prevUrl,runUrl,upUrl){
+  theEvent = window.event;
+  kc = theEvent.keyCode;
+  if (((kc == 110) || (kc == 13)) && (nextUrl != "")) window.location = nextUrl; // n
+  else if ((kc == 112) && (prevUrl != "")) window.location = prevUrl;      // p
+  else if ((kc == 114) && (prevUrl != "")) window.location = runUrl;      // r
+  else if ((kc == 117) && (upUrl != "")) window.location = upUrl;   // u
+}
+</script><body onkeypress = "photoNavigate('MVC-004F-stop.html', 'MVC-002F-stop.html', 'MVC-004F.html', '../index.html')" ondblclick = "photoNavigate('MVC-004F-stop.html', 'MVC-002F-stop.html', 'MVC-004F.html', '../index.html')" bgcolor = "#000000" text = "#ffffff" link = "#ffffff" vlink = "#ffffff" ><center><table border = "0" cellpadding = "0" cellspacing = "0" width = "100%" ><tr><td width = "33%" align = "left" valign = "top" ><font size = "2" ><a href = "../index.html"  style = "text-decoration: none;">Index</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href = "MVC-004F.html"  style = "text-decoration: none;">Run</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href = "MVC-002F-stop.html"  style = "text-decoration: none;">Prev</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href = "MVC-004F-stop.html"  style = "text-decoration: none;">Next</a></font></td><td width = "34%" align = "center" valign = "top" ><font size = "2" >3 : 24&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MVC-003F</font></td><td width = "33%" align = "right" valign = "top" ><font size = "2" ><a href = "../../index.html"  style = "text-decoration: none;">Home</a></font></td></tr></table><font size = "6" color = "#ffffff" ><b>The Faroe Islands 1998</b></font><p><p><img src = "../MVC-003F.JPG" alt = "" ><p></center></body></html><!-- Generated from an LAML (Lisp Abstracted Markup Language) source file. LAML is designed and implemented by Kurt Nørmark, normark@cs.auc.dk. Time of generation: 15. Marts 2001 23:05:07-->
+

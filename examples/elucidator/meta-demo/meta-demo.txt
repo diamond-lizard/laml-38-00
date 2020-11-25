@@ -1,0 +1,103 @@
+.TITLE       A simple meta demonstration of the Scheme Elucidator
+.AUTHOR      Kurt Nørmark
+.EMAIL       normark@cs.auc.dk
+.AFFILIATION Department of Computer Science, Aalborg University, Denmark
+.ABSTRACT
+This elucidative program demonstrates the facilities of the Scheme Elucidator.
+The program fragments are just simple and well known functions without any coherence
+or real value.
+.END
+
+-----------------------------------------------------------------------------
+
+.SECTION first-section
+.TITLE A section
+.BODY
+This is section one. Here we can give overview of the subsequent subsections, which we
+happen to call entries.
+.END
+
+-----------------------------------------------------------------------------
+
+.ENTRY first-entry
+.TITLE An introductory entry
+.BODY
+Here in the first subsection we can introduce the matters. Typically we do not make
+very many references to program pieces from the first section.
+
+A documentation bundle is the set of Scheme files, the textual documentation file, and
+the LAML setup file.  <p>
+
+We have made the documentation bundle by means of the emacs command M-x make-elucidator. 
+This command creates the documentation file, the first program file, and the setup file.
+It also creates the necessary and underlying file and directory structures. When we execute
+this editor command we are asked to process the LAML file, and to activate another emacs command
+setup-elucidator. We just do that.
+
+.END
+
+--------------------------------------------------------------------------------
+
+.ENTRY second-entry
+.TITLE The next entry
+.BODY
+I made this entry via the Emacs command M-x insert-documentation-entry. <p>
+
+In this entry we can start discussing the Scheme program. Just to have something
+on the program side, we have made the well-known {-fak} function in meta-demo. So we make
+a reference to it. If we have lost the editor context we can always say C-e C-r (or M-x elucidator-reset-elucidator)
+to establish the characteristic split view editor panes with documentation in the top window and
+program in the bottom window.<p>
+
+Now let us discuss {*meta-demo$fak}. The reference just inserted is conveniently made by selecting
+the fak header in the Scheme file and entering C-e C-p (elucidator-program-ref). It turns out that 
+this makes a full qualified reference (file and name). The reason is that the editor - at this point in 
+time - does not known any thing about {-fak}. If the documentation bundle had been processed (abstracted)
+we would have this knowledge. We may change this policy in the future.<p>
+
+We now process the documentation bundle by C-e C-o (or M-x elucidator-elucidate).
+
+.END
+
+--------------------------------------------------------------------------------
+
+.ENTRY third-entry
+.TITLE The next steps
+.BODY
+We now program additional functions in both {meta-demo$} and in {other-source$}. This - by the way -
+illustrates links to whole program files.<p>
+
+The functions in meta-demo are {*list-prefix} and its helping function {+list-prefix-1}. Notice first the
+strong reference (red) and the weak reference (blue). We may also just make typographic emphasis, like
+{-list-prefix-1} (C-e C-w). 
+<p>
+
+The functions in {+other-source$} are {*other-source$pair-up} and its helping function {+other-source$pair-up-1}.<p>
+
+At the bottom of {*other-source$} we see a definitions of {+other-source$key-list} and {+other-source$val-list}.
+Following these definitions we see {+other-source$aref-assignment}, which in a rather informal way denotes a section
+of the program via use of a so-called  <em>sectional comment</em> in {+other-source$}.
+
+.END
+
+--------------------------------------------------------------------------------
+
+.ENTRY details
+.TITLE Discussing details
+.BODY
+Let us demonstrate the use of source markers in {*fak}.
+At @a we test if the parameter is zero. If it is we return the base value 1 (@b).
+If not we return n times (fak (- n 1)) (@c); This illustrates the recursion in {+fak}.
+
+.END
+
+
+--------------------------------------------------------------------------------
+
+.ENTRY the-end
+.TITLE The End
+.BODY
+This ends our simple demonstration of the Scheme elucidator.
+.END
+
+

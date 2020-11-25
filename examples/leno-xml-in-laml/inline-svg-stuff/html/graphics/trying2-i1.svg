@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- The material in this file is copyrighted (c) by KN, AAU.  All rights reserved.-->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="700" height="700"
+     viewBox="0 0 700 700">
+   <g>
+      <g>
+         <rect id="rect1" x="0" y="100" width="200" height="150" stroke-width="2" stroke="white" fill="white">
+            <animate id="b1" begin="accessKey(1)" dur="1.1s" attributeName="stroke" from="white" to="blue"
+                     fill="freeze" />
+         </rect>
+         <text id="text1" x="25" y="150" font-size="25" stroke="white" fill="white">
+            Hello
+            <animate id="a1" begin="b1.end" dur="1s" attributeName="stroke" from="white" to="blue" fill="freeze" />
+            <animate id="a2" begin="b1.end" dur="1s" attributeName="fill" from="white" to="blue" fill="freeze" />
+         </text>
+      </g>
+      <g>
+         <rect id="rect2" x="250" y="100" width="200" height="150" stroke-width="2" stroke="white" fill="white">
+            <animate id="b2" begin="accessKey(2)" dur="1.1s" attributeName="stroke" from="white" to="blue"
+                     fill="freeze" />
+         </rect>
+         <text id="text2" x="275" y="150" font-size="25" stroke="white" fill="white">
+            World
+            <animate id="a3" begin="b2.end" dur="1s" attributeName="stroke" from="white" to="blue" fill="freeze" />
+            <animate id="a4" begin="b2.end" dur="1s" attributeName="fill" from="white" to="blue" fill="freeze" />
+         </text>
+      </g>
+   </g>
+</svg>

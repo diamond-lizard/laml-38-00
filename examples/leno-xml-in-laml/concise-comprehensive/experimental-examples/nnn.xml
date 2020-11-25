@@ -1,0 +1,18 @@
+<note-page id="intro">
+   <title><main-text>Introduction</main-text></title>
+   <point id="pt1">
+      <main-text>
+         This paper is about derivation of a comprehensive document from a concise document
+      </main-text>
+   </point>
+   <items id="it1">
+      <item>
+         <main-text>Outline:</main-text>
+         <items>
+            <item><main-text>Model</main-text></item>
+            <item><main-text>The LENO system</main-text></item>
+            <item><main-text>Conclusions</main-text></item>
+         </items>
+      </item>
+   </items>
+</note-page>

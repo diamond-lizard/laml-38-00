@@ -1,0 +1,40 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+
+(write-html '(raw)
+ (html
+  (head 
+    (title "WEB Programming in Scheme - the LAML approach")
+  )
+  (body 
+    (h1 "WEB Programming in Scheme - the LAML approach")
+
+    (p "The paper"
+      (a 'href "http://www.cs.auc.dk/~normark/laml/papers/jfp.pdf"
+         (em "WEB Programming in Scheme - the LAML approach"))
+      "is written for people who are interested in functional programming."
+      "The" (a 'href "abstract.html" "abstract") "is available as a separate page.")
+  
+    (p "The paper contains the following sections:")
+  
+    (ol 
+      (li "Introduction")
+      (li "Markup language mirroring")
+      (li "Programming with the HTML mirror functions")
+      (li "Raising the level of abstraction")
+      (li "LAML overview")
+      (li "Reflections and similar work")
+      (li "Conclusions"))
+
+    (p "There exists other papers about LAML, such as:")
+
+    (ul 
+     (li (a 'href "http://www.cs.auc.dk/~normark/laml/papers/www2002/p296-normark.html"
+           "Programmatic WWW authoring using Scheme and LAML")))
+
+    (p "Kurt Normark" (br) "normark@cs.auc.dk" (br)
+       (a 'href "http://www.cs.auc.dk/~normark" "http://www.cs.auc.dk/~normark")))))
+
+
+
+

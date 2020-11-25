@@ -1,0 +1,17 @@
+(load (string-append laml-dir "laml.scm"))
+
+(define (process-list . lst)
+ (for-each (lambda (f) (display f) (newline) (newline) (laml f)) lst))
+
+(laml-cd "dtds") (laml-cd "bikes")
+(laml "parse-dtd-and-make-mirror")
+(laml-cd "..") (laml-cd "..")
+
+(laml-cd "documents") (laml-cd "bikes")
+(laml "bikes-1") (laml "bikes-2")
+(laml-cd "..") (laml-cd "..")
+
+; (process-list "index")
+
+
+(end-laml)

@@ -1,0 +1,32 @@
+(load (string-append laml-dir "laml.scm"))
+
+(laml-style "xml-in-laml/lecture-notes-themes/lecture-notes-themes")
+
+(leno-themes-front-matters 
+  
+)
+
+(begin-themes)
+
+(theme 'id "sec1"
+  (leno-element 'lecture-id "multi-2" 'page-id "sec1" 'element-type "section-title" 'element-number "1" )
+  (leno-element 'lecture-id "multi-2" 'page-id "page1" 'element-type "title" 'element-number "1" )
+  (leno-element 'lecture-id "multi-2" 'page-id "page1" 'element-type "slide-text" 'element-number "1" )
+  (leno-element 'lecture-id "multi-2" 'page-id "page1" 'element-type "point" 'element-number "1" )
+  (leno-element 'lecture-id "multi-2" 'page-id "page2" 'element-type "title" 'element-number "1" )
+  (leno-element 'lecture-id "multi-2" 'page-id "page2" 'element-type "point" 'element-number "1" )
+  (leno-element 'lecture-id "multi-2" 'page-id "page2" 'element-type "opposing" 'element-number "1" )
+)
+
+(theme 'id "sec2"
+  (leno-element 'lecture-id "multi-2" 'page-id "sec2" 'element-type "section-title" 'element-number "1" )
+  (leno-element 'lecture-id "multi-2" 'page-id "page3" 'element-type "title" 'element-number "1" )
+  (leno-element 'lecture-id "multi-2" 'page-id "page3" 'element-type "items" 'element-number "1" )
+  (leno-element 'lecture-id "multi-2" 'page-id "page3" 'element-type "syntax" 'element-number "1" )
+  (leno-element 'lecture-id "multi-2" 'page-id "page4" 'element-type "title" 'element-number "1" )
+  (leno-element 'lecture-id "multi-2" 'page-id "page4" 'element-type "items" 'element-number "1" )
+)
+
+
+
+(end-themes)

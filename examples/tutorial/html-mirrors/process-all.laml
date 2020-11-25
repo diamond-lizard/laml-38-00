@@ -1,0 +1,9 @@
+(load (string-append laml-dir "laml.scm"))
+
+(define (process-list . lst)
+ (for-each (lambda (f) (display f) (newline) (newline) (laml f)) lst))
+
+(process-list "abstract1" "doc0" "mirror1" "mirror2" "mirror3" "mirror4" "mirror5" "index")
+
+
+(end-laml)

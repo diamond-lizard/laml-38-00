@@ -1,0 +1,4 @@
+For convenience place included stuff in this directory,
+such as syntax diagrams which live best on their own file.
+Use functions such as read-text-file-between-marks to include
+stuff from files in this directory.

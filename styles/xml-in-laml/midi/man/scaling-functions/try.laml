@@ -1,0 +1,30 @@
+(load (string-append laml-dir "laml.scm"))
+(load "scaling-function-common.scm")
+
+(begin-laml)
+
+; ---------------------------------------------------------------------------------------------------
+; The scaling function
+(define pi 3.141592654)
+
+(define lin
+  (make-scale-function-by-xy-points
+     (from-percent-points '((0 100) (100 0)))
+          ))
+
+(define sf 
+  (multiply-two-scaling-functions 
+     lin
+     (lambda (x) (sin (* x 25 pi)))
+  ) 
+)
+
+
+;(define sf  (make-scale-fn-pol-one-pol 'down 'up 7 0.3))
+
+; ---------------------------------------------------------------------------------------------------
+
+(make-svg-drawing (multiply-two-scaling-functions lin sf) 1000 -1 1)
+
+(end-laml)
+

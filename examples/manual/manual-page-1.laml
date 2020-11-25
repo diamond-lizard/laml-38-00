@@ -1,0 +1,81 @@
+(load (string-append laml-dir "laml.scm"))
+
+; ---------------------------------------------------------------------------------------------------
+
+(laml-style "manual/original-manual")
+
+; ---------------------------------------------------------------------------------------------------
+; PREAMBLE:
+
+(set-manual-title "MANUAL TITLE")
+
+(set-manual-author "Kurt Nørmark" "normark@cs.auc.dk" "Department of Computer Science" "Aalborg University" "Denmark")
+
+(set-manual-abstract
+  "MANUAL ABSTRACT"
+)
+
+(set-manual-name "manual-page-1")
+
+; ---------------------------------------------------------------------------------------------------
+; THE MANUAL: a number of manual-section and manual-page forms.
+
+(manual-section
+ (section-title "Section 1")
+ (section-body "Text of first section")
+)
+
+(manual-page 
+ 'f
+ (title "f")
+
+ (form 
+  '(f a b)
+  )
+
+ (description "Description of function f")
+
+ (parameters
+  (parameter "a" "Explanation of a")
+
+  (parameter "b" "Explanation of g")
+  )
+
+ (pre-condition "What to ensure before f is called")
+
+ (cross-references
+  (internal-references "similar function" "g")
+ )
+
+ (misc "What else to to say about f")
+)
+
+(manual-page 
+ 'g
+ (title "g")
+
+ (form 
+  '(g)
+  )
+
+ (description "Description of function g")
+
+ (parameters
+ )
+
+ (pre-condition "What to ensure before g is called")
+
+ (cross-references
+  (internal-references "Similar function" "f")
+ )
+
+ (misc "What else to say about g")
+)
+
+; ---------------------------------------------------------------------------------------------------
+; Make the manual from the sections and entries above
+
+(make-manual)
+
+
+

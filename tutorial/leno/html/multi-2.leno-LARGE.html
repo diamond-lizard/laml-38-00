@@ -1,0 +1,106 @@
+<html><head><link href="stylesheets/program.css" rel="stylesheet" title="program" type="text/css"/> <title>Source file</title></head><body bgcolor = "#c6e2ff" text = "#000000" link = "#000000" vlink = "#000000"  ><font size = "3"  ><pre>(<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX468" target="documentation-frame" title="R5RS Scheme form">load</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" target="documentation-frame" title="R5RS Scheme form">string-append</a> laml-dir "laml.scm"))       
+(<a class="schemedoc-name" href="../../../man/laml.html#laml-style" target="documentation-frame" title="Manual: laml">laml-style</a> "xml-in-laml/lecture-notes/lecture-notes")
+
+(<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#leno-front-matters" target="documentation-frame" title="Manual: lecture-notes">leno-front-matters</a>
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#front-title" target="documentation-frame" title="Manual: lecture-notes">front-title</a> "Lecture 2 of Multi Demo")           
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#front-author" target="documentation-frame" title="Manual: lecture-notes">front-author</a> "Kurt N&oslash;rmark")           
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#front-affiliation" target="documentation-frame" title="Manual: lecture-notes">front-affiliation</a> "Department of Computer Science, Aalborg University, Denmark")  
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#front-abstract" target="documentation-frame" title="Manual: lecture-notes">front-abstract</a> "This is the second lecture of the tuturial multi demo material")    
+
+  'slide-view "true"  
+  'annotated-slide-view "true"
+  'aggregated-view "true" 
+  'primary-view "slide-view"
+
+  'scheme-prefix "pre-notes.scm"
+  'scheme-suffix "post-notes.scm"
+  'course-home-url ""   
+  'author-home-url ""   
+  'note-download-url ""   
+  'logo-url "http://www.auc.dk/"  
+  'note-contents-description ""    
+  'slide-header "normal"  <span class = "comment"  >; minimal/normal/none </span><br/>  'trail-of-lecture "false"  
+  'language "english"      
+  'show-and-speak "false" 
+    'default-showing-time "2"    
+    'additional-showing-time "0" 
+    'sound-source "real-audio" 
+    'speak-url-prefix "../../speak/"
+  'exercise-model "none"   
+  'mouse-advancement "double-press" 
+  'word-index "true"  
+  'css-stylesheet ""
+  'news-flash-string  ""  
+  'news-flash-level   "2"
+  'quiz-support "false"   
+  'verbosity-level "1"
+)
+
+(<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#begin-notes" target="documentation-frame" title="Manual: lecture-notes">begin-notes</a>)
+
+(<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#note-page" target="documentation-frame" title="Manual: lecture-notes">note-page</a> 'id "sec1"
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#section-title" target="documentation-frame" title="Manual: lecture-notes">section-title</a> "Section one")
+)
+
+(<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#note-page" target="documentation-frame" title="Manual: lecture-notes">note-page</a> 'id "page1"
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#title" target="documentation-frame" title="Manual: lecture-notes">title</a> (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#main-text" target="documentation-frame" title="Manual: lecture-notes">main-text</a> "First page in second lecture")
+         (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#annotation" target="documentation-frame" title="Manual: lecture-notes">annotation</a> "")
+  )
+
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#point" target="documentation-frame" title="Manual: lecture-notes">point</a>
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#main-text" target="documentation-frame" title="Manual: lecture-notes">main-text</a>
+    "This is the first page in the second lecture"
+    )
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#annotation" target="documentation-frame" title="Manual: lecture-notes">annotation</a>
+    ""
+    )
+  )
+
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#opposing" target="documentation-frame" title="Manual: lecture-notes">opposing</a>
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#opposing-item" target="documentation-frame" title="Manual: lecture-notes">opposing-item</a> 
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#left-item" target="documentation-frame" title="Manual: lecture-notes">left-item</a> "Yest"
+               ) 
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#right-item" target="documentation-frame" title="Manual: lecture-notes">right-item</a> "it"
+                ))
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#opposing-item" target="documentation-frame" title="Manual: lecture-notes">opposing-item</a> 
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#left-item" target="documentation-frame" title="Manual: lecture-notes">left-item</a> "is"
+               ) 
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#right-item" target="documentation-frame" title="Manual: lecture-notes">right-item</a> "second"
+  )))
+
+)
+
+(<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#note-page" target="documentation-frame" title="Manual: lecture-notes">note-page</a> 'id "page2"
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#title" target="documentation-frame" title="Manual: lecture-notes">title</a> (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#main-text" target="documentation-frame" title="Manual: lecture-notes">main-text</a> "Second page in first lecture")
+         (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#annotation" target="documentation-frame" title="Manual: lecture-notes">annotation</a> "")
+  )
+
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#items" target="documentation-frame" title="Manual: lecture-notes">items</a> 
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#item" target="documentation-frame" title="Manual: lecture-notes">item</a> 
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#main-text" target="documentation-frame" title="Manual: lecture-notes">main-text</a> "First item on page 2"
+               ) 
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#annotation" target="documentation-frame" title="Manual: lecture-notes">annotation</a> "There are no annotations - 
+                 no real ones, at least"
+                ))
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#item" target="documentation-frame" title="Manual: lecture-notes">item</a> 
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#main-text" target="documentation-frame" title="Manual: lecture-notes">main-text</a> "Second item on page 2"
+               ) 
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#annotation" target="documentation-frame" title="Manual: lecture-notes">annotation</a> ""
+  )))
+
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#syntax" target="documentation-frame" title="Manual: lecture-notes">syntax</a>
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#main-text" target="documentation-frame" title="Manual: lecture-notes">main-text</a>
+    "A syntax box" )
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#annotation" target="documentation-frame" title="Manual: lecture-notes">annotation</a>
+    "Annotations to the syntax box" )
+  )
+
+)
+
+
+
+
+(<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#end-notes" target="documentation-frame" title="Manual: lecture-notes">end-notes</a>)
+
+
+</pre></font><div>&nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p></div></body></html>

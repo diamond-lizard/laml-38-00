@@ -1,0 +1,41 @@
+(load (string-append laml-dir "laml.scm"))
+
+(laml-style "simple-html4.0-loose")
+(lib-load "file-read.scm")
+
+(define _ #f)                    ; white-space suppress
+
+(define (html-write html-string)
+  (write-text-file
+    html-string
+    (string-append 
+      (startup-directory) (source-filename-without-extension) "." "html")))
+
+(html-write
+ (html
+  (head 
+    (title "Surface Demo")
+  )
+
+  (body 
+    (h1 "Surface Demo")
+
+     (p "This page demonstrates the use of the surface mirror, without any use of 
+      the convenience functions, demonstrated in some of the other examples in this directory.")
+
+      "Here comes the" (em "document text") _ ", with an " (b "enumeration") _ ":"  (p)
+
+      (ul 'type "square"
+        (li "Item 1" _ ";")
+        (li "Item 2" _ ";") 
+        (li "Item 3" _ ".") 
+      )
+
+    (a 'href "index.html" "A link to the table of contents") _ "." (br)
+
+    "And finally some more " (kbd "text")_"."
+  )
+ )
+)
+
+(end-laml)

@@ -1,0 +1,31 @@
+/* to be removed */
+DIV.leno-slide-section-titel		  { font-size: 250%; }
+DIV.leno-slide-section-title		  { font-size: 250%; }
+DIV.leno-slide-title			  { font-size: 250%; }
+DIV.leno-slide-point			  { font-size: 150%; }
+DIV.leno-slide-text			  { font-size: 200%; }
+DIV.leno-slide-slide-text		  { font-size: 200%; }
+DIV.leno-slide-comment			  { font-size: 150%; }
+DIV.leno-slide-example			  { font-size: 200%; }
+DIV.leno-slide-syntax			  { font-size: 200%; }
+DIV.leno-slide-quotation		  { font-size: 200%; }
+DIV.leno-slide-cross-reference-item	  { font-size: 100%; }
+
+
+UL.leno-slide-items LI			  { font-size: 24px; } 
+
+DIV.leno-slide-synopsis UL LI		  { font-size: 150%; }
+DIV.leno-slide-concept-list P		  { font-size: 150%; }
+DIV.leno-slide-source-program		  { font-size: 125%; }
+DIV.leno-slide-source-program-caption	  { font-size: 150%; }
+
+DIV.leno-slide-image-caption		  { font-size: 150%; }
+DIV.leno-slide-image-text		  { font-size: 150%; }
+DIV.leno-slide-image-series-caption       { font-size: 150%; }
+DIV.leno-slide-image-series-text	  { font-size: 150%; }
+DIV.leno-slide-exercise-caption		  { font-size: 150%; }
+DIV.leno-slide-exercise			  { font-size: 150%; }
+
+TABLE.leno-slide-tabular TD		  { font-size: 150%; }
+
+TABLE.leno-slide-opposing TD		  { font-size: 200%; }

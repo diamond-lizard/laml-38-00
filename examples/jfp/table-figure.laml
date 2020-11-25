@@ -1,0 +1,58 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+
+(define map (curry-generalized map))
+(define row list)
+
+(define sample-table
+ (list
+  (row "This" "is" "row" "1")
+  (row "This" "is" "row" "2")
+  (row "This" "is" "row" "3")
+  (row "This" "is" "row" "4")))
+
+(define (switch row-lst) 
+ (cons (second row-lst)
+  (cons (first row-lst) (cddr row-lst))))
+
+(define (grey-numeric x)
+ (if (and (string? x) (numeric-string? x))
+     (list x 'bgcolor (rgb-color 200 200 200))
+     x))
+
+(define a-main 
+  (modify-element a 'target "main" 'title "Goes to the main window"))
+
+(write-html 'pp
+ (html
+  (head 
+    (title "Demonstration of higher order functions together with tables")
+  )
+
+  (body 
+
+    (table
+     (tbody
+      (map 
+        (compose tr (map td) (map (lambda (x) (list x 'width "190"))))
+        (list
+         (row
+	  (table (tbody (map (compose tr (map td)) sample-table)) 'border "1")
+	  (table (tbody (map (compose tr (map td) switch) sample-table)) 'border "1")
+	  (table 
+	   'border "1" 
+	   (tbody 
+	    (map (compose tr (map (compose td grey-numeric)))
+		 (list
+		  (row (list "This" 'rowspan "2") "is" "row" "1")
+		  (row                            "is" "row" "2")
+		  (row "This"                     "is" "row" "3")
+		  (row "This"                     "is" "row"  "4")))))))
+       )))
+
+   
+   
+  )
+ ))
+
+

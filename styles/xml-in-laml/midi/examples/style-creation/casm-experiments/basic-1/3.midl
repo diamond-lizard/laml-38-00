@@ -1,0 +1,237 @@
+;;;; Replication. Trimmed to MainA with a single channel.
+; Adding parts from Country Waltz - A Tyros 1 preset style.
+
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/midi/midi")
+(load (string-append laml-dir "styles/xml-in-laml/midi/midi-laml-processing-lib.scm"))
+
+(TyrosStyle 'mode "absTime" 
+            'image (icon "lighting") 'extension "sty"
+            'pulsesPerQuarterNote "1920"
+   (MidiSection
+      (StyleInit
+         (Meta 'absTime "0" 'info "0:0:0 Time signature 3:4" 'type "88" "03 02 18 08")
+         (Meta 'absTime "0" 'info "0:0:0 Tempo: 428571 microsec. per quarter note = 140 BPM. Setter: (tempo= BPM)" 'type "81" "06 8A 1B")
+         (Meta 'absTime "0" 'info "0:0:0 Copyright" 'type "2" "(C)Kurt Noermark."))
+      (StyleId
+         (Meta 'absTime "0" 'info "0:0:0 Sequence/track name" 'type "3" "StyleName")
+      )
+
+      (StyleSetup ; copy from CountryWaltz setup - adapted slightly in channel 5.
+         (SysEx 'absTime "0" 'info "0:0:0 " "05 7E 7F 09 01 F7")
+         (ControlChange 'absTime "0" 'info "0:0:0 Channel volume MSB" 'channel "16" 'control "7" 'value "24")
+         (ControlChange 'absTime "0" 'info "0:0:0 Pan MSB" 'channel "16" 'control "10" 'value "48")
+         (ControlChange 'absTime "0" 'info "0:0:0 Reverb send level" 'channel "16" 'control "91" 'value "0")
+         (ControlChange 'absTime "0" 'info "0:0:0 Effects 4 depth" 'channel "16" 'control "94" 'value "127")
+         (ControlChange 'absTime "0" 'info "0:0:0 Sound controller 3: Release time" 'channel "16" 'control "72" 'value "80")
+         (ControlChange 'absTime "0" 'info "0:0:0 Sound controller 5: Brightness" 'channel "16" 'control "74" 'value "68")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select MSB" 'channel "16" 'control "0" 'value "8")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select LSB" 'channel "16" 'control "32" 'value "0")
+         (ProgramChange 'absTime "0" 'info "0:0:0 **Panel Voice GUITAR HiStringGtr MegaVoice " 'channel "16" 'number "2")
+         (ControlChange 'absTime "0" 'info "0:0:0 Channel volume MSB" 'channel "15" 'control "7" 'value "72")
+         (ControlChange 'absTime "0" 'info "0:0:0 Reverb send level" 'channel "15" 'control "91" 'value "37")
+         (ControlChange 'absTime "0" 'info "0:0:0 Chorus send level " 'channel "15" 'control "93" 'value "67")
+         (ControlChange 'absTime "0" 'info "0:0:0 Sound controller 3: Release time" 'channel "15" 'control "72" 'value "68")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select MSB" 'channel "15" 'control "0" 'value "0")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select LSB" 'channel "15" 'control "32" 'value "117")
+         (ProgramChange 'absTime "0" 'info "0:0:0 **Panel Voice E.PIANO StageEP ­ " 'channel "15" 'number "4")
+         (ControlChange 'absTime "0" 'info "0:0:0 Channel volume MSB" 'channel "13" 'control "7" 'value "33")
+         (ControlChange 'absTime "0" 'info "0:0:0 Reverb send level" 'channel "13" 'control "91" 'value "60")
+         (ControlChange 'absTime "0" 'info "0:0:0 Sound controller 5: Brightness" 'channel "13" 'control "74" 'value "66")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select MSB" 'channel "13" 'control "0" 'value "0")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select LSB" 'channel "13" 'control "32" 'value "122")
+         (ProgramChange 'absTime "0" 'info "0:0:0 **Panel Voice STRINGS Allegro Live! " 'channel "13" 'number "49")
+         (ControlChange 'absTime "0" 'info "0:0:0 Channel volume MSB" 'channel "12" 'control "7" 'value "33")
+         (ControlChange 'absTime "0" 'info "0:0:0 Reverb send level" 'channel "12" 'control "91" 'value "60")
+         (ControlChange 'absTime "0" 'info "0:0:0 Sound controller 5: Brightness" 'channel "12" 'control "74" 'value "66")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select MSB" 'channel "12" 'control "0" 'value "0")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select LSB" 'channel "12" 'control "32" 'value "122")
+         (ProgramChange 'absTime "0" 'info "0:0:0 **Panel Voice STRINGS Allegro Live! " 'channel "12" 'number "49")
+         (ControlChange 'absTime "0" 'info "0:0:0 Channel volume MSB" 'channel "11" 'control "7" 'value "98")
+         (ControlChange 'absTime "0" 'info "0:0:0 Reverb send level" 'channel "11" 'control "91" 'value "26")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select MSB" 'channel "11" 'control "0" 'value "127")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select LSB" 'channel "11" 'control "32" 'value "0")
+         (ProgramChange 'absTime "0" 'info "0:0:0 **Panel Voice PERC&DRUM BrushKit Drums " 'channel "11" 'number "40")
+         (ControlChange 'absTime "0" 'info "0:0:0 Channel volume MSB" 'channel "10" 'control "7" 'value "60")
+         (ControlChange 'absTime "0" 'info "0:0:0 Reverb send level" 'channel "10" 'control "91" 'value "60")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select MSB" 'channel "10" 'control "0" 'value "127")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select LSB" 'channel "10" 'control "32" 'value "0")
+         (ProgramChange 'absTime "0" 'info "0:0:0 **Panel Voice PERC&DRUM StandardKit2 Drums " 'channel "10" 'number "1")
+         (ControlChange 'absTime "0" 'info "0:0:0 Channel volume MSB" 'channel "9" 'control "7" 'value "98")
+         (ControlChange 'absTime "0" 'info "0:0:0 Reverb send level" 'channel "9" 'control "91" 'value "26")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select MSB" 'channel "9" 'control "0" 'value "127")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select LSB" 'channel "9" 'control "32" 'value "0")
+         (ProgramChange 'absTime "0" 'info "0:0:0 **Panel Voice PERC&DRUM BrushKit Drums " 'channel "9" 'number "40")
+         (ControlChange 'absTime "0" 'info "0:0:0 Channel volume MSB" 'channel "8" 'control "7" 'value "65")
+         (ControlChange 'absTime "0" 'info "0:0:0 Pan MSB" 'channel "8" 'control "10" 'value "76")
+         (ControlChange 'absTime "0" 'info "0:0:0 Reverb send level" 'channel "8" 'control "91" 'value "0")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select MSB" 'channel "8" 'control "0" 'value "0")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select LSB" 'channel "8" 'control "32" 'value "0")
+         (ProgramChange 'absTime "0" 'info "0:0:0 **GM BASS FingerBass ­ " 'channel "8" 'number "33")
+         (ControlChange 'absTime "0" 'info "0:0:0 Channel volume MSB" 'channel "7" 'control "7" 'value "72")
+         (ControlChange 'absTime "0" 'info "0:0:0 Reverb send level" 'channel "7" 'control "91" 'value "37")
+         (ControlChange 'absTime "0" 'info "0:0:0 Chorus send level " 'channel "7" 'control "93" 'value "67")
+         (ControlChange 'absTime "0" 'info "0:0:0 Sound controller 3: Release time" 'channel "7" 'control "72" 'value "68")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select MSB" 'channel "7" 'control "0" 'value "0")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select LSB" 'channel "7" 'control "32" 'value "117")
+         (ProgramChange 'absTime "0" 'info "0:0:0 **Panel Voice E.PIANO StageEP ­ " 'channel "7" 'number "4")
+;          (ControlChange 'absTime "0" 'info "0:0:0 Channel volume MSB" 'channel "6" 'control "7" 'value "65")
+;          (ControlChange 'absTime "0" 'info "0:0:0 Pan MSB" 'channel "6" 'control "10" 'value "76")
+;          (ControlChange 'absTime "0" 'info "0:0:0 Reverb send level" 'channel "6" 'control "91" 'value "0")
+;          (ControlChange 'absTime "0" 'info "0:0:0 Bank select MSB" 'channel "6" 'control "0" 'value "0")
+;          (ControlChange 'absTime "0" 'info "0:0:0 Bank select LSB" 'channel "6" 'control "32" 'value "0")
+;          (ProgramChange 'absTime "0" 'info "0:0:0 **GM BASS FingerBass ­ " 'channel "6" 'number "33")
+
+;         (ControlChange 'absTime "0" 'info "0:0:0 Pan MSB" 'channel "5" 'control "10" 'value "66")
+;         (ControlChange 'absTime "0" 'info "0:0:0 Expression controller MSB" 'channel "5" 'control "11" 'value "88")
+;         (ControlChange 'absTime "0" 'info "0:0:0 Reverb send level" 'channel "5" 'control "91" 'value "0")
+;         (ControlChange 'absTime "0" 'info "0:0:0 Sound controller 2: Timbre" 'channel "5" 'control "71" 'value "60")
+;         (ControlChange 'absTime "0" 'info "0:0:0 Chorus send level " 'channel "5" 'control "93" 'value "22")
+
+         (ControlChange 'absTime "0" 'info "0:0:0 Pan MSB" 'channel "5" 'control "10" 'value "91")
+         (ControlChange 'absTime "0" 'info "0:0:0 Sound controller 3: Release time" 'channel "5" 'control "72" 'value "76")
+;         (ControlChange 'absTime "0" 'info "0:0:0 Bank select MSB" 'channel "5" 'control "0" 'value "0")
+;         (ControlChange 'absTime "0" 'info "0:0:0 Bank select LSB" 'channel "5" 'control "32" 'value "0")
+;         (ProgramChange 'absTime "0" 'info "0:0:0 **GM GUITAR SteelGuitar ­ " 'channel "5" 'number "25")
+         (voice 5 8 1 2)
+
+         (ControlChange 'absTime "0" 'info "0:0:0 Pan MSB" 'channel "6" 'control "10" 'value "91")
+         (ControlChange 'absTime "0" 'info "0:0:0 Sound controller 3: Release time" 'channel "6" 'control "72" 'value "76")
+         (voice 6 8 1 2)
+
+         (ControlChange 'absTime "0" 'info "0:0:0 Pan MSB" 'channel "4" 'control "10" 'value "66")
+         (ControlChange 'absTime "0" 'info "0:0:0 Expression controller MSB" 'channel "4" 'control "11" 'value "88")
+         (ControlChange 'absTime "0" 'info "0:0:0 Reverb send level" 'channel "4" 'control "91" 'value "38")
+         (ControlChange 'absTime "0" 'info "0:0:0 Chorus send level " 'channel "4" 'control "93" 'value "22")
+         (ControlChange 'absTime "0" 'info "0:0:0 Sound controller 2: Timbre" 'channel "4" 'control "71" 'value "60")
+         (ControlChange 'absTime "0" 'info "0:0:0 Sound controller 3: Release time" 'channel "4" 'control "72" 'value "76")
+;         (ControlChange 'absTime "0" 'info "0:0:0 Bank select MSB" 'channel "4" 'control "0" 'value "0")
+;         (ControlChange 'absTime "0" 'info "0:0:0 Bank select LSB" 'channel "4" 'control "32" 'value "0")
+;         (ProgramChange 'absTime "0" 'info "0:0:0 **GM GUITAR SteelGuitar ­ " 'channel "4" 'number "25")
+         (voice 4 8 1 2)
+
+         (ControlChange 'absTime "0" 'info "0:0:0 Channel volume MSB" 'channel "3" 'control "7" 'value "24")
+         (ControlChange 'absTime "0" 'info "0:0:0 Pan MSB" 'channel "3" 'control "10" 'value "33")
+         (ControlChange 'absTime "0" 'info "0:0:0 Reverb send level" 'channel "3" 'control "91" 'value "0")
+         (ControlChange 'absTime "0" 'info "0:0:0 Effects 4 depth" 'channel "3" 'control "94" 'value "127")
+         (ControlChange 'absTime "0" 'info "0:0:0 Sound controller 3: Release time" 'channel "3" 'control "72" 'value "80")
+         (ControlChange 'absTime "0" 'info "0:0:0 Sound controller 5: Brightness" 'channel "3" 'control "74" 'value "68")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select MSB" 'channel "3" 'control "0" 'value "8")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select LSB" 'channel "3" 'control "32" 'value "0")
+         (ProgramChange 'absTime "0" 'info "0:0:0 **Panel Voice GUITAR HiStringGtr MegaVoice " 'channel "3" 'number "2")
+         (ControlChange 'absTime "0" 'info "0:0:0 Channel volume MSB" 'channel "2" 'control "7" 'value "24")
+         (ControlChange 'absTime "0" 'info "0:0:0 Pan MSB" 'channel "2" 'control "10" 'value "33")
+         (ControlChange 'absTime "0" 'info "0:0:0 Reverb send level" 'channel "2" 'control "91" 'value "0")
+         (ControlChange 'absTime "0" 'info "0:0:0 Effects 4 depth" 'channel "2" 'control "94" 'value "127")
+         (ControlChange 'absTime "0" 'info "0:0:0 Sound controller 3: Release time" 'channel "2" 'control "72" 'value "80")
+         (ControlChange 'absTime "0" 'info "0:0:0 Sound controller 5: Brightness" 'channel "2" 'control "74" 'value "68")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select MSB" 'channel "2" 'control "0" 'value "8")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select LSB" 'channel "2" 'control "32" 'value "0")
+         (ProgramChange 'absTime "0" 'info "0:0:0 **Panel Voice GUITAR HiStringGtr MegaVoice " 'channel "2" 'number "2")
+         (ControlChange 'absTime "0" 'info "0:0:0 Channel volume MSB" 'channel "1" 'control "7" 'value "24")
+         (ControlChange 'absTime "0" 'info "0:0:0 Pan MSB" 'channel "1" 'control "10" 'value "33")
+         (ControlChange 'absTime "0" 'info "0:0:0 Reverb send level" 'channel "1" 'control "91" 'value "0")
+         (ControlChange 'absTime "0" 'info "0:0:0 Effects 4 depth" 'channel "1" 'control "94" 'value "127")
+         (ControlChange 'absTime "0" 'info "0:0:0 Sound controller 3: Release time" 'channel "1" 'control "72" 'value "80")
+         (ControlChange 'absTime "0" 'info "0:0:0 Sound controller 5: Brightness" 'channel "1" 'control "74" 'value "68")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select MSB" 'channel "1" 'control "0" 'value "8")
+         (ControlChange 'absTime "0" 'info "0:0:0 Bank select LSB" 'channel "1" 'control "32" 'value "0")
+         (ProgramChange 'absTime "0" 'info "0:0:0 **Panel Voice GUITAR HiStringGtr MegaVoice " 'channel "1" 'number "2")
+         (SysEx 'absTime "0" 'info "0:0:0 " "09 43 10 4C 02 01 00 01 10 F7")
+         (SysEx 'absTime "0" 'info "0:0:0 " "09 43 10 4C 02 01 20 42 08 F7")
+         (SysEx 'absTime "0" 'info "0:0:0 " "09 43 10 4C 02 01 40 4D 00 F7")
+         (SysEx 'absTime "0" 'info "0:0:0 " "09 43 10 4C 02 01 42 00 0F F7")
+         (SysEx 'absTime "0" 'info "0:0:0 " "09 43 10 4C 02 01 44 00 33 F7")
+         (SysEx 'absTime "0" 'info "0:0:0 " "09 43 10 4C 02 01 46 00 36 F7")
+         (SysEx 'absTime "0" 'info "0:0:0 " "09 43 10 4C 02 01 48 00 48 F7")
+         (SysEx 'absTime "0" 'info "0:0:0 " "08 43 10 4C 02 01 56 7F F7")
+         (SysEx 'absTime "0" 'info "0:0:0 " "08 43 10 4C 02 01 58 26 F7")
+         (SysEx 'absTime "0" 'info "0:0:0 " "08 43 10 4C 02 01 59 0C F7")
+         (SysEx 'absTime "0" 'info "0:0:0 " "08 43 10 4C 02 01 5A 01 F7")
+         (SysEx 'absTime "0" 'info "0:0:0 " "08 43 10 4C 08 08 07 03 F7")
+         (SysEx 'absTime "0" 'info "0:0:0 " "08 43 10 4C 08 09 07 02 F7")
+         (SysEx 'absTime "0" 'info "0:0:0 " "08 43 10 4C 30 21 02 6B F7")
+         (SysEx 'absTime "0" 'info "0:0:0 " "08 43 10 4C 30 21 05 0F F7")
+         (SysEx 'absTime "0" 'info "0:0:0 " "08 43 10 4C 30 2A 05 5A F7")
+         (SysEx 'absTime "0" 'info "0:0:0 " "08 43 10 4C 30 2C 05 5A F7")
+         (SysEx 'absTime "0" 'info "0:0:0 " "08 43 10 4C 30 2E 05 5A F7")
+         (SysEx 'absTime "0" 'info "0:0:0 " "08 43 10 4C 30 36 05 6E F7")
+         (SysEx 'absTime "0" 'info "0:0:0 " "08 43 10 4C 30 36 05 7F F7")
+         (SysEx 'absTime "0" 'info "0:0:0 " "08 43 10 4C 30 36 0B 37 F7")
+         (SysEx 'absTime "0" 'info "0:0:0 " "08 43 10 4C 31 36 05 50 F7"))
+
+      (MainA  
+         'limitQN "48"
+         'addMidiPart1 "c:/users/kurt/Media/midi-laml-projects/Morning-has-broken-style/Final-attempt/guitar-beats/a0.mid" 'addAsChannel1 "5"
+         'addMidiPart2 "c:/users/kurt/Media/midi-laml-projects/Morning-has-broken-style/Final-attempt/guitar-beats/d.mid" 'addAsChannel2 "6"
+      )
+
+   )
+   (CasmSection
+      (cseg
+         (sdec "Main A")
+         (ctab  
+            'name "KN Gtar" 'editable "true"
+            'source-channel "5" 'destination-channel "12"
+            'autostart-enable "false"
+            'source-chord-key
+            "C"
+            'source-chord-type
+            "maj7"
+            'note-transposition-rule
+            "root-fixed"
+            'note-transposition-table
+            "chord"
+            'high-key
+            "B"
+            'note-low-limit
+            "C-2"
+            'note-high-limit
+            "G8"
+            'retrigger-rule
+            "pitch-shift"
+            'special-feature-bytes
+            "00"
+            (note-mute (chord-com"")
+            (chord-mute "min, min6, min7, min7b5, min-9, min7-9, min7-11, min-maj7, min-maj7-9"))
+         (ctab
+            'source-channel
+            "6"
+            'name
+            "KN Gtar"
+            'destination-channel
+            "12"
+            'editable
+            "true"
+            'autostart-enable
+            "false"
+            'source-chord-key
+            "C"
+            'source-chord-type
+            "maj7"
+            'note-transposition-rule
+            "root-fixed"
+            'note-transposition-table
+            "chord"
+            'high-key
+            "B"
+            'note-low-limit
+            "C-2"
+            'note-high-limit
+            "G8"
+            'retrigger-rule
+            "pitch-shift"
+            'special-feature-bytes
+            "00"
+            (note-mute "")
+            (chord-mute "maj, maj6, maj7, maj7s11, maj9, maj7-9, maj6-9"))
+
+
+         (cntt 'source-channel "5" 'bass-on-off "on" 'note-transposition-table "chord")))
+   (NonMidiSuffix
+      "4F 54 53 63 00 00 21 69 4D 54 72 6B 00 00 08 4B 00 F0 09 43 73 01 50 05 01 01 2A F7 00 F0 09 43 73 01 50 05 01 02 32 F7 00 F0 09 43 73 01 50 08 00 00 7F F7 00 B0 00 00 00 B0 20 70 00 C0 16 00 B0 48 5D 00 B0 63 01 00 B0 62 66 00 B0 06 40 00 B0 49 40 00 B0 63 01 00 B0 62 64 00 B0 06 40 00 B0 63 01 00 B0 62 09 00 B0 06 40 00 B0 63 01 00 B0 62 08 00 B0 06 40 00 B0 63 01 00 B0 62 0A 00 B0 06 40 00 F0 08 43 10 4C 08 00 05 01 F7 00 F0 09 43 73 01 50 08 00 04 6C F7 00 B0 07 64 00 B0 0A 40 00 B0 47 40 00 B0 4A 40 00 B0 65 00 00 B0 64 01 00 B0 06 40 00 B0 41 00 00 B0 05 10 00 F0 08 43 10 4C 08 00 0C 40 F7 00 F0 08 43 10 4C 08 00 0D 40 F7 00 F0 09 43 73 01 50 08 00 03 40 F7 00 F0 08 43 10 4C 08 00 76 10 F7 00 F0 08 43 10 4C 08 00 72 40 F7 00 F0 08 43 10 4C 08 00 77 2F F7 00 F0 08 43 10 4C 08 00 73 40 F7 00 B0 65 00 00 B0 64 00 00 B0 06 02 00 B0 5B 00 00 B0 5D 00 00 F0 08 43 10 4C 08 00 1E 40 F7 00 F0 08 43 10 4C 0A 00 40 40 F7 00 F0 08 43 10 4C 08 00 20 06 F7 00 F0 08 43 10 4C 08 00 21 00 F7 00 F0 08 43 10 4C 08 00 22 1E F7 00 F0 08 43 10 4C 08 00 4E 40 F7 00 F0 08 43 10 4C 0A 00 42 4C F7 00 F0 08 43 10 4C 08 00 50 03 F7 00 F0 08 43 10 4C 08 00 51 00 F7 00 F0 08 43 10 4C 08 00 52 00 F7 00 F0 09 43 73 01 50 08 01 00 00 F7 00 B1 00 00 00 B1 20 76 00 C1 04 00 B1 48 62 00 B1 63 01 00 B1 62 66 00 B1 06 40 00 B1 49 40 00 B1 63 01 00 B1 62 64 00 B1 06 40 00 B1 63 01 00 B1 62 09 00 B1 06 40 00 B1 63 01 00 B1 62 08 00 B1 06 40 00 B1 63 01 00 B1 62 0A 00 B1 06 40 00 F0 08 43 10 4C 08 01 05 01 F7 00 F0 09 43 73 01 50 08 01 04 7A F7 00 B1 07 64 00 B1 0A 40 00 B1 47 40 00 B1 4A 40 00 B1 65 00 00 B1 64 01 00 B1 06 40 00 B1 41 00 00 B1 05 00 00 F0 08 43 10 4C 08 01 0C 40 F7 00 F0 08 43 10 4C 08 01 0D 42 F7 00 F0 09 43 73 01 50 08 01 03 40 F7 00 F0 08 43 10 4C 08 01 76 10 F7 00 F0 08 43 10 4C 08 01 72 40 F7 00 F0 08 43 10 4C 08 01 77 2F F7 00 F0 08 43 10 4C 08 01 73 40 F7 00 B1 65 00 00 B1 64 00 00 B1 06 02 00 B1 5B 14 00 B1 5D 00 00 F0 08 43 10 4C 08 01 1E 40 F7 00 F0 08 43 10 4C 0A 01 40 40 F7 00 F0 08 43 10 4C 08 01 20 01 F7 00 F0 08 43 10 4C 08 01 21 00 F7 00 F0 08 43 10 4C 08 01 22 2D F7 00 F0 08 43 10 4C 08 01 4E 40 F7 00 F0 08 43 10 4C 0A 01 42 40 F7 00 F0 08 43 10 4C 08 01 50 00 F7 00 F0 08 43 10 4C 08 01 51 00 F7 00 F0 08 43 10 4C 08 01 52 00 F7 00 F0 09 43 73 01 50 08 02 00 00 F7 00 B2 00 00 00 B2 20 76 00 C2 19 00 B2 48 69 00 B2 63 01 00 B2 62 66 00 B2 06 40 00 B2 49 40 00 B2 63 01 00 B2 62 64 00 B2 06 40 00 B2 63 01 00 B2 62 09 00 B2 06 40 00 B2 63 01 00 B2 62 08 00 B2 06 40 00 B2 63 01 00 B2 62 0A 00 B2 06 40 00 F0 08 43 10 4C 08 02 05 01 F7 00 F0 09 43 73 01 50 08 02 04 74 F7 00 B2 07 64 00 B2 0A 40 00 B2 47 40 00 B2 4A 40 00 B2 65 00 00 B2 64 01 00 B2 06 40 00 B2 41 00 00 B2 05 00 00 F0 08 43 10 4C 08 02 0C 40 F7 00 F0 08 43 10 4C 08 02 0D 40 F7 00 F0 09 43 73 01 50 08 02 03 3F F7 00 F0 08 43 10 4C 08 02 76 10 F7 00 F0 08 43 10 4C 08 02 72 40 F7 00 F0 08 43 10 4C 08 02 77 2F F7 00 F0 08 43 10 4C 08 02 73 40 F7 00 B2 65 00 00 B2 64 00 00 B2 06 02 00 B2 5B 00 00 B2 5D 00 00 F0 08 43 10 4C 08 02 1E 40 F7 00 F0 08 43 10 4C 0A 02 40 40 F7 00 F0 08 43 10 4C 08 02 20 05 F7 00 F0 08 43 10 4C 08 02 21 00 F7 00 F0 08 43 10 4C 08 02 22 00 F7 00 F0 08 43 10 4C 08 02 4E 40 F7 00 F0 08 43 10 4C 0A 02 42 40 F7 00 F0 08 43 10 4C 08 02 50 02 F7 00 F0 08 43 10 4C 08 02 51 00 F7 00 F0 08 43 10 4C 08 02 52 00 F7 00 F0 09 43 73 01 50 08 03 00 00 F7 00 B3 00 00 00 B3 20 70 00 C3 30 00 B3 48 65 00 B3 63 01 00 B3 62 66 00 B3 06 40 00 B3 49 40 00 B3 63 01 00 B3 62 64 00 B3 06 40 00 B3 63 01 00 B3 62 09 00 B3 06 40 00 B3 63 01 00 B3 62 08 00 B3 06 40 00 B3 63 01 00 B3 62 0A 00 B3 06 40 00 F0 08 43 10 4C 08 03 05 01 F7 00 F0 09 43 73 01 50 08 03 04 64 F7 00 B3 07 3C 00 B3 0A 40 00 B3 47 40 00 B3 4A 40 00 B3 65 00 00 B3 64 01 00 B3 06 40 00 B3 41 00 00 B3 05 0A 00 F0 08 43 10 4C 08 03 0C 40 F7 00 F0 08 43 10 4C 08 03 0D 40 F7 00 F0 09 43 73 01 50 08 03 03 41 F7 00 F0 08 43 10 4C 08 03 76 10 F7 00 F0 08 43 10 4C 08 03 72 40 F7 00 F0 08 43 10 4C 08 03 77 2F F7 00 F0 08 43 10 4C 08 03 73 44 F7 00 B3 65 00 00 B3 64 00 00 B3 06 02 00 B3 5B 00 00 B3 5D 00 00 F0 08 43 10 4C 08 03 1E 40 F7 00 F0 08 43 10 4C 0A 03 40 40 F7 00 F0 08 43 10 4C 08 03 20 00 F7 00 F0 08 43 10 4C 08 03 21 00 F7 00 F0 08 43 10 4C 08 03 22 19 F7 00 F0 08 43 10 4C 08 03 4E 40 F7 00 F0 08 43 10 4C 0A 03 42 40 F7 00 F0 08 43 10 4C 08 03 50 00 F7 00 F0 08 43 10 4C 08 03 51 00 F7 00 F0 08 43 10 4C 08 03 52 00 F7 00 F0 0B 43 73 01 51 08 00 11 02 00 0B F7 00 F0 0B 43 73 01 51 08 00 00 02 00 03 F7 00 F0 09 43 10 4C 03 00 00 01 11 F7 00 F0 09 43 73 01 50 08 00 08 7F F7 00 F0 09 43 73 01 50 08 00 01 00 F7 00 F0 08 43 10 4C 03 00 0B 28 F7 00 F0 0B 43 73 01 51 08 01 11 02 00 5E F7 00 F0 09 43 10 4C 03 01 00 50 10 F7 00 F0 09 43 73 01 50 08 01 08 7F F7 00 F0 09 43 73 01 50 08 01 01 00 F7 00 F0 08 43 10 4C 03 01 0B 1A F7 00 F0 0B 43 73 01 51 08 02 11 02 00 0B F7 00 F0 0B 43 73 01 51 08 02 00 02 00 03 F7 00 F0 09 43 10 4C 03 02 00 01 11 F7 00 F0 09 43 73 01 50 08 02 08 7F F7 00 F0 09 43 73 01 50 08 02 01 00 F7 00 F0 08 43 10 4C 03 02 0B 28 F7 00 F0 0B 43 73 01 51 08 03 11 02 00 0B F7 00 F0 0B 43 73 01 51 08 03 00 02 00 03 F7 00 F0 09 43 10 4C 03 03 00 01 11 F7 00 F0 09 43 73 01 50 08 03 08 7F F7 00 F0 09 43 73 01 50 08 03 01 00 F7 00 F0 08 43 10 4C 03 03 0B 2E F7 00 F0 09 43 73 01 50 08 03 02 00 F7 00 F0 09 43 73 01 50 04 00 00 00 F7 00 F0 0B 43 73 01 51 04 00 00 02 00 02 F7 00 F0 09 43 73 01 50 04 00 05 42 F7 00 F0 09 43 73 01 50 04 00 02 10 F7 00 F0 09 43 73 01 50 04 00 03 00 F7 00 F0 09 43 73 01 50 04 00 04 00 F7 00 F0 0B 43 73 01 51 07 00 00 02 03 00 F7 00 F0 09 43 73 01 50 07 00 00 64 F7 00 FF 7F 82 04 43 73 0C 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 FF 2F 00 4D 54 72 6B 00 00 08 4C 00 F0 09 43 73 01 50 05 01 01 2A F7 00 F0 09 43 73 01 50 05 01 02 32 F7 00 F0 09 43 73 01 50 08 00 00 7F F7 00 B0 00 00 00 B0 20 73 00 C0 1B 00 B0 48 66 00 B0 63 01 00 B0 62 66 00 B0 06 40 00 B0 49 40 00 B0 63 01 00 B0 62 64 00 B0 06 40 00 B0 63 01 00 B0 62 09 00 B0 06 40 00 B0 63 01 00 B0 62 08 00 B0 06 40 00 B0 63 01 00 B0 62 0A 00 B0 06 40 00 F0 08 43 10 4C 08 00 05 01 F7 00 F0 09 43 73 01 50 08 00 04 58 F7 00 B0 07 64 00 B0 0A 40 00 B0 47 40 00 B0 4A 40 00 B0 65 00 00 B0 64 01 00 B0 06 40 00 B0 41 00 00 B0 05 28 00 F0 08 43 10 4C 08 00 0C 40 F7 00 F0 08 43 10 4C 08 00 0D 40 F7 00 F0 09 43 73 01 50 08 00 03 40 F7 00 F0 08 43 10 4C 08 00 76 10 F7 00 F0 08 43 10 4C 08 00 72 40 F7 00 F0 08 43 10 4C 08 00 77 2F F7 00 F0 08 43 10 4C 08 00 73 40 F7 00 B0 65 00 00 B0 64 00 00 B0 06 02 00 B0 5B 26 00 B0 5D 00 00 F0 08 43 10 4C 08 00 1E 40 F7 00 F0 08 43 10 4C 0A 00 40 40 F7 00 F0 08 43 10 4C 08 00 20 0A F7 00 F0 08 43 10 4C 08 00 21 00 F7 00 F0 08 43 10 4C 08 00 22 04 F7 00 F0 08 43 10 4C 08 00 4E 40 F7 00 F0 08 43 10 4C 0A 00 42 40 F7 00 F0 08 43 10 4C 08 00 50 08 F7 00 F0 08 43 10 4C 08 00 51 00 F7 00 F0 08 43 10 4C 08 00 52 00 F7 00 F0 09 43 73 01 50 08 01 00 7F F7 00 B1 00 00 00 B1 20 7A 00 C1 31 00 B1 48 6A 00 B1 63 01 00 B1 62 66 00 B1 06 40 00 B1 49 40 00 B1 63 01 00 B1 62 64 00 B1 06 40 00 B1 63 01 00 B1 62 09 00 B1 06 40 00 B1 63 01 00 B1 62 08 00 B1 06 40 00 B1 63 01 00 B1 62 0A 00 B1 06 40 00 F0 08 43 10 4C 08 01 05 01 F7 00 F0 09 43 73 01 50 08 01 04 70 F7 00 B1 07 50 00 B1 0A 40 00 B1 47 40 00 B1 4A 40 00 B1 65 00 00 B1 64 01 00 B1 06 40 00 B1 41 00 00 B1 05 0A 00 F0 08 43 10 4C 08 01 0C 40 F7 00 F0 08 43 10 4C 08 01 0D 40 F7 00 F0 09 43 73 01 50 08 01 03 40 F7 00 F0 08 43 10 4C 08 01 76 10 F7 00 F0 08 43 10 4C 08 01 72 40 F7 00 F0 08 43 10 4C 08 01 77 2F F7 00 F0 08 43 10 4C 08 01 73 40 F7 00 B1 65 00 00 B1 64 00 00 B1 06 02 00 B1 5B 00 00 B1 5D 00 00 F0 08 43 10 4C 08 01 1E 40 F7 00 F0 08 43 10 4C 0A 01 40 40 F7 00 F0 08 43 10 4C 08 01 20 00 F7 00 F0 08 43 10 4C 08 01 21 00 F7 00 F0 08 43 10 4C 08 01 22 20 F7 00 F0 08 43 10 4C 08 01 4E 40 F7 00 F0 08 43 10 4C 0A 01 42 48 F7 00 F0 08 43 10 4C 08 01 50 00 F7 00 F0 08 43 10 4C 08 01 51 00 F7 00 F0 08 43 10 4C 08 01 52 00 F7 00 F0 09 43 73 01 50 08 02 00 00 F7 00 B2 00 00 00 B2 20 70 00 C2 15 00 B2 48 5E 00 B2 63 01 00 B2 62 66 00 B2 06 40 00 B2 49 40 00 B2 63 01 00 B2 62 64 00 B2 06 40 00 B2 63 01 00 B2 62 09 00 B2 06 40 00 B2 63 01 00 B2 62 08 00 B2 06 40 00 B2 63 01 00 B2 62 0A 00 B2 06 40 00 F0 08 43 10 4C 08 02 05 01 F7 00 F0 09 43 73 01 50 08 02 04 74 F7 00 B2 07 64 00 B2 0A 40 00 B2 47 40 00 B2 4A 40 00 B2 65 00 00 B2 64 01 00 B2 06 40 00 B2 41 00 00 B2 05 00 00 F0 08 43 10 4C 08 02 0C 40 F7 00 F0 08 43 10 4C 08 02 0D 46 F7 00 F0 09 43 73 01 50 08 02 03 40 F7 00 F0 08 43 10 4C 08 02 76 10 F7 00 F0 08 43 10 4C 08 02 72 40 F7 00 F0 08 43 10 4C 08 02 77 2F F7 00 F0 08 43 10 4C 08 02 73 48 F7 00 B2 65 00 00 B2 64 00 00 B2 06 02 00 B2 5B 00 00 B2 5D 00 00 F0 08 43 10 4C 08 02 1E 40 F7 00 F0 08 43 10 4C 0A 02 40 40 F7 00 F0 08 43 10 4C 08 02 20 02 F7 00 F0 08 43 10 4C 08 02 21 00 F7 00 F0 08 43 10 4C 08 02 22 26 F7 00 F0 08 43 10 4C 08 02 4E 40 F7 00 F0 08 43 10 4C 0A 02 42 40 F7 00 F0 08 43 10 4C 08 02 50 00 F7 00 F0 08 43 10 4C 08 02 51 00 F7 00 F0 08 43 10 4C 08 02 52 00 F7 00 F0 09 43 73 01 50 08 03 00 00 F7 00 B3 00 00 00 B3 20 70 00 C3 30 00 B3 48 65 00 B3 63 01 00 B3 62 66 00 B3 06 40 00 B3 49 40 00 B3 63 01 00 B3 62 64 00 B3 06 40 00 B3 63 01 00 B3 62 09 00 B3 06 40 00 B3 63 01 00 B3 62 08 00 B3 06 40 00 B3 63 01 00 B3 62 0A 00 B3 06 40 00 F0 08 43 10 4C 08 03 05 01 F7 00 F0 09 43 73 01 50 08 03 04 64 F7 00 B3 07 3C 00 B3 0A 40 00 B3 47 40 00 B3 4A 40 00 B3 65 00 00 B3 64 01 00 B3 06 40 00 B3 41 00 00 B3 05 0A 00 F0 08 43 10 4C 08 03 0C 40 F7 00 F0 08 43 10 4C 08 03 0D 40 F7 00 F0 09 43 73 01 50 08 03 03 41 F7 00 F0 08 43 10 4C 08 03 76 10 F7 00 F0 08 43 10 4C 08 03 72 40 F7 00 F0 08 43 10 4C 08 03 77 2F F7 00 F0 08 43 10 4C 08 03 73 44 F7 00 B3 65 00 00 B3 64 00 00 B3 06 02 00 B3 5B 00 00 B3 5D 00 00 F0 08 43 10 4C 08 03 1E 40 F7 00 F0 08 43 10 4C 0A 03 40 40 F7 00 F0 08 43 10 4C 08 03 20 00 F7 00 F0 08 43 10 4C 08 03 21 00 F7 00 F0 08 43 10 4C 08 03 22 19 F7 00 F0 08 43 10 4C 08 03 4E 40 F7 00 F0 08 43 10 4C 0A 03 42 40 F7 00 F0 08 43 10 4C 08 03 50 00 F7 00 F0 08 43 10 4C 08 03 51 00 F7 00 F0 08 43 10 4C 08 03 52 00 F7 00 F0 0B 43 73 01 51 08 00 11 02 00 40 F7 00 F0 09 43 10 4C 03 00 00 06 00 F7 00 F0 09 43 73 01 50 08 00 08 7F F7 00 F0 09 43 73 01 50 08 00 01 00 F7 00 F0 09 43 10 4C 03 00 42 00 1A F7 00 F0 0B 43 73 01 51 08 01 11 02 00 0B F7 00 F0 0B 43 73 01 51 08 01 00 02 00 03 F7 00 F0 09 43 10 4C 03 01 00 01 11 F7 00 F0 09 43 73 01 50 08 01 08 7F F7 00 F0 09 43 73 01 50 08 01 01 00 F7 00 F0 08 43 10 4C 03 01 0B 2E F7 00 F0 0B 43 73 01 51 08 02 11 02 00 0B F7 00 F0 0B 43 73 01 51 08 02 00 02 00 03 F7 00 F0 09 43 10 4C 03 02 00 01 11 F7 00 F0 09 43 73 01 50 08 02 08 7F F7 00 F0 09 43 73 01 50 08 02 01 00 F7 00 F0 08 43 10 4C 03 02 0B 2A F7 00 F0 0B 43 73 01 51 08 03 11 02 00 0B F7 00 F0 0B 43 73 01 51 08 03 00 02 00 03 F7 00 F0 09 43 10 4C 03 03 00 01 11 F7 00 F0 09 43 73 01 50 08 03 08 7F F7 00 F0 09 43 73 01 50 08 03 01 00 F7 00 F0 08 43 10 4C 03 03 0B 2E F7 00 F0 09 43 73 01 50 08 03 02 00 F7 00 F0 09 43 73 01 50 04 00 00 00 F7 00 F0 0B 43 73 01 51 04 00 00 02 00 02 F7 00 F0 09 43 73 01 50 04 00 05 48 F7 00 F0 09 43 73 01 50 04 00 02 00 F7 00 F0 09 43 73 01 50 04 00 03 00 F7 00 F0 09 43 73 01 50 04 00 04 00 F7 00 F0 0B 43 73 01 51 07 00 00 02 03 00 F7 00 F0 09 43 73 01 50 07 00 00 64 F7 00 FF 7F 82 04 43 73 0C 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 FF 2F 00 4D 54 72 6B 00 00 08 59 00 F0 09 43 73 01 50 05 01 01 2A F7 00 F0 09 43 73 01 50 05 01 02 32 F7 00 F0 09 43 73 01 50 08 00 00 7F F7 00 B0 00 00 00 B0 20 71 00 C0 28 00 B0 48 64 00 B0 63 01 00 B0 62 66 00 B0 06 40 00 B0 49 40 00 B0 63 01 00 B0 62 64 00 B0 06 40 00 B0 63 01 00 B0 62 09 00 B0 06 40 00 B0 63 01 00 B0 62 08 00 B0 06 40 00 B0 63 01 00 B0 62 0A 00 B0 06 40 00 F0 08 43 10 4C 08 00 05 01 F7 00 F0 09 43 73 01 50 08 00 04 5A F7 00 B0 07 64 00 B0 0A 40 00 B0 47 40 00 B0 4A 40 00 B0 65 00 00 B0 64 01 00 B0 06 40 00 B0 41 00 00 B0 05 10 00 F0 08 43 10 4C 08 00 0C 40 F7 00 F0 08 43 10 4C 08 00 0D 40 F7 00 F0 09 43 73 01 50 08 00 03 40 F7 00 F0 08 43 10 4C 08 00 76 10 F7 00 F0 08 43 10 4C 08 00 72 40 F7 00 F0 08 43 10 4C 08 00 77 2F F7 00 F0 08 43 10 4C 08 00 73 3C F7 00 B0 65 00 00 B0 64 00 00 B0 06 02 00 B0 5B 00 00 B0 5D 00 00 F0 08 43 10 4C 08 00 1E 40 F7 00 F0 08 43 10 4C 0A 00 40 40 F7 00 F0 08 43 10 4C 08 00 20 0C F7 00 F0 08 43 10 4C 08 00 21 00 F7 00 F0 08 43 10 4C 08 00 22 08 F7 00 F0 08 43 10 4C 08 00 4E 40 F7 00 F0 08 43 10 4C 0A 00 42 4A F7 00 F0 08 43 10 4C 08 00 50 00 F7 00 F0 08 43 10 4C 08 00 51 00 F7 00 F0 08 43 10 4C 08 00 52 00 F7 00 F0 09 43 73 01 50 08 01 00 7F F7 00 B1 00 00 00 B1 20 75 00 C1 31 00 B1 48 6A 00 B1 63 01 00 B1 62 66 00 B1 06 40 00 B1 49 40 00 B1 63 01 00 B1 62 64 00 B1 06 40 00 B1 63 01 00 B1 62 09 00 B1 06 40 00 B1 63 01 00 B1 62 08 00 B1 06 40 00 B1 63 01 00 B1 62 0A 00 B1 06 40 00 F0 08 43 10 4C 08 01 05 01 F7 00 F0 09 43 73 01 50 08 01 04 64 F7 00 B1 07 5A 00 B1 0A 40 00 B1 47 40 00 B1 4A 40 00 B1 65 00 00 B1 64 01 00 B1 06 40 00 B1 41 00 00 B1 05 18 00 F0 08 43 10 4C 08 01 0C 40 F7 00 F0 08 43 10 4C 08 01 0D 40 F7 00 F0 09 43 73 01 50 08 01 03 40 F7 00 F0 08 43 10 4C 08 01 76 10 F7 00 F0 08 43 10 4C 08 01 72 40 F7 00 F0 08 43 10 4C 08 01 77 2F F7 00 F0 08 43 10 4C 08 01 73 40 F7 00 B1 65 00 00 B1 64 00 00 B1 06 02 00 B1 5B 00 00 B1 5D 00 00 F0 08 43 10 4C 08 01 1E 40 F7 00 F0 08 43 10 4C 0A 01 40 40 F7 00 F0 08 43 10 4C 08 01 20 00 F7 00 F0 08 43 10 4C 08 01 21 00 F7 00 F0 08 43 10 4C 08 01 22 19 F7 00 F0 08 43 10 4C 08 01 4E 40 F7 00 F0 08 43 10 4C 0A 01 42 47 F7 00 F0 08 43 10 4C 08 01 50 00 F7 00 F0 08 43 10 4C 08 01 51 00 F7 00 F0 08 43 10 4C 08 01 52 00 F7 00 F0 09 43 73 01 50 08 02 00 00 F7 00 B2 00 00 00 B2 20 73 00 C2 15 00 B2 48 5E 00 B2 63 01 00 B2 62 66 00 B2 06 40 00 B2 49 40 00 B2 63 01 00 B2 62 64 00 B2 06 40 00 B2 63 01 00 B2 62 09 00 B2 06 40 00 B2 63 01 00 B2 62 08 00 B2 06 40 00 B2 63 01 00 B2 62 0A 00 B2 06 40 00 F0 08 43 10 4C 08 02 05 01 F7 00 F0 09 43 73 01 50 08 02 04 7A F7 00 B2 07 64 00 B2 0A 40 00 B2 47 40 00 B2 4A 40 00 B2 65 00 00 B2 64 01 00 B2 06 40 00 B2 41 00 00 B2 05 00 00 F0 08 43 10 4C 08 02 0C 40 F7 00 F0 08 43 10 4C 08 02 0D 40 F7 00 F0 09 43 73 01 50 08 02 03 40 F7 00 F0 08 43 10 4C 08 02 76 10 F7 00 F0 08 43 10 4C 08 02 72 40 F7 00 F0 08 43 10 4C 08 02 77 2F F7 00 F0 08 43 10 4C 08 02 73 4A F7 00 B2 65 00 00 B2 64 00 00 B2 06 02 00 B2 5B 00 00 B2 5D 00 00 F0 08 43 10 4C 08 02 1E 40 F7 00 F0 08 43 10 4C 0A 02 40 40 F7 00 F0 08 43 10 4C 08 02 20 00 F7 00 F0 08 43 10 4C 08 02 21 00 F7 00 F0 08 43 10 4C 08 02 22 23 F7 00 F0 08 43 10 4C 08 02 4E 40 F7 00 F0 08 43 10 4C 0A 02 42 40 F7 00 F0 08 43 10 4C 08 02 50 00 F7 00 F0 08 43 10 4C 08 02 51 00 F7 00 F0 08 43 10 4C 08 02 52 00 F7 00 F0 09 43 73 01 50 08 03 00 00 F7 00 B3 00 00 00 B3 20 70 00 C3 30 00 B3 48 65 00 B3 63 01 00 B3 62 66 00 B3 06 40 00 B3 49 40 00 B3 63 01 00 B3 62 64 00 B3 06 40 00 B3 63 01 00 B3 62 09 00 B3 06 40 00 B3 63 01 00 B3 62 08 00 B3 06 40 00 B3 63 01 00 B3 62 0A 00 B3 06 40 00 F0 08 43 10 4C 08 03 05 01 F7 00 F0 09 43 73 01 50 08 03 04 64 F7 00 B3 07 3C 00 B3 0A 40 00 B3 47 40 00 B3 4A 40 00 B3 65 00 00 B3 64 01 00 B3 06 40 00 B3 41 00 00 B3 05 0A 00 F0 08 43 10 4C 08 03 0C 40 F7 00 F0 08 43 10 4C 08 03 0D 40 F7 00 F0 09 43 73 01 50 08 03 03 41 F7 00 F0 08 43 10 4C 08 03 76 10 F7 00 F0 08 43 10 4C 08 03 72 40 F7 00 F0 08 43 10 4C 08 03 77 2F F7 00 F0 08 43 10 4C 08 03 73 44 F7 00 B3 65 00 00 B3 64 00 00 B3 06 02 00 B3 5B 00 00 B3 5D 00 00 F0 08 43 10 4C 08 03 1E 40 F7 00 F0 08 43 10 4C 0A 03 40 40 F7 00 F0 08 43 10 4C 08 03 20 00 F7 00 F0 08 43 10 4C 08 03 21 00 F7 00 F0 08 43 10 4C 08 03 22 19 F7 00 F0 08 43 10 4C 08 03 4E 40 F7 00 F0 08 43 10 4C 0A 03 42 40 F7 00 F0 08 43 10 4C 08 03 50 00 F7 00 F0 08 43 10 4C 08 03 51 00 F7 00 F0 08 43 10 4C 08 03 52 00 F7 00 F0 0B 43 73 01 51 08 00 11 02 00 0B F7 00 F0 0B 43 73 01 51 08 00 00 02 00 03 F7 00 F0 09 43 10 4C 03 00 00 01 11 F7 00 F0 09 43 73 01 50 08 00 08 7F F7 00 F0 09 43 73 01 50 08 00 01 00 F7 00 F0 08 43 10 4C 03 00 0B 2D F7 00 F0 0B 43 73 01 51 08 01 11 02 00 0B F7 00 F0 0B 43 73 01 51 08 01 00 02 00 03 F7 00 F0 09 43 10 4C 03 01 00 01 11 F7 00 F0 09 43 73 01 50 08 01 08 7F F7 00 F0 09 43 73 01 50 08 01 01 00 F7 00 F0 08 43 10 4C 03 01 0B 2E F7 00 F0 0B 43 73 01 51 08 02 11 02 00 0B F7 00 F0 0B 43 73 01 51 08 02 00 02 00 03 F7 00 F0 09 43 10 4C 03 02 00 01 11 F7 00 F0 09 43 73 01 50 08 02 08 7F F7 00 F0 09 43 73 01 50 08 02 01 00 F7 00 F0 08 43 10 4C 03 02 0B 24 F7 00 F0 0B 43 73 01 51 08 03 11 02 00 0B F7 00 F0 0B 43 73 01 51 08 03 00 02 00 03 F7 00 F0 09 43 10 4C 03 03 00 01 11 F7 00 F0 09 43 73 01 50 08 03 08 7F F7 00 F0 09 43 73 01 50 08 03 01 00 F7 00 F0 08 43 10 4C 03 03 0B 2E F7 00 F0 09 43 73 01 50 08 03 02 00 F7 00 F0 09 43 73 01 50 04 00 00 00 F7 00 F0 0B 43 73 01 51 04 00 00 02 00 02 F7 00 F0 09 43 73 01 50 04 00 05 48 F7 00 F0 09 43 73 01 50 04 00 02 01 F7 00 F0 09 43 73 01 50 04 00 03 00 F7 00 F0 09 43 73 01 50 04 00 04 00 F7 00 F0 0B 43 73 01 51 07 00 00 02 03 00 F7 00 F0 09 43 73 01 50 07 00 00 64 F7 00 FF 7F 82 04 43 73 0C 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 FF 2F 00 4D 54 72 6B 00 00 08 59 00 F0 09 43 73 01 50 05 01 01 2A F7 00 F0 09 43 73 01 50 05 01 02 32 F7 00 F0 09 43 73 01 50 08 00 00 7F F7 00 B0 00 00 00 B0 20 71 00 C0 00 00 B0 48 68 00 B0 63 01 00 B0 62 66 00 B0 06 40 00 B0 49 40 00 B0 63 01 00 B0 62 64 00 B0 06 40 00 B0 63 01 00 B0 62 09 00 B0 06 40 00 B0 63 01 00 B0 62 08 00 B0 06 40 00 B0 63 01 00 B0 62 0A 00 B0 06 40 00 F0 08 43 10 4C 08 00 05 01 F7 00 F0 09 43 73 01 50 08 00 04 6A F7 00 B0 07 64 00 B0 0A 40 00 B0 47 40 00 B0 4A 4E 00 B0 65 00 00 B0 64 01 00 B0 06 40 00 B0 41 00 00 B0 05 00 00 F0 08 43 10 4C 08 00 0C 40 F7 00 F0 08 43 10 4C 08 00 0D 40 F7 00 F0 09 43 73 01 50 08 00 03 40 F7 00 F0 08 43 10 4C 08 00 76 10 F7 00 F0 08 43 10 4C 08 00 72 5C F7 00 F0 08 43 10 4C 08 00 77 2F F7 00 F0 08 43 10 4C 08 00 73 60 F7 00 B0 65 00 00 B0 64 00 00 B0 06 02 00 B0 5B 00 00 B0 5D 00 00 F0 08 43 10 4C 08 00 1E 40 F7 00 F0 08 43 10 4C 0A 00 40 40 F7 00 F0 08 43 10 4C 08 00 20 00 F7 00 F0 08 43 10 4C 08 00 21 00 F7 00 F0 08 43 10 4C 08 00 22 32 F7 00 F0 08 43 10 4C 08 00 4E 40 F7 00 F0 08 43 10 4C 0A 00 42 40 F7 00 F0 08 43 10 4C 08 00 50 00 F7 00 F0 08 43 10 4C 08 00 51 00 F7 00 F0 08 43 10 4C 08 00 52 00 F7 00 F0 09 43 73 01 50 08 01 00 7F F7 00 B1 00 00 00 B1 20 71 00 C1 5E 00 B1 48 6C 00 B1 63 01 00 B1 62 66 00 B1 06 3A 00 B1 49 40 00 B1 63 01 00 B1 62 64 00 B1 06 40 00 B1 63 01 00 B1 62 09 00 B1 06 40 00 B1 63 01 00 B1 62 08 00 B1 06 40 00 B1 63 01 00 B1 62 0A 00 B1 06 40 00 F0 08 43 10 4C 08 01 05 01 F7 00 F0 09 43 73 01 50 08 01 04 53 F7 00 B1 07 46 00 B1 0A 40 00 B1 47 40 00 B1 4A 40 00 B1 65 00 00 B1 64 01 00 B1 06 40 00 B1 41 00 00 B1 05 1A 00 F0 08 43 10 4C 08 01 0C 40 F7 00 F0 08 43 10 4C 08 01 0D 40 F7 00 F0 09 43 73 01 50 08 01 03 40 F7 00 F0 08 43 10 4C 08 01 76 10 F7 00 F0 08 43 10 4C 08 01 72 4A F7 00 F0 08 43 10 4C 08 01 77 2F F7 00 F0 08 43 10 4C 08 01 73 40 F7 00 B1 65 00 00 B1 64 00 00 B1 06 02 00 B1 5B 00 00 B1 5D 00 00 F0 08 43 10 4C 08 01 1E 40 F7 00 F0 08 43 10 4C 0A 01 40 40 F7 00 F0 08 43 10 4C 08 01 20 02 F7 00 F0 08 43 10 4C 08 01 21 00 F7 00 F0 08 43 10 4C 08 01 22 1A F7 00 F0 08 43 10 4C 08 01 4E 40 F7 00 F0 08 43 10 4C 0A 01 42 40 F7 00 F0 08 43 10 4C 08 01 50 00 F7 00 F0 08 43 10 4C 08 01 51 00 F7 00 F0 08 43 10 4C 08 01 52 00 F7 00 F0 09 43 73 01 50 08 02 00 00 F7 00 B2 00 00 00 B2 20 72 00 C2 49 00 B2 48 59 00 B2 63 01 00 B2 62 66 00 B2 06 40 00 B2 49 40 00 B2 63 01 00 B2 62 64 00 B2 06 40 00 B2 63 01 00 B2 62 09 00 B2 06 40 00 B2 63 01 00 B2 62 08 00 B2 06 40 00 B2 63 01 00 B2 62 0A 00 B2 06 40 00 F0 08 43 10 4C 08 02 05 01 F7 00 F0 09 43 73 01 50 08 02 04 6C F7 00 B2 07 64 00 B2 0A 40 00 B2 47 40 00 B2 4A 40 00 B2 65 00 00 B2 64 01 00 B2 06 40 00 B2 41 00 00 B2 05 0C 00 F0 08 43 10 4C 08 02 0C 40 F7 00 F0 08 43 10 4C 08 02 0D 42 F7 00 F0 09 43 73 01 50 08 02 03 40 F7 00 F0 08 43 10 4C 08 02 76 10 F7 00 F0 08 43 10 4C 08 02 72 40 F7 00 F0 08 43 10 4C 08 02 77 35 F7 00 F0 08 43 10 4C 08 02 73 6A F7 00 B2 65 00 00 B2 64 00 00 B2 06 02 00 B2 5B 00 00 B2 5D 00 00 F0 08 43 10 4C 08 02 1E 40 F7 00 F0 08 43 10 4C 0A 02 40 40 F7 00 F0 08 43 10 4C 08 02 20 0A F7 00 F0 08 43 10 4C 08 02 21 00 F7 00 F0 08 43 10 4C 08 02 22 14 F7 00 F0 08 43 10 4C 08 02 4E 40 F7 00 F0 08 43 10 4C 0A 02 42 48 F7 00 F0 08 43 10 4C 08 02 50 00 F7 00 F0 08 43 10 4C 08 02 51 00 F7 00 F0 08 43 10 4C 08 02 52 00 F7 00 F0 09 43 73 01 50 08 03 00 00 F7 00 B3 00 00 00 B3 20 70 00 C3 30 00 B3 48 65 00 B3 63 01 00 B3 62 66 00 B3 06 40 00 B3 49 40 00 B3 63 01 00 B3 62 64 00 B3 06 40 00 B3 63 01 00 B3 62 09 00 B3 06 40 00 B3 63 01 00 B3 62 08 00 B3 06 40 00 B3 63 01 00 B3 62 0A 00 B3 06 40 00 F0 08 43 10 4C 08 03 05 01 F7 00 F0 09 43 73 01 50 08 03 04 64 F7 00 B3 07 3C 00 B3 0A 40 00 B3 47 40 00 B3 4A 40 00 B3 65 00 00 B3 64 01 00 B3 06 40 00 B3 41 00 00 B3 05 0A 00 F0 08 43 10 4C 08 03 0C 40 F7 00 F0 08 43 10 4C 08 03 0D 40 F7 00 F0 09 43 73 01 50 08 03 03 41 F7 00 F0 08 43 10 4C 08 03 76 10 F7 00 F0 08 43 10 4C 08 03 72 40 F7 00 F0 08 43 10 4C 08 03 77 2F F7 00 F0 08 43 10 4C 08 03 73 44 F7 00 B3 65 00 00 B3 64 00 00 B3 06 02 00 B3 5B 00 00 B3 5D 00 00 F0 08 43 10 4C 08 03 1E 40 F7 00 F0 08 43 10 4C 0A 03 40 40 F7 00 F0 08 43 10 4C 08 03 20 00 F7 00 F0 08 43 10 4C 08 03 21 00 F7 00 F0 08 43 10 4C 08 03 22 19 F7 00 F0 08 43 10 4C 08 03 4E 40 F7 00 F0 08 43 10 4C 0A 03 42 40 F7 00 F0 08 43 10 4C 08 03 50 00 F7 00 F0 08 43 10 4C 08 03 51 00 F7 00 F0 08 43 10 4C 08 03 52 00 F7 00 F0 0B 43 73 01 51 08 00 11 02 00 0B F7 00 F0 0B 43 73 01 51 08 00 00 02 00 03 F7 00 F0 09 43 10 4C 03 00 00 01 11 F7 00 F0 09 43 73 01 50 08 00 08 7F F7 00 F0 09 43 73 01 50 08 00 01 00 F7 00 F0 08 43 10 4C 03 00 0B 2A F7 00 F0 0B 43 73 01 51 08 01 11 02 00 0F F7 00 F0 0B 43 73 01 51 08 01 00 02 00 04 F7 00 F0 09 43 10 4C 03 01 00 01 12 F7 00 F0 09 43 73 01 50 08 01 08 7F F7 00 F0 09 43 73 01 50 08 01 01 00 F7 00 F0 08 43 10 4C 03 01 0B 28 F7 00 F0 0B 43 73 01 51 08 02 11 02 00 0B F7 00 F0 0B 43 73 01 51 08 02 00 02 00 03 F7 00 F0 09 43 10 4C 03 02 00 01 11 F7 00 F0 09 43 73 01 50 08 02 08 7F F7 00 F0 09 43 73 01 50 08 02 01 00 F7 00 F0 08 43 10 4C 03 02 0B 2A F7 00 F0 0B 43 73 01 51 08 03 11 02 00 0B F7 00 F0 0B 43 73 01 51 08 03 00 02 00 03 F7 00 F0 09 43 10 4C 03 03 00 01 11 F7 00 F0 09 43 73 01 50 08 03 08 7F F7 00 F0 09 43 73 01 50 08 03 01 00 F7 00 F0 08 43 10 4C 03 03 0B 2E F7 00 F0 09 43 73 01 50 08 03 02 00 F7 00 F0 09 43 73 01 50 04 00 00 7F F7 00 F0 0B 43 73 01 51 04 00 00 02 00 02 F7 00 F0 09 43 73 01 50 04 00 05 48 F7 00 F0 09 43 73 01 50 04 00 02 00 F7 00 F0 09 43 73 01 50 04 00 03 00 F7 00 F0 09 43 73 01 50 04 00 04 00 F7 00 F0 0B 43 73 01 51 07 00 00 02 03 00 F7 00 F0 09 43 73 01 50 07 00 00 64 F7 00 FF 7F 82 04 43 73 0C 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 FF 2F 00 46 4E 52 63 00 00 03 56 46 4E 52 50 00 00 00 4C 0A 2C 2A 03 04 4D 6E 61 6D 00 00 00 10 48 65 27 6C 6C 20 48 61 76 65 20 54 6F 20 47 6F 47 6E 61 6D 00 00 00 08 42 61 6C 6C 72 6F 6F 6D 4B 77 64 31 00 00 00 0F 35 30 2C 6D 6F 64 65 72 6E 20 77 61 6C 74 7A 4B 77 64 32 00 00 00 00 46 4E 52 50 00 00 00 57 07 81 1B 03 04 4D 6E 61 6D 00 00 00 11 48 6F 6D 65 20 4F 6E 20 54 68 65 20 52 61 6E 67 65 47 6E 61 6D 00 00 00 07 43 6F 75 6E 74 72 79 4B 77 64 31 00 00 00 1A 74 72 61 64 69 74 69 6F 6E 61 6C 2C 63 6F 77 62 6F 79 2C 77 65 73 74 65 72 6E 4B 77 64 32 00 00 00 00 46 4E 52 50 00 00 00 3B 06 5B 9A 03 04 4D 6E 61 6D 00 00 00 07 4C 75 63 69 6C 6C 65 47 6E 61 6D 00 00 00 07 43 6F 75 6E 74 72 79 4B 77 64 31 00 00 00 08 37 30 2C 77 61 6C 74 7A 4B 77 64 32 00 00 00 00 46 4E 52 50 00 00 00 57 06 EF 91 03 04 4D 6E 61 6D 00 00 00 1A 4D 61 6D 61 20 44 6F 6E 27 74 20 4C 65 74 20 59 6F 75 72 20 42 61 62 69 65 73 47 6E 61 6D 00 00 00 07 43 6F 75 6E 74 72 79 4B 77 64 31 00 00 00 11 61 6D 65 72 69 63 61 6E 2C 73 74 61 6E 64 61 72 64 4B 77 64 32 00 00 00 00 46 4E 52 50 00 00 00 56 07 0A E2 03 04 4D 6E 61 6D 00 00 00 15 4D 79 20 44 61 72 6C 69 6E 67 20 43 6C 65 6D 65 6E 74 69 6E 65 47 6E 61 6D 00 00 00 0B 53 69 6E 67 2D 61 6C 6F 6E 67 73 4B 77 64 31 00 00 00 11 74 72 61 64 69 74 69 6F 6E 61 6C 2C 77 61 6C 74 7A 4B 77 64 32 00 00 00 00 46 4E 52 50 00 00 00 5F 05 95 1D 03 04 4D 6E 61 6D 00 00 00 14 4F 6E 20 54 6F 70 20 4F 66 20 4F 6C 64 20 53 6D 6F 6B 65 79 47 6E 61 6D 00 00 00 0B 53 69 6E 67 2D 61 6C 6F 6E 67 73 4B 77 64 31 00 00 00 1B 74 72 61 64 69 74 69 6F 6E 61 6C 2C 63 68 69 6C 64 72 65 6E 73 2C 77 61 6C 74 7A 4B 77 64 32 00 00 00 00 46 4E 52 50 00 00 00 3E 06 5B 9A 03 04 4D 6E 61 6D 00 00 00 11 4F 6E 65 20 44 61 79 20 41 74 20 41 20 54 69 6D 65 47 6E 61 6D 00 00 00 06 4F 6C 64 69 65 73 4B 77 64 31 00 00 00 02 37 30 4B 77 64 32 00 00 00 00 46 4E 52 50 00 00 00 48 06 5B 9A 03 04 4D 6E 61 6D 00 00 00 09 50 69 61 6E 6F 20 4D 61 6E 47 6E 61 6D 00 00 00 0C 50 6F 70 20 43 6C 61 73 73 69 63 73 4B 77 64 31 00 00 00 0E 37 30 2C 70 69 61 6E 6F 2C 77 61 6C 74 7A 4B 77 64 32 00 00 00 00 46 4E 52 50 00 00 00 43 08 52 AE 03 04 4D 6E 61 6D 00 00 00 0F 54 65 6E 6E 65 73 73 65 65 20 57 61 6C 74 7A 47 6E 61 6D 00 00 00 07 43 6F 75 6E 74 72 79 4B 77 64 31 00 00 00 08 35 30 2C 77 61 6C 74 7A 4B 77 64 32 00 00 00 00 46 4E 52 50 00 00 00 53 09 89 68 03 04 4D 6E 61 6D 00 00 00 18 54 68 65 72 65 20 47 6F 65 73 20 4D 79 20 45 76 65 72 79 74 68 69 6E 67 47 6E 61 6D 00 00 00 07 43 6F 75 6E 74 72 79 4B 77 64 31 00 00 00 0F 61 6D 65 72 69 63 61 6E 2C 62 61 6C 6C 61 64 4B 77 64 32 00 00 00 00")
+
+
+
+)
+;;; 8839

@@ -1,0 +1,2400 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/schemedoc-2/schemedoc")
+
+(define end-p (compose li p))
+(define (pre-code code-text) (pre 'css:color "brown" 'css:font-size "70%" code-text))
+
+; return a reference to the meta-lecture-note document:
+(define (meta-ref kind)
+  (list 'href (string-append "meta-example/html/meta-lecture-notes-slide-" kind ".html")))
+
+(define (general-lib-ref suffix)
+  (string-append "../../../../lib/" suffix))
+
+; return a reference to another place in this manual:
+(define (this-ref ref)
+  (string-append "#" ref))
+
+(define common-subnote-page-attributes
+ (list
+   (attribute-description 'name "id" (span "The identification of this element. Unique within a" (kbd "note-page") "clause"))
+   (attribute-description 'name "margin" "A margin around this element. A CSS attribute. Remember a unit such as cm, em, or ex.")
+   (attribute-description 'name "margin-left" "A margin to the left of the element. A CSS attribute. Remember a unit such as cm, em, or ex.")
+   (attribute-description 'name "margin-right" "A margin to the right of the element. A CSS attribute. Remember a unit such as cm, em, or ex.")
+   (attribute-description 'name "margin-bottom" "A margin to the bottom of the element. A CSS attribute. Remember a unit such as cm, em, or ex.")
+   (attribute-description 'name "margin-top" "A margin to the top of the element. A CSS attribute. Remember a unit such as cm, em, or ex.")
+   (attribute-description 'name "drop" (span "If" (kbd (string-it "true")) "this element is not taken into account. Defaults to" (kbd (string-it "false")) _ "."))
+   (attribute-description 'name "annotations" "An attribute relevant for those elements with one or more annotations.
+                                              Tells how to organize the annotations relative to the main contents in themes.")
+ )
+)
+
+(manual
+  (manual-front-matters
+    (manual-title "Reference Manual of the XML-in-LAML Lecture Note System")
+    (manual-author "Kurt Nørmark" "normark@cs.auc.dk")
+    (manual-affiliation "Department of Computer Science" "Aalborg University" "Denmark")
+    (manual-abstract 
+     (div 
+      (p "This is the reference manual of the LENO Lecture Note System. 
+          This manual pertains to the XML-in-LAML interface
+          of LENO. The older interface - " 
+          (a-tag "../../../lecture-notes/man/lecture-notes.html" "the original LENO system") " - is now obsolete.")
+
+     (p "There are also reference manuals of the" 
+         (a 'href "../../lecture-notes-themes/man/lecture-notes-themes.html" "LENO theme language")
+             "and the" (a 'href "../../lecture-notes-trail/man/lecture-note-trail.html" "LENO trail language") _ ".")
+
+      (p "LENO has its own home page -" (a 'href "http://www.cs.auc.dk/~normark/leno/" "The LENO Homepage") _ "." "In case you are interested in a broader introduction to LENO, please consult it.")
+
+      (p "Using LENO it is possible to make web-based teaching material. The collection is structured 
+    in chapters. Each chapter is used in a separate lecture. LENO supports a comprehensive
+    linking of slides within a chapter, and linking between the chapters. Overview pages are
+    generated for each chapter, and lecture wide for all chapters. LENO also supports an
+    alphabetic index with links to slides given selected index words, concepts, and slide titles.")
+ 
+    (p "LENO supports three different
+    views on the slide: Slide view, annotated slide view, and an aggregated slide view.
+    In addition, LENO supports a thematic view via a secondary source file.
+    In slide view, the main text of the slides are shown
+    in using a relatively large font. In the annotated slide view, the slide is shown to
+    the left, and the annotations are shown to the right. 
+    In the aggregated slide view, the slide contents and the annotations are mixed into a single,
+    long text with marginal comments.
+    Thematic view of a LENO material comes close to a traditional text book exposition, and it typically contains more information than found in the already mentioned views..
+    Allviews can be seen from any Internet browser,
+    because it is translated to simple and plain HTML.")
+
+    (p "LENO is implemented by means of LAML, which means 'Lisp Abstracted Markup Language'.
+        This version of LENO depends on XML-in-LAML.
+        In LAML a number of Scheme expressions are executed with the purpose to generate HTML
+        counterparts.")
+
+    (p "This document is the reference manual of LENO. It documents the primary user level 'markup' functions, which
+    act as special purpose slide markup functions. The markup functions mirror the elements of the LENO XML language,
+    which is defined by the LENO DTD.")
+
+    (p "There exists a " (a-tag "../../../lecture-notes/man/css-classes.html" "separate overview of the CSS") " support for LENO.
+     This overview has a brief description of the LENO CSS stylesheet support as well. 
+    ")
+
+    (p "The"
+      (a-tag "meta-example/meta-lecture-notes.html" "Meta Lecture Notes") "gives a concrete example
+      of each Leno means of expression. As a distinguished feature, the example give access to the LENO source
+      using the source-program clause to read relevant parts of the underlying LAML file. Try it out!")
+
+    (p "You should also consult the comprehensive, elucidative " (a-tag "../../../../tutorial/leno/html/index.html" "LENO tutorial")
+     " which features " (a-tag "../../../../examples/tutorial/leno/index.html" "a variety of LENO examples") _ ".")
+
+    (p "You should also pay attention to the very simple (and somewhat artificial) "
+       (a-tag "../../../../examples/leno-xml-in-laml/index.html" "introductory LENO examples")
+       "provided with this software.")
+
+    
+  ))
+    'css-prestylesheet "compact"
+    'css-stylesheet "original"
+    'laml-resource "true"
+  )
+
+(manual-section 'id "single-lecture"
+
+ (section-title "Single lecture materials")
+ (section-body
+   (div 
+    (p "A single lecture material consist on a single lecture only, and as such it is simpler
+        than multi-section materials, which is described in" (a 'href "#multi-section" "the next section") _ ".")
+  
+    (p "The following shows a template of single lecture LENO source file:")
+  
+    (indent-pixels 10 
+          (pre-code (read-text-file (in-startup-directory "template-zip-dir/single-xml-in-laml.laml"))))
+  
+    (p (span "It is easy to initiate a single lecture material in LENO when you work with LENO and LAML in Emacs. Just initiate the 
+        command M-x " (b "make-lecture-notes") ",and you are started. Use the templates in the Emacs LENO menu to construct your document."))
+  
+    (p "The" (kbd "scheme-suffix") "attribute of the" 
+        (kbd "leno-front-matters") "clause allows you to read a Scheme file with ordinary Scheme
+        definitions. (This file is loaded after the loading of all LENO software). 
+        Use this file to organize ad hoc convenience functions, which help you manage a complex material.
+        There is also a similar" (kbd "scheme-prefix") "attribute, which you do not need to care about for single chapter materials.
+        The Scheme definitions in the scheme prefix file are read before the LENO software is loaded.")
+   )
+
+))
+
+
+(manual-section 'id "multi-section"
+
+ (section-title "Multi lecture materials")
+ (section-body
+   (div
+    (p "A multi lecture material consist of a number of LAML source files which each represents a chapter (lecture) in
+        the material. Usually, we organize the common aspects in Scheme prefix and Scheme suffix files, which are shared
+        among all the chapters.")
+
+    (p "The Scheme prefix file, addressed by the" (kbd "scheme-prefix") "attribute of" (kbd "leno-front-matters") "clauses,
+        must be present for multi-lecture materials. Here is an example of this file:")
+
+    (indent-pixels 10 
+          (pre-code (read-text-file (in-startup-directory "template-zip-dir/scheme-prefix-xml-in-laml.scm"))))
+
+    (p "As it appears, the Scheme prefix file defines the note titles, the abstract, and most important a list
+        of lecture names (proper file names of the each lecture/chapter). The variable current-lecture can be set to a value smaller
+        than the length of the lecture-sections, in case you do not want to link to details in the latter chapters yet.")
+
+    (p "The Scheme suffix file, addressed by the" (kbd "scheme-suffix") "attribute of the" (kbd "leno-front-matters") "clauses,
+        can contain additional Scheme definitions.")
+
+    (p "The following shows a template of a lecture in a multi lecture LENO material:")
+  
+  
+    (indent-pixels 10 
+          (pre-code (read-text-file (in-startup-directory "template-zip-dir/multi-xml-in-laml.laml"))))
+
+    (p "Notice the loading of '" _ (kbd "common-front-matters-stuff.scm") _ "' which conveniently define a number of properties shared by the
+     leno-front-matters clauses in all lectures. (We cannot define this in the" 
+     (kbd "scheme-prefix") "or" (kbd "scheme-suffix") "clauses, because
+     these are first brought to the attention of LENO through the" (kbd "leno-front-matters") "clause itself.) Here is a typical 
+     '" _ (kbd "common-front-matters-stuff.scm") _ "' file:")
+  
+    (indent-pixels 10 
+          (pre-code (read-text-file (in-startup-directory "template-zip-dir/front-matters-xml-in-laml.scm"))))
+
+    (p "As of now, there is no easy way to make all the pieces of a multi lecture material. It is probably easiest first to initiate a 
+     single lecture material, and to create the missing pieces (as described above) manually.")
+
+   )
+ )
+)
+
+
+
+(manual-section 'id "overall-org"
+  (section-title "Overall directory organization")
+  (section-body 
+   (div
+    (p "We start with a description of the overall organization of a set of lecture notes. 
+     Here follows the subdirectory structure of the directory with LENO lecture notes:") 
+
+    (pre 
+"notes
+  html
+    graphics
+      small
+    images
+    javascript
+    applets
+    external-html
+  graphics
+    small
+  images
+  includes
+  internal
+  stylesheets")
+
+    (p "All of the names above are directory names.")
+    (p "The notes directory contains the laml files (one laml file per chapter in the notes), the
+        Scheme prefix and Scheme suffix files, and other source related files. Your are in control of the real
+        name of this directory. When LENO is executed, an
+        HTML file per lecture is placed in the notes directory.")
+
+    (p "The html directory contains all the generated html files, and as can be seen, it contains
+        a number of sub-directories. This organization is handy, because you can zip the html directory
+        in order to obtain a self-contained set of information at HTML level.
+        In other words, the contents
+        of the html directory is enough to use the material in an Internet browser. The javascript directory contains
+        a tiny amount of javascript stuff used by Leno.
+        When you process a LENO file the javascript directory is populated automatically.")
+
+    (p "It is possible to organize that the html directory is placed outside the notes directory. 
+        In order to do that you should define the" (kbd "source-destination-delta") "attribute of the" (kbd "leno-front-matters") "clause.
+        This attributes defines
+        the path 'difference' between the note source directory and the HTML destination directory. In the default case,
+        the value of this attribute is" (kbd (string-it "html/")) ".")
+
+    (p "The" (kbd "notes/graphics") "directory contains gif, jpg, or png files for all the figures of the notes. 
+        The author of the notes is responsible
+        for the population of this directory, as well as the subdirectory called small.
+        If, for instance," (kbd "f.gif") "is a file in" (kbd "html/graphics") _ ","
+        (kbd "f.fig") "must in addition be found in the directory" (kbd "html/graphics/small") _ "." "
+        The idea is to reduce the figure in" (kbd "f.gif") _ "," "and to place the reduced figure in the" (kbd "small") "directory.
+        This turns out to be necessary, because most browsers makes very rough and poor reductions of pictures.")
+
+     (p "The" (kbd "images") "directory contains note-specific icons that are used throughout the LENO systems.
+        In most situations, this directory is empty (or it contains only the logo.gif image).
+        Location hint icons, as described in"
+       (a 'href "#cross-reference-location-hints" "the documentation of the function cross-reference-location-hints")
+         _ "," "serve as examples.
+        The note-specific icons do not include the graphical illustrations nor the LENO icons.
+        When you run LENO (thus generating the HTML version of the 
+        slides etc) the relevant image icons are copied from the" (kbd "notes/images") "directory to the" (kbd "html/images") "directory.
+        Therefore we do not need to copy the images into this directory on beforehand.")
+
+     (p "In the" (kbd "applets") "directory you should place java class files with applets.")
+
+     (p "The directory" (kbd "external-html") "is intended to contain html files, which are considered an integrated
+         part of a set of lecture notes, but being outside the LAML domain. In other words, here you can put
+         html files, which somehow are relevant for the lecture notes.")
+
+     (p "The" (kbd "internal") "directory contains helping files in Lisp format with extensions
+         " (kbd "aux") _ "," (kbd "crs") _ "," (kbd "exc") _ "," (kbd "spk") _ "," (kbd "lsp") _ "," "and" (kbd "idx") _ "." "
+         Most users of LENO do not need to care about these files. They are generated when a lecture on a LAML file
+         is processsed. The" (kbd "aux") "file contains the name of the lecture together with an 'record' for each page
+         in the lecture. The" (kbd "crs") "file contains information about all cross references found in a lecture.
+         The" (kbd "exc") "file contains information about all the exercises of a lecture." (kbd "lsp") "files
+         contains a complete representation of the slides in a list representation." (kbd "spk") "files contains information
+         about" (kbd "show-and-speak") "details (if applied). And finally, an" (kbd "idx") "file
+         contains all contributions to the index file from a given section.")
+         
+     (p "The" (kbd "includes") "directory can be used to material which is included
+         (copied into) the notes. In other words, the material in the include directory
+         is source material, which is addressed from the LAML note files. Such included material can also come from other
+         places in your file system.")
+         
+     (p "The" (kbd "stylesheets") "directory contains note-specific CSS stylesheets. If you want to affect the appearance of
+         your LENO slides you can organize your CSS files in this directory.")
+         
+
+    )
+   )
+)
+
+(manual-section 'id "the-leno-element"
+
+ (section-title "The surrounding leno element")
+ (section-body "We will first discuss the outer LENO element, which plays a special, and not very important role."))
+
+(manual-page 
+ 'name "leno"
+ (example-form "(leno (leno-front-matters ...) (begin-notes) (note-page ...) ... (end-notes))")
+ (description (span "A surrounding element, which we typically do NOT use at the XML-in-LAML level.
+               According to the DTD (grammar) of LENO, the outer element is called" (kbd "leno") _ "." "It is supposed to surround
+               the" (kbd "leno-front-matters") _ "," 
+               (kbd "begin-notes") _ "," "all note pages, and" (kbd "end-notes") _ "." "In a programmatic authoring situation
+               with LAML and Scheme we usually ignore this outer structuring. It is far more flexible to 
+               work with a number of top level forms (" (kbd "leno-front-matters") _ "," 
+               (kbd "begin-notes") _ "," "etc) than a single one (" _ (kbd "leno")_ ").
+               Also, this allows us to have Scheme" (kbd "define") "forms side by side with note-page clauses.")
+ )
+)
+
+
+
+(manual-section 'id "preamble-stuff" 
+  (section-title "Preamble stuff")
+  (section-body (span "The LENO preamble consist of a single" (kbd "leno-front-matters") "element instance with a few
+                 embedded elements and a lot of possible attributes.")))
+
+
+(manual-page 
+ 'name "leno-front-matters"
+ (example-form "(leno-front-matters 
+                                (front-title \"title\") 
+                                (front-subtitle \"sub\")
+                                (front-author \"author\")
+                                (front-affiliation \"af\")
+                                (front-abstract \"abstract\")
+                                attributes...))")
+ (attribute-descriptions
+
+   (attribute-description 'name "slide-view"  "Generate the slide view of the material")
+   (attribute-description 'name "annotated-slide-view"   "Generate the annotated slide view of the material")
+   (attribute-description 'name "aggregated-view"   "Generate the aggregated lecture note view of the material")
+   (attribute-description 'name "theme-view"   "Link to the theme view. An advanced attribute. Theme are generated from a secondary source, controlled by the attribute theme-source")
+   (attribute-description 'name "primary-view"   "Controls the primary view of the material. Normally, it is slide-view, but it may also be 
+                                            annotated-slide view or aggregated-view")
+
+   (attribute-description 'name "course-home-url"   "The URL of an associated course home page. Becomes the target of the 'Home' link of LENO.")
+   (attribute-description 'name "author-home-url"   "The URL of (one of) the author's home page(s). Less important than course-home-url.")
+   (attribute-description 'name "note-download-url"   "The relative URL of a download page. The URL is relative from the HTML target directory. If an empty string, no link to download page is provided.")
+   (attribute-description 'name "logo-url"   "The URL associated with a logo. This attribute controls logo dispay. If an empty string, no logo is displayed. ")
+   (attribute-description 'name "note-contents-description"   "Meta description of the lecture. Goes into the content meta tag description of the material")
+   (attribute-description 'name "slide-header"   "Controls the amount of slide header, including the icons present in the header")
+   (attribute-description 'name "lecture-type"   "Provides for marking of lectures that serve as side tracks only. Use normal for non-side track lectures")
+   (attribute-description 'name "scheme-prefix"   "The name of a Scheme file (proper name and extension) which is loaded before the LENO software is loaded. Necessary for multi lecture materials")
+   (attribute-description 'name "scheme-suffix"   "The name of a Scheme file (proper name and extension) which is loaded after the LENO software. Good for ad hoc conveniences abstractions")
+   (attribute-description 'name "trail-of-lecture"   "If true, the whole lecture will - as an additional means - be available in a 'dummy trail'. This causes generation of a lot of frame and frameset files in addition to the normal HTML files")
+   (attribute-description 'name "language"   "Controls the language of the fixed texts in the LENO software")
+   (attribute-description 'name "show-and-speak"   "If true, the show and speak facility is enabled. Defaults to false")
+   (attribute-description 'name "default-showing-time"   "Only relevant if show-and-speak is true. The number of seconds to show a page if nothing is specified in a show-and-speak clause.")
+   (attribute-description 'name "additional-showing-time"   "Only relevant if show-and-speak is true: A fixed amount of seconds always added to any showing time to compensate for download time etc.")
+   (attribute-description 'name "sound-source"   "Controls the source of the sound files")
+   (attribute-description 'name "speak-url-prefix"   "The URL prefix to the sound files. The URL prefix is relative to the HTML target directory. 
+                                                It can also be a prefix of an absolute URL. Notice that this attribute is coupled to speak-file-prefix.")
+   (attribute-description 'name "speak-file-prefix"   "The relative path from the LENO source directory to the sound directory. 
+                                                 Notice that this attribute is coupled to speak-url-prefix.")
+   (attribute-description 'name "show-and-speak-author-mode" "If true, display the name of sound source files in annotated slide view. This is helpful while recording sound files.
+                                                        Should be false in normal use.")
+   (attribute-description 'name "exercise-model"   "Controls the various presentation modes of exercises and solutions supported by LENO.
+                                              none: Do no include exercises in the material. 
+                                              make-indexes: Include exercise formulations, and make indexes of these of a given lecture.
+                                              make-indexes-and-solutions-per-lecture: Include exercise formulations and solutions lecture wide.
+                                              synchronous-exercises: A special exercise mode targeted at an external server-based tool: The exercise manager (advanced aspect).
+   ")
+   (attribute-description 'name "mouse-advancement"   "Controls whether to proceed to next page by double click or single clicking the mouse. Defaults to double click.")
+   (attribute-description 'name "word-index"   "Controls whether to generate a comprehensive index - based on the information in the index-words clauses and other informations")
+   (attribute-description 'name "word-index-type"   "Control if only slides, or both slides and theme (text book) are referred from word indexes. It may take some time to generate word indexes with the value slide-and-theme, because the relation between theme sections and slide parts takes time to compute (it may involve searching through large parts of the material).")
+   (attribute-description 'name "apply-css-styling"   "Controls whether to apply CSS style sheets in slide view. 
+               Currently there exists a default set of CSS stylesheets which are applied in case this attribute is true. 
+               In a future version, the LENO user will be able to specify his own style sheets. ")
+
+   (attribute-description 'name "css-stylesheet"      "The name of a CSS stylesheet to apply on the LENO material. 
+                                                 The given stylesheet is not supposed to control font sizes. This is done via" (kbd "css-prestylesheet") _ "." "
+                                                 The name corresponds to the proper file names (without extension) of a CSS stylesheet in
+                                                 either the stylesheets directory of the LENO software directory or the note source directory.
+                                                 If both exist, they are appended in such a way that the stylesheet of the source directory
+                                                 comes last. 
+                                                 If this attribute is not present, no CSS styling is done. Possible values: original, aau1, aau2, blue, powerpoint."
+                                                 "See also the last part of the" (a 'href "../../../lecture-notes/man/css-classes.html" "CSS class explanation") _ "." "
+                                                 ")
+   (attribute-description 'name "css-prestylesheet"      "The name of a CSS stylesheet for the LENO material.
+                                                          Is only intended to specify font size properties.
+                                                          As for the" (kbd "css-stylesheet") "attribute, there may be a prestylesheet in both the LENO software directory and in the
+                                                          directory with the leno source file.
+                                                          Possible values: large-size, normal-size, small-size."
+                                                          "See also the last part of the" (a 'href "../../../lecture-notes/man/css-classes.html" "CSS class explanation") _ ".")
+   (attribute-description 'name "css-stylesheet-copying" "A boolean variable that controls the copying of stylesheets from the LENO software directory or the LENO source directory to the
+                                                    LENO target directory. If false, a stylesheet file is not copied. A false value is useful in a development situation, during which 
+                                                    you experiment with CSS settings in the HTML target directory. In normal use, the value should be true. True is the default value.")
+   (attribute-description 'name "news-flash-string"   "A news flash string to be shown on selected index pages in LENO. If empty, no newsflash is shown.")
+   (attribute-description 'name "news-flash-level"   "A number between 0 and 3. Level 0 means no news flash. Level 1: Show on main index page. Level 2: Show on all lecture pages. Level 3: Add news flash to other overview pages")
+   (attribute-description 'name "quiz-support"   "Controls the linking to an external LAML server quiz service, based on information in the quiz clauses")
+   (attribute-description 'name "verbosity-level"   "A number between 0 and 2. Controls how much LENO gives while processing. 0: Be almost silent. 1: A line pr. note page. 2: A line pr. subclause of note page.")
+   (attribute-description 'name "process-all-lectures"   "If true, all lectures in a multi lecture collection is processed after the processing of this lecture")
+
+   (attribute-description 'name "clean-html-directory"   
+      "If true, relevant files are removed from the LENO html target directories. This includes html files from the html directory, graphics files from the images and the graphics directories, and css files from the stylesheet directory. Use a true value every now and then to remove old stuff")
+   
+   (attribute-description 'name "theme-source"   
+      "Controls the generation of the secondary theme source file. An advanced aspect. If overwrite, overwrite the canonical theme source file. If new, make a new uniquely name theme source file. If none, do not derive any theme source file.")
+
+   (attribute-description 'name "theme-auto-process" "If true, process the secondary theme source file automatically after processing of the primary LENO source file.")
+   (attribute-description 'name "make-print-page" "It true, generate a PDF print page which links to PDF files, and link to it from the overall LENO index pages via the 'printer icon'.")
+   (attribute-description 'name "trail-source" "If non-none, generate a secondary trail source file covering all note pages in all lectures.
+                                          Overwrite an existing file if the value is 'overwrite'. Generate a new one if the value is 'new'. See also" (a 'href "../../lecture-notes-trail/man/lecture-note-trail.html" "The introduction of the LENO trail facility") _ ".")
+
+   (attribute-description 'name "source-destination-delta" "The relative file path from the LENO source directory to the HTML target directory")
+   (attribute-description 'name "html-pdf-delta" "The relative file path from the HTML target directory to the PDF directory. 
+                                            This attribute is only relevant if the attribute make-print-page is true.")
+
+  (attribute-description 'name "source-program-index" "Controls the generation, and the linking to, an index of the source-programs in a lecture. Either true or false. Defaults to true.")
+  (attribute-description 'name "source-index-page" "Controls the generation of an HTML start page of the current lecture note file, located side-by-side with the leno source page. 
+                                                    The value of this attribute does not affect the generation of pages in the HTML target directory. Either true or false. Defaults true.")
+  (attribute-description 'name "presentation-medium"   "Not really used, but you can use it for conditional purposes in LENO materials.
+                                                        Sets the value of the variable presentation-medium-of-theme. This variable can be used to control 
+                                                        details such as source program inclusion, which - in turn - may affect the text book (theme) version of a LENO material.
+                                                        The normal value is web.")
+
+  (attribute-description 'name "use-doc-comments" "True if certain, special comments in source programs are extracted and
+                                                 presented in annotated slide view. The comments must be prefixed with
+                                                 the value of the attribute doc-comment-prefix")
+
+  (attribute-description 'name "doc-comment-prefix" "The end-of-line comment prefix used for LENO documentation comments.
+                                                    This attribute is only used if the value of the attribute use-doc-comments is true.")
+
+  (attribute-description 'name "use-note-page-importance" "A boolean attribute that controls the visualization of the importance attribute of note-page elements. 
+                                                           Notice that the note-page importance attribute only is taken into account if the value of the slide-header attribute is minimal.")
+
+  (attribute-description 'name "pdf-version-as-of" "A string of the form \"year-month-day\", for instance \"2009-2-25\", which tells when the PDF version has been generated.")
+
+
+ )
+
+ (external-reference
+  'category "meta example" "example with access to the leno-front-matters form" (meta-ref "leno-front-matters")
+ )
+
+ (description "Defines the overall characteristics of a LENO lecture.")
+)
+
+(manual-page 
+ 'name "front-title"
+ (description "The title of the lecture. If we are working with a single lecture, the front title becomes the
+               overall title of the material.")
+ (external-reference
+  'category "meta example" "example with access to the LENO form" (meta-ref "leno-front-matters")
+ )
+
+ (misc (div "The title of a set of multi lectures (several chapter) is 
+        defined in the Scheme prefix file, by " (br) (kbd "(define notes-title \"NOTES TITLE\")") ))
+)
+
+(manual-page 
+ 'name "front-subtitle"
+ (description "The subtitle of the lecture.")
+
+)
+
+(manual-page 
+ 'name "front-author"
+ (description "The authors name(s)")
+
+ (misc "We may, in a future version, want to impose further structure, in terms of individual author names")
+)
+
+(manual-page 
+ 'name "front-affiliation"
+ (description "The affiliation of the author(s)")
+ (external-reference
+  'category "meta example" "example with access to the LENO form" (meta-ref "leno-front-matters")
+ )
+)
+
+(manual-page 
+ 'name "front-abstract"
+ (description "The abstract/summary of this lecture")
+ (external-reference
+  'category "meta example" "example with access to the LENO form" (meta-ref "leno-front-matters")
+
+ )
+ (misc (div "Please notice that the abstract of the entire lecture note material is defined in the Scheme prefix by
+        " (br) (kbd "(define note-abstract \"ABSTRACT\")") ))
+)
+
+
+
+(manual-section 'id "top-level-fu" 
+  (section-title "Top level functions")
+  (section-body  
+     (div 
+       (p "The element mirror functions described in this section are really subelements of the" (kbd "leno") "element.
+      However, as already explained, we recommend that the LENO top level structuring is ignored. With this,
+      the forms in this section becomes top level elements side by side with " (kbd "leno-front-matters") ".
+      ")
+
+      (a-name "common-attributes")
+      (p "A number of attributes are widely available in many note page subclauses. These are")
+
+      (ul (list
+        (li (kbd "id") ": An optional identification of note page subclause. Must be unique within a note page. 
+              If you use the theme facility it is important to use the id attributes of the elements described below.")
+        (li (kbd "margin") ": Margin around the subclause, using CSS semantics. Remember a unit, such as em or ex")
+        (li (kbd "margin-left") ": Margin around the subclause, using CSS semantics.")
+        (li (kbd "margin-right") ": Right margin of the subclause, using CSS semantics.")
+        (li (kbd "margin-bottom") ": Bottom margin of the subclause, using CSS semantics.")
+        (li (kbd "margin-top") ": Top margin the subclause, using CSS semantics.")
+        (li (kbd "drop") ": A boolean attribute which makes it possible to disregard a note page subclause, 
+                           in the same way as" (kbd "note-page") "can
+                           be dropped.")
+        (li (kbd "annotations") ": An attribute of relevance only to the LENO theme facility.
+                                  Tells how annotations are treated in a thematic presentation of the material.")
+        ))
+      )
+  )
+)
+
+
+(manual-page 
+ 'name "begin-notes"
+
+
+
+ (description (span "This form marks the ending of the preamble and the beginning of the note page definition part. It must be matched by exactly one" (kbd "end-notes") "clause."))
+
+ (internal-references 'category "Related clauses"  (name-ref "end-notes"))
+
+ (misc "This element may seem of little importance, because it carries no additional attributes or sub elements. However,
+        in the LENO system it is important, because it is an action element. It means that it initiates a lot of initial actions in
+        in LENO.")
+)
+
+
+(manual-page 
+ 'name "end-notes"
+
+
+
+ (description (span "States the ending of this lecture note file. This form matches the" (kbd "begin-notes") "clause. The" 
+              (kbd "end-note") "form must be the last clause in a lecture note file."))
+
+ (internal-references 'category "Related clauses"  (name-ref "begin-notes"))
+
+ (misc (div (p "Like, " (kbd "begin-notes") _
+       ", this element may seem of little importance, because it carries no additional attributes or subelements. However,
+        in the LENO system it is important, because it is an action element. In reality, most important LENO functionality is
+        initiated via" (kbd "end-notes") _ ".")))
+
+)
+
+
+(manual-page 
+ 'name "note-page"
+
+
+ (description (div "Describes a single note page in terms of a number of subelements. A page corresponds to a slide in slide view. The ordering
+                    of the note-page subelements is significant for all elements apart from" (kbd "title") _ "," (kbd "section-title") _ "," 
+      "and" (kbd "show-and-speak") _ "." "The mutual ordering determines the sequence of element presentations in all views." ))
+
+ (attribute-descriptions
+   (attribute-description 'name "id"   "A symbol which in a unique way identifies this note page within the lecture.
+                                  The value of the id attribute must be composed of lower case alphabetic chars, numeric chars, and '-'.")
+
+   (attribute-description 'name "drop" "If true, disregard this note page in all respects. Defaults to false")
+   (attribute-description 'name "importance" "A number between 0 and 100. A high number signifies high importance. The variable showing-importance? controls the visualization of importance.
+                                              The presentation of note page importance is controlled by the leno-front-matters attribute called use-note-page-importance.")
+ )
+
+ (internal-references 'category "Reference to note-page" (name-ref "slide-url") (name-ref "note-url")
+                                                         (name-ref "book-url"))
+
+ (misc (div "As it appears from the content model, a note page must at
+            least contain a title or a section-title form. The Emacs commands " 
+            (kbd "M-x leno-insert-notepage") " and " (kbd "M-x leno-insert-notesection") "
+            insert templates of this form. These commands can be found the LENO menu as well."))
+)
+
+
+
+
+(manual-section 'id "note-page-clauses" 
+  (section-title "Clauses of the note-page form")
+  (section-body  
+     (span "In this section follows all the possible subclauses of a" 
+      (kbd "note-page") "clause. All of these must appear within a" (kbd "note-page") "form.
+      Some of the clauses must appear at the top level within a note-page form. Others must be further nested."))
+)
+
+(manual-page 
+ 'name "title"
+
+ (description "Defines the title of a note-page ")
+
+ (attribute-descriptions
+   common-subnote-page-attributes
+ )
+
+ (internal-references 'category "Related clauses" (name-ref "section-title"))
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "title")
+ )
+)
+
+(manual-page 
+ 'name "main-text"
+ (description "The main text of the enclosing form.")
+)
+
+(manual-page 
+ 'name "annotation"
+ (description "The annotation of the enclosing form.")
+)
+
+(manual-page 
+ 'name "section-title"
+
+
+ (description "Defines the title of a section of slides. 
+               In the lecture note view this can be thought of as a starting a new section in a chapter. 
+               In this context, a chapter is a single lecture note file.")
+
+
+ (internal-references 'category "Related clauses" (name-ref "title"))
+
+ (external-reference
+   'category "meta example" "example with access to the underlying note-page form" (meta-ref "section-title")
+ )
+
+ (misc (div "Please notice that only a limited subset of the note page subclauses can co-exist with the section-title clause. 
+        For more information
+        see the content model of the " (kbd "note-page") " clause"))
+
+)
+
+(manual-page 
+ 'name "text"
+
+
+ (description "Defines a text clause of a note page. The main text is shown in all views, whereas the annotation text is shown
+               in the annotated slides and in the note page views only. 
+               The annotation text is used for additional comments to the primary text.
+               ")
+
+ (attribute-descriptions
+   common-subnote-page-attributes
+ )
+
+ (internal-references 'category "Related clauses"  (name-ref "note-text") (name-ref "slide-text") (name-ref "items"))
+
+ (external-reference
+   'category "meta example" "example with access to the underlying note-page form" (meta-ref "text")
+
+ )
+)
+
+(manual-page 
+ 'name "slide-text"
+
+
+ (description "Defines a text clause to appear in slides views only. Does not affect the other views at all")
+
+ (attribute-descriptions
+   common-subnote-page-attributes
+ )
+
+ (internal-references 'category "Related clauses" (name-ref "note-text")  (name-ref "text"))
+
+ (external-reference
+   'category "meta example" "example with access to the underlying note-page form" (meta-ref "slide-text")
+ )
+)
+
+
+(manual-page 
+ 'name "note-text"
+
+ (description "Defines a text clause to appear in note page view and the aggregated slide view only. Does not affect slide view at all.")
+
+ (attribute-descriptions
+   common-subnote-page-attributes
+ )
+
+ (internal-references 'category "Related clauses"  (name-ref "slide-text") (name-ref  "text"))
+
+ (external-reference
+   'category "meta example" "example with access to the underlying note-page form" (meta-ref "note-text")
+
+ )
+
+)
+
+(manual-page 
+ 'name "meta-text"
+
+
+ (description (span "Defines a meta text - a text about the material at the meta level. 
+               When using type" (kbd "readers-guide") "this will be rendered specially as a reader's guide to the material.
+               Does not affect the slide view at all."))
+
+ (attribute-descriptions
+   (attribute-description 'name "type" "The type or role of the meta text")
+   common-subnote-page-attributes
+ )
+
+ (internal-references 'category "Related clauses"  (name-ref "slide-text")  (name-ref "text")
+                                                   (name-ref "note-text") (name-ref "theme-text"))
+
+ (external-reference
+   'category "meta example" "example with access to the underlying note-page form" (meta-ref "meta-text")
+
+ )
+
+)
+
+(manual-page 
+ 'name "theme-text"
+
+
+ (description "Defines a contribution to the thematic view, which is a LENO view which presents the material in the tyle of
+               a traditional text book.
+               This clause does not affect the slide slide view, the annotated slide view, or the aggregated view.")
+
+ (internal-references 'category "Related clauses"  (name-ref "slide-text")  (name-ref "text")
+                                                   (name-ref "note-text") (name-ref "meta-text"))
+
+ (attribute-descriptions
+   common-subnote-page-attributes
+ )
+
+ (external-reference
+   'category "meta example" "example with access to the underlying note-page form" (meta-ref "meta-text")
+ )
+
+ (misc "A theme-text contribution is similar to a theme-text contribution, as found in the secondary theme source file.
+        Sometimes it is convenient to 'single source' the material in the original LENO file, by
+        putting theme contributions side by side with all the other note page subclauses. Use the theme-text element, as
+        documented here, for such purposes."
+ )
+
+)
+
+(manual-page 
+ 'name "items"
+
+
+ (description (div "Defines one of more items, to be presented as a bullet list. Each " (kbd "items")
+               " clause contains one or more " (kbd "item") " clauses,
+               each of which contains " (kbd "main-text") ", an optional " (kbd "annotation") ", and - recursively - a new " 
+               (kbd "items") " clause."))
+
+ (attribute-descriptions
+   common-subnote-page-attributes
+ )
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "items")
+
+ )
+
+ (misc (div "The Emacs command " (b "M-x leno-insert-items") "is very helpful to construct correctly structured items clauses.
+             This command can also be found in the Emacs LENO menu.
+            ")
+ )
+)
+
+(manual-page 
+ 'name "item"
+
+
+ (description "Describes a single item in terms of main-tex, optional annotations, and - recursively, subitems.")
+
+
+
+)
+
+
+(manual-page 
+ 'name "point"
+ 
+ (description "A point is a distinguished observation which is presented with special emphasis in all views. 
+               ")
+
+ (attribute-descriptions
+   common-subnote-page-attributes
+ )
+
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "point")
+
+ )
+)
+
+(manual-page 
+ 'name "example"
+
+ (description "Defines an example which is shown in all views.")
+
+ (attribute-descriptions
+   common-subnote-page-attributes
+ )
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "example")
+
+ )
+
+ (comment "It is perhaps doubtful whether this clause is worthwhile, although of course, it defines a semantic difference between
+           an example and a more general text clause"
+ )
+)
+
+(manual-page 
+ 'name "opposing"
+
+ (description "Presents a number of opposing items in a two column setup. This is good to discuss a number of 
+               issues against each other.")
+
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "opposing")
+
+ )
+
+ (attribute-descriptions
+   common-subnote-page-attributes
+ )
+
+ (misc (div "The emacs command " (b "M-x leno-insert-opposing") " is useful to construct a well-formed opposing clause."))
+)
+
+(manual-page 
+ 'name "opposing-item"
+
+ (description "An item of the opposing clause")
+
+)
+
+(manual-page 
+ 'name "left-item"
+
+ (description "The left item of an opposing clause")
+
+)
+
+(manual-page 
+ 'name "right-item"
+
+ (description "The right item of an opposing clause")
+
+ (internal-references 'category "Related clause" (name-ref "left-item"))
+
+
+)
+
+
+(manual-page 
+ 'name "comment"
+
+
+ (description "Present an internal comment. A comment is only intended as a remark, which should be removed in the final version.
+               Not shown in slide view.")
+
+ (attribute-descriptions
+   common-subnote-page-attributes
+ )
+ 
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "comment")
+
+ )
+)
+
+
+(manual-page 
+ 'name "index-words"
+
+
+ (description "Defines a number of index words of this page. The index words are added to the central lecture note index with a link
+               to the enclosing note page. This clause leaves no trace in any of the views. The index-words clause may be 
+               given at an arbitrary position within a note-page form")
+
+ (attribute-descriptions
+   common-subnote-page-attributes
+ )
+
+ (external-reference
+   'category "meta example" "example with access to the underlying note-page form" (meta-ref "index-words")
+ )
+)
+
+(manual-page 
+ 'name "index-word"
+ (description "The individual index word of an index-words clause")
+
+)
+
+
+(manual-page 
+ 'name "concept-list"
+
+ (description "Defines a number of concepts. Each concept is defined via a separate concept clause")
+
+ (attribute-descriptions
+   common-subnote-page-attributes
+ )
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "concept-list")
+ )
+)
+
+(manual-page 
+ 'name "concept"
+
+
+ (attribute-descriptions
+   (attribute-description 'name "id" "A unique id within the enclosing note-page clause that allows us to address the concept")
+   (attribute-description 'name "concept-name" "The name of the concept. Instances of this string is emphasized in the concept definition")
+   common-subnote-page-attributes
+ )
+
+ (description "Defines a concept in terms of a concept name (an attribute), a concept definition (main-text), and a concept explanation
+               (annotation). The concept name goes into the index.
+               The concept definition is shown in slide view. The concept explanation is, 
+               together with the concept definition, shown in the two other views")
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "concept-list")
+ )
+)
+
+(manual-page 
+ 'name "quotation"
+
+
+ (description "Defines a quotation, which is presented within quote characters. ")
+
+ (attribute-descriptions
+   common-subnote-page-attributes
+ )
+
+
+ (external-reference
+   'category "meta example" "example with access to the underlying note-page form" (meta-ref "quotation")
+ )
+)
+
+
+(manual-page 
+ 'name "image"
+
+ (description "Inserts an image (gif, jpg, ...) from an external file. Image files 
+               must be located in the graphics directory. A reduced version must be located in graphics/small. "
+ )
+
+ (attribute-descriptions
+   (attribute-description 'name "src" "the name of the image file (as located in the graphics and graphics/small directories).
+                                 Include file extension.")
+   (attribute-description 'name "alignment" "if the caption (main-text) is shown in slide view, this attribute tell how the image and the text
+                                       is aligned with each other. In simple cases, this attribute 
+                                       can be ignored together with first and second.")
+   (attribute-description 'name "first" "tells whether the text or picture comes first (top or left)")
+   (attribute-description 'name "second" "tells whether the text of picture comes second (bottom or right)")
+   common-subnote-page-attributes
+ )
+
+ (internal-references 'category "Related clause" (name-ref "svg-image") (name-ref "image-series"))
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "image")
+ )
+
+ (misc (div "Notice that all images must be stored in a directory named " (kbd "graphics") " which is a subdirectory of the catalogue
+        in which the generated html files reside.
+        The graphics directory, in turn, must have a sub directory called " (kbd "small") " in which a smaller version of all images reside. This is in order
+        to ensure good reduction of images in the annotated slide view, the aggregated slide view, and in the thematic view."))
+
+)
+
+
+(manual-page 
+ 'name "svg-image"
+
+
+ (description "Inserts an SVG image from an external file. The SVG image is either given inline, via the svg-inline element, 
+               or it is referred to via the src attribute.
+               Referred SVG images files 
+               must be located in the graphics directory. No reduced version in graphics/small is necessary, nor possible."
+ )
+
+ (attribute-descriptions
+   (attribute-description 'name "src" "the name of the image file (as located in the graphics and graphics/small directories).
+                                 Include file extension. Do not supply this attribute if the svg image is given via an svg-inline element.")
+   (attribute-description 'name "width" "The preferred width of the image in pixels - a number ")
+   (attribute-description 'name "height" "The preferred height of the image in pixels - a number ")
+   common-subnote-page-attributes
+ )
+
+ (internal-references 'category "Related clause" (name-ref "image"))
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "svg-image")
+
+ )
+
+ (misc (div "Notice that svg images, like gif and jpg images, must be stored in a directory named " (kbd "graphics") " which is a subdirectory of the catalogue
+        in which the generated html files reside. Contrary to gif and jpg images, SVG images scale in an elegant way. Therefore 
+        it is only necessary to define the image in the graphics directory (and not also in graphics/small)."))
+
+)
+
+(manual-page 
+ 'name "svg-inline"
+ 
+ (description "An svg clause that describes a graphical illustration.")
+)
+(manual-page 
+ 'name "flash-image"
+
+
+ (description "Inserts a Flash image from an external file. The Flash image files 
+               must be located in the graphics directory. No reduced version in graphics/small is necessary, nor possible."
+ )
+
+ (attribute-descriptions
+   (attribute-description 'name "src" "the name of the image file (as located in the graphics and graphics/small directories).
+                                 Include file extension.")
+   (attribute-description 'name "width" "The preferred width of the image in pixels - a number ")
+   (attribute-description 'name "height" "The preferred height of the image in pixels - a number ")
+   common-subnote-page-attributes
+ )
+
+ (internal-references 'category "Related clause" (name-ref "image") (name-ref "svg-image"))
+
+ (misc (div "Notice that flash images, like gif, jpg, and SVG images, must be stored in a directory named " (kbd "graphics") " which is a subdirectory of the catalogue
+        in which the generated html files reside. Flash images scale like SVG, and therefore
+        it is only necessary to define the image in the graphics directory (and not also in graphics/small).
+        The extension of flash images is assumed to be 'swf'"))
+
+)
+
+
+
+(manual-page 
+ 'name "slide-image"
+
+
+ (attribute-descriptions
+   (attribute-description 'name "src" "the name of the image file (as located in the graphics and graphics/small directories). 
+                                 Include file extension.")
+   common-subnote-page-attributes
+ )
+
+ (description "Show an image (gif, jpg, ...) in slide view and in the annotated slide view. The note page view is not affected.
+               This clause is useful to duplicate an already shown picture in a slide. 
+               The first occurrence of the picture is shown via the image clause")
+
+ (internal-references 'category "Related clauses" (name-ref "image") (name-ref "image-series"))
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "slide-image")
+ )
+
+
+ (misc "This clause is much simpler, and less important than image. It's sole purpose is duplication of already shown images")
+
+)
+
+
+
+(manual-page 
+ 'name "image-series"
+
+
+ (description "Defines a series of images, which may define a number of steps. Each step can be explained separately 
+              via the caption.
+              The" (kbd "slide-mode") "and" 
+              (kbd "book-mode") "attributes controls how to show the series in the slide view and the aggregated view
+              respectively.")
+
+
+ (attribute-descriptions
+   (attribute-description 'name "title" "The caption of the entire series of images")
+   (attribute-description 'name "slide-mode" "How to show the image series in the slide view. With external, we link to a series of pages.
+                                        With inline, the whole series is shown one after the other on the slide page.")
+   (attribute-description 'name "book-mode" "How to show the image series in the aggregated view. With external, we link to a series of pages.
+                                        With inline, the whole series is shown one after the other on the slide page.")
+   common-subnote-page-attributes
+ )
+
+ (internal-references 'category "Related clauses" (name-ref "image") (name-ref "slide-image"))
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "image-series")
+ )
+
+ (misc (div "Tip: The most useful configuration of " (kbd "slide-mode/bookmode") " is " (kbd "'(external/inline)") "because we  
+        in that way use minimal space on slides. In this configuration, the full image series is shown together in 
+        the aggregated view"))
+)
+
+
+
+(manual-page 
+ 'name "image-series-item"
+
+ (description "The items of an image-series")
+
+ (attribute-descriptions
+  (attribute-description 'name "src" "the name of the image file (as located in the graphics and graphics/small directories). 
+                                 Include file extension.")
+ )
+
+)
+
+(manual-page 
+ 'name "cross-references"
+
+
+ (description "Define a number of cross references to other material. The references may be to Internet materials,
+               to other locations in the current
+               collection of lecture notes, to BibTex references, or to off line materials")
+
+ (internal-references 'category "See also" (name-ref "slide-url") (name-ref "note-url")
+                                           (name-ref "book-url") (name-ref "exercise-formulation-url") 
+                                           (name-ref "exercise-formulation-url-given-id")
+                                           (name-ref "exercise-solution-url"))
+
+ (attribute-descriptions
+   common-subnote-page-attributes
+ )
+
+ (external-reference
+   'category "meta example" "example with access to the underlying note-page form" (meta-ref "cross-references")
+
+ )
+)
+
+
+
+(manual-page 
+ 'name "note-reference"
+
+
+ (description "Describes a reference to another part (possibly in another section) of the current lecture notes. It can be a page
+               in this chapter (lecture) or a page in a sibling chapter (lecture).")
+
+ (attribute-descriptions
+  (attribute-description 'name "lecture-id" "The id of LENO lecture. The corresponds to the proper file name of a LAML file.")
+  (attribute-description 'name "page-id" "The id of a page. This corresponds to the value of a note-page id attribute")
+  common-subnote-page-attributes
+ )
+
+ (internal-references 'category "Related clauses" (name-ref "internet-reference") 
+                                                  (name-ref "informal-reference") (name-ref "bibtex-reference"))
+ (internal-references 'category "About location hints" (name-ref "location-hints"))
+
+ (external-reference
+   'category "meta example" "example with access to the underlying note-page form" (meta-ref "cross-references")
+
+ )
+)
+
+
+(manual-page 
+ 'name "internet-reference"
+
+ (description "Defines a reference to an Internet resource addressed by means of an URL")
+
+ (attribute-descriptions
+  (attribute-description 'name "href"   "The URL of the internet reference")
+  (attribute-description 'name "target" "The target window of the reference. Affects the window in which the target is displayed.
+                                   Corresponds to the HTML attribute of the same name.")
+  common-subnote-page-attributes
+ )
+
+ (internal-references 'category "Related clauses" (name-ref "note-reference") (name-ref "informal-reference"))
+ (internal-references 'category "Description of Scheme suffix"  (name-ref "leno-front-matters"))
+ (internal-references 'category "About location hints" (name-ref "location-hints"))
+
+ (external-reference
+   'category "meta example" "example with access to the underlying note-page form" (meta-ref "cross-references")
+ )
+
+ (misc "It is often very useful to generate URLs via Scheme functions. This is the case if several references are made to information
+        located at the same server and/or directory. In that way only the function needs redefinition in case we move a set of referred
+        internet resources. Such URL functions should be located in the Scheme suffix file, as described in the 
+        leno front matters clause.")
+)
+
+(manual-page 
+ 'name "bibtex-reference"
+
+
+ (attribute-descriptions
+  (attribute-description 'name "key" "A bibtex key in one of the involved bibtex files. A key identifies a bibtex record uniquely.")
+ )
+
+ (description "Defines a reference to a bibtex item. Bibtex is the LaTeX formalism for definition of
+               bibliographic information. In order to use bibtex references in the material you must define
+               a list of parsed bibtex files. Currently, this is done via the Scheme suffix file, in the LENO front matters
+               clause. In the Scheme suffix file, define the variable bibtex-files to a list of absolute file paths
+               to LAML parsed bibtex files.")
+
+ (internal-references 'category "Related clauses" (name-ref "note-reference") (name-ref "informal-reference")
+                                                  (name-ref "internet-reference"))
+ (internal-references 'category "Description of Scheme suffix"  (name-ref "single-lecture"))
+
+
+ (external-reference
+   'category "meta example" "example with access to the underlying note-page form" (meta-ref "cross-references")
+ )
+
+)
+
+
+(manual-page 
+ 'name "informal-reference"
+
+ (description "Defines a reference to an off line resource, such as a book")
+
+ (attribute-descriptions
+  (attribute-description 'name "title"   "The title of the informal reference")
+  common-subnote-page-attributes
+ )
+
+ (internal-references 'category "Enclosing clause" (name-ref "cross-references"))
+ (internal-references 'category "Related clauses" (name-ref "note-reference") (name-ref "internet-reference"))
+ (internal-references 'category "About location hints" (name-ref "location-hints"))
+
+ (external-reference
+   'category "meta example" "example with access to the underlying note-page form" (meta-ref "cross-references")
+
+ )
+
+ (misc "The informal reference is not really very useful any more. Use bibtex-reference for non-web materials.")
+
+)
+
+(manual-page 
+ 'name "location-hints"
+
+ (description (div "A location hint of a cross reference item. A location hint gives the reader a hint on the location of the reference,
+               (such as local, cd, net, etc). In order to use location hints you should define the function 
+               " (kbd "cross-reference-location-hints") ) )
+
+ (internal-references 'category "Related Scheme function" (name-ref "cross-reference-location-hints"))
+
+)
+
+(manual-page 
+ 'name "hint"
+
+ (description "A hint item of a location-hints clause")
+
+)
+
+
+(manual-page 
+ 'name "language-syntax"
+
+
+ (description "Defines a syntax description in terms of a syntax rule and an explanation.
+               A syntax description is intended for description of formal syntax rules of programming languages.")
+
+
+ (external-reference
+   'category "meta example" "example with access to the underlying note-page form" (meta-ref "language-syntax")
+ )
+
+ (external-reference
+   'category "useful Scheme function" "colorize-substrings" 'href (general-lib-ref "man/xhtml10-convenience.html#colorize-substrings"))
+ (external-reference
+   'category "useful Scheme function" "read-text-file" 'href (general-lib-ref "man/file-read.html#read-text-file"))
+ (external-reference
+   'category "useful Scheme function" "read-text-file-between-marks" 'href (general-lib-ref "man/file-read.html#read-text-file-between-marks"))
+
+ (attribute-descriptions
+   common-subnote-page-attributes
+ )
+
+ (misc (div "It is often most convenient to read the syntax-rule string from an external file. 
+             The meta example referred to above shows an example. The function" (kbd "read-text-file") "
+             is useful for reading a text from on a textfile. Similarly,
+             the function " (kbd "read-text-file-between-marks") 
+             " is useful for reading a substring from an external textfile. In order to decorate the syntax-rule
+             with fonting and coloring the function" (kbd "colorize-substrings") "is useful."))
+)
+
+
+(manual-page 
+ 'name "source-program"
+
+ (description "Shows a source program (or a similar text of an artificial language) in 'verbatim style'. 
+               The source program text is taken from an external file. 
+               It is possible to extract a substring from the external file via the from-mark and to-mark attributes.
+               If no from-mark and to-mark attributes are given, show the entire file.
+               In any case, trailing empty lines are deleted from the extracted program (before colorizing).
+               Substrings of the extracted source program (part) can be decorated with colors and font-faces by use of
+               a color-decorations subclause.
+               ")
+
+ (attribute-descriptions
+  (attribute-description 'name "src"  "The absolute or relative file path to a source file to be included in these lecture notes.
+                                       A relative file path is relative to the note source directory, in which
+                                       the LAML leno file is located.")
+  (attribute-description 'name "from-mark" "A substring of the source file, at which to begin the source extract")
+  (attribute-description 'name "to-mark" "A substring of the source file, at which to end the source extract")
+  (attribute-description 'name "slide-mode" "The mode of presentation in slide view and note-view")
+  (attribute-description 'name "book-mode" "The mode of presentation in the aggregated view")
+  (attribute-description 'name "background-color" "The background color of the source program. There exists 16 color constants which can be used, 
+                                             such as red, green, blue, yellow, etc. In addition, the Scheme function 
+                                             (rgb-color-encoding r g b) is useful. It is defined in the LAML Color library.")
+  (attribute-description 'name "indexed" "Does this source program appear in the source program index?")
+  (attribute-description 'name "index-title" "If this source program is indexed, the title of the source program, as it appears in the index, becomes value of this attribute.
+                                        Defaults to the first sentence of the main-text constituent of the source-program element.")
+  (attribute-description 'name "kind" "The kind of ordinary source programs should always be source-program. Output listings, and similar kinds of texts, should be marked as kind listing.
+                                       Material marked as kind listing are caption-labeled as \"Listings\" in theme renderings, it is not included in source program indexes
+                                       (but it is copied to the source program directory of the html target directory).
+                                      ")
+
+  (attribute-description 'name "program-annotations" "Only relevant for annotated slide view. True if program annotations should
+                                     be presented. Normally true. Use the value false, if the annotations are irrelevant for
+                                     this instance of the source-program element.")
+  common-subnote-page-attributes
+ )
+
+ (external-reference
+   'category "meta example" "example with access to the underlying note-page form" (meta-ref "source-program")
+ )
+
+ (misc "It will be very useful to consult the meta examples regarding the source-program clause. The meta examples show how
+        portions of the laml source file can be included in its own html presentation. The example also illustrate various
+        options for use of colors.
+        ")
+)
+
+(manual-page 
+ 'name "color-decorations"
+ (description "The color decorations of a source program")
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "source-program")
+ )
+)
+
+(manual-page 
+ 'name "color-decoration"
+ (description "The color decoration of a color-decorations form")
+ (attribute-descriptions
+  (attribute-description 'name "from-mark"  "The substring at which this color decoration starts. The from-mark is included.")
+  (attribute-description 'name "to-mark"  "The substring at which this color decoration ens. The to-mark is included.")
+  (attribute-description 'name "color"  "The color to use. There exists 16 color constants which can be used, 
+                                             such as red, green, blue, yellow, etc. In addition, the Scheme function 
+                                             (rgb-color-encoding r g b) is useful. It is defined in the LAML Color library.")
+  (attribute-description 'name "face"  "The font face to use")
+  (attribute-description 'name "repetition"  "How many times to apply the color decorations. The default repetition is 1.")
+ )
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "source-program")
+ )
+ (external-reference
+   'category "useful Scheme function" "rgb-color-encoding" 'href (general-lib-ref "man/color.html#rgb-color-encoding"))
+)
+
+
+
+(manual-page 
+ 'name "exercise"
+
+ (description "Defines an exercise in terms of an id, a title, a formulation and an optional solution. 
+               A link will be provided to a separate page where the title and formulation
+               appear. The exercise solution is optional. The Leno front matters attribute exercise model
+               is important for the actual handling of the exercise solution.")
+
+ (attribute-descriptions
+  (attribute-description 'name "id" "The mandatory id of the exercise")
+  (attribute-description 'name "title" "The title of the exercise")
+  (attribute-description 'name "rank" "The rank of the exercise. A numeric field. A low rank means an easy or low priority exercise. We use a star notation (**) to present the exercise rank")
+ )
+
+ (internal-references 'category "See also"  (name-ref "exercise-model"))
+ (internal-references 'category "References to"  (name-ref "exercise-formulation-url")
+                                                 (name-ref "exercise-formulation-url-given-id")
+                                                 (name-ref "exercise-solution-url"))
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "exercise")
+ )
+)
+
+(manual-page 
+ 'name "formulation"
+
+ (description "Defines the exercise formulation text")
+
+ (internal-references 'category "Reference to" (name-ref "exercise-formulation-url")
+                                               (name-ref "exercise-formulation-url-given-id"))
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "exercise")
+ )
+)
+
+(manual-page 
+ 'name "solution"
+
+ (description "Defines the exercise solution text")
+
+ (internal-references 'category "Reference to" (name-ref "exercise-solution-url"))
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "exercise")
+ )
+)
+
+
+(manual-page 
+ 'name "tabular"
+
+ (description "Defines a tabular presentation of table-contents. A tabular clause is defined in terms of border,
+               a row-widths clause which defines the width of the columns (!!), and the individual rows.")
+
+ (attribute-descriptions
+  (attribute-description 'name "border" "The table border. An integer.")
+  common-subnote-page-attributes
+ )
+
+ (external-reference
+   'category "meta example" "example with access to the underlying note-page form" (meta-ref "tabular")
+ )
+
+)
+
+(manual-page 
+ 'name "row-widths"
+
+ (description "The definition of the row width list of a LENO table")
+
+)
+
+(manual-page 
+ 'name "row"
+
+ (description "The definition of a row of a LENO table")
+
+)
+
+(manual-page 
+ 'name "cell"
+
+ (description "The definition of a cell in a row or row-width form of a LENO table")
+
+)
+
+
+(manual-page 
+ 'name "applet-program"
+
+ (description "inserts a Java applet in the LENO presentation")
+
+
+ (attribute-descriptions
+  (attribute-description 'name "code" "the name of the file where the applet is located. 
+                                 Must include the class file extension. The location of the file
+                                is relative to codebase (the next parameter). The type of this parameter is string")
+
+  (attribute-description 'name "code-base" "the directory or url in which the class file is located. 
+                         The code base is taken relative to the directory in which 
+                         the generated html files reside")
+  (attribute-description 'name "height" "an integer describing the height of the applet (integer, in pixels)")
+  (attribute-description 'name "width" "an integer describing the width of the applet (integer, in pixels)")
+   common-subnote-page-attributes
+ )
+
+
+ (external-reference
+   'category "meta example" "example with access to the underlying note-page form" (meta-ref "applet-program")
+ )
+)
+
+(manual-page 
+ 'name "applet-param"
+ (description "Supplies parameters of an applet (name-value pairs passed to the applet)")
+
+)
+
+(manual-page 
+ 'name "synopsis"
+
+ (description "Defines a synopsis in terms of a list of synopsis item elements. A synopsis is useful to summarize a number of points
+               in a graphically distinguished manner")
+
+ (attribute-descriptions
+   common-subnote-page-attributes
+ )
+
+
+ (external-reference
+   'category "meta example" "example with access to the underlying note-page form" (meta-ref "synopsis")
+ )
+)
+
+(manual-page 
+ 'name "synopsis-item"
+
+
+ (description "Defines a single item in a synopsis clause")
+
+ (attribute-descriptions
+   common-subnote-page-attributes
+ )
+
+
+ (external-reference
+   'category "meta example" "example with access to the underlying note-page form" (meta-ref "synopsis")
+ )
+)
+
+(manual-page 
+ 'name "quiz"
+
+ (description (div (p "Define a contribution to a quiz about the current lecture. A quiz clause does not add 
+               anything to the note-page to which it belongs. Rather it adds to an internal quiz structure (in the internal
+               directory, which can be used by a WWW quiz service).  In order to use quizzes the
+               Leno front matters attribute quiz-support must be true.")
+
+               (p "Quizzes are managed by a separate side server program, which is not part of the LAML distribution.
+               As of now, the quiz facility can only be used at www.cs.auc.dk because it depends on additional software,
+               including server side checking software. You will find the link to the all quiz elements of the
+               lecture on the lecture overview page ('Quiz about this lecture')." )
+
+               (p "As an aside, the use of the quizzes in LENO requires that the
+               function course-absolute-url is defined. Define it in the Scheme suffix file. ")))
+
+ (internal-references 'category "Necessary function" (name-ref "course-absolute-url"))
+
+ (external-reference
+   'category "meta example" "example with access to the underlying note-page form" (meta-ref "quiz")
+
+ )
+
+
+)
+
+(manual-page 
+ 'name "question"
+
+ (description "Defines the question of a quiz clause")
+
+ (internal-references 'category "Sibling clause" (name-ref "answers"))
+
+ (external-reference
+   'category "meta example" "example with access to the underlying note-page form" (meta-ref "quiz")
+
+ )
+)
+
+
+(manual-page 
+ 'name "answers"
+
+ (description "Define a number of possible answers of a quiz clause")
+
+ (internal-references 'category "Sibling clause" (name-ref "question"))
+
+ (external-reference
+   'category "meta example" "example with access to the underlying note-page form" (meta-ref "quiz")
+ )
+
+)
+
+(manual-page 
+ 'name "answer"
+
+ (description "Define a single answering possibility side by side with other possible answers.
+              Clarification: An explanation of why - or why not - the answer possibility is right or wrong.")
+
+ (attribute-descriptions
+  (attribute-description 'name "correctness" "A measure of correctness. A number between 0 and 100. 0 means wrong, 100 means correct.
+                                  Numbers in between 0 and 100 means partially correct.")
+ )
+
+
+ (external-reference
+   'category "meta example" "example with access to the underlying note-page form" (meta-ref "quiz")
+ )
+
+)
+
+(manual-page 
+ 'name "answer-possibility"
+
+ (description "The actual answer of an answer form")
+
+)
+
+(manual-page 
+ 'name "answer-clarification"
+
+ (description "The explanation given if the user choses a particular answer in a quiz. 
+               This explains why the sibling answer possibility is right or wrong")
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "quiz")
+ )
+)
+
+
+(manual-page 
+ 'name "show-and-speak"
+
+ (description (div 
+              (p "Define a number of 'show and speak' clause of the surrounding note page. 
+               A show and speak clause controls the speaker's sound and the sequencing in an automatically progressing
+               slide show.")
+
+               (p "In order to enable 'show and speak' the attribute" (kbd "show-and-speak") "of the leno-front-matters element
+                   should be turned to true")
+
+              )
+
+ )
+
+ (internal-references 'category "The show-and-speak attribute"  (name-ref "leno-front-matters"))
+ (internal-references 'category "About show and speak" (name-ref "SECTION12"))
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "show-and-speak")
+ )
+
+)
+
+(manual-page 
+ 'name "slide-part"
+
+ (description "Define a slide-part of a surrounding show and speak clause. A slide-part asks for presentation of the
+               slide for a certain amount of time.")
+
+
+ (attribute-descriptions
+  (attribute-description 'name "number" "A slide page can be show a number of time an an automatically progressing slide show. Each time there
+                       will be a different speaker sound related to the slide. This parameter defines the number associated with
+                       this presentation.")
+  (attribute-description 'name "seconds" "The number of seconds (an integer) to show this page. As a convention, seconds = 0 means that there is no sound defined. Such as page is 
+               shown additional-showing-time seconds (a front-matters attribute).")
+ )
+
+ (internal-references 'category "Sibling clauses" (name-ref "program-part") (name-ref "image-series-part"))
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "show-and-speak")
+ )
+
+)
+
+
+(manual-page 
+ 'name "program-part"
+
+ (description "Define a program-part of the surrounding show and speak clause. A program-part presents one of the external source programs
+               on this page.")
+
+ (attribute-descriptions
+  (attribute-description 'name "number" "A program page can be show a number of time an an automatically progressing slide show. Each time there
+                       will be a different speaker sound related to the slide. This parameter defines the number associated with
+                       this presentation.")
+  (attribute-description 'name "seconds" "The number of seconds (an integer) to show this page. 
+           As a convention, seconds = 0 means that there is no sound defined. Such as page is 
+          shown additional-showing-time seconds (a front-matters attribute).")
+ )
+
+ (internal-references 'category "Sibling clauses" (name-ref "slide-part") (name-ref "image-series-part"))
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "show-and-speak")
+ )
+
+)
+
+(manual-page 
+ 'name "image-series-part"
+
+ (description "Define an image-series part of the surrounding show and speak clause.
+               An image-series-part presents one of the image-series
+               on this page.")
+
+ (attribute-descriptions
+  (attribute-description 'name "number" "A slide page can be show a number of time an an automatically progressing slide show. Each time there
+                       will be a different speaker sound related to the slide. This parameter defines the number associated with
+                       this presentation.")
+ )
+
+ (internal-references 'category "Sibling clauses" (name-ref "slide-part") (name-ref "program-part"))
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "show-and-speak")
+ )
+
+)
+
+(manual-page 
+ 'name "image-part"
+
+ (description "The individual item which describes how many seconds to show an image in an image series. Relates to show-and-speak.")
+ (attribute-descriptions
+  (attribute-description 'name "seconds" "The number of seconds (an integer) to show this page. As a convention, seconds = 0 means that there is no sound defined. Such as page is 
+               shown additional-showing-time seconds (a front-matters attribute).")
+ )
+
+ (internal-references 'category "Related clauses" (name-ref "show-and-speak"))
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "show-and-speak")
+
+ )
+)
+
+(manual-page
+ 'name "lecturer-photos"
+
+ (description "Present a number of lecturer photos on the current note page.  The photos are only shown in the automatically progressing
+              'show-and-speak' slide show (slide view only). 
+               This clause depends on the list lecturer-photo-list, which must enumerate the available photos. Defined it in 
+               the Scheme suffix file.
+               The lecturer photos must be organized in the sub-directory lecturer-photos in the lecture note source directory
+               (the directory in which your lecture laml files are found). The photos will be copied to the html destination 
+               directory as part of LENO processing.")
+
+
+ (attribute-descriptions
+  (attribute-description 'name "start-number" "The first photo to show relative to the enumeration in lecturer-photo-list.
+                                         The first photo is number 1")
+  (attribute-description 'name "number-of-photos" "The number of photos to show")
+  common-subnote-page-attributes
+ )
+
+ (internal-references 'category "Related clause" (name-ref "lecturer-photos-and-logo"))
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "lecturer-photos")
+
+ )
+
+)
+
+(manual-page 
+ 'name "lecturer-photos-and-logo"
+
+ (description "Show two lecturer photos and a logo. The photos are only shown in the automatically progressing
+        'show-and-speak' slide show (slide view only). The parameter determines which photos to show.
+        The logo is a gif file organized together with the other images which are important for LENO.
+        You should define your logo in the images directory of your lecture note directory (the note specific images files).
+        The Aalborg University logo comes together with LENO, however, so it is automatically there.
+        The logo image must have the
+        name 'logo.gif'. In case you want to link from the logo, define the variable logo-url to an appropriate
+        WWW address.")
+
+
+ (attribute-descriptions
+  (attribute-description 'name "start-number" "The first photo to show relative to the enumeration in lecturer-photo-list.
+                                         The first photo is number 1")
+  common-subnote-page-attributes
+ )
+
+ (internal-references 'category "Related clause with necessary information" (name-ref "lecturer-photos"))
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "lecturer-photos-and-logo")
+ )
+)
+
+(manual-page 
+ 'name "elucidate"
+
+
+
+ (description "Insert a link to an elucidator (accompanied with an elucidator icon) which explains a program.
+               Only available for Scheme and Java.")
+
+ (attribute-descriptions
+  (attribute-description 'name "href" "The url with the WWW address of the top level elucidator page.")
+  (attribute-description 'name "target" "Defines the anchor target. Defaults to the value of elucidator-default-target. Similar to
+                                   the HTML attribute of the same name, as used in the a (anchor) element.")
+  common-subnote-page-attributes
+ )
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "elucidate")
+ )
+
+)
+
+(manual-page 
+ 'name "splice-page-with"
+
+ (description "Splice the elements of another page from a specified lecture-id including certain kinds of elements. 
+    With this, it is possible to
+    include selected elements from another page without copying its elements. Only the type of elements mentioned in 
+    leno-elements are included. If element-id attribute is supplied, only include an element (of the 
+    given type) with the given id. In practice, this implies that only a single element is included (because
+    ids of subclauses have to be unique in a note page).
+    In case a certain kind of element appears more than once, all occurrences are included.
+    Only pages from the current lecture or a sibling lecture can be include. In other words,
+    you cannot address pages in lectures located in other directories.")
+
+ (attribute-descriptions
+  (attribute-description 'name "lecture-id" "The lecture id of the lecture from which to splice a page - a symbol")
+  (attribute-description 'name "page-id" "The page id of the page from which to splice")
+  (attribute-description 'name "id" "The id of an element on the specified note page (optional parameter)")
+  common-subnote-page-attributes
+ )
+
+ (internal-references 'category "Related clause" (name-ref "splice-page-without"))
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "splice-page-with")
+ )
+
+ (misc "The internal lsp representation of the lecture contains the splice-page-with and splice-page-without clauses in contrast to
+        the spliced elements. It is not possible to splice (part of) a page into itself recursively (you get an error).
+        Mutual splicing of two pages into each other should be avoided - the result is undefined and it will break LENO.
+        (We could easily support mutual recursive splicing by a very minimal change in
+        the information saved on the -.lsp file, but it would cause confusing results - ever expanding pages - which are
+        not interesting for practical purposes).")
+        
+)
+
+(manual-page 
+ 'name "splice-page-without"
+
+
+ (description (span "Splice the elements of another page from a specified lecture-id excluding certain types of elements.
+    With this, it is possible to
+    include selected elements from another page without copying its elements. The type of elements mentioned in 
+    the leno-elements are" (b "not") "included; All others than the elements in leno-elements are included.
+    Only pages from the current lecture or a sibling lecture can be include. In other words,
+    you cannot address pages in lectures located in other directories."))
+
+ (attribute-descriptions
+  (attribute-description 'name "lecture-id" "The lecture id of the lecture from which to splice a page - a symbol")
+  (attribute-description 'name "page-id" "The page id of the page from which to splice")
+  common-subnote-page-attributes
+ )
+
+ (internal-references 'category "Related clause" (name-ref "splice-page-with"))
+ (internal-references 'category "See also note of" (name-ref "splice-page-with"))
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "splice-page-without")
+ )
+
+)
+
+(manual-page 
+ 'name "leno-elements"
+
+ (description "An enumeration (or list) of Leno elements to include or exclude in the clauses splice-page-with and splice-page-without.")
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "splice-page-without")
+ )
+)
+
+(manual-page 
+ 'name "element-name"
+
+ (description "A list item in leno-elements")
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "splice-page-without")
+ )
+)
+
+
+(manual-page 
+ 'name "side-track"
+
+ (description "Define a side track. A side track is meant to explain a given topic in some additional detail.
+               LENO keeps the original context in a frameset, such that it is always easy to 'come back on track' from a number of navigations in the side track.
+               In LENO terminology, a side track can be a lecture of its own. This lecture is dedicated to the side track.
+               When used in this way, the view is preserved when entering the sidetrack (slide-to-slide, note-to-note, book-to-book).
+               Alternatively, we can address an arbitrary page via the track-url attribute, which is shown as a side track. 
+               When used in this way, all the view share the exact same side track.
+               ")
+
+ (attribute-descriptions
+  (attribute-description 'name "track-lecture-id" "The lecture id of the side track lecture. Either this or the track-url attribute must be provided. If both track-lecture-id and track-url are given, track-lecture-id 'wins'.")
+  (attribute-description 'name "track-url" "An absolute or relative URL to the material to be shown as a side track of the current LENO page. Either this or the track-lecture-id attribute must be provided.")
+ )
+
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "side-track")
+ )
+
+ (external-reference
+  'category "meta example - external side track" "example with access to the underlying note-page form" (meta-ref "side-track-1")
+ )
+
+)
+
+(manual-page 
+ 'name "slide-space"
+
+ (description "Add some vertical space on in slide view only. This element is now obsolete. It is much better to 
+               use the top-margin attribute which applies to all note page sub elements")
+ (external-reference
+  'category "meta example" "example with access to the underlying note-page form" (meta-ref "slide-space")
+ )
+)
+
+
+(manual-section 'id "additional-func"
+
+ (section-title "Additional Scheme level functionality")
+ (section-body "In this section we describe additional LENO functionality at the Scheme level.
+                The facilities in this section are not related to the XML DTD of LENO.
+                It is either lower level functionality or (rarely used) functionality not yet supported via the XML-in-LAML interface.
+                Use of these
+                expressions in the Scheme prefix and Scheme suffix files, as referred to by the attributes 
+                " (kbd "scheme-prefix") "and" (kbd "scheme-suffix") "
+                of the" 
+                (kbd "leno-front-matters") "clause. If nothing is mentioned, the expressions should be used in the" 
+                (kbd "scheme-suffix") "file."))
+
+
+(manual-page 
+ 'name "note-specific-image-files"
+
+
+ (description "This variable is a list of image file names (without path, with extension such a gif) used specifically in these notes.
+               The images must reside in the images directory of note-source-directory. This list of files is copied automatically
+               to the" (kbd "html/images")
+               "directory during processing together with a set of general images files, defined together with the LENO software.")
+
+ (misc "Use a define form to set this variable. Define it in the Scheme suffix files if you need it.
+        If not, the default value is the empty list.")
+)
+
+
+
+
+(manual-page 
+ 'name "notes-title"
+
+
+ (description "A variable which holds the title of the entire set of lecture notes (a string). 
+               You should only care about this variable in multi-lecture materials.
+               You must define this variable
+               in the Scheme prefix file.")
+
+ (misc "Use the Scheme define form to define the value of the variable: (define notes-title ...) ")
+
+)
+
+(manual-page 
+ 'name "lecture-sections"
+
+
+ (description "A variable which keep track of the names of all lecture chapters in these lecture notes.
+               As such, this variable holds very important bookkeeping information. The value of the variable 
+               must be a list of strings. In other words, it must be a list of lecture-chapter names. Each 
+               chapter name corresponds to the proper name of a LENO file, which represents a LENO lecture.
+               This variable must always be defined in the Scheme prefix file if you work with materials
+               that consist of more than one chapter (lecture). You do not need to care about this variable
+               if you author a single lecture material.
+             ")
+
+ (misc "Use the Scheme define form to define the value of the variable: (define lecture-sections ...) ")
+)
+
+
+
+
+
+(manual-page 
+ 'name "current-lecture"
+
+
+ (description "An integer variable defining the chapter number of the last lecture to be generated.
+               The number is relative to the lecture-sections list (see above). If current-lecture is 1,
+               only the first lecture-chapter is taken into consideration.
+               This variable is useful if the collection consist of, say, 10 chapters, but we are currently
+               working at chapter 3. In that case, the value of current-lecture is 3. 
+               The links to the lectures 4-10 are not opened.
+               If used, this variable must be defined in the Scheme prefix file.")
+
+ (misc "Use the Scheme define form to define the value of the variable: (define current-lecture ...) ")
+
+)
+
+(manual-page 
+ 'name "cross-reference-location-hints"
+
+
+ (description "A function which may return a hint of the location of a cross reference. 
+The parameter is a list of symbols. The function is called by LENO, and its default implementation returns the empty
+string. You can redefine it to return an arbitrary HTML clause, which will be shown as the location hint. We recommend
+that you return an icon. (Lecture note specific icons can be organized in the" (kbd "images") "subdirectory). 
+This function must be defined in the Scheme suffix file. It is legal
+always to return the empty string from this function, in which case no location hints will be given.
+")
+
+ (parameters
+  (parameter 'name "location-list" "a list of symbols, the first of which is the kind of reference (note-reference, 
+           internet-reference, informal-reference, or bibtex-reference). The remaining symbols are the given hints.
+           ")
+
+ )
+
+ (internal-references 'category "cross reference clauses"
+        (name-ref "cross-references") (name-ref "note-reference") (name-ref "internet-reference")
+        (name-ref "bibtex-reference") (name-ref "informal-reference"))
+
+ (misc "Tip: Use the hint to signal if a note-reference goes to a location before or after the current page.
+       Use a hint to signal if the reference goes to a piece of information on a CD, on the WEB, on the local host, etc.")
+)
+
+
+
+(manual-page 
+ 'name "meta-tag-clauses"
+
+ (description "Returns meta information about these notes in terms of a list of list. 
+In other words, this function is required to return a list of list. Each inner list must
+be an even length list of key (symbol) value (string) pairs.
+Each list generates a single HTML meta tag.
+It is intended that this function returns the general meta information,
+such as the charset used, the generator applied, the language used, etc.
+There is a default implementation of this function in the source file" (kbd "styles/xml-in-laml/lecture-notes/lecture-notes.scm") _ "."
+"Thus, you shold only care about this function in special situations.")
+
+ (misc "Must be defined in the Scheme prefix file.")
+)
+
+(manual-page 
+ 'name "preferred-maximum-filename-length"
+
+
+ (description "The preferred maximum length of file names.
+               The length includes the including extension, but excludes the initial path.
+               This size may be important for CD file systems.
+               A warning is issued if the preferred maximum length is exceeded.
+               The type is integer. The default value is 64.")
+
+ (misc "Use the Scheme define form to change the value of the variable: (define preferred-maximum-filename-length ...).") 
+)
+
+
+
+(manual-page 
+ 'name "generating-system"
+
+
+ (description "A parameter less function which is supposed to return a string describing the system, which has generated these notes.
+               This information is useful of you use LENO on more than one machine in slightly different contexts. The default
+               implementation returns the empty string (no information)")
+
+ (misc "If needed, define this function in post-notes.scm")
+)
+
+
+
+(manual-page 
+ 'name "course-absolute-url"
+
+ (form "(course-absolute-url suffix)")
+
+ (description "A function which is supposed to return an absolute URL to a resource in a directory
+               contained in the course directory.
+               The course directory is the directory that contains the LENO source files.") 
+
+ (parameters
+  (parameter 'name "suffix" "The last part of the URL, which addresses a specific file within a subdirectory of  'course directory'.")
+                             
+ )
+
+ (internal-references 'category "relevant in"
+        (name-ref "quiz"))
+
+)
+
+
+(manual-section 'id "special-scheme-func"
+
+ (section-title "Special Scheme level functionality")
+(section-body "In this section you will find a few special Scheme functions. Most users can just ignore these."))
+
+
+(manual-page 
+ 'name "course-dir"
+
+ (description "A variable which defines the course directory, in which the Course Plan (the LAML course home page system) files resides.")
+
+ (misc "Define this variable using a Scheme define form.  ")
+)
+
+(manual-page 
+ 'name "solution-passwords"
+
+ (description "A variable the purpose of which is to define a number of password for exercise solution files. 
+               We do not want users to be able to guess the names of solution files. Therefore we can
+               add a component to solution file names, which cannot be guessed: a password component.
+               Such a component is defined pr. lecture. The value of the variable is a list of 
+               password entries. A password entry is a cons pair (lecture-id-symbol . password-string).
+               The default value is an empty list, meaning that no passwords are mixed into the solution files.")
+
+ (misc "Define this variable via a Scheme define form in the post-notes.scm")
+)
+
+
+
+(manual-section 'id "emacs-support" 
+  (section-title "LENO Emacs Support")
+  (section-body 
+    (div
+       (p "There is a number of useful Emacs commands that make it easy and convenient to author LENO material. 
+        Most important, perhaps, is the function which help initiate a new set of slides (a single lecture only).
+        This command is called " (kbd "make-lecture-notes") ".")
+
+       (p "In Emacs there is a LENO menu in which many LENO relevant editor commands are available.
+        This is very useful for newcomers. You can use this menu to see the keyboard shortcuts to a number of commands.")
+
+       (p "The table below lists the other LENO specific Emacs Lisp commands. These will all be available
+        if you have installed the LAML system appropriately. The list is not necessarily complete, but the
+        LENO menu of Emacs is! The keyboard shortcuts are based on the assumption that you use the hygienic emacs keybindings 
+        in the LAML configuration file. If you use the original keybindings you can ignore the leading C-c.")
+
+       (p (indent-pixels 10
+       (table-1
+	1
+	(list 160 100 500)
+	(make-list 3  white)
+        (list
+           (map b (list "Command" "Key binding" "Effect"))
+           (list "make-lecture-notes" "none" "make the directory structure of a LENO set of slides. You are prompted for directory and
+                                              the name of slides. You are adviced to organize each single-chapter slide set in a new 
+                                              directory.") 
+           (list "leno-insert-notepage" "C-c C-l C-b" "insert a note-page form in a set of slides") 
+           (list "leno-insert-notesection" "C-c C-l C-a" "insert a note-page form in a set of slides") 
+           (list "leno-insert-title" "none" "insert a title form in a note page") 
+           (list "leno-insert-items" "C-c C-l C-i or C-c C-l C-l" "insert an item form in a note page. This command prompts for the number of items at top level,
+                                        and the number of subitems of each item. A very useful function if you use many items
+                                        on your slides.") 
+           (list "leno-insert-opposing" "none" "insert an opposing form in a note page. 
+                                           This command prompts for the number of opposing items.") 
+           (list "leno-insert-concept-list" "C-c C-l C-c" "insert a concept-list form in a note page.
+                                               This command prompts for the number of concepts to define.") 
+           (list "leno-insert-synopsis" "none" "insert a synopsis form in a note page. 
+                                           This command prompts for the number of synopsis items.") 
+           (list "leno-insert-title" "none" "insert a title form in a note page") 
+           (list "leno-insert-text" "none" "insert a text form in a note page") 
+           (list "leno-insert-point" "C-c C-l C-p" "insert a point form in a note page") 
+           (list "leno-insert-source-program" "C-c C-l C-s" "insert a source-program form in a note page") 
+           (list "leno-insert-image" "C-c C-l C-m" "insert a title form in a note page") 
+           (list "leno-insert-example" "none" "insert an example form in a note page") 
+           (list "leno-insert-syntax" "C-c C-l C-y" "insert a syntax form in a note page") 
+           (list "leno-insert-slide-space" "none" "insert a slide-space form in a note page")
+           (list "leno-insert-tabular" "C-c C-l C-u" "insert a tabular form in a note page") 
+           (list "leno-insert-note-text" "none" "insert a note-text form in a note page") 
+           (list "leno-insert-slide-text" "none" "insert a slide-text form in a note page")
+           (list "leno-insert-cross-references" "C-c C-l C-r" "insert a cross-references form in a note page") 
+           (list "leno-insert-internet-reference" "none" "insert an internet-reference form in a cross-references form") 
+           (list "leno-insert-informal-reference" "none" "insert an informal-reference form in a cross-references form") 
+           (list "leno-insert-note-reference" "none" "insert a note-reference form in a cross-references form")
+           (list "leno-insert-exercise" "C-c C-l C-e" "insert an exercise form in note page")
+           (list "leno-insert-long-slide" "none" "insert a long-slide form in note page")
+           (list "leno-insert-index-words" "C-c C-l C-w" "insert an index-words form in note page")
+           (list "leno-insert-image-series" "none" "insert an image-series form in note page")
+           (list "leno-insert-section-title" "none" "insert a section-title form in note section page")
+           (list "leno-insert-slide-image" "none" "insert a slide-image form in note page page")
+           (list "leno-insert-applet-program" "none" "insert an applet-program form in note page page")
+           (list "leno-insert-quotation" "C-c C-l C-q" "insert a quotation form in note page page")
+
+	)
+       )))
+
+       (p "The Emacs Lisp variable " (kbd "laml-pp-helpful") 
+           "(of type boolean) controls the detailed working of most of the leno-insert-... functions from above.
+            If the value of  " (kbd "laml-pp-helpful") " is " (kbd "t") " 
+            (for true) it shows the roles of the individual constituents. If " (kbd "nil") " (for false) just
+            empty string placeholders are presented.")
+
+       (p "Please also notice the following generally useful LAML Emacs commands (shown with hygienic key bindings):")
+
+       (p (indent-pixels 10
+       (table-1
+	1
+	(list 160 100 500)
+	(make-list 3  white)
+        (list
+           (map b (list "Command" "Key binding" "Effect"))
+           (list "embed" "C-c C-x C-e" "Embeds the current selection into a Lisp form. Handles the necessary string splitting and surrounding concatenation.
+                                    The variables laml-single-string-approach, smart-word-determination, concatenate-form controls the behavior of 
+                                    the embed command")
+
+           (list "unembed" "C-c C-r" "The opposite command of embed")
+
+           (list "split"   "C-c C-q" "Split a string in two pieces")
+           (list "unsplit"   "C-c C-a" "Join two strings - the opposite of split.")
+ 
+           (list "nest"  "C-c C-n"    "Nest a lisp form into another. A generic and generally useful Lisp programming primitive")
+           (list "unnest" "C-c C-m"   "The opposite command of nest")
+           (list "open-laml-form" "C-c C-x C-l"   "Open a new LAML form")
+           (list "tidy-laml-form" "C-c C-x C-t"   "Tidy up a LAML form. Very useful for cleaning up a clumsy paragraph. Use it on the initial parenthesis of a form.")
+
+	)
+       )))
+    )
+  )
+)
+
+
+(manual-section 'id "cross-ref-support"
+
+ (section-title "Cross Reference Support")
+
+ (section-body
+   (div 
+    (p "It is often useful and necessary to refer from one piece of LENO information to another.
+             In this section we will document the various cross reference facilities supported by LENO. 
+             The functions in this section return URLs to other pages generated by LENO.")
+
+   (p "Recall the " (internal-ref "cross-references") " clause of LENO, the purpose of which is to define cross references
+             to other note pages, or to external material. The cross-references clause is a constituent of a note-page.")
+   )
+ )
+)
+
+(manual-page 
+ 'name "slide-url"
+
+ (form "(slide-url lecture-id slide-id)")
+
+ (description "Return a URL of particular slide page in a particular lecture")
+
+
+
+ (parameters
+  (parameter 'name "lecture-id" "A symbol which identifies a lecture")
+  (parameter 'name "slide-id" "A symbol which identifies a note pages in the lecture - corresponds to the first parameter of note-page")
+  )
+
+)
+
+(manual-page 
+ 'name "note-url"
+
+ (form "(note-url lecture-id slide-id)")
+
+ (description "Return a URL of particular note page in a particular lecture")
+
+ (parameters
+  (parameter 'name "lecture-id" "A symbol which identifies a lecture")
+  (parameter 'name "slide-id" "A symbol which identifies a note pages in the lecture - corresponds to the first parameter of note-page")
+  )
+
+)
+
+(manual-page 
+ 'name "book-url"
+
+ (form "(book-url lecture-id [slide-id])")
+
+ (description "Return a URL of particular aggregated lecture. The slide-id parameter is optional. 
+              If it is supplied,
+              return a URL to a particular place in the aggregated lecture")
+
+ (parameters
+  (parameter 'name "lecture-id" "A symbol which identifies a lecture")
+  (parameter 'name "slide-id" "A symbol which identifies a note pages in the lecture - corresponds to the first parameter of note-page")
+  )
+
+)
+
+(manual-page 
+ 'name "primary-view-url"
+
+ (form "(primary-view--url lecture-id slide-id)")
+
+ (description "Return a URL of particular page in a particular lecture using the designated primary-view")
+
+ (parameters
+  (parameter 'name "lecture-id" "A symbol which identifies a lecture")
+  (parameter 'name "slide-id" "A symbol which identifies a note pages in the lecture - corresponds to the first parameter of note-page")
+ )
+
+ (misc "The primary-view is one of the LENO front matters attributes.")
+
+)
+
+(manual-page 
+ 'name "exercise-formulation-url"
+
+ (form 
+  "(exercise-formulation-url lecture-id page-id presentation-kind exercise-number)"
+  )
+
+ (description "Return a URL to an exercise formulation in a given lecture, and on a given page. 
+               It is possible to return a URL to either the slide formulation or the note formulation of the exercise (depending
+               on the presentation-kind parameter). Exercise-number refers to a particular exercise number on the 
+               page. If there is only one exercise on this page, exercise-number will be 1.
+               Notice that this function does not use the exercise-id parameter; Rather it identifies the exercise
+               by means of the lecture, page (slide-id) and which number of exercise on the page. 
+              ")
+
+ (parameters
+  (parameter 'name "lecture-id" "A symbol which identifies the lecture")
+  (parameter 'name "page-id" "A symbol which identifies a page in a lecture - corresponds to the first parameter of note-page")
+  (parameter 'name "presentation-kind" "One of the symbols 'slide or 'note, giving the kind of presentation addressed by the URL")
+  (parameter 'name "exercise-number" "An integer giving the number of the exercise to address with the resulting URL")
+  )
+
+ (internal-references 'category "Relevant LENO clauses" (name-ref "exercise") (name-ref "formulation"))
+ (internal-references 'category "Similar function" (name-ref "exercise-formulation-url-given-id"))
+
+)
+
+(manual-page 
+ 'name "exercise-formulation-url-given-id"
+
+ (form 
+  "(exercise-formulation-url-given-id lecture-id exercise-id . presentation-kind)"
+  )
+
+ (description "Return a URL to an exercise formulation identified with exercise-id, located in a particular lecture. 
+               Presentation-kind determines the kind of presentation addressed by the URL (optional parameter which defaults to note).
+               This function finds the page and the exercise-number on the page via the internally generated -.exc files.
+               Thus, this function assumes that the -.exc file of lecture-id exists. If not, this function
+               returns \"???\" and issues a warning.")
+
+ (parameters
+  (parameter 'name "lecture-id" "A symbol which identifies the lecture")
+  (parameter 'name "exercise-id" "A symbol identifying the lecture - correspond to the first parameter of the exercise clause")
+  (parameter 'name "presentation-kind" "One of the symbols 'slide or 'note, giving the kind of presentation addressed by the URL")
+ )
+
+ (internal-references 'category "Relevant LENO clauses" (name-ref "exercise") (name-ref "formulation"))
+ (internal-references 'category "Similar function" (name-ref "exercise-formulation-url"))
+
+)
+
+
+(manual-page 
+ 'name "exercise-solution-url"
+
+ (form 
+  "(exercise-solution-url lecture-id page-id exercise-number)"
+  )
+
+ (description "Return a URL to an exercise solution in a particular lecture, on a particular page.  
+               The URL always addresses a note-size solution - there is no slide style solution page generated.
+               The parameter exercise-number addresses a particular exercise on a note page. If there is only one
+               exercise on the page, exercise-number will be one")
+
+ (parameters
+  (parameter 'name "lecture-id" "A symbol which identifies the lecture")
+  (parameter 'name "page-id" "A symbol which identifies a page in a lecture - corresponds to the first parameter of note-page")
+  (parameter 'name "exercise-number" "An integer giving the number of the exercise to address with the resulting URL")
+  )
+
+ (internal-references 'category "Relevant LENO clauses" (name-ref "exercise") (name-ref "solution"))
+
+)
+
+
+
+
+(manual-section 'id "show-and-speak"
+
+ (section-title "Show and speak functionality")
+
+ (section-body 
+  (div
+   (p "In this section we describe the show and speak functionality of LENO. This facility provides
+    for an automatically progressing lecture with the lecturer's speaker sound. It is rather difficult to 
+    arrange for show and speak functionality in LENO. The information below will give you a help in the right direction,
+    but it is probably not complete, nor totally up-to-date.")
+   
+   (p "The LENO clauses related to the facility is described elsewhere. Here we will focus
+    on the practical procedure for recording and arranging the sound clips in relation to
+    a LENO material.")
+
+   (p "At the overall level, we can observe that the show and speak facility is based on 
+    the following:")
+
+   (ol (map end-p (list
+     "To each note page there is one or more corresponding sound clips"
+
+     "On each note page we specify the sequencing and timing of the sound clips using a show-and-speak clause"
+
+     "The sound clips are brought to the appropriate sound files by means of a LENO utility tool, 
+      found in the xml-in-laml LENO source program directory's util branch."
+
+     (span "A number of leno-front-matters attributes
+       control the show and speak facility, most important the one called" (kbd "show-and-speak") _ "." "
+       These are all attributes in the " (kbd "leno-front-matters") " element.")
+
+
+   )))
+
+   (p "The practical procedure for making and arranging a set of sound files is the following:")
+
+   (ol (map end-p (list 
+     (span "Specify the sounds in the leno source, using " (kbd "(show-and-speak ...)") " clauses")
+
+     (span "Be sure that the attributes show-and-speak is set to true.")
+     
+     (span "Process the lecture with the variable " (kbd "show-and-speak-recording?") " set to #t. Set in post-notes.scm. This will cause the numbers
+      of the source sound files to appear in the annotated slide view. Using this information it is easy to 
+      find out where to locate a given sound clip.")
+
+     (span "Record the sounds, on files 1.wav, 2.wav, etc. in a subdirectory of the sound dir. "
+     "We recommend to organize the sounds outside the note source directory, because they are too voluminous.")
+
+     "Move the sound files from its subdirectory up one level to the sound directory. During the moving,
+      the files should be renamed appropriately. The mentioned utility program does this, based on the information
+      in the internal -.spk file."
+
+     (span "Process the leno LAML source file again. In this processing, be sure to set " (kbd "show-and-speak-recording?") " to false - #f.")
+   
+   )))
+
+   (p "As another practical information, the processing of a LENO laml file with show-and-speak clauses (and with show-and-speak? set
+    to #t) generates a -.spk file in the internal directory. This file holds all the bookkeeping information about
+    the show-and-speak clauses in a LENO laml file.")
+
+  )
+ )
+)
+
+  (merged-manual-from-xml-dtd 'src "../dtd/leno")
+
+)

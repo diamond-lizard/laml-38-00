@@ -1,0 +1,9 @@
+(load (string-append laml-dir "laml.scm"))
+(load (in-startup-directory "../example-processing.scm"))
+
+(apply process-list (all-laml-files))
+
+(laml-cd "single-chapter") (laml "process-all") (laml-cd "..")      ; Problematic in Guile due to use of (syntax ...) 
+(laml-cd "multi-chapter") (laml "process-all") (laml-cd "..")       ; Problematic in Guile due to use of (syntax ...)
+
+(end-laml)

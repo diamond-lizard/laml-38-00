@@ -1,0 +1,1 @@
+((date . "4. December 2002") (time . "15:02:11") (second-count . "1039010531") (number . "1") (position . "1") (ast-name-path . "$course-plan0$course-info2$lecture-list2"))

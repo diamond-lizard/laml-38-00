@@ -1,0 +1,281 @@
+/* body settings*/
+BODY.leno-slide 
+{
+    font-family: Sans-serif;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px; 
+    background: #0101AA;
+    color: #DDDDDD;
+}
+
+a
+{
+    color:white;
+}
+
+
+DIV.leno-slide-section-title 
+{
+    color: blue;
+    font-weight: 900;
+    text-align: center;
+    margin-top: 20%;
+    margin-bottom: 30%;
+    vertical-align: middle;
+    font-family: Arial, Helvetica, Sans-serif; 
+}
+
+DIV.leno-slide-title         
+{
+    color: blue;
+    text-align: left;
+    font-weight: 900;
+    font-family: Sans-serif;
+    margin-bottom: 100px; 
+}
+
+DIV.leno-slide-point         
+{
+    color: red;
+    text-align: center;
+    border-width: thin;
+    border-color: black;
+    border-style: groove;
+    margin-right: 10%;
+    margin-left: 10%;
+    margin-bottom: 50px; 
+}
+
+DIV.leno-slide-example	     
+{
+    font-style: italic; 
+    margin-bottom: 50px; 
+}
+
+DIV.leno-slide-comment	     
+{
+    font-style: italic;
+    margin-bottom: 50px; 
+}
+
+DIV.leno-slide-text          
+{
+    color: black;
+    text-align: left; 
+    margin-bottom: 50px; 
+}
+
+DIV.leno-slide-comment       
+{
+    color: black;
+    text-align: left; 
+    margin-bottom: 50px; 
+}
+
+DIV.leno-slide-quotation     
+{
+    color: black;
+    font-style: italic;
+    text-align: left;
+    line-height: 3ex;
+    margin-right: 15%;
+    margin-left: 15%;
+    margin-bottom: 40px; 
+}
+
+DIV.leno-slide-syntax	     
+{
+    display: compact;
+    font-family: monospace; 
+    background: yellow;
+    text-align: center;
+    margin-right: 10%;
+    margin-left: 10%;
+    margin-bottom: 50px; 
+}
+
+DIV.leno-slide-synopsis	     
+{
+    background: #99ff99;
+    margin-right: 10%;
+    margin-left: 10%;
+    margin-bottom: 50px; 
+}
+
+DIV.leno-slide-synopsis UL LI  
+{
+    list-style-image: url("../images/yellow-ball-large.gif");
+    text-transform: uppercase;
+}
+
+DIV.leno-slide-synopsis  UL LI:first-letter    
+{
+    font-size: 200%;
+}
+
+DIV.leno-slide-concept-list P 
+{
+    color: white;
+    text-align: center;
+    border-width: thick;
+    padding: 1%;
+    background: blue;
+    margin-right: 10%;
+    margin-left: 10%;
+    margin-bottom: 50px; 
+}
+
+TABLE.leno-slide-tabular TD 
+{
+    color: black; 
+}
+
+TABLE.leno-slide-tabular TR 
+{
+    background-color: #e4a08f; 
+}
+
+TABLE.leno-slide-opposing 
+{
+    border-spacing: 15pt;
+    margin-bottom: 50px; 
+}
+
+DIV.leno-slide-cross-reference 
+{
+    margin-left: 70%;
+    margin-right: 0%;
+}
+
+IMG.leno-slide		      
+{
+    border: 0;
+}
+
+DIV.leno-slide-source-program   
+{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+BODY.leno-slide-section-start
+{
+    font-family: Sans-serif;
+    background-color: white;
+    background-image: url("../graphics/computer-crash.jpg");
+    background-repeat: no-repeat; background-position: 100px 100px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px; 
+}
+
+BODY.leno-intro
+{
+    font-family: Sans-serif;
+    background: #0101AA;
+    color: #DDDDDD;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+DIV.leno-intro-links a
+{
+    color: white;
+}
+
+BODY.leno-slide-program 
+{
+    font-family: monospace;
+    background: #0101CC;
+    color: #DDDDDD;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px; 
+}
+
+BODY.leno-slide-program PRE
+{
+    font-family: monospace;
+    background: #0101CC;
+    color: #DDDDDD;
+}
+
+/* other */
+DIV.leno-slide-section-title
+{
+    font-family: Sans-serif;
+    font-variant: small-caps;
+    color: #0101AA;
+    font-weight: 900;
+    margin-top: 300px;
+    margin-left: 150px;
+}
+
+DIV.leno-slide-title         
+{
+    color: #DDDDDD;
+    text-align: left;
+    font-weight: 900;
+    font-family: Sans-serif;
+    font-variant: small-caps;
+    margin-top: 0px; 
+    margin-left: 10px;	
+    margin-bottom: 40px; 
+}
+
+LI.leno-slide-item	
+{
+    color: #DDDDDD;
+    font-family: Sans-serif;
+}
+
+
+DIV.leno-slide-point   
+{
+
+    background: #FEE001;
+    border-width: thick;
+    border-color: black;
+    border-style: outset; 
+}
+
+DIV.leno-slide-concept-list P
+{
+    color: #FEE001;
+    border-width: thick;
+    border-color: black;
+    border-style: outset;
+    background: #4040D0;
+}
+
+DIV.leno-slide-cross-reference
+{
+    color: black;
+    background: #DDDDDD;
+    border-style: solid;
+}
+
+DIV.leno-slide-cross-reference a:link, DIV.leno-slide-cross-reference a:visited
+{
+    color: black;
+}
+
+DIV.leno-slide-cross-reference UL 
+{
+    background: #DDDDDD;
+    padding-left: 20px;
+}
+
+DIV.leno-slide-slide-text 
+{
+    margin-left: 10px;
+    color: #DDDDDD;
+    font-family: Sans-serif;
+    font-weight: 900;
+}

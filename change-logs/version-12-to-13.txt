@@ -1,0 +1,90 @@
+We have eleminated the calls of
+
+  (cond ((eq? scheme-system 'drscheme) (lib-load "drscheme.scm"))
+        ((eq? scheme-system 'scm) (lib-load "scm.scm"))
+        ((eq? scheme-system 'gambit) (lib-load "gambit.scm"))
+        ((eq? scheme-system 'mzscheme) (lib-load "mzscheme.scm"))
+        (else (error "Unknown Scheme system")))
+
+and instead introduced a call of 
+
+  (system-specific-load scheme-system)
+
+which is defined in laml.scm (at the outer level of the LAML system).
+
+---------------------------------------------------------------------------------------------------
+
+We have made a description of all non-standard R4RS functions used in LAML.
+See the index.html file in the root of the distribution.
+
+We have also implemented all R4RS functions in the compatibility files.
+
+---------------------------------------------------------------------------------------------------
+
+The function make-directory, which creates a directory in an already existing
+and explicitly given directory, collides with a procedure of the same name
+in MzScheme (it creates a directory in the current dir).
+
+We have renamed the LAML version to make-directory-in-directory.
+
+---------------------------------------------------------------------------------------------------
+
+In the configuration file:
+
+kind-of-emacs deleted. Now always gnu-emacs.
+
+scm-exec and mzscheme-exe eliminated. Now there is one scheme-exec, which
+specifies the absolute path to the Scheme executable.
+
+Derived changes in laml.el and laml-execute.el.
+
+laml-config/laml-config.scm has been changed such that it copies a version
+of laml-execute.el from the directory laml-config/emacs-stuff to emacs-support.
+Hereby the emacs LAML execution support has be isolated in individual files,
+per platform and scheme system, see laml-config/emacs-stuff/README.
+
+---------------------------------------------------------------------------------------------------
+
+The file laml-execute.el has been reduced to contain only platform and scheme-system
+specific functions. Some platform independent stuff has been moved to laml.el in the 
+LAML root. From version 13, the emacs-support/laml-execute.el file is copied from
+the laml-config/emacs-stuff directory during the configuration of LAML.
+
+---------------------------------------------------------------------------------------------------
+
+laml.scm has been re-programmed along the lines proposed by Thien-Thi Nguyen.
+
+parameters of source-filename-without-extension and startup-directory removed.
+For the sake of backward compatibility, we allow an unused dummy actual parameter.
+
+laml-end moved to this file.
+
+laml-canonical-command-line and fake-startup-parameters are specified in this file,
+but expected to be defined in compatibility files
+
+Loading of compatibility files are now done from laml.scm
+In order to keed old laml programs running, the compatibility files have not been
+moved (as supposed by ttn).
+
+make-color and the color constants moved from html.scm to hex.scm
+
+The lib file hex.scm renamed to color.scm. For backward compatibility we still have
+the hex.scm file, which loads color.scm.
+
+---------------------------------------------------------------------------------------------------
+
+We have added the function laml-load to laml.scm. This function programmatically
+loads and runs an laml program. Also, a more user friendly and versatile programmatic
+LAML activation function, laml, is added.
+
+laml.scm now also loads general.scm - because lam.scm uses some the file file-name
+decomposition functions in general.scm
+
+We do not use laml-activation, laml-default-output-file, laml-default-output-directory
+any more. These have been cancelled from the configuration file. This makes the configuration
+even simpler.
+
+We have changed the function source-filename-without-extension. It returns #f if
+there are not activation context. A similar change is done on startup-directory.
+
+---------------------------------------------------------------------------------------------------

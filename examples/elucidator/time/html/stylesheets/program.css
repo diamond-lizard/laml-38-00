@@ -1,0 +1,43 @@
+SPAN.sectional-comment{
+  background: rgb(255,255,0);
+  font-weight: bold;
+} 
+
+SPAN.comment{
+  color: rgb(112,168,0);
+} 
+
+A.applied-name{
+  color: rgb(0,0,128);
+  text-decoration: none;
+}
+
+SPAN.signature{
+  color: rgb(255,0,0);
+  font-weight: bold;
+}
+
+.scheme-syntax-name{      /* Also SPAN  x 3 */
+  font-weight: bold;
+  color: rgb(0,0,0);
+  text-decoration: none;
+}
+
+.scheme-procedure-name{
+  color: rgb(166,71,0);     /* Brown */
+  text-decoration: none;
+}
+
+.scheme-misc-name{
+  color: rgb(0,0,0);
+  text-decoration: none;
+}
+
+
+
+A.schemedoc-name{
+  color: rgb(0,90,0);       /* Dark green */
+  text-decoration: none;
+}
+
+ 

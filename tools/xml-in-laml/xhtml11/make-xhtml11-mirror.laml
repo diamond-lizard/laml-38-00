@@ -1,0 +1,61 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-tool-load "xml-in-laml/xml-in-laml.scm")
+
+; ----------------------------------------------------------------------------------------
+; Tool parameters
+
+; The name of the language for which we create a mirror
+(define mirror-name "xhtml11")
+
+; The full path to the parsed DTD:
+(define parsed-dtd-path
+  (string-append laml-dir "/tools/dtd-parser/dtds/xhtml11-flat.lsp"))
+
+; The full path of the mirror target directory
+(define mirror-target-dir (string-append laml-dir "lib/xml-in-laml/mirrors/"))
+
+(define validation-predicate-names 'normal)  
+
+(define mirror-name-prefix "")
+
+(set! reserved-scheme-names (cons 'map (cons 'filter reserved-scheme-names)))
+
+(set! define-named-mirror-functions? #t)
+
+; End tool parameters
+
+; ----------------------------------------------------------------------------------------
+; Parameters to be part of the generated mirror:
+
+(set! default-document-type-declaration 
+  (string-it "<!DOCTYPE html PUBLIC \\\"-//W3C//DTD XHTML 1.1//EN\\\" \\\"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\\\">"))
+
+
+(set! default-xml-duplicated-attribute-handling "'keep-first")
+; (set! default-xml-accept-only-string-valued-attributes? "#f")
+
+(set! default-xml-accept-extended-contents? "#t")  ; accept numbers and characters as element contents
+(set! default-xml-accept-only-string-valued-attributes? "#f")  ; accept numbers and characters as attribute values 
+
+; Added in LAML version 32: 
+(set! default-xml-non-transliteration-elements (as-quoted-string (list 'list "script" "style")))
+(set! default-xml-preformatted-text-elements  (as-quoted-string (list 'list "pre" "script" "style")))
+(set! default-xml-accept-extended-contents? "#t")  ; accept numbers and characters as element contents in XHTML 1.0
+(set! default-xml-accept-only-string-valued-attributes? "#f")  ; accept numbers and characters as attribute values 
+
+; ----------------------------------------------------------------------------------------
+
+
+(let ((mirror-destination-file (string-append mirror-target-dir mirror-name "-mirror" ".scm"))
+      (file-inclusion-abs-path (in-startup-directory "runtime-stuff/xhtml-inclusions.scm")))
+  (generate-mirror parsed-dtd-path mirror-destination-file mirror-name file-inclusion-abs-path))
+
+
+; ----------------------------------------------------------------------------------------
+; Generating the manual of the XHTML 1.1 mirror.
+
+(display-message "")
+(display-message "Making the XHTML1.1 manual")
+(laml-cd (string-append mirror-target-dir "man/"))
+(laml "xhtml11-mirror.sdoc")
+(display-message "")

@@ -1,0 +1,15 @@
+(define try1
+  (xml-in-laml-positional-abstraction 1 1
+    (lambda (p1 cont attr p2)
+      (p (as-string (+ p1 p2)) _  cont)) #f "try1"))
+
+(define doc 
+  (xml-in-laml-positional-abstraction 1 4
+    (lambda (ttl cont attr bg-color text-color link-color vlink-color)
+       (html 
+         (head (title ttl))
+         (body 'bgcolor (rgb-color-encoding bg-color)
+               'text (rgb-color-encoding text-color)
+               'link (rgb-color-encoding link-color)
+               'vlink (rgb-color-encoding vlink-color)
+               cont)))))

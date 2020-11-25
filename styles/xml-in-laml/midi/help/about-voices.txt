@@ -1,0 +1,33 @@
+HELP ON VOICES
+
+To address a voice three MIDI messages are used: Two ControlChange message (control 0 and 32, MSB and LSB resp)
+and a ProgramChange message. The following Scheme functions abstract these:
+
+  (voice channel msb lsb program-number)
+  (voice-with-mix channel msb lsb program-number vol pan revert chorus)
+  (gm-voice channel program)                   program is either a program-number or an instrument name
+  (voices-from-file [voice-file])              Read and insert voices from a voice file.
+
+Voice Files:
+  Voice files (with extension 'voices') are simple list files with voice information.
+  It is possible to generate a voice file interactively by MIDL > Voice collection browser, or
+  M-x make-voice-collection-from-midl-file. This extracts the voice information from the current
+  Midl file and writes them to a file. It also brings up a voice collection brower on the extracted
+  voices.
+
+  The Scheme message list function eliminate-voice-messages are useful for getting rid of voice
+  information in a MIDI file. 
+
+Voice Collection Browser.
+  A voice collection brower can be initiated from an instrument specific voice browser.
+  From a MIDI LAML song it is possible to browse the voice collection in the song with MIDL > Voice collection browser.
+  A new and fresh voice collection can also be initiated from a song with MIDL > Empty voice collection browser.
+  
+  New voices are added to a voice collection from an instrument-specific voice browser, such
+  as the GM voice browser (initiated with Tools > GM Voice Browser).
+
+ 
+
+
+  
+  

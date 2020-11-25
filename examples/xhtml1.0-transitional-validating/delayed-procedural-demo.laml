@@ -1,0 +1,59 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(begin-laml)
+
+(define current-xml-language 'xhtml10-transitional)
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+; LAML processing options:
+(set-xml-accept-only-string-valued-attributes-in 'xhtml10-transitional #f)
+
+; Insert the LAML template "Processing Options" here
+; if you need variations in the LAML processing
+
+; This function proceduces a table of contents.
+; The function is called when the entire document has been aggregated.
+(define (table-of-contents whole-ast immediate-context-ast)
+ (list
+  'id "some-body-id"
+  (div 
+    (h1  "Table of Contents")
+    (indent-pixels 30
+     (table 'border 1
+           (find-asts whole-ast "h1"
+                      (lambda (h1-ast)
+                        (tr (td (ast-text h1-ast)))))))
+  )
+  (list 'class "some-body-class")
+ )
+)
+
+(write-html '(pp prolog)
+ (html html-props
+        (head 
+         (meta meta-props) laml-generation-meta
+         (title "Delayed Procedural Content Demo"))
+        (body 
+
+         table-of-contents
+
+    
+         (h1 "Section 1")
+         (p  "Here is section 1")
+
+         (h1 "Section 2")
+         (p "Here is section 2")
+
+         (h1 "Section 3")
+         (p "Here is section 3")
+
+         )
+        )
+)
+
+
+(end-laml)

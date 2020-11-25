@@ -1,0 +1,66 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/midi/midi")
+(load (string-append laml-dir "styles/xml-in-laml/midi/midi-laml-processing-lib.scm"))
+
+; The identity scaling function
+(define sc-id
+  (make-scale-function-by-xy-points
+           (from-percent-points 
+             '((0 100) (100 100)))))
+
+; Strong last. Interesting effect
+(define sc-sl
+  (make-scale-function-by-xy-points
+           (from-percent-points 
+             '((0 100) (10 80) (20 70) (30 60) (40 60) (50 70) (60 80) (70 90) (80 130) (90 150) (100 200)))))
+
+; Strong attack (strong first)
+(define sc-sa
+  (make-scale-function-by-xy-points
+           (from-percent-points 
+             '((0 180) (10 170) (20 100) (30 100) (40 100) (50 95) (60 90) (70 85) (80 85) (90 80) (100 80)))))
+
+(define sc-xx ; sc-up-50-100
+  (make-scale-function-by-xy-points
+           (from-percent-points 
+             '((0 50) (100 100)))))
+
+(define sc-yy ; sc-up-10-100
+  (make-scale-function-by-xy-points
+           (from-percent-points 
+             '((0 10) (100 100)))))
+
+(define sc-const-h
+  (make-scale-function-by-xy-points
+           (from-percent-points 
+             '((0 200) (100 100)))))
+
+; Every second note is strum sound in a Tyros mega voice (the ones with a 108 note value).
+(define strummed-c-major 
+  '((240 C2) (0 108) (240 E2) (0 108) (240 G2) (0 108) (240 B2) (0 108) (240 C3) (0 108) (240 E3)))
+
+(define default-c-major
+  '((240 C2) (240 E2) (240 G2) (240 B2) (240 C3) (240 E3)))
+
+(define str 0.5)
+
+(StandardMidiFile
+   (MidiHeader 'format "0" 'numberOfTracks "1" 'pulsesPerQuarterNote "1920" 'mode "deltaTime")
+   (MidiTrack
+    (Meta 'deltaTime "0" 'type "81" (tempo= 80))
+    (ControlChange 'deltaTime "0" 'info "0:0:0 Channel volume MSB" 'channel "1" 'control "7" 'value "60")        
+    (voice 1 0 0 24)
+
+    (repeat-messages 3
+       ;     Dir   Stretch   Vel   Total-lgt   Vel-scale     Time-scale  Transp  Ch  Base-dur  Time-note-list
+       (beat 'down str       80    1920        sc-sa         sc-xx       0       1   960       default-c-major)
+       (beat 'up   str       50    1920        sc-sl         sc-yy       0       1   960       default-c-major)
+       (beat 'down str       80    1220        sc-sa         sc-xx       0       1   960       default-c-major)
+       (beat 'up   str       50    1920        sc-sl         sc-yy       0       1   960       default-c-major)
+    )
+
+    (Meta 'deltaTime "1920" 'type "47" "")   ; End of track
+   )
+)
+
+;;; 1829

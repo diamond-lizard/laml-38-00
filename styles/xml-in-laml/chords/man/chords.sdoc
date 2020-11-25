@@ -1,0 +1,335 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/schemedoc-2/schemedoc")
+
+(define chord-desc "A particular chord. Can surround one of more words in the song. 
+                    The attributes names are very short, in order not to end up with very long verse lines.
+                    This form Can also appear alone without any textual contents.")
+
+(define chord-x-attr "Some extra 'abstraction' of this chord. Such as 7,6,dim,...")
+(define chord-b-attr "The bass note of this chord")
+(define chord-o-attr "If t this chord is optional. t means true and f means false. The default value is f. Optional notes are not shown in simple rendering mode.")
+
+(manual
+  (manual-front-matters
+    (manual-title "The LAML Chords Reference Manual")
+    (manual-author "Kurt Nørmark" "normark@cs.auc.dk")
+    (manual-affiliation "Department of Computer Science" "Aalborg University" "Denmark")
+    (manual-abstract 
+      (div  (p "This is the manual of the LAML chords song format, which is based on a simple XML DTD. In this format
+                it is possible to carry out simple chords markup of a song text. This includes chord decorations and
+                and chord inversions (by means of a given bass note).  The song document is an XML-in-LAML
+                document. In other words, the song source complies with an XML DTD, but it is written as a Scheme/Lisp
+                expression, which uses mirror functions that correspond to the XML elements of the chords.dtd." )
+
+            (p "The song format is supported by a few Emacs commands, which make it convenient and flexible to author
+                an LAML song text via the Emacs text editor. One of these," (b "M-x make-chords") _ "," 
+               "creates the initial chords file, with the overall markup. A number of specialized embedding commands," 
+               (b "M-x embed-in-chord")"(bound to" (kbd "C-x  C-e") ")" _ ","
+               (b "M-x x-embed-in-chord") "(bound to" (kbd "C-x C-x") ")"  _ ","
+               (b "M-x b-embed-in-chord") "(bound to" (kbd "C-x C-b") ")"  _ "," "and" 
+               (b "M-x x-b-embed-in-chord") "(bound to" (kbd "C-x B") ")"
+               "make it handy to embed a word or phrase in a chord (with or without additional attributes)." )
+
+           (p "As a slightly advanced feature, the LAML chords processor is able to transpose a song, via use of
+               the transpose attribute of the"  (kbd "song-front-matters") "element." 
+              "The transposition also affects the bass note of chord inversions."  )
+
+           (p "It is also possible to use the" (kbd "font-size") 
+              "attribute to adjust the font size. You can  use this attribute to ensure that a song text fits a single page. You
+               can also adjust the indentation to fit your preferences via use of the" (kbd "indentation") 
+              "attribute. Finally, you can color the chords by using the" (kbd "chord-color") "attribute." )
+
+           (p 
+             "It may be useful to consult the" (a 'href "../../../../examples/chords/index.html" "LAML chords examples") _ "."
+           )
+
+           (p "Seen from the context of LAML, the LAML Chords facility serves as a simple example of my personal
+               use of LAML within the area music notation (keyboard/MIDI)." )
+
+           (p "For chord presentation purposes, we support a number of variations. See the attributes" 
+              (kbd "h-hame")_ "," (kbd "cs-or-db") _ "," (kbd "ds-or-eb") _ "," (kbd "fs-or-gb") _ "," 
+              (kbd "gs-or-ab")_ "," "and" (kbd "as-or-hb") "of the" (kbd "song-front-matters") "element" _ "." )
+
+      ))
+
+    'css-prestylesheet "normal"
+    'css-stylesheet "original"
+    'laml-resource "true"
+  )
+
+  (manual-section 'id "song-sec"
+    (section-title "Song and song-front-matters")
+    (section-body
+      (div "In this section we document the song and the song-front-matters elements."
+      )
+    )
+  ) 
+
+  (manual-page 'name "song"
+    (description "The top level element. Notice that it is possible to inore this element, 
+                  and hereby to leave song-front-matters and song-verses as top-level elements. ")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "song-front-matters"
+    (description "This element defines a number of parmeters and processing options of this song.")
+    (attribute-descriptions 
+      (attribute-description 'name "transposition" "The number of half tone steps for transposition.
+                                                    An integer number between -11 and 11")
+      (attribute-description 'name "indentation" "The indentation of the song. An integer, denoting pixels")
+      (attribute-description 'name "font-size" "The font size used for the song text. A percentage. 
+                                                100 means normal size.")
+      (attribute-description 'name "compact-lines" "A boolean value that controls the line compactness. 
+                                                    The value true does not give nice results in MS Internet Explorer.
+                                                    (I do not know why).")
+      (attribute-description 'name "rendering-mode" "Either normal or simple. In simple mode, chords with the o attribute valued \"t\" are not shown.
+                                                     The o attribute is short for optional. \"t\" and \"f\"  are short for true or false respectively.")
+      (attribute-description 'name "chord-color" "The Color used for the chords. Must be a color value acceptable by CSS")
+      (attribute-description 'name "h-name" "Controls the presentation of the chord name H. H and h are aliases for each other.
+                                             Similarly, B and b are aliases for each other.")
+
+      (attribute-description 'name "cs-or-db" "Controls the presentation of the chord which internally is notated cs (C sharp)")
+      (attribute-description 'name "ds-or-eb" "Controls the presentation of the chord which internally is notated eb (B flat)")
+      (attribute-description 'name "fs-or-gb" "Controls the presentation of the chord which internally is notated fs (F sharp)")
+      (attribute-description 'name "gs-or-ab" "Controls the presentation of the chord which internally is notated gs (G sharp)")
+      (attribute-description 'name "as-or-hb" "Controls the presentation of the chord which internally is notated hb (H sharp)")
+    )
+  )
+
+  (manual-page 'name "song-verses"
+    (description "A container around individual song verses")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "song-title"
+    (description "The song title")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "song-author"
+    (description "The author/composer of the song")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "song-source"
+    (description "The book or internet address, which describes the origin of the song and/or the chords of the song.")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-section 'id "verse-line-sect"
+    (section-title "Verse and line")
+    (section-body
+      (div "Below we describe the verse and line elements"
+       )
+    )
+  ) 
+
+  (manual-page 'name "verse"
+    (description "A container around the lines of the song")
+    (attribute-descriptions 
+      (attribute-description 'name "n" "The verse number - an integer. It not supplied, no verse numering appears")
+      (attribute-description 'name "chords" "A boolean attribute that controls if chords are shown for this verse.
+                                             Chords can - of course - only be shown if they appear in the 
+                                             markuped song text.")
+    )
+  )
+
+  (manual-page 'name "line"
+    (description "A line of song verse. Individual words can be embedded in one of the chords elements.")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-section 'id "chords-sec"
+    (section-title "Chords")
+    (section-body
+      (div
+         (p "In this section we document the 12 main chords. We also include the unison form.
+             In chord markup the suffix s, such as in cs, means 'sharp'.
+             Similarly, the suffix b, such as in eb, means 'minor'.
+             We use the name 'h' for the chord, which sometimes (and perhaps more often) called b.
+            ")
+  
+          (p "We support a number of auxiliary functions, which act as conveninent shortcuts for some often used
+              chord abstractions.  These are" (kbd "cm") _ "," (kbd "c7") _ "," (kbd "c6") _ "," "and" 
+             (kbd "cm7")_ "," "and similar functions for the other main chords." )
+
+          (p "In addition, the chord named" (kbd "db") "can be used as an alias of" (kbd "cs") _ ";" "
+              " (kbd "ds") "can be used as an alias of" (kbd "eb") _ ";" "
+              " (kbd "gb") "can be used as an alias of" (kbd "fs") _ ";" "
+              " (kbd "ab") "can be used as an alias of" (kbd "gs") _ ";" "And
+              " (kbd "as") "can be used as an alias of" (kbd "hb") _ "."
+             "The abstractions, such as" (kbd "db7") _ "," (kbd "db6") _ "," (kbd "dbm") _ "," "and" (kbd "dbm7") "are also availble.")                
+       )
+    )
+  ) 
+
+  (manual-page 'name "c"
+    (description chord-desc)
+    (attribute-descriptions 
+      (attribute-description 'name "x" chord-x-attr)
+      (attribute-description 'name "b" chord-b-attr)
+      (attribute-description 'name "o" chord-o-attr)
+    )
+  )
+
+  (manual-page 'name "cs"
+    (description "C sharp." chord-desc)
+    (attribute-descriptions 
+      (attribute-description 'name "x" chord-x-attr)
+      (attribute-description 'name "b" chord-b-attr)
+      (attribute-description 'name "o" chord-o-attr)
+    )
+  )
+
+  (manual-page 'name "d"
+    (description chord-desc)
+    (attribute-descriptions 
+      (attribute-description 'name "x" chord-x-attr)
+      (attribute-description 'name "b" chord-b-attr)
+      (attribute-description 'name "o" chord-o-attr)
+    )
+  )
+
+  (manual-page 'name "eb"
+    (description "E minor." chord-desc)
+    (attribute-descriptions 
+      (attribute-description 'name "x" chord-x-attr)
+      (attribute-description 'name "b" chord-b-attr)
+      (attribute-description 'name "o" chord-o-attr)
+    )
+  )
+
+  (manual-page 'name "e"
+    (description chord-desc)
+    (attribute-descriptions 
+      (attribute-description 'name "x" chord-x-attr)
+      (attribute-description 'name "b" chord-b-attr)
+      (attribute-description 'name "o" chord-o-attr)
+    )
+  )
+
+  (manual-page 'name "f"
+    (description chord-desc)
+    (attribute-descriptions 
+      (attribute-description 'name "x" chord-x-attr)
+      (attribute-description 'name "b" chord-b-attr)
+      (attribute-description 'name "o" chord-o-attr)
+    )
+  )
+
+  (manual-page 'name "fs"
+    (description "F sharp." chord-desc)
+    (attribute-descriptions 
+      (attribute-description 'name "x" chord-x-attr)
+      (attribute-description 'name "b" chord-b-attr)
+      (attribute-description 'name "o" chord-o-attr)
+    )
+  )
+
+  (manual-page 'name "g"
+    (description chord-desc)
+    (attribute-descriptions 
+      (attribute-description 'name "x" chord-x-attr)
+      (attribute-description 'name "b" chord-b-attr)
+      (attribute-description 'name "o" chord-o-attr)
+    )
+  )
+
+  (manual-page 'name "gs"
+    (description "G sharp." chord-desc)
+    (attribute-descriptions 
+      (attribute-description 'name "x" chord-x-attr)
+      (attribute-description 'name "b" chord-b-attr)
+      (attribute-description 'name "o" chord-o-attr)
+    )
+  )
+
+  (manual-page 'name "a"
+    (description chord-desc)
+    (attribute-descriptions 
+      (attribute-description 'name "x" chord-x-attr)
+      (attribute-description 'name "b" chord-b-attr)
+      (attribute-description 'name "o" chord-o-attr)
+    )
+  )
+
+  (manual-page 'name "hb"
+    (description "H flat, also known as B flat." chord-desc)
+    (attribute-descriptions 
+      (attribute-description 'name "x" chord-x-attr)
+      (attribute-description 'name "b" chord-b-attr)
+      (attribute-description 'name "o" chord-o-attr)
+    )
+  )
+
+  (manual-page 'name "h"
+    (description "H, also often notated as B." chord-desc)
+    (attribute-descriptions 
+      (attribute-description 'name "x" chord-x-attr)
+      (attribute-description 'name "b" chord-b-attr)
+      (attribute-description 'name "o" chord-o-attr)
+    )
+  )
+
+  (manual-page 'name "unison"
+    (description "Play without chords. Of typographical reasons it is recommended to use this form on a single word, although it logically apply to a longer phrase of a song line.")
+    (attribute-descriptions 
+    )
+  )
+
+  (manual-section 'id "emacs-sec"
+    (section-title "Emacs Support")
+    (section-body
+      (p "In this section we describe the Emacs support for use of the LAML Chords facility.")
+
+      (p "The names of basic chords mirror functions in Scheme are c, cs, d, eb, e, f, fs, g, gs, a, hb, h. These are documented above.
+          These functions are, of course, supported by Emacs. The s in cs means 'sharp' (one half tone up), and the b in hb means flat (one half tone down).")
+
+      (p "In addition, the following alternative chord names are supported: db (= cs), ds (= eb), gb (= fs), ab (= gs), and as (= hb).")
+
+      (p "A number of additional, named mirror functions are derived automatically by the Chords Scheme software.
+          These are CHORD-NAMEm for minor chords, CHORD-NAME7 for the seventh variation, 
+          CHORD-NAME6 for the sixth variation, and CHORD-NAMEm7 for the seventh minor variation, where CHORD-NAME
+          is one of c, db, cs, d, ds, eb, e, f, gb, fs, g, ab, gs, a, as, hb, and h.")
+
+      (p "Emacs supports all these names via completion in the chords embedding editing commands, see below.
+          Many of these chord names translate to use of the x attribute with the the attribute value \"m\", \"6\", or \"7\"."
+      )
+
+      (p "The following chord-embedding Emacs editing commands are supported:")
+
+      (ul
+        (lis "M-x" (b "embed-in-chord") "(C-x C-e):" (br) "Basic chord embedding.")
+        (lis "M-x" (b "x-embed-in-chord") "(C-x C-x):" (br) "Adds an empty x attribute name-value pair.")
+        (lis "M-x" (b "b-embed-in-chord") "(C-x C-b):" (br) "Adds an empty b attribute name-value pair.")
+        (lis "M-x" (b "x-b-embed-in-chord") "(C-x B):" (br) "Adds empty x and b attribute name-value pairs.")
+      )
+
+      (p "These editing commands prompt for chord names, and they use completions to avoid simple typos.")
+
+      (p "In addition to the chord embedding commands, the following chord-related editing command is supported:")
+ 
+      (ul
+        (li "M-x" (b "make-chords:") (br) "This command is embeds the content of an entire buffer in a LAML chord XML-in-LAML template, 
+             and it enters the Chords Emacs mode.")
+      )
+
+    )
+  )
+
+  (merged-manual-from-xml-dtd 'src "../dtd/chords")
+
+)
+

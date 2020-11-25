@@ -1,0 +1,36 @@
+<html><head><link href="stylesheets/program.css" rel="stylesheet" title="program" type="text/css" /> <title>Source file</title></head><body bgcolor="#e2e2c7" text="#000000" link="#000000" vlink="#000000"><font size="3"><pre>(<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX468" target="documentation-frame" title="R5RS Scheme form">load</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" target="documentation-frame" title="R5RS Scheme form">string-append</a> laml-dir "laml.scm"))
+(<a class="schemedoc-name" href="../../../man/laml.html#laml-style" target="documentation-frame" title="Manual: laml">laml-style</a> "simple-xhtml1.0-strict-validating")
+
+(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX106" target="documentation-frame" title="R5RS Scheme form">set!</a> <a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#xml-validate-contents?" target="documentation-frame" title="Manual: xml-in-laml">xml-validate-contents?</a> #t)
+(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX106" target="documentation-frame" title="R5RS Scheme form">set!</a> <a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#xml-check-attributes?" target="documentation-frame" title="Manual: xml-in-laml">xml-check-attributes?</a> #t)
+(<a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#set-xml-transliterate-character-data-in" target="documentation-frame" title="Manual: xml-in-laml">set-xml-transliterate-character-data-in</a> 'xhtml10-strict #t)
+
+(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX106" target="documentation-frame" title="R5RS Scheme form">set!</a> <a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#xml-check-error" target="documentation-frame" title="Manual: xml-in-laml">xml-check-error</a> <a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#display-xml-warning" target="documentation-frame" title="Manual: xml-in-laml">display-xml-warning</a>)
+
+(<a class="schemedoc-name" href="../../../man/laml.html#write-html" target="documentation-frame" title="Manual: laml">write-html</a> 'pp
+  (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-strict-mirror.html#html" target="documentation-frame" title="Manual: xhtml10-strict-mirror">html</a> 
+   (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-strict-mirror.html#head" target="documentation-frame" title="Manual: xhtml10-strict-mirror">head</a> 
+     (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-strict-mirror.html#title" target="documentation-frame" title="Manual: xhtml10-strict-mirror">title</a> "An Invalid document") 
+     (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-strict-mirror.html#em" target="documentation-frame" title="Manual: xhtml10-strict-mirror">em</a> "Emphasis not allowed here")
+   )
+
+   (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-strict-mirror.html#body" target="documentation-frame" title="Manual: xhtml10-strict-mirror">body</a>
+
+     (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-strict-mirror.html#p" target="documentation-frame" title="Manual: xhtml10-strict-mirror">p</a> 'x "y" 
+        "A paragraph with an invalid attribute")
+
+     (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-strict-mirror.html#p" target="documentation-frame" title="Manual: xhtml10-strict-mirror">p</a> 'id "p1"
+        (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-strict-mirror.html#ol" target="documentation-frame" title="Manual: xhtml10-strict-mirror">ol</a>
+          (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-strict-mirror.html#li" target="documentation-frame" title="Manual: xhtml10-strict-mirror">li</a> "Ordered list not allowed here")
+        )
+        'id "p2"
+     )
+
+
+     (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-strict-mirror.html#li" target="documentation-frame" title="Manual: xhtml10-strict-mirror">li</a> "li item outside ul and ol context")
+     
+   )
+  )
+) 
+
+(<a class="schemedoc-name" href="../../../man/laml.html#end-laml" target="documentation-frame" title="Manual: laml">end-laml</a>)</pre></font><div>&nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p></div></body></html>

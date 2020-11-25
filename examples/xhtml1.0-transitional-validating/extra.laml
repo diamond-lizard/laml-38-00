@@ -1,0 +1,74 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+; (lib-load "xhtml1.0-convenience.scm")
+
+(begin-laml)
+
+(define current-xml-language 'xhtml10-transitional)
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+
+(write-html '(pp prolog)
+ (html html-props
+  (xml-comment "aaa")
+  (head 
+   (meta meta-props (xml-comment "bbb"))
+   laml-generation-meta
+   (script 'type "js"
+     (cdata-section "Code here")
+   )   
+   (xml-comment "bbb")
+   (title "Extra XML aspects")) 
+   (processing-instruction "my-app" "xxx" 'yyy 5)
+  (body 
+ 
+    (h1 "Extra XML aspects" )
+
+    (h2 "Character references")
+
+    (p "LAML supports character references, such as" (char-ref "aring") "directly."
+       "'Strange characters', such as" (char-ref "gt") "and" (char-ref 60) "can be reached in this way."
+       "Please consult the LAML source to see how character references are given in the LAML source."
+    )
+
+    (h2 "XML comments")
+
+    (p "In case the real document source is an LAML file (written in Scheme), we can and should use Scheme comments.
+        However, in some cases it is desirable to have real XML comments in the generated HTML/SVG/LENO file.
+        If you view the underlying HTML code of this page, you will see several XML comments."
+        "The LAML source shows how to write XML comments in your original source."
+        (xml-comment "<p> xxx </p>" 7 'x)
+    )
+
+    (h2 "CDATA Sections" )
+
+    (p "CDATA Sections are typcially used for style and script contents that contain <, &, or > characters:
+        Here follows a CDATA section, which you can see in the HTML source, but not in the rendered text:"
+        (cdata-section "<x>" 7 'xx "</xx>") "."
+        "Notice, however, in this context, that LAML is very helpful for conversion of <, & and >.
+         This is done via use of the HTML character transformation table."
+    )
+
+    (cdata-section "if (ok(x)) &x else &y")
+         
+
+    (h2 "Processing Instructions")
+
+    (p "A processing instruction is an XML technicality for telling something to an application, which 
+        processes the document. Here is an example:" (processing-instruction "my-app" "xxx" 'yyy 5))
+
+    (processing-instruction "my-app" "xxx" 'yyy 5)
+
+    (when-generated)
+
+  )
+
+
+
+ )
+)
+
+
+(end-laml)

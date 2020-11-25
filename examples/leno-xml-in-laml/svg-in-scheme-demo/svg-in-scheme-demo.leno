@@ -1,0 +1,1038 @@
+(load (string-append laml-dir "laml.scm"))       
+(laml-style "xml-in-laml/lecture-notes/lecture-notes")
+
+(lib-load "svg-extensions.scm")
+
+(leno-front-matters
+  (front-title "SVG in Scheme")           
+  (front-subtitle "Graph Abstractions")   
+  (front-author "KN")           
+  (front-affiliation "AAU")  
+  (front-abstract "These pages shows examples of SVG graph abstractions. The examples are intended as examples for the abstract of the
+                   paper" (a 'href "http://www.cs.aau.dk/~normark/laml/papers/svg-in-scheme/WorkingWithSvgInScheme.html" "Working With SVG in Scheme") _ ".")  
+
+  'slide-view "true"  
+  'annotated-slide-view "true"
+  'aggregated-view "false" 
+  'primary-view "slide-view"
+
+;   'scheme-suffix "post-notes.scm"
+
+  'course-home-url "http://www.cs.aau.dk/~normark/laml/papers/svg-in-scheme/WorkingWithSvgInScheme.html"   
+  'author-home-url ""   
+  'note-download-url ""   
+  'logo-url "http://www.auc.dk/"  
+  'note-contents-description ""    
+  'slide-header "normal"  ; minimal/normal/none 
+  'trail-of-lecture "false"  
+  'language "english"      
+
+  'show-and-speak "false" 
+  'default-showing-time "2"    
+  'additional-showing-time "0" 
+  'sound-source "wave-file" 
+  'speak-file-prefix "sound/"
+  'speak-url-prefix "../sound/"
+
+  'exercise-model "none"   
+  'quiz-support "false"   
+
+  'word-index "true"  
+
+  'news-flash-string  ""  
+  'news-flash-level   "2"
+
+  'verbosity-level "1"
+  'clean-html-directory "false"
+
+  'css-prestylesheet "large-size"
+  'css-stylesheet "original"
+)
+
+(begin-notes)
+
+
+
+(define txt-lgt 31)
+
+(define (aggregate-text-box . text-list)
+ (let ((y-list (map (mult 60) (number-interval 1 (length text-list)))))
+  (with-xml-language! svg-language '(filter)
+   (g (map (lambda (txt y)
+	    (svg-node rectangular 0 y (pad-with-spaces txt-lgt txt) 'text-align "lc"))
+	  text-list y-list)))))
+
+(define (mult n)
+ (lambda (x)
+   (* n x)))
+
+(define (pad-with-spaces lgt txt)
+  (let ((txt-lgt (string-length txt)))
+    (string-append txt
+                  (if (>= lgt txt-lgt)
+                      (make-string (- lgt txt-lgt) #\space)
+                      ""))))
+
+(define prog-box (aggregate-text-box "Some code" "User text cases" "Tool options"))
+(define tool-box (aggregate-text-box "Instrumented code" "Partition transition graph" "Candidate object creation table" "Tool test case"))
+(define box-4 (aggregate-text-box "Partition coverage log" "Junit log" "Object creation table"))
+(define box-3 (aggregate-text-box "Partition coverage table" "Partition transition graph" "Junit reports"))
+
+
+(define testing-process
+ (with-xml-language! svg-language '(filter)
+  (let* ((x1 100) (x2 400)
+	 (y1 100) (y2 300)
+         )
+   (with-animation '(step-buttons-walk-through-edge-motion) ; step-buttons-reveal  step-buttons-walk-through
+    (let*
+        ((node-a (svg-composite-node x1 y1 prog-box  'width 180 'padding 10 'steps "1,13"))
+         (node-b (svg-composite-node x2 y1 tool-box  'width 180 'padding 10 'steps "3,7"))
+         (node-c (svg-composite-node x1 y2 box-3  'width 180 'padding 10 'step 11))
+         (node-d (svg-composite-node x2 y2 box-4  'width 180 'padding 10 'steps "5,9"))
+
+         (edge1 (svg-edge node-a "rc" node-b "lc" 'stroke-width "2" 'stroke "black" 'arrow "yes" 'step 2))
+         (edge2 (svg-edge node-b "lb" node-d "lt" 'dx 30 'stroke-width "2" 'stroke "black" 'arrow "yes" 'steps "4,8"))
+         (edge2-r (svg-edge node-d "rt" node-b "rb" 'dx -30 'stroke-width "2" 'stroke "black" 'arrow "yes" 'step 6))
+         (edge3 (svg-edge node-d "lc" node-c "rc" 'stroke-width "2" 'stroke "black" 'arrow "yes" 'step 10))
+         (edge4 (svg-edge node-c "ct" node-a "cb" 'stroke-width "2" 'stroke "black" 'arrow "yes" 'step 12))
+  
+	 )
+      (svg-graph 'from-step 1 'to-step 14
+		 (list node-a node-b node-c node-d)
+		 (list edge1 edge2 edge2-r edge3 edge4)
+       )
+      )
+    ))))
+
+(define (element-node x y label . attributes)
+ (let* ((default-attributes (list 'min-width 50 'min-height 50 'font-size 22  'rx 25 'ry 25
+                                  'step 0 'bg-color (rgb-color-encoding 157 198 140)))
+        (effective-attributes (append attributes default-attributes)))
+   (svg-node rectangular x y label effective-attributes)))
+
+
+
+(note-page 'id "per-ill"
+  (title (main-text "A Sample Flow Graph")
+         (annotation "")
+  )
+
+  (point
+   (main-text
+    (p "A graph which illustrates the workflow in Per Madsens experimental testing tool")
+    (p "Press the grey triangle to step through the animations")
+    )
+   (annotation
+    ""
+    )
+  )
+
+  (svg-image 'id "i1" ; 'margin-left "5cm"
+   'width "800"
+   'height "800"
+   (main-text
+    "Testing Process" )
+   (svg-here
+    (g 'transform "scale(1.3)" testing-process) 
+  )
+ )
+)
+
+(define a-graph 
+ (with-xml-language! svg-language '(filter)
+  (let* ((x1 100) (x2 (+ x1 100)) (x3 (+ x2 100))
+	 (y1 100) (y2 (+ y1 100)) (y3 (+ y2 100))
+         )
+   (with-animation '(node-emphasize edge-emphasize step-buttons-reveal) ; 
+    (let*
+        ((node-a (svg-node rectangular x1 y1 "a" 'step 1 'rx 10 'min-width 40))
+         (node-b (svg-node diamond x3 y1 "b" 'step 1 'min-width 40))
+         (node-c (svg-node rectangular x2 y2 "c" 'step-from 1 'step-to 6 'min-width 40 'bg-color "yellow"))
+         (node-d (svg-node circular x1 y3 "d" 'step 2 'min-width 40 'min-height 40))
+         (node-e (svg-node cloud x3 y3 "e" 'step 3 'min-width 40))
+
+         (edge1 (svg-edge node-a "cb" node-c "lt" 'break-path (rl-p 20 20 (rl-p -10 15 (e-p))) 'step-from 4 'step-to 5 'stroke-width "4" 'stroke "green" 'arrow "yes"))
+         (edge2 (svg-edge node-a "cb" node-d "ct" 'step 5 'stroke "green" 'arrow "yes"))  
+         (edge3 (svg-edge node-b "cb" node-e "ct" 'step 6 'stroke "blue" 'stroke-width "3" 'stroke-dasharray "3 4"))
+         (edge4 (svg-edge node-a "rc" node-b "lc" 'step 6 'stroke "black" 'stroke-width "2" 'stroke-dasharray "3 4"))
+         (edge5 (svg-edge node-d "rc" node-e "lc" 'step 6 'arrow "yes" 'stroke "purple" 'stroke-width "3" 'stroke-dasharray "10 10 5 5" ))  
+	 )
+      (svg-graph 'from-step 1 'to-step 6 'button-x 200 'button-y 400 
+		 (list node-a node-b node-c node-d node-e)
+		 (list edge1 edge2 edge3 edge4 edge5)
+		 )
+      )
+    ))))
+
+
+(note-page 'id "p3"
+  (title (main-text "An Animated Graph")
+         (annotation "")
+  )
+
+  (point
+   (main-text
+    (p "An animated graph which gradually develops when you activate the grey contol buttons")
+    (p "Press the grey triangle to step through the animations")
+    )
+   (annotation
+    ""
+    )
+  )
+
+  (svg-image 'id "i1" ; 'margin-left "5cm"
+   'width "800"
+   'height "800"
+   (main-text
+    "Introduction of lines" )
+   (svg-here
+    (g 'transform "scale(1.0)" a-graph) 
+  )
+ )
+)
+
+(define graph-2 
+ (with-xml-language! svg-language '(filter)
+  (let* ((x1 100) (x2 (+ x1 100)) (x3 (+ x2 100))
+	 (y1 100) (y2 (+ y1 100)) (y3 (+ y2 100))
+         )
+   (with-animation '(none) ; 
+    (let*
+        ((node-a (svg-node rectangular x1 y1 "a" 'rx 10 'min-width 40))
+         (node-b (svg-node rectangular x3 y1 "b" 'min-width 40))
+         (node-c (svg-node rectangular x2 y2 "c" 'min-width 40 'bg-color "yellow"))
+         (node-d (svg-node rectangular x1 y3 "d" 'min-width 40 'min-height 40 'rx 20))
+         (node-e (svg-node rectangular x3 y3 "e" 'min-width 40))
+
+         (edge1 (svg-edge node-a "cb" node-c "lc" 'style "vh" 'stroke-width "4" 'stroke "green" 'arrow "yes"))
+         (edge2 (svg-edge node-b "cb" node-c "rc" 'style "vh"  'stroke "green" 'arrow "yes"))  
+         (edge4 (svg-edge node-a "rc" node-b "lc" 'break-path (rl-p 75 -50 (e-p))  'stroke "black" 'stroke-width "2" 'stroke-dasharray "3 4"))
+         (edge5 (svg-edge node-d "rc" node-c "cb" 'style "hv" 'arrow "yes" 'stroke "purple" 'stroke-width "3"
+                                                  'stroke-dasharray "10 10 5 5" ))  
+         (edge6 (svg-edge node-c "rb" node-e "lt" 'style "straight" 'stroke "black" 'arrow "yes"))
+	 )
+      (svg-graph 'from-step 1 'to-step 6 'button-x 200 'button-y 400 
+		 (list node-a node-b node-c node-d node-e)
+		 (list edge1 edge2 edge4 edge5 edge6)
+		 )
+      )
+    ))))
+
+(note-page 'id "ag"
+  (title (main-text "Another Graph")
+         (annotation "")
+  )
+
+  (point
+   (main-text
+    "A graph which demonstrates broken, right angle edges"
+    )
+   (annotation
+    ""
+    )
+  )
+
+  (svg-image 'id "i1" ; 'margin-left "5cm"
+   'width "800"
+   'height "800"
+   (main-text
+    "Introduction of lines" )
+   (svg-here
+    (g 'transform "scale(1.0)" graph-2) 
+  )
+ )
+)
+
+
+(define (var-val x y var val)
+  (let*((var-box (svg-node rectangular x y (string-append (as-string var) ":") 'id var
+                                'lc "rc" 'stroke "none"   ))
+        (val-box (svg-node rectangular (+ x 20) y (as-string val)
+                                'text-align "rc" 'lc "lc" 'min-width 100 'stroke-width "1" 'bg-color "coral" 'font-style "italic")))
+   (svg-graph (list var-box val-box))))
+
+(define several-variables 
+ (with-xml-language! svg-language '(filter)
+  (let* ((x1 100) (x2 450)   
+	 (y1 100) (y2 (+ y1 60)) (y3 (+ y2 60)) (y4 (+ y3 60)) (y5 (+ y4 60))
+	 )
+    (g					; 'transform "scale(1.3)"
+     (var-val x1 y1 "i" "55556") 
+     (var-val x1 y2 "j" 7777)
+     (var-val x1 y3 "kkk" "pip")
+     (var-val x1 y4 "x" "88")
+     (var-val x1 y5 "y" "#t")
+
+     (var-val x2 y1 "ii" "55556") 
+     (var-val x2 y2 "jj" 7777)
+     (var-val x2 y3 "kkkkkk" "pip")
+     ))))
+
+
+
+; Display a variable box at position (x,y).
+; val is an even length list of step value elements, such as (step1 val1 step2 val2 ... stepn valn). 
+(define (var-values x y var val)
+  (let*((var-box (svg-node rectangular x y (string-append (as-string var) ":") 'step 0 'id var
+                                'lc "rc" 'stroke "none"   ))
+        (val-box (if (not (list? val))
+                     (svg-node rectangular (+ x 20) y (as-string val) 'step 0
+                               'text-align "rc" 'lc "lc" 'min-width 100 'stroke-width "1" 'bg-color "coral" 'font-style "italic")
+                     (let ((val-ass (propertylist-to-alist val)))
+                       (map (lambda (step-val)
+                              (svg-node rectangular (+ x 20) y (as-string (cdr step-val)) 'step (car step-val)
+                                        'text-align "rc" 'lc "lc" 'min-width 100 'stroke-width "1"
+                                        'bg-color "coral" 'font-style "italic"))
+                            val-ass))))
+       )
+   (list var-box val-box)))
+
+(define anim-variables 
+ (with-xml-language! svg-language '(filter)
+  (let* ((x1 100) (x2 450)   
+	 (y1 100) (y2 (+ y1 60)) (y3 (+ y2 60)) (y4 (+ y3 60)) (y5 (+ y4 60))
+	 )
+   (with-animation 'step-buttons-reveal
+    (svg-graph 'from-step 1 'to-step 11
+     (var-values x1 y1 "i" (list 0 "?" 1 "55556" 3 "3") ) 
+     (var-values x1 y2 "j" (list 0 "?" 2 7777 4 6666))
+     (var-values x1 y3 "kkk" (list 0 "?" 5 "pip" 6 "pop"))
+     (var-values x1 y4 "x" (list 0 "?" 7 88 8 99))
+     (var-values x1 y5 "y" (list 0 "?" 10 "#t" 11 "#f"))
+
+     (var-values x2 y1 "ii" "55556") 
+     (var-values x2 y2 "jj" 7777)
+     (var-values x2 y3 "kkkkkk" "pip")
+     )))))
+
+(note-page 'id "p5-anim"
+  (title (main-text "Variables")
+         (annotation "")
+  )
+
+  (point
+   (main-text
+     (p "A set of variables the values of which are changed gradually")
+     (p "Press the grey triangle to step through the animations")
+    )
+   (annotation
+    ""
+    )
+  )
+
+  (svg-image 'id "i1" 
+   'width "800"
+   'height "800"
+   (main-text
+    "Some realistic stuff" )
+   (svg-here
+     anim-variables)
+  )
+
+)
+
+(note-page 'id "p8"
+  (title (main-text "ASCII Tabel")
+         (annotation "")
+  )
+
+  (svg-image 'id "i1" ; 'margin-left "2cm"
+   'width "900"
+   'height "650"
+   (main-text
+    "The ASCII Table" )
+   (svg-here
+    (g   'transform "scale(0.85)"
+
+    (with-animation 'node-emphasize ; 'step-buttons-reveal
+     (let* ((color (lambda (c) (list 'fill (rgb-color-encoding c) 'stroke (rgb-color-encoding c)))) 
+            (print-char (lambda (n)
+                          (if (and (> n 32) (< n 127))
+                              (list (as-string (as-char n)) (tspan (as-string n) 'baseline-shift "sub" 'font-size "19" (color "blue")))
+                              (list (tspan "NP" (color "grey")) (tspan (as-string n) 'baseline-shift "sub" 'font-size "19" 'fill "red" 'stroke "blue") ))))
+            (cell-dim 50)
+            (x-stretch 1.7)
+            (char-max 127)
+            (rows 13)
+            (print-chars (map print-char (number-interval 0 char-max)))
+            (print-chars-list (sublist-by-rows 10 print-chars))
+            (x-list (map (lambda (n) (+ (* n cell-dim x-stretch) cell-dim)) (number-interval 1 10)))
+            (y-list (map (lambda (n) (+ (* n cell-dim) 50)) (number-interval 1 rows)))
+           )
+      (g
+       ; horizontal numbers       
+       (map2 (lambda (n x) (svg-node rectangular x 40 (as-string n) 'stroke "none" 'text-color "grey")) (number-interval 0 9) x-list)
+
+       ; vertical numbers
+       (map2 (lambda (n y) (svg-node rectangular 20 y (as-string (* 10 n)) 'stroke "none" 'text-color "grey"))
+             (number-interval 0 (- rows 1)) y-list)
+
+       ; the table
+       (map2 
+         (lambda (row y)
+           (map2 
+             (lambda (item x)
+               (svg-node rectangular x y item 'stroke-width "1" 'text-align "cc" 'min-width (* cell-dim x-stretch) 'min-height cell-dim))
+             row x-list))
+             
+         print-chars-list y-list)
+      )
+     )
+   ))))
+)
+
+(define another-graph 
+ (with-xml-language! svg-language '(filter)
+  (let* ((x1 100) (x2 (+ x1 100)) (x3 (+ x2 100))
+	 (y1 100) (y2 (+ y1 100)) (y3 (+ y2 100))
+         )
+    (let*
+        ((node-a (svg-node rectangular x1 y1 "jakob" 'min-width 150))
+         (node-b (svg-node rectangular x3 y1 "b" 'min-width "40"))
+         (node-c (svg-node rectangular x2 y2 "c" 'min-width "40" 'bg-color "yellow"))
+         (node-d (svg-node rectangular x1 y3 "d" 'min-width 100))
+         (node-e (svg-node rectangular x3 y3 "ee" 'min-width "40" 'id "enode"))
+
+         (edge1 (svg-edge node-a "cb" node-c "lt" 'stroke-width "4" 'stroke "red" 'arrow "yes"))
+         (edge2 (svg-edge node-a "cb" node-d "ct" 'arrow "yes"))  
+         (edge3 (svg-edge node-b "cb" node-e "ct" 'stroke "blue" 'stroke-width "3" 'stroke-dasharray "3 4"))
+         (edge4 (svg-edge node-a "rc" node-b "lc" 'stroke "black" 'stroke-width "2" 'stroke-dasharray "3 4"))
+         (edge5 (svg-edge node-d "rc" node-e "lc" 'arrow "yes" 'stroke "purple" 'stroke-width "3" 'stroke-dasharray "10 10 5 5" ))  
+	 )
+      (svg-graph ; 'transform "scale(1.3)"
+		 (list node-a node-b node-c node-d node-e)
+		 (list edge1 edge2 edge3 edge4 edge5)
+		 )
+      )
+    )))
+
+(define some-variables
+ (with-xml-language! svg-language '(filter)
+  (let* ((x1 100) (x2 (+ x1 150)) (x3 (+ x2 100))
+	 (y1 100) (y2 (+ y1 60)) (y3 (+ y2 100))
+	 )
+    (let*
+	((var-box-1 (svg-node rectangular x1 y1 (string-append "x" ":") 'stroke "none" ))
+	 (val-box-1 (svg-node rectangular x2 y1 "7    " 'stroke-width "1" 'bg-color "coral" 'font-style "italic"))
+
+	 (var-box-2 (svg-node rectangular x1 y2 (string-append "yyy" ":") 'stroke "none" ))
+	 (val-box-2 (svg-node rectangular x2 y2 "9    " 'stroke-width "1" 'bg-color "coral" 'font-style "italic"))
+	 )
+      (svg-graph 'transform "scale(1.0)"
+		 (list var-box-1 val-box-1 var-box-2 val-box-2)
+
+		 )))))
+
+(note-page 'id "composite-nodes"
+  (title (main-text "Composite Nodes")
+         (annotation "")
+  )
+
+
+  (svg-image 'id "i1" ; 'margin-left "5cm"
+   'width "900"
+   'height "800"
+   (main-text
+    "Compositite Node" )
+   (svg-here
+    (let* ((x1 150) (x2 450)
+           (y1 100)
+           (y2 300)
+           (y3 400)
+         )
+     (with-animation 'step-buttons-walk-through
+      (let*
+        ((big-node1 (svg-composite-node x1 y1 some-variables 'step 0  
+                            'width 100 'lc "ct"  'padding 10 'stroke "black" 'stroke-width "2" 'rx 3 'bg-color "grey"))
+         (big-node2 (svg-composite-node x2 y1 several-variables 
+                            'step 2 'width 300 'lc "ct" 'padding 10 'stroke "black" 'stroke-width "2" 'bg-color "grey"))
+         (big-node3 (svg-composite-node x2 y3 another-graph  
+                            'step 3 'width 200 'lc "ct" 'padding 10 'stroke "black" 'stroke-width "2" 'bg-color "grey"))
+         (small-node (svg-node rectangular x1 y2 "e" 'step 4 'min-width "40"))
+         
+         (edge1 (svg-edge big-node1 "cb" small-node "ct" 'step 5 'stroke-width 1 'stroke "purple" ))
+         (edge2 (svg-edge big-node2 "lc" small-node "ct" 'step 6 'stroke-width 1 'stroke "purple" ))
+         (edge3 (svg-edge big-node1 "cb" big-node3 "lc" 'step 7 'stroke-width 1 'stroke "purple" ))  
+        )
+      (svg-graph ; 'transform "scale(0.6)"
+        'from-step 2 'to-step 7
+        (list big-node1 big-node2 small-node big-node3)
+        (list edge1 edge2 edge3)
+        (explanations
+          (explanation 'step 2 "xxx")
+          (explanation 'step 3 "yyy")
+          (explanation 'step 4 "zzz")
+        )
+      )
+     ))
+   )
+  )
+ )
+
+)
+
+(define (var-val-color x y var val val-color)
+  (let*((var-box (svg-node rectangular x y (string-append (as-string var) ":")
+                                'lc "rc" 'stroke "none"   ))
+        (val-box (svg-node rectangular (+ x 20) y (as-string val)
+                                'text-align "rc" 'lc "lc" 'min-width 100 'stroke-width "1" 'bg-color val-color 'font-style "italic")))
+   (svg-graph (list var-box val-box))))
+
+(define (an-object x y v1 v2 v3 v4)
+  (svg-composite-node x y 
+    (instance-vars x y v1 v2 v3 v4)
+    'width 200 'lc "lt" 'padding 10 'stroke "black" 'stroke-width 2 'rx 15))
+  
+
+(define (instance-vars x y v1 v2 v3 v4)
+ (g
+  (var-val-color x y "rentesats" v1 (rgb-color-encoding 135 206 235))
+  (var-val-color x (+ y 60) "navn" v2 (rgb-color-encoding 152 251 152))
+  (var-val-color x (+ y 120) "saldo" v3 (rgb-color-encoding 135 206 235))
+  (var-val-color x (+ y 180) "xxx" v4 (rgb-color-encoding 135 206 235))))
+  
+
+(note-page 'id "class-ill"
+  (title (main-text "Class Illustrations")
+         (annotation "")
+  )
+
+  (point
+   (main-text
+    "Three composite nodes that illustrates three objects with a number of fields"
+    )
+   (annotation
+    ""
+    )
+  )
+
+
+  (svg-image 'id "i1" ; 'margin-left "5cm"
+   'width "900"
+   'height "900"
+   (main-text
+    "Compositite Node" )
+   (svg-here
+    (with-animation 'node-emphasize ; 'step-buttons-reveal
+     (let* ((x1 50) (x2 350) (x3 650)
+            (y1 100)
+         )
+      (let*
+        ((o1 (an-object x1 y1 "0.02" "Kurt" "100.0" 1))
+         (o2 (an-object x2 y1 "0.03" "Kim"  "3001.0" 2))
+         (o3 (an-object x3 y1 "0.02" "Peter" "300.0" 3))
+        )
+      (svg-graph 
+        (list o1 o2 o3)
+      )
+     )
+   ))
+  )
+ )
+
+)
+
+; A cons cell in terms of two svg nodes at (x,) with car text. Attributes fused into both svg-nodes.
+(define (cons-cell x y car-txt . attributes)
+ (let* ((wd 40)
+        (default-svg-node-attributes (list 'font-size 22 'min-height wd 'min-width wd 'stroke-width 1))
+        (effective-attributes (append attributes default-svg-node-attributes)))
+  (let ((car-box (svg-node rectangular x y car-txt 'id "car-cell" 'lc "cc" 'text-align "cc" effective-attributes))
+        (cdr-box (svg-node rectangular (+ x wd) y "" 'id "cdr-cell" 'lc "cc" effective-attributes)))
+   (g car-box cdr-box ))))
+
+
+; A reference from the cdr part of cons cell-1 to cons cell-2. to-locator determines the edge attachment in cell-2.
+; attributes are fused into the svg-edge. 
+(define (cons-ref cell-1 cell-2 to-locator . attributes)
+ (let* ((default-attributes (list 'stroke "black" 'arrow "yes"))
+        (effective-attributes (append attributes default-attributes)))
+  (svg-edge cell-1 "cc" cell-2 to-locator 'from-id "cdr-cell" 'to-id "car-cell" effective-attributes)))
+
+
+
+(note-page 'id "cons-cells-ani"
+  (title (main-text "Animated Cons Cells")
+         (annotation "")
+  )
+
+  (point
+   (main-text
+     (p "Press the grey triangle to step through the animations")
+    )
+
+  )
+
+  (svg-image 'id "i1" ; 'margin-left "5cm"
+   'width "900"
+   'height "900"
+   (main-text
+    "Compositite Node" )
+   (svg-here
+    (let* ((x1 50) (x2 200) (x3 350) (x4 500)
+           (y1 100) (y2 200)
+
+         )
+     (with-animation '(step-buttons-reveal node-emphasize)
+      (let*
+        ((c1 (cons-cell x1 y1 "a" 'step 3))
+         (c2 (cons-cell x2 y1 "b" 'step 2))
+         (c3 (cons-cell x3 y1 "c" 'step 1))
+
+         (c-empty (svg-node rectangular x4 y1 "( )" 'step 0 'stroke "none"))
+
+         (c4 (cons-cell x1 y2 "d" 'step 4))
+         (c5 (cons-cell x2 y2 "e" 'step 4))
+         (c6 (cons-cell x3 y2 "f" 'step 4))
+
+         (r1 (cons-ref c1 c2 "lc" 'step 3))
+         (r2 (cons-ref c2 c3 "lc" 'step 2))
+         (r3 (cons-ref c3 c6 "ct" 'step 4))
+         (r2a (cons-ref c3 c-empty  "lc" 'step 1 ))
+         (r4 (cons-ref c4 c5 "lc" 'step 4))
+         (r5 (cons-ref c5 c6 "lc" 'step 4))
+        )
+      (svg-graph 'from-step 1 'to-step 4  'button-x 0 'button-y 400 
+        (list c1 c2 c3 c4 c5 c6 c-empty) (list r1 r2  r2a  r4 r5)
+        (explanations 'x 150 'y 400 'width 600 'height 100
+                      'font-size 20
+           (explanation 'step 0 "The start situation. We see an empty list, denoted ().")
+           (explanation 'step 1 "We allocate a cons cell with head c and the empty list in the tail: (cons 'c '()). ")
+           (explanation 'step 2 "Similarly, we allocated a cons cell with head b, and the cons cell from the previous step as the tail.")
+           (explanation 'step 3 "An once again, here allocating a cons cell with head a.")
+           (explanation 'step 4 "Just replicating the list from above - not very illustrative.")
+        )
+      )
+     ))
+   )
+  )
+ )
+
+) 
+
+; Return a x coordinate function for a total width.
+; The returned function return x coordinate i at level. Root level i level 0.
+(define (x-coord-function width)
+  (lambda (i level)
+   (let* ((number-of-nodes (expt 2 level))
+          (width-delta (divide width (+ number-of-nodes 1))))
+      (* width-delta i))))
+
+(define (x-coord-function-1 width)
+  (lambda (i level)
+   (let* ((number-of-dist  (expt 2 (+ level 1)))
+          (width-delta (divide width number-of-dist)))
+     ( + (* (- i 1) (* 2 width-delta)) width-delta))))
+
+   
+  
+
+(define a-tree
+ (with-xml-language! svg-language '(filter)
+  (let* ((xc (x-coord-function-1 800))
+         (y0 100) (y1 (+ y0 100)) (y2 (+ y1 100)) (y3 (+ y2 100))
+         (deco (list 'rx 7 'min-width 50))  
+        )
+   (with-animation '(edge-emphasize node-emphasize)
+    (let*
+        ((n1 (svg-node rectangular (xc 1 0) y0 "A" 'step 1 deco))
+
+         (n2 (svg-node rectangular (xc 1 1) y1 "B" 'step 1 deco))
+         (n3 (svg-node rectangular (xc 2 1) y1 "C" 'step 1 deco))
+
+         (n4 (svg-node rectangular (xc 1 2) y2 "D" 'step 1 deco))
+         (n5 (svg-node rectangular (xc 2 2) y2 "E" 'step 1 deco))
+         (n6 (svg-node rectangular (xc 3 2) y2 "F" 'step 1 deco))
+         (n7 (svg-node rectangular (xc 4 2) y2 "G" 'step 1 deco))
+
+         (n8 (svg-node rectangular (xc 1 3) y3 "H" 'step 1 deco))
+         (n9 (svg-node rectangular (xc 2 3) y3 "I" 'step 1 deco))
+         (n10 (svg-node rectangular (xc 3 3) y3 "J" 'step 1 deco))
+         (n11 (svg-node rectangular (xc 4 3) y3 "K" 'step 1 deco))
+         (n12 (svg-node rectangular (xc 5 3) y3 "L" 'step 1 deco))
+         (n13 (svg-node rectangular (xc 6 3) y3 "M" 'step 1 deco))
+         (n14 (svg-node rectangular (xc 7 3) y3 "N" 'step 1 deco))
+         (n15 (svg-node rectangular (xc 8 3) y3 "O" 'step 1 deco))
+
+         (e1 (svg-edge n1 "cb" n2 "ct" 'step 2 'stroke-width "1" 'stroke "black"))
+         (e2 (svg-edge n1 "cb" n3 "ct" 'step 2 'stroke-width "1" 'stroke "black"))
+
+         (e3 (svg-edge n2 "cb" n4 "ct" 'step 2 'stroke-width "1" 'stroke "black"))
+         (e4 (svg-edge n2 "cb" n5 "ct" 'step 2 'stroke-width "1" 'stroke "black"))
+         (e5 (svg-edge n3 "cb" n6 "ct" 'step 2 'stroke-width "1" 'stroke "black"))
+         (e6 (svg-edge n3 "cb" n7 "ct" 'step 2 'stroke-width "1" 'stroke "black"))
+
+         (e7 (svg-edge n4 "cb" n8 "ct" 'step 2 'stroke-width "1" 'stroke "black"))
+         (e8 (svg-edge n4 "cb" n9 "ct" 'step 2 'stroke-width "1" 'stroke "black"))
+         (e9 (svg-edge n5 "cb" n10 "ct" 'step 2 'stroke-width "1" 'stroke "black"))
+         (e10 (svg-edge n5 "cb" n11 "ct" 'step 2 'stroke-width "1" 'stroke "black"))
+         (e11 (svg-edge n6 "cb" n12 "ct" 'step 2 'stroke-width "1" 'stroke "black"))
+         (e12 (svg-edge n6 "cb" n13 "ct" 'step 2 'stroke-width "1" 'stroke "black"))
+         (e13 (svg-edge n7 "cb" n14 "ct" 'step 2 'stroke-width "1" 'stroke "black"))
+         (e14 (svg-edge n7 "cb" n15 "ct" 'step 2 'stroke-width "1" 'stroke "black"))
+  
+	 )
+      (svg-graph ; 'from-step 1 'to-step 6 'button-x 200 'button-y 400 
+		 (list n1 n2 n3 n4 n5 n6 n7 n8 n9 n10 n11 n12 n13 n14 n15)
+		 (list e1 e2 e3 e4 e5 e6 e7 e8 e9 e10 e11 e12 e13 e14)
+		 )
+      )
+    ))))
+
+
+
+
+
+(note-page 'id "list-insertion"
+  (title (main-text "List Insertion")
+         (annotation "")
+  )
+
+  (point
+   (main-text
+    (p "List insertion")
+    (p "Press the grey triangle to step through the animations")
+    )
+   (annotation
+    ""
+    )
+  )
+
+  (svg-image 'id "i1" ; 'margin-left "5cm"
+   'width "850"
+   'height "500"
+   (main-text
+    "Insertion of elements in list" )
+    (svg-here
+     (let* ((x1 50) (x2 200) (x3 350) (x4 500) (x5 650) (x6 800)
+            (y0 50) (y1 100) (y2 200) (y3 350)
+
+            (step-new-node 1) (step-new-cons-cell 2) (step-node-cell-connect 3) (step-remember-tail 4)
+            (step-connect-front 5) (step-connect-rear 6) 
+           )
+      (with-animation '(step-buttons-reveal)
+       (let*
+           ((c1 (cons-cell x1 y1 ""))
+            (c2 (cons-cell x2 y1 ""))
+            (c3 (cons-cell x3 y1 ""))
+            (c4 (cons-cell x4 y1 ""))
+            (c5 (cons-cell x5 y1 ""))
+
+            (e1 (element-node x1 y2 "e1"))
+            (e2 (element-node x2 y2 "e2"))
+            (e3 (element-node x3 y2 "e3"))
+            (e4 (element-node x4 y2 "e4"))
+            (e5 (element-node x5 y2 "e5"))
+
+            ; new node and cons-cell, with car connector:
+            (e-new (element-node (+ x2 75)  y3 "e" 'step step-new-node 'bg-color "red"))
+            (c-new (cons-cell (+ x2 (- 75 20)) (- y3 75) "" 'step step-new-cons-cell))
+            (c-e-new (svg-edge c-new "cc" e-new "ct" 'stroke "black" 'arrow "yes" 'step step-node-cell-connect))
+
+            ; Connections to list
+            (link-to (svg-edge c2 "cc" c-new "ct" 'from-id "cdr-cell" 'stroke "black" 'arrow "yes" 'step step-connect-front))
+            (link-back (svg-edge c-new "cc" c3 "lb" 'from-id "cdr-cell" 'stroke "black" 'arrow "yes" 'step step-connect-rear))
+
+            (e1-edge (svg-edge c1 "cc" e1 "ct" 'stroke "black" 'arrow "yes"))
+            (e2-edge (svg-edge c2 "cc" e2 "ct" 'stroke "black" 'arrow "yes"))
+            (e3-edge (svg-edge c3 "cc" e3 "ct" 'stroke "black" 'arrow "yes"))
+            (e4-edge (svg-edge c4 "cc" e4 "ct" 'stroke "black" 'arrow "yes"))
+            (e5-edge (svg-edge c5 "cc" e5 "ct" 'stroke "black" 'arrow "yes"))
+
+            (var-tail (svg-node rectangular (+ x2 70) y0  "" 'bg-color "yellow" 'stroke "black" 
+                                'step-from step-remember-tail 'step-to step-connect-rear 'min-width 40 'min-height 40 ))
+            (link-from-var-tail (svg-edge var-tail "cc" c3 "lt" 'stroke "black" 'arrow "yes" 
+                                        'step-from step-remember-tail 'step-to step-connect-rear))
+
+            (c-empty (svg-node rectangular x6 y1 "( )" 'stroke "none" ))
+
+            (r1 (cons-ref c1 c2 "lc"))
+            (r2 (cons-ref c2 c3 "lc" 'step-to step-connect-front))
+            (r3 (cons-ref c3 c4 "lc"))
+            (r4 (cons-ref c4 c5 "lc"))
+            (r-ept (cons-ref c5 c-empty  "lc"))
+            )
+         (svg-graph 'from-step 1 'to-step 6
+          (list c1 c2 c3 c4 c5 c-empty  e1 e2 e3 e4 e5 e-new c-new var-tail)
+          (list r1 r2 r3 r4 r-ept   e1-edge e2-edge e3-edge e4-edge e5-edge c-e-new link-to link-back link-from-var-tail)
+          (explanations 'x 10 'y 430 'width 600 'height 100
+                        'font-size 20
+           (explanation 'step 0 "The start situation. We see a list with five elements e1 ... e5.")
+           (explanation 'step step-new-node "We want to insert element e after e2")
+           (explanation 'step step-new-cons-cell "A new cons cell is allocated")
+           (explanation 'step step-node-cell-connect "The new cons cell now references the element e")
+           (explanation 'step step-remember-tail "In order not to loose the tail, we remember a pointer to the third cons cell")
+           (explanation 'step step-connect-front "The new cons cell is linked into the existing link. We should be careful not to loose the list tail! ")
+           (explanation 'step step-connect-rear "The new cons cell connects to the tail of the existing list")
+          )         
+         )
+        ))
+       )
+     )
+ )
+)
+
+
+(note-page 'id "list-deletion"
+  (title (main-text "List deletion")
+         (annotation "")
+  )
+
+  (point
+   (main-text
+    (p "List deletion")
+    (p "Press the grey triangle to step through the animations")
+    )
+   (annotation
+    ""
+    )
+  )
+
+  (svg-image 'id "i1" ; 'margin-left "5cm"
+   'width "850"
+   'height "500"
+   (main-text
+    "Insertion of elements in list" )
+    (svg-here
+     (let* ((x1 50) (x2 200) (x3 350) (x4 500) (x5 650) (x6 800)
+            (y0 50) (y1 100) (y2 200) (y3 350)
+           )
+      (with-animation '(step-buttons-reveal)
+       (let*
+           ((light-purple (rgb-color-encoding 255 108 255))
+            (cell3-e3-disappear-step 5)
+            (c1 (cons-cell x1 y1 ""))
+            (c2 (cons-cell x2 y1 ""))
+            (c3 (cons-cell x3 y1 "" 'step-to cell3-e3-disappear-step))  
+            (c4 (cons-cell x4 y1 ""))
+            (c5 (cons-cell x5 y1 ""))
+
+            (e1 (element-node x1 y2 "e1"))
+            (e2 (element-node x2 y2 "e2"))
+            (e3 (element-node x3 y2 "e3" 'step-to cell3-e3-disappear-step))
+            (e3-empty (svg-node rectangular x3 (- y3 50) "" 'stroke "none"))
+  
+            (e4 (element-node x4 y2 "e4"))
+            (e5 (element-node x5 y2 "e5"))
+             
+            (e2-holdings (list  'step-from 2 'step-to 5))
+              (var-tail (svg-node rectangular (+ x1 70) y0  "" 'bg-color "yellow" 'stroke "black" e2-holdings 'min-width 40 'min-height 40 ))
+              (link-from-var-tail (svg-edge var-tail "cc" c2 "lt" 'stroke "black" 'arrow "yes" e2-holdings))
+
+            (e4-holdings (list  'step-from 3 'step-to 5))
+              (var-tail-1 (svg-node rectangular (+ x4 130) y0  "" 'bg-color light-purple 'stroke "black" e4-holdings 'min-width 40 'min-height 40 ))
+              (link-from-var-tail-1 (svg-edge var-tail-1 "cc" c4 "rt" 'to-id "cdr-cell"
+                                                                      'stroke "black" 'arrow "yes" e4-holdings))
+
+            (e1-edge (svg-edge c1 "cc" e1 "ct" 'stroke "black" 'arrow "yes"))
+            (e2-edge (svg-edge c2 "cc" e2 "ct" 'stroke "black" 'arrow "yes"))
+            (e3-edge (svg-edge c3 "cc" e3 "ct" 'stroke "black" 'arrow "yes" 'step-to 5)) 
+            (e4-edge (svg-edge c4 "cc" e4 "ct" 'stroke "black" 'arrow "yes"))
+            (e5-edge (svg-edge c5 "cc" e5 "ct" 'stroke "black" 'arrow "yes"))
+
+            (e3-pointer (svg-edge e3-empty "cc" e3 "cb" 'step-from 1 'step-to cell3-e3-disappear-step
+                                                        'stroke "red" 'stroke-width 3 'arrow "true"))
+
+            (c-empty (svg-node rectangular x6 y1 "( )" 'stroke "none" ))
+
+            (r1 (cons-ref c1 c2 "lc"))
+            (r2 (cons-ref c2 c3 "lc" 'step-to 4))
+            (r2-4 (svg-edge c2 "cc" c4 "ct" 'break-path (rv-p -50 (rh-p 260 (e-p))) 'step-from 4 'from-id "cdr-cell" 
+                                            'to-id "car-cell" 'stroke "black" 'arrow "yes"))
+            (r3 (cons-ref c3 c4 "lc" 'step-to 5))
+            (r4 (cons-ref c4 c5 "lc"))
+            (r-ept (cons-ref c5 c-empty  "lc"))
+            )
+         (svg-graph 'from-step 1 'to-step 5
+          (list c1 c2 c3 c4 c5 c-empty  e1 e2 e3 e4 e5   e3-empty var-tail var-tail-1)
+          (list r1 r2 r3 r4 r-ept   e1-edge e2-edge e3-edge e4-edge e5-edge
+                e3-pointer link-from-var-tail link-from-var-tail-1 r2-4
+          )
+         (explanations 'x 10 'y 430 'width 600 'height 100
+                        'font-size 20
+           (explanation 'step 0 "The start situation. We see a list with five elements e1 ... e5.")
+           (explanation 'step 1 "We want to delete element e3 from the list.")
+           (explanation 'step 2 "In order to do so, we need a reference to the second cons cell.")
+           (explanation 'step 3 "We hold on to the fourth cons cell too.")
+           (explanation 'step 4 "We now move the cdr pointer from the second cons cell to the fourth cons cell.")
+           (explanation 'step 5 "The third element, and its accompanying cons cell disappear.")
+          )         
+         )
+        ))
+       )
+     )
+ )
+)
+
+(define (double-linkable x y car-txt . attributes)
+ (let* ((wd 40)
+        (default-svg-node-attributes (list 'font-size 22 'min-height wd 'min-width wd 'stroke-width 1))
+        (effective-attributes (append attributes default-svg-node-attributes)))
+  (let ((left-box (svg-node rectangular x y "" 'id "left-cell" 'lc "cc" 'text-align "cc" effective-attributes))
+        (center-box (svg-node rectangular (+ x wd) y car-txt 'id "center-cell" 'lc "cc" 'text-align "cc" effective-attributes))
+        (right-box (svg-node rectangular (+ x wd wd) y "" 'id "right-cell" 'lc "cc" effective-attributes)))
+   (g left-box center-box right-box ))))
+
+
+; A reference from the cdr part of double-linkable cell-1 to cons cell-2. to-locator determines the edge attachment in cell-2.
+; attributes are fused into the svg-edge. 
+(define (right-ref cell-1 cell-2 to-locator . attributes)
+ (let* ((default-attributes (list 'stroke "black" 'arrow "yes"))
+        (effective-attributes (append attributes default-attributes)))
+  (svg-edge cell-1 "cc" cell-2 to-locator 'from-id "right-cell" 'to-id "left-cell" effective-attributes 'dy -10)))
+
+(define (left-ref cell-1 cell-2 to-locator . attributes)
+ (let* ((default-attributes (list 'stroke "black" 'arrow "yes"))
+        (effective-attributes (append attributes default-attributes)))
+  (svg-edge cell-1 "cc" cell-2 to-locator 'from-id "left-cell" 'to-id "right-cell" effective-attributes 'dy 10)))
+
+
+
+
+
+(note-page 'id "double-linked-list"
+  (title (main-text "Double Linked List"))
+
+  (svg-image 'id "i1" ; 'margin-left "5cm"
+   'width "1050"
+   'height "500"
+   (main-text
+    "A double linked list" )
+    (svg-here
+     (let* (; (x1 50) (x2 200) (x3 350) (x4 500) (x5 650) (x6 800)
+            (x1 50) (x2 250) (x3 450) (x4 650) (x5 850) (x6 1050)
+            (y0 50) (y1 100) (y2 200) (y3 350)
+           )
+       (let*
+           ((c1 (double-linkable x1 y1 ""))
+            (c2 (double-linkable x2 y1 ""))
+            (c3 (double-linkable x3 y1 ""))  
+            (c4 (double-linkable x4 y1 ""))
+            (c5 (double-linkable x5 y1 ""))
+
+            (e1 (element-node (+ x1 40) y2 "e1"))
+            (e2 (element-node (+ x2 40) y2 "e2"))
+            (e3 (element-node (+ x3 40) y2 "e3"))
+            (e4 (element-node (+ x4 40) y2 "e4"))
+            (e5 (element-node (+ x5 40) y2 "e5"))
+             
+            (e1-edge (svg-edge c1 "cc" e1 "ct" 'from-id "center-cell" 'stroke "black" 'arrow "yes"))
+            (e2-edge (svg-edge c2 "cc" e2 "ct" 'from-id "center-cell" 'stroke "black" 'arrow "yes"))
+            (e3-edge (svg-edge c3 "cc" e3 "ct" 'from-id "center-cell" 'stroke "black" 'arrow "yes")) 
+            (e4-edge (svg-edge c4 "cc" e4 "ct" 'from-id "center-cell" 'stroke "black" 'arrow "yes"))
+            (e5-edge (svg-edge c5 "cc" e5 "ct" 'from-id "center-cell" 'stroke "black" 'arrow "yes"))
+
+            (rght-edge-1-2 (right-ref c1 c2 "lc")) (lft-edge-1-2 (left-ref c2 c1 "rc"))
+            (rght-edge-2-3 (right-ref c2 c3 "lc")) (lft-edge-2-3 (left-ref c3 c2 "rc"))
+            (rght-edge-3-4 (right-ref c3 c4 "lc")) (lft-edge-3-4 (left-ref c4 c3 "rc"))
+            (rght-edge-4-5 (right-ref c4 c5 "lc")) (lft-edge-4-5 (left-ref c5 c4 "rc"))
+
+           )
+         (svg-graph 'from-step 1 'to-step 5
+          (list c1 c2 c3 c4 c5  e1 e2 e3 e4 e5)
+          (list e1-edge e2-edge e3-edge e4-edge e5-edge
+                rght-edge-1-2 lft-edge-1-2
+                rght-edge-2-3 lft-edge-2-3
+                rght-edge-3-4 lft-edge-3-4
+                rght-edge-4-5 lft-edge-4-5
+          )
+         
+         )
+        )
+       )
+     )
+ )
+
+)
+
+
+
+
+(define a-tree-traversal
+ (with-xml-language! svg-language '(filter)
+  (let* ((xc (x-coord-function-1 800))
+         (y0 100) (y1 (+ y0 100)) (y2 (+ y1 100)) (y3 (+ y2 100))
+         (deco (list 'rx 7 'min-width 50))  
+        )
+   (with-animation 'step-buttons-walk-through ; edge-emphasize node-emphasize
+    (let*
+        ((n1 (svg-node rectangular (xc 1 0) y0 "A" 'step 8 deco))
+
+         (n2 (svg-node rectangular (xc 1 1) y1 "B" 'step 4 deco))
+         (n3 (svg-node rectangular (xc 2 1) y1 "C" 'step 12 deco))
+
+         (n4 (svg-node rectangular (xc 1 2) y2 "D" 'step 2 deco))
+         (n5 (svg-node rectangular (xc 2 2) y2 "E" 'step 6 deco))
+         (n6 (svg-node rectangular (xc 3 2) y2 "F" 'step 10 deco))
+         (n7 (svg-node rectangular (xc 4 2) y2 "G" 'step 14 deco))
+
+         (n8 (svg-node rectangular (xc 1 3) y3 "H" 'step 1 deco))
+         (n9 (svg-node rectangular (xc 2 3) y3 "I" 'step 3 deco))
+         (n10 (svg-node rectangular (xc 3 3) y3 "J" 'step 5 deco))
+         (n11 (svg-node rectangular (xc 4 3) y3 "K" 'step 7 deco))
+         (n12 (svg-node rectangular (xc 5 3) y3 "L" 'step 9 deco))
+         (n13 (svg-node rectangular (xc 6 3) y3 "M" 'step 11 deco))
+         (n14 (svg-node rectangular (xc 7 3) y3 "N" 'step 13 deco))
+         (n15 (svg-node rectangular (xc 8 3) y3 "O" 'step 15 deco))
+
+         (e1 (svg-edge n1 "cb" n2 "ct" 'step 0 'stroke-width "1" 'stroke "black"))
+         (e2 (svg-edge n1 "cb" n3 "ct" 'step 0 'stroke-width "1" 'stroke "black"))
+
+         (e3 (svg-edge n2 "cb" n4 "ct"  'stroke-width "1" 'stroke "black"))
+         (e4 (svg-edge n2 "cb" n5 "ct"  'stroke-width "1" 'stroke "black"))
+         (e5 (svg-edge n3 "cb" n6 "ct"  'stroke-width "1" 'stroke "black"))
+         (e6 (svg-edge n3 "cb" n7 "ct"  'stroke-width "1" 'stroke "black"))
+
+         (e7 (svg-edge n4 "cb" n8 "ct"  'stroke-width "1" 'stroke "black"))
+         (e8 (svg-edge n4 "cb" n9 "ct"  'stroke-width "1" 'stroke "black"))
+         (e9 (svg-edge n5 "cb" n10 "ct"  'stroke-width "1" 'stroke "black"))
+         (e10 (svg-edge n5 "cb" n11 "ct"  'stroke-width "1" 'stroke "black"))
+         (e11 (svg-edge n6 "cb" n12 "ct"  'stroke-width "1" 'stroke "black"))
+         (e12 (svg-edge n6 "cb" n13 "ct"  'stroke-width "1" 'stroke "black"))
+         (e13 (svg-edge n7 "cb" n14 "ct"  'stroke-width "1" 'stroke "black"))
+         (e14 (svg-edge n7 "cb" n15 "ct"  'stroke-width "1" 'stroke "black"))
+  
+	 )
+      (svg-graph 'from-step 1 'to-step 15 ; 'button-x 200 'button-y 400 
+		 (list n1 n2 n3 n4 n5 n6 n7 n8 n9 n10 n11 n12 n13 n14 n15)
+		 (list e1 e2 e3 e4 e5 e6 e7 e8 e9 e10 e11 e12 e13 e14)
+		 )
+      )
+    ))))
+
+
+(note-page 'id "p-tree-trav"
+  (title (main-text "Tree Page - traversal")
+         (annotation "")
+  )
+
+  (point
+   (main-text
+     (p "Preorder traversal of binary tree")
+     (p "Press the grey triangle to step through the animations")
+    )
+   (annotation
+    ""
+    )
+  )
+
+  (svg-image 'id "i1" ; 'margin-left "5cm"
+   'width "800"
+   'height "800"
+   (main-text
+    "A tree" )
+   (svg-here
+    (g 'transform "scale(1.0)" a-tree-traversal) 
+  )
+ )
+)
+
+
+
+
+
+
+(end-notes)
+
+

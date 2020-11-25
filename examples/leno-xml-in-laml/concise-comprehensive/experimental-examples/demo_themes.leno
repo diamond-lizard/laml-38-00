@@ -1,0 +1,76 @@
+(load (string-append laml-dir "laml.scm"))
+
+(laml-style "xml-in-laml/lecture-notes-themes/lecture-notes-themes")
+
+(leno-themes
+(leno-themes-front-matters 
+   'scheme-suffix "post-notes.scm"
+   'scheme-prefix "pre-notes.scm"
+
+   'course-home-url "../../index.html"   
+   'author-home-url "http://www.cs.aau.dk/~normark/"   
+   'logo-url "http://www.aau.dk"  
+
+   'make-print-page "false"
+
+   'slide-view "true"  
+   'annotated-slide-view "false"
+   'aggregated-view "false" 
+
+   'author-mode (if (eq? computer-system 'cs-unix) "false" "true")
+   'presentation-medium "web"  ; web, paper
+   'language "english"
+   'program-linking "false"
+   'exercise-linking "false"
+
+)
+
+(begin-themes)
+
+(theme 'id "intro-sec"
+  (leno-element 'lecture-id "demo" 'page-id "intro-sec" 'element-type "section-title" 'element-number "1" )
+  (theme-text (p "This is a demo material written with the purpose of illustrating the LENO approach."))
+  (leno-element 'lecture-id "demo" 'page-id "intro" 'element-type "title" 'element-number "1" )
+  (theme-text (p "At this level, we give an overview of this material. The outline is as follows:"))
+  (leno-element 'lecture-id "demo" 'page-id "intro" 'element-type "point" 'element-id "pt1" )
+  (leno-element 'lecture-id "demo" 'page-id "intro" 'element-type "items" 'element-id "it1" 'select "subitems")
+)
+
+(theme 'id "model-sec"
+  (leno-element 'lecture-id "demo" 'page-id "model-sec" 'element-type "section-title" 'element-number "1" )
+  (theme-text (p "We first describe the work at the model level."))
+  (leno-element 'lecture-id "demo" 'page-id "primsec" 'element-type "title" 'element-number "1" )
+  (theme-text (p "The Prisec model is probably the most important contribution of this work."))
+  (leno-element 'lecture-id "demo" 'page-id "primsec" 'element-type "concept-list" 'element-id "con1" 'drop "true")
+  (leno-element 'lecture-id "demo" 'page-id "primsec" 'element-type "point" 'element-id "pt1" )
+  (theme-text (p "The following issues are the most important:"))
+  (leno-element 'lecture-id "demo" 'page-id "primsec" 'element-type "items" 'element-id "it1" 'select "subitems")
+
+)
+
+(theme 'id "leno-sec"
+  (leno-element 'lecture-id "demo" 'page-id "leno-sec" 'element-type "section-title" 'element-number "1" )
+  (theme-text (p "LENO is an abbreviation of Lecture Note System."))
+
+  (leno-element 'lecture-id "demo" 'page-id "leno-seco" 'element-type "title" 'element-number "1" )
+  (theme-text (p "The secondary source is derived from the primary source, which is described in"
+                  (ref "demo_themes-leno-sec" "demo" "leno-prim" "title" "1") _ "."))
+  (leno-element 'lecture-id "demo" 'page-id "leno-seco" 'element-type "point" 'element-id "pt1" )
+  (leno-element 'lecture-id "demo" 'page-id "leno-seco" 'element-type "items" 'element-id "it1" )
+  (leno-element 'lecture-id "demo" 'page-id "leno-seco" 'element-type "point" 'element-id "pt2" )
+
+  (leno-element 'lecture-id "demo" 'page-id "leno-prim" 'element-type "title" 'element-number "1" )
+  (theme-text (p "The primary source is used to derive the secondary source, see"
+                 (ref "demo_themes-leno-sec" "demo" "leno-seco" "title" "1") _ ".")) 
+  (leno-element 'lecture-id "demo" 'page-id "leno-prim" 'element-type "point" 'element-id "pt1" )
+  (leno-element 'lecture-id "demo" 'page-id "leno-prim" 'element-type "cross-references" 'element-id "cr1" )
+  (leno-element 'lecture-id "demo" 'page-id "leno-prim" 'element-type "items" 'element-id "it1" )
+  (leno-element 'drop "true" 'lecture-id "demo" 'page-id "leno-prim" 'element-type "point" 'element-id "pt2" )
+  (theme-text (p "This ends this demo theme. Let us recap the central model issue:"))
+  (leno-element 'lecture-id "demo" 'page-id "primsec" 'element-type "items" 'element-id "it1" 'select "subitems")
+
+)
+
+
+
+(end-themes))

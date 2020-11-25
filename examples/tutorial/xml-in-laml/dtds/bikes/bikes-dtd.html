@@ -1,0 +1,48 @@
+
+<html><head><title> Bikes dtd</title></head><body bgcolor = "#caf0b3" text = "#000000" link = "#0000ff" vlink = "#0000ff" ><pre>&lt;!ENTITY % Number "CDATA"&gt;
+    &lt;!-- one or more digits --&gt;
+
+&lt;!ENTITY % Boolean "(true | false)"&gt;
+    &lt;!--  spaces --&gt;
+
+
+
+&lt;!ELEMENT bikes (bike)*&gt;
+&lt;!ATTLIST bikes
+&gt;
+
+&lt;!ELEMENT bike (frame, wheel+, brake*, lock*)&gt;
+&lt;!ATTLIST bike
+  kind   (mountain-bike, racer-bike, tourist-bike, other)  "tourist-bike"
+&gt;
+
+&lt;!ELEMENT frame EMPTY&gt;
+
+&lt;!ATTLIST frame
+  frame-number CDATA #REQUIRED
+&gt;
+
+&lt;!ELEMENT wheel EMPTY&gt;
+
+&lt;!ATTLIST wheel
+  size        %Number; #REQUIRED
+  tube-kind   CDATA    #IMPLIED
+&gt;
+
+&lt;!ELEMENT brake EMPTY&gt;
+
+&lt;!ATTLIST brake
+  kind    CDATA   #IMPLIED
+  brand   CDATA   #IMPLIED
+&gt;
+
+&lt;!ELEMENT lock EMPTY&gt;
+
+&lt;!ATTLIST lock
+  brand   CDATA   #IMPLIED
+  insurance-approved  %Boolean; #REQUIRED
+&gt;
+
+</pre></body> </html>
+<!-- Generated from an LAML (Lisp Abstracted Markup Language) source file. Version 24.00 (December, 2003, development). LAML is designed and implemented by Kurt Nørmark, normark@cs.auc.dk. Time of generation: March 22, 2004 14:06:20-->
+

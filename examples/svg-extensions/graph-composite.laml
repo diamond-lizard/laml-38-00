@@ -1,0 +1,56 @@
+;; .schemedoc-dependencies  "~/scheme/lib/man/svg-extensions"
+
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-svg11")
+(lib-load "svg-extensions.scm")
+
+(write-html '(pp prolog)
+
+  (svg standard-svg-1-1-element-attributes 'width "800" 'height "800" 
+    (g 'transform "scale(1.0)"
+     (let* ((x1 100) (x2 (+ x1 150)) (x3 (+ x2 150))
+            (y1 100) (y2 (+ y1 100)) (y3 (+ y2 100))
+            (first-graph (let* ((x1 100) (x2 (+ x1 100)) (x3 (+ x2 100))
+				(y1 100) (y2 (+ y1 100)) 
+				(stroke-props  (list 'stroke "black" 'stroke-width "1"))
+				)
+			   (let* ((node-a (svg-node rectangular x1 y2 "A" 'id "aa"))
+				  (node-b (svg-node rectangular x2 y1 "B"))
+				  (node-c (svg-node rectangular x3 y2 "C"))
+
+				  (edge1 (svg-edge node-a "ct" node-b "lc" stroke-props))
+				  (edge2 (svg-edge node-b "rc" node-c "ct" stroke-props)) )
+			     (svg-graph 
+			      (list node-a node-b node-c)
+			      (list edge2 edge1) ))))
+            )
+       (let*
+           ((node-a (svg-node circular x1 y1 "A" 'min-width 150))
+            (node-b (svg-node cloud x3 y1 "B" 'bg-color "olive" 'min-width 100))
+            (node-c (svg-node diamond x1 y2 "C" 'bg-color "yellow" 'min-width "80"))
+            (node-d (svg-node triangular x3 y2 "D" 'min-width 75))
+            (node-e (svg-composite-node x2 y3 first-graph 'padding 10 'width 100))
+
+            (edge1 (svg-edge node-a "rc" node-b "lc" 'break-path "l 85 -25"  'stroke "black" 'stroke-width "2" 'stroke-dasharray "3 4"  'arrow "yes" 'font-size "12" 'ldx -15 'ldy -5 "A-to-B" ))
+            (edge2 (svg-edge node-b "cb" node-d "ct" 'stroke "blue" 'stroke-width "3" 'stroke-dasharray "3 4" 'arrow "yes" 'font-size "12" 'ldx 10 "B-to-D"))
+            (edge3 (svg-edge node-c "ct" node-a "cb" 'stroke "purple" 'stroke-width "3" 'stroke-dasharray "10 10 5 5" 'arrow "yes" 'font-size "12" 'ldx 5 'ldy 5 "C-to-A" ))
+            (edge4 (svg-edge node-c "cb" node-e "lc" 'style "vh" 'stroke "black" 'stroke-width "3" 'font-size "12" 'ldx 5 'ldy 5 "C-to-E" )) 
+            (edge5 (svg-edge node-e "rc" node-d "cb" 'style "hv" 'stroke "black" 'stroke-width "3" 'font-size "12" 'ldx 5 'ldy 5 "E-to-D" )) 
+           )
+         (svg-graph 
+          (list node-a node-b node-c node-d node-e)
+          (list edge2 edge1 edge3 edge4 edge5)
+          )
+         )
+       )))
+  (full-source-path-with-extension "svg")
+)
+
+(end-laml)
+
+
+
+
+
+
+

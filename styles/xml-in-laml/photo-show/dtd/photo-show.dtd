@@ -1,0 +1,114 @@
+<!--
+   Photo Show
+   Copyright (c) 2003 Kurt Nørmark.
+   All Rights Reserved. 
+-->
+
+<!ENTITY % Number "CDATA">
+    <!-- one or more digits -->
+
+<!ENTITY % Color "CDATA">
+    <!-- an HTML color string -->
+
+<!ENTITY % Symbol "CDATA">
+    <!-- a name without spaces -->
+
+<!ENTITY % URI "CDATA">
+    <!-- a Uniform Resource Identifier, see [RFC2396] -->
+
+<!ENTITY % File-path "CDATA">
+    <!-- an absolute or relative file path -->
+
+
+<!ELEMENT photo-show
+  (title-of-show,
+   upper-caption,
+   lower-caption,
+   (photo-list | photos-in-current-directory))
+>
+
+<!ATTLIST photo-show
+  time                                %Number;                      #REQUIRED
+  background-color                    %Color;                       #IMPLIED
+  text-color                          %Color;                       #IMPLIED
+  home-path                           %File-path;                   #IMPLIED
+
+  previous-film                       %File-path;                   #IMPLIED
+  next-film                           %File-path;                   #IMPLIED
+  before-first                        (last-picture |
+                                       previous-film | none)        "last-picture"
+  after-last                          (first-picture |
+                                       next-film | stop-page | 
+                                       none)                        "first-picture"
+
+  transition                          (blend | none)                "none"
+  verbosity-level                     %Number;                      "2"
+  language                            (danish | english)            "english"  
+  html-mode                           (raw | pp)                    "raw"
+  index-linking                       (run | stop)                  "stop"
+
+  default-size                        (original | auto | explicit)  "auto"
+  default-orientation                 (portrait | landscape)        "landscape"
+  portrait-percentage                 %Number;                      "90"
+  landscape-percentage                %Number;                      "95"
+  photo-displacement-left             %Number;                      "0"
+  photo-displacement-right            %Number;                      "0"
+
+  
+  tabular-overview-dimension          %Number;                      "3"
+  photo-tabular-window-width          %Number;                      "870"
+  photo-tabular-window-height         %Number;                      "740"
+
+  copy-film                           (true|false)                  "false"                            
+  copy-destination                    %File-path;                   #IMPLIED
+
+  shave-resize-and-copy               (true|false)                  "false"                            
+  shave-width                         %Number;                      "0"
+  shave-height                        %Number;                      "0"
+  resize-width                        %Number;                      "0"
+  resize-height                       %Number;                      "0"
+
+  camera                              %Symbol;                      "Canon-G3"
+
+  image-transformation-software       (image-magick | none)         "none"
+  make-thumbnails-of                  (all | non-existing | none)   "none"  
+
+  time-stamp                          (auto | 
+                                       from-file-system | 
+                                       from-jpg-file |
+                                       none)                        "auto"
+  time-stamp-presentation             (date | weekday-date |
+                                       time | date-time |
+                                       weekday-date-time |
+                                       none)                        "date-time"
+  rotate                               CDATA                        #IMPLIED
+>
+
+<!ELEMENT title-of-show (#PCDATA)>
+
+<!ELEMENT upper-caption (#PCDATA)>
+<!ATTLIST upper-caption
+  size                                %Number;                      #IMPLIED
+>
+
+<!ELEMENT lower-caption (#PCDATA)>
+<!ATTLIST lower-caption
+  size                                %Number;                      #IMPLIED
+>
+
+<!ELEMENT photo-list (photo*)>
+
+<!ELEMENT photo (upper-caption?, lower-caption?)>
+<!ATTLIST photo
+  file                                %File-path;                   #REQUIRED
+  path                                %File-path;                   ""
+  time                                %Number;                      #IMPLIED
+  transition                          (blend | none)                "none"
+  size                                (original | auto | explicit)  "auto"
+  orientation                         (portrait | landscape)        "landscape"
+  width                               %Number;                      #IMPLIED
+  height                              %Number;                      #IMPLIED
+>
+
+<!ELEMENT photos-in-current-directory EMPTY>
+

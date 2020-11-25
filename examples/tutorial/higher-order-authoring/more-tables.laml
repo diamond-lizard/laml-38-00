@@ -1,0 +1,60 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+
+(define map (curry-generalized map))
+(define row list)
+(define cell list)
+
+(define sample-table
+ (list
+  (row "This" "is" "row" "1")
+  (row "This" "is" "row" "2")
+  (row "This" "is" "row" "3")
+  (row "This" "is" "row" "4")))
+
+(define (switch row-lst) 
+ (cons (second row-lst)
+  (cons (first row-lst) (cddr row-lst))))
+
+(define (grey-numeric x)
+ (if (and (string? x) (numeric-string? x))
+     (list x 'bgcolor (rgb-color 200 200 200))
+     x))
+
+
+; ::write-html-clause::
+(write-html 'raw
+ (html
+  (head 
+    (title "Demonstration of higher order 
+            functions together with tables")
+  )
+
+  (body 
+
+    ; @a
+    (p "Original table rendering:")
+    (table (tbody (map (compose tr (map td)) sample-table))
+           'border "1")
+
+    ; @b
+    (p "Switching the first and second column:")
+    (table (tbody (map (compose tr (map td) switch) sample-table))
+           'border "1")
+
+    ; @c
+    (p "Passing certain attribute values to given cells in the table :")
+    (table 
+     'border "1" 
+     (tbody 
+      (map (compose tr (map (compose td grey-numeric)))
+           (list
+            (row (cell "This" 'rowspan "2") "is" "row" "1")
+            (row                            "is" "row" "2")
+            (row "This"                     "is" "row" "3")
+            (row "This"                     "is" "row"  "4")))))
+
+   
+  )
+ ))
+

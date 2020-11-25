@@ -1,0 +1,23 @@
+; Process a single midi file in a specialized way
+; -----------------------------------------------------------------------------
+(load (string-append laml-dir "laml.scm"))
+(load (string-append laml-dir "styles/xml-in-laml/midi/midi.scm"))
+
+; -----------------------------------------------------------------------------
+; Parameters
+
+(define midi-file-path "???")
+(define mode 'deltaTime)       ; deltaTime, absTime, raw
+
+; -----------------------------------------------------------------------------
+
+(define midi-ast (midi-file-to-laml-ast midi-file-path mode 0 #f))
+
+; Process midi-ast
+
+
+
+
+; (make-midi-laml-file transformed-ast laml-file-path)
+
+  

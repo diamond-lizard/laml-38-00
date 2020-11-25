@@ -1,0 +1,51 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-strict-validating")
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+(set-xml-transliterate-character-data-in 'xhtml10-strict #t)
+
+; ::a-write-clause::
+; Writing the HTML fragment to an HTML file.
+
+(write-html 'pp
+  (html 
+   (head 
+     (title "CSS attributes") 
+   )
+
+   (body
+
+     (p "CSS attributes can be use side 
+         by side with HTML attributes.")
+
+     ; @a
+     (p "This is demonstrated in this paragraph,"
+        (span 'id "first" 
+              'css:letter-spacing "0.3cm" 
+              'css:text-decoration "overline"
+              'css:background-color "yellow" 
+              'css:color "red"
+          "where this part is decorated with 
+           CSS attributes") ".") 
+
+     ; @b
+     (p "This is" (b "also") "demonstrated in this paragraph,"
+        (span 'id "second"
+              'style "letter-spacing: 0.3cm; 
+                      text-decoration: overline; 
+                      background-color: yellow;
+                      color:red; "
+          "where this part is decorated with 
+           CSS attributes via a style attribute") ".") 
+
+
+
+     
+
+     
+   )
+  )
+) 
+
+(end-laml)

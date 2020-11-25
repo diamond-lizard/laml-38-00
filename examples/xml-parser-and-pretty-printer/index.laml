@@ -1,0 +1,58 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(define (an x)
+  (a 'href x x))
+
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "The LAML XML parser examples")
+   (laml-shortcut-icon (laml-home-url-prefix))
+  )
+  (body 
+    (laml-top-banner)
+    (h1 "The LAML XML parser examples")
+
+    (p "Below we show a couple of examples of XML files and parsing scripts that produce the internal LAML document representations (abstract parse trees - ASTs).")
+
+    (indent-pixels 10
+      (table 'border "1"
+
+          (tr (map (compose td b) (list "XML file" "Parsing script" "File with AST")))
+
+          (tr  (td (an "time.xml"))
+               (td (an "parse-xml-time.laml"))
+               (td (an "time.lsp"))
+          )
+
+          (tr  (td (a 'href "../../info/link-checking.html" "A real life XHTML file"))
+               (td (an "parse-laml-link-checking.laml"))
+               (td (an "link-checking.lsp"))
+          )
+        ))
+
+     (p "Notice that the parsing of the XHTML file in the second example also validates the XHTML document relative to the validation predicates of the XHTML mirror in LAML.")
+   
+
+     (vertical-space 1) (font 'color "red" 'size "2" (when-generated))
+
+
+  )
+ )
+)
+
+
+(end-laml)
+
+

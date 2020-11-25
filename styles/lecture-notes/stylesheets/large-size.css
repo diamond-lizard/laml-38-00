@@ -1,0 +1,54 @@
+/* Font sizes */
+DIV.leno-intro-title                      { font-size: 300%; }
+DIV.leno-intro-sub-title                  { font-size: 200%; }
+DIV.leno-slide-section-title              { font-size: 350%; }
+DIV.leno-slide-title                      { font-size: 300%; }
+DIV.leno-slide-point                      { font-size: 170%; }
+DIV.leno-slide-text                       { font-size: 170%; }
+DIV.leno-slide-slide-text                 { font-size: 170%; }
+DIV.leno-slide-comment                    { font-size: 170%; }
+DIV.leno-slide-example                    { font-size: 170%; }
+DIV.leno-slide-syntax                     { font-size: 170%; }
+DIV.leno-slide-quotation                  { font-size: 170%; }
+DIV.leno-slide-cross-reference-item       { font-size:  90%; }
+UL.leno-slide-items LI                    { font-size: 28px; } 
+DIV.leno-slide-synopsis UL LI             { font-size: 170%; }
+DIV.leno-slide-concept-list P             { font-size: 170%; }
+DIV.leno-slide-source-program             { font-size: 145%; }
+BODY.leno-slide-program                   { font-size: 180%; }   /* external - was 125%*/    
+
+/* Captions */
+DIV.leno-slide-source-program-caption     { font-size: 170%; }
+DIV.leno-slide-side-track-caption         { font-size: 170%; }
+DIV.leno-slide-image-caption              { font-size: 170%; }
+DIV.leno-slide-image-series-caption       { font-size: 170%; }
+DIV.leno-slide-exercise-caption           { font-size: 170%; }
+DIV.leno-slide-elucidate-caption          { font-size: 170%; }
+
+DIV.leno-slide-image-text                 { font-size: 140%; }
+DIV.leno-slide-image-series-text          { font-size: 140%; }
+
+DIV.leno-slide-exercise                   { font-size: 140%; }
+DIV.leno-slide-exercise KBD               { font-size: 20px; }
+DIV.leno-slide-exercise PRE               { font-size: 20px; }
+
+TABLE.leno-slide-tabular TD               { font-size: 140%; }
+TABLE.leno-slide-opposing TD              { font-size: 175%; }
+
+DIV.leno-slide-title KBD                  { font-size: 100%; }
+DIV.leno-slide-text KBD                   { font-size: 22px; }
+DIV.leno-slide-text PRE                   { font-size: 22px; }
+TABLE.leno-slide-tabular TD KBD           { font-size: 22px; }
+TABLE.leno-slide-tabular TD PRE           { font-size: 22px; }
+LI.leno-slide-item KBD                    { font-size: 22px; } 
+LI.leno-slide-item PRE                    { font-size: 22px; } 
+DIV.leno-slide-example KBD                { font-size: 22px; }
+DIV.leno-slide-example PRE                { font-size: 22px; }
+DIV.leno-slide-point KBD                  { font-size: 22px; }
+DIV.leno-slide-point PRE                  { font-size: 22px; }
+DIV.leno-slide-source-program-caption KBD { font-size: 22px; }
+DIV.leno-slide-side-track-caption     KBD { font-size: 22px; } 
+DIV.leno-slide-image-caption          KBD { font-size: 22px; }
+DIV.leno-slide-image-series-caption   KBD { font-size: 22px; }
+DIV.leno-slide-exercise-caption       KBD { font-size: 22px; }
+DIV.leno-slide-elucidate-caption      KBD { font-size: 22px; }

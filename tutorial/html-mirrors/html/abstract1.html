@@ -1,0 +1,43 @@
+<html><head><link href="stylesheets/program.css" rel="stylesheet" title="program" type="text/css"/> <title>Source file</title></head><body bgcolor = "#e0e0e0" text = "#000000" link = "#000000" vlink = "#000000"  ><font size = "2"  ><pre>(<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX468" target="documentation-frame" title="R5RS Scheme form">load</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" target="documentation-frame" title="R5RS Scheme form">string-append</a> laml-dir "laml.scm"))
+(<a class="schemedoc-name" href="../../../man/laml.html#laml-style" target="documentation-frame" title="Manual: laml">laml-style</a> "simple-xhtml1.0-strict-validating")
+
+(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX106" target="documentation-frame" title="R5RS Scheme form">set!</a> <a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#xml-validate-contents?" target="documentation-frame" title="Manual: xml-in-laml">xml-validate-contents?</a> #t)
+(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX106" target="documentation-frame" title="R5RS Scheme form">set!</a> <a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#xml-check-attributes?" target="documentation-frame" title="Manual: xml-in-laml">xml-check-attributes?</a> #t)
+(<a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#set-xml-accept-only-string-valued-attributes-in" target="documentation-frame" title="Manual: xml-in-laml">set-xml-accept-only-string-valued-attributes-in</a> 'xhtml10-strict #t)
+
+(<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX468" target="documentation-frame" title="R5RS Scheme form">load</a> (<a class="schemedoc-name" href="../../../man/laml.html#in-startup-directory" target="documentation-frame" title="Manual: laml">in-startup-directory</a> "cd-stuff.scm"))
+
+<a name="page-title"></a><span><span><a href="abstract1-LARGE.html#page-title"><img src="./images/small-square.gif" title="Show source file in large font" alt="" border="0"/></a></span> <span><a href="cross-reference-index-p.html#page-title" target="control-frame"><img src="./images/small-green-up-triangle.gif" title="In abstract1: Link from page-title to it&#39;s cross reference table entry" alt="" border="0"/></a></span> </span><br/>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" target="documentation-frame" title="R5RS Scheme form">define</a> <span class = "signature"  >page-title</span> "My CD Archive")
+
+<span><span><a href="abstract1-LARGE.html#document-body"><img src="./images/small-square.gif" title="Show source file in large font" alt="" border="0"/></a></span> <span><a href="cross-reference-index-d.html#document-body" target="control-frame"><img src="./images/small-green-up-triangle.gif" title="In abstract1: Link from document-body to it&#39;s cross reference table entry" alt="" border="0"/></a></span> <a href="documentation.html#cd1" target="documentation-frame"><img src="./images/doc-left.gif" title="6.2. A CD archive" alt="" border="0"/></a></span><br/><div class = "sectional-comment"  >; <span><a name="document-body"></a> <b><font color="#ff0000">document-body</font></b></span>
+; Writing the cd archive to a file.</div>
+(<a class="schemedoc-name" href="../../../man/laml.html#write-html" target="documentation-frame" title="Manual: laml">write-html</a> '(raw)
+  (<a class="applied-name" href="cd-stuff.html#cd-archive" title="cd-stuff">cd-archive</a>  <span class = "comment"  >; <span><a name="document-body-@a"></a> <a href="documentation.html#cd1-@a" target="documentation-frame"><img src="./images/source-mark-red.gif" title="A linked program source marker to section 6.2:
+&#39;A CD archive&#39;
+Mark char: a" alt="" border="0"/></a></span></span><br/>    (<a class="applied-name" href="cd-stuff.html#cd-entry" title="cd-stuff">cd-entry</a>            <span class = "comment"  >; <span><a name="document-body-@b"></a> <a href="documentation.html#cd1-@b" target="documentation-frame"><img src="./images/source-mark-green.gif" title="A linked program source marker to section 6.2:
+&#39;A CD archive&#39;
+Mark char: b" alt="" border="0"/></a></span></span><br/>      (<a class="applied-name" href="cd-stuff.html#cd-number" title="cd-stuff">cd-number</a> "1")
+      (<a class="applied-name" href="cd-stuff.html#cd-artist" title="cd-stuff">cd-artist</a> "Paul Simon")
+      (<a class="applied-name" href="cd-stuff.html#cd-title" title="cd-stuff">cd-title</a> "Graceland")
+      (<a class="applied-name" href="cd-stuff.html#cd-playing-time" title="cd-stuff">cd-playing-time</a> 45 37)
+    )
+
+    (<a class="applied-name" href="cd-stuff.html#cd-entry" title="cd-stuff">cd-entry</a>            <span class = "comment"  >; <span><a name="document-body-@c"></a> <a href="documentation.html#cd1-@c" target="documentation-frame"><img src="./images/source-mark-blue.gif" title="A linked program source marker to section 6.2:
+&#39;A CD archive&#39;
+Mark char: c" alt="" border="0"/></a></span></span><br/>      (<a class="applied-name" href="cd-stuff.html#cd-number" title="cd-stuff">cd-number</a> "2")
+      (<a class="applied-name" href="cd-stuff.html#cd-artist" title="cd-stuff">cd-artist</a> "Elvis Presley")
+      (<a class="applied-name" href="cd-stuff.html#cd-title" title="cd-stuff">cd-title</a> "Elvis Christmas Classics")
+      (<a class="applied-name" href="cd-stuff.html#cd-playing-time" title="cd-stuff">cd-playing-time</a> 37 38)
+    )
+
+    (<a class="applied-name" href="cd-stuff.html#cd-entry" title="cd-stuff">cd-entry</a>            <span class = "comment"  >; <span><a name="document-body-@d"></a> <a href="documentation.html#cd1-@d" target="documentation-frame"><img src="./images/source-mark-black.gif" title="A linked program source marker to section 6.2:
+&#39;A CD archive&#39;
+Mark char: d" alt="" border="0"/></a></span></span><br/>      (<a class="applied-name" href="cd-stuff.html#cd-number" title="cd-stuff">cd-number</a> "3")
+      (<a class="applied-name" href="cd-stuff.html#cd-artist" title="cd-stuff">cd-artist</a> "Elvis Presley")
+      (<a class="applied-name" href="cd-stuff.html#cd-title" title="cd-stuff">cd-title</a> "Elvis No1 Hits")
+      (<a class="applied-name" href="cd-stuff.html#cd-playing-time" title="cd-stuff">cd-playing-time</a> 63 45)
+    )
+  )
+) 
+
+(<a class="schemedoc-name" href="../../../man/laml.html#end-laml" target="documentation-frame" title="Manual: laml">end-laml</a>)</pre></font><div>&nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p></div></body></html>

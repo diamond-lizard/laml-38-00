@@ -1,0 +1,62 @@
+; A manual presented via the manual style, and extracted from Scheme comments via 
+; the Schemedoc tool.
+
+(load (string-append laml-dir "laml.scm"))
+
+
+; ---------------------------------------------------------------------------------------------------
+; LOADING
+
+(define (lib-load file-name)
+  (load (string-append  the-library "/" file-name)))
+
+(lib-load "general.scm")
+
+(load (string-append software-directory "tools/schemedoc-extractor" "/" "schemedoc-extractor.scm"))
+
+; ---------------------------------------------------------------------------------------------------
+; FILES:
+
+(define manual-source-file (string-append software-directory "styles/" "simple.scm"))
+(define manual-destination-directory (string-append software-directory "styles/" "man/"))
+
+
+; ---------------------------------------------------------------------------------------------------
+; COMMENT EXTRACTING
+(define delete-comment-file? #t)
+
+(define doc-list (extract-documentation-from-scheme-file manual-source-file))
+; extracted-manual-abstract is hereby defined
+
+; ---------------------------------------------------------------------------------------------------
+; MANUAL PRODUCTION
+
+(laml-style "manual/original-manual")      
+
+(set-manual-title "Manual of the Simple LAML style")
+
+(set-manual-author "Kurt Nørmark" "normark@cs.auc.dk" "Department of Computer Science" "Aalborg University" "Denmark")
+
+(set-manual-abstract extracted-manual-abstract)
+
+(set-home-url "http://www.cs.auc.dk/~normark/laml/")
+; (set-manual-master-index "ALL.html")
+
+(set-manual-name "simple")
+
+; a redefinition from manual
+(define manual-index-width-list  (list 180 320 350))
+
+; another redefinition from manual
+(define end-remark "This documentation has been extracted automatically from the Scheme source file by means of the Schemedoc tool")
+
+; producing the manual
+(make-manual doc-list manual-destination-directory "styles/simple.scm")
+
+
+
+
+
+
+
+

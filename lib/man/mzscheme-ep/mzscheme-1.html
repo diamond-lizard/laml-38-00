@@ -1,0 +1,93 @@
+<html><head><link href="../../../css-stylesheets/elucidator/program.css" rel="stylesheet" title="program" type="text/css" /> <title>Source file</title></head><body bgcolor="#ffffff" text="#000000" link="#000000" vlink="#000000"><font size="2"><pre><span class="comment">; The LAML library and programs written by Kurt Normark, Aalborg University, Denmark.
+; Copyright (C) 1999  Kurt Normark.
+;
+; This program is free software; you can redistribute it and/or modify
+; it under the terms of the GNU General Public License as published by
+; the Free Software Foundation; either version 2 of the License, or
+; (at your option) any later version.
+;
+; This program is distributed in the hope that it will be useful,
+; but WITHOUT ANY WARRANTY; without even the implied warranty of
+; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+; GNU General Public License for more details.
+;
+; You should have received a copy of the GNU General Public License
+; along with this program; if not, write to the Free Software
+; Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA</span><br />
+
+<div class="schemedoc-abstract-comment">;;;; .title Reference Manual of the MzScheme LAML compatibility libray.
+;;;; MzScheme specific stuff to be loaded for compatibility. 
+;;;; This file implements each of the necessary non-R5RS functions mentioned in the
+;;;; root documentation of the LAML system. Notice that some of the non-standard Scheme functions used
+;;;; in LAML already happens to exist in MzScheme. These are 
+;;;; file-exists?, delete-file, copy-file, and directory-exists?
+;;;; Therefore, these functions need not to be provided in this compatibility library. </div>
+(require (lib "compat.ss"))
+(require (lib "url.ss" "net"))
+
+<div class="schemedoc-section-comment">;;; Definition of non-R5RS Scheme functions. 
+;;; The functions in this section are general purpose functions which happen
+;;; not to be in the Scheme standard (R5RS). </div>
+<a name="current-time"></a><a name="current-time"></a><span><a href="../mzscheme.html#current-time"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(current-time)</span>
+  (current-seconds))
+
+<a name="sort-list"></a><a name="sort-list"></a><span><a href="../mzscheme.html#sort-list"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(sort-list list com)</span>
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX330" title="R5RS Scheme form">null?</a> list) list (sort com list)))
+
+
+<a name="make-directory-in-directory"></a><a name="make-directory-in-directory"></a><span><a href="../mzscheme.html#make-directory-in-directory"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(make-directory-in-directory in-directory-path new-dir)</span>
+  (make-directory (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" title="R5RS Scheme form">string-append</a> in-directory-path new-dir)))
+
+<a name="mail"></a><a name="mail"></a><span><a href="../mzscheme.html#mail"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(mail receiver title contents)</span>
+  (error "The mail function is not implemented in this configuration"))
+
+
+<span class="comment">; -----------------------------------------------------------------------------</span><br />
+<a name="bound?"></a><a name="bound?"></a><span><a href="../mzscheme.html#bound?"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(bound? symbol)</span>
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX338" title="R5RS Scheme form">memq</a> symbol (namespace-mapped-symbols)) #t #f))
+
+<a name="eval-cur-env"></a><a name="eval-cur-env"></a><span><a href="../mzscheme.html#eval-cur-env"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">eval-cur-env</span> <a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX429" title="R5RS Scheme form">eval</a>)
+
+<span class="comment">; Version 29: Does not work fully correct. Reports success for existing server but non-existing file.
+; (define (url-target-exists? url-string)
+;  (with-handlers ((exn?
+;                     (lambda (exn) #f)))
+;     (let ((ip (get-pure-port (string-&gt;url url-string))))
+;       (close-input-port ip)
+;       #t)))</span><br />
+<a name="url-target-exists?"></a><a name="url-target-exists?"></a><span><a href="../mzscheme.html#url-target-exists?"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(url-target-exists? url-string)</span>
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX122" title="R5RS Scheme form">let*</a> ((<span class="local-name-binding">result</span> (read-http-alist url-string))
+         (<span class="local-name-binding">status</span> (<a class="schemedoc-name" href="../../../lib/man/general.html#as-number" title="Manual: general">as-number</a> (<a class="schemedoc-name" href="../../../lib/man/general.html#defaulted-get" title="Manual: general">defaulted-get</a> 'status result "0"))))
+    (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">cond</a> ((<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX117" title="R5RS Scheme form">and</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX239" title="R5RS Scheme form">&gt;=</a> status 200) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX238" title="R5RS Scheme form">&lt;=</a> status 399)) #t)
+          (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX110" title="R5RS Scheme form">else</a> #f))))
+
+
+<div class="schemedoc-section-comment">;;; LAML specific, context definition functions. 
+;;; The functions in this section return and define the activation context of the LAML processor.</div>
+
+<a name="laml-canonical-command-line"></a><a name="laml-canonical-command-line"></a><span><a href="../mzscheme.html#laml-canonical-command-line"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(laml-canonical-command-line)</span>
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX117" title="R5RS Scheme form">and</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX399" title="R5RS Scheme form">vector?</a> argv) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX239" title="R5RS Scheme form">&gt;=</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX403" title="R5RS Scheme form">vector-length</a> argv) 2))
+        (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX332" title="R5RS Scheme form">list</a> 'laml 
+               (<a class="schemedoc-name" href="../../../lib/man/general.html#file-name-proper" title="Manual: general">file-name-proper</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX404" title="R5RS Scheme form">vector-ref</a> argv 0))
+               (<a class="schemedoc-name" href="../../../lib/man/general.html#transliterate" title="Manual: general">transliterate</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX404" title="R5RS Scheme form">vector-ref</a> argv 1) #\\ "/") <span class="comment">; ensure forward slashing</span><br />               (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX103" title="R5RS Scheme form">if</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX239" title="R5RS Scheme form">&gt;=</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX403" title="R5RS Scheme form">vector-length</a> argv) 3) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX325" title="R5RS Scheme form">cddr</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX406" title="R5RS Scheme form">vector-&gt;list</a> argv)) '())   <span class="comment">; Before august 18, 2008:  (if (&gt;= (vector-length argv) 3) (vector-ref argv 2))
+; Playing with: (if (&gt;= (vector-length argv) 3) (cddr (vector-&gt;list argv)) '())</span><br />        )
+      #f))
+
+
+<a name="fake-startup-parameters"></a><a name="fake-startup-parameters"></a><span><a href="../mzscheme.html#fake-startup-parameters"><img src="../../../images/elucidator/small-prev.gif" title="SchemeDoc Manual entry" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" title="R5RS Scheme form">define</a> <span class="signature">(fake-startup-parameters source-file startup-dir . program-parameters)</span>
+  (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX106" title="R5RS Scheme form">set!</a> argv (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX407" title="R5RS Scheme form">list-&gt;vector</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX334" title="R5RS Scheme form">append</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX332" title="R5RS Scheme form">list</a> source-file startup-dir) program-parameters))))
+
+<span class="comment">; Earlier version:
+; (define (fake-startup-parameters source-file startup-dir . optional-parameter-list)
+;   (let ((program-parameters (optional-parameter 1 optional-parameter-list '()))
+;         (a (make-vector 3 #f)))
+;     (vector-set! a 0 source-file)
+;     (vector-set! a 1 startup-dir)
+;     (vector-set! a 2 program-parameters)
+;     (set! argv a)))</span><br />
+
+(error-print-width 1000)
+
+(read-case-sensitive #t)
+
+</pre></font><div>&nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p></div></body></html>

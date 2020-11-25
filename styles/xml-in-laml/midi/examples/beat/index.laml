@@ -1,0 +1,49 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+(load (in-startup-directory "../" "common-example-stuff.scm"))
+
+
+(begin-laml)
+
+(define current-xml-language 'xhtml10-transitional)
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+; Insert the LAML template "Processing Options" here
+; if you need variations in the LAML processing
+
+(define ttl "Guitar Beats")
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title ttl))
+  (body
+    (h1 ttl)
+
+
+    (p "Here follows some examples of guitar beat generation.")
+
+    (table  'border 1
+      (tr (td (b "Description")) (td (b "Midl source file")) (td (b "Resulting midi file")))
+      (tr (get-baseline-mt "e1" 1))
+      (tr (get-baseline-mt "e2" 1))
+      (tr (get-baseline-mt "e3" 1))
+      (tr (get-baseline-mt "e3-a" 1))
+      (tr (get-baseline-mt "e4" 1))
+      (tr (get-baseline-mt "e6" 1))
+      (tr (get-baseline-mt "e7" 1))
+
+    )
+
+
+
+  )
+ )
+)
+
+
+(end-laml)

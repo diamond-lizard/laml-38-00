@@ -1,0 +1,152 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+; (lib-load "xhtml1.0-convenience.scm")
+
+(define current-xml-language 'xhtml10-transitional)
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+; Insert the LAML template "Processing Options" here
+; if you need variations in the LAML processing
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "The Primary Document"))
+  (body 
+    (pre     
+"<leno>
+   <leno-front-matters slide-view=\"true\" annotated-slide-view=\"false\" aggregated-view=\"false\" theme-view=\"true\" primary-view=\"slide-view\"
+                       scheme-prefix=\"pre-notes.scm\" scheme-suffix=\"post-notes.scm\" course-home-url=\"\" author-home-url=\"\"
+                       note-download-url=\"\" logo-url=\"http://www.auc.dk/\" note-contents-description=\"\" slide-header=\"normal\"
+                       trail-of-lecture=\"false\" language=\"english\" show-and-speak=\"false\" default-showing-time=\"2\"
+                       additional-showing-time=\"0\" sound-source=\"wave-file\" speak-file-prefix=\"sound/\" speak-url-prefix=\"../sound/\"
+                       exercise-model=\"none\" quiz-support=\"false\" word-index=\"true\" news-flash-string=\"\" news-flash-level=\"2\"
+                       verbosity-level=\"1\" clean-html-directory=\"false\" css-prestylesheet=\"large-size\" css-stylesheet=\"original\"
+                       theme-auto-process=\"false\" theme-source=\"none\">
+      <front-title>Concise and Comprehensive Documents</front-title>
+      <front-author>Kurt N&oslash;rmark</front-author>
+      <front-affiliation>Aalborg University</front-affiliation>
+      <front-abstract>
+         An ultra brief exposition of the relations betwen concise and comprehensive documents
+      </front-abstract>
+   </leno-front-matters>
+
+   <begin-notes/>
+
+   <note-page id=\"intro-sec\"><section-title>Introduction</section-title></note-page>
+   <note-page id=\"intro\">
+      <title><main-text>Introduction</main-text></title>
+      <point id=\"pt1\">
+         <main-text>
+            This paper is about derivation of a comprehensive document from a concise document
+         </main-text>
+      </point>
+      <items id=\"it1\">
+         <item>
+            <main-text>Outline:</main-text>
+            <items>
+               <item><main-text>Model</main-text></item>
+               <item><main-text>The LENO system</main-text></item>
+               <item><main-text>Conclusions</main-text></item>
+            </items>
+         </item>
+      </items>
+   </note-page>
+
+   <note-page id=\"model-sec\"><section-title>Model</section-title></note-page>
+   <note-page id=\"primsec\">
+      <title><main-text>The Prisec model</main-text></title>
+      <concept-list id=\"con1\">
+         <concept concept-name=\"Prisec\">
+            <main-text>
+               The Prisec model is a model with a primary and secondary source of
+               the concise and comprehensive documents resp.
+            </main-text>
+         </concept>
+      </concept-list>
+      <items id=\"it1\">
+         <item>
+            <main-text>Issues:</main-text>
+            <items>
+               <item>
+                  <main-text>
+                     Derivation of the secondary source from the primary source
+                  </main-text>
+               </item>
+               <item><main-text>Consistency between the sources </main-text></item>
+               <item><main-text>An alternative to a single source model</main-text></item>
+            </items>
+         </item>
+      </items>
+      <point id=\"pt1\"><main-text>LENO implements the Primsec model</main-text></point>
+   </note-page>
+
+   <note-page id=\"leno-sec\"><section-title>LENO</section-title></note-page>
+   <note-page id=\"leno-prim\">
+      <title><main-text>The primary LENO source</main-text></title>
+      <point id=\"pt1\">
+         <main-text>LENO is an XML-based presentation tool in the LAML family</main-text>
+      </point>
+      <cross-references id=\"cr1\">
+         <internet-reference href=\"http://www.cs.auc.dk/~normark/laml/\">
+            <main-text>LAML</main-text>
+         </internet-reference>
+      </cross-references>
+      <items id=\"it1\">
+         <item>
+            <main-text>LENO primary source characteristics:</main-text>
+            <items>
+               <item>
+                  <main-text>
+                     Slide view, annotated slide view, and aggregated view
+                  </main-text>
+               </item>
+               <item>
+                  <main-text>Aims at elimination of duplicated source elements</main-text>
+               </item>
+               <item>
+                  <main-text>Structured as sectioned lectures and slide pages</main-text>
+               </item>
+            </items>
+         </item>
+      </items>
+      <point id=\"pt2\">
+         <main-text>A secondary source can be derived from the primary source </main-text>
+      </point>
+   </note-page>
+
+   <note-page id=\"leno-seco\">
+      <title><main-text>The secondary LENO source</main-text></title>
+      <point id=\"pt1\">
+         <main-text>
+            The secondary source contains lots of references to primary source elements
+         </main-text>
+      </point>
+      <items id=\"it1\">
+         <item>
+            <main-text>LENO secondary source characteristics:</main-text>
+            <items>
+               <item>
+                  <main-text>Theme-text elements add to the comprehensiveness</main-text>
+               </item>
+               <item><main-text>Presented as traditional paper material</main-text></item>
+               <item><main-text>Structured as chapters and sections</main-text></item>
+            </items>
+         </item>
+      </items>
+      <point id=\"pt2\">
+         <main-text>A PDF version can easily be provided for</main-text>
+      </point>
+   </note-page>
+
+   <end-notes/>
+</leno>"))
+
+ )
+)
+
+
+(end-laml)

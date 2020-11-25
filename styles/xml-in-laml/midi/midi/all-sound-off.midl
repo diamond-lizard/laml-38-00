@@ -1,0 +1,10 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/midi/midi")
+(load (string-append laml-dir "styles/xml-in-laml/midi/midi-laml-processing-lib.scm"))
+
+(StandardMidiFile
+   (MidiHeader 'format "0" 'numberOfTracks "1" 'pulsesPerQuarterNote "1920" 'mode "absTime" 'counterTransposition "0")
+   (MidiTrack
+      (map (lambda (ch) (AllSoundOff 'absTime "0" 'channel ch)) (number-interval 1 16))
+      (Meta 'absTime "1920" 'info "76:3:878 End of track" 'type "47" "")))
+

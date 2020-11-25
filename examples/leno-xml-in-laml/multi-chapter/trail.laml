@@ -1,0 +1,25 @@
+(load (string-append laml-dir "laml.scm"))       
+(laml-style "xml-in-laml/lecture-notes/lecture-notes")
+
+(load (in-startup-directory "common-front-matter-stuff"))
+
+(leno-front-matters
+  (front-title "A trail")           
+
+  (front-author "Kurt Normark")           
+  (front-affiliation "Institut for Datalogi, Aalborg Universitet")  
+  (front-abstract "Abstract of trail. We have selected two pages of the multi-chapter example, which
+                   are specified as a trail. This is useful if you need to select a subset of slides for presentation.
+                   Notice that you are free to control both the selection of slides to include in the trail, and
+                   the sequence.")  
+
+  common-attributes
+
+)
+
+(note-trail 'trail
+    (slide-select 'ch1 'p1)
+    (slide-select 'ch2 'p2)
+)
+
+

@@ -1,0 +1,145 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/elucidator-2/elucidator")
+
+; A version of laml-url that works relative to ./html
+(define (laml-url f)
+  (string-append "../../../../" f))
+
+(elucidator-front-matters
+  
+ 'laml-resource "true"
+ 'scheme-report-version "r5rs"
+
+ 'home-url "../../index.html"
+
+ 'author-mode "true"
+
+ ; OVERALL attributes
+ 'table-of-contents "detailed" ; detailed or shallow
+ 'detailed-table-of-contents-columns "3"
+ 'shallow-table-of-contents-columns "3"
+ 'source-marker-presentation "image"  ; image, text, colored-text
+ 'source-marker-char "!"
+ 'browser-pixel-width "1100"
+ 'control-frame-pixel-height "100"
+
+ ; INDEX attributes
+ 'cross-reference-index "per-letter"  ; per-letter, aggregated, none
+ 'defined-name-index "per-letter"     ; per-letter, aggregated, none
+
+ ; PROGRAM attributes
+ 'initial-program-frame "first-source-file" ; blank, first-source-file
+ 'large-font-source-file  "true"
+ 'small-font-source-file  "true"
+ 'default-source-file-font-size  "small"   ; small or large
+ 'program-menu "separate-frame"   ; inline-table, none, separate-frame 
+ 'manual-frame-from-program "documentation-frame" ; program-frame, documentation-frame
+ 'manual-frame-from-documentation "program-frame" ; program-frame, documentation-frame
+
+ ; DOCUMENTATION attributes
+ 'documentation-escape-char "\\"
+ 'program-link-prefix-char "{"
+ 'program-link-suffix-char "{"
+ 'documentation-link-prefix-char "["
+ 'documentation-link-suffix-char "]"
+ 'strong-link-char "*"
+ 'weak-link-char "+"
+ 'none-link-char "-"
+ 'default-program-link "weak"  ; weak, strong, none
+
+ 'css-documentation-stylesheet "documentation"
+ 'css-program-stylesheet "program"
+
+
+ (color-scheme
+   (color-entry 'group "doc" (predefined-color "documentation-background-color")) 
+   (color-entry 'group "index" (predefined-color "documentation-background-color"))  
+   (color-entry 'group "core" (predefined-color "program-background-color-1"))
+   (color-entry 'group "lib" (predefined-color "program-background-color-2"))
+ )
+    
+ (source-files
+   (program-source 'key "sample" 'file-path (in-startup-directory "sample.scm")
+                   'group "core" 'process "true")
+   (manual-source 'file-path "../../../lib/man/general")
+ )
+)
+
+(begin-documentation)
+
+  (documentation-intro
+    (doc-title "Sample and Simple Documentation")
+    (doc-author "Kurt Nørmark")
+    (doc-affiliation "Department of Computer Science, Aalborg University")
+    (doc-email "normark@cs.auc.dk")
+    (doc-abstract 
+      "This is just simple testing stuff of LAML documentation in Elucidator 2.
+       Please notice that we have used local additions to the normal CSS stylesheet of the Elucidator.
+       This explains the variations of colors and font sizes."
+    )
+  )
+
+  (documentation-section 'id "s1"
+    (section-title "Some section title")
+    (section-body 
+      (p "This is first paragraph")
+
+      (ol (li "x" "y" "z"))
+
+      (pre "some text")
+    )
+  )
+
+
+
+(define (p* . parameters)
+  (let ((lgt-parameters (length parameters)))
+    (cond ((=  lgt-parameters 2)
+             (strong-prog-ref 'file (first parameters) 'name (second parameters)))
+          ((=  lgt-parameters 1)
+             (strong-prog-ref 'name (first parameters)))
+          (else (laml-error "p* accepts only one or two parameters")))))
+
+(define (p+ . parameters)
+  (let ((lgt-parameters (length parameters)))
+    (cond ((=  lgt-parameters 2)
+             (weak-prog-ref 'file (first parameters) 'name (second parameters)))
+          ((=  lgt-parameters 1)
+             (weak-prog-ref 'name (first parameters)))
+          (else (laml-error "p+ accepts only one or two parameters")))))
+
+
+
+
+
+  (documentation-entry 'id "e1"
+    (entry-title "The first entry")
+    (entry-body 
+      (p "xxx")
+
+      (p "Some documentation with a convenient reference to" (p* "fib" "sample") _ ".")
+
+      (p "Some documentation with a reference to" (weak-prog-ref 'file "sample" 'name "negate") _ ".")
+
+      (p "Some documentation with a reference to" (strong-prog-ref 'file "sample" 'name "fac") _ "."
+         "More specifically, see" (source-marker 'name "a") _ "."
+      )
+
+      (p "Some documentation with a reference to section" (doc-ref 'name "s1") _ ".")
+
+      (p "Some documentation with a reference to section" (doc-ref 'name "e1") _ ".")
+    )
+  )
+
+  (documentation-section 'id "s2"
+    (section-title "Another title")
+    (section-body 
+      (p "This is the second paragraph")
+
+      (ol (li "x" "y" "z"))
+
+      (pre "some text")
+    )
+  )
+
+(end-documentation)

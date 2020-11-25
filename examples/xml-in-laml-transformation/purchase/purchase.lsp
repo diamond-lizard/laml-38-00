@@ -1,0 +1,1 @@
+((element "purchase" "-" "-" (element-content (seq one (name zero-or-more "p"))) "") (element "p" "-" "-" (mixed-content pcdata) "") (attribute "p" ()) (attribute "purchase" ()))

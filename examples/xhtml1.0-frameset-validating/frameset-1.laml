@@ -1,0 +1,30 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-frameset-validating")
+
+(begin-laml)
+
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (title "First simple frameset example"))
+
+   (frameset 
+    (frame 'name "fr2" 'src "../xhtml1.0-strict-validating/simple-1.html")
+    (frame 'name "fr2" 'src "../xhtml1.0-strict-validating/simple-2.html")
+    'cols "50%,50%"
+
+    (noframes
+     (body 
+       (p "Frames are" (em "unfortunately") "not available")))
+  )
+ )
+)
+
+
+(end-laml)

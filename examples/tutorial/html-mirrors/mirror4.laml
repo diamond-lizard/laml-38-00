@@ -1,0 +1,36 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-strict-validating")
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+(set-xml-transliterate-character-data-in 'xhtml10-strict #t)
+
+(set! xml-check-error display-xml-warning)
+
+(write-html 'pp
+  (html 
+   (head 
+     (title "An Invalid document") 
+     (em "Emphasis not allowed here")
+   )
+
+   (body
+
+     (p 'x "y" 
+        "A paragraph with an invalid attribute")
+
+     (p 'id "p1"
+        (ol
+          (li "Ordered list not allowed here")
+        )
+        'id "p2"
+     )
+
+
+     (li "li item outside ul and ol context")
+     
+   )
+  )
+) 
+
+(end-laml)

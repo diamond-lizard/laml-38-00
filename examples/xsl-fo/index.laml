@@ -1,0 +1,95 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(begin-laml)
+
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(define (an x)
+  (a 'href x x))
+
+(define ttl "XSL Formatting Objects Examples")
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title ttl)
+   (laml-shortcut-icon (laml-home-url-prefix))
+  )
+  (body 
+    (laml-top-banner)
+    (h1 ttl)
+
+    (p "The following LAML XSL-FO examples exist in this directory.")
+
+    (p "Via use of" (a 'href "http://xmlgraphics.apache.org/fop/" "Apache FOP") "as post processor, it is possible to produce PDF files from a LAML source.
+        The examples image-test and table-test illustrate how it can be done from XML-in-LAML sources via XHTML to XSL-FO transformations.")
+
+    (indent-pixels 10
+      (table 'border "1"
+
+          (tr (map (compose td b) (list "Kind" "LAML file" "FO File" "PDF File")))
+
+          (tr  (td "Hello World")
+               (td (an "hello-world.laml"))
+               (td (an "hello-world.fo"))
+               (td (an "hello-world.pdf"))
+          )
+
+          (tr  (td "Simple test of images")
+               (td (an "image-test.laml"))
+               (td (an "image-test.fo"))
+               (td (an "image-test.pdf"))
+          )
+
+          (tr  (td "Simple test of tables")
+               (td (an "table-test.laml"))
+               (td (an "table-test.fo"))
+               (td (an "table-test.pdf"))
+          )
+
+
+        ))
+
+  (p "The XHTML to XSL-FO transformations in" 
+     (a 'href "../../lib/xml-in-laml/transformations/xhtml-to-xsl-fo.scm" "lib/xml-in-laml/transformations/xhtml-to-xsl-fo.scm")
+     "(as used in the two last examples)"
+     "are preliminary, in-progress, and still not complete." )
+
+
+  (p "LAML can activate a FOP processor via the post processing facility of the function" 
+     (a 'href "../../man/laml.html#write-xml" "write-xml")"and" 
+     (a 'href "../../man/laml.html#process-xml" "process-xml")_ "." "Please consult the documentation of write-xml." )
+
+  (p "Here are my own post processor defintions for files with extension \"fo\":")
+
+  (indent-pixels 10
+  (pre "
+(define fop-system \"/pack/site-java/fop/fop.sh\")
+
+(define (fo-process full-target-file-path-with-extension)
+ (let ((initial-path (file-name-initial-path full-target-file-path-with-extension))
+       (proper-file-name (file-name-proper full-target-file-path-with-extension))
+       (ext (file-name-extension full-target-file-path-with-extension)))
+  (system
+   (string-append \"cd \" initial-path \"; \" fop-system \" \" proper-file-name \".\" ext \" \" \"-pdf\" \" \" initial-path proper-file-name \".\" \"pdf\"))))
+"))
+
+  (p "They are located in my personal" (kbd ".laml") "file.")   
+
+
+  )
+ )
+)
+
+
+(end-laml)
+
+

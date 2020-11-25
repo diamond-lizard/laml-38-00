@@ -1,0 +1,170 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/elucidator-2/elucidator")
+
+(elucidator-front-matters
+
+ 'laml-resource "true"
+ 'scheme-report-version "r5rs"
+
+ ; OVERALL attributes
+ 'table-of-contents "shallow" ; detailed or shallow
+ 'shallow-table-of-contents-columns "3"
+ 'detailed-table-of-contents-columns "2"
+ 'source-marker-presentation "image"  ; image, text, colored-text
+ 'source-marker-char "@"
+ 'browser-pixel-width "1100"
+ 'control-frame-pixel-height "120"
+
+ ; INDEX attributes
+ 'cross-reference-index "aggregated"  ; per-letter, aggregated
+ 'defined-name-index "aggregated"     ; per-letter, aggregated
+ 'duplicated-name-index "false"
+
+ ; PROGRAM attributes
+ 'initial-program-frame "blank" ; blank, first-source-file
+ 'large-font-source-file  "true"
+ 'small-font-source-file  "true"
+ 'default-source-file-font-size  "small"   ; small or large
+ 'program-menu "separate-frame"   ; inline-table, none, separate-frame 
+ 'processing-mode "verbose"
+
+ (color-scheme
+   (color-entry 'group "doc" (predefined-color "documentation-background-color")) 
+   (color-entry 'group "index" (predefined-color "documentation-background-color"))  
+   (color-entry 'group "core" (predefined-color "program-background-color-1"))
+   (color-entry 'group "others" (predefined-color "program-background-color-2"))
+ )
+    
+ (source-files
+   (program-source "Program 1"
+                   'key "prog1" 
+                   'file-path "../../schemedoc/scheme-documentation-tools/prog1.scm"
+                   'group "core" 'process "true")
+   (program-source "Program 2"
+                   'key "prog2" 'file-path "src/prog2.scm"
+                   'group "others" 'process "true")
+   
+   (manual-source  "LAML General Library"
+                   'key "laml-lib"
+                   'file-path "../../../lib/man/general")
+                    
+   (manual-source  "LAML Core Library"
+                   'key "laml"
+                   'file-path "../../../man/laml")
+                    
+   (manual-source  "Prog1 Manual"
+                   'key "prog1-man"
+                   'file-path "../../schemedoc/scheme-documentation-tools/man/prog1" )
+                   
+ )
+)
+
+(begin-documentation)
+
+ (documentation-intro
+    (doc-title "Elucidator Demo")
+    (doc-author "Kurt Normark")
+    (doc-affiliation "Aalborg University, Denmark")
+    (doc-email "normark@cs.auc.dk")
+    (doc-abstract 
+      (p "This is a brief demo example of an Elucidative Program")
+    )
+ )
+
+ (documentation-section 
+   'id "overview-sect"
+   (section-title "Overview")
+   (section-body 
+     (p "This Elucidative program consists of two tiny source programs:" 
+        (weak-prog-ref 'file "prog1")"and" (weak-prog-ref 'file "prog2") _ "." 
+        "The first of these was used for illustration of SchemeDoc, in terms of" 
+        (weak-prog-ref 'file "prog1-man" "a prog1 interface manual")_ "." )
+   )
+ )  
+
+ (documentation-entry
+   'id "intro"
+   (entry-title "Introduction")
+   (entry-body 
+     (p (weak-prog-ref 'file "prog1" "prog1.scm") "contains the factorial function" 
+        (weak-prog-ref 'name "fac")_ "," "and the two functions" (weak-prog-ref 'name "head") "and" 
+        (weak-prog-ref 'name "tail")_ "," "which are aliases of" (weak-prog-ref 'name "car") "and" 
+        (weak-prog-ref 'name "cdr")_ "." )
+
+     (p (weak-prog-ref 'file "prog2" "prog2.scm") 
+        "shows a collection of classical higher-order functions," (weak-prog-ref 'name "compose") _ 
+        "," (weak-prog-ref 'name "filter") _ "," "and" (weak-prog-ref 'name "zip") _ "." )
+    )
+ )
+
+ (documentation-section 
+   'id "higher-order-sec"
+   (section-title "Higher-order functions")
+   (section-body 
+     (p "In this section we explain some details of the higher-order functions, namely" 
+        (weak-prog-ref 'name "filter")"and" (weak-prog-ref 'name "compose") _ "." 
+        "We do not go into the details of" (weak-prog-ref 'name "zip") _ "," "however." )
+   )
+ )
+
+ (documentation-entry
+   'id "filtering"
+   (entry-title "Filtering")
+   (entry-body 
+    (p "The function" (strong-prog-ref 'name "filter") "makes use of the tail-recursive function," 
+       (weak-prog-ref 'name "filter-help")_ "," 
+       "which iteratively carries out the filtering. Due to use the iterative processing in" 
+       (weak-prog-ref 'name "filter-help")_ "," "we need to reverse the result in filter," 
+       (source-marker 'name "a")_ "." )
+   )
+ )
+
+
+ (documentation-entry
+   'id "composing"
+   (entry-title "Function composition")
+   (entry-body 
+    (p "Composition of two or more functions can be done by the function" 
+       (strong-prog-ref 'name "compose")_ "." 
+       "The function handles two special cases first, namely the trivial composition of a single
+        function" (source-marker 'name "b") _ "," 
+       "the typical composition of two functions" (source-marker 'name "c") _ "," 
+       "and composition of more than two functions" (source-marker 'name "d") _ "." )
+   )
+ )
+
+
+ (documentation-entry
+  'id "enum-order"
+  (entry-title "Enumeration ordering")
+  (entry-body 
+   (p "It is some times useful to be able to generate a 'less-than-or-equal' function from an explicitly given enumeration
+       ordering. This is done by the function" (strong-prog-ref 'file "prog2" 'name "generate-leq") _ "." 
+      "Values of the enumeration-order are supposed to occur as constituents of some data structure. The selector
+       function selector accesses the enumertion values within the data structure. Enumeration values are compared
+       using eq-eq?, which is an optional parameter of" (strong-prog-ref 'file "prog2" 'name "generate-leq" ) "."
+       "Notice the pattern used for handling of optional parameters, and in particular the use of the function " 
+       (weak-prog-ref 'name "optional-parameter") _ "."
+   )
+  )
+)
+
+(documentation-section
+ 'id "extra"
+ (section-title "Trailing Stuff")
+ (section-body 
+  (p "In this section we demonstrate a few additional topics")
+  )
+ )
+
+(documentation-entry
+ 'id "extra-1"
+ (entry-title "Inter program references")
+ (entry-body 
+  (p "It is - of course - possible to link applied names in one source program to the defining name in
+      another source file. See the list" (strong-prog-ref 'file "prog2" 'name "other-source-list")
+      "which refers to the defined names in another source program." )
+  )
+ ) 
+
+(end-documentation)

@@ -1,0 +1,65 @@
+(comment!!! 2 "Zip the two lists lst1 and lst2 by means of z.")
+(define (zip z lst1 lst2)
+  (if (null? lst1)
+      '()
+      (cons 
+        (z (car lst1) (car lst2))
+        (zip z (cdr lst1) (cdr lst2)))))
+
+(comment!!! 2 "Compose a list of functions to a single function.
+Each function in the list takes a single parameter.
+Handles the typical case of two functions manually to achieve
+better efficiency.
+.precondition f-list is a proper list of length ast least one.")
+(define (compose . f-list)
+  (cond ((= 1 (length f-list)) (car f-list)) (comment!!! 1 "@b")
+        ((= 2 (length f-list)) (comment!!! 1 "@c")
+	 (let ((f (car f-list)) 
+	       (g (cadr f-list)))
+	   (lambda (x) (f (g x)))))
+        (else  (lambda (x)     (comment!!! 1 "@d")
+		 ((car f-list)
+		  ((apply compose (cdr f-list)) x))))))
+
+(comment!!! 2 "Filter lst by pred.")
+(define (filter pred lst)
+ (reverse (comment!!! 1 "@a")
+  (filter-help pred lst '())))
+
+(comment!!! 1 "The function that does the real filtering.
+A tail recursive function")
+(define (filter-help pred lst res)
+  (cond ((null? lst) res)  
+        ((pred (car lst)) 
+           (filter-help pred (cdr lst)  (cons (car lst) res))) 
+        (else 
+           (filter-help pred (cdr lst)  res))))
+
+(comment!!! 2 "Generate a less than or equal predicate from the enumeration-order.
+If p is the generated predicate, (p x y) is true if and only if
+(selector x) comes before (or at the same position) as (selector y)
+in the enumeration-order. Thus, (selector x) is assumed to give a
+value in enumeration-order. Comparison with elements in the enumeration-list
+is done with el-eq?
+.form (generate-leq enumeration-order selector [el-eq?])")
+(define (generate-leq enumeration-order selector . optional-parameter-list)
+ (let ((el-eq? (optional-parameter 1 optional-parameter-list eq?)))
+  (lambda (x y)
+     (comment!!! 1 "x and y supposed to be elements in enumeration order")
+     (let ((x-index (list-index (selector x) enumeration-order el-eq?))
+           (y-index (list-index (selector y) enumeration-order el-eq?)))
+       (<= x-index y-index)))))
+
+(comment!!! 1 "A helping function of generate-leq.
+Return the position of e in lst. First is 1
+compare with el-eq?
+if e is not member of lst return (+ 1 (length lst))")
+(define (list-index e lst el-eq?)
+ (cond ((null? lst) 1)
+       ((el-eq? (car lst) e) 1)
+       (else (+ 1 (list-index e (cdr lst) el-eq?)))))
+
+
+(comment!!! 1 "A list of functions from the other souce program")
+(define other-source-list
+  (list fac head tail))  

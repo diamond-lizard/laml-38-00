@@ -1,0 +1,61 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(define (an x)
+  (a 'href x x))
+
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "LAML processing examples")
+   (laml-shortcut-icon (laml-home-url-prefix))
+  )
+  (body 
+    (laml-top-banner)
+
+    (h 1 "LAML Processing Examples")
+
+    (p "This page illustrates a laml program, " (kbd "basis.laml") ", which activates the processing of two laml files " 
+          (kbd "dir1.laml") " and
+          " (kbd "dir2.laml") " in other directories, " (kbd "dir1") " and " (kbd "dir2") " respectively.")
+
+    (p "The pages, in addition, illustrates source-filename-without-extension, startup-directory, and laml-program-parameters.")
+
+    (p "This LAML file " (kbd "basis.laml") " has, in the distribution, been processed without program parameters.
+     The files " (kbd "dir1/dir1.laml") " and " (kbd "dir2/dir2.laml") " have not been processed separatly - only via " (kbd "basis.laml") )
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 250 200 200)
+        (list
+          (map b (list "Example"   "LAML"                            "HTML"))
+          (list "This index"       (a-tag "index.laml")              (a-tag "index.html"))
+          (list "The outer page"   (a-tag "basis.laml")              (a-tag "basis.html"))
+          (list "The dir1 page"    (a-tag "dir1/dir1.laml")          (a-tag "dir1/dir1.html"))
+          (list "The dir2 page"    (a-tag "dir2/dir2.laml")          (a-tag "dir2/dir2.html"))
+        )))
+
+    (p (font-size 2 (em "If your browser will not present files with 'laml' or 'scm' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files.")))
+
+
+  )
+ )
+)
+
+
+(end-laml)
+
+

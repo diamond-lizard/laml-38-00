@@ -1,0 +1,185 @@
+<!--
+   Course-plan - LAML Course Plan Home Page Document
+
+   Namespace = ???
+
+   Copyright (c) 2002  Kurt Nørmark.
+   All Rights Reserved. 
+-->
+
+
+
+<!ENTITY % Number "CDATA">
+    <!-- one or more digits -->
+
+<!ENTITY % Symbol "CDATA">
+    <!-- a name without spaces -->
+
+<!ENTITY % URI "CDATA">
+    <!-- a Uniform Resource Identifier, see [RFC2396] -->
+
+<!ENTITY % File-path "CDATA">
+    <!-- an absolute or relative file path -->
+
+<!ENTITY % Color "CDATA">
+    <!-- A legal color name -->
+
+<!ENTITY % Target "CDATA">
+    <!-- A browser target name -->
+
+
+<!ENTITY % XHTML-crossing "(#PCDATA | div | span | ol | ul | p)*">
+    <!-- Possible XHTML elements to be embedded in a course-plan document -->
+
+
+
+
+<!ELEMENT course-plan
+  (course-intro?,
+   course-info,
+   lecture-plan-list)
+>
+
+<!ATTLIST course-plan
+>
+
+<!ELEMENT course-info 
+  (time-list?,
+   lecture-list,
+   subject-list?,
+   index-links?,
+   bottom-links?)
+>
+
+<!ATTLIST course-info
+  course-id                           Symbol                        "IMPLIED"
+  language-preference                 (english | danish)            "english"
+  course-title                        CDATA                         #REQUIRED
+  course-directory                    CDATA                         #IMPLIED
+  brief-course-title                  CDATA                         #REQUIRED
+  course-semester                     CDATA                         #REQUIRED
+  brief-course-semester               CDATA                         #REQUIRED
+  teacher-name                        CDATA                         #REQUIRED
+  course-url-prefix                   %URI;                         #IMPLIED
+  author-home-url                     %URI;                         #REQUIRED
+  make-overview-pages                 (true | false)                "false"
+  color-scheme                        (purple-yellow | red-yellow |
+                                       black-white | blue-grey |
+                                       green-brown | brownish-yellow |
+                                       orange-blue | orange-brownish | 
+                                       olive-yellow | blue-white | blue-creme)
+                                                                    "green-brown"
+  last-lecture-number                 %Number;                      #IMPLIED
+  relative-source-destination-path    %File-path;                   #IMPLIED
+  exercise-model                      (this-exercise-slot |
+                                       next-exercise-slot 
+                                      )          "this-exercise-slot"
+  floating-exercises                  (true | false)                "false"
+
+  calendar-start-year                 %Number;                      #IMPLIED
+  calendar-start-month                %Number;                      #IMPLIED
+  calendar-number-of-months           %Number;                      #IMPLIED
+  url-of-external-calendar            %URI;                         #IMPLIED
+
+  new-or-updated-n-days               %Number;                      #IMPLIED
+
+  news-flash-string                   CDATA                         #IMPLIED
+  news-flash-url                      %URI;                         #IMPLIED
+  news-flash-level                    %Number;                      "1"
+
+  shortcut-icon                       %URI;                         #IMPLIED
+>
+
+
+<!ELEMENT time-list (time)* >
+<!ATTLIST time-list
+>
+
+<!ELEMENT time EMPTY >
+<!ATTLIST time
+  year                   %Number;                    #REQUIRED
+  month                  %Number;                    #REQUIRED
+  day                    %Number;                    #REQUIRED
+  hour                   %Number;                    #REQUIRED
+  minute                 %Number;                    "0"
+  second                 %Number;                    "0"
+>
+
+<!ELEMENT lecture-list (lecture)* >
+<!ATTLIST lecture-list
+>
+
+<!ELEMENT lecture (time? description?)>
+<!ATTLIST lecture
+  lecture-id             %Symbol;                    #REQUIRED
+  subject-id             %Symbol;                    #IMPLIED
+  title                  CDATA                       #IMPLIED
+  href                   %URI;                       #IMPLIED     
+  plenum-start           %Number;                    #REQUIRED
+  plenum-length          %Number;                    #REQUIRED
+  exercise-start         %Number;                    #REQUIRED
+  exercise-length        %Number;                    #REQUIRED
+  room                   CDATA                       #REQUIRED 
+  new-as-of              CDATA                       #IMPLIED
+  updated-as-of          CDATA                       #IMPLIED
+>
+
+<!ELEMENT subject-list (subject)* >
+<!ATTLIST subject-list
+>
+
+<!ELEMENT subject (description) >
+<!ATTLIST subject
+  id                     %Symbol;                    #REQUIRED
+  title                  CDATA                       #REQUIRED
+  href                   %URI;                       #IMPLIED     
+>
+
+<!ELEMENT description %XHTML-crossing; >
+<!ATTLIST description >
+
+
+<!ELEMENT index-links (link-entry)* >
+<!ATTLIST index-links
+>
+
+<!ELEMENT bottom-links (link-entry)* >
+<!ATTLIST bottom-links
+>
+
+<!ELEMENT link-entry (#PCDATA)>
+<!ATTLIST link-entry
+  href                   %URI;                      #REQUIRED 
+  target                 %Symbol;                   "main"
+  new-as-of              CDATA                      #IMPLIED
+  updated-as-of          CDATA                      #IMPLIED
+>
+
+<!ELEMENT course-intro %XHTML-crossing; >
+<!ATTLIST course-intro >
+
+
+<!ELEMENT lecture-plan-list (lecture-plan)* >
+<!ATTLIST lecture-plan-list
+>
+
+<!ELEMENT lecture-plan (literature?, reading-guide?, exercises?, references?, misc?) >
+<!ATTLIST lecture-plan
+  lecture-id             %Symbol;                    #REQUIRED
+>
+
+<!ELEMENT literature %XHTML-crossing; >
+<!ATTLIST literature >
+
+<!ELEMENT reading-guide %XHTML-crossing; >
+<!ATTLIST reading-guide >
+
+<!ELEMENT exercises %XHTML-crossing; >
+<!ATTLIST exercises >
+
+<!ELEMENT references %XHTML-crossing; >
+<!ATTLIST references >
+
+<!ELEMENT misc %XHTML-crossing; >
+<!ATTLIST misc >
+

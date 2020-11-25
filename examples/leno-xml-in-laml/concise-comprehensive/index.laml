@@ -1,0 +1,109 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+(define language-preference 'english)
+
+(define validate-html? #t)
+(define check-html-attributes? #t)
+(define transliterate-character-data? #t)
+
+(define paper-url "http://www.cs.aau.dk/~normark/laml/papers/scheme-2007.pdf")
+(define paper-ttl "Deriving a Comprehensive Document from a Concise Docment - Document Engineering in Scheme")
+
+(generic-page
+  "LENO Theme Examples"
+  (con-par
+    (laml-top-banner)
+    (h 1 "Concise and Comprehensive Documents")
+    (p "The examples in this directory are associated with the paper")
+
+    (ul (li (a 'href paper-url (em paper-ttl))))
+
+    (p "The examples correspond to the examples discussed in the paper, as shown in appendix A of the paper.")
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 250 250 200)
+        (list
+          (map b (list (span "LENO LAML source Document" (br) "written in Scheme") "XML source" "HTML target document"))
+
+          (list (span (a 'href "document-examples/demo.leno" "Primary LAML source") "of" (br) "the Concise document")
+                (span (a 'href "document-examples/primdoc-embedded.html" "Primary XML source") "of" (br) "the Concise document")
+                (span (a 'href "document-examples/html/demo.html" "Primary HTML target") "of" (br) "the Concise document"))
+ 
+          (list (span (a 'href "document-examples/demo_themes-1.leno" "Derived secondary LAML source") "of" (br) "the Comprehensive document")
+                (span (a 'href "document-examples/secdoc-derived-embedded.html" "Derived secondary XML source") "of" (br) "the Comprehensive document")
+                "-")
+
+          (list (span (a 'href "document-examples/demo_themes.leno" "Elaborated secondary LAML source") "of" (br) "the Comprehensive document")
+                (span (a 'href "document-examples/secdoc-embedded.html" "Elaborated secondary XML source") "of" (br) "the Comprehensive document")
+                (span (a 'href "document-examples/html/theme-index.html" "Elaborated secondary HTML target") "of" "the Comprehensive document")) 
+
+         )
+        ))
+
+    (p "Here is a brief explanation of the examples. In the second row of the table:
+        The LENO LAML source (in the first column) represents the source of a set of slides, authored in LAML." (a 'href "http://www.cs.aau.dk/~normark/laml/" "LAML") "is an XML software package for Scheme.
+        The XML source is the corresponding source in XML notation, which is shown here for people who prefer to understand the work in pure XML terms.
+        (The XML sources are not generated nor used in LENO).
+        The primary HTM target document shows the HTML index file of the slide material, ready for browsing. Try to follow some of the links to the slide pages.")
+
+    (p "In the third row of the table: The derived secondary LAML source is the automatically produced starting point of the comprehensive document.
+        It is also shown as a pure XML source.")
+
+    (p "In the bottom row of the table: The elaborated LAML secondary source of the comprehensive document contains additional" (kbd "theme-text") "elements, with
+        text which binds the material together. 
+        We also show this document in pure XML notation.
+        The elaborated secondary HTML target shows the HTML index file of the comprehensive material, ready for browsing. Please browse the links in the table.")
+
+    (p "
+        For additional details, please consult the" (a 'href paper-url "paper") "mentioned above.") (vertical-space 1)
+
+    (p "The following real-life examples of LENO teaching materials are relevant for this work:")
+
+    (ul 
+
+      (li (a 'href "http://www.cs.aau.dk/~normark/oop-07/html/notes/index.html" "Object-oriented Programming in C#") _ "," "2007" _ "," "Concise Material")
+      (li "Object-oriented Programming in C#"  "Comprehensive Material" 
+        (ul
+          (li (a 'href "http://www.cs.aau.dk/~normark/oop-07/html/notes/theme-index.html" "HTML version"))
+          (li (a 'href "http://www.cs.aau.dk/~normark/oop-07/html/notes/leno-print-page.html" "PDF version") (vertical-space 1))
+        )
+      )
+
+      (li (a 'href "http://www.cs.aau.dk/~normark/c-prog-06/html/notes/index.html"  "Programming in C") _ "," "2006" _ "," "(in Danish) - Concise Material")
+      (li "Programming in C" "(in Danish) - Comprehensive Material"
+        (ul
+          (li (a 'href "http://www.cs.aau.dk/~normark/c-prog-06/html/notes/theme-index.html" "HTML version"))
+          (li (a 'href "http://www.cs.aau.dk/~normark/c-prog-06/html/notes/leno-print-page.html" "PDF version") (vertical-space 1))
+        )
+
+      )
+
+      (li (a 'href "http://www.cs.auc.dk/~normark/prog3-03/html/notes/index.html" "Functional Programming in Scheme - With Web Programming Examples") _ "," "2003" "- Concise Material")
+      (li "Functional Programming in Scheme - With Web Programming Examples" "- Comprehensive Material"  
+
+        (ul
+          (li (a 'href "http://www.cs.auc.dk/~normark/prog3-03/html/notes/theme-index.html" "HTML version"))
+          (li (a 'href "http://www.cs.auc.dk/~normark/prog3-03/html/notes/leno-print-page.html" "PDF version") )
+        )
+
+      )
+
+    )
+
+
+
+    (font-size 2 (em "If your browser will not present files with 'laml', 'leno', or 'scm' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files."))
+)
+  white black blue blue
+)
+
+(end-laml)
+
+
+
+
+

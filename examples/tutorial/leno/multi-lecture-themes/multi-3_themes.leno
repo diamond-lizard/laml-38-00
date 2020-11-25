@@ -1,0 +1,29 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/lecture-notes-themes/lecture-notes-themes")
+(load (in-startup-directory "shared-front-matters-stuff.scm"))
+
+(leno-themes-front-matters 
+  shared-themes-front-matters-attributes
+)
+
+(begin-themes)
+
+(theme 'id "sec1"
+  (leno-element 'lecture-id "multi-3" 'page-id "sec1" 'element-type "section-title" 'element-number "1" )
+  (theme-text "Another thematic introduction")
+  (leno-element 'lecture-id "multi-3" 'page-id "page1" 'element-type "title" 'element-number "1" )
+  (theme-text "Intro 'thematic' text")
+  (leno-element 'lecture-id "multi-3" 'page-id "page1" 'element-type "point" 'element-id "pt1" )
+  (leno-element 'lecture-id "multi-3" 'page-id "page1" 'element-type "slide-text" 'element-id "st1" )
+  (leno-element 'lecture-id "multi-3" 'page-id "page2" 'element-type "title" 'element-number "1" )
+  (theme-text "Intro 'thematic' text")
+  (leno-element 'lecture-id "multi-3" 'page-id "page2" 'element-type "items" 'element-id "it1" )
+  (leno-element 'lecture-id "multi-3" 'page-id "page3" 'element-type "title" 'element-number "1" )
+  (leno-element 'lecture-id "multi-3" 'page-id "page3" 'element-type "slide-text" 'element-id "sl1" )
+  (leno-element 'lecture-id "multi-3" 'page-id "page3" 'element-type "note-text" 'element-id "nt1" )
+  (theme-text "Final remarks. The material starts with" 
+    (ref "multi-1_themes-sec1" "multi-1" "sec1" "section-title" "1") ".")
+)
+
+
+(end-themes)

@@ -1,0 +1,220 @@
+
+<html><head><title> documentation</title></head><body bgcolor = "#ffffff" text = "#000000" link = "#000000" vlink = "#000000" ><a name="START"><h1><font color = "#0000ff">The XML parser for LAML</font></h1><h3>Kurt Nørmark &copy;&nbsp;&nbsp;&nbsp;&nbsp;normark@cs.auc.dk&nbsp;&nbsp;&nbsp;&nbsp;Department of Computer Science, Aalborg University, Denmark&nbsp;&nbsp;&nbsp;&nbsp;</h3><p><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#d2d2d2"><em><b>Abstract. </b>This elucidative program documents the development of a simple XML parser for the
+LAML software package.
+This is a non-validating XML parser for LAML. As of the current version,
+the parser is by no means complete. Never the less, it is useful tool for parsing most
+everyday XML document to a Lisp data structure. <p> Given a well-formed XML document
+this parser returns a Lisp tree structure that represents the parse tree of the XML document.
+This parser skips any element of the XML prolog (front matters) including the DTD (if any).
+The parser also skips XML comments.
+The parser handles start tags, end tags, and empty tags (in this parser called start-end tags).
+Entities and their declarations are not handled at all.<p>
+The top level function is xml-parse and xml-parse-file.<p>
+See also the brief <a href="../../man/xml-parser.html" target= "_top">reference manual</a> of the XML parser.</em></td></tr></table><p>&nbsp;<p><a name="intr-section"><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#00ccff"><a href = "documentation.html#START"><img src = "./images/small-up.gif" alt = "" border = "0" ></a>&nbsp;<img src = "./images/small-prev-blind.gif" alt = "" border = "0" >&nbsp;<a href = "documentation.html#parse-section"><img src = "./images/small-next.gif" alt = "The parser" border = "0" ></a>&nbsp;<br><b><font size = 5>1&nbsp;&nbsp;Introduction</font></b><br>In this section we describe the overall parsing ideas together with examples.</td></tr></table><table border = 0><tr><td width = 10 valign = top ></td><td width = * valign = top ><font size = 2>1.1&nbsp;&nbsp;<a href = "documentation.html#start-entry" target = documentation-frame><font color = "#000000">The start</font></a></font><br><font size = 2>1.2&nbsp;&nbsp;<a href = "documentation.html#front-and-white" target = documentation-frame><font color = "#000000">Handling white space, comments, and front matters.</font></a></font><br><font size = 2>1.3&nbsp;&nbsp;<a href = "documentation.html#tree-structure" target = documentation-frame><font color = "#000000">The parse tree</font></a></font><br><font size = 2>1.4&nbsp;&nbsp;<a href = "documentation.html#parse-tree-functions" target = documentation-frame><font color = "#000000">Parse tree functions</font></a></font><br></td></tr></table>&nbsp;<p><a name="start-entry"><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#00ccff"><a href = "documentation.html#intr-section"><img src = "./images/small-up.gif" alt = "Introduction" border = "0" ></a>&nbsp;<img src = "./images/small-prev-blind.gif" alt = "" border = "0" >&nbsp;<a href = "documentation.html#front-and-white"><img src = "./images/small-next.gif" alt = "Handling white space, comments, and front matters." border = "0" ></a>  <br> <b><font size = 4>1.1&nbsp;&nbsp;The start</font></b></td></tr></table>We first make a top level parse function, <a href = "xml-parser.html#parse-xml" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>parse-xml</kbd></font></a> (and <a href = "xml-parser.html#parse-xml-file" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>parse-xml-file</kbd></font></a>) which we model
+after the similar function in the dtd parser, which we have made earlier.
+We decide to read the input from a text file - say f.xml. <a href = "xml-parser.html#parse-xml-file" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>parse-xml-file</kbd></font></a>.
+The name of the resulting file is determined by the second parameter of <a href = "xml-parser.html#parse-xml-file" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>parse-xml-file</kbd></font></a>.<p>
+We establish a parse stack, cf. <a href = "xml-parser.html#parse-stack" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>parse-stack</kbd></font></a>. This is plain and ordinary stack
+to which we make a good interface. Alternatively, we could have used a generic stack ADT.<p>
+The function <a href = "xml-parser.html#parse-xml-ip" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>parse-xml-ip</kbd></font></a> starts the real work. After handling empty initial space 
+and front matters (the XML prefix - see section <a href = "documentation.html#front-and-white" style = "{text-decoration: underline;}" target = "documentation-frame" title = "Handling white space, comments, and front matters." ><font color = "#0000ff">1.2</font></a>)
+the ball is passed to <a href = "xml-parser.html#parse-xml-balanced-expression" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>parse-xml-balanced-expression</kbd></font></a> which does the real job.
+More will follow in section <a href = "documentation.html#overall-parsing" style = "{text-decoration: underline;}" target = "documentation-frame" title = "Overall parsing functions" ><font color = "#0000ff">2.1</font></a>.<p>&nbsp;<p>&nbsp;<p><a name="front-and-white"><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#00ccff"><a href = "documentation.html#intr-section"><img src = "./images/small-up.gif" alt = "Introduction" border = "0" ></a>&nbsp;<a href = "documentation.html#start-entry"><img src = "./images/small-prev.gif" alt = "The start" border = "0" ></a>&nbsp;<a href = "documentation.html#tree-structure"><img src = "./images/small-next.gif" alt = "The parse tree" border = "0" ></a>  <br> <b><font size = 4>1.2&nbsp;&nbsp;Handling white space, comments, and front matters.</font></b></td></tr></table>An XML document typically starts with a prolog, consisting of an XML declaration, document type defintion,
+and perhaps an inline DTD. This parser does not need to care about all that stuff.
+Thus, we only want to jump over such material. The function <a href = "xml-parser.html#skip-front-matters" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#ff0000"><kbd>skip-front-matters</kbd></font></a>
+does it. Notice the skipping of XML declarations (<a href = "xml-parser.html#skip-front-matters-@a" target = program-frame><img src = "./images/source-mark-red.gif" alt = "A link to a program source marker in skip-front-matters" border = "0" ></a><a name="front-and-white-@a">) which makes use of the function
+<a href = "collect-skip.html#collect-balanced-until" target = "program-frame" title = "collect-skip" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>collect-balanced-until</kbd></font></a> from the collect skip library. The use of this function ensures that
+we can handle embedded declarations, as long they are balanced.<p>
+The skipping of white space using <a href = "xml-parser.html#skip-white-space" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>skip-white-space</kbd></font></a> is simple. 
+The function <a href = "xml-parser.html#skip-white-space-and-comments" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>skip-white-space-and-comments</kbd></font></a> also skips 
+XML comments. Notice the recursive implementation of <a href = "xml-parser.html#skip-white-space-and-comments" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>skip-white-space-and-comments</kbd></font></a>
+which ensures that all white space - including multiple comments - may be skipped.
+&nbsp;<p>&nbsp;<p><a name="tree-structure"><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#00ccff"><a href = "documentation.html#intr-section"><img src = "./images/small-up.gif" alt = "Introduction" border = "0" ></a>&nbsp;<a href = "documentation.html#front-and-white"><img src = "./images/small-prev.gif" alt = "Handling white space, comments, and front matters." border = "0" ></a>&nbsp;<a href = "documentation.html#parse-tree-functions"><img src = "./images/small-next.gif" alt = "Parse tree functions" border = "0" ></a>  <br> <b><font size = 4>1.3&nbsp;&nbsp;The parse tree</font></b></td></tr></table>The tree structure is as follows:
+<pre>
+  T = (tree N ST1 ST2 ... STn)
+</pre>
+STi, i = 1..n are trees recursively. tree is a symbol (tagging a syntax tree). A Leaf node is denoted as
+<pre>
+  (tree N)
+</pre>
+or just N if N is a string (corresponding to textual contents) or an empty tag (a tag without contents,
+also called a start-end tag in this software).<p>
+An inner node of a parse tree corresponds to a tag (an element) with contents. Such a node is represented
+by the following 'tag structure':
+<pre>
+  (tag kind tag-name . attr-info)
+</pre>
+Kind is either start, start-end, or end (corresponding to the three kinds of tags).
+Tag-name is a string. Attr-info is the attribute on property list format.
+An terminal may be a start-end node, or just a contents string. End tags are not represented 
+in the parse tree.<p>
+<pre>
+  (tag start "title" role "xxx" size "5")
+</pre>
+The function <a href = "xml-parser.html#make-tag-structure" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>make-tag-structure</kbd></font></a> constructs the nodes. The function <a href = "xml-parser.html#kind-of-tag-structure" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>kind-of-tag-structure</kbd></font></a>
+returns the kind of a node (tag structure); whether start or start-end. There are also functions to 
+access the constituents of a tag structure: <a href = "xml-parser.html#tag-of-tag-structure" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>tag-of-tag-structure</kbd></font></a> and <a href = "xml-parser.html#attributes-of-tag-structure" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>attributes-of-tag-structure</kbd></font></a>.
+<p>
+If we assume that we parse the following XML fragment
+(If you are reading this in the source file, please consult the browser version):
+<pre>
+  &lt;title role = "xxx" size = "5"&gt;
+    Here is some contents of title
+  &lt;/title&gt;
+</pre>
+The tree becomes:
+<pre>
+  ((start "title" role "xxx" size "5")
+     "Here is some contents of title")
+</pre>
+A more complicated example
+<pre>
+  &lt;title role = "xxx" size = "5"&gt;
+    Here is some contents of title
+    &lt;mark number = "1" listed = "yes"/&gt;
+    More text.
+    &lt;section number = "1"&gt;
+      Section text.
+    &lt;/section&gt;
+  &lt;/title&gt;
+</pre>
+The tree is (slighly formatted, but accurated- actually parsed):
+<pre>
+(tree
+  (tag start "title" role "xxx" size "5")
+  "Here is some contents of title " 
+  (tag start-end "mark" number "1" listed "yes")
+   "More text. "
+  (tree 
+    (tag start "section" number "1") 
+    "Section text. "))
+</pre>&nbsp;<p>&nbsp;<p><a name="parse-tree-functions"><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#00ccff"><a href = "documentation.html#intr-section"><img src = "./images/small-up.gif" alt = "Introduction" border = "0" ></a>&nbsp;<a href = "documentation.html#tree-structure"><img src = "./images/small-prev.gif" alt = "The parse tree" border = "0" ></a>&nbsp;<img src = "./images/small-next-blind.gif" alt = "" border = "0" >  <br> <b><font size = 4>1.4&nbsp;&nbsp;Parse tree functions</font></b></td></tr></table>The function <a href = "xml-parser.html#make-parse-tree" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>make-parse-tree</kbd></font></a> constructs a parsetree,
+and the functions <a href = "xml-parser.html#root-of-parse-tree" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>root-of-parse-tree</kbd></font></a> and <a href = "xml-parser.html#subtrees-of-parse-tree" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>subtrees-of-parse-tree</kbd></font></a>
+access the root and the subtrees of a parse tree respectively.<p>
+The predicate <a href = "xml-parser.html#terminal-node?" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#ff0000"><kbd>terminal-node?</kbd></font></a> tells whether a tree is considered an terminal node.
+It is an terminal node if it is a contents string (direct on convoluted in a node), or
+if it is start-end-node (which cannot have contents). The complementing function function 
+is called <a href = "xml-parser.html#inner-node?" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>inner-node?</kbd></font></a>. Both of these functions assume that they are applied on
+a tree.<p>
+We also have prediates on nodes: <a href = "xml-parser.html#start-node?" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>start-node?</kbd></font></a> and <a href = "xml-parser.html#start-end-node?" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>start-end-node?</kbd></font></a>.&nbsp;<p>&nbsp;<p><a name="parse-section"><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#00ccff"><a href = "documentation.html#START"><img src = "./images/small-up.gif" alt = "" border = "0" ></a>&nbsp;<a href = "documentation.html#intr-section"><img src = "./images/small-prev.gif" alt = "Introduction" border = "0" ></a>&nbsp;<a href = "documentation.html#html-parser"><img src = "./images/small-next.gif" alt = "A HTML variant" border = "0" ></a>&nbsp;<br><b><font size = 5>2&nbsp;&nbsp;The parser</font></b><br>Here we explain the parser as such.</td></tr></table><table border = 0><tr><td width = 10 valign = top ></td><td width = * valign = top ><font size = 2>2.1&nbsp;&nbsp;<a href = "documentation.html#overall-parsing" target = documentation-frame><font color = "#000000">Overall parsing functions</font></a></font><br><font size = 2>2.2&nbsp;&nbsp;<a href = "documentation.html#parse-balanced" target = documentation-frame><font color = "#000000">Parsing a balanced XML expression.</font></a></font><br><font size = 2>2.3&nbsp;&nbsp;<a href = "documentation.html#parse-contents" target = documentation-frame><font color = "#000000">Parsing the contents after a start tag</font></a></font><br><font size = 2>2.4&nbsp;&nbsp;<a href = "documentation.html#tree-building" target = documentation-frame><font color = "#000000">Building the tree</font></a></font><br></td></tr></table>&nbsp;<p><a name="overall-parsing"><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#00ccff"><a href = "documentation.html#parse-section"><img src = "./images/small-up.gif" alt = "The parser" border = "0" ></a>&nbsp;<img src = "./images/small-prev-blind.gif" alt = "" border = "0" >&nbsp;<a href = "documentation.html#parse-balanced"><img src = "./images/small-next.gif" alt = "Parsing a balanced XML expression." border = "0" ></a>  <br> <b><font size = 4>2.1&nbsp;&nbsp;Overall parsing functions</font></b></td></tr></table>The function <a href = "xml-parser.html#parse-xml-balanced-expression" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#ff0000"><kbd>parse-xml-balanced-expression</kbd></font></a>
+is supposed to return a (sub)tree, and thus read a balanced expression from the input port.
+There are three possible results: 
+<ol>
+ <li> A tree rooted of a start node.
+ <li> A terminal node of start-end node.
+ <li> A contents string.
+</ol>
+<p>
+The function <a href = "xml-parser.html#what-is-ahead" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#ff0000"><kbd>what-is-ahead</kbd></font></a> looks ahead without really reading.
+All white space is consumed, so <a href = "xml-parser.html#what-is-ahead" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>what-is-ahead</kbd></font></a> faces a non-blank character.
+It is easy to spot if it is a tag, starting with start angle. If not, it is a string (contents). <p>
+The function <a href = "xml-parser.html#read-tag" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#ff0000"><kbd>read-tag</kbd></font></a> is more serious. It parses a tag (start tag, end tag, or start-end tag)
+including the attributes. This function can read all kinds of tags, including an end tag. Internally, it
+is pretty straightforward. The first case to handle is the end tag (<a href = "xml-parser.html#read-tag-@a" target = program-frame><img src = "./images/source-mark-red.gif" alt = "A link to a program source marker in read-tag" border = "0" ></a><a name="overall-parsing-@a">). In the conditional (<a href = "xml-parser.html#read-tag-@b" target = program-frame><img src = "./images/source-mark-green.gif" alt = "A link to a program source marker in read-tag" border = "0" ></a><a name="overall-parsing-@b">) we handle
+the following three cases:
+<ol>
+ <li> An start-end tag without attributes (<a href = "xml-parser.html#read-tag-@c" target = program-frame><img src = "./images/source-mark-blue.gif" alt = "A link to a program source marker in read-tag" border = "0" ></a><a name="overall-parsing-@c">).
+ <li> A start tag (<a href = "xml-parser.html#read-tag-@d" target = program-frame><img src = "./images/source-mark-black.gif" alt = "A link to a program source marker in read-tag" border = "0" ></a><a name="overall-parsing-@d">).
+ <li> A start-end tag with attributes (<a href = "xml-parser.html#read-tag-@e" target = program-frame><img src = "./images/source-mark-maroon.gif" alt = "A link to a program source marker in read-tag" border = "0" ></a><a name="overall-parsing-@e">).
+</ol>
+The parsing of the attributes in the start or start-end tag is done by the function <a href = "xml-parser.html#read-tag-attributes" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>read-tag-attributes</kbd></font></a>.
+The rest of this last case has to do with the determination of whether we are facing a start tag or a
+start-end tag.<p>
+The function <a href = "xml-parser.html#read-tag-attributes" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>read-tag-attributes</kbd></font></a> parses a list of attributes. The task of parsing a single attribute, like
+<pre>
+  attr = "value"
+</pre>
+is done by <a href = "xml-parser.html#read-attribute-value-pair" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>read-attribute-value-pair</kbd></font></a>. Again, this is just detailed parsing work using the
+collect-skip library.<p>&nbsp;<p>&nbsp;<p><a name="parse-balanced"><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#00ccff"><a href = "documentation.html#parse-section"><img src = "./images/small-up.gif" alt = "The parser" border = "0" ></a>&nbsp;<a href = "documentation.html#overall-parsing"><img src = "./images/small-prev.gif" alt = "Overall parsing functions" border = "0" ></a>&nbsp;<a href = "documentation.html#parse-contents"><img src = "./images/small-next.gif" alt = "Parsing the contents after a start tag" border = "0" ></a>  <br> <b><font size = 4>2.2&nbsp;&nbsp;Parsing a balanced XML expression.</font></b></td></tr></table>As already mentioned in section <a href = "documentation.html#overall-parsing" style = "{text-decoration: underline;}" target = "documentation-frame" title = "Overall parsing functions" ><font color = "#0000ff">2.1</font></a> the function <a href = "xml-parser.html#parse-xml-balanced-expression" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#ff0000"><kbd>parse-xml-balanced-expression</kbd></font></a>
+is central. We will here examine it in more details.<p>
+The function assumes that all initial white space is consumed. 
+We start by finding out if we are facing a tag (start or start-end tag presumably) or textual contents (<a href = "xml-parser.html#parse-xml-balanced-expression-@a" target = program-frame><img src = "./images/source-mark-red.gif" alt = "A link to a program source marker in parse-xml-balanced-expression" border = "0" ></a><a name="parse-balanced-@a">).<p>
+In case of a tag we handle the start, and start-end tag separately. The function <a href = "xml-parser.html#read-tag" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>read-tag</kbd></font></a> reads the tag.<p>
+Let us first notice that the start-end tag is easy to handle, because it is terminal; So we just return the
+node (the result returned by <a href = "xml-parser.html#read-tag" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>read-tag</kbd></font></a>). <p>
+The most interesting and important case is the start tag (<a href = "xml-parser.html#parse-xml-balanced-expression-@c" target = program-frame><img src = "./images/source-mark-blue.gif" alt = "A link to a program source marker in parse-xml-balanced-expression" border = "0" ></a><a name="parse-balanced-@c">). We push the start tag onto the stack.
+The function <a href = "xml-parser.html#read-and-push-subtrees-until-end-tag" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>read-and-push-subtrees-until-end-tag</kbd></font></a> pushes additional contributions onto the stack - 
+all read recursively by <a href = "xml-parser.html#parse-xml-balanced-expression" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>parse-xml-balanced-expression</kbd></font></a> via <a href = "xml-parser.html#read-and-push-subtrees-until-end-tag" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>read-and-push-subtrees-until-end-tag</kbd></font></a>.
+Finally the function <a href = "xml-parser.html#build-tree-from-stack" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>build-tree-from-stack</kbd></font></a> takes information from the stack (and pops the stack)
+in order to build and return the parse tree. In the next section we will study <a href = "xml-parser.html#read-and-push-subtrees-until-end-tag" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>read-and-push-subtrees-until-end-tag</kbd></font></a>
+and <a href = "xml-parser.html#build-tree-from-stack" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>build-tree-from-stack</kbd></font></a>.<p>
+If we encounter an end tag (<a href = "xml-parser.html#parse-xml-balanced-expression-@b" target = program-frame><img src = "./images/source-mark-green.gif" alt = "A link to a program source marker in parse-xml-balanced-expression" border = "0" ></a><a name="parse-balanced-@b">) there is an error which we report in the final case.&nbsp;<p>&nbsp;<p><a name="parse-contents"><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#00ccff"><a href = "documentation.html#parse-section"><img src = "./images/small-up.gif" alt = "The parser" border = "0" ></a>&nbsp;<a href = "documentation.html#parse-balanced"><img src = "./images/small-prev.gif" alt = "Parsing a balanced XML expression." border = "0" ></a>&nbsp;<a href = "documentation.html#tree-building"><img src = "./images/small-next.gif" alt = "Building the tree" border = "0" ></a>  <br> <b><font size = 4>2.3&nbsp;&nbsp;Parsing the contents after a start tag</font></b></td></tr></table>The procedure <a href = "xml-parser.html#read-and-push-subtrees-until-end-tag" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#ff0000"><kbd>read-and-push-subtrees-until-end-tag</kbd></font></a> must read
+all the textual contents after the start tag.  To be concrete, while parsing
+<pre>
+  &lt;title role = "xxx" size = "5"&gt;
+    Here is some contents of title
+    &lt;mark number = "1" listed = "yes"/&gt;
+    More text.
+    &lt;section number = "1"&gt;
+      Section text.
+    &lt;/section&gt;
+  &lt;/title&gt;
+</pre>
+we have just pushed information about the start tag on to the stack. 
+<a href = "xml-parser.html#read-and-push-subtrees-until-end-tag" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>read-and-push-subtrees-until-end-tag</kbd></font></a> must read
+<ol>
+  <li> "Here is some contents of title"
+  <li> The mark terminal node.
+  <li> "More text"
+  <li> The section subtree
+</ol>
+After that it must encounter the title end tag and use this as a stopping condition. This is
+the most trickiest part of this function.<p>
+We establish a look ahead corresponding to the length of end tag, including the "<", ">", and "\".
+This is the local name n (<a href = "xml-parser.html#read-and-push-subtrees-until-end-tag-@a" target = program-frame><img src = "./images/source-mark-red.gif" alt = "A link to a program source marker in read-and-push-subtrees-until-end-tag" border = "0" ></a><a name="parse-contents-@a">). If we encounter the end tag string (<a href = "xml-parser.html#read-and-push-subtrees-until-end-tag-@b" target = program-frame><img src = "./images/source-mark-green.gif" alt = "A link to a program source marker in read-and-push-subtrees-until-end-tag" border = "0" ></a><a name="parse-contents-@b">) we just read it - and we are done.
+If not (<a href = "xml-parser.html#read-and-push-subtrees-until-end-tag-@c" target = program-frame><img src = "./images/source-mark-blue.gif" alt = "A link to a program source marker in read-and-push-subtrees-until-end-tag" border = "0" ></a><a name="parse-contents-@c">) we parse a subtree using <a href = "xml-parser.html#parse-xml-balanced-expression" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>parse-xml-balanced-expression</kbd></font></a>, push it on to the stack, and iterates
+tail recursively via <a href = "xml-parser.html#read-and-push-subtrees-until-end-tag" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>read-and-push-subtrees-until-end-tag</kbd></font></a>.&nbsp;<p>&nbsp;<p><a name="tree-building"><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#00ccff"><a href = "documentation.html#parse-section"><img src = "./images/small-up.gif" alt = "The parser" border = "0" ></a>&nbsp;<a href = "documentation.html#parse-contents"><img src = "./images/small-prev.gif" alt = "Parsing the contents after a start tag" border = "0" ></a>&nbsp;<img src = "./images/small-next-blind.gif" alt = "" border = "0" >  <br> <b><font size = 4>2.4&nbsp;&nbsp;Building the tree</font></b></td></tr></table>We are now in a possition where the constituents of the parse tree is on the stack, and we have encountered
+and read an end tag. Now we shall build the parse tree. This is done by <a href = "xml-parser.html#build-tree-from-stack" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#ff0000"><kbd>build-tree-from-stack</kbd></font></a>. <p>
+Recall that <a href = "xml-parser.html#parse-xml-balanced-expression" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>parse-xml-balanced-expression</kbd></font></a> pushed the start tag on to the stack. Consequently, we pop the stack
+until we meet the tag corresponding to end-tag-name (the parameter of <a href = "xml-parser.html#build-tree-from-stack" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>build-tree-from-stack</kbd></font></a>.)<p>
+Given our example  from section <a href = "documentation.html#parse-contents" style = "{text-decoration: underline;}" target = "documentation-frame" title = "Parsing the contents after a start tag" ><font color = "#0000ff">2.3</font></a> the stack is (top on first line):
+<pre>
+  The section subtree
+  "More text"
+  mark start-end-tag
+  "Here is some contents of title"
+  start title tag
+</pre>
+This is done by <a href = "xml-parser.html#build-tree-from-stack-1" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#ff0000"><kbd>build-tree-from-stack-1</kbd></font></a>, which is called in a trivial way by <a href = "xml-parser.html#build-tree-from-stack" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>build-tree-from-stack</kbd></font></a>.
+<a href = "xml-parser.html#build-tree-from-stack-1" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>build-tree-from-stack-1</kbd></font></a> pops the stack iteratively until it meets the start tag (first parameter of <a href = "xml-parser.html#build-tree-from-stack-1" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>build-tree-from-stack-1</kbd></font></a>).
+The predicate <a href = "xml-parser.html#start-tag-entry?" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>start-tag-entry?</kbd></font></a> identifies a start tag entry, and the function <a href = "xml-parser.html#matches-stack-entry" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>matches-stack-entry</kbd></font></a>
+finds out if the top tag structure matches the start tag name. Notice that all stack entries are taged, such we can see if we face
+a tag structure (see the predicates tag-stack-entry?, tree-stack-entry?, <a href = "xml-parser.html#text-contents-entry?" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>text-contents-entry?</kbd></font></a>, 
+start-tag-stack-entry?, and start-end-tag-stack-entry?).&nbsp;<p>&nbsp;<p><a name="html-parser"><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#00ccff"><a href = "documentation.html#START"><img src = "./images/small-up.gif" alt = "" border = "0" ></a>&nbsp;<a href = "documentation.html#parse-section"><img src = "./images/small-prev.gif" alt = "The parser" border = "0" ></a>&nbsp;<img src = "./images/small-next-blind.gif" alt = "" border = "0" >&nbsp;<br><b><font size = 5>3&nbsp;&nbsp;A HTML variant</font></b><br>In this section we will explain the differences between the XML parser, as developed until now,
+and an HTML parser.</td></tr></table><table border = 0><tr><td width = 10 valign = top ></td><td width = * valign = top ><font size = 2>3.1&nbsp;&nbsp;<a href = "documentation.html#important-diff" target = documentation-frame><font color = "#000000">Important differences</font></a></font><br></td></tr></table>&nbsp;<p><a name="important-diff"><table border = 0><tr><td width = 1200 valign = bottom bgcolor = "#00ccff"><a href = "documentation.html#html-parser"><img src = "./images/small-up.gif" alt = "A HTML variant" border = "0" ></a>&nbsp;<img src = "./images/small-prev-blind.gif" alt = "" border = "0" >&nbsp;<img src = "./images/small-next-blind.gif" alt = "" border = "0" >  <br> <b><font size = 4>3.1&nbsp;&nbsp;Important differences</font></b></td></tr></table>HTML is not as clean and easy to deal with as XML. The main stumbling block
+is tags which can be applied as empty tags (without end tags) as well as with an
+end tag. As an example both
+<pre>
+  &lt;body&gt;
+    Some text.
+    &lt;p&gt;
+    Some more text
+    &lt;p&gt;
+  &lt;/body&gt;
+</pre>
+and 
+<pre>
+  &lt;body&gt;
+    &lt;p&gt; Some text.&lt;/p&gt;
+    &lt;p&gt; Some more text &lt;/p&gt;
+  &lt;/body&gt;
+</pre>
+is legal. The parsing is not the same, however. The problem is that the first
+fragment we never meet the end of the two p tags. So a balanced parsing of expression
+does not work here.<p>
+But what works then? We use the following idea:
+<ul>
+ <li> Read and stack tags and contents strings until we encounter some end tag.
+ <li> When we encounter an end tag we pop the stack until we meet the closest similar start tag.
+ <li> During our way down the stack we may pass some start tags, which we now realise
+      never will be terminated by end tags. These must be converted to start-end tags (empty tags)
+ <li> We form a tree of all the elements until and including the matcing start tag.
+ <li> We push the subtree so formed.
+</ul>
+Is this a nice recursive algorithm? NO. It is an iterative algorithm. We run until the stack is empty.
+It becomes empty when we meet the end html tag (or a similar enclosing tag surrounding the whole document).<p>
+Thus, we need to re-program most of the parser, including of course the central <a href = "xml-parser.html#parse-xml-balanced-expression" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>parse-xml-balanced-expression</kbd></font></a>
+(which is recursive through <a href = "xml-parser.html#read-and-push-subtrees-until-end-tag" target = "program-frame" title = "xml-parser" style = "{text-decoration: none;}" ><font color = "#000080"><kbd>read-and-push-subtrees-until-end-tag</kbd></font></a>). There is an accompanying source file,
+html-support.scm, where these contributions can be found.&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p>&nbsp;<p></body> </html>
+<!-- Generated from an LAML (Lisp Abstracted Markup Language) source file. Version 30.2 (January 20, 2006, full, alpha). LAML is designed and implemented by Kurt Nørmark, normark@cs.auc.dk. Time of generation: January 21, 2006 16:32:00-->
+

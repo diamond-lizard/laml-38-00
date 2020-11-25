@@ -1,0 +1,121 @@
+(define (p1 lst)
+  (let ((car length)
+        (length car))
+    (car lst)
+    (length lst)))
+
+(define (p2 lst)
+  (let* ((car length)
+         (length car))
+    (car lst)
+    (length lst)))
+
+(define (p3 lst)
+  (letrec ((car length)
+           (length car))
+    (car lst)
+    (length lst)))
+
+(define (p4)
+ (letrec ((car
+            (lambda (n)
+              (if (zero? n)
+                  #t
+                  (cdr (- n 1)))))
+          (cdr
+            (lambda (n)
+              (if (zero? n)
+                  #f
+                  (car (- n 1))))))
+    (car 88)))
+
+(define p5
+  (lambda (lambda case . do)
+    (let*  ((length (+ 5 lambda))  
+            (if length))
+      (+ if case do length lambda))))
+
+(define (p5a lambda case do)
+    (let*  ((length (+ 5 lambda))  
+            (if length))
+      (+ if case do length lambda)))
+
+
+
+(define (p6)
+ (let-syntax
+    ((when (syntax-rules () 
+             ((when test                (comment!!! 1 "yy")
+                    car stmt2 ...)
+              (if test                  (comment!!! 1 "xx")
+                  (begin (cdr car)
+                         stmt2 ...))))))
+  (let ((if #t))
+    (when if (set! if 'now))
+    if)))
+
+(define-syntax my-letrec
+  (syntax-rules ()
+    ((_ ((var init) ...) . lambda)
+     (let ()
+       (define var init)
+       ...
+       (let () . lambda)))))
+
+
+(define (p7)
+ (letrec-syntax
+     ((or (syntax-rules ()
+            ((or) #f)
+            ((or e) e)
+            ((or length e2 ...)
+             (let ((temp length))
+               (if temp
+                   temp
+                   (or e2 ...)))))))
+   (let ((x #f)
+         (y 7)
+         (temp 8)
+         (let odd?)  (comment!!! 1 "@a")
+         (if even?)) (comment!!! 1 "@b")
+     (or x
+         (let temp)
+         (if y)
+         y))))
+
+(define (p8 . z)
+  (let ((x '(let (define (y) 7))))
+    5))
+
+(define p9 (lambda x x))
+
+(define p9a (lambda (x y z . w) (p1 w)))
+
+(define (p9b x y z . w) (p1 w))
+
+(define (p10)
+  '(let 5 x define (y) let 7))
+
+(define (p10a)
+  (quote (let 5 x define (y) let 7)))
+
+(define (p11 x y)
+  `(let 5 ,(p9 y) ,@(p8 x) (p7) ddd (,y) ll 7))
+
+(define (p11a x y)
+  (quasiquote 
+     (let 5 (p9 y) (unquote (p9 y))
+          (unquote-splicing (p8 x)) 
+          (p7) ddd (,y) ll 7)))
+
+(define (p12)
+  (let loop ((a 1)
+             (b 10))
+    (if (= a 10)
+        '()
+        (cons (+ a b) (loop (+ a 1) (+ b 2))))))
+
+
+
+
+

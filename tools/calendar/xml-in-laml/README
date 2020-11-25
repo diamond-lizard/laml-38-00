@@ -1,0 +1,8 @@
+This directory holds an XHTML transitional (validating) version of the LAML
+calendar in ../
+
+In addition, the subdirecory laml-web-calendar contains the XML-in-LAML based
+LAML web calender stuff (cgi).
+
+KN
+

@@ -1,0 +1,43 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+
+(begin-laml)
+
+; HTML attribute lists
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(define (document ttl body-form)
+ (html html-props
+  (head 
+   (meta meta-props) (title ttl))
+  (body 
+    body-form)))
+
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+
+(write-html '(pp prolog)
+ (document
+  "A simple page"
+  (list
+    (h1 "Simple page")
+    (p "Here is the" (em "first") "paragraph.")
+    (p "Below we use the font element, which is part of XHTML1.0 transitional. 
+        This element is not available in XHTML1.0 strict.")
+    (span (char-ref "copy"))
+    (hr) 
+    (p "Here is the" (font 'size "6" 'color (rgb-color-encoding 255 0 0) (em "second")) "paragraph")
+    (hr)
+    (p "A link to the" (a 'href "index.html" (em "index") ) _ ".")
+
+    (laml-power-icon 0 'large)
+
+  )
+ )
+)
+
+(check-id-and-idref-attributes!)
+(end-laml)

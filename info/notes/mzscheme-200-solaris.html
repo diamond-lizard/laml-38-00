@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+      <meta name="Generator" content="LAML" />
+      <title>Notes about LAML with MzScheme 200</title></head>
+   <body bgcolor="#ffffbf" text="#000000" link="#0000ff" vlink="#0000ff">
+      <table border="0px" cellpadding="0" cellspacing="0" width="100%">
+         <tbody>
+            <tr>
+               <td width="33%" align="left" valign="top">
+                  <font size="2">Generated: Wednesday, September 23, 2009, 15:08:49</font></td>
+               <td width="34%" align="center" valign="top">
+                  <font size="2"><span>Copyright &copy; 2009, Kurt N&#248;rmark</span></font></td>
+               <td width="33%" align="right" valign="top">
+                  <font size="2">
+                     <a href="../../index.html" title="The local LAML software home page" target="_top">
+                        <img src="../../images/laml-home.gif" alt="The local LAML software home page"
+                             border="0" /></a></font></td></tr></tbody></table>
+      <h1>LAML with MzScheme 200 on Solaris.</h1>
+      <p>I have tested LAML 26 on Solaris 2.9 with MzScheme 205.</p>
+      <p>
+         As of 2009, were LAML version 35 is the current version, we do not use Solaris any
+         more. Therefore I cannot test most recent version of LAML on Solaris. </p>
+      <p>
+         As of January 2005 we use MzScheme version 205 on Red Hat Linux and on Solaris. Everything
+         in LAML runs perfectly in this version of MzScheme. We also use MzScheme 205 for CGI
+         purposes.</p>
+      <p>Version 27: Tested and OK.</p>
+      <p><b>Some historical remarks - pre version 26:</b></p>
+      <p>
+         About LAML configuration and MzScheme 200+: I have made a new compatibility file
+         in lib/compatibility called star_star_mzscheme-200.scm. Currently it covers all
+         mzscheme 200+ needs, on both unix and windows. I have made a &#39;hack&#39; in the LAML
+         configuration program such that the exec files and the emacs stuff are taken from
+         the old mzscheme configuration when mzscheme-200 is requested. In that way fewer
+         files are needed in the configuration part of LAML.</p>
+      <p>
+         Some Scheme programs and LAML documents contain backslashes. MzScheme 200+ has a different
+         interpretation of the escaping backslash character in strings than version 103
+         and 101. In LAML version 19 and beyond we have addapted SchemeDoc to deal with
+         the strict interpretation of backslashes in strings (only \&quot; and \\ are well-defined).
+         In that way, both SchemeDoc, the Scheme Elucidator, and other tools run with
+         MzScheme200+.</p>
+      <p>
+         When we eventually stop using MzScheme 101 on Solaris, also for CGI, we will probably
+         make a specific compatibility file for MzScheme 200+ on Solaris. Until then,
+         the generic star_star_mzscheme-200.scm. is fine.</p>
+      <p>
+         I have used MzScheme 200+ (all versions) on Windows 2000 since it appeared. MzScheme
+         200+ works fine also on Solaris. However, we still use version 101 in our daily use
+         of LAML on Solaris. This also holds for CGI programs. It would be trivial
+         to start using MzScheme 200+ for static LAML processing. It will take some
+         efforts to convert to MzScheme 200+ with respect the LAML-based CGI programs, because
+         they all start like this: </p>
+      <pre>#!/bin/sh
+ 
+string=? ; exec /pack/mzscheme/bin/mzscheme -r $0 &quot;$@&quot;
+</pre></body></html>

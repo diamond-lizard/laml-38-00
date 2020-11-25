@@ -1,0 +1,58 @@
+<html><head><link href="stylesheets/program.css" rel="stylesheet" title="program" type="text/css" /> <title>Source file</title></head><body bgcolor="#c6e2ff" text="#000000" link="#000000" vlink="#000000"><font size="2"><pre>(<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX468" target="documentation-frame" title="R5RS Scheme form">load</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" target="documentation-frame" title="R5RS Scheme form">string-append</a> laml-dir "laml.scm"))
+(<a class="schemedoc-name" href="../../../man/laml.html#laml-style" target="documentation-frame" title="Manual: laml">laml-style</a> "simple-xhtml1.0-transitional-validating")
+
+<a name="map"></a><span><span><a href="lists-1-LARGE.html#map"><img src="./images/small-square.gif" title="Show source file in large font" alt="" border="0" /></a></span> <span><a href="cross-reference-index-m.html#map" target="control-frame"><img src="./images/small-green-up-triangle.gif" title="In lists: Link from map to it&#39;s cross reference table entry" alt="" border="0" /></a></span> <a href="documentation.html#tables" target="documentation-frame"><img src="./images/doc-left.gif" title="4.2. Tables" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" target="documentation-frame" title="R5RS Scheme form">define</a> <span class="signature">map</span> (<a class="schemedoc-name" href="../../../lib/man/general.html#curry-generalized" target="documentation-frame" title="Manual: general">curry-generalized</a> <a class="applied-name" href="lists-1.html#map" title="lists">map</a>))
+
+<a name="li-map"></a><span><span><a href="lists-1-LARGE.html#li-map"><img src="./images/small-square.gif" title="Show source file in large font" alt="" border="0" /></a></span> <span><a href="cross-reference-index-l.html#li-map" target="control-frame"><img src="./images/small-green-up-triangle.gif" title="In lists: Link from li-map to it&#39;s cross reference table entry" alt="" border="0" /></a></span> <a href="documentation.html#ol-ul" target="documentation-frame"><img src="./images/doc-left-weak.gif" title="4.1. Ordered and unordered lists" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" target="documentation-frame" title="R5RS Scheme form">define</a> <span class="signature">li-map</span> (<a class="applied-name" href="lists-1.html#map" title="lists">map</a> <a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-transitional-mirror.html#li" target="documentation-frame" title="Manual: xhtml10-transitional-mirror">li</a>))
+
+<a name="my-list"></a><span><span><a href="lists-1-LARGE.html#my-list"><img src="./images/small-square.gif" title="Show source file in large font" alt="" border="0" /></a></span> <span><a href="cross-reference-index-m.html#my-list" target="control-frame"><img src="./images/small-green-up-triangle.gif" title="In lists: Link from my-list to it&#39;s cross reference table entry" alt="" border="0" /></a></span> <a href="documentation.html#ol-ul" target="documentation-frame"><img src="./images/doc-left-weak.gif" title="4.1. Ordered and unordered lists" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" target="documentation-frame" title="R5RS Scheme form">define</a> <span class="signature">my-list</span>
+  (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX332" target="documentation-frame" title="R5RS Scheme form">list</a> "My first item" "My second item" 
+        "My third item" "My fourth item"))
+
+<a name="my-second-list"></a><span><span><a href="lists-1-LARGE.html#my-second-list"><img src="./images/small-square.gif" title="Show source file in large font" alt="" border="0" /></a></span> <span><a href="cross-reference-index-m.html#my-second-list" target="control-frame"><img src="./images/small-green-up-triangle.gif" title="In lists: Link from my-second-list to it&#39;s cross reference table entry" alt="" border="0" /></a></span> <a href="documentation.html#ol-ul" target="documentation-frame"><img src="./images/doc-left-weak.gif" title="4.1. Ordered and unordered lists" alt="" border="0" /></a> <br /></span>(<a class="scheme-syntax-name" href="../../../r5rs/r5rs_7.html#IDX173" target="documentation-frame" title="R5RS Scheme form">define</a> <span class="signature">my-second-list</span>
+  (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX332" target="documentation-frame" title="R5RS Scheme form">list</a> "*This is my first item" "Here is the second item" 
+        "The follows the third item" "*Finally fourth item"))
+
+<span><span><a href="lists-1-LARGE.html#write-clause-lists"><img src="./images/small-square.gif" title="Show source file in large font" alt="" border="0" /></a></span> <span><a href="cross-reference-index-w.html#write-clause-lists" target="control-frame"><img src="./images/small-green-up-triangle.gif" title="In lists: Link from write-clause-lists to it&#39;s cross reference table entry" alt="" border="0" /></a></span> <a href="documentation.html#ol-ul" target="documentation-frame"><img src="./images/doc-left.gif" title="4.1. Ordered and unordered lists" alt="" border="0" /></a> <br /></span><div class="sectional-comment">; <span><a name="write-clause-lists"></a> <b><font color="#ff0000">write-clause-lists</font></b></span></div>(<a class="schemedoc-name" href="../../../man/laml.html#write-html" target="documentation-frame" title="Manual: laml">write-html</a> '(raw prolog)
+ (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-transitional-mirror.html#html" target="documentation-frame" title="Manual: xhtml10-transitional-mirror">html</a> 
+  (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-transitional-mirror.html#head" target="documentation-frame" title="Manual: xhtml10-transitional-mirror">head</a> 
+    (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-transitional-mirror.html#title" target="documentation-frame" title="Manual: xhtml10-transitional-mirror">title</a> "Ordered and unordered lists"))
+  (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-transitional-mirror.html#body" target="documentation-frame" title="Manual: xhtml10-transitional-mirror">body</a>
+    (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-transitional-mirror.html#h1" target="documentation-frame" title="Manual: xhtml10-transitional-mirror">h1</a> "Ordered and unordered lists")
+ 
+    <span class="comment">; First list <span><a name="write-clause-lists-@a"></a> <a href="documentation.html#ol-ul-@a" target="documentation-frame"><img src="./images/source-mark-red.gif" title="A linked program source marker to section 4.1:
+&#39;Ordered and unordered lists&#39;
+Mark char: a" alt="" border="0" /></a></span></span><br />    (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-transitional-mirror.html#ul" target="documentation-frame" title="Manual: xhtml10-transitional-mirror">ul</a> 
+      (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-transitional-mirror.html#li" target="documentation-frame" title="Manual: xhtml10-transitional-mirror">li</a> "The first item")
+      (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-transitional-mirror.html#li" target="documentation-frame" title="Manual: xhtml10-transitional-mirror">li</a> "The second item")
+      (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-transitional-mirror.html#li" target="documentation-frame" title="Manual: xhtml10-transitional-mirror">li</a> "The third item"))
+
+    <span class="comment">; Second list <span><a name="write-clause-lists-@b"></a> <a href="documentation.html#ol-ul-@b" target="documentation-frame"><img src="./images/source-mark-green.gif" title="A linked program source marker to section 4.1:
+&#39;Ordered and unordered lists&#39;
+Mark char: b" alt="" border="0" /></a></span></span><br />    (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-transitional-mirror.html#ul" target="documentation-frame" title="Manual: xhtml10-transitional-mirror">ul</a> 
+     (<a class="applied-name" href="lists-1.html#li-map" title="lists">li-map</a>
+      (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX332" target="documentation-frame" title="R5RS Scheme form">list</a> 
+      "The first item"
+      "The second item"
+      "The third item")))
+
+    <span class="comment">; Third list <span><a name="write-clause-lists-@c"></a> <a href="documentation.html#ol-ul-@c" target="documentation-frame"><img src="./images/source-mark-blue.gif" title="A linked program source marker to section 4.1:
+&#39;Ordered and unordered lists&#39;
+Mark char: c" alt="" border="0" /></a></span></span><br />    (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-transitional-mirror.html#ul" target="documentation-frame" title="Manual: xhtml10-transitional-mirror">ul</a> (<a class="applied-name" href="lists-1.html#li-map" title="lists">li-map</a> <a class="applied-name" href="lists-1.html#my-list" title="lists">my-list</a>))
+
+
+    <span class="comment">; Fourth list <span><a name="write-clause-lists-@d"></a> <a href="documentation.html#ol-ul-@d" target="documentation-frame"><img src="./images/source-mark-black.gif" title="A linked program source marker to section 4.1:
+&#39;Ordered and unordered lists&#39;
+Mark char: d" alt="" border="0" /></a></span></span><br />    (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX121" target="documentation-frame" title="R5RS Scheme form">let</a> ((<span class="local-name-binding">stared-items</span> 
+           (<a class="scheme-syntax-name" href="../../../r5rs/r5rs_6.html#IDX98" target="documentation-frame" title="R5RS Scheme form">lambda</a> (<span class="local-name-binding">str</span>) (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX199" target="documentation-frame" title="R5RS Scheme form">eq?</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX379" target="documentation-frame" title="R5RS Scheme form">string-ref</a> str 0) #\*))))
+     (<a class="schemedoc-name" href="../../../lib/xml-in-laml/mirrors/man/xhtml10-transitional-mirror.html#ul" target="documentation-frame" title="Manual: xhtml10-transitional-mirror">ul</a> 
+      (<a class="applied-name" href="lists-1.html#li-map" title="lists">li-map</a>
+       (<a class="schemedoc-name" href="../../../lib/man/general.html#filter" target="documentation-frame" title="Manual: general">filter</a> stared-items <a class="applied-name" href="lists-1.html#my-second-list" title="lists">my-second-list</a>))))
+    
+
+
+
+
+)))
+
+(<a class="schemedoc-name" href="../../../man/laml.html#end-laml" target="documentation-frame" title="Manual: laml">end-laml</a>)</pre></font><div>&nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p></div></body></html>

@@ -1,0 +1,7 @@
+The directory with the XML-in-LAML LENO software. 
+The bulk of the LENO system is implemented in ../../lecture-notes/lecture-notes-kernel.scm.
+
+The dtd directory is only included in the full LAML distribution - not in slim.
+
+
+KN

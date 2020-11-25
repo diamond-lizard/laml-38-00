@@ -1,0 +1,36 @@
+(load (string-append laml-dir "laml.scm"))
+
+(laml-style "simple")
+
+(set-file-name! "index")
+
+(generic-page
+  "Index of article examples"
+  (con-par
+    (laml-top-banner)
+    (h 1 "Article example")
+
+    "The following article example exists in this directory:"
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 250 200 200)
+        (list
+          (map b (list "Example" "LAML" "HTML"))
+          (list "Article about educational usage of LAML technology"    (a-tag "www-education-paper.laml")      (a-tag "www-education-paper.html"))
+        )))
+
+    (p "Please notice that the article style is rather primitive. It represents an early development with LAML.
+        I have not used it actively the last couple of years.")
+
+    (font-size 2 (em "If your browser will not present files with 'laml' or 'scm' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files."))
+
+  )
+  white black blue blue
+)
+
+(end-laml)
+

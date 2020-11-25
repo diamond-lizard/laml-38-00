@@ -1,0 +1,18 @@
+Adding style pieces:
+
+For <i> from 1 .. 16:
+
+Add a midi piece - from a midi file - via use of the attribute addMidiPart<i>
+The value of this attribute is an absolute file path to the midi file.
+
+The attribute addAsCannel<i> controls the channel assigned to the added piece.
+
+The attribute repetitions<i> controls the number of repetitions of the pieces. Default value is 1. It is
+assumed that the piece is shorter or equal to (* ppqn partLengthQN<i>), where partLengthQN<i>
+is annother attribute. Enfore the number of repetition, and enforce that each repetition has the
+length of (* ppqn partLengthQN<i>). partLengthQN<i> is required if repetitions<i> is larger than one.
+
+The attribute limitQN is used to enforce an upper limit of the length of a part.
+limitQN is mandatory, because it is necessary (very desirable) to cut off too long durations.
+limitQN is shared between all additions to a section, such as MainA. For fills, limitQN is automatically set to 
+the number of quarter notes of a bar (the bar length).

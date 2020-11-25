@@ -1,0 +1,101 @@
+(load (string-append laml-dir "laml.scm"))
+
+(local-load "notes.scm")                       ; Load the common set up for all chapters from notes.scm
+(laml-style "lecture-notes/lecture-notes")    ; Causes loadning the LENO software
+(local-load "post-notes.scm")                  ; Loads the post part of the common set up
+
+(define front-index? #t)                 ; Set LENO up to make a top-level front index 
+(define word-index? #t)                  ; Set LENO up make word, cross reference index
+
+(set-lecture-name "ch1")
+(set-lecture-number 1)                   ; Define the chapter number (a number)
+
+(exercise-model 'make-indexes-and-solutions-per-lecture)
+                                         ; One of the symbols none, make-indexes, make-indexes-and-solutions-per-lecture,
+                                         ; make-indexes-and-solutions-lecture-wide, synchronous-exercises, asynchronous-exercises
+
+(define slide-header? 'normal)           ; one of the symbols normal, none, or minimal
+
+(define check-html-attributes? #f)
+
+
+(lecture-intro "Chapter one of two"                   ; Define the title, author, affiliation, and the abstract
+  (list 
+    (copyright-owner "Kurt Nørmark")
+    "Department of Computer Science"
+    "Aalborg University"
+    )
+  "Sample abstract"
+)
+
+(begin-notes)                            ; End of preamble section, start of note page section
+
+
+(note-page 'section-1
+  (section-title "Section one")
+)
+
+(note-page 'page1
+  (title "First note page"
+         "Some explanation of this page")
+
+  (items 
+   (item "Item 1"
+         ""
+
+         (items 
+          (item "Elephant"
+                ""
+                )
+
+          (item "Tiger"
+                ""
+                )
+
+          (item "Monkey"
+                ""
+                )
+          )
+         )
+  )
+
+  (point
+   "An end remark"
+   "A comments to the end remark"
+  )
+
+  (index-words
+   "elephant"
+   "tiger"
+   "monkey"
+  )
+
+)
+
+(note-page 'page2
+  (title "Page 2")
+  
+  (point
+   "Point number 1 on page 2"
+   "And some explanation"
+  )
+
+  (text "Some text")
+
+  (exercise 'ex1 "Exercise number one"
+    (formulation "An exercise text")
+    (solution "An exercise solution text")
+  )
+
+  (cross-references
+   (list 
+     (note-reference "Reference to page 1" 'ch1 'page1)
+   )
+  )
+
+  (slide-text "This ends the example")
+)
+
+
+(end-notes)                              ; End of note page section
+

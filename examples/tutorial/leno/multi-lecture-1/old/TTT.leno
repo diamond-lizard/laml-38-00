@@ -1,0 +1,37 @@
+(load (string-append laml-dir "laml.scm"))       
+(laml-style "xml-in-laml/lecture-notes-trail/lecture-note-trail")
+(load (in-startup-directory "shared-front-matters-stuff.scm"))
+
+(leno-trail-front-matters
+  (front-title "Demo Trail")           
+  (front-author multi-author)           
+  (front-affiliation multi-affiliation)  
+  (front-abstract "This is the trail abstract")
+
+  'trail-id      "tutorial-trail"
+  'scheme-prefix "better-pre-notes.scm"
+  'scheme-suffix "post-notes.scm"
+  'course-home-url "http://www.cs.auc.dk/~normark/"
+  'language      "english"
+)
+
+
+(begin-trail)
+
+(page-select 'lecture-id "multi-1" 'page-id "sec1")
+
+(page-select 'lecture-id "multi-2" 'page-id "sec1")
+(page-select 'lecture-id "multi-2" 'page-id "page1")
+
+(page-select 'lecture-id "multi-3" 'page-id "sec1")
+(page-select 'lecture-id "multi-3" 'page-id "page1")
+
+(page-select 'lecture-id "multi-1" 'page-id "page2")
+
+(page-select 'lecture-id "multi-2" 'page-id "page3")
+
+
+(end-trail)
+
+
+

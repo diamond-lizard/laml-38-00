@@ -1,0 +1,1 @@
+(defun form-navigation-predicate () t)

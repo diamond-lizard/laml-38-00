@@ -1,0 +1,38 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+(define language-preference 'english)
+
+(generic-page
+  "A course plan example"
+  (con-par
+     (laml-top-banner)
+     (h 1 "A Course Plan example")
+
+    (p "In this directory we find an example of an XML-in-LAML Course Plan.
+     Compared with the" (a 'href "../../styles/course-plan/man/course-plan.html" "original Course Plan system") 
+     "(and" (a 'href "../course-plan/index.html" "original examples") _ "),
+     the XML-in-LAML course plan is much better organized. And as the other XML-in-LAML languages, it is derived from
+     an XML DTD.")
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 250 200 200)
+        (list
+          (map b (list "Example" "LAML/SCM" "HTML"))
+          (list "The Example Course Plan"    (a-tag "example.laml")  (a-tag "html/example.html"))
+          (list "The Example Course Plan -  time and  subject inlined in lecture"    (a-tag "example-1.laml")  (a-tag "html/example-1.html"))
+
+        )))
+
+    (font-size 2 (em "If your browser will not present files with 'laml' or 'scm' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files."))
+
+
+  )
+  white black blue blue
+)
+
+(end-laml)
+

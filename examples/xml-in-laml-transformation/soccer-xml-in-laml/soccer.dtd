@@ -1,0 +1,12 @@
+<!ENTITY % Number "CDATA">   
+
+<!ELEMENT results (match)*>
+<!ATTLIST results  group   CDATA  #REQUIRED>
+
+<!ELEMENT match (date, team, team)>
+
+<!ELEMENT date (#PCDATA)>
+
+<!ELEMENT team  (#PCDATA)>
+<!ATTLIST team  score   %Number; #REQUIRED>
+

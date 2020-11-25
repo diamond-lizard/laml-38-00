@@ -1,0 +1,75 @@
+Use of MIDI LAML Function Keys and Mouse Wheel
+
+F1-F4:                      Reserved for general purposes (jumping, activity switching, USB drive access, ...)
+
+Mouse Wheel and Button 2:     ... all play-channel and tempo sensitive
+  Down                        Play from point to end of current visible page.
+  M-down                      Play next note
+  S-down                      Play next chord
+  C-down                      Play next bar
+  M-C-down                    Play next marked region
+  S-C-down                    Play from point to end of track
+
+  Button 2 press              Play current note
+  M-C Button 2                Play current marked region
+
+  Up and M-up                 Play previous note
+  C-up                        Play previous bar
+  M-C-up                      Play previous marked region
+
+ENTER (Key pad)               Process and play the current visible page.  Play-channel and tempo sensitive.
+  C-ENTER:                    Ditto, but horizontal cursor position overrules tempo.
+  S-ENTER:                    Ditto, but from point and rest of visible page.
+  M-ENTER                     From point to end of track.
+
+F5:                           Set relative tempo.            C-F5 resets.              S-F5 subtracts 10.  C-M-F5 adds 10.
+F6:                           Toggle play after navigate.    C-F6 resets to play.
+F7:                           Set channels to play.          C-F7 resets to all.       M-f7 toggles use of voice context.
+F8:                           Not in use.
+
+F9:                           Not in use.
+F10:                          Toggle the type of shadow overlay.
+F11:                          Same as ENTER. It is recommended to use key pad ENTER.
+F12:                          Process and play blank separated region. Play-channel and tempo sensitive.
+  S-F12                       Ditto, but from point to end of blank separated region.
+
+PAUSE/BREAK:                  Stop MIDI playing
+C-PAUSE/BREAK:                Immediate play again - an already existing MIDI file.
+DEL:                          Toggle use of live cursor (moving cursor while playing).
+MINUS:                        Makes live cursor a bit slower.
+PLUS:                         Makes live cursor a bit faster.
+DIVIDE:                       Toggle fixed part playing
+
+Keypad arrow UP and DOWN:     ... all are play-channel and tempo sensitive:
+  UP:                         Play previous note - with shadow
+  DOWN                        Play next note - with shadow
+  S-UP                        Goto previous note - with shadow
+  S-DOWN                      Goto next note - with shadow
+  C-DOWN                      Move shadow - and play shadow part
+  C-UP                        Nothing useful...
+  
+Arrow UP and DOWN:            ... all are play-channel and tempo sensitive:
+  UP:                         Go to previous noteOn message and play it.
+  DOWN:                       Play from point to end of current visible page (like wheel down).
+  KP-5:                       Process and play the current NoteOn (do not move cursor).
+  
+  C-UP:                       Go to previous bar and play it.
+  C-DOWN :                    Go to next bar and play it. With prefix arg, play a number of bars.
+  
+  M-C-UP and M-C-KP-UP:       Go to previous named section and play it.
+  M-C-KP-5:                   Process and play the current named section (do not move cursor).
+  M-C-DOWN and M-C-KP-DOWN:   Go to next named section and play it.
+
+  S-UP and S-KP-UP            Process and play previous chord.
+  S-KP-5                      Process and play current chord.
+  S-DOWN and S-KP-DOWN        Process and play next chord.
+
+RIGHT:                        Add to selected attribute level 1.
+C-RIGHT AND C-KP-RIGHT:       Add to selected attribute level 2.
+C-M-RIGHT AND C-M-KP-RIGHT:   Add to selected attribute level 3.
+
+LEFT:                         Subtract from selected attribute level 1.
+C-LEFT AND C-KP-LEFT:         Subtract from selected attribute level 2.
+C-M-LEFT AND C-M-KP-LEFT:     Subtract from selected attribute level 3.
+
+C-Mouse-1:                    Selection of forms to navigate or attributes to edit.

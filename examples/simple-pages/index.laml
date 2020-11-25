@@ -1,0 +1,40 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple")
+
+(define language-preference 'english)
+
+(generic-page
+  "Overview of simple examples"
+  (con-par
+    (laml-top-banner)
+    (h 1 "Overview of simple examples")
+    (con "A number of  simple examples exist in this directory. " (p)
+     "Notice, however, that
+     these pages are produced by the old and now " (a-tag "../../lib/man/html.html" "obsolete html library") " functions."
+    (br)
+     "Please consult the " (a-tag "../simple-html4.0-loose-validating/index.html" "simple html4.0 examples")
+     " for similar examples and more up-to-date information.")
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 250 200 200)
+        (list
+          (map b (list "Example"   "LAML"                            "HTML"))
+          (list "This index"       (a-tag "index.laml")              (a-tag "index.html"))
+          (list "Hello world"      (a-tag "hello-world.laml")        (a-tag "hello-world.html"))
+          (list "A simple page"    (a-tag "simple-page-1.laml")      (a-tag "simple-page-1.html"))
+        )))
+
+    (con "See " (a-tag "../simple-html4.0-loose-validating/index.html" "similar examples") 
+         " using the " (b "much improved") " HTML4.0 mirror.")
+
+    (font-size 2 (em "If your browser will not present files with 'laml' or 'scm' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files."))
+
+  )
+  white black blue blue
+)
+
+(end-laml)

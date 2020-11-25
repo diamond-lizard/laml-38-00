@@ -1,0 +1,218 @@
+15.3.01 
+index-download-bundle.laml
+The variable slim-version controls whether a slim version is prepared for.
+If #t, almost all links in the distribution are directed towards the distribution/laml directory 
+at www.auc.dk.
+
+Leno and the elucidiator now makes the html and internal directories if they do not exists.
+I did this to make it easier to distribute 'source-only' examples.
+
+16.3.01
+A slim version of the LAML distribtion has been prepared for.
+Version 16 of the distribution will be offered in two versions.
+
+3.4.01.
+The command file absolute-laml has been introduced in the LAML configuration part.
+absolute-laml is an alternative to the laml command file. absolute-laml takes, as
+the first parameter, an absolute path to the directory in which the laml file is 
+processed:
+
+  absolute-laml absoute-path laml-file-without-extension.
+
+absolute-laml is good for cron job activation of LAML.
+The absolute-laml support is not yet supported on all platforms.
+
+30.4.01
+surface.scm: New helping function free-html-element which is useful for generating
+mirrors of non-standard HTML tags. Example:
+
+  (free-html-element "xyz" 'href "aaa" "bbb" "ccc") =>
+  "<xyz href = \"aaa\" >bbb ccc</xyz>"
+
+
+30.4.01
+xml-support.scm: 
+
+  The function parse-tree-to-laml-expression transforms an XML/HTML parse tree to a list structure.
+  The function is-tag-of-kind? is a higher-order function that generates a predicate on parse tree nodes
+  of a certain kind.
+
+  Example in concert with the existing function traverse-and-collect-from-parse-tree:
+
+    (traverse-and-collect-from-parse-tree resulting-parse-tree (is-tag-of-kind? 'a) parse-tree-to-laml-expression) 
+ 
+  We traverse resulting-parse-tree, extracts all a elements (anchor tag applications) and 
+  transforms these to LAML expressions.
+
+
+1.5.01
+  
+  convenience: a new table function, called table-5, that allows individual coloring of table cells.
+
+May 01
+
+  The function parse-html-string parses a string of HTML, returning a LAML parse tree.
+  The functions done until now parses a file. parse-html-string is a simple work around, which
+  just writes, parses, and deletes a temporary file.
+
+6.6.01
+
+  We have added the url-read.scm library, which is a MzScheme dependent facility for reading and crawling
+  Internet pages. This is an ad hoc facility, which by no means is finished and final. But it is useful
+  and interesting as a simple facility for programmatic access to part of the Internet from MzScheme.
+
+-.7.01  general.scm
+  The list-part function has been added to general.scm
+
+9.7.01:  tools/bibtex.scm
+  bibtex-book-present has been defined.
+
+10.7.01  course-plan.scm:
+  The course plan style now supports automatic creation of auxilary directories: html, html/images, and
+  internal.
+
+10.7.01  emacs support:
+  The C-o, C-i, and C-x C-e, and C-x C-r commands are now local to laml-mode.
+
+11.7.01  general.scm
+  The general library has been re-organized to provide for better categorization of the generally useful functions
+  in the LAML software packages.
+
+6.8.01  laml startup and configuration
+  LAML now supports a laml init file, such as .laml. 
+  The laml init file is loaded as the last action in laml.scm.
+  The full path of the laml init file must be specified in the laml configuration file.
+
+---------------------------------------------------------------------------------------------------
+Version 16.01
+
+One of the messages from the LAML installation about absolute-laml was changed.
+
+
+---------------------------------------------------------------------------------------------------
+Version 16.02
+
+An error in manual.scm (observed in the slim version only!!!) was corrected.
+Use of capitalize-string-nd instead of capitalize-string.
+
+color.scm: Defined rgb-color-list as an alias of rgb-color strings.
+Manual improvements of color.scm.
+
+
+---------------------------------------------------------------------------------------------------
+Version 16.1
+
+Emacs LAML mode: 
+
+  * Now menu entries for the most important commands.
+  * Customization support has been added.
+
+
+convenience.scm
+  The variable _ is defined to boolean false (space supression).
+
+laml.scm:
+  The function full-source-path-with-extension has been added to laml.scm
+
+
+-.0.01:
+Leno has been revised.
+
+---------------------------------------------------------------------------------------------------
+Version 16.2
+
+27.8.01:
+The function embed-substring has been added to general.scm
+
+-----------------------------------------------------------------------------
+
+8.9.01:
+An important addition to the HTML4.0 loose surface mirror:
+
+From LAML version 16.2 contents-i (i from 1 to n) can also be proper
+lists of strings which automatically are string-appended to form a
+single content string. The attribute names must be symbols, and the
+attribute values have to be strings.
+
+Example:
+
+  (ul (map li (list "First element" "Second Element" "Third Element")))
+  
+is OK in the new mirror. The new idea is to allow ul (one of the mirror tags)
+to receive a list of elements, not just a string. In the old mirror you had to write
+
+  (ul (apply string-append 
+    (map li (list "First element" "Second Element" "Third Element"))))
+
+or apply one of the convenience functions, such as ul-1
+
+  (ul-1 (list (list "First element" "Second Element" "Third Element")))
+
+which did the job.
+
+-----------------------------------------------------------------------------
+The higher order function
+
+  (modify-element element . attributes-and-contents)
+
+has been added to surface.scm in lib/html4.0-loose/.
+With this function you can partially fix a number of attribute (and in fact also
+part of the contents of a tag). Example:
+
+  (define ol-roman
+     (modify-element ol 'css:list-style-type "lower-roman" 'css:background-color "yellow"))
+
+The ol-roman 'tag' will always use roman numbers and yellow background.
+
+-------------------------------------------------------------------------------
+
+10.9.01:
+
+laml-error in general has been made.
+
+A trivial version of numeric-string? from lib/html4.0-loose/basis.scm
+has been removed. It erronous redefined numeric-string? from lib/general.scm.
+
+
+-------------------------------------------------------------------------------
+
+11.09.01:
+
+The higher order function curry-generalized has been added to the general library
+in lib.
+
+This function allows ad hoc currying of functions such as map and filter.
+
+-------------------------------------------------------------------------------
+19.09.01 LAML Program parameters:
+
+laml.scm
+ new: laml-program-parameters
+ fake-startup-parameters
+ set-laml-startup-directory
+ set-laml-source-file
+ set-laml-program-parameters  (new)
+ language-preference should, per default, be english!!
+
+compatibility (win2000 + unix)
+  fake-startup-parameters
+  laml-canonical-command-line
+
+  * remember other compatibility files *
+
+
+styles/simple-html4.0-loose.scm
+  generic-page changed.
+
+examples/processing added
+
+-------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+

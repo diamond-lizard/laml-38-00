@@ -1,0 +1,71 @@
+(load (string-append laml-dir "laml.scm"))       
+(laml-style "lecture-notes/leno")
+
+(leno-front-matters
+  (front:title "LENO Demonstration - XML in LAML Syntax")       
+  (front:author "Kurt Nørmark")  
+  (front:affiliation "Department of Computer Science, Aalborg University, Denmark") 
+  (front:abstract "This is a lecture note the purpose of which is to demonstrate 
+                   a note page in the paper 'WEB Programming in Scheme - the LAML approach'") 
+
+  'course-home-url "../../index.html" 
+  'author-home-url "http://www.cs.auc.dk/~normark/" 
+  'note-download-url "" 
+  'logo-url "http://www.auc.dk/" 
+  'note-contents-description "Demo of LENO using the XML in LAML syntax" 
+  'language "english" 
+)
+
+(define (course-absolute-url suffix)
+  (string-append "http://www.cs.auc.dk/~normark/prog1-01/" suffix))
+
+(define lecturer-photo-list '())
+
+(begin-notes)                                          ; End of preamble section, start of note page section
+
+
+(note-page 'id "section-laml"
+ 
+  (section-title "LAML Overview")
+
+)
+
+(note-page 'id "laml-basics"
+  (title 
+    (main-text "LAML basics ")
+    (annotation "On this page we describe LAML briefly"))
+
+  (point
+    (main-text "LAML brings HTML and XML to the Scheme programming language")
+    (annotation "LAML is software package that supports authoring of HTML 
+                and XML documents in Scheme Syntax."))
+
+  (concept-list
+    (concept 
+      'concept-name "LAML"
+      (main-text "LAML is a Lisp Abstracted Markup Language")
+      (annotation "LAML consists of HTML mirrors, document styles, and tools")))
+
+  (items 
+     (item
+      (main-text "LAML Characteristics")
+      (annotation "We here mention a number of important LAML characteristics")
+      (items
+        (item 
+          (main-text "Supports a number of different HTML mirrors")
+          (items 
+            (item (main-text "LAML 4.0 loose. 
+                              XHTML1.0 strict, transitional, and frameset")))
+        )
+       (item 
+          (main-text "Supports a number of document styles")
+          (items 
+            (item (main-text "Domain specific WEB languages"))
+            (item (main-text "LENO, Scheme manual pages, questionnaire, ...")))))))
+
+  (index-words (index-word "LAML" )  (index-word "mirror") (index-word  "LENO"))
+)
+
+(end-notes)
+
+

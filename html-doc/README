@@ -1,0 +1,14 @@
+The directory in which we represent HTML manuals from w3.
+
+The file html-knowledge maps element names to the necessary URL part of the URLs 
+to the resprective documentation of the elements.
+
+The html401 directory contains the downloaded HTML4.01 documentation from w3.
+
+I have removed the element
+
+  <link rel="stylesheet" type="text/css" href= 
+  "http://www.w3.org/StyleSheets/TR/W3C-REC">
+
+from all html files in order to avoid that the browser tries to access 
+the potentially remote W3C site to access the style sheet.

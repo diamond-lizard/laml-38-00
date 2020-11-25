@@ -1,0 +1,35 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-strict-validating")
+
+(begin-laml)
+
+; HTML attribute lists
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+;(set-xml-transliterate-character-data-in 'xhtml10-strict #t)
+; (set-xml-char-transformation-table-in 'xhtml10-strict funny-char-transformation-table)
+; (set-xml-accept-only-string-valued-attributes 'xhtml10-strict #t)
+
+(set! xhtml10-strict-xml-represent-white-space? #t)
+
+(write-html '(pp prolog)
+ (html html-props
+   (head 
+     (title "Second simple page")
+     (meta meta-props))
+
+   (body
+     (p "First paragraph with some" (em "emphasized text") _ ".")
+     (p "Second paragraph with a" (a 'href "simple-1.html" "link to another example") _ ".")
+     (pre "This  is 
+   pre-formatted
+text.")
+
+   ) 
+ )
+)
+
+(end-laml)

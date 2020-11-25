@@ -1,0 +1,32 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.1-validating")
+
+(begin-laml)
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(write-html '(pp prolog)
+  (html 
+   (head 
+     (title "Hello World") 
+   )
+   (body 
+     (p "Here is the body text of the most simple WWW page," 
+        "you have ever seen!!")
+
+     (p 'id "x" "Here is a link to" (a 'href "../../index-not-there.html" "LAML") _ ".")
+
+     (p 'id "x" "And a link to" (a 'href "http://www.w3c.not-there.org" "W3C") _ ".")
+   )
+  )
+)
+
+(end-laml)
+
+
+
+
+
+
+

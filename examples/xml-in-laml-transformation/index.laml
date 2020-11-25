@@ -1,0 +1,55 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(define (an x)
+  (a 'href x x))
+
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "An XML-in-LAML Transformations")
+   (laml-shortcut-icon (laml-home-url-prefix))
+  )
+  (body 
+
+    (laml-top-banner)
+    (h 1 "XML-in-LAML Transformations")
+
+    (p "The examples below show only one particular aspect of the important and central XML-in-LAML common library.")
+
+    (p "We have developed a number of sample XML-in-LAML transformations, that already are well-known in the 
+             literature. With these, it is possible to make a direct comparsion between the LAML approach and
+             other approaches." 
+    )
+
+    (ul
+      (li (a-tag "soccer-xml-in-laml/index.html" "Soccer example"))
+      (li (a-tag "album/index.html" "Album example"))
+      (li (a-tag "purchase/index.html" "Purchase/text example"))
+    )
+
+    (p "In the August 2003 paper " (em (string-it "XML Transformations in Scheme with LAML - a Minimalistic Approach ")) 
+       " (" _ (a-tag "http://www.cs.auc.dk/~normark/laml/papers/xml-transformations.pdf" "pdf") _ ", " 
+            (a-tag "http://www.cs.auc.dk/~normark/laml/papers/xml-transformations.ps" "ps") _ ")" " we discuss the examples from above." )
+
+
+    (vertical-space 1) (font 'color "red" 'size "2" (when-generated))
+
+  )
+ )
+)
+
+
+(end-laml)
+
+

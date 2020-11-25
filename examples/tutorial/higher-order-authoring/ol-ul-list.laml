@@ -1,0 +1,55 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+
+(define map (curry-generalized map))
+
+(define li-map (map li))
+
+(define my-list
+  (list "My first item" "My second item" 
+        "My third item" "My fourth item"))
+
+(define my-second-list
+  (list "*This is my first item" "Here is the second item" 
+        "The follows the third item" "*Finally fourth item"))
+
+; ::write-clause-lists::
+(write-html '(raw prolog)
+ (html 
+  (head 
+    (title "Ordered and unordered lists"))
+  (body
+    (h1 "Ordered and unordered lists")
+ 
+    ; First list @a
+    (ul 
+      (li "The first item")
+      (li "The second item")
+      (li "The third item"))
+
+    ; Second list @b
+    (ul 
+     (li-map
+      (list 
+      "The first item"
+      "The second item"
+      "The third item")))
+
+    ; Third list @c
+    (ul (li-map my-list))
+
+
+    ; Fourth list @d
+    (let ((stared-items 
+           (lambda (str) (eq? (string-ref str 0) #\*))))
+     (ul 
+      (li-map
+       (filter stared-items my-second-list))))
+    
+
+
+
+
+)))
+
+(end-laml)

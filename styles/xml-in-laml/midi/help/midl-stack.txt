@@ -1,0 +1,36 @@
+HELP ON MIDL STACK.
+
+The Midl stack is used to maintain a stack of Midi LAML buffers.
+Typically, Scheme expressions are evaluated and the result is pushed
+as a new entry on the stack, using "Process, save and push source".
+
+Here follows some information and tips about the Midl Stack:
+
+"Pop and reestablish source" (C-c C-o).
+  Eliminate the top of the stack. It is, however, possible to 
+  undo the pop operation (with C-c C-y)  because popped elements are pushed onto
+  a ghost stack. 
+
+"Reset Midl Stack":
+  Keep current stack entry, and delete all other entries.
+  Also delete ghost entries. After this operation, only one
+  entry is on the stack (the buffer shown when you started this
+  operation).
+
+"Get rid of ghost elements":
+  The gost stack is cleared when you push a new element on the stack, or
+  when you explicitly clear it with "Get rid of ghost elements".
+
+"Replicate current buffer - undo all pops":
+  You can use this command to pick a buffer somewhere in the stack,
+  and push it at the very top of the stack. Before pushing, all ghost
+  elements are turned into ordinary elements on the stack.
+  Use C-c C-o and C-c C-y to navigate the stack. 
+
+"Push latest temp selection":
+  Push the latest temporary "sel-temp.midl" file, which is the result of 
+  processing a selection of a midl file.
+
+
+
+

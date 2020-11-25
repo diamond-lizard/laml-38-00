@@ -1,0 +1,71 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+; (lib-load "xhtml1.0-convenience.scm")
+
+(begin-laml)
+
+(define current-xml-language 'xhtml10-transitional)
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "Mixed notation"))
+  (body 
+  
+    (p "This is a page written in mixed LAML and native XHTML notation.")
+
+    (ul
+      (li "First LAML item")
+      (li "Second LAML item")
+    )
+
+    (xml-parse-string
+      "<ul>
+         <li> First XML item </li>
+         <li> Second XML item</li>
+       </ul>" current-xml-language)
+
+
+    (xml-parse-string
+      "<p>This is a <a href=\"http://www.cs.aau.dk\">link to the AAU home page</a>.</p>"
+      current-xml-language)
+
+    (xml-parse-string
+      "<p>This <p> paragraph    </p> is incorrectly nested in another paragraph, and
+          it should lead to validation problems.</p>"
+      current-xml-language)
+
+    (pre "
+            Here is some
+            preformatted
+            text, written in" (b "LAML") _ ".")
+
+    (xml-parse-string
+      "<pre> 
+            Here is some 
+            preformatted
+            text, parsed from <b>XHTML</b>.
+       </pre>"
+    current-xml-language)
+
+
+;    (p "Now follows the paragraphs read from the already produced html file:")
+
+;     (if (file-exists? "mixed-laml-xml.html")
+;         (match-ast  (xml-parse-file "mixed-laml-xml.html" current-xml-language)
+;             (location-step 'child "body") (location-step 'child "p"))
+;         '()
+;     )
+
+;    (p "Each time the document is processed it becomes longer...")
+
+  )
+ )
+)
+
+
+(end-laml)

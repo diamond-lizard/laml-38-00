@@ -1,0 +1,42 @@
+; A 2/4 style.
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/midi/midi")
+(load (string-append laml-dir "styles/xml-in-laml/midi/midi-laml-processing-lib.scm"))
+
+; The identity scaling function
+(define sc-id
+  (make-scale-function-by-xy-points
+           (from-percent-points 
+             '((0 100) (100 100)))))
+
+; Every second note is strum sound in a Tyros mega voice (the ones with a 108 note value).
+(define strummed-c-major 
+  '((240 C2) (25 108)  (240 E2) (25 108)  (240 G2) (25 108)  (240 B2) (25 108)  (240 C3) (25 108) (240 E3) (25 108)))
+
+(define strummed-c-major-short
+  '((240  -) (25 108)  (240 E2) (25 -)    (240 G2) (25 108)  (240 B2) (25 108)  (240  -) (25   -) (240 E3) (25 108)))
+
+
+(StandardMidiFile
+   (MidiHeader 'format "0" 'numberOfTracks "1" 'pulsesPerQuarterNote "1920" 'mode "deltaTime")
+   (MidiTrack
+    (Meta 'deltaTime "0" 'type "81" (tempo= 110))
+    (ControlChange 'deltaTime "0" 'info "0:0:0 Channel volume MSB" 'channel "1" 'control "7" 'value "60")        
+    (voice 1 8 1 2)  ; Tyros Mega voice
+
+    (repeat-messages 7
+       ;     Dir   Stretch   Vel   Total-lgt   Vel-scale     Time-scale  Transp  Ch  Base-dur  Time-note-list
+       (beat 'down 0.4       70    1920        sc-id         sc-id       0       1   960       strummed-c-major)
+       (beat 'up   0.2       64     960        sc-id         sc-id       0       1   960       strummed-c-major-short)
+       (beat 'down 0.2       64     960        sc-id         sc-id       0       1   960       strummed-c-major)
+
+       (beat 'down 0.4       70    1920        sc-id         sc-id       0       1   960       strummed-c-major)
+       (beat 'up   0.2       64     960        sc-id         sc-id       0       1   960       strummed-c-major-short)
+       (beat 'down 0.2       64     960        sc-id         sc-id       0       1   960       strummed-c-major)
+    )
+
+    (Meta 'deltaTime "1920" 'type "47" "")   ; End of track
+   )
+)
+
+;;; 439

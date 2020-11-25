@@ -1,0 +1,41 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/photo-show/photo-show")
+
+(define photo-show-title "Demo")
+
+(photo-show
+  'language "english"                                       ; danish or english
+  'time "5"
+  'background-color (rgb-color-encoding black)             ; color string, like "#123456"
+  'text-color (rgb-color-encoding white)                   ; color string, like "#123456"
+  'home-path "../"
+  'transition "blend"                                       ; none or blend
+  'tabular-overview-dimension "2"                          ; The dimension of tabular overviews. An integer, such as 2, 3, or 4
+  'index-linking "stop"                                    ; run, stop
+
+  'before-first "none"                                     ; last-picture, previous-film, none
+  'after-last "first-picture"                                  ; first-picture, next-film, stop-page, none
+
+  'default-size "original"                                     ; original, auto, explicit
+  'default-orientation "landscape"                         ; portrait or landscape
+  'portrait-percentage "90"                                ; Applies for auto default-size. 
+  'landscape-percentage "95"                               ; Applies for auto default-size. 
+
+  'verbosity-level "2"                                     ; 0, 1, 2
+
+  'copy-film "false"                                       ; true, false
+  'copy-destination "DIR"                                  ; abs. path to destination directory.  Used if copy-film is true.
+
+  'camera "None"                                           ; The name of the camara used. "Canon-G3" supported.
+  'image-transformation-software  "none"                   ; "image-magick" if image-magick is installed on your computer.
+  'make-thumbnails-of "non-existing"
+
+;   'rotate "MVC-001F.JPG:90"
+
+  (title-of-show photo-show-title)
+  (upper-caption 'size "6" photo-show-title)
+  (lower-caption 'size "4" "")
+
+  (photos-in-current-directory)                            ; or alternatively (photo-list (photo ...) ...)
+
+)

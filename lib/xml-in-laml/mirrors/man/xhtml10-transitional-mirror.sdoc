@@ -1,0 +1,54 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/schemedoc-2/schemedoc")
+
+(define manual-element-order 
+  '(section-id section-title section-body title library kind form xml-in-laml-example-form description content-model cross-references attributes 
+    pre-condition parameters xml-in-laml-attributes returns post-condition examples misc comment))
+
+(define element-name-url-map '(("a" . "struct/links.html#edef-A") ("abbr" . "struct/text.html#edef-ABBR") ("acronym" . "struct/text.html#edef-ACRONYM") ("address" . "struct/global.html#edef-ADDRESS") ("applet" . "struct/objects.html#edef-APPLET") ("area" . "struct/objects.html#edef-AREA") ("b" . "present/graphics.html#edef-B") ("base" . "struct/links.html#edef-BASE") ("basefont" . "present/graphics.html#edef-BASEFONT") ("bdo" . "struct/dirlang.html#edef-BDO") ("big" . "present/graphics.html#edef-BIG") ("blockquote" . "struct/text.html#edef-BLOCKQUOTE") ("body" . "struct/global.html#edef-BODY") ("br" . "struct/text.html#edef-BR") ("button" . "interact/forms.html#edef-BUTTON") ("caption" . "struct/tables.html#edef-CAPTION") ("center" . "present/graphics.html#edef-CENTER") ("cite" . "struct/text.html#edef-CITE") ("code" . "struct/text.html#edef-CODE") ("col" . "struct/tables.html#edef-COL") ("colgroup" . "struct/tables.html#edef-COLGROUP") ("dd" . "struct/lists.html#edef-DD") ("del" . "struct/text.html#edef-del") ("dfn" . "struct/text.html#edef-DFN") ("dir" . "struct/lists.html#edef-DIR") ("div" . "struct/global.html#edef-DIV") ("dl" . "struct/lists.html#edef-DL") ("dt" . "struct/lists.html#edef-DT") ("em" . "struct/text.html#edef-EM") ("fieldset" . "interact/forms.html#edef-FIELDSET") ("font" . "present/graphics.html#edef-FONT") ("form" . "interact/forms.html#edef-FORM") ("frame" . "present/frames.html#edef-FRAME") ("frameset" . "present/frames.html#edef-FRAMESET") ("h1" . "struct/global.html#edef-H1") ("h2" . "struct/global.html#edef-H2") ("h3" . "struct/global.html#edef-H3") ("h4" . "struct/global.html#edef-H4") ("h5" . "struct/global.html#edef-H5") ("h6" . "struct/global.html#edef-H6") ("head" . "struct/global.html#edef-HEAD") ("hr" . "present/graphics.html#edef-HR") ("html" . "struct/global.html#edef-HTML") ("i" . "present/graphics.html#edef-I") ("iframe" . "present/frames.html#edef-IFRAME") ("img" . "struct/objects.html#edef-IMG") ("input" . "interact/forms.html#edef-INPUT") ("ins" . "struct/text.html#edef-ins") ("isindex" . "interact/forms.html#edef-ISINDEX") ("kbd" . "struct/text.html#edef-KBD") ("label" . "interact/forms.html#edef-LABEL") ("legend" . "interact/forms.html#edef-LEGEND") ("li" . "struct/lists.html#edef-LI") ("link" . "struct/links.html#edef-LINK") ("map" . "struct/objects.html#edef-MAP") ("menu" . "struct/lists.html#edef-MENU") ("meta" . "struct/global.html#edef-META") ("noframes" . "present/frames.html#edef-NOFRAMES") ("noscript" . "interact/scripts.html#edef-NOSCRIPT") ("object" . "struct/objects.html#edef-OBJECT") ("ol" . "struct/lists.html#edef-OL") ("optgroup" . "interact/forms.html#edef-OPTGROUP") ("option" . "interact/forms.html#edef-OPTION") ("p" . "struct/text.html#edef-P") ("param" . "struct/objects.html#edef-PARAM") ("pre" . "struct/text.html#edef-PRE") ("q" . "struct/text.html#edef-Q") ("s" . "present/graphics.html#edef-S") ("samp" . "struct/text.html#edef-SAMP") ("script" . "interact/scripts.html#edef-SCRIPT") ("select" . "interact/forms.html#edef-SELECT") ("small" . "present/graphics.html#edef-SMALL") ("span" . "struct/global.html#edef-SPAN") ("strike" . "present/graphics.html#edef-STRIKE") ("strong" . "struct/text.html#edef-STRONG") ("style" . "present/styles.html#edef-STYLE") ("sub" . "struct/text.html#edef-SUB") ("sup" . "struct/text.html#edef-SUP") ("table" . "struct/tables.html#edef-TABLE") ("tbody" . "struct/tables.html#edef-TBODY") ("td" . "struct/tables.html#edef-TD") ("textarea" . "interact/forms.html#edef-TEXTAREA") ("tfoot" . "struct/tables.html#edef-TFOOT") ("th" . "struct/tables.html#edef-TH") ("thead" . "struct/tables.html#edef-THEAD") ("title" . "struct/global.html#edef-TITLE") ("tr" . "struct/tables.html#edef-TR") ("tt" . "present/graphics.html#edef-TT") ("u" . "present/graphics.html#edef-U") ("ul" . "struct/lists.html#edef-UL") ("var" . "struct/text.html#edef-VAR")))
+
+(define (html10-element-name-to-w3c-specification-url el-name) 
+  (let ((res (assoc el-name element-name-url-map)))
+    (if res
+       (string-append "http://www.w3.org/TR/1999/REC-html401-19991224/" (cdr res))
+       #f)))
+
+(manual
+  (manual-front-matters
+    (manual-title "Reference Manual of the XHTML 1.0 transitional mirror")
+    (kn-manual-settings
+     (manual-abstract
+      (div 
+       (p "This is a manual of transitional XHTML1.0 mirror, as derived from the XHTML 1.0 DTD.
+       The manual contains information which is present in the DTD: information about attributes
+       and the content model.  In contrast to the DTD, however, the information in this manual is fully expanded
+       (without the macros defined by 'entities').
+       In addition it links to relevant sections of the HTML 4.01 specification.
+         ")
+
+     (p "This mirror validates both the attributes and content composition. It also checks the links in
+         the document when the document is rendered with" 
+        (a 'href "../../../../man/laml.html#write-html" "write-html")_ "," 
+        "and when" (a 'href "../../../../man/laml.html#end-laml" "end-laml") "is called.
+        Link checking depends on the value of the variable" (a 'href "../../man/xml-in-laml.html#xml-link-checking" "xml-link-checking") _ "." )
+
+       (p "For simple and conveninent loading of this XHTML1.0 mirror library, as well as accompanying libraries, you can just load" (kbd "simple-xhtml1.0-transitional-validating.scm") _ ":")
+
+       (pre "   (laml-style \"simple-xhtml1.0-transitional-validating.scm\")")
+
+       (p "More specifically, this LAML style loads the generic XML-in-LAML library, the XHTML 1.0 mirror library, color.scm, time.scm, and file-read.scm.") 
+
+
+       )))
+    'laml-resource "true"
+    'attribute-sorting "by-attribute-name"
+
+    'element-cross-reference-url-fn "html10-element-name-to-w3c-specification-url"
+    'element-cross-reference-anchor-text "HTML 4.01 Specification Details"
+    
+  )
+
+  (manual-from-xml-dtd 'src "../../../../tools/dtd-parser/dtds/xhtml10-transitional.lsp")
+
+)
+

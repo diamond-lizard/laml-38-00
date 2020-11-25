@@ -1,0 +1,44 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(define  index-color (make-color 255 255 191))
+(define body-props 
+   (list 'bgcolor (rgb-color-encoding index-color) 'text (rgb-color-encoding black)
+         'link (rgb-color-encoding blue) 'vlink (rgb-color-encoding blue)))
+
+
+(write-html '(pp prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "Notes about LAML with MzScheme 300"))
+  (body body-props
+    (laml-top-banner)
+ 
+    (h1 "LAML with MzScheme 300 ... 362 on Unix (Linux and Solaris). ")
+
+    (p "MzScheme 300+ works fine with LAML on Linux.")
+
+    (p "Concretely, I have tested LAML version 32 with PLT version 350 on Linux. All examples work.")
+
+    (p "MzScheme 300+ uses UniCode and UTF-8. 
+        It seems difficult (impossible?) to use MzScheme 300+ together with 8 bit character sets (such as iso-latin-1).
+        Thus, you should only use MzScheme 300+ if you are ready for Unicode and UTF-8.")
+
+    (p "I have not yet converted all my text files (and CGI data files) to UTF-8, 
+        and therefore I still use MzScheme 209 on Linux together with LAML.")
+
+  )
+ )
+)
+
+
+(end-laml)

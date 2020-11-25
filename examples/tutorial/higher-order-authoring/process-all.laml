@@ -1,0 +1,10 @@
+(load (string-append laml-dir "laml.scm"))
+
+(define (process-list . lst)
+ (for-each (lambda (f) (display f) (newline) (newline) (laml f)) lst))
+
+(process-list "more-li-extensions" "li-extensions" "color-frame" "element-mod"
+              "fac-3" "more-tables" "ol-ul-list" "index")
+
+
+(end-laml)

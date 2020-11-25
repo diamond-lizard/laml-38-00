@@ -1,0 +1,41 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+(define language-preference 'english)
+
+(generic-page
+  "Tutorial Examples"
+  (con-par
+    (laml-top-banner)
+    (h 1 "Tutorial Examples")
+    
+    (p "The following tutorial examples are available on sub pages:")
+
+
+    (ul
+
+      (li (a 'href "getting-started/index.html" "Getting started examples."))
+      (li (a 'href "html-mirrors/index.html" "Using the HTML mirror functions"))
+      (li (a 'href "higher-order-authoring/index.html" "Authoring with higher-order functions"))
+      (li (a 'href "schemedoc/index.html" "Schemedoc and Manual Pages"))
+      (li (a 'href "xml-in-laml/index.html" "XML-in-LAML examples"))
+      (li (a 'href "leno/index.html" "LENO examples"))
+      (li (a 'href "cgi-programming/index.html" "CGI programming examples"))
+  
+    )
+
+   (p "The examples are associated with" (a 'href "../../tutorial/index.html" "the LAML tutorial") _ ".")
+
+   (p (em "If you modify the examples in this directory, or in one of the subdirectories, you may break or destroy
+       your local copy of the LAML tutorial. Therefore you are encouraged to make a copy of the examples
+       before modifying them."))
+
+   (p "Please notice that the up-to-date tutorial can always be accessed from"
+      (a 'href "http://www.cs.auc.dk/~normark/scheme/tutorial/index.html" "the www.cs.auc.dk web site") _ ".")
+
+
+ 
+  )
+  white black blue blue
+)
+
+(end-laml)

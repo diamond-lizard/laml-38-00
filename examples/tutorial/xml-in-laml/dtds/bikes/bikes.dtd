@@ -1,0 +1,44 @@
+<!ENTITY % Number "CDATA">
+    <!-- one or more digits -->
+
+<!ENTITY % Boolean "(true | false)">
+    <!--  spaces -->
+
+
+
+<!ELEMENT bikes (bike)*>
+<!ATTLIST bikes
+>
+
+<!ELEMENT bike (frame, wheel+, brake*, lock*)>
+<!ATTLIST bike
+  kind   (mountain-bike, racer-bike, tourist-bike, other)  "tourist-bike"
+>
+
+<!ELEMENT frame EMPTY>
+
+<!ATTLIST frame
+  frame-number CDATA #REQUIRED
+>
+
+<!ELEMENT wheel EMPTY>
+
+<!ATTLIST wheel
+  size        %Number; #REQUIRED
+  tube-kind   CDATA    #IMPLIED
+>
+
+<!ELEMENT brake EMPTY>
+
+<!ATTLIST brake
+  kind    CDATA   #IMPLIED
+  brand   CDATA   #IMPLIED
+>
+
+<!ELEMENT lock EMPTY>
+
+<!ATTLIST lock
+  brand   CDATA   #IMPLIED
+  insurance-approved  %Boolean; #REQUIRED
+>
+

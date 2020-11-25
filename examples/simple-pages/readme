@@ -1,0 +1,11 @@
+In this directory you will find examples of simple LAML files together
+with the generated HTML files.
+
+In order to run the examples you must change the file path of the 
+styles.scm loading (first non-comment line in each example).
+
+
+
+
+
+

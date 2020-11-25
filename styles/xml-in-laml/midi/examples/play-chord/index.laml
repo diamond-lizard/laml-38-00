@@ -1,0 +1,41 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+(load (in-startup-directory "../" "common-example-stuff.scm"))
+
+
+(begin-laml)
+
+(define current-xml-language 'xhtml10-transitional)
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+; Insert the LAML template "Processing Options" here
+; if you need variations in the LAML processing
+
+(define ttl "Chord Playing")
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title ttl))
+  (body
+    (h1 ttl)
+
+    (p "Sample use of the function play-chord")
+
+    (table  'border 1
+      (tr (td (b "Description")) (td (b "Midl source file")) (td (b "Resulting midi file")))
+      (tr (td "sus2 chord progression")  (td (a-self "play-chord-1.midl"))  (td (a-self "play-chord-1.mid")))
+      (tr (td "m chord progression")  (td (a-self "play-chord-2.midl"))  (td (a-self "play-chord-2.mid")))
+    )
+
+
+  )
+ )
+)
+
+
+(end-laml)

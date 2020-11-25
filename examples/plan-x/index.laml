@@ -1,0 +1,59 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+
+(define (table-entry txt ex-name)
+ (list txt (a-tag (string-append ex-name ".laml")) (a-tag (string-append ex-name ".html"))))
+
+(define table-header-list 
+  (map b (list "Example"          "LAML"                              "HTML")))
+
+(define (a-tag-still-blind url anchor-text)
+  (em anchor-text))
+
+(define browser-advice 
+  (font-size 2
+    (em "If your browser will not present files with 'laml' or 'scm' extensions 
+         you should disable any special handling of these extensions on your system.
+         In that way they are treated as pure text files.")))
+  
+
+(write-text-file
+  (page
+  "Overview of JFP Examples"
+  (con-par
+    (laml-top-banner)
+    (h 1 "Overview of PLAN-x examples")
+
+    (con "These examples accompany the paper (in progress)"
+          (a-tag-still-blind 
+            "http://www.cs.auc.dk/~normark/laml/papers/plan-x.pdf" 
+            "XML in LAML - Web programming in Scheme") _ ".")
+   
+    "The following examples exist in this directory:"
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 250 250 250)
+        (list
+          table-header-list
+          (table-entry "A first example" "first")
+          (table-entry "Introducing programmatic means" "second")
+          (table-entry "Introducing a domain-specific element " "third")
+
+        )))
+
+    (con "The" (a-tag "index.laml" "LAML script") 
+      "that generates this page may also be of interest. Notice 
+      in particular the" (kbd "table-entry") "function which helps to keep the table body simple.")
+
+    (con "The examples can be found in the directory"
+          (kbd "examples/plan-x/") "of the LAML download bundle.")
+
+    browser-advice
+
+  ))
+  (full-source-path-with-extension "html")
+)
+
+(end-laml)

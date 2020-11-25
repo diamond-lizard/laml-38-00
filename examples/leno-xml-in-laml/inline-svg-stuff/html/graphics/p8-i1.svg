@@ -1,0 +1,2229 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- The material in this file is copyrighted (c) by KN, AAU.  All rights reserved.-->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="900" height="650"
+     viewBox="0 0 900 650">
+   <g transform="scale(0.85)">
+      <g>
+         <g>
+            <rect x="112.10526315789474" y="20.0" width="45.78947368421053" height="40" stroke="none"
+                  stroke-width="1" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="grey" color="grey" fill="grey" x="135.0"
+                  text-anchor="middle" y="50.0">
+               0
+            </text>
+         </g>
+         <g>
+            <rect x="197.10526315789474" y="20.0" width="45.78947368421053" height="40" stroke="none"
+                  stroke-width="1" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="grey" color="grey" fill="grey" x="220.0"
+                  text-anchor="middle" y="50.0">
+               1
+            </text>
+         </g>
+         <g>
+            <rect x="282.10526315789474" y="20.0" width="45.78947368421053" height="40" stroke="none"
+                  stroke-width="1" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="grey" color="grey" fill="grey" x="305.0"
+                  text-anchor="middle" y="50.0">
+               2
+            </text>
+         </g>
+         <g>
+            <rect x="367.10526315789474" y="20.0" width="45.78947368421053" height="40" stroke="none"
+                  stroke-width="1" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="grey" color="grey" fill="grey" x="390.0"
+                  text-anchor="middle" y="50.0">
+               3
+            </text>
+         </g>
+         <g>
+            <rect x="452.10526315789474" y="20.0" width="45.78947368421053" height="40" stroke="none"
+                  stroke-width="1" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="grey" color="grey" fill="grey" x="475.0"
+                  text-anchor="middle" y="50.0">
+               4
+            </text>
+         </g>
+         <g>
+            <rect x="537.1052631578947" y="20.0" width="45.78947368421053" height="40" stroke="none" stroke-width="1"
+                  fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="grey" color="grey" fill="grey" x="560.0"
+                  text-anchor="middle" y="50.0">
+               5
+            </text>
+         </g>
+         <g>
+            <rect x="622.1052631578947" y="20.0" width="45.78947368421053" height="40" stroke="none" stroke-width="1"
+                  fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="grey" color="grey" fill="grey" x="645.0"
+                  text-anchor="middle" y="50.0">
+               6
+            </text>
+         </g>
+         <g>
+            <rect x="707.1052631578947" y="20.0" width="45.78947368421053" height="40" stroke="none" stroke-width="1"
+                  fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="grey" color="grey" fill="grey" x="730.0"
+                  text-anchor="middle" y="50.0">
+               7
+            </text>
+         </g>
+         <g>
+            <rect x="792.1052631578947" y="20.0" width="45.78947368421053" height="40" stroke="none" stroke-width="1"
+                  fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="grey" color="grey" fill="grey" x="815.0"
+                  text-anchor="middle" y="50.0">
+               8
+            </text>
+         </g>
+         <g>
+            <rect x="877.1052631578947" y="20.0" width="45.78947368421053" height="40" stroke="none" stroke-width="1"
+                  fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="grey" color="grey" fill="grey" x="900.0"
+                  text-anchor="middle" y="50.0">
+               9
+            </text>
+         </g>
+         <g>
+            <rect x="-2.8947368421052637" y="80.0" width="45.78947368421053" height="40" stroke="none"
+                  stroke-width="1" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="grey" color="grey" fill="grey" x="20.0"
+                  text-anchor="middle" y="110.0">
+               0
+            </text>
+         </g>
+         <g>
+            <rect x="-10.789473684210527" y="130.0" width="61.578947368421055" height="40" stroke="none"
+                  stroke-width="1" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="grey" color="grey" fill="grey" x="20.0"
+                  text-anchor="middle" y="160.0">
+               10
+            </text>
+         </g>
+         <g>
+            <rect x="-10.789473684210527" y="180.0" width="61.578947368421055" height="40" stroke="none"
+                  stroke-width="1" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="grey" color="grey" fill="grey" x="20.0"
+                  text-anchor="middle" y="210.0">
+               20
+            </text>
+         </g>
+         <g>
+            <rect x="-10.789473684210527" y="230.0" width="61.578947368421055" height="40" stroke="none"
+                  stroke-width="1" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="grey" color="grey" fill="grey" x="20.0"
+                  text-anchor="middle" y="260.0">
+               30
+            </text>
+         </g>
+         <g>
+            <rect x="-10.789473684210527" y="280.0" width="61.578947368421055" height="40" stroke="none"
+                  stroke-width="1" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="grey" color="grey" fill="grey" x="20.0"
+                  text-anchor="middle" y="310.0">
+               40
+            </text>
+         </g>
+         <g>
+            <rect x="-10.789473684210527" y="330.0" width="61.578947368421055" height="40" stroke="none"
+                  stroke-width="1" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="grey" color="grey" fill="grey" x="20.0"
+                  text-anchor="middle" y="360.0">
+               50
+            </text>
+         </g>
+         <g>
+            <rect x="-10.789473684210527" y="380.0" width="61.578947368421055" height="40" stroke="none"
+                  stroke-width="1" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="grey" color="grey" fill="grey" x="20.0"
+                  text-anchor="middle" y="410.0">
+               60
+            </text>
+         </g>
+         <g>
+            <rect x="-10.789473684210527" y="430.0" width="61.578947368421055" height="40" stroke="none"
+                  stroke-width="1" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="grey" color="grey" fill="grey" x="20.0"
+                  text-anchor="middle" y="460.0">
+               70
+            </text>
+         </g>
+         <g>
+            <rect x="-10.789473684210527" y="480.0" width="61.578947368421055" height="40" stroke="none"
+                  stroke-width="1" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="grey" color="grey" fill="grey" x="20.0"
+                  text-anchor="middle" y="510.0">
+               80
+            </text>
+         </g>
+         <g>
+            <rect x="-10.789473684210527" y="530.0" width="61.578947368421055" height="40" stroke="none"
+                  stroke-width="1" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="grey" color="grey" fill="grey" x="20.0"
+                  text-anchor="middle" y="560.0">
+               90
+            </text>
+         </g>
+         <g>
+            <rect x="-18.684210526315795" y="580.0" width="77.36842105263159" height="40" stroke="none"
+                  stroke-width="1" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="grey" color="grey" fill="grey" x="20.0"
+                  text-anchor="middle" y="610.0">
+               100
+            </text>
+         </g>
+         <g>
+            <rect x="-18.684210526315795" y="630.0" width="77.36842105263159" height="40" stroke="none"
+                  stroke-width="1" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="grey" color="grey" fill="grey" x="20.0"
+                  text-anchor="middle" y="660.0">
+               110
+            </text>
+         </g>
+         <g>
+            <rect x="-18.684210526315795" y="680.0" width="77.36842105263159" height="40" stroke="none"
+                  stroke-width="1" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="grey" color="grey" fill="grey" x="20.0"
+                  text-anchor="middle" y="710.0">
+               120
+            </text>
+         </g>
+         <g>
+            <rect x="92.5" y="75.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="135.0"
+                  text-anchor="middle" y="110.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  0
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="177.5" y="75.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="220.0"
+                  text-anchor="middle" y="110.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  1
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="262.5" y="75.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="305.0"
+                  text-anchor="middle" y="110.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  2
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="347.5" y="75.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="390.0"
+                  text-anchor="middle" y="110.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  3
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="432.5" y="75.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="475.0"
+                  text-anchor="middle" y="110.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  4
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="517.5" y="75.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="560.0"
+                  text-anchor="middle" y="110.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  5
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="602.5" y="75.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="645.0"
+                  text-anchor="middle" y="110.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  6
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="687.5" y="75.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="730.0"
+                  text-anchor="middle" y="110.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  7
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="772.5" y="75.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="815.0"
+                  text-anchor="middle" y="110.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  8
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="857.5" y="75.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="900.0"
+                  text-anchor="middle" y="110.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  9
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="92.5" y="125.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="135.0"
+                  text-anchor="middle" y="160.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  10
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="177.5" y="125.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="220.0"
+                  text-anchor="middle" y="160.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  11
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="262.5" y="125.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="305.0"
+                  text-anchor="middle" y="160.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  12
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="347.5" y="125.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="390.0"
+                  text-anchor="middle" y="160.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  13
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="432.5" y="125.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="475.0"
+                  text-anchor="middle" y="160.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  14
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="517.5" y="125.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="560.0"
+                  text-anchor="middle" y="160.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  15
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="602.5" y="125.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="645.0"
+                  text-anchor="middle" y="160.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  16
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="687.5" y="125.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="730.0"
+                  text-anchor="middle" y="160.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  17
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="772.5" y="125.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="815.0"
+                  text-anchor="middle" y="160.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  18
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="857.5" y="125.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="900.0"
+                  text-anchor="middle" y="160.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  19
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="92.5" y="175.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="135.0"
+                  text-anchor="middle" y="210.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  20
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="177.5" y="175.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="220.0"
+                  text-anchor="middle" y="210.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  21
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="262.5" y="175.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="305.0"
+                  text-anchor="middle" y="210.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  22
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="347.5" y="175.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="390.0"
+                  text-anchor="middle" y="210.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  23
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="432.5" y="175.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="475.0"
+                  text-anchor="middle" y="210.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  24
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="517.5" y="175.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="560.0"
+                  text-anchor="middle" y="210.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  25
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="602.5" y="175.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="645.0"
+                  text-anchor="middle" y="210.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  26
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="687.5" y="175.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="730.0"
+                  text-anchor="middle" y="210.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  27
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="772.5" y="175.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="815.0"
+                  text-anchor="middle" y="210.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  28
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="857.5" y="175.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="900.0"
+                  text-anchor="middle" y="210.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  29
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="92.5" y="225.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="135.0"
+                  text-anchor="middle" y="260.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  30
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="177.5" y="225.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="220.0"
+                  text-anchor="middle" y="260.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  31
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="262.5" y="225.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="305.0"
+                  text-anchor="middle" y="260.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  32
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="347.5" y="225.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="390.0"
+                  text-anchor="middle" y="260.0">
+               !
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  33
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="432.5" y="225.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="475.0"
+                  text-anchor="middle" y="260.0">
+               &quot;
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  34
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="517.5" y="225.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="560.0"
+                  text-anchor="middle" y="260.0">
+               #
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  35
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="602.5" y="225.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="645.0"
+                  text-anchor="middle" y="260.0">
+               $
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  36
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="687.5" y="225.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="730.0"
+                  text-anchor="middle" y="260.0">
+               %
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  37
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="772.5" y="225.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="815.0"
+                  text-anchor="middle" y="260.0">
+               &amp;
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  38
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="857.5" y="225.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="900.0"
+                  text-anchor="middle" y="260.0">
+               &#39;
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  39
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="92.5" y="275.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="135.0"
+                  text-anchor="middle" y="310.0">
+               (
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  40
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="177.5" y="275.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="220.0"
+                  text-anchor="middle" y="310.0">
+               )
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  41
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="262.5" y="275.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="305.0"
+                  text-anchor="middle" y="310.0">
+               *
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  42
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="347.5" y="275.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="390.0"
+                  text-anchor="middle" y="310.0">
+               +
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  43
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="432.5" y="275.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="475.0"
+                  text-anchor="middle" y="310.0">
+               ,
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  44
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="517.5" y="275.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="560.0"
+                  text-anchor="middle" y="310.0">
+               -
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  45
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="602.5" y="275.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="645.0"
+                  text-anchor="middle" y="310.0">
+               .
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  46
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="687.5" y="275.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="730.0"
+                  text-anchor="middle" y="310.0">
+               /
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  47
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="772.5" y="275.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="815.0"
+                  text-anchor="middle" y="310.0">
+               0
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  48
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="857.5" y="275.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="900.0"
+                  text-anchor="middle" y="310.0">
+               1
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  49
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="92.5" y="325.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="135.0"
+                  text-anchor="middle" y="360.0">
+               2
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  50
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="177.5" y="325.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="220.0"
+                  text-anchor="middle" y="360.0">
+               3
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  51
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="262.5" y="325.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="305.0"
+                  text-anchor="middle" y="360.0">
+               4
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  52
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="347.5" y="325.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="390.0"
+                  text-anchor="middle" y="360.0">
+               5
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  53
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="432.5" y="325.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="475.0"
+                  text-anchor="middle" y="360.0">
+               6
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  54
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="517.5" y="325.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="560.0"
+                  text-anchor="middle" y="360.0">
+               7
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  55
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="602.5" y="325.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="645.0"
+                  text-anchor="middle" y="360.0">
+               8
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  56
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="687.5" y="325.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="730.0"
+                  text-anchor="middle" y="360.0">
+               9
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  57
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="772.5" y="325.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="815.0"
+                  text-anchor="middle" y="360.0">
+               :
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  58
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="857.5" y="325.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="900.0"
+                  text-anchor="middle" y="360.0">
+               ;
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  59
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="92.5" y="375.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="135.0"
+                  text-anchor="middle" y="410.0">
+               &lt;
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  60
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="177.5" y="375.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="220.0"
+                  text-anchor="middle" y="410.0">
+               =
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  61
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="262.5" y="375.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="305.0"
+                  text-anchor="middle" y="410.0">
+               &gt;
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  62
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="347.5" y="375.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="390.0"
+                  text-anchor="middle" y="410.0">
+               ?
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  63
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="432.5" y="375.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="475.0"
+                  text-anchor="middle" y="410.0">
+               @
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  64
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="517.5" y="375.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="560.0"
+                  text-anchor="middle" y="410.0">
+               A
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  65
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="602.5" y="375.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="645.0"
+                  text-anchor="middle" y="410.0">
+               B
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  66
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="687.5" y="375.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="730.0"
+                  text-anchor="middle" y="410.0">
+               C
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  67
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="772.5" y="375.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="815.0"
+                  text-anchor="middle" y="410.0">
+               D
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  68
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="857.5" y="375.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="900.0"
+                  text-anchor="middle" y="410.0">
+               E
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  69
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="92.5" y="425.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="135.0"
+                  text-anchor="middle" y="460.0">
+               F
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  70
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="177.5" y="425.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="220.0"
+                  text-anchor="middle" y="460.0">
+               G
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  71
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="262.5" y="425.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="305.0"
+                  text-anchor="middle" y="460.0">
+               H
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  72
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="347.5" y="425.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="390.0"
+                  text-anchor="middle" y="460.0">
+               I
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  73
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="432.5" y="425.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="475.0"
+                  text-anchor="middle" y="460.0">
+               J
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  74
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="517.5" y="425.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="560.0"
+                  text-anchor="middle" y="460.0">
+               K
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  75
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="602.5" y="425.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="645.0"
+                  text-anchor="middle" y="460.0">
+               L
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  76
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="687.5" y="425.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="730.0"
+                  text-anchor="middle" y="460.0">
+               M
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  77
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="772.5" y="425.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="815.0"
+                  text-anchor="middle" y="460.0">
+               N
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  78
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="857.5" y="425.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="900.0"
+                  text-anchor="middle" y="460.0">
+               O
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  79
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="92.5" y="475.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="135.0"
+                  text-anchor="middle" y="510.0">
+               P
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  80
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="177.5" y="475.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="220.0"
+                  text-anchor="middle" y="510.0">
+               Q
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  81
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="262.5" y="475.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="305.0"
+                  text-anchor="middle" y="510.0">
+               R
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  82
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="347.5" y="475.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="390.0"
+                  text-anchor="middle" y="510.0">
+               S
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  83
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="432.5" y="475.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="475.0"
+                  text-anchor="middle" y="510.0">
+               T
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  84
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="517.5" y="475.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="560.0"
+                  text-anchor="middle" y="510.0">
+               U
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  85
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="602.5" y="475.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="645.0"
+                  text-anchor="middle" y="510.0">
+               V
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  86
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="687.5" y="475.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="730.0"
+                  text-anchor="middle" y="510.0">
+               W
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  87
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="772.5" y="475.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="815.0"
+                  text-anchor="middle" y="510.0">
+               X
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  88
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="857.5" y="475.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="900.0"
+                  text-anchor="middle" y="510.0">
+               Y
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  89
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="92.5" y="525.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="135.0"
+                  text-anchor="middle" y="560.0">
+               Z
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  90
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="177.5" y="525.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="220.0"
+                  text-anchor="middle" y="560.0">
+               [
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  91
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="262.5" y="525.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="305.0"
+                  text-anchor="middle" y="560.0">
+               \
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  92
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="347.5" y="525.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="390.0"
+                  text-anchor="middle" y="560.0">
+               ]
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  93
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="432.5" y="525.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="475.0"
+                  text-anchor="middle" y="560.0">
+               ^
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  94
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="517.5" y="525.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="560.0"
+                  text-anchor="middle" y="560.0">
+               _
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  95
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="602.5" y="525.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="645.0"
+                  text-anchor="middle" y="560.0">
+               `
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  96
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="687.5" y="525.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="730.0"
+                  text-anchor="middle" y="560.0">
+               a
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  97
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="772.5" y="525.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="815.0"
+                  text-anchor="middle" y="560.0">
+               b
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  98
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="857.5" y="525.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="900.0"
+                  text-anchor="middle" y="560.0">
+               c
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  99
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="92.5" y="575.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="135.0"
+                  text-anchor="middle" y="610.0">
+               d
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  100
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="177.5" y="575.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="220.0"
+                  text-anchor="middle" y="610.0">
+               e
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  101
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="262.5" y="575.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="305.0"
+                  text-anchor="middle" y="610.0">
+               f
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  102
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="347.5" y="575.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="390.0"
+                  text-anchor="middle" y="610.0">
+               g
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  103
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="432.5" y="575.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="475.0"
+                  text-anchor="middle" y="610.0">
+               h
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  104
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="517.5" y="575.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="560.0"
+                  text-anchor="middle" y="610.0">
+               i
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  105
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="602.5" y="575.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="645.0"
+                  text-anchor="middle" y="610.0">
+               j
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  106
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="687.5" y="575.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="730.0"
+                  text-anchor="middle" y="610.0">
+               k
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  107
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="772.5" y="575.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="815.0"
+                  text-anchor="middle" y="610.0">
+               l
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  108
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="857.5" y="575.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="900.0"
+                  text-anchor="middle" y="610.0">
+               m
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  109
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="92.5" y="625.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="135.0"
+                  text-anchor="middle" y="660.0">
+               n
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  110
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="177.5" y="625.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="220.0"
+                  text-anchor="middle" y="660.0">
+               o
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  111
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="262.5" y="625.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="305.0"
+                  text-anchor="middle" y="660.0">
+               p
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  112
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="347.5" y="625.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="390.0"
+                  text-anchor="middle" y="660.0">
+               q
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  113
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="432.5" y="625.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="475.0"
+                  text-anchor="middle" y="660.0">
+               r
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  114
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="517.5" y="625.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="560.0"
+                  text-anchor="middle" y="660.0">
+               s
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  115
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="602.5" y="625.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="645.0"
+                  text-anchor="middle" y="660.0">
+               t
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  116
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="687.5" y="625.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="730.0"
+                  text-anchor="middle" y="660.0">
+               u
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  117
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="772.5" y="625.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="815.0"
+                  text-anchor="middle" y="660.0">
+               v
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  118
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="857.5" y="625.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="900.0"
+                  text-anchor="middle" y="660.0">
+               w
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  119
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="92.5" y="675.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="135.0"
+                  text-anchor="middle" y="710.0">
+               x
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  120
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="177.5" y="675.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="220.0"
+                  text-anchor="middle" y="710.0">
+               y
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  121
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="262.5" y="675.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="305.0"
+                  text-anchor="middle" y="710.0">
+               z
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  122
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="347.5" y="675.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="390.0"
+                  text-anchor="middle" y="710.0">
+               {
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  123
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="432.5" y="675.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="475.0"
+                  text-anchor="middle" y="710.0">
+               |
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  124
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="517.5" y="675.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="560.0"
+                  text-anchor="middle" y="710.0">
+               }
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  125
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="602.5" y="675.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="645.0"
+                  text-anchor="middle" y="710.0">
+               ~
+               <tspan baseline-shift="sub" font-size="19" fill="#0000ff" stroke="#0000ff">
+                  126
+               </tspan>
+            </text>
+         </g>
+         <g>
+            <rect x="687.5" y="675.0" width="85.0" height="50" stroke-width="1" stroke="black" fill="white">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" begin="mouseover"
+                        fill="freeze" />
+               <animate attributeType="XML" attributeName="fill" from="red" to="white" dur="0.5s" begin="mouseout"
+                        fill="freeze" />
+            </rect>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="730.0"
+                  text-anchor="middle" y="710.0">
+               <tspan fill="#808080" stroke="#808080">NP</tspan>
+               <tspan baseline-shift="sub" font-size="19" fill="red" stroke="blue">
+                  127
+               </tspan>
+            </text>
+         </g>
+      </g>
+   </g>
+</svg>

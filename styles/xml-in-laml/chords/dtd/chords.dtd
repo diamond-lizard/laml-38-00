@@ -1,0 +1,162 @@
+<!--
+   Chrods - LAML Musical Chords support
+
+   Copyright (c) 2005  Kurt Nørmark.
+   All Rights Reserved. 
+-->
+
+<!ENTITY % Number "CDATA">
+    <!-- one or more digits -->
+
+<!ENTITY % CSScolor  "CDATA">
+    <!-- A CSS compliant color value  -->
+
+<!ENTITY % Symbol "CDATA">
+    <!-- a name without spaces -->
+
+<!ENTITY % URI "CDATA">
+    <!-- a Uniform Resource Identifier, see [RFC2396] -->
+
+<!ENTITY % File-path "CDATA">
+    <!-- an absolute or relative file path -->
+
+<!ENTITY % Color "CDATA">
+    <!-- A legal color name -->
+
+<!ENTITY % XHTML-crossing "(#PCDATA | span | em | b | kbd)*">
+    <!-- Possible XHTML elements to be embedded in a course-plan document -->
+
+
+<!ELEMENT song
+  (song-front-matters,
+   song-verses*)
+>
+
+<!ELEMENT song-front-matters
+ (song-title?, song-author? song-source?)
+>
+
+<!ATTLIST song-front-matters
+  transposition                       %Symbol;                        #IMPLIED
+  indentation                         %Number;                        #IMPLIED
+  font-size                           %Number;                        #IMPLIED
+  compact-lines                      (true|false)                     "false"
+  rendering-mode                     (normal|simple)                  "normal"
+  chord-color                         %CSScolor;                      "black"
+  h-name                             (h | H | B | b)                  "H"
+
+  cs-or-db                           (cs | db)                        "cs"
+  ds-or-eb                           (ds | eb)                        "eb"
+  fs-or-gb                           (fs | gb)                        "fs"
+  gs-or-ab                           (gs | ab)                        "gs"
+  as-or-hb                           (as | hb)                        "hb"
+>
+
+<!ELEMENT song-verses
+   (verse*)
+>
+
+<!ELEMENT song-title (#PCDATA) >
+<!ELEMENT song-author (#PCDATA) >
+<!ELEMENT song-source (#PCDATA) >
+
+
+<!ELEMENT verse (line)* >
+<!ATTLIST verse
+  n                                  %Number;                          #IMPLIED
+  chords                             (true|false)                      "true"
+>
+
+<!ELEMENT line 
+  (#PCDATA | c | cs | d | eb | e | f | fs | g | gs | a | hb | h | unison)>
+
+<!ELEMENT unison (#PCDATA) >
+<!ATTLIST unison
+>
+
+<!-- The 12 main chords -->
+
+<!ELEMENT c (#PCDATA) >
+<!ATTLIST c  
+  x     CDATA    #IMPLIED
+  b     (c | cs | d | eb | e | f | fs | g | gs | a | hb | h)    #IMPLIED
+  o     (t | f)    #IMPLIED
+>
+
+<!ELEMENT cs (#PCDATA) > 
+<!ATTLIST cs
+  x     CDATA    #IMPLIED
+  b     (c | cs | d | eb | e | f | fs | g | gs | a | hb | h)    #IMPLIED
+  o     (t | f)    #IMPLIED
+>
+
+<!ELEMENT d (#PCDATA) > 
+<!ATTLIST d
+  x     CDATA    #IMPLIED
+  b     (c | cs | d | eb | e | f | fs | g | gs | a | hb | h)    #IMPLIED
+  o     (t | f)    #IMPLIED
+>
+
+<!ELEMENT eb (#PCDATA) > 
+<!ATTLIST eb
+  x     CDATA    #IMPLIED
+  b     (c | cs | d | eb | e | f | fs | g | gs | a | hb | h)    #IMPLIED
+  o     (t | f)    #IMPLIED
+>
+
+<!ELEMENT e (#PCDATA) > 
+<!ATTLIST e
+  x     CDATA    #IMPLIED
+  b     (c | cs | d | eb | e | f | fs | g | gs | a | hb | h)    #IMPLIED
+  o     (t | f)    #IMPLIED
+>
+
+<!ELEMENT f (#PCDATA) > 
+<!ATTLIST f
+  x     CDATA    #IMPLIED
+  b     (c | cs | d | eb | e | f | fs | g | gs | a | hb | h)    #IMPLIED
+  o     (t | f)    #IMPLIED
+>
+
+<!ELEMENT fs (#PCDATA) > 
+<!ATTLIST fs
+  x     CDATA    #IMPLIED
+  b     (c | cs | d | eb | e | f | fs | g | gs | a | hb | h)    #IMPLIED
+  o     (t | f)    #IMPLIED
+>
+
+<!ELEMENT g (#PCDATA) > 
+<!ATTLIST g
+  x     CDATA    #IMPLIED
+  b     (c | cs | d | eb | e | f | fs | g | gs | a | hb | h)    #IMPLIED
+  o     (t | f)    #IMPLIED
+>
+
+<!ELEMENT gs (#PCDATA) > 
+<!ATTLIST gs
+  x     CDATA    #IMPLIED
+  b     (c | cs | d | eb | e | f | fs | g | gs | a | hb | h)    #IMPLIED
+  o     (t | f)    #IMPLIED
+>
+
+<!ELEMENT a (#PCDATA) > 
+<!ATTLIST a
+  x     CDATA    #IMPLIED
+  b     (c | cs | d | eb | e | f | fs | g | gs | a | hb | h)    #IMPLIED
+  o     (t | f)    #IMPLIED
+>
+
+<!ELEMENT hb  (#PCDATA) > 
+<!ATTLIST hb
+  x     CDATA    #IMPLIED
+  b     (c | cs | d | eb | e | f | fs | g | gs | a | hb | h)    #IMPLIED
+  o     (t | f)    #IMPLIED
+>
+
+<!ELEMENT h  (#PCDATA) > 
+<!ATTLIST h
+  x     CDATA    #IMPLIED
+  b     (c | cs | d | eb | e | f | fs | g | gs | a | hb | h)    #IMPLIED
+  o     (t | f)    #IMPLIED
+>
+

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+      <meta name="Generator" content="LAML" />
+      <title>Notes about LAML with Guile on Linux</title></head>
+   <body bgcolor="#ffffbf" text="#000000" link="#0000ff" vlink="#0000ff">
+      <table border="0px" cellpadding="0" cellspacing="0" width="100%">
+         <tbody>
+            <tr>
+               <td width="33%" align="left" valign="top">
+                  <font size="2">Generated: Thursday, September 24, 2009, 09:35:32</font></td>
+               <td width="34%" align="center" valign="top">
+                  <font size="2"><span>Copyright &copy; 2009, Kurt N&#248;rmark</span></font></td>
+               <td width="33%" align="right" valign="top">
+                  <font size="2">
+                     <a href="../../index.html" title="The local LAML software home page" target="_top">
+                        <img src="../../images/laml-home.gif" alt="The local LAML software home page"
+                             border="0" /></a></font></td></tr></tbody></table>
+      <h1>LAML with Guile on Linux</h1>
+      <p>Guile is the GNU people&#39;s Scheme system.</p>
+      <p>
+         I every now and then test LAML with Guile on Red Hat Linux. As of September
+         2009 I have tested LAML version 35 with Guile version 1.8.7. It seems to work
+         OK, but MzScheme version 209 is faster than Guile version 1.8.7.</p>
+      <p>
+         Maybe due to the use of R5RS macros, (use-syntax (ice-9 syncase)), Guile 1.6
+         is/was
+         <b>slow</b>
+         with LAML. It is not, however, clear if Guile 1.6 is slower than Guile 1.8.</p>
+      <p>
+         The use of Guile on Linux may be convenient for many Linux users, because Guile
+         is probably present on your Linux machine already. Try call
+         <kbd>guile</kbd>
+         from the command prompt, with the -v option to find out about which version
+         you have. Use
+         <kbd>which guile</kbd>
+         to find out where it is located in the file system.</p>
+      <p>
+         I have experienced that older versions (1.3 and 1.4) of Guile also work well with LAML
+         on Linux. But they are not tested with LAML 26. As of LAML version 35, I have
+         disabeled the support of version 1.4 (and older) of Guile. If you want to used LAML
+         with an old version of Guile, please consult the compatibility file in
+         <kbd>lib/compatibility/star_star_guile.scm</kbd>.
+          </p>
+      <p>Version 27: Tested and OK - but slow.</p></body></html>

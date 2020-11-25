@@ -1,0 +1,9 @@
+Til kplejd11@student.aau.dk
+
+Dette er feedback om afleveringsopgave 7 i Imperativ Programmering
+
+Du behøver ikke bruge pointere til dine arrays, det vil give pointere til pointere. I stedet er det lettere at bruge arrays som arrays, og tilgå dem via et index, dvs. du tæller hvor langt ind i array'et du er nået. Du skriver du tror du har forstået det nu, så jeg vil foreslå at du prøver at løse opgaven (selvom den ikke kan afleveres), du kan nemt selv teste om den virker :)
+
+Bemærk venligst, at du ikke kan sende et svar tilbage på denne email.
+
+/Hjælpelærer Henrik Søndberg Karlsen

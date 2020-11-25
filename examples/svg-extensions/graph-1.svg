@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="800" height="800">
+   <g transform="scale(1.0)">
+      <g>
+         <defs>
+            <marker id="OpenArrowhead" viewBox="0 0 10 10" refX="10" refY="5" stroke="black" stroke-width="1"
+                    fill="white" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="15" orient="auto"
+                    preserveAspectRatio="none">
+               <path d="M 0 0 L 10 5 L 0 10 z" />
+            </marker>
+         </defs>
+         <defs>
+            <marker id="OpenDiamond" viewBox="0 -5 10 10" refX="10" refY="0" stroke="black" stroke-width="1"
+                    fill="white" markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="22.5" orient="auto"
+                    preserveAspectRatio="none">
+               <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+            </marker>
+         </defs>
+         <defs>
+            <marker id="FilledArrowhead" viewBox="0 0 10 10" refX="10" refY="5" fill="black" markerUnits="userSpaceOnUse"
+                    markerWidth="20" markerHeight="15" orient="auto" preserveAspectRatio="none">
+               <path d="M 0 0 L 10 5 L 0 10 z" />
+            </marker>
+         </defs>
+         <defs>
+            <marker id="FilledDiamond" viewBox="0 -5 10 10" refX="10" refY="0" fill="black" markerUnits="userSpaceOnUse"
+                    markerWidth="30" markerHeight="22.5" orient="auto" preserveAspectRatio="none">
+               <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+            </marker>
+         </defs>
+         <g>
+            <rect x="25.0" y="80.0" width="150.0" height="40" rx="75.0" ry="20.0" stroke-width="1" stroke="black"
+                  fill="white" />
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="100.0"
+                  text-anchor="middle" y="110.0">
+               A
+            </text>
+         </g>
+         <g>
+            <g>
+               <rect x="350.0" y="80.0" width="100.0" height="40" stroke-width="1" stroke="black" fill="olive"
+                     style="visibility:hidden;" />
+               <path stroke-width="1" stroke="black" fill="olive" d="M 350.0 100.0 q 0 -17.5 25.0 -10.0 q 0 -17.5 25.0 -10.0 q 17.5 -8.75 25.0 10.0 q 17.5 -17.5 25.0 10.0 q 17.5 17.5 -25.0 10.0 q 17.5 17.5 -25.0 10.0 q -8.75 17.5 -25.0 -10.0 q -8.75 17.5 -25.0 -10.0 " />
+            </g>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="400.0"
+                  text-anchor="middle" y="110.0">
+               B
+            </text>
+         </g>
+         <g>
+            <g>
+               <rect x="60.0" y="180.0" width="80.0" height="40" stroke-width="1" stroke="black" fill="yellow"
+                     style="visibility:hidden;" />
+               <path stroke-width="1" stroke="black" fill="yellow" d="M 60.0 200.0 l 40.0 -20.0 l 40.0 20.0 l -40.0 20.0 l -40.0 -20.0 " />
+            </g>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="100.0"
+                  text-anchor="middle" y="210.0">
+               C
+            </text>
+         </g>
+         <g>
+            <g>
+               <rect x="362.5" y="180.0" width="75.0" height="40" stroke-width="1" stroke="black" fill="white"
+                     style="visibility:hidden;" />
+               <path stroke-width="1" stroke="black" fill="white" d="M 362.5 220.0 l 37.5 -40 l 37.5 40 l -75.0 0 " />
+            </g>
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="400.0"
+                  text-anchor="middle" y="210.0">
+               D
+            </text>
+         </g>
+         <g>
+            <rect x="212.5" y="280.0" width="75.0" height="40" stroke-width="1" stroke="black" fill="white" />
+            <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="250.0"
+                  text-anchor="middle" y="310.0">
+               E
+            </text>
+         </g>
+         <g>
+            <path id="line-3" stroke="blue" stroke-width="3" stroke-dasharray="3 4" fill="none" d="M 400.0 120.0 L 400.0 180.0 "
+                  marker-end="url(#FilledArrowhead)" />
+            <path id="line-4" stroke="blue" stroke-width="3" stroke-dasharray="3 4" fill="none" d="M 400.0 180.0 L 400.0 120.0 "
+                  marker-end="url(#FilledArrowhead)" style="visibility:hidden;" />
+            <text font-family="times-roman" font-size="12" font-style="normal" stroke="black" color="black"
+                  fill="black" x="410.0" y="150.0">
+               B-to-D
+            </text>
+         </g>
+         <g>
+            <path id="line-1" stroke="black" stroke-width="2" stroke-dasharray="3 4" fill="none" d="M 175.0 100.0 l 85 -25L 350.0 100.0 "
+                  marker-end="url(#FilledArrowhead)" />
+            <path id="line-2" stroke="black" stroke-width="2" stroke-dasharray="3 4" fill="none" d="M 350.0 100.0 l 85 -25L 175.0 100.0 "
+                  marker-end="url(#FilledArrowhead)" style="visibility:hidden;" />
+            <text font-family="times-roman" font-size="12" font-style="normal" stroke="black" color="black"
+                  fill="black" x="247.5" y="95.0">
+               A-to-B
+            </text>
+         </g>
+         <g>
+            <path id="line-5" stroke="purple" stroke-width="3" stroke-dasharray="10 10 5 5" fill="none"
+                  d="M 100.0 180.0 L 100.0 120.0 " marker-end="url(#FilledArrowhead)" />
+            <path id="line-6" stroke="purple" stroke-width="3" stroke-dasharray="10 10 5 5" fill="none"
+                  d="M 100.0 120.0 L 100.0 180.0 " marker-end="url(#FilledArrowhead)" style="visibility:hidden;" />
+            <text font-family="times-roman" font-size="12" font-style="normal" stroke="black" color="black"
+                  fill="black" x="105.0" y="155.0">
+               C-to-A
+            </text>
+         </g>
+         <g>
+            <path id="line-7" stroke="black" stroke-width="3" fill="none" d="M 100.0 220.0 v 80.0 L 212.5 300.0 " />
+            <path id="line-8" stroke="black" stroke-width="3" fill="none" d="M 212.5 300.0 v 80.0 L 100.0 220.0 "
+                  style="visibility:hidden;" />
+            <text font-family="times-roman" font-size="12" font-style="normal" stroke="black" color="black"
+                  fill="black" x="161.25" y="265.0">
+               C-to-E
+            </text>
+         </g>
+         <g>
+            <path id="line-9" stroke="black" stroke-width="3" fill="none" d="M 287.5 300.0 h 112.5 L 400.0 220.0 " />
+            <path id="line-10" stroke="black" stroke-width="3" fill="none" d="M 400.0 220.0 h 112.5 L 287.5 300.0 "
+                  style="visibility:hidden;" />
+            <text font-family="times-roman" font-size="12" font-style="normal" stroke="black" color="black"
+                  fill="black" x="348.75" y="265.0">
+               E-to-D
+            </text>
+         </g>
+      </g>
+   </g>
+</svg>

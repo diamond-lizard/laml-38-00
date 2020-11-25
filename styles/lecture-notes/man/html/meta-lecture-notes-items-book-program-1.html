@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><head><meta http-equiv = "Content-Type" content = "text/html; charset = ISO-8859-1" ><meta name = "Generator" content = "LAML" ><meta name = "description" lang = "dk" content = "A meta demonstration of the Scheme-based LENO lecture note system, describing its own format" ><link href = "stylesheets/leno-slide-basic.css" rel = "stylesheet" title = "leno-slide-basic" type = "text/css" ><link href = "stylesheets/leno-slide-font.css" rel = "stylesheet" title = "leno-slide-font" type = "text/css" ><title>Program</title><script src = "javascript/lenonavigate.js" type = "text/javascript" ></script></head><body onkeypress = "lenoNavigate('', '', 'meta-lecture-notes-book.html#items', '')" ondblclick = "lenoNavigate('', '', 'meta-lecture-notes-book.html#items', '')" bgcolor = "#ffffff" text = "#000000" link = "#000000" vlink = "#000000" class = "leno-book-program" ><table border = "0" cellpadding = "0" cellspacing = "0" width = "100%" ><tr><td width = "33%" align = "left" valign = "top" ><font size = "2" ><a href = "meta-lecture-notes-book.html#items" ><img src = "./images/nav-up.gif" alt = "Back to lecture notes
+Keyboard shortcut: 'u'" border = "0" ></a>&nbsp;&nbsp;</font></td><td width = "34%" align = "center" valign = "top" ><font size = "2" ><em><font size = "2" color = "#919191" ></font></em></font></td><td width = "33%" align = "right" valign = "top" ><font size = "2" ><b>Slide 4 : 24</b><br><b>Program 1</b></font></td></tr></table>&nbsp;<p><font size = "3" ><pre>(note-page 'items
+  (title "Items"
+         "Items is used to present arbitrarily nested items"
+  )
+
+  (items
+    (item "An outer item"
+          "Explanation of outer item"
+          (items
+            (item "Inner item 1"
+                  "Explanation of inner item 1"
+            )
+        
+            (item "Inner item 2"
+                  "Explanation of inner item 2"
+            )
+
+            (item "Inner item 3"
+                  "Explanation of inner item 3"
+            )
+          )
+    )
+  )  
+
+  (index-words "items")
+
+  (source-program this-source-file  (list "(note-page 'items" end-marker)
+       (list
+       )
+       '(slide-external book-external)
+       "The underlying LAML program. This shows the underlying source of this part of the notes"
+  )
+
+) ; end page</pre></font></body></html><!-- Generated from an LAML (Lisp Abstracted Markup Language) source file. Version 17 Development
+. LAML is designed and implemented by Kurt Nørmark, normark@cs.auc.dk. Time of generation: October 12, 2001 15:47:42-->
+<!-- LAML source file: /user/normark/scheme//styles/lecture-notes/man/meta-lecture-notes.laml; Scheme system: mzscheme; Scheme library directory: /user/normark/scheme/lib4/; Style Scheme file: /user/normark/scheme/styles/lecture-notes/lecture-notes.scm; -->

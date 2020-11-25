@@ -1,0 +1,38 @@
+(load (string-append laml-dir "laml.scm"))       
+(laml-style "lecture-notes/leno")
+
+(load "common-front-matters-stuff.scm")
+
+(leno-front-matters
+  (front-title "TITLE")           
+  (front-subtitle "SUBTITLE")   
+  (front-author authors)           
+  (front-affiliation institutions)  
+  (front-abstract "ABSTRACT")  
+
+  common-attributes
+  'process-all-lectures "true"
+)
+
+(begin-notes)
+
+
+  (note-page 'id "sec-id"
+    (section-title "TITLE")
+  )
+  
+  (note-page 'id "page-id"
+    (title (main-text "TITLE")
+           (annotation "ANNOTATION")
+    )
+
+    (point
+     (main-text "TEXT OF POINT")
+     (annotation "ANNOTATION OF POINT")
+    )
+  )
+
+
+(end-notes)
+
+

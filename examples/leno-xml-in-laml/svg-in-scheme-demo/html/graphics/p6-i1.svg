@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- The material in this file is copyrighted (c) by KN &copy;, AAU.  All rights reserved.-->
+<svg width="800" height="800" viewBox="0 0 800 800">
+   <g>
+      <g>
+         <rect rx="20" x="250.0" y="100" width="300" height="250" stroke-width="1" stroke="black" fill="#dcdcdc">
+            
+         </rect>
+         <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="400.0"
+               text-anchor="middle" y="235.0">
+            pip
+            <tspan color="red" fill="red">pop</tspan>
+            pyp
+         </text>
+      </g>
+   </g>
+</svg>

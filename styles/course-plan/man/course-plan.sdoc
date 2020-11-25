@@ -1,0 +1,87 @@
+; Manual of the file-read library
+
+(load (string-append laml-dir "laml.scm"))
+
+; ---------------------------------------------------------------------------------------------------
+; LOADING
+
+(define (lib-load file-name)
+  (load (string-append  the-library "/" file-name)))
+
+(lib-load "general.scm")
+
+(load (string-append software-directory "tools/schemedoc-extractor" "/" "schemedoc-extractor.scm"))
+
+; ---------------------------------------------------------------------------------------------------
+; FILES:
+
+(define source-directory (string-append laml-dir "styles/course-plan/"))
+
+(define manual-source-file (string-append  source-directory "course-plan.scm"))
+(define manual-destination-directory (string-append source-directory "man/"))
+
+; ---------------------------------------------------------------------------------------------------
+; COMMENT EXTRACTING
+(define delete-comment-file? #t)
+
+(define doc-list (extract-documentation-from-scheme-file manual-source-file))
+
+; extracted-manual-abstract implicitly defined
+
+(laml-style "manual/original-manual")
+
+
+; ---------------------------------------------------------------------------------------------------
+; MANUAL PRODUCTION
+
+(set-home-url "http://www.cs.auc.dk/~normark/laml/laml-overview.html")
+
+(set-manual-name "course-plan")
+
+; a redefinition from manual
+(define manual-index-width-list  (list 180 320 350))
+
+; another redefinition from manual
+(define end-remark "This documentation has been extracted automatically from the Scheme source file by means of the Schemedoc tool")
+
+; ---------------------------------------------------------------------------------------------------------------
+
+(set-manual-title "Reference Manual of the Course Plan Document Style")
+
+(set-manual-author "Kurt Nørmark" "normark@cs.auc.dk" "Department of Computer Science" "Aalborg University" "Denmark")
+
+(set-manual-abstract extracted-manual-abstract)
+
+(manual-section
+
+ (section-title "An example of a course home page")
+
+ (section-body (con "One of the best ways to learn about the course plan document style is to study an example.
+                As part of the LAML example collection we also provide a "
+                (a-tag "../../../examples/course-plan/index.html" "course plan example") ", where you
+                can see the Scheme and LAML sources together with the generated HTML pages."))
+)
+
+
+(manual-section
+
+ (section-title "Template stuff")
+
+ (section-body (con "If you are going to create a course home page via use of the LAML course plan document style
+                the template described in this section is a possible starting point. We have made a " 
+                (a-tag "template/" "directory structure") " with templates of all the central elements. The capitalized names should be filled in 
+                by you.
+                It is possible generate the 'template course' once the course-dir in course-description.scm has been defined.
+                The "
+                (a-tag "template/html/COURSE-HOME.html" "resulting course home page") " does not look nice, but it may be instructive to take a look at it anyway.
+                The resulting HTML files can be navigated to above, but they are not part of the zip file.
+                We have also made a " (a-tag "template.zip" "zipped version of the template directory") " for your convenience. 
+                You can unzip it into the parent directory, in which you want your course home page to reside. It creates a course directory called 'template'.
+                Afterwards, rename 'template' to something which makes sense."))
+)
+
+; ---------------------------------------------------------------------------------------------------------------
+
+(make-manual (append  manual-page-list doc-list) manual-destination-directory "styles/course-plan/course-plan.scm")
+
+

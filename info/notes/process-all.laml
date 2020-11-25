@@ -1,0 +1,21 @@
+; A LAML script that processes LAML files in this directory.
+
+(load (string-append laml-dir "laml.scm"))
+
+(define (process-list lst)
+ (for-each
+   (lambda (f)
+    (display f) (newline) (newline)
+    (laml f)
+   )
+   lst))
+
+; Return the list of all laml files, excluded the laml file of this script.
+(define (all-laml-files)
+ (let ((file-list (directory-list (startup-directory))))
+  (filter (lambda (f) (not (equal? (source-filename-without-extension) (file-name-proper f))))
+    (filter (lambda (f) (equal? (file-name-extension f) "laml")) file-list))))
+
+(process-list (all-laml-files))
+
+(end-laml)

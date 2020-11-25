@@ -1,0 +1,42 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(define  index-color (make-color 255 255 191))
+(define body-props 
+   (list 'bgcolor (rgb-color-encoding index-color) 'text (rgb-color-encoding black)
+         'link (rgb-color-encoding blue) 'vlink (rgb-color-encoding blue)))
+
+
+(write-html '(pp prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "Notes about LAML with MzScheme on older Windows systems"))
+  (body body-props
+    (laml-top-banner)
+ 
+    (h1 "Historial notes: LAML with MzScheme on older Windows Systems")
+
+    (p "Earlier on I used MzScheme on Windows 98 and NT4.0, relatively problem free.")
+
+    (p "It did not like Windows 98, because processes were hard to kill.")
+
+    (p "NT4.0 was OK, although the laml command prompt did not work well.")
+
+    (p "The last couple of years I have not tried LAML on Windows 98 nor NT.
+        I use mostly Unix, including Linux, Windows 2000, and Windows XP to some degree.")
+
+  )
+ )
+)
+
+
+(end-laml)

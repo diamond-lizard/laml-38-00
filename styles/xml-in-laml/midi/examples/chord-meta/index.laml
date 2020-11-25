@@ -1,0 +1,51 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+(load (in-startup-directory "../" "common-example-stuff.scm"))
+
+
+(begin-laml)
+
+(define current-xml-language 'xhtml10-transitional)
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+; Insert the LAML template "Processing Options" here
+; if you need variations in the LAML processing
+
+(define ttl "Chords - Meta Event")
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title ttl))
+  (body
+    (h1 ttl)
+
+    (p "The starting point of this example is a simple recoding of" (em "Oh Susanna") _ "," (a 'href "oh-susanna-ren/baseline-1.midl" "midl file") 
+        "corresponding to this" 
+       (a 'href "oh-susanna-ren-midi/baseline-1.mid" "midi file")_ "." )
+
+    (p "It is demonstrated how to use the chord-meta function for insertion of chord events.
+        We also show the expansion of this file.")
+
+    (table  'border 1
+      (tr (td (b "Description")) (td (b "Midl source file")) (td (b "Resulting midi file")))
+      (tr (get-baseline-mt "oh-susanna-ren" 5))
+      (tr (get-baseline-mt "oh-susanna-ren" 4))
+
+    )
+
+    (p "The midl column of the examles above also demonstrates the bar comments and 
+        the score comments of midl source files.")
+
+
+
+  )
+ )
+)
+
+
+(end-laml)

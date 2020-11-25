@@ -1,0 +1,87 @@
+(load (string-append laml-dir "laml.scm"))       
+(laml-style "xml-in-laml/lecture-notes/lecture-notes")
+
+; ::front-matters::
+(leno-front-matters
+  (front-title "Lecture 1 of Multi Demo")           
+  (front-author "Kurt Nørmark")           
+  (front-affiliation "Department of Computer Science, Aalborg University, Denmark")  
+  (front-abstract "This is the first lecture of the tuturial multi demo material")  
+
+  'slide-view "true"  
+  'annotated-slide-view "true"
+  'aggregated-view "true" 
+  'primary-view "slide-view"
+
+  'scheme-prefix "pre-notes.scm"  ; @a
+  'scheme-suffix "post-notes.scm"
+  'course-home-url ""   
+  'author-home-url ""   
+  'note-download-url ""   
+  'logo-url "http://www.auc.dk/"  
+  'note-contents-description ""    
+  'slide-header "normal"  ; minimal/normal/none 
+  'trail-of-lecture "false"  
+  'language "english"      
+  'show-and-speak "false" 
+    'default-showing-time "2"    
+    'additional-showing-time "0" 
+    'sound-source "real-audio" 
+    'speak-url-prefix "../../speak/"
+  'exercise-model "none"   
+  'mouse-advancement "double-press" 
+  'word-index "true"  
+  'news-flash-string  ""  
+  'news-flash-level   "2"
+  'quiz-support "false"   
+  'verbosity-level "1"
+  'css-stylesheet ""
+
+  'process-all-lectures "true"  ; @b
+)
+
+(begin-notes)
+
+(note-page 'id "sec1"
+  (section-title "Section one")
+)
+
+(note-page 'id "page1"
+  (title (main-text "First page in first lecture")
+         (annotation "")
+  )
+
+  (point
+   (main-text
+    "This is the first page"
+    )
+   (annotation
+    ""
+    )
+  )
+
+
+)
+
+(note-page 'id "page2"
+  (title (main-text "Second page in first lecture")
+         (annotation "")
+  )
+
+  (items 
+   (item 
+    (main-text "First item on page 2"
+               ) 
+    (annotation "There are no annotations - 
+                 no real ones, at least"
+                ))
+   (item 
+    (main-text "Second item on page 2"
+               ) 
+    (annotation ""
+  )))
+)
+
+(end-notes)
+
+

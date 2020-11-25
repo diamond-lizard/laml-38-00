@@ -1,0 +1,33 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/midi/midi")
+(load (string-append laml-dir "styles/xml-in-laml/midi/midi-laml-processing-lib.scm"))
+
+; The identity scaling function
+(define sc-id
+  (make-scale-function-by-xy-points
+           (from-percent-points 
+             '((0 100) (100 100)))))
+
+(StandardMidiFile
+   (MidiHeader 'format "0" 'numberOfTracks "1" 'pulsesPerQuarterNote "1920" 'mode "deltaTime")
+   (MidiTrack
+     (Meta 'deltaTime "0" 'type "81" (tempo= 30))
+     (voice 1 0 0 24)
+
+     ; Bar 1 with 4 downwards beats:
+     (beat 'down 0.2 70 1920 sc-id sc-id)
+     (beat 'down 0.2 70 1920 sc-id sc-id)
+     (beat 'down 0.2 70 1920 sc-id sc-id)
+     (beat 'down 0.2 70 1920 sc-id sc-id)
+
+     ; Bar 2 with 4 upwards beats:
+     (beat 'up 0.2 70 1920 sc-id sc-id)
+     (beat 'up 0.2 70 1920 sc-id sc-id)
+     (beat 'up 0.2 70 1920 sc-id sc-id)
+     (beat 'up 0.2 70 1920 sc-id sc-id)
+
+     (Meta 'deltaTime "1920" 'type "47" "")   ; End of track
+   )
+)
+
+;;; 1

@@ -1,0 +1,28 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/tutorials-and-demos/bikes")
+
+(bikes
+ (bike
+  (frame 'frame-number "IQ7W36-56")
+
+  (wheel 'size "25" 'tube-kind "standard")
+  (wheel 'size "25" 'tube-kind "standard")
+
+  (brake 'kind "hand" 'brand "shimano")
+
+  (lock 'brand "basta" 'insurance-approved "false")
+ )
+
+
+ (bike
+  (frame 'frame-number "IQ98T33-00")
+
+  (wheel 'size "22" 'tube-kind "standard")
+  (wheel 'size "23" 'tube-kind "standard")
+
+  (brake 'kind "foot" 'brand "shimano")
+  (brake 'kind "hand" 'brand "shimano")
+
+  (lock 'brand "basta" 'insurance-approved "true")
+ )
+)

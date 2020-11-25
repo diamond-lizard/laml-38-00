@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- The material in this file is copyrighted (c) by KN, AAU.  All rights reserved.-->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="700" height="700"
+     viewBox="0 0 700 700">
+   <g>
+      <line x1="300" y1="0" x2="300" y2="700" />
+      <line x1="0" y1="400" x2="700" y2="400" />
+      <g>
+         <rect x="300" y="400" width="124.73684210526316" height="40" stroke-width="1" stroke="black" fill="white" />
+         <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="362.36842105263156"
+               text-anchor="middle" y="430.0">
+            A node
+         </text>
+      </g>
+   </g>
+</svg>

@@ -1,0 +1,175 @@
+; Caches all the voice phrases used by the Emacs Motif XS Voice browser.
+
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/midi/midi")
+(load (string-append laml-dir "styles/xml-in-laml/midi/midi-laml-processing-lib.scm"))
+
+; --------------------------------------------------------------------------------------------------------
+; Parameters:
+
+(define ppqn 480)
+(define xs-voice-cache-directory "c:/users/kurt/Media/Motif-XS8/Midi-voice-phrases/")
+(define data-list-dir (string-append laml-dir "styles/xml-in-laml/midi/data/"))
+(define target-ch 16)
+
+; --------------------------------------------------------------------------------------------------------
+
+(define (octave-phrase msb lsb pc)
+  (StandardMidiFile
+     (MidiHeader 'format "0" 'numberOfTracks "1" 'pulsesPerQuarterNote ppqn 'mode "deltaTime")
+     (MidiTrack
+        (voice target-ch msb lsb pc)
+
+        (map
+          (lambda (n)
+            (SysEx 'deltaTime "0" 'info "0:0:0 GM Reset: 7E 7F 09 01 F7" "05 7E 7F 09 01 F7")
+            (NoteOn 'deltaTime (/ ppqn 2) 'channel target-ch 'note n 'velocity "100" 'duration (/ ppqn 2))
+          )
+          (number-interval 60 72)
+        )
+        (Meta 'deltaTime ppqn 'type "47" "")   ; End of track  
+     )
+  ))
+
+(define (full-scale-phrase msb lsb pc)
+  (StandardMidiFile
+     (MidiHeader 'format "0" 'numberOfTracks "1" 'pulsesPerQuarterNote ppqn 'mode "deltaTime")
+     (MidiTrack
+        (voice target-ch msb lsb pc)
+        (map
+          (lambda (n)
+            (NoteOn 'deltaTime (/ ppqn 2) 'channel target-ch 'note n 'velocity "100" 'duration (/ ppqn 2))
+          )
+          (number-interval 0 127)
+        )
+        (Meta 'deltaTime ppqn 'type "47" "")   ; End of track
+     )
+  ))
+
+(define (mega-phrase msb lsb pc)
+  (StandardMidiFile
+     (MidiHeader 'format "0" 'numberOfTracks "1" 'pulsesPerQuarterNote ppqn 'mode "deltaTime")
+     (MidiTrack
+        (voice target-ch msb lsb pc)
+        (map
+          (lambda (vel)
+           (list
+            (NoteOn 'deltaTime (/ ppqn 8) 'channel target-ch 'note 60 'velocity  vel 'duration (/ ppqn 2))
+            (NoteOn 'deltaTime (/ ppqn 8) 'channel target-ch 'note 64 'velocity  vel 'duration (/ ppqn 2))
+            (NoteOn 'deltaTime (/ ppqn 8) 'channel target-ch 'note 67 'velocity  vel 'duration (/ ppqn 2))
+            (midi-comment-delta-time (* (/ ppqn 8) 5) "Pause rest of this beat")
+           )          
+          )
+          (list 19 39 59 74 89 104 119 126)
+        )
+        (Meta 'deltaTime ppqn 'type "47" "")   ; End of track
+     )
+  ))
+
+(define (drums-phrase msb lsb pc)
+  (StandardMidiFile
+     (MidiHeader 'format "0" 'numberOfTracks "1" 'pulsesPerQuarterNote ppqn 'mode "deltaTime")
+     (MidiTrack
+        (voice target-ch msb lsb pc)
+  
+        (NoteOn 'deltaTime "0" 'info "0:0:0 C1 Bass Drum 1" 'channel target-ch 'note "36" 'velocity "90" 'duration "0")
+        (NoteOn 'deltaTime "0" 'info "0:0:0 F#1 Closed Hi-Hat" 'channel target-ch 'note "42" 'velocity "65" 'duration "192")
+        (NoteOn 'deltaTime "192" 'info "0:0:192 F#1 Closed Hi-Hat" 'channel target-ch 'note "42" 'velocity "61" 'duration "192")
+        (NoteOn 'deltaTime "192" 'info "0:1:0 D1 Acoustic Snare" 'channel target-ch 'note "38" 'velocity "87" 'duration "0")
+        (NoteOn 'deltaTime "0" 'info "0:1:0 F#1 Closed Hi-Hat" 'channel target-ch 'note "42" 'velocity "62" 'duration "192")
+        (NoteOn 'deltaTime "192" 'info "0:1:192 F#1 Closed Hi-Hat" 'channel target-ch 'note "42" 'velocity "69" 'duration "192")
+        (NoteOn 'deltaTime "192" 'info "0:2:0 C1 Bass Drum 1" 'channel target-ch 'note "36" 'velocity "86" 'duration "0")
+        (NoteOn 'deltaTime "0" 'info "0:2:0 F#1 Closed Hi-Hat" 'channel target-ch 'note "42" 'velocity "65" 'duration "192")
+        (NoteOn 'deltaTime "192" 'info "0:2:192 F#1 Closed Hi-Hat" 'channel target-ch 'note "42" 'velocity "68" 'duration "192")
+        (NoteOn 'deltaTime "192" 'info "0:3:0 D1 Acoustic Snare" 'channel target-ch 'note "38" 'velocity "88" 'duration "0")
+        (NoteOn 'deltaTime "0" 'info "0:3:0 F#1 Closed Hi-Hat" 'channel target-ch 'note "42" 'velocity "63" 'duration "192")
+        (NoteOn 'deltaTime "192" 'info "0:3:192 F#1 Closed Hi-Hat" 'channel target-ch 'note "42" 'velocity "65" 'duration "192")
+        (NoteOn 'deltaTime "192" 'info "1:0:0 D1 Acoustic Snare" 'channel target-ch 'note "38" 'velocity "89" 'duration "96")
+        (NoteOn 'deltaTime "96" 'info "1:0:96 D2 High Tom" 'channel target-ch 'note "50" 'velocity "92" 'duration "96")
+        (NoteOn 'deltaTime "96" 'info "1:0:192 C2 Hi-Mid Tom" 'channel target-ch 'note "48" 'velocity "86" 'duration "96")
+        (NoteOn 'deltaTime "96" 'info "1:0:288 B1 Low-Mid Tom" 'channel target-ch 'note "47" 'velocity "86" 'duration "96")
+        (NoteOn 'deltaTime "96" 'info "1:1:0 D1 Acoustic Snare" 'channel target-ch 'note "38" 'velocity "90" 'duration "96")
+        (NoteOn 'deltaTime "96" 'info "1:1:96 D2 High Tom" 'channel target-ch 'note "50" 'velocity "91" 'duration "96")
+        (NoteOn 'deltaTime "96" 'info "1:1:192 C2 Hi-Mid Tom" 'channel target-ch 'note "48" 'velocity "88" 'duration "96")
+        (NoteOn 'deltaTime "96" 'info "1:1:288 B1 Low-Mid Tom" 'channel target-ch 'note "47" 'velocity "93" 'duration "96")
+        (NoteOn 'deltaTime "96" 'info "1:2:0 D1 Acoustic Snare" 'channel target-ch 'note "38" 'velocity "91" 'duration "96")
+        (NoteOn 'deltaTime "96" 'info "1:2:96 D2 High Tom" 'channel target-ch 'note "50" 'velocity "91" 'duration "96")
+        (NoteOn 'deltaTime "96" 'info "1:2:192 C2 Hi-Mid Tom" 'channel target-ch 'note "48" 'velocity "93" 'duration "96")
+        (NoteOn 'deltaTime "96" 'info "1:2:288 B1 Low-Mid Tom" 'channel target-ch 'note "47" 'velocity "94" 'duration "96")
+        (NoteOn 'deltaTime "96" 'info "1:3:0 D1 Acoustic Snare" 'channel target-ch 'note "38" 'velocity "90" 'duration "96")
+        (NoteOn 'deltaTime "96" 'info "1:3:96 D2 High Tom" 'channel target-ch 'note "50" 'velocity "94" 'duration "96")
+        (NoteOn 'deltaTime "96" 'info "1:3:192 C2 Hi-Mid Tom" 'channel target-ch 'note "48" 'velocity "88" 'duration "96")
+        (NoteOn 'deltaTime "96" 'info "1:3:288 B1 Low-Mid Tom" 'channel target-ch 'note "47" 'velocity "92" 'duration "96")
+        (NoteOn 'deltaTime "96" 'info "2:0:0 C1 Bass Drum 1" 'channel target-ch 'note "36" 'velocity "89" 'duration "0")
+        (NoteOn 'deltaTime "0" 'info "2:0:0 C#2 Crash Cymbal 1" 'channel target-ch 'note "49" 'velocity "58" 'duration "384")
+  
+        (Meta 'deltaTime "384" 'info "2:1:0 End of track" 'type "47" "")
+     )
+  ))
+
+(define (user-voices)
+  "Return the list of all Motif XS user voices"
+
+  (append
+
+     ; User1 voices
+     (map (lambda (i) (list 63 8 i "User Voice" 'NoAsg 'NoAsg 'NoAsg 'NoAsg 1))
+             (number-interval 0 127))
+
+     ; User2 voices
+     (map (lambda (i) (list 63 9 i "User Voice" 'NoAsg 'NoAsg 'NoAsg 'NoAsg 1))
+             (number-interval 0 127))
+
+     ; User3 voices
+     (map (lambda (i) (list 63 10 i "User Voice" 'NoAsg 'NoAsg 'NoAsg 'NoAsg 1))
+             (number-interval 0 127))
+
+     ; UserDr voices
+     (map (lambda (i) (list 63 40 i "User Drum" 'Dr-Pc 'NoAsg 'NoAsg 'NoAsg 1))
+             (number-interval 0 31))
+  )
+)
+
+(define (cache-motif-xs-voice-phrases)
+  (let ((voice-list (append
+;                       (file-read (string-append data-list-dir "Motif-xs-voices.dat"))
+                       (user-voices))))
+    (for-each
+      (lambda (voice-entry)
+        (let ((msb (first voice-entry))
+              (lsb (second voice-entry))
+              (pc (third voice-entry)))
+
+          (let ((path (string-append xs-voice-cache-directory "octave/" (as-string msb) "-" (as-string lsb) "-" (as-string pc) "." "mid")))
+            (if (file-exists? path) (delete-file path))
+            (display-message msb lsb pc)
+            (write-text-file
+             (standard-midi-file-ast-to-bin (octave-phrase msb lsb pc)) path
+            ))
+
+          (let ((path (string-append xs-voice-cache-directory "full-scale/" (as-string msb) "-" (as-string lsb) "-" (as-string pc) "." "mid")))
+            (if (file-exists? path) (delete-file path))
+            (display-message msb lsb pc)
+            (write-text-file
+             (standard-midi-file-ast-to-bin (full-scale-phrase msb lsb pc)) path
+            ))
+
+          (let ((path (string-append xs-voice-cache-directory "mega/" (as-string msb) "-" (as-string lsb) "-" (as-string pc) "." "mid")))
+            (if (file-exists? path) (delete-file path))
+            (display-message msb lsb pc)
+            (write-text-file
+             (standard-midi-file-ast-to-bin (mega-phrase msb lsb pc)) path
+            ))
+
+          (let ((path (string-append xs-voice-cache-directory "drums/" (as-string msb) "-" (as-string lsb) "-" (as-string pc) "." "mid")))
+            (if (file-exists? path) (delete-file path))
+            (display-message msb lsb pc)
+            (write-text-file
+             (standard-midi-file-ast-to-bin (drums-phrase msb lsb pc)) path
+            ))
+         )
+      )
+      voice-list)))
+
+(cache-motif-xs-voice-phrases)
+        

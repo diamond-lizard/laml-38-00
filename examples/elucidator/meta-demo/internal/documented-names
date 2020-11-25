@@ -1,0 +1,1 @@
+((fak second-entry strong) (list-prefix third-entry strong) (list-prefix-1 third-entry weak) (pair-up third-entry strong) (pair-up-1 third-entry weak) (key-list third-entry weak) (val-list third-entry weak) (aref-assignment third-entry weak) (fak details strong) (fak details weak))

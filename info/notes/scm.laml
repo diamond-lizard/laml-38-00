@@ -1,0 +1,68 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(define  index-color (make-color 255 255 191))
+(define body-props 
+   (list 'bgcolor (rgb-color-encoding index-color) 'text (rgb-color-encoding black)
+         'link (rgb-color-encoding blue) 'vlink (rgb-color-encoding blue)))
+
+
+(write-html '(pp prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "Notes about LAML on SCM"))
+  (body body-props
+    (laml-top-banner)
+ 
+    (h1 "LAML with SCM")
+
+    (p "Version 27: Not yet tested with SCM")
+
+    (h2 "Historical Remarks:")
+
+    (p "The notes below are all historial pre-version 26 remarks. The remarks are appropriate for version 20.")
+
+    (p "SCM is Aubrey Jaffer's excellent Scheme system, which we used in the early days of the development of LAML. Also for CGI programming efforts.")
+
+    (p "We left SCM, mostly because our system staff on Solaris had a hard time installing new versions.
+        The last few years I have not used SCM with LAML on Solaris.")
+
+    (p "I installed SCM version 5d7 and SLIB version 2d5 (most recent versions as of May 2003) on Red Hat Linux.
+        This was very easy due to existence of
+        RPM's for both, cf." (a 'href "http://www-swiss.ai.mit.edu/~jaffer/SCM.html""Jaffer's SCM page") _ "."
+    )
+
+    (p "In the same way as for Guile and MzScheme-200, I adapted the existing SCM compatibility file and made
+        it generic for all platforms and all operating systems:" (kbd "lib/compatibility/star_star_scm.scm") _ ".")
+
+    (p "The following minor problems exist for SCM in relation to LAML:")
+
+    (ol 
+      (li "I could not figure out how to implement the compatiblity function" (kbd "bound?") "
+           A macro" (kbd "defined?") "exist in SCM, but it does not evaluate its parameter, of course.
+           Thus (as noticed in newsgroups and mailing lists)," (kbd "defined?") "in Guile and" (kbd "defined?") "in SCM
+           differs.")
+
+      (li "I could not figure out how to ask for case sensitive reading. This affects the SVG mirror.")
+    )
+
+    (p "All other aspects of LAML seems to work very well together with SCM")
+
+    (p "I will assume that SCM (using the same compatibility file as for Linux) also works on Solaris, but it remains
+        to be proven.")
+
+  )
+ )
+)
+
+
+(end-laml)

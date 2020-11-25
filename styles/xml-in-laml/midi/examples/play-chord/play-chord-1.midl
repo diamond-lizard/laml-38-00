@@ -1,0 +1,23 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/midi/midi")
+(load (string-append laml-dir "styles/xml-in-laml/midi/midi-laml-processing-lib.scm"))
+
+(StandardMidiFile
+   (MidiHeader 'format "0" 'numberOfTracks "1" 'pulsesPerQuarterNote "1920" 'mode "deltaTime")
+   (MidiTrack
+      (voice 1 0 113 0)    ; piano
+
+      (play-chord "C"        ; root
+                  "sus2"     ; chord name
+                  0          ; start octave number
+                  7          ; number of octaves plaed
+                  960        ; deltaTime of each note
+                  (* 4 960)  ; duration of each note
+                  1          ; channel number
+                  100        ; velocity
+      )
+
+      (Meta 'deltaTime "1920" 'type "47" "")   ; End of track
+   )
+)
+

@@ -1,0 +1,7 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+
+(xml-parse-file (in-startup-directory "cs-home.html") 'xhtml10-transitional "cs-home-xhtml.lsp")
+
+(end-laml)
+

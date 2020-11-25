@@ -1,0 +1,188 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/manual/manual")
+(manual
+  (manual-front-matters
+    (manual-title "")
+    (manual-author "")
+    (manual-affiliation "")
+    (manual-abstract "")
+    'css-prestylesheet "normal"
+    'css-stylesheet "original"
+  )
+
+  (manual-page 'name "course-plan"
+    (description "")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "course-info"
+    (description "")
+    (attribute-descriptions 
+      (attribute-description 'name "course-id" "")
+      (attribute-description 'name "language-preference" "")
+      (attribute-description 'name "course-title" "")
+      (attribute-description 'name "course-directory" "")
+      (attribute-description 'name "brief-course-title" "")
+      (attribute-description 'name "course-semester" "")
+      (attribute-description 'name "brief-course-semester" "")
+      (attribute-description 'name "teacher-name" "")
+      (attribute-description 'name "course-url-prefix" "")
+      (attribute-description 'name "author-home-url" "")
+      (attribute-description 'name "make-overview-pages" "")
+      (attribute-description 'name "color-scheme" "")
+      (attribute-description 'name "last-lecture-number" "")
+      (attribute-description 'name "relative-source-destination-path" "")
+      (attribute-description 'name "exercise-model" "")
+      (attribute-description 'name "calendar-start-year" "")
+      (attribute-description 'name "calendar-start-month" "")
+      (attribute-description 'name "calendar-number-of-months" "")
+      (attribute-description 'name "news-flash-string" "")
+      (attribute-description 'name "news-flash-level" "")
+    )
+  )
+
+  (manual-page 'name "time-list"
+    (description "")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "time"
+    (description "")
+    (attribute-descriptions 
+      (attribute-description 'name "year" "")
+      (attribute-description 'name "month" "")
+      (attribute-description 'name "day" "")
+      (attribute-description 'name "hour" "")
+      (attribute-description 'name "minute" "")
+      (attribute-description 'name "second" "")
+    )
+  )
+
+  (manual-page 'name "lecture-list"
+    (description "")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "lecture"
+    (description "")
+    (attribute-descriptions 
+      (attribute-description 'name "lecture-id" "")
+      (attribute-description 'name "subject-id" "")
+      (attribute-description 'name "plenum-start" "")
+      (attribute-description 'name "plenum-length" "")
+      (attribute-description 'name "exercise-start" "")
+      (attribute-description 'name "exercise-length" "")
+      (attribute-description 'name "room" "")
+    )
+  )
+
+  (manual-page 'name "subject-list"
+    (description "")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "subject"
+    (description "")
+    (attribute-descriptions 
+      (attribute-description 'name "id" "")
+      (attribute-description 'name "title" "")
+      (attribute-description 'name "href" "")
+    )
+  )
+
+  (manual-page 'name "description"
+    (description "")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "index-links"
+    (description "")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "bottom-links"
+    (description "")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "link-entry"
+    (description "")
+    (attribute-descriptions 
+      (attribute-description 'name "href" "")
+      (attribute-description 'name "target" "")
+    )
+  )
+
+  (manual-page 'name "course-intro"
+    (description "")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "lecture-plan-list"
+    (description "")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "lecture-plan"
+    (description "")
+    (attribute-descriptions 
+      (attribute-description 'name "lecture-id" "")
+    )
+  )
+
+  (manual-page 'name "literature"
+    (description "")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "reading-guide"
+    (description "")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "exercises"
+    (description "")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "references"
+    (description "")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "misc"
+    (description "")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (merged-manual-from-xml-dtd 'src "")
+
+)

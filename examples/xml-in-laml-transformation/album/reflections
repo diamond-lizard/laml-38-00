@@ -1,0 +1,28 @@
+Access to constituents.
+
+ Specific naviation along certain edges in the tree.
+   Vulnerable from reorganizations of the tree.
+
+ Global search - first match
+  
+ DTD controlled search
+  More efficient search
+
+
+Article, figure 
+ recording-date constituent missing in figure 1 relative to figure 5. Added in LAML doc.
+
+LAML problem: Character reference in attribute. Lapsus. Corrected in version 20.10.
+
+Article: Optional recording date: Problems if not there.
+
+White space problems in notes - I don't understand why, in details.
+  Jo - det handler om at vi går igennem overflade funktionerne igen i taget af transformation,
+  hvor vi kræver explicit suppress!!!
+  Kan håndteres med to specielle cases in transform-asts!?
+
+Numbering of catalog numbers: ol is the natural solution.
+An explicit numbering would be slightly more tricky.
+
+Very satisfactory and helpful to have full validation on both source and target.
+We can program under the assumption that the input document is legal and valid.

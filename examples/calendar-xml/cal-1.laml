@@ -1,0 +1,49 @@
+(load (string-append laml-dir "laml.scm"))
+
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+(load (string-append laml-dir "tools/calendar/xml-in-laml/calendar.scm"))
+
+; HTML attribute lists
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(define calendar-events 
+  (list
+    (list (time-encode 2005 8 19 10 20 0) (time-encode 2005 8 19 22 20 0) "Brief text" "Long text here" (rgb-color-encoding 0 255 0) "")
+  )
+)
+
+(define calendar-division-of-day
+  (let ((noon-time (/ seconds-in-a-day 2)))
+    (list (list 0 14400) (list 14400 28800) (list 28800 43200)
+          (list 43200 57600) (list 57600 72000) (list 72000 86400))))
+
+(define validate-html? #t)
+(define check-html-attributes? #t)
+(define transliterate-character-data? #t)
+(define check-element-prohibitions? #t)
+(define month-width 250)
+
+(write-html '(pp prolog)
+ (html html-props
+  (head 
+    (style 'type "text/css" "TABLE.calendar-table TD { font-size: 7pt; }")
+;    (link 'href "calendar.css" 'rel "stylesheet" 'type "text/css") 
+    (title "Calendar test"))
+  (body 
+
+    (h1 "A calendar of 2005")
+  
+    (calendar 2005 1 12 #t (length calendar-division-of-day))
+
+    (vertical-space 2)
+
+    (week-calendar (current-time) (length calendar-division-of-day) 100)
+
+    (when-generated)
+
+  ))
+)
+
+(end-laml)

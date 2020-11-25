@@ -1,0 +1,133 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/elucidator-2/elucidator")
+
+(elucidator-front-matters
+
+ 'laml-resource "true"
+ 'home-url "../../index.html"
+
+ 'author-mode "false"
+
+ ; OVERALL attributes
+ 'table-of-contents "detailed" ; detailed or shallow
+ 'shallow-table-of-contents-columns "3"
+ 'detailed-table-of-contents-columns "2"
+ 'source-marker-presentation "image"  ; image, text, colored-text
+ 'source-marker-char "@"
+ 'browser-pixel-width "1100"
+ 'control-frame-pixel-height "120"
+
+ ; INDEX attributes
+ 'cross-reference-index "aggregated"  ; per-letter, aggregated
+ 'defined-name-index "aggregated"     ; per-letter, aggregated
+
+ ; PROGRAM attributes
+ 'initial-program-frame "first-source-file" ; blank, first-source-file
+ 'large-font-source-file  "true"
+ 'small-font-source-file  "true"
+ 'default-source-file-font-size  "small"   ; small or large
+ 'program-menu "separate-frame"   ; inline-table, none, separate-frame 
+ 'author-mode "true"
+ 'processing-mode "verbose"
+
+ (color-scheme
+   (color-entry 'group "doc" (predefined-color "documentation-background-color")) 
+   (color-entry 'group "index" (predefined-color "documentation-background-color"))  
+   (color-entry 'group "core" (predefined-color "program-background-color-1"))
+   (color-entry 'group "others" (predefined-color "program-background-color-2"))
+ )
+    
+ (source-files
+   (program-source 'key "prog" 'file-path (in-startup-directory "demo.scm")
+                   'group "core" 'process "true")
+
+;   (manual-source 'file-path "" 'url "")
+   
+
+ )
+)
+
+
+(begin-documentation)
+
+(documentation-intro
+    (doc-title "Name Binding Demo")
+    (doc-author "Kurt Nørmark")
+    (doc-affiliation "Department of Computer Science, Aalborg University")
+    (doc-email "normark@cs.auc.dk")
+    (doc-abstract 
+      (p "This is a demonstration of various name binding issues in the Scheme Elucidator. This includes examples with" (kbd "define-syntax") "and" (kbd "syntax-rules") _ "." "
+          Do not expect that all the illustrated Scheme functions makes sense from a semantic point of view.")
+
+       (p "In this elucidative program we have modified the program style sheet to emphasize local name
+           bindings using a" (font 'color (rgb-color-encoding 255 90 90)  "light red color") _ "." )
+    )
+)
+
+(documentation-section 
+   'id "sec"
+   (section-title "Name binding")
+   (section-body 
+
+   )
+)
+
+(documentation-entry
+    'id "entry"
+    (entry-title "Short explanations")
+    (entry-body 
+      (p "First look at" (strong-prog-ref 'file "prog" 'name "p1") _ "." 
+         "In the" (weak-prog-ref 'name "let") "form," (kbd "car") "and" (kbd "length") "are simultaneously bound to" (weak-prog-ref 'name "length") "and" 
+         (weak-prog-ref 'name "car")_ "." 
+         "Within the body of" (weak-prog-ref 'name "let") _ "," "the names" (kbd "car") "and" (kbd "length") "refer to the locally defined name, not to R5RS names.
+          Notice the linking from brown names to details in R5RS." )
+
+      (p 
+        "In " (strong-prog-ref 'file "prog" 'name "p2") "and" (strong-prog-ref 'file "prog" 'name "p3")
+        "we illustrate" (weak-prog-ref 'name "let*") "and" (weak-prog-ref 'name "letrec") "instead of" (weak-prog-ref 'name "let") _ "." "It appears that the Scheme Elucidator is aware of the
+         different name binding techniques of" (weak-prog-ref 'name "let") _ "," (weak-prog-ref 'name "let*") _ "," "and" (weak-prog-ref 'name "letrec") _ "." )
+
+      (p 
+        "In " (strong-prog-ref 'file "prog" 'name "p4") "we see that we can locally bind the names" (kbd "car") "and" (kbd "cdr") "in a" (weak-prog-ref "letrec") _ "."
+        "The Elucidator is aware of these bindings."
+      )
+
+      (p 
+        "In" (strong-prog-ref 'file "prog" 'name "p5") "it is illustrated that we can use" (kbd "lambda") _ "," (kbd "case") _ "," "and" (kbd "do") "as formal parameter names.
+         In addition, we can locally bind the names" (kbd "length") "and" (kbd "if") "in a" (weak-prog-ref 'name "let*") _ "." "Notice here, and above, that bold names are linked to R5RS."
+      )
+
+      (p 
+        (strong-prog-ref 'file "prog" 'name "p6") "illustrates both" (weak-prog-ref 'name "let-syntax") "and" (weak-prog-ref 'name "syntax-rules") _ "." "
+        The Scheme Elucidator is aware the names bound in the patterns of" (weak-prog-ref 'name "syntax-rules") _ "," "for instance" (kbd "car") _ "."
+      )
+
+      (p 
+        (strong-prog-ref 'file "prog" 'name "letrec") "shows an application of" (weak-prog-ref 'name "define-syntax") _ "," "with use of the name" (kbd "lambda") "in the pattern of
+        syntax rule (confusing, of course)."
+      )
+
+      (p (strong-prog-ref 'file "prog" 'name "p7") "shows, again," (weak-prog-ref 'name "letrec-syntax") "and" (weak-prog-ref 'name "syntax-rules") _ 
+         "." "In addition, there is a" (weak-prog-ref 'name "let") "name binding where the names" (kbd "let") (source-marker 'name "a") "and" (kbd "if") (source-marker 'name "b")"are bound." )
+
+
+      (p 
+        (strong-prog-ref 'file "prog" 'name "p9") _ "," (strong-prog-ref 'file "prog" 'name "p9a") _ ", and"
+        (strong-prog-ref 'file "prog" 'name "p9b") "are not particular important in this context. 
+        They show the handling of different kinds of function definitions, in particular lambda form parameters."
+      )
+
+      (p "The functions" (strong-prog-ref 'file "prog" 'name "p10") "and" 
+         (strong-prog-ref 'file "prog" 'name "p11")"show the handling of" (weak-prog-ref 'name "quote") "and" 
+         (weak-prog-ref 'name "quasiquote") "using the lexical quote notation. Similarly," 
+         (strong-prog-ref 'file "prog" 'name "p10a") "and" (strong-prog-ref 'file "prog" 'name "p11a") 
+         "shows the" (weak-prog-ref 'name "quote") _ "," (weak-prog-ref 'name "quasiquote") _ "," 
+         (weak-prog-ref 'name "unquote-splicing")_ "," "and" (weak-prog-ref 'name "unquote") "forms." )
+
+      (p 
+        "The function" (strong-prog-ref 'file "prog" 'name "p12") "illustrates a named let." 
+      )
+    )
+)
+
+(end-documentation)

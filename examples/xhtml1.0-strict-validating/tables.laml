@@ -1,0 +1,64 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-strict-validating")
+
+(begin-laml)
+
+; FOP
+;(lib-load "xml-in-laml/mirrors/xsl-fo-mirror.scm")
+;(lib-load "xml-in-laml/transformations/xhtml-to-xsl-fo.scm")
+
+; HTML attribute lists
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(define (document ttl body-form)
+ (html html-props
+  (head 
+   (meta meta-props) (title ttl))
+  (body 
+    body-form)))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(process-xml 
+  (list
+    (list "html" id-1 'raw 'prolog)
+;    (list "fo" (lambda (ast) (transform-ast xhtml-to-xsl-fo ast)) 'pp)
+  )
+  (in-startup-directory (source-filename-without-extension))
+ (document
+  "Table example"
+
+  (list 
+   (h1 "Table examples")
+
+   (p "A table with tbody:")
+
+   (table 'border "1"
+	   (caption "Table caption")
+	   (thead (tr (td "X") (td "Y")))
+	   (tfoot (tr (td "Z") (td "V")))
+	   (tbody  
+	    (tr (td "1") (td "2"))  
+	    (tr (td "3") (td "4"))  
+	    )
+	   )
+
+   (hr)
+
+   (p "A simpler table with tr:")
+
+   (table 'border "1"
+           (caption (em "Table caption"))
+           (tr (td "1") (td "2"))  
+	   (tr (td "3") (td "4"))
+   )
+
+   (hr)
+
+  )
+ )
+)
+
+(end-laml)

@@ -1,0 +1,120 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/schemedoc-2/schemedoc")
+
+(define (prim anchor-name)
+  (a 'href (string-append "../../lecture-notes/man/lecture-notes.html#" anchor-name) anchor-name))
+
+(manual
+  (manual-front-matters
+    (manual-title "Lecture Note Trail Manual")
+    (kn-manual-settings)
+    (manual-abstract
+     (div
+       (p "This is a manual of the LENO Trail facility. Using the LENO trail
+           facility it is possible to select a subset of slides in a lecture,
+           and to generate a collection of interlinked frameset pages.")
+
+       (p "The best way to initiate a new trail is to ask LENO to generate a complete trail (on a separate, secondary
+           source file).
+           and then delete the" (kbd "page-select") "clauses which you do not need.
+           The generated trail covers all pages in all lectures. The attribute" (kbd "trail-source") "
+           in the"
+          (a 'href "../../lecture-notes/man/lecture-notes.html#leno-front-matters" (kbd "leno-front-matters"))
+           "element controls the trail generation. You can of course also
+           reorganize the" (kbd "page-select") "clauses.")
+
+       (p "You may consult section 4 of the" (a 'href "../../../../tutorial/leno/leno.html" "LENO Tutorial") "to learn more about LENO trails.")
+
+       (p "Similar resources:" (a 'href "../../lecture-notes/man/lecture-notes.html" "The primary LENO language")
+           "and" (a 'href "../../lecture-notes-themes/man/lecture-notes-themes.html" "The Theme LENO language") _ ".")
+     )
+
+    )
+    'laml-resource "true"
+  )
+
+  (manual-page 'name "leno-trail"
+    (description "The root element of the LENO trail source file.")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "leno-trail-front-matters"
+    (description "The front matters elements holds a number of overall attributes of the LENO trail.")
+    (attribute-descriptions 
+      (attribute-description 'name "trail-id" "The unique id of this trail.
+                                               The id determines the prefix of the names of the generated HTML files.")
+      (attribute-description 'name "scheme-prefix" 
+             (span "The scheme prefix file. Similar to the" (prim "leno-front-matters")
+                   "attribute of the same name"))
+      (attribute-description 'name "scheme-suffix" 
+             (span "The scheme suffix file. Similar to the" (prim "leno-front-matters")
+                   "attribute of the same name"))
+      (attribute-description 'name "course-home-url" 
+             (span "The URL of the designated course home page. Similar to the" (prim "leno-front-matters")
+                   "attribute of the same name")
+      )
+      (attribute-description 'name "language" "Controls the language of the fixed text")
+    )
+  )
+
+  (manual-page 'name "front-title"
+    (description "The title of the LENO trail")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "front-author"
+    (description "The author of the LENO trail")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "front-affiliation"
+    (description "The affiliation of the trail author")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "front-abstract"
+    (description "The abstract of the LENO trail")
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "begin-trail"
+    (description (span "An empty element before the first" (kbd "page-select") "clause."))
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "end-trail"
+    (description (span "An empty element after the last" (kbd "page-select") "clause"))
+    (attribute-descriptions 
+
+    )
+  )
+
+  (manual-page 'name "page-select"
+    (description (span "Selects a page of a LENO lecture.
+                  This is the most important element of a LENO trail source file.
+                  A sequence of" (kbd "page-select") "elements in between" (kbd "begin-trail") "and" 
+                  (kbd "end-trail") "constitute
+                  the body of a LENO trail.
+                 "))
+
+    (attribute-descriptions 
+      (attribute-description 'name "lecture-id" "The id of a LENO lecture. Must be located in the same lecture as this trail file.")
+      (attribute-description 'name "page-id" "The page id of a page in the lecture addressed by lecture-id")
+    )
+  )
+
+  (merged-manual-from-xml-dtd 'src "../dtd/leno-trail")
+
+)

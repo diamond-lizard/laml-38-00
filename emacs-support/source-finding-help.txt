@@ -1,0 +1,22 @@
+FINDING DEFINITIONS.
+
+The main idea with this feature is to allow navigation from an applied name to its definition.
+It works separately for Scheme and ELisp source files.
+The navigation can take place across a number of different source files.
+
+F7 searches for the definition of the name under point.
+F5 goes back the chain to the location before the previous finding operation.
+F6 goes forward the chain without searching. 
+S-F7 searches similarly to F7, but it starts a new chain.
+
+M-x add-current-source-file-for-finding-definitions:
+Adds the current source file so that it can be searched.
+
+M-x remove-current-source-file-for-finding-definitions ()
+Delete the current source file from the list of files that are searched.
+
+M-x info-about-source-file-for-finding-definitions
+Gives information about the files that are searched.
+
+All commands mentioned above are also located in the Scheme/Emacs-Lisp menus.
+

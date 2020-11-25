@@ -1,0 +1,70 @@
+<!--
+   LENO - LAML Lecture Notes.
+
+   Copyright (c) 2002  Kurt Nørmark.
+   All Rights Reserved. 
+-->
+
+<!ENTITY % Symbol "CDATA">
+    <!-- a name without spaces -->
+
+<!ENTITY % URI "CDATA">
+    <!-- a Uniform Resource Identifier, see [RFC2396] -->
+
+<!ENTITY % File-path "CDATA">
+    <!-- an absolute or relative file path -->
+
+
+
+<!ELEMENT leno-trail
+  (leno-trail-front-matters, 
+   begin-trail,
+   page-select*,
+   end-trail) >
+
+<!ATTLIST leno-trail
+>
+
+<!ELEMENT leno-trail-front-matters
+  (front-title, front-author, front-affiliation, front-abstract)
+>
+
+<!ATTLIST leno-trail-front-matters
+  trail-id                            %Symbol;                      #REQUIRED
+  scheme-prefix                       %File-path;                   #IMPLIED
+  scheme-suffix                       %File-path;                   #IMPLIED
+
+  course-home-url                     %URI;                         #REQUIRED
+  language                            (danish|english)              "english"
+>
+
+<!ELEMENT front-title (#PCDATA) >
+<!ATTLIST front-title
+>
+
+<!ELEMENT front-author (#PCDATA) >
+<!ATTLIST front-author
+>
+
+<!ELEMENT front-affiliation (#PCDATA) >
+<!ATTLIST front-affiliation
+>
+
+<!ELEMENT front-abstract (#PCDATA) >
+<!ATTLIST front-abstract
+>
+
+
+<!ELEMENT begin-trail EMPTY >
+<!ATTLIST begin-trail
+>
+
+<!ELEMENT end-trail EMPTY >
+<!ATTLIST end-trail
+>
+
+<!ELEMENT page-select EMPTY >
+<!ATTLIST page-select
+   lecture-id             %Symbol;      #REQUIRED
+   page-id                %Symbol;      #REQUIRED   
+>

@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><head><title>Department of Computer Science, Aalborg University</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="shortcut icon" href="http://www.aau.dk/favicon.ico">
+<script language="javascript" type="text/javascript">
+  if (document.images) {
+    news = new Image();news.src = "Graphics/news.png";
+    news2 = new Image();news2.src = "Graphics/news2.png";
+    education = new Image();education.src="Graphics/education.png";
+    education2 = new Image();education2.src="Graphics/education2.png";
+    research = new Image(); research.src="Graphics/research.png";
+    research2 = new Image(); research2.src="Graphics/research2.png";
+    catpeople =new Image();catpeople.src="Graphics/catpeople.png";
+    catpeople2 = new Image(); catpeople2.src="Graphics/catpeople2.png";
+    nouhauz=new Image(); nouhauz.src="Graphics/nouhauz.png";
+    nouhauz2=new Image(); nouhauz2.src="Graphics/nouhauz2.png";
+    intranet=new Image(); intranet.src="Graphics/intranet.png";
+    intranet2=new Image(); intranet2.src="Graphics/intranet2.png";
+  }
+
+  function skiftBillede(picName,picture) {
+    if (document.images) {
+      document[picName].src = eval(picture + ".src");
+    }
+  }
+</script>
+</head>
+<body background="Graphics/background.png">
+
+	<table cellpadding="0" cellspacing="0" align="center" border="0" style="border: 1px solid #81B3D1">
+	  <tr>
+	    <td colspan="2"><a href="index2.php?content=General"><img src="Graphics/cs.png"
+    alt="Contact" title="Contact" border="0"></a></td>
+    	    <td rowspan="3"><a href="http://www.aau.dk" ><img src="Graphics/top_right.png" alt="Aalborg University" border="0"></a></td>
+
+	  </tr>
+	  <tr>
+	    <td colspan="2"><img src="Graphics/top_left.png" alt=""></td>
+	  </tr>
+	  <tr>
+	    <td><a href="index2.php?content=News" onmouseover="skiftBillede('news','news2')" onmouseout="skiftBillede('news','news')"> <img src="Graphics/news.png" border="0" name="news" alt="News"></a></td>
+	    <td><img src="Graphics/above_top.png" alt=""></td>
+	  </tr>
+
+	  <tr>
+	    <td><a href="index2.php?content=Education" onmouseover="skiftBillede('education','education2')" onmouseout="skiftBillede('education','education')"><img src="Graphics/education.png" border="0" name="education" alt="Education and students"></a></td>
+	    <td><a href="index2.php?content=General"><img src="Graphics/center.png" border="0"
+    alt="Contact" title="contact"></a></td>
+	    <td><a href="index2.php?content=Research" onmouseover="skiftBillede('research','research2')" onmouseout="skiftBillede('research','research')"><img src="Graphics/research.png" border="0" name="research" alt="Research and employees"></a></td>
+	  </tr>
+	  <tr>
+	    <td><a href="http://www.dat-cats.com"  onmouseover="skiftBillede('catpeople','catpeople2')" onmouseout="skiftBillede('catpeople','catpeople')"><img src="Graphics/catpeople.png" border="0" name="catpeople" alt="IT-studier"></a></td>
+	    <td rowspan="2"><a href="http://www.nouhauz.dk"  onmouseover="skiftBillede('nouhauz','nouhauz2')" onmouseout="skiftBillede('nouhauz','nouhauz')"><img src="Graphics/nouhauz.png" border="0" name="nouhauz" alt="Mødestedet for ITfagfolk, ITforskere, og ITstuderende"></a></td>
+	    <td><a href="index2.php?content=Intranet" onmouseover="skiftBillede('intranet','intranet2')" onmouseout="skiftBillede('intranet','intranet')"><img src="Graphics/intranet.png" border="0" name="intranet" alt="Local access only"></a></td>
+
+	  </tr>
+	  <tr>
+	    <td><img src="Graphics/bottom_left.png" alt=""></td>
+	    <td><img src="Graphics/bottom_right.png" alt=""></td>
+	  </tr>
+        </table>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+(load (in-startup-directory "../" "common-example-stuff.scm"))
+
+
+(begin-laml)
+
+(define current-xml-language 'xhtml10-transitional)
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+; Insert the LAML template "Processing Options" here
+; if you need variations in the LAML processing
+
+(define ttl "Thin Out")
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title ttl))
+  (body
+    (h1 ttl)
+
+    (p "The starting point of this example is the drum part taken from the Tyros 60's 8Beat style."
+       "The starting point of all examples below is this" (a 'href "Main-B/baseline-1.midl" "midl file") _ "," "corresponding to this" 
+       (a 'href "Main-B-midi/baseline-1.mid" "midi file") _ ".")
+
+    (table  'border 1
+      (tr (td (b "Description")) (td (b "Midl source file")) (td (b "Resulting midi file")))
+      (tr (get-baseline "Main-B" 2))
+      (tr (get-baseline "Main-B" 3))
+      (tr (get-baseline "Main-B" 4))
+    )
+
+    (vertical-space 2)
+
+    (p "Here follows another thin out example of piano scale with increasing note values and
+        an organ scale with decreasing note values. In this example we use the slightly more
+        advance function" (kbd "thin-out-section-by-bar") _ "." 
+       (a 'href "scale/baseline-1.midl" "Starting point")_ "," "corresponding to this" 
+       (a 'href "scale-midi/baseline-1.mid" "midi file")_ "." )
+
+    (table  'border 1
+      (tr (td (b "Description")) (td (b "Midl source file")) (td (b "Resulting midi file")))
+      (tr (get-baseline "scale" 2))
+    )
+
+
+
+
+
+  )
+ )
+)
+
+
+(end-laml)

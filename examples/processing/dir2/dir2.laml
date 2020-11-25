@@ -1,0 +1,15 @@
+(load (string-append laml-dir "laml.scm"))
+(style "simple-html4.0-loose")
+
+(generic-page-1
+  "Dir2 Page"
+  (con
+    "Dir2 source file: " (source-filename-without-extension) (p)
+    "Dir2 startup dir: " (startup-directory) (p)
+    "Dir2 program parameters: " (as-string (laml-program-parameters)) (p)
+
+    (a-tag "../basis.html")
+  )
+
+  white black blue blue
+)

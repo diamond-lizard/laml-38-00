@@ -1,0 +1,70 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+
+(begin-laml)
+
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) (title "Invalid tables"))
+  (body 
+  
+    ; tfoot before thead
+    (table (caption "caption") (col 'id "col1") (col 'id "col1")
+      (tfoot (tr (td "dd") (td "dd")) (tr (td "dd") (td "dd")))
+      (thead (tr (td "dd") (td "dd")) (tr (td "dd") (td "dd")))
+
+      (tr (td "dd") (td "dd"))
+      (tr (td "dd") (td "dd"))
+    )
+
+    ; tr before tfoot and theader
+    (table (caption "caption") (col 'id "col1") (col 'id "col1")
+      (tr (td "dd") (td "dd"))
+      (tfoot (tr (td "dd") (td "dd")) (tr (td "dd") (td "dd")))
+      (thead (tr (td "dd") (td "dd")) (tr (td "dd") (td "dd")))
+     
+      (tr (td "dd") (td "dd"))
+    )
+
+    ; Missing the tr constructs
+    (table (caption "caption") (col 'id "col1") (col 'id "col1")
+      (thead (tr (td "dd") (td "dd")) (tr (td "dd") (td "dd")))
+      (tfoot (tr (td "dd") (td "dd")) (tr (td "dd") (td "dd")))
+
+    )
+
+    ; Invalid nestingn of a table in table
+    (table (caption "caption") (col 'id "col1") (col 'id "col1")
+      (thead (tr (td "dd") (td "dd")) (tr (td "dd") (td "dd")))
+      (tfoot (tr (td "dd") (td "dd")) (tr (td "dd") (td "dd")))
+     
+     (table (caption "caption") (col 'id "col1") (col 'id "col1")
+      (thead (tr (td "dd") (td "dd")) (tr (td "dd") (td "dd")))
+      (tfoot (tr (td "dd") (td "dd")) (tr (td "dd") (td "dd")))
+     )
+    )
+
+    ; Both tr and tbody in table 
+    (table (caption "caption") (col 'id "col1") (col 'id "col1")
+      (thead (tr (td "dd") (td "dd")) (tr (td "dd") (td "dd")))
+      (tfoot (tr (td "dd") (td "dd")) (tr (td "dd") (td "dd")))
+     
+      (tbody (tr (td "dd") (td "dd")))
+      (tr (td "dd") (td "dd"))
+    )
+
+
+  )
+ )
+)
+
+
+(end-laml)

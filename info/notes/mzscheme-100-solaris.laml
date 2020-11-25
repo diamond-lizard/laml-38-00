@@ -1,0 +1,42 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(define  index-color (make-color 255 255 191))
+(define body-props 
+   (list 'bgcolor (rgb-color-encoding index-color) 'text (rgb-color-encoding black)
+         'link (rgb-color-encoding blue) 'vlink (rgb-color-encoding blue)))
+
+
+(write-html '(pp prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "Notes about LAML with MzScheme 101-103 on Solaris"))
+  (body body-props
+    (laml-top-banner)
+ 
+    (h1 "LAML with MzScheme 101-103 on Sun Solaris")
+
+    (p "MzScheme 101 and 103 are now rather old. You should really update to version 200+.")
+
+    (p "As of version 26, the LAML compatibility file loads synrule.ss, hereby allowing 
+        MzScheme 101 and 103 to use R5RS macros. With this, you can still use MzScheme 101 and 103 with LAML.")
+
+    (p "As of April I have tested the development version of LAML on MzScheme 101. Everything was OK.")
+
+    (p "Version 27: Tested and OK.") 
+
+  )
+ )
+)
+
+
+(end-laml)

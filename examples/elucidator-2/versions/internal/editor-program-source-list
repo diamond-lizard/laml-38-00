@@ -1,0 +1,1 @@
+(((key "prog1") (file-location "/user/normark/scheme/examples/elucidator-2/versions/src/prog1.scm") (language "scheme") (group "core") (version 2) (process t) (friendly-name "")) ((key "prog2") (file-location "/user/normark/scheme/examples/elucidator-2/versions/src/prog2.scm") (language "scheme") (group "others") (version 2) (process t) (friendly-name "")))

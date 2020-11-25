@@ -1,0 +1,56 @@
+The Motif-XS Arpeggio Browser.
+
+Meaning of the columns:
+    ARP#                    The arpeggio number, as it appears on the instrument
+                            and in the data sheet.
+
+    MAIN CATEGORY           The arpeggio main category, see manual page 62.
+
+    SUBCAT                  The arpeggio sub category, musical genre, see manual page 62.
+
+    ARPEGGIO NAME           The name of the arpeggio.
+
+    ROLE                    Either a main category (MA/MB/MC/MD) a fill (FA/FB/FC) or a break (BA).
+
+    GEN                     The arpeggio generation: XS/ES/-. 
+                               XS means special chordal XS arpeggio.
+                               ES means more playable ES arpeggio.
+                               -  means neither XS nor ES.
+
+    ASSOCIATED VOICE !      The main voice category, see manaul page 23 and 98,
+                            to which the arpeggio is supposed to the used.
+                            The category name in the browser does not match exactly with the names
+                            in the voice tables in the manual.
+                            A trailing exclamation mark (!) sigifies a concrete voice name.
+
+    SIGN.                   Time signature, such as 4/4 or 6/8.
+
+    LGT                     The bar length of the pattern. Say L.
+                            If the time signature is n/m the arpeggio is L * n * PPQN ticks long.
+
+    TEMPO                   The recommended tempo of this arpeggio, measure in BPM (beats per minutes).
+                            In this context, a beat is a the duration of a quarter note.
+                            How many quarter notes happen during every minute.
+                            
+    ACC                     Is there an accent for this arpeggio. 
+                            A boolean attribute. "ACC" means true. Nothing means false.
+                            From the manual page 64:
+                            "Accent Phrases are composed of sequence data included
+                            in some Arpeggio types, sounding only when you play
+                            notes at a velocity higher (stronger) than that specified in
+                            the Accent Velocity Threshold parameter. If it is hard to play
+                            at velocities necessary to trigger the Accent Phrase, set
+                            the Accent Velocity Threshold parameter to a lower value."
+
+    SFX                     Random special sounds.
+                            A boolean attribute. "R-SFX" means that random special sounds 
+                            are supported. Nothing means they are not. From the manual page 64:
+                            "Some Arpeggio types feature a Random SFX function
+                             which will trigger special sounds (such as guitar fret
+                            noises) when the note is released. The following
+                            parameters affecting Random SFX are provided."
+
+
+----------------------------------------------------------------------------------------------------------
+
+

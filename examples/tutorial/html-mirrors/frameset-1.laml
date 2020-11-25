@@ -1,0 +1,79 @@
+(load (string-append laml-dir "laml.scm"))
+
+(lib-load "xml-in-laml/xml-in-laml.scm")
+(lib-load "xml-in-laml/mirrors/xhtml10-frameset-mirror.scm")
+(lib-load "xml-in-laml/mirrors/xhtml10-transitional-mirror.scm")
+
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+(set! xml-check-language-overlap? #t)
+
+(define fs:html (xhtml10-frameset 'html))
+(define fs:head (xhtml10-frameset 'head))
+(define fs:title (xhtml10-frameset 'title))
+(define fs:body (xhtml10-frameset 'body))
+(define fs:p (xhtml10-frameset 'p))
+(define fs:em (xhtml10-frameset 'em))
+(define fs:noframes (xhtml10-frameset 'noframes))
+
+; ::frameset-doc::
+(write-html '(raw prolog)
+ (fs:html html-props
+  (fs:head 
+   (fs:title "Third frameset example"))
+
+   (frameset 
+    (frame 'name "fr2" 'src "transitional-1.html")
+    (frame 'name "fr2" 'src "transitional-2.html")
+    'cols "40%,60%"
+
+    (fs:noframes
+     (fs:body 
+       (fs:p "Frames are" (fs:em "unfortunately") "not available")))
+  )
+ ))
+
+
+(define tr:html (xhtml10-transitional 'html))
+(define tr:head (xhtml10-transitional 'head))
+(define tr:title (xhtml10-transitional 'title))
+(define tr:body (xhtml10-transitional 'body))
+(define tr:p (xhtml10-transitional 'p))
+(define tr:a (xhtml10-transitional 'a))
+
+; ::left-doc::
+(write-html '(raw prolog)
+ (tr:html html-props
+  (tr:head 
+   (tr:title "Left frame"))
+
+   (tr:body 
+     (tr:p "This is the left frame"))
+ )
+ (in-startup-directory "transitional-1.html")
+)
+
+; ::right-doc::
+(write-html '(raw prolog)
+ (tr:html html-props
+  (tr:head 
+   (tr:title "Right frame"))
+
+   (tr:body 
+     (tr:p "This is the right frame. ")
+
+     (tr:p "This example illustrates a possible way to deal with the language overlap.
+         Try process it.")
+
+
+   )
+ )
+ (in-startup-directory "transitional-2.html")
+)
+
+
+
+
+(end-laml)

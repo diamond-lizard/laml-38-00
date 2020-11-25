@@ -1,0 +1,52 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(define  index-color (make-color 255 255 191))
+(define body-props 
+   (list 'bgcolor (rgb-color-encoding index-color) 'text (rgb-color-encoding black)
+         'link (rgb-color-encoding blue) 'vlink (rgb-color-encoding blue)))
+
+
+(write-html '(pp prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "Notes about LAML with MzScheme 300"))
+  (body body-props
+    (laml-top-banner)
+ 
+    (h1 "LAML with MzScheme 300+ on Windows 2000, Windows XP, and Windows 7")
+
+    (p  "From version 32 of LAML, LAML works very well with MzScheme 300+ on Windows (2000, XP, and will also assumed on Windows 7).")
+
+    (p "Improvements of the LAML compatibility library in version 32 of LAML: The consequences of block buffering has been alleviated
+        by forcing line buffering of the current outputport. In addition, a (tricky) redefinition of
+        the function directory-list has been revised and corrected. In earlier versions of LAML (with MzScheme 300) this redefinition
+        caused major problems in many LAML programs. Finally, the function sort-list has been redefined
+        such that it now works in both version 299-301, and in version 350+ of MzScheme.")
+
+    (p "Be aware that MzScheme 300+ relies on Unicode internally. Thus, you should make sure that your LAML files
+        are written and saved using UTF-8 encoding. If you use an 8-bit encoding, such as ISO-Latin-1, you can expect
+        strange results if you use national characters, such as in the Danish, and German alphabet.
+    ")
+
+    (p "On Windows, LAML version 32 has been tested with MzSchme 370. Everything works fine.
+        All examples run.")
+
+
+
+
+  )
+ )
+)
+
+
+(end-laml)

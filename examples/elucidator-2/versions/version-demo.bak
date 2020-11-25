@@ -1,0 +1,378 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "xml-in-laml/elucidator-2/elucidator")
+
+(define (icon name)
+  (img 'src (string-append "images/" name) 'alt ""))
+
+(elucidator-front-matters
+
+ ; OVERALL attributes
+ 'author-mode "false"
+ 'laml-resource "true"
+ 'processing-mode "verbose"                 ; verbose, silent
+ 'table-of-contents "shallow"              ; detailed, shallow
+ 'shallow-table-of-contents-columns "3"
+ 'detailed-table-of-contents-columns "2"
+ 'source-marker-presentation "image"        ; image, text, colored-text
+ 'source-marker-char "@"
+ 'browser-pixel-width "1100"
+ 'control-frame-pixel-height "120"
+ 'home-url "../../index.html"
+
+ ; INDEX attributes 
+ 'cross-reference-index "aggregated"        ; per-letter, aggregated, none
+ 'defined-name-index "aggregated"           ; per-letter, aggregated, none
+
+ ; PROGRAM attributes
+ 'initial-program-frame "first-source-file"             ; blank, first-source-file
+ 'large-font-source-file  "true"
+ 'small-font-source-file  "true"
+ 'default-source-file-font-size  "small"    ; small or large
+ 'program-menu "separate-frame"             ; inline-table, separate-frame, or none
+ 'source-markers-in-program "show-documented"
+
+
+ (color-scheme
+   (color-entry 'group "doc" (predefined-color "documentation-background-color")) 
+   (color-entry 'group "index" (predefined-color "documentation-background-color"))  
+   (color-entry 'group "core" (predefined-color "program-background-color-1"))
+   (color-entry 'group "others" (predefined-color "program-background-color-2"))
+ )
+    
+ (source-files
+   (version-group 'key "prog1" 'group "core"
+     (program-source 'file-path "../../schemedoc/scheme-documentation-tools/prog1.scm" 'process "true")
+     (program-source 'file-path "src/prog1.scm" 'process "true")
+   )
+
+   (version-group 'key "prog2" 'group "others"
+     (program-source 'file-path "../scheme-documentation-tools/src/prog2.scm" 'process "true")
+     (program-source 'file-path "src/prog2.scm" 'process "true")
+   )
+
+   (manual-source  "LAML General Library"
+                   'key "laml-lib"
+                   'file-path "../../../lib/man/general")
+
+   (manual-source  "LAML Core Library"
+                   'key "laml"
+                   'file-path "../../../man/laml")
+                    
+   (manual-source  "Prog1 Manual"
+                   'key "prog1-man"
+                   'file-path "../../schemedoc/scheme-documentation-tools/man/prog1")
+                   
+
+ )
+
+   
+;   (manual-source 'file-path "" 'url "")
+
+)
+
+
+(begin-documentation)
+
+(documentation-intro
+    (doc-title "Scheme Elucidator Versioning Demo")
+    (doc-author "Kurt Nørmark")
+    (doc-affiliation "Department of Computer Science, Aalborg University")
+    (doc-email "normark@cs.aau.dk")
+    (doc-abstract 
+      (p "This is an elucidative program which illustrates the use of multiple source program versions. Notice that the documentation as such
+          is not versioned. The reason is that the documentation is intended to be able to address the evolution of the software as such."
+         "Thus, the documentation transcends the versions of the programs.  The demo is quite similar to the" 
+         (a 'href "../../scheme-documentation-tools/demo.html" "Demo Program" 'target "_top")"which I wrote for the paper" 
+         (a 'href "http://www.cs.auc.dk/~normark/laml/papers/documentation-tools.pdf" "Scheme Program Documentation Tools")_ "." )
+
+      (p "For a larger and more realistic example please see the" 
+         (a 'href "http://www.cs.auc.dk/~normark/scheme/styles/xml-in-laml/elucidator-2/doc/elucidator.html" 'target "_top" "documentation of the Scheme Elucidator")"itself." )
+    )
+)
+
+(documentation-section 
+   'id "intr-sect"
+   (section-title "Introduction")
+   (section-body 
+      (p "In this small elucidative program we will illustrate the versioning features of the Scheme Elucidator 2. In the documentation part
+          we will draw the readers attention to the relevant features.")
+   )
+)
+
+(documentation-entry
+    'id "intr"
+    (entry-title "The meaning of version 1 and 2")
+    (entry-body 
+      (p "The original versions of" (strong-prog-ref 'file "prog1" 'vers "1" ) "and" (strong-prog-ref 'file "prog2" 'vers "1" ) 
+         "have been used in other demo programs. These are designated as version 1. You can see the version number in the upper right
+          corner of the source program, as a water mark. The newest versions," (strong-prog-ref 'file "prog1" 'vers "2" ) "and" 
+         (strong-prog-ref 'file "prog2" 'vers "2" )
+         "have been modified in various ways. The only aims of the modifications has been to illustrate the versioning features of
+          the Scheme Elucidator 2. Let us already here notice that links to older versions are shown on a grey background." )
+    )
+)
+
+(documentation-section
+ 'id "vers-features-sec"
+ (section-title "Features")
+ (section-body 
+
+  )
+ )
+
+(documentation-entry
+ 'id "vers-featurs"
+ (entry-title "Updated and New abstractions")
+ (entry-body 
+  (p "We start the discussion of the function" (strong-prog-ref 'file "prog1" 'name "fac") _ "."
+     "In version 1 the" (strong-prog-ref 'vers "1" 'file "prog1" 'name "fac") "function is recursive."
+     "In version 2, we have changed the" (strong-prog-ref 'vers "2" 'file "prog1" 'name "fac") "function to be iterative."
+     "Hereby we have introduced the usual helping function" (strong-prog-ref 'file "prog1" 'name "fac-iter") _ "." 
+     "You should notice the" (icon "updated.gif") "icon of" (strong-prog-ref 'vers "2" 'file "prog1" 'name "fac") ". Also, you should notice that"
+     (strong-prog-ref 'file "prog1" 'name "fac-iter") "is marked as " (icon "new.gif") ". Also notice the possibility of navigation in between
+     version 1 and version 2, by means of the grey arrows, such as" (icon "gray-left-arrow.gif") _"," "above the definitions in the source programs."
+  )
+
+ (p "Version 1 of" (strong-prog-ref 'file "prog1" 'vers "1") "has two functions called" 
+    (strong-prog-ref 'vers "1" 'file "prog1" 'name "head")"and" (strong-prog-ref 'vers "1" 'file "prog1" 'name "tail") _ "." 
+    "These functions have no counterpart in" (strong-prog-ref 'file "prog1" 'vers "2"  "version 2") _ "." 
+    "Thus, these two functions have been delete from the program." 
+    "Notice the special 'dead end' icon" (icon "no-pass-sign.gif") "(similar to the well-known road sign)" "used in" 
+    (strong-prog-ref 'vers "1" 'file "prog1" "version 1")
+    "to indicate that you cannot navigate to succeeding versions of these abstractions." )
+
+ (p "Recall that the Scheme Elucidator uses the" (icon "doc-left.gif") 
+    "icon in source programs to link to the place in the documentation, where a particular abstraction is discussed." 
+    "It is possible to direct some documentation towards a specific version of the documentation. When this is done, the icon" (icon "doc-left-point.gif") 
+    "is used instead of" (icon "doc-left.gif") _ "." "When we discussed" (strong-prog-ref 'vers "1" 'file "prog1" 'name "head") "and" 
+    (strong-prog-ref 'vers "1" 'file "prog1" 'name "tail")"above we explicitly referred to version 1. This explains the use of" (icon "doc-left-point.gif") 
+    "in the documentation." "Thus, the use of" (icon "doc-left-point.gif") 
+    "tells the source program reader that there exists documentation that addresses the specific version of the source program." )
+
+
+
+ )
+)
+
+(documentation-section
+ 'id "prog-evolution"
+ (section-title "New Programs - Old Documentation")
+ (section-body 
+ (p "Let us assume that we have written some documentation about" (strong-prog-ref 'file "prog2" 'vers 1) 
+    "some time ago. The documentation corresponds to version 1 of prog2. Now time passes, and" 
+    (strong-prog-ref 'file "prog2" 'vers 1)"is updated in various ways. We end up with" 
+    (strong-prog-ref 'file "prog2" 'vers 2)_ "." "As a typical scenario, however, the documentation of" 
+    (strong-prog-ref 'file "prog2" 'vers 1)
+    "is not updated. Below we show some documentation taken from section 2.1 - 2.3 of" 
+    (a 'href "../../scheme-documentation-tools/demo.html" "Demo Program" 'target "_top")_ _ "." )
+
+ (p "When we address an abstraction from the documentation, without explicit use of the version" (kbd "vers") 
+    "attribute, we attempt to identify the newest versions of the abstraction. If this cannot be done, we fall through the versions - from the newest (highest) towards
+     the oldest (1). When reading the documentation below, you should observe this" (string-it "version fall through") 
+    "facility. Recall that links to older versions are shown on a grey background." )
+
+ (p 
+   (em "Italic portions of the text below are meta comments, intended to explain the versioning points.") 
+       "The non-italic parts of section" 
+       (doc-ref 'name "filtering") _ "," (doc-ref 'name "composing") "and" (doc-ref 'name "enum-order") "have not been altered, in comparison with
+       the" (a 'href "../../scheme-documentation-tools/demo.html" 'target "_top" "original documentation") _ ".")
+ )
+)
+
+
+ (documentation-entry
+   'id "filtering"
+   (entry-title "Filtering")
+   (entry-body 
+    (p 
+      (em "From version 1 to version 2 we have moved the filter function from prog2 to prog1. Therefore
+           both" (strong-prog-ref 'file "prog1" 'name "filter") "and" 
+          (strong-prog-ref 'file "prog1" 'name "filter-help")"are marked as moved, using the icon" 
+          (icon "moved.gif")_ "." 
+          "A function marked as moved with this icon exists - structurally equal with the current definition - in another source file.
+           The grey link icon, "
+          (icon "gray-left-arrow.gif") "links to the function which has been moved." 
+          "Notice that the original documentation - as can be seen in the following paragraph
+           - is unaffected. The main reason is that" (kbd "filter") "and" (kbd "filter-help") 
+          "are addressed without mention of the source file to which they belong. Most often in the Scheme
+           Elucidator, the documentation remains valid even if the program is reorganized." )
+    )
+
+    (p "The function" (strong-prog-ref 'name "filter") "makes use of the tail-recursive function," 
+       (weak-prog-ref 'name "filter-help")_ "," 
+       "which iteratively carries out the filtering. Due to use the iterative processing in" 
+       (weak-prog-ref 'name "filter-help")_ "," "we need to reverse the result in filter," 
+       (source-marker 'name "a")_ "." )
+   )
+ )
+
+
+ (documentation-entry
+   'id "composing"
+   (entry-title "Function composition")
+   (entry-body 
+
+    (p (em "The function" (strong-prog-ref 'file "prog2" 'name "compose") "is renamed to" 
+     (strong-prog-ref  'file "prog2" 'name "compose-functions")"in the latest version of prog2." 
+     "The renaming implies that the documentation links to the original version (version 1). The mutual
+      navigability between" (strong-prog-ref 'file "prog2" 'name "compose") "and" 
+     (strong-prog-ref  'file "prog2" 'name "compose-functions")
+     "is lost at the program side. The function" 
+     (strong-prog-ref  'file "prog2" 'name "compose-functions")"is seen as a new function." ))
+
+    (p (em "The function" (strong-prog-ref 'file "prog2" 'name "zip-lists") "has also been renamed. The original
+       name was just" (strong-prog-ref 'file "prog2" 'name "zip") _ "."
+       "In this case, the Elucidator is clever enough to identify the fact that" (strong-prog-ref 'file "prog2" 'name "zip") 
+       "has been renamed to" (strong-prog-ref 'file "prog2" 'name "zip-lists") _ "." "This is signalled with the icon" 
+       (icon "renamed.gif") _ "," "and the arrow" (icon "gray-left-arrow.gif") "links to the 'old name version'."
+        ))
+
+    (p (em "Why could the Elucidator not find out that" (strong-prog-ref 'file "prog2" 'name "compose")
+           "was renamed? Well - the only reason is that" (strong-prog-ref 'file "prog2" 'name "compose-functions")
+           "is recursive, and therefore the body of" (strong-prog-ref 'file "prog2" 'name "compose-functions")
+           "refers to its own name. Therefore the body of" (strong-prog-ref 'file "prog2" 'name "compose")
+           "and" (strong-prog-ref 'file "prog2" 'name "compose-functions") "are not structurally equal!"
+           ))
+
+    (p "Composition of two or more functions can be done by the function" (strong-prog-ref 'name "compose") _ "." 
+       "The function handles two special cases first, namely the trivial composition of a single function" (source-marker 'name "b") _ "," 
+       "the typical composition of two functions" (source-marker 'name "c") _ "," "and composition of more than two functions" 
+       (source-marker 'name "d")_ "." )
+   )
+ )
+
+
+ (documentation-entry
+  'id "enum-order"
+  (entry-title "Enumeration ordering")
+  (entry-body 
+
+   (p 
+     (em "The function" (strong-prog-ref 'file "prog2" 'name "generate-leq") "has been deleted in version 2." 
+         "However, of some reason (most likely an oversight) its helping function" 
+         (strong-prog-ref 'file "prog2" 'name "list-index")"has survived." 
+         "The documentation below is only relevant for version 1. As shown several times before, the link to" 
+         (kbd "generate-leq")"is greyed." )
+   )
+
+   (p "It is sometimes useful to be able to generate a 'less-than-or-equal' function from an explicitly given enumeration
+       ordering. This is done by the function" (strong-prog-ref 'file "prog2" 'name "generate-leq") 
+      "and its helping function" (strong-prog-ref 'file "prog2" 'name "list-index") _ "." 
+      "Values of the enumeration-order are supposed to occur as constituents of some data structure. The selector function
+       selector accesses the enumeration values within the data structure. Enumeration values are compared using eq-eq?, which
+       is an optional parameter of" (strong-prog-ref 'file "prog2" 'name "generate-leq" ) "." 
+      "Notice the pattern used for handling of optional parameters, and in particular the use of the function" 
+      (weak-prog-ref 'name "optional-parameter")_ "." )
+
+  )
+)
+
+
+(documentation-section
+ 'id "dated-documentation"
+ (section-title "Marking old documentation")
+ (section-body 
+    (p "In section" (doc-ref 'name "prog-evolution") 
+       "we have shown what happens if old documentation is attached to updated programs. When reading through section" 
+       (doc-ref 'name "filtering")_ "," (doc-ref 'name "composing") "and" (doc-ref 'name "enum-order") 
+       "we easily realize that (at least) section" (doc-ref 'name "enum-order") 
+       "is outdated. It is possible to mark a documentation section or a documentation as outdated, by putting an explicit" 
+       (kbd "program-version")"number on it. Notice that this forces all links in this section to go to a particular version.  Below we show this for section" (doc-ref 'name "enum-order") _ "." 
+       "To visually emphasize that section" (doc-ref 'name "enum-order-again") 
+       "is outdated, it can be arranged that the whole section is shown on a grey background. This is done by using the body attribute
+        " (kbd "body-style") _ "." "It is, as an alternative, possible reduce the text size of the body text." )
+  )
+ )
+
+(documentation-entry
+  'program-version "1"
+  'id "enum-order-again"
+  (entry-title "Enumeration ordering")
+  (entry-body 'body-style "grey"
+
+   (p "It is some times useful to be able to generate a 'less-than-or-equal' function from an explicitly given enumeration
+       ordering. This is done by the function" (strong-prog-ref 'file "prog2" 'name "generate-leq") "and its helping function" (strong-prog-ref 'file "prog2" 'name "list-index") _ "." 
+      "Values of the enumeration-order are supposed to occur as constituents of some data structure. The selector
+       function selector accesses the enumeration values within the data structure. Enumeration values are compared
+       using eq-eq?, which is an optional parameter of" (strong-prog-ref 'file "prog2" 'name "generate-leq" ) "."
+       "Notice the pattern used for handling of optional parameters, and in particular the use of the function " 
+       (weak-prog-ref 'name "optional-parameter") _ "."
+   )
+  )
+)
+
+(documentation-section
+ 'id "doc-prog-evolution"
+ (section-title "Documenting Program Evolution")
+ (section-body 
+  (p "In section " (doc-ref 'name "prog-evolution") "we showed what can happen if we use the Scheme Elucidator with outdated documentation on updated programs.")
+
+  (p "In this section we will show how we can document the evolution of a program. Thus, here we rewrite the documentation of" 
+     (strong-prog-ref 'file "prog2")
+     "in order to reflect  the changes in the software. The documentation primarily emphasizes the software evolution from" 
+     (strong-prog-ref 'file "prog2" 'vers "1" "version 1")"to" (strong-prog-ref 'file "prog2" 'vers "2" "version 2") "of prog2" _ 
+     "." )
+  )
+ )
+
+(documentation-entry
+ 'id "evol1"
+ (entry-title "How the program evolved...")
+ (entry-body 
+
+  (p 
+    (em "We should start noticing that the program we discuss in this demo is solely a collection of a few, largely unrelated functions.")
+  )
+
+  (p "The function" (typographic-prog-ref 'file "prog1" 'name "fac") "has undergone a change from a" 
+     (strong-prog-ref 'file "prog1" 'vers "1" 'name "fac" "recursive version")"to an" 
+     (strong-prog-ref 'file "prog1" 'vers "2" 'name "fac" "interative version")_ "." "Notice in this context that it is the helping function" 
+     (strong-prog-ref 'file "prog1" 'name "fac-iter") "that makes the real difference between the two.")
+  
+  (p "The functions" (strong-prog-ref 'name "head") "and" (strong-prog-ref  'name "tail") "have been taken out of the program" _ 
+     "." "We now use the native Scheme functions" (strong-prog-ref 'name "car") "and" (strong-prog-ref  'name "cdr") "instead." )
+
+  (p  
+     "For some reason, we have renamed" 
+     (strong-prog-ref 'file "prog2" 'vers 1 'name "compose")"to" (strong-prog-ref 'file "prog2" 'name "compose-functions") _ "."
+     "Similary, we have renamed" (strong-prog-ref 'file "prog2" 'name "zip") "to" (strong-prog-ref 'file "prog2" 'name "zip-lists") _ "."
+     "In a more realistic set up, this will affect a number of other functions as well." 
+  )
+
+  (p "We decided to move" (strong-prog-ref 'file "prog2" 'vers 1 'name "filter") "together with its" 
+     (strong-prog-ref 'file "prog2" 'vers 1 'name "filter-help" "helping function") "to" (strong-prog-ref 'file "prog1" 'vers "2" 'name "filter" "prog1") _ "." 
+     "Seen in retrospect, this was not a good decission."
+  )
+
+  (p (em "Notice that we in a few paragraphs, and with use of precice references to old and
+          new definitions, can carry out a discussion of the way the program has evolved. Notice also
+          how the icons" (icon "new.gif") _ "," (icon "updated.gif") _ "," (icon "renamed.gif") ",and" (icon "moved.gif")
+          "help us understand the fine grained evolution of the program source files."  ))
+ )
+)
+
+(documentation-entry
+ 'id "to-do"
+ (entry-title "Still work to do")
+ (entry-body 
+  (p (em "Even though the Scheme Elucidator is quite good at spotting new, updated, moved, or renamed definitions it is not yet perfect."))
+
+  (p (em "If a definition is moved from one source file to another, we can trace the moving from the target to the source, but not
+      yet in the other direction."))
+
+  (p (em "A similar observation holds for renaming. Thus, we link from the new name definition to the old name definition 
+      (in a previous version of the same source file). But we are not yet able to trace the evolution from the old
+      name version to the new name version."))
+
+  (p (em "The Elucidator uses some very strict predicates for comparison of definitions.
+      Currently, we use Schemes" (strong-prog-ref 'name "equal?") "function. As we saw with" 
+      (strong-prog-ref 'file "prog2" 'name "compose") "and" (strong-prog-ref 'file "prog2" 'name "compose-functions") "
+      it might be desirable to use a less strict function to determine if two definitions are considered as being equal.
+      Maybe, differences in comments should not count. Maybe recursive calls should be 'name adjusted'. And maybe
+      other minor differences be taken into account explicitly.")) 
+  )
+ )
+
+; Scenario: Marking a documentation section as outdated.
+
+(end-documentation)

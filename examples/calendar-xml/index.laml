@@ -1,0 +1,52 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(define (an x)
+  (a 'href x x))
+
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "Index of XML calendar examples")
+   (laml-shortcut-icon (laml-home-url-prefix))
+  )
+  (body 
+    (laml-top-banner)
+    (h1 "XML Calendar example")
+
+    (p "The following calendar example exists in this directory:")
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 250 200 200)
+        (list
+          (map b (list "Example" "LAML" "HTML"))
+          (list "A six-column calendar of 2005"    (a-tag "cal-1.laml")      (a-tag "cal-1.html"))
+          (list "The first decade of the millennium"    (a-tag "cal-2.laml")      (a-tag "cal-2.html"))
+        )))
+
+    (p (font-size 2 (em "If your browser will not present files with 'laml' or 'scm' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files.")))
+
+    (vertical-space 1) (font 'color "red" 'size "2" (when-generated))
+
+  )
+ )
+)
+
+
+(end-laml)
+
+

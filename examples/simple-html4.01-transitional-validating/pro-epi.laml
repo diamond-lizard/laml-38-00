@@ -1,0 +1,39 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+
+; HTML attribute lists
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define body-props (list 'bgcolor (rgb-color-list white) 'text (rgb-color-list black)
+                         'link (rgb-color-list blue) 'vlink (rgb-color-list purple)))
+
+(define (document ttl body-form)
+ (html 
+  (head 
+   (meta meta-props) (title ttl))
+  (body body-props
+    (con (h1 ttl) body-form))))
+
+; Write a WWW page with title and body to f.html, provided
+; that this file is located in f.laml.  You must write this buffer
+; to a file, such as f.laml, before you LAML process it.
+
+(define validate-html? #t)
+(define check-html-attributes? #t)
+(define transliterate-character-data? #t)
+
+(write-html '(raw prolog epilog)
+ (document
+  "Prolog and epilog example"
+  (con
+   (p "This example illustrates how, in an convenient way, to include the document type declaration,
+       charset information, and epilog document information.")
+
+   (p "You need to consult the " (a 'href "pro-epi.laml" "LAML source")  
+       " to study this - the HTML rendering does not contain any trace of
+       all this. Notice the clause" (b "'(raw prolog epilog)") "in the" (kbd "write-html") "procedure.
+       Best, perhaps, consult the HTML source via the browser.")
+  )
+ )
+)
+
+(end-laml)

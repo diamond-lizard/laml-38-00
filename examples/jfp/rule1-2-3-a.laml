@@ -1,0 +1,25 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+
+
+(write-html 'pp
+ (html
+  (head 
+    (title "Demo of the rules 1, 2, and 3") 
+  )
+
+  (body 
+    (p (a 'href "http://www.dcs.glasgow.ac.uk/jfp" 
+	   "Journal of" (em "functional programming"))) 
+
+    (hr)
+
+    (p (a "Journal of" 'href "http://www.dcs.glasgow.ac.uk/jfp" 
+        (em "functional programming")))
+
+    (hr)
+
+
+   
+  )
+ ))

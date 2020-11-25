@@ -1,0 +1,51 @@
+;; .schemedoc-dependencies  "~/scheme/lib/man/svg-extensions"
+
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-svg11")
+(lib-load "svg-extensions.scm")
+
+(define (cons-cell x y car-txt . attributes)
+ (let* ((cell-width 40)
+        (default-svg-node-attributes (list 'font-size 22 'min-height cell-width 'min-width cell-width)))
+  (let ((car-box (svg-node rectangular x y car-txt 'id "head-cell" attributes default-svg-node-attributes))
+        (cdr-box (svg-node rectangular (+ x cell-width) y 'id "tail-cell" attributes default-svg-node-attributes)))
+   (g car-box cdr-box ))))
+
+
+; A reference from the cdr part of cons cell-1 to cons cell-2. to-locator determines the edge attachment in cell-2.
+; attributes are fused into the svg-edge. 
+(define (cons-ref cell-1 cell-2 to-locator . attributes)
+ (let* ((default-attributes (list 'stroke "black" 'arrow "yes")))
+  (svg-edge cell-1 "cc" cell-2 to-locator 'from-id "tail-cell" 'to-id "head-cell" attributes default-attributes)))
+
+(write-html '(pp prolog)
+
+  (svg standard-svg-1-1-element-attributes 'width "800" 'height "800" 
+    (g 'transform "scale(1.0)"
+     (let* ((x1 100) (x2 (+ x1 150)) (x3 (+ x2 150))
+            (y1 100)
+           )
+       (let*
+        ((c1 (cons-cell x1 y1 "a" 'bg-color "yellow"))
+         (c2 (cons-cell x2 y1 "b" 'text-color "red"))
+         (c3 (cons-cell x3 y1 "c"))
+
+         (r1 (cons-ref c1 c2 "lc" 'stroke-dasharray "3 4" ))
+         (r2 (cons-ref c2 c3 "lc"))
+        )
+      (svg-graph  
+        (list c1 c2 c3) (list r1 r2)
+      )
+     ) )))
+       
+  (full-source-path-with-extension "svg")
+)
+
+(end-laml)
+
+
+
+
+
+
+

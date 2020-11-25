@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+      <title>Character reference example</title>
+   </head>
+   <body>
+      <p>
+         When we write &#39;&lt;&#39; and &#39;&gt;&#39; these characters are translated to HTML character
+         references &amp;lt; and &amp;gt;
+      </p>
+      <p>
+         Notice, in the LAML source, how the previous paragraph is written. We make
+         good use of the HTML transformation table.
+      </p>
+      <p>
+         The character &lt; can also be written as a character entity
+         &#60;
+         or
+         &lt;.
+         This looks strange in the rendered page, but take a look in the LAML source.
+      </p>
+      <p>
+         Special characters can also be used, for instance
+         &Lambda;
+         and
+         &#937;.
+         Please take a look in the LAML source.
+      </p>
+      <p id="XM&Lambda;">
+         Attribute values can also contain character entities. We illustrate this
+         with the id of the enclosing paragraph.
+      </p>
+      <p id="&lt;XM&Lambda;&gt;">
+         Attributes values may even contain the &#39;&lt;&#39; character. The reason is that
+         LAML converts it to
+         &amp;amp;.
+         See again the attribute of the enclosing paragraph.
+      </p>
+      <br id="XM&Lambda;" />
+      <p style="x:y&oslash;z;">
+         In the id of this paragraph we test character references in css attribute values.
+         This is not useful, however, and probably even in conflict with the basic
+         CSS syntax. We should really include some basic CSS validation in LAML to
+         deal with this problem. 
+      </p>
+   </body>
+</html>

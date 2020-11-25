@@ -1,0 +1,5 @@
+(load (string-append laml-dir "laml.scm"))
+
+(html-parse (in-startup-directory "cs-home.html") "cs-home.lsp")
+
+(end-laml)

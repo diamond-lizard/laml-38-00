@@ -1,0 +1,16 @@
+LAML can activate a FOP processor via the post processing facility
+of the function write-xml process-xml. Please consult the documentation of
+write-xml.
+
+
+
+Here are my post processor functions for files with extension "fo":
+
+(define fop-system "/pack/site-java/fop/fop.sh")
+
+(define (fo-process full-target-file-path-with-extension)
+ (let ((initial-path (file-name-initial-path full-target-file-path-with-extension))
+       (proper-file-name (file-name-proper full-target-file-path-with-extension))
+       (ext (file-name-extension full-target-file-path-with-extension)))
+  (system
+   (string-append "cd " initial-path "; " fop-system " " proper-file-name "." ext " " "-pdf" " " initial-path proper-file-name "." "pdf"))))

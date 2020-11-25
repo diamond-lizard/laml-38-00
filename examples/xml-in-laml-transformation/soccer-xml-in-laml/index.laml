@@ -1,0 +1,60 @@
+(load (string-append laml-dir "laml.scm"))
+
+(laml-style "simple")
+
+(set-file-name! "index")
+
+(generic-page
+  "An XML-in-LAML Soccer Example"
+  (con-par
+    (laml-top-banner)
+    (h 1 "An XML-in-LAML Soccer Example")
+
+    (p (con "This example takes as a starting point a couple of XSLT programs found in the short paper " 
+        (a-tag-target "http://www-106.ibm.com/developerworks/xml/library/x-xslt/?article=xr" "What kind of language is XSLT?" "xml-paper")
+        " written by Michael Kay, Software AG."
+    ))
+
+    (p "Briefly stated, we develop an XML DTD for soccer results, and we generate the mirror in Scheme of this DTD.
+        After this we have developed two diffent transformations of soccer results, exactly as shown in the paper referred above.
+        Throughout we use the XML-in-LAML framework of LAML.")
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 350 200 200 200 200)
+        (list
+          (map b (list "Example" "DTD" "Scheme" "LAML" "HTML"))
+          (list "The soccer XML DTD"    (con (a-tag "soccer.dtd") (br) (font 2 red "Download it. Your browser will probably not let you see it")) "-" "-" "-")
+          (list "The DTD parsing script"    "-" "-" (a-tag "parse.laml") "-")
+          (list "The XML-in-LAML mirroring script"    "-" "-" (a-tag "make-mirror.laml") "-")
+          (list "The auto-generated Scheme mirror of the soccer DTD"    "-" (a-tag "soccer-mirror.scm") "-" "-")
+          (list "The example XML-in-LAML soccer document - basis"     "-" (a-tag "basic-soccer-style.scm") (a-tag "basic-example-doc.laml")  (a-tag "basic-example-doc.html"))
+          (list "The example XML-in-LAML soccer document - elaborate"     "-" (a-tag "new-elaborate-soccer-style.scm") (a-tag "elaborate-example-doc.laml")  (a-tag "elaborate-example-doc.html"))
+        )))
+
+    (p "Notice that the two example documents (basic and elaborate) are identical, except for the loading of different Scheme transformation programs.")
+
+    (p (con "The XSLT example in the referred paper uses a declarative, functional approach based on pattern matching and replacement.
+        XSLT is a special purpose (application oriented) language.
+        The LAML solution uses a general purpose functional programming language (Scheme), the derived mirror functions (of the Soccer elements) and of XHTML,
+        and a few AST access functions from the " (a-tag "../../lib/xml-in-laml/man/xml-in-laml.html"  "XML-in-LAML library") _ ". "
+        "To avoid duplicated code, and in order to raise the level of abstraction, a number of small functions are defined as part of the transformation programs." 
+    ))
+
+    (p (con "For a tutorial discussion of XML-in-LAML (and all the stuff illustrated above) please have a look at "
+             (a-tag "../../../tutorial/xml-in-laml/xml-in-laml.html" "the appropriate part of the LAML tutorial") _ "."))
+
+    (font-size 2 (em "If your browser will not present files with 'laml', 'scm', or 'dtd' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files."))
+
+    (a-tag "../index.html" "Transformation example index.")
+
+
+  )
+  white black blue blue
+)
+
+(end-laml)
+

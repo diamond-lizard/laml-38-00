@@ -1,0 +1,51 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(define  index-color (make-color 255 255 191))
+(define body-props 
+   (list 'bgcolor (rgb-color-encoding index-color) 'text (rgb-color-encoding black)
+         'link (rgb-color-encoding blue) 'vlink (rgb-color-encoding blue)))
+
+
+(write-html '(pp prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "Notes about LAML with MzScheme 200"))
+  (body body-props
+    (laml-top-banner)
+ 
+    (h1 "LAML with MzScheme 200")
+
+    (p "As of June 2011 I use MzScheme 209 on Windows 7. Everything in LAML runs perfectly with these versions of MzScheme.")
+
+    (p "We only used the cgi stuff on Unix (Solaris and Linux), not on Windows.")
+
+    (p (b "Some historical remarks - pre version 26:"))
+
+    (p "About LAML configuration and MzScheme 200+: 
+     I have made a compatibility file in lib/compatibility called star_star_mzscheme-200.scm.
+     Currently it covers all mzscheme 200+ needs, on both unix and windows. 
+     I have made a 'hack' in the 
+     LAML configuration program such that the exec files and the emacs stuff are taken from 
+     the old mzscheme configuration when mzscheme-200 is requested. In that way fewer files
+     are needed in the configuration part of LAML.")
+
+    (p "Version 27: Tested and OK.")
+
+
+
+  )
+ )
+)
+
+
+(end-laml)

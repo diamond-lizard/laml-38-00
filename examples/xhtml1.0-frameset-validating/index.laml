@@ -1,0 +1,46 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+(define language-preference 'english)
+
+(generic-page
+  "Overview of XHTML1.0 frameset examples"
+  (con-par
+    (laml-top-banner)
+    (h 1 "Overview of XHTML1.0 frameset examples - with validation")
+    (p "The examples in this directory introduces the XHTML1.0 frameset, validating mirror. Notice that this mirror
+     uses the XML-in-LAML framework.")
+
+    (p "In the examples frameset-2 and frameset-3 we illustrate
+        the coexistence of XHTML1.0 frameset and XHTML1.0 transitional.")
+
+    (p "To get the full outcome of the examples, you should try processing them in 
+        the directory" (kbd "examples/xhtml1.0-frameset-validating/") _ ".")
+ 
+
+    (p "The following simple examples exist in this directory:")
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 250 200 200)
+        (list
+          (map b (list "Example"   "LAML"                            "HTML"))
+
+          (list "A very simple frameset"    (a-tag "frameset-1.laml")      (a-tag "frameset-1.html"))
+
+          (list "A frameset with language overlap"    (a-tag "frameset-2.laml")      (a-tag "frameset-2.html"))
+          (list "A frameset without language overlap"    (a-tag "frameset-3.laml")      (a-tag "frameset-3.html"))
+          
+        )))
+
+
+    
+
+    (font-size 2 (em "If your browser will not present files with 'laml' or 'scm' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files."))
+  )
+  white black blue blue
+)
+
+(end-laml)

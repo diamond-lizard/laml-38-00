@@ -1,0 +1,43 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(define  index-color (make-color 255 255 191))
+(define body-props 
+   (list 'bgcolor (rgb-color-encoding index-color) 'text (rgb-color-encoding black)
+         'link (rgb-color-encoding blue) 'vlink (rgb-color-encoding blue)))
+
+
+(write-html '(pp prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "Notes about LAML with MzScheme 101-103 on Windows"))
+  (body body-props
+    (laml-top-banner)
+ 
+    (h1 "LAML with MzScheme 101-103 on Windows")
+
+    (p "If you already have an old PLT version (101, 103) on your Windows machine you can use it with LAML.")
+
+    (p "If not, you should download the newest version MzScheme, or the newest version of DrScheme
+        (which includes MzScheme).")
+
+    (p "I have used MzScheme 201, 202, 203, and 204 extensively on Windows 2000 with LAML.
+        I keep a version 103 present, and I use it every now and then, problem free.
+    ")
+        
+
+  )
+ )
+)
+
+
+(end-laml)

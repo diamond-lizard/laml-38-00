@@ -1,0 +1,105 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define (indent-pixels p . x)
+  (div 'css:margin-left (string-append (as-string p) "px") x))
+
+(write-html '(pp prolog)
+ (html (head (title "Purchase/text Example"))
+  (body
+    (laml-top-banner)
+    (h 1 "Purchase/text Example")
+
+    (p (con "This example shows how to transform a linear list of p elements to a nested list of text elements.
+        The example comes from " (em "Transformation-by-Example for XML") " by Shriram Krishnamurthi, Kathryn Gray, and Paul Graunke,
+        PADL 2000, Lecture Notes in Computer Science 1753." "It is also present in the paper"
+        (em " SXLT: Manipulation Languge for XML ")
+        "by Oleg Kiselyov and Shriram Krishnamurthi, PADL 2003, Lecture Notes in Computer Science 2562. 
+        The " (a 'href "http://link.springer.de/link/service/series/0558/" "Lecture Notes in Computer Science") " volumes are available from Springer 
+        Verlag if you have the the appropriate privileges.
+       "))
+
+    (p "Examples and explations of the example is found below the table.")
+
+    (p "The twist of the example is to introduce comma separation between the paragraphs, 'and' between the two last ones,
+       and a count attribute on outer text element instance.")
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 350 200 200 200 200)
+        (list
+          (map b (list "Example" "DTD" "Scheme" "LAML" "XML"))
+          (list "The purchase DTD"    (a-tag "purchase.dtd") "-" "-" "-")
+          (list "The text DTD"    (a-tag "text.dtd") "-" "-" "-")
+          (list "The DTD parsing script"    "-" "-" (a-tag "parse-dtds.laml") "-")
+          (list "The XML-in-LAML mirroring script"    "-" "-" (a-tag "make-mirrors.laml") "-")
+          (list "The generated purchase mirror" "-" (a-tag "purchases-mirror.scm") "-" "-")
+          (list "The generated text mirror" "-" (a-tag "txt-mirror.scm") "-" "-")
+          (list "A simple purchase document and its transformation"     "-" (a-tag "purchase-transformation.scm") (a-tag "simple-purchase-doc.laml")  (a-tag "simple-purchase-doc.xml"))
+          (list "Another purchase document and its transformation"     "-" (a-tag "purchase-transformation.scm") (a-tag "purchase-doc.laml")  (a-tag "purchase-doc.xml"))
+        )))
+
+    (p "Example of input and output. The simple clause")
+    (indent-pixels 10 (pre 
+"<purchase>
+ <p>4 thinkers</p>
+</purchase>"))
+    (p "is transformed to")
+    (indent-pixels 10 (pre "
+<text count=\"1\">
+   4 thinkers
+</text>"))
+
+    
+    (p "The slightly more complicated input clause")
+    (indent-pixels 10 (pre "
+<purchase>
+ <p>4 thinkers</p>
+ <p>5 tailors</p>
+ <p>2 soldiers</p>
+ <p>1 spy</p>
+</purchase>"))
+    (p "is translated to")
+    (indent-pixels 10 (pre "
+<text count=\"4\">
+   4 thinkers,
+   <text>
+      5 tailors,
+      <text>
+         2 soldiers
+         and
+         <text>1 spy</text>
+      </text>
+   </text>
+</text>"))
+
+
+    (p)(hr)(p)
+
+    (p "Our conclusions are the following:")
+
+    (ul
+     (li "For a competent Scheme programmer it is easier to understand the LAML solution given above than the solutions based on pattern matching
+          and replacement in the papers referred in the top of this document. In our solution we use very few functions that are specific
+          to the LAML transformation apparatus. The remaining functions are either mirror functions or standard Scheme functions. The 
+          key function" (kbd "p->text") "is very easy to program - almost a 'first timer' - for any trained Scheme programmer."))
+
+    (p)(hr)(p)
+
+
+
+
+    (p (con "For a tutorial discussion of XML-in-LAML (and all the stuff illustrated above) please have a look at "
+             (a-tag "../../../tutorial/xml-in-laml/xml-in-laml.html" "the appropriate part of the LAML tutorial") _ "."))
+
+    (p (font-size 2 (em "If your browser will not present files with 'laml', 'scm', or 'dtd' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files.")))
+
+    (p (a-tag "../index.html" "Transformation example index.")))))
+
+
+(end-laml)
+

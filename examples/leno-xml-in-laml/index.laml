@@ -1,0 +1,92 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+(define language-preference 'english)
+
+(define validate-html? #t)
+(define check-html-attributes? #t)
+(define transliterate-character-data? #t)
+
+(generic-page
+  "Overview of LENO XML-in-LAML examples"
+  (con-par
+    (laml-top-banner)
+    (h 1 "Overview of LENO XML-in-LAML examples")
+    "The following examples exist in this directory:"
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 250 250 200)
+        (list
+          (map b (list "Example"   "LAML"                            "HTML"))
+
+          (list "LENO Single Chapter Example"  (brl (list
+                                                (a-tag "single-chapter/lecture.leno"  "LAML source"))
+                                               )
+   
+                                                                      (a-tag "single-chapter/html/lecture.html" "index.html"))
+
+          (list "LENO Multi Chapter Example"  (brl (list
+                                                (a-tag "multi-chapter/ch1.leno"  "Chapter 1 LAML source")
+                                                (a-tag  "multi-chapter/ch2.leno" "Chapter 2 LAML source")
+                                                (a-tag  "multi-chapter/pre-notes.scm" "Scheme prefix definitions")
+                                                (a-tag  "multi-chapter/post-notes.scm" "Scheme suffix common definitions")
+                                                (a-tag  "multi-chapter/common-front-matter-stuff" "Common attributes"))
+                                               )
+   
+                                                                      (a-tag "multi-chapter/html/index.html" "index.html"))
+
+          (list "LENO Trail Example"  (brl (list 
+                                                (a-tag "multi-chapter/trail.laml"  "A trail through selected pages of the 
+                                                                                    multi chapter examples"))
+
+                                               )
+   
+                                                                      (a-tag "multi-chapter/html/trail.html" "trail.html"))
+          (list "LENO Meta example" 
+                                (a-tag "../../styles/xml-in-laml/lecture-notes/man/meta-example/meta-lecture-notes.laml" "LAML meta example")                                      
+                                        (a-tag "../../styles/xml-in-laml/lecture-notes/man/meta-example/html/meta-lecture-notes.html" "HTML meta example") )
+
+          (list "LENO SVG example" 
+                                (a-tag "inline-svg-stuff/svg-more.leno" "An example with inline SVG - Development stuff")                                      
+                                        (a-tag "inline-svg-stuff/svg-more.html" "HTML+SVG slides") )
+
+          (list "LENO SVG demo" 
+                                (a-tag "svg-in-scheme-demo/svg-in-scheme-demo.leno" "A Demo of SVG in Scheme")                                      
+                                        (a-tag "svg-in-scheme-demo/svg-in-scheme-demo.html" "HTML+SVG slides") )
+
+          (list "Slides of LAML presentation" 
+                                (a-tag "../../slides/www2002/www2002.laml" "LAML source slides/www2002/www2002.laml")                                      
+                                        (a-tag "../../slides/www2002/www2002.html" "HTML slides") )
+
+
+         )
+        ))
+
+    (p "The last example represent a real slide set used to present LAML at WWW2002 in Honolulu, Hawaii.")
+
+    (b "Please pay attention to the LAML meta example, which offers a very useful way to get familiar with LENO.")
+
+    (p "There is a separate set of" (a 'href "concise-comprehensive/index.html" "examples of LENO themes") _ "," "which is associated with paper about the theme facilities in LENO.")
+
+
+
+    (p (con "Please, also consult the " (a 'href "../tutorial/leno/index.html" "tutorial LENO examples") _ "," " which accompany the " 
+       (a 'href "../../tutorial/leno/leno.html" "LENO tutorial") _ "."))
+
+    (p "SVG Viewing: In Firefox, please consult" (a 'href "http://plugindoc.mozdev.org/windows-all.html#AdobeSVG" "this page")  "to get advice on viewing of SVG content.")
+
+
+    (font-size 2 (em "If your browser will not present files with 'laml' or 'scm' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files."))
+)
+  white black blue blue
+)
+
+(end-laml)
+
+
+
+
+

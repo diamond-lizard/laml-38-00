@@ -1,0 +1,43 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+(define language-preference 'english)
+
+(generic-page
+  "Overview of HTML4.01 examples"
+  (con-par
+    (laml-top-banner)
+    (h 1 "Overview of HTML4.01 convenience examples - with validation")
+    (p "The examples in this directory use the convenience library.
+        This library contains a collection of loosely related functions on top of the
+        validting basic and surface libraries.")
+  
+    (p  "Some of these you may find useful. Others are probably only important for myself."
+        "It is likely that you will develop your own collection of" (string-it "convenience functions") 
+        "if you start using LAML.")
+ 
+
+    "The following simple examples exist in this directory:"
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 250 200 200)
+        (list
+          (map b (list "Example"   "LAML"                            "HTML"))
+
+          (list "Table example"      (a-tag "test17.laml")        (a-tag "test17.html"))
+          (list "Box, frame, and multi column examples"    (a-tag "test19.laml")      (a-tag "test19.html"))
+          (list "mail-link etc - simple"      (a-tag "test18.laml")        (a-tag "test18.html"))
+
+          
+        )))
+
+    (font-size 2 (em "If your browser will not present files with 'laml' or 'scm' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files."))
+  )
+  white black blue blue
+)
+
+(end-laml)
+

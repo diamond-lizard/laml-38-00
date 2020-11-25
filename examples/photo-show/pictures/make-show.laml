@@ -1,0 +1,17 @@
+(load (string-append laml-dir "laml.scm"))
+(load (string-append laml-dir "tools/photo-show/photo-show.scm"))
+
+(define default-upper-caption "The Faroe Islands 1998")
+(define default-upper-size 6)  ; font size - a number between 1 and 6
+(define default-lower-caption #f)  ; no lower caption
+(define default-lower-size 1)
+(define home-url "../index.html")
+
+(define photo-show-title "The Faroe Islands 1998")
+
+(define default-time 3)  ; show each picture 3 seconds
+
+(define photo-list (photos-in-current-directory))   ; extract photos from current dir
+(define last-url (url-of-first-picture photo-list))  ; show cyclic show
+
+(make-photo-show photo-list)

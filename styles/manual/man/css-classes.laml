@@ -1,0 +1,123 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define current-xml-language 'xhtml10-transitional)
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+; Insert the LAML template "Processing Options" here
+; if you need variations in the LAML processing
+
+(define (manual-plain-css-class class-name-suffix)
+  (string-append "manual-plain" "-" class-name-suffix))
+
+(define (manual-header-css-class class-name-suffix)
+  (string-append "manual-header" "-" class-name-suffix))
+
+(define (css-table-entry e)
+  (tr (td (kbd (first e)))  (td (kbd (second e))) (td (font-color red (third e)))))
+
+(define css-documentation-list
+ (list
+   (list    "manual-table"       "table"      "The table which holds all manual entries and manual sections. Only one such table exists in a single manual.")
+   (list    "manual-author-element"  "span"   "The elements in author information of the manual")
+   (list    "manual-abstract"       "div"      "The manual abstract")
+   (list    "manual-body"       "body"      "The body of the manual page")
+   (list    "manual-title"       "h1"      "The title of the manual page")
+   (list    "manual-section"     "tr"      "The manual section row")
+   (list    "manual-section"     "td"      "The manual section row. Spans all four columns")
+   (list    "manual-section-level-2"     "td"      "The manual row of nested sections. Spans all four columns")
+   (list    "manual-section-description"  "td"      "The text of a manual section. Spans all four columns")
+
+   (list    (manual-header-css-class "title") "td" "The title (in the first column cell) of the alphabetic index")
+   (list    (manual-header-css-class "form") "td" "The form (in the second column cell) of the alphabetic index")
+   (list    (manual-header-css-class "description") "td" "The description (in the third column cell) of the alphabetic index")
+
+   (list (manual-plain-css-class "title")          "td"     "The title cell of a manual entry.  Spans four columns.")
+   (list (manual-plain-css-class "title-level-2")          "td"     "The title cell of a nested manual entry.  Spans four columns.")
+   (list (manual-plain-css-class "section-title")  "span"     "The title of a manual section.  Spans four columns.")
+   (list (manual-plain-css-class "section-title-level-2")  "span"     "The title of a nested section.  Spans four columns.")
+   (list (manual-plain-css-class "entry-kind")     "td"     "The marking of kind of entries. Such as 'Form' and 'Description'")
+   (list (manual-plain-css-class "form")           "td"     "The form line of a manual entry. Spans three columns")
+   (list (manual-plain-css-class "condition")   "td"     "The precondition and postcondition of a manual entry. Spans three columns")
+   (list (manual-plain-css-class "description")    "td"     "The description line of a manual entry. Spans three columns")
+   (list (manual-plain-css-class "parameter-name") "td"     "A single parameter name.")
+   (list (manual-plain-css-class "parameter-description")    "td"     "A sigle parameter description")
+   (list (manual-plain-css-class "example")        "td"     "An example line of a manual entry.  Spans three columns")
+   (list (manual-plain-css-class "reference-role") "td"     "The word appearing after 'See also'. The role of a reference. Followed by the reference anchor")
+   (list (manual-plain-css-class "reference-anchor")  "td"     "The anchored link of a reference. Comes just after the reference role")
+   (list (manual-plain-css-class "comment")        "td"     "An internal remark of a manual entry.")
+   (list (manual-plain-css-class "misc")          "td"      "A miscellaneous line of a manual entry")
+   (list (manual-plain-css-class "returns")        "td"      "A return line of a manual entry")
+   (list (manual-plain-css-class "form")          "td"      "A form line of a manual entry")
+   (list (manual-plain-css-class "xml-content-model")   "td"      "An XML content model line of a manual entry which describes a mirror function of an XML element")
+   (list (manual-plain-css-class "attribute-name")  "td"      "An attribute name of a mirror function of an XML element")
+   (list (manual-plain-css-class "attribute-type")  "td"      "An attribute type of a mirror function of an XML element")
+   (list (manual-plain-css-class "attribute-description")  "td"      "An attribute description of a mirror function of an XML element")
+
+   (list (manual-plain-css-class "end-of-entry")   "td"     "A cell in an empty row inserted after the last row in a manual entry. Used to make a termination or vertical space")
+   (list (manual-plain-css-class "end-of-entry")   "hr"     "A horizontal rule in the ending entry mentioned above. Can be eliminated by zero width")
+
+   (list (manual-plain-css-class "external-reference")   "a"     "The anchored link of an external reference")
+   (list (manual-plain-css-class "internal-reference")   "a"     "The anchored link of an internal reference")
+
+
+
+   )
+ )
+
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "CSS Classes in LAML Manuals"))
+  (body 
+    (h1 "CSS Classes in LAML Manuals")
+
+    (p "The LAML manuals, and more generally manuals produced by SchemeDoc and the manual document style, make
+        use of CSS stylesheets. Below we give an overview of the CSS classes that are used in a manual document.")
+
+    (p "Following the top indexes of a manual pages comes a number of manual sections, each with a number of
+        manual entries. All manual sections and entries have a" (b "tabular layout") "with" "four columns:")
+
+    (table 'border "1"
+      (tr (td "Col 1") (td "Col 2") (td "Col 3") (td "Col 4"))
+      (tr (td "...")   (td "...") (td "...") (td "..."))
+    )
+
+    (p "As an example:")
+
+    (table 'border "1"
+      (tr (td 'colspan "4" "Name of some function"))
+      (tr (td "Kind") (td  'colspan "3" "Info about kind"))
+      (tr (td 'rowspan "2" "Kind") (td "Subkind") (td 'colspan "2" "Info about subkind"))
+      (tr             (td "Subkind") (td 'colspan "2" "Info about subkind"))
+      (tr (td "...")   (td "...") (td "...") (td "..."))
+    )
+
+
+    (p "Many of the rows join two or more cells with a" (kbd "colspan") "attribute. Similarly, 
+        " (kbd "rowspan") "attributes are used to join rows in certain situations. As a consequence of this table organization many
+        of the stylesheet rules are associated with" (kbd "td") "elements.
+    ")
+
+    (p "A few classes are associated with level 2 manual pages and manual sections. The level 2 pages and sections are nested in top level entries (level 1).
+        As of now, we do not support level 3 and beyond.")
+
+    (p "The following classes are used in manual stylesheets:")
+
+    (table 'border "1"
+      (tr (td (b "Class name")) (td (b "Hosting element")) (td (b "Explanation")))
+      (map css-table-entry css-documentation-list))
+
+    (p (con "See also the concrete manual stylesheets in the " (a 'href "../stylesheets" "manual software stylesheet directory") _ "."))
+
+  )
+ )
+)
+
+
+(end-laml)

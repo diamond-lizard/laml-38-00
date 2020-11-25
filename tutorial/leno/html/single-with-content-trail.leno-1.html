@@ -1,0 +1,219 @@
+<html><head><link href="stylesheets/program.css" rel="stylesheet" title="program" type="text/css" /> <title>Source file</title></head><body bgcolor="#ffffc1" text="#000000" link="#000000" vlink="#000000"><font size="2"><pre>(<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX468" target="documentation-frame" title="R5RS Scheme form">load</a> (<a class="scheme-procedure-name" href="../../../r5rs/r5rs_8.html#IDX392" target="documentation-frame" title="R5RS Scheme form">string-append</a> laml-dir "laml.scm"))       
+(<a class="schemedoc-name" href="../../../man/laml.html#laml-style" target="documentation-frame" title="Manual: laml">laml-style</a> "xml-in-laml/lecture-notes/lecture-notes")
+
+(<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#leno-front-matters" target="documentation-frame" title="Manual: lecture-notes">leno-front-matters</a>
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#front-title" target="documentation-frame" title="Manual: lecture-notes">front-title</a> "LENO Tutorial Demo - Trail Embedding")           
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#front-subtitle" target="documentation-frame" title="Manual: lecture-notes">front-subtitle</a> "Note page content")   
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#front-author" target="documentation-frame" title="Manual: lecture-notes">front-author</a> "Kurt N&#248;rmark")           
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#front-affiliation" target="documentation-frame" title="Manual: lecture-notes">front-affiliation</a> "Department of Computer Science, Aalborg University, Denmark")  
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#front-abstract" target="documentation-frame" title="Manual: lecture-notes">front-abstract</a> 
+    "This is a LENO demo lecture, which is part of the LAML tutorial. It
+    demonstrates the trivial - but useful embedding of every slide page
+    in a trail frameset. The first two leno-front-matters attributes controls
+    the generation of the framesets, and the amount of navigation icons.")  
+
+
+  'trail-of-lecture "true"
+  'slide-header "minimal"  <span class="comment">; minimal/normal/none </span><br />
+
+  'slide-view "true"  
+  'annotated-slide-view "true"
+  'aggregated-view "true" 
+  'primary-view "slide-view"
+
+  'scheme-suffix "post-notes.scm"
+  'course-home-url "http://www.cs.auc.dk/~normark/scheme/tutorial/leno/leno.html"   
+  'author-home-url "http://www.cs.auc.dk/~normark/"   
+  'note-download-url ""   
+  'logo-url "http://www.auc.dk/"  
+  'note-contents-description ""    
+  'trail-of-lecture "false"  
+  'language "english"      
+  'show-and-speak "false" 
+    'default-showing-time "2"    
+    'additional-showing-time "0" 
+    'sound-source "real-audio" 
+    'speak-url-prefix "../../speak/"
+  'exercise-model "none"   
+  'mouse-advancement "double-press" 
+  'word-index "true"  
+  'css-stylesheet ""
+  'news-flash-string  ""  
+  'news-flash-level   "2"
+  'quiz-support "false"   
+  'verbosity-level "1"
+
+)
+
+(<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#begin-notes" target="documentation-frame" title="Manual: lecture-notes">begin-notes</a>)
+
+(<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#note-page" target="documentation-frame" title="Manual: lecture-notes">note-page</a> 'id "easy-section"
+ 
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#section-title" target="documentation-frame" title="Manual: lecture-notes">section-title</a> "The easy section")
+
+)
+
+(<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#note-page" target="documentation-frame" title="Manual: lecture-notes">note-page</a> 'id "first-page"
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#title" target="documentation-frame" title="Manual: lecture-notes">title</a> (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#main-text" target="documentation-frame" title="Manual: lecture-notes">main-text</a> "The first page")
+         (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#annotation" target="documentation-frame" title="Manual: lecture-notes">annotation</a> "Title annotation of the first page")
+  )
+
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#point" target="documentation-frame" title="Manual: lecture-notes">point</a>
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#main-text" target="documentation-frame" title="Manual: lecture-notes">main-text</a>
+     (p "Please notice that the usual yellow navigation icons are gone away")
+     (p "Because we have set the slide-header attribute to minimal")
+    )
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#annotation" target="documentation-frame" title="Manual: lecture-notes">annotation</a>
+    "We did this by" (b "M-x") (kbd "leno-insert-point,") 
+    "or from the LENO Emacs menu: &#39;" (kbd "Insert Point") "&#39;"
+    )
+  )
+
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#items" target="documentation-frame" title="Manual: lecture-notes">items</a> 
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#item" target="documentation-frame" title="Manual: lecture-notes">item</a> 
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#main-text" target="documentation-frame" title="Manual: lecture-notes">main-text</a> "This is an item"
+               ) 
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#annotation" target="documentation-frame" title="Manual: lecture-notes">annotation</a> "It is also possible to make the item from the Emacs LENO menu, 
+                 using &#39;Insert items&#39; or &#39;Insert simple items&#39;."
+                )
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#items" target="documentation-frame" title="Manual: lecture-notes">items</a> 
+     (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#item" target="documentation-frame" title="Manual: lecture-notes">item</a> 
+      (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#main-text" target="documentation-frame" title="Manual: lecture-notes">main-text</a> "with a single subitem"
+                 ) 
+      (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#annotation" target="documentation-frame" title="Manual: lecture-notes">annotation</a> ""
+                  ))))
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#item" target="documentation-frame" title="Manual: lecture-notes">item</a> 
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#main-text" target="documentation-frame" title="Manual: lecture-notes">main-text</a> "We made it with" (kbd "M-x leno-insert-items") <a class="schemedoc-name" href="../../../lib/xml-in-laml/man/xml-in-laml.html#_" target="documentation-frame" title="Manual: xml-in-laml">_</a> "." ) 
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#annotation" target="documentation-frame" title="Manual: lecture-notes">annotation</a> ""
+                )
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#items" target="documentation-frame" title="Manual: lecture-notes">items</a> 
+     (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#item" target="documentation-frame" title="Manual: lecture-notes">item</a> 
+      (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#main-text" target="documentation-frame" title="Manual: lecture-notes">main-text</a> "The" (kbd "leno-insert-items") "prompts us for the number of 
+                 items and the number of subitems"
+                 ) 
+      (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#annotation" target="documentation-frame" title="Manual: lecture-notes">annotation</a> ""
+  )))))
+
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#concept-list" target="documentation-frame" title="Manual: lecture-notes">concept-list</a>
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#concept" target="documentation-frame" title="Manual: lecture-notes">concept</a> 'concept-name "programmatic authoring" 
+            (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#main-text" target="documentation-frame" title="Manual: lecture-notes">main-text</a> "By programmatic authoring we mean authoring of documents 
+                        via use of  programmaing programming expressions"
+                       ) 
+            (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#annotation" target="documentation-frame" title="Manual: lecture-notes">annotation</a> "In LENO we use programmatic authoring."
+                        ))
+  )
+
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#opposing" target="documentation-frame" title="Manual: lecture-notes">opposing</a>
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#opposing-item" target="documentation-frame" title="Manual: lecture-notes">opposing-item</a> 
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#left-item" target="documentation-frame" title="Manual: lecture-notes">left-item</a> (b "LENO")
+               ) 
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#right-item" target="documentation-frame" title="Manual: lecture-notes">right-item</a> (b "Latex")
+                ))
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#opposing-item" target="documentation-frame" title="Manual: lecture-notes">opposing-item</a> 
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#left-item" target="documentation-frame" title="Manual: lecture-notes">left-item</a> "Programmatic authoring in Scheme"
+               ) 
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#right-item" target="documentation-frame" title="Manual: lecture-notes">right-item</a> "Authoring in a TeX language"
+  )))
+
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#cross-references" target="documentation-frame" title="Manual: lecture-notes">cross-references</a>
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#internet-reference" target="documentation-frame" title="Manual: lecture-notes">internet-reference</a>
+    'href "http://www.cs.auc.dk/~normark"
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#main-text" target="documentation-frame" title="Manual: lecture-notes">main-text</a> "Take a trip to normark&#39;s web page - it is easy to come back on track..."
+              ) )
+
+  )
+
+)
+
+
+(<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#note-page" target="documentation-frame" title="Manual: lecture-notes">note-page</a> 'id "graphics-page"
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#title" target="documentation-frame" title="Manual: lecture-notes">title</a> (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#main-text" target="documentation-frame" title="Manual: lecture-notes">main-text</a> "A page with graphics")
+         (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#annotation" target="documentation-frame" title="Manual: lecture-notes">annotation</a> "We will now make a page with a graphical image")
+  )
+
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#image" target="documentation-frame" title="Manual: lecture-notes">image</a>
+   'src "first-image.gif"
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#main-text" target="documentation-frame" title="Manual: lecture-notes">main-text</a>
+    "The first image - the most basic form of the image clause.  
+     The first-image.gif file must be located in  
+     the graphics and graphics/small directories."
+    )
+  )
+
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#image" target="documentation-frame" title="Manual: lecture-notes">image</a>
+   'margin-top "3cm"
+   'src "second-image.gif"
+   'alignment "vertical"
+   'first "text"
+   'second "picture"
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#main-text" target="documentation-frame" title="Manual: lecture-notes">main-text</a>
+    "Another graphics example using the image clause. 
+     In this example we use a few attributes of
+     the image mirror function."
+    )
+  )
+
+
+)
+
+(<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#note-page" target="documentation-frame" title="Manual: lecture-notes">note-page</a> 'id "source-program-page"
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#title" target="documentation-frame" title="Manual: lecture-notes">title</a> (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#main-text" target="documentation-frame" title="Manual: lecture-notes">main-text</a> "A page with a source program")
+         (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#annotation" target="documentation-frame" title="Manual: lecture-notes">annotation</a> "LENO is often used for teaching material about programming.
+            Therefore the source-program LENO element is important.")
+  )
+
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#source-program" target="documentation-frame" title="Manual: lecture-notes">source-program</a>
+   'src (<a class="applied-name" href="post-notes.scm-1.html#in-tutorial-dir" title="post-notes.scm">in-tutorial-dir</a> "schemedoc/prog3.scm")
+   'from-mark "(define (negate"
+   'to-mark ")))"
+   'slide-mode "inline"
+   'book-mode "external"
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#color-decorations" target="documentation-frame" title="Manual: lecture-notes">color-decorations</a>
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#color-decoration" target="documentation-frame" title="Manual: lecture-notes">color-decoration</a> 'from-mark "negate" 'to-mark "" 'color "blue" 'face "bold" )
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#color-decoration" target="documentation-frame" title="Manual: lecture-notes">color-decoration</a> 'from-mark "(if" 'to-mark "#t)" 'color "red" 'face "italic" )
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#color-decoration" target="documentation-frame" title="Manual: lecture-notes">color-decoration</a> 'from-mark "lambda" 'to-mark "" 'color "purple" 'face "bold" )
+   )
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#main-text" target="documentation-frame" title="Manual: lecture-notes">main-text</a>
+    "The negate function" )
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#annotation" target="documentation-frame" title="Manual: lecture-notes">annotation</a>
+    "This function is really from the SchemeDoc part of the LAML tutorial." )
+  )
+
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#source-program" target="documentation-frame" title="Manual: lecture-notes">source-program</a>
+   'src (<a class="applied-name" href="post-notes.scm-1.html#in-tutorial-dir" title="post-notes.scm">in-tutorial-dir</a> "schemedoc/prog3.scm")
+   'from-mark ";; Calculate the factorial"
+   'to-mark ")))))"
+   'slide-mode "inline"
+   'book-mode "inline"
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#color-decorations" target="documentation-frame" title="Manual: lecture-notes">color-decorations</a>
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#color-decoration" target="documentation-frame" title="Manual: lecture-notes">color-decoration</a> 'from-mark "fac " 'to-mark "" 'color "red" 'face "bold" 'repetition "2" )
+   )
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#main-text" target="documentation-frame" title="Manual: lecture-notes">main-text</a>
+    "The fac function" )
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#annotation" target="documentation-frame" title="Manual: lecture-notes">annotation</a>
+    "This is the classical recursive edition of fac." )
+  )
+
+  (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#source-program" target="documentation-frame" title="Manual: lecture-notes">source-program</a>
+   'src (<a class="applied-name" href="post-notes.scm-1.html#in-tutorial-dir" title="post-notes.scm">in-tutorial-dir</a> "schemedoc/prog3.scm")
+   'from-mark "(define (fib"
+   'to-mark "))))))"
+   'slide-mode "external"
+   'book-mode "external"
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#color-decorations" target="documentation-frame" title="Manual: lecture-notes">color-decorations</a>
+    (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#color-decoration" target="documentation-frame" title="Manual: lecture-notes">color-decoration</a> 'from-mark "fib " 'to-mark "" 'color "red" 'face "bold" 'repetition "3" )
+   )
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#main-text" target="documentation-frame" title="Manual: lecture-notes">main-text</a>
+    "The fib function" )
+   (<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#annotation" target="documentation-frame" title="Manual: lecture-notes">annotation</a>
+    "This is the classical recursive edition of fib, which is very time consuming." )
+  )
+
+)
+
+
+
+(<a class="schemedoc-name" href="../../../styles/xml-in-laml/lecture-notes/man/lecture-notes.html#end-notes" target="documentation-frame" title="Manual: lecture-notes">end-notes</a>)
+
+
+</pre></font><div>&nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p> &nbsp; <p></p></div></body></html>

@@ -1,0 +1,53 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-strict-validating")
+
+(define laml-url "http://www.cs.auc.dk/~normark/laml/")
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+(set-xml-accept-only-string-valued-attributes-in 'xhtml10-strict #t)
+
+(set-xml-transliterate-character-data-in 'xhtml10-strict #t)
+(set-xml-char-transformation-table-in 'xhtml10-strict
+   (list->vector (append (number-interval 1 255) (list 0))))
+
+
+; ::the-html-write-clause::
+; Writing the HTML fragment to an HTML file.
+
+(write-html '(raw prolog)
+  (html 
+   (head 
+     (title "White space handling") 
+   )
+
+   (body
+
+     (p "This is the" (em "first") "paragraph.")   
+
+     (p "This is the second" (b "paragraph") _ ".")  
+
+     (p (list (kbd "This") "is" "the" "third" 
+              "paragraph" _ "."))  
+
+     (p (list (kbd "This") "is" "the" "fourth" 
+              'class "third" "paragraph" _ ".")) 
+
+     (p (list "This" 
+              (list (b "is") "the")
+              "fifth" "paragraph" _ "."))  
+
+     (p (list "This"
+               (list (b "is") "the" 'class "third")
+              "sixth" "paragraph" _ "."))  
+
+     (p (list "This" "is" "t") _
+        "h" _
+        (list "e" "seventh")
+        (list (list (list "paragraph"))) _ ".") 
+     
+   )
+  )
+)
+
+(end-laml)

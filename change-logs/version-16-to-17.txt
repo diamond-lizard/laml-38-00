@@ -1,0 +1,38 @@
+1.10.01: The LENO manual has been updated with recent note-page clauses.
+
+Fall 01: LENO has changed a lot. We are in the middle of introducing CSS support.
+We have introduced a new XML-in-LAML interface to LENO.
+
+Fall 01: We have introduced a new validating HTML mirror in LAML. This is the
+main LAML in version 17.
+
+The LAML library browser has been extend with the definitions from laml.scm.
+Be aware that no LAML document style functions are documented in the LAML browser.
+
+Fall 01.
+There is a new procedure write-html in laml.scm which is intended for rendering
+and writing of all HTML document to text files.
+
+Feb 12, 2002
+The rendering of AST-based documents (using the validating mirrors)
+has been made more efficient, using an imperative tree traversal which causes
+only minimal garbage collection. When used from write-html, the document is
+rendered directly to an output stream.
+
+Feb 13, 2002
+Standard prolog and epilog stuff added to the function render and render-to-output-port.
+The standard prolog contains document type declaration.
+A new section of functions (prolog and epilog) added to laml.scm.
+The procedure write-html has been extended to use the prolog and epilog stuff.
+
+Feb 2002.
+The HTML4 mirror have been upgraded to from HTML4.0 to HTML4.01. 
+The HTML4.0 mirror has been eliminated from the distribution.
+
+Feb 2002.
+The XHTML1.0 strict mirror has been turned into a fully validating mirror.
+In addition, the element prohibitions of XHTML1.0 are enforced by this mirror.
+
+March 2002.
+The old lib4 has been renamed to just lib.
+

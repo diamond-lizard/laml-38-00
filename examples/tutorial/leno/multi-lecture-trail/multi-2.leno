@@ -1,0 +1,139 @@
+(load (string-append laml-dir "laml.scm"))       
+(laml-style "xml-in-laml/lecture-notes/lecture-notes")
+(load (in-startup-directory "shared-front-matters-stuff.scm"))
+
+(leno-front-matters
+  (front-title "Lecture 2 of Multi Demo")           
+  (front-author multi-author)           
+  (front-affiliation multi-affiliation)  
+  (front-abstract "This is the second lecture of the tutorial multi demo material")    
+
+  shared-front-matters-attributes
+)
+
+(begin-notes)
+
+(note-page 'id "page1"
+  (title (main-text "First page in second lecture")
+         (annotation "An annotation of the first page in the second lecture")
+  )
+
+  (slide-text
+   "Some slide text"
+  )
+
+
+  (point
+   (main-text
+    "Main point of first page in second lecture"
+    )
+   (annotation
+    ""
+    )
+  )
+
+)
+
+
+
+(note-page 'id "page2"
+  (title (main-text "Second page in second lecture")
+         (annotation "")
+  )
+
+  (point
+   (main-text
+    "This is the second page in the second lecture"
+    )
+   (annotation
+    ""
+    )
+  )
+
+  (opposing
+   (opposing-item 
+    (left-item "Yest"
+               ) 
+    (right-item "it"
+                ))
+   (opposing-item 
+    (left-item "is"
+               ) 
+    (right-item "second"
+  )))
+
+)
+
+(note-page 'id "page3"
+  (title (main-text "Third page in second lecture")
+         (annotation "")
+  )
+
+  (items 
+   (item 
+    (main-text "First item on page 2"
+               ) 
+    (annotation "There are no annotations - 
+                 no real ones, at least"
+                ))
+   (item 
+    (main-text "Second item on page 2"
+               ) 
+    (annotation ""
+  )))
+
+  (language-syntax
+   (main-text
+    "A syntax box" )
+   (annotation
+    "Annotations to the syntax box" )
+  )
+
+)
+
+(note-page 'id "page4"
+  (title (main-text "Fourth page i second lecture")
+         (annotation "Some annotation")
+  )
+
+  (items 
+   (item 
+    (main-text "Item one"
+               ) 
+    (annotation ""
+                )
+    (items 
+     (item 
+      (main-text "Subitem one"
+                 ) 
+      (annotation ""
+                  ))
+     (item 
+      (main-text "Subitem two"
+                 ) 
+      (annotation ""
+                  ))))
+   (item 
+    (main-text "Item two"
+               ) 
+    (annotation ""
+                )
+    (items 
+     (item 
+      (main-text "Subitem one"
+                 ) 
+      (annotation ""
+                  ))
+     (item 
+      (main-text "Subitem two"
+                 ) 
+      (annotation ""
+  )))))
+
+
+)
+
+
+(end-notes)
+
+

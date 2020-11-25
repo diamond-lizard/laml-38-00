@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE edoc PUBLIC "-//Elucidator2 edoc//EN" "">
+
+<!-- initial comment -->
+
+<edoc>
+<enode role="essay">
+<head>
+
+<!-- The topic must characterize and introduce the thematic contents of -->
+<!-- the node, not merely categorize (label) it. The topic should aim -->
+<!-- to convey positions and results. Topics are more likely to be -->
+<!-- representative and topically faithful if they are (1) constructed as -->
+<!-- sentence fragments and (2) rewritten after composition of the node. -->
+<topic> 
+Time Conversion
+</topic>
+
+<!-- The abstract is supposed to be a thematic window into the -->
+<!-- contents of the node. The abstract must boil down the node body -->
+<!-- to typicalle 3-5 lines of text. It should expose rationales, results -->
+<!-- and main characteristics of content of the node. -->
+<abstract>
+This program shows how to convert time from milliseconds elapsed since
+January 1, 1970, 00:00:00 GMT to a representation with year, month,
+day, hour, minutes and seconds.<br/><br/> 
+
+It does so via a class that stores and convert the given time. The
+class has an interface that allow one to retrieve the needed
+information about the time.<br/><br/> 
+
+A test example is provided to illustrate the use of the class.<br/><br/>
+
+This documentation is to be viewed as an small example of
+<em>Elucidative Programming</em> with Java and was part of the
+week-assignment for the authors DAT5 project exam.<br/><br/>  
+</abstract>
+
+<!-- The status of the node, being new, inprogress or finished. -->
+<status><new/></status>
+
+<!-- A list of representative keywords for the node. -->
+<keywords><kw>Time</kw>
+	  <kw>Conversion</kw>
+	  <kw>Elucidative programming</kw>
+</keywords>
+
+<!-- The name of the author that has last change the node (Will be -->
+<!-- filled in automatically). -->
+<author>Max Rydahl Andersen and Claus Nyhus Christensen</author>
+
+<created>2000/09/12 21:43:32</created>
+
+<last-updated>$Date: 2000/09/04 11:55:46 $</last-updated>
+</head>
+
+    <section>
+      <title>Introduction</title>
+
+This example is based on the <xlink role="mentions"
+href="http://www.cs.auc.dk/~normark/elucidative-programming/time-conversion/time/time.html">Scheme Time Example</xlink> made by 
+Kurt Noermark.<br/><br/> The goal is to create a Java application that
+can convert time from one representation to another. To do this we
+create a class named <slink role="mentions" href="ugeopgave/Date">Date</slink>, that can be used to store a
+specifc instance of time and provides an interface to set and get
+information about the time.<br/><br/>  
+
+There exists a range of different time representations and many rules
+for calculation and exceptions to these rules. We are not going to
+discuss all the different methods of time conversions but focus on one
+of the simpler solutions: <em>Universal Time</em>(UT). UT is based on
+the elapsed time since January 1, 1970, 00:00:00 GMT. <br/><br/> 
+
+Javas own <slink role="mentions"
+href="java/util/Date">java.util.Date</slink> class uses milliseconds
+to store the elapsed time, in this example we are going to use seconds
+instead.<br/><br/> 
+
+The following sections will first describe the structure of the class
+and secondly the methods used for doing the actual time
+conversion.<br/><br/> 
+    </section>
+
+    <section sbase="ugeopgave/Date">
+      <title>Class structure</title>
+     
+The <slink role="mentions" href="">Date</slink> class stores the UT
+seconds in the <slink role="describes" href="@ut">ut</slink> field.  This
+field can be set either through the class single parameter <slink
+role="describes" href="@Date(long)">constructor</slink> or via the <slink
+role="describes" href="@setUT(long)">setUT(long)</slink>
+method.<br/><br/> 
+     
+Whenever the <slink role="mentions" href="@ut">ut</slink> field is set,
+each part of the time is calculated. The method used for the
+calculation is described <dlink role="mentions" href="/Time.edoc@conversionmethod">later</dlink>. Each part is stored in a slot
+and this is described in the following <dlink role="mentions"
+href="/Time.edoc@slots">section</dlink>. 
+
+    <section label="slots">
+      <title>Slots</title>
+We use slots to store each interesting item of a <em>time</em>. A slot
+is just a plain <em>long</em> and all slots are stored in the <slink
+role="describes" href="@slots">slots</slink> field.<br/><br/> 
+
+The <code>slots</code> array contain currently five items. These are
+      listed here with their corresponding value intervals. 
+      <slink role="describes" href="@YEAR">YEAR</slink> [1970..292278994]),
+      <slink role="describes" href="@MONTH">MONTH</slink> [1..12],
+      <slink role="describes" href="@DAY">DAY</slink> [1..31],
+      <slink role="describes" href="@HOUR">HOUR</slink> [0..23],
+      <slink role="describes" href="@MINUTE">MINUTE</slink> [0..59] and
+      <slink role="describes" href="@SECONDS">SECONDS</slink> [0.59].<br/><br/>
+     
+The slots array is used to have each item pre-calculated.  This
+     removes the need for recalculation when each item of the time is
+     accessed via the <slink role="describes"
+     href="@e:slotgetset">get-methods</slink>.  
+     In a larger industrial application it probably will be more
+     important to be able to write the human readable format for the
+     time instead of the elapsed seconds since 1970. The
+     "slot-solution" would be the best solution for this as the
+     readable format is straightforward to extract. A more complete
+     example of such an implementation is in the <xlink href=" http://www.javasoft.com/j2se/1.3/docs/api/java/util/Date.html">standard Java
+     API</xlink><br/><br/>
+     
+     The disadvantage is the need for extra storage, but this is not
+     an issue for this example. If only the elapsed seconds is needed
+     in an application a solution is to just store the UT in a simple
+     long and use the date class when it is needed to present the date
+     in readable form.<br/><br/>
+    </section>
+
+    <section label="conversionmethod">
+      <title>Conversion method</title>
+      The conversion from UT(elapsed seconds) to a representation
+      with year, month, day, hour, minute and seconds is handled by
+      <slink role="describes" href="@calcTime()">calcTime()</slink>.<br/><br/>
+
+      To convert from elapsed seconds to each part of the time can be done
+      either through a formula or via succesive
+      counting. A formula is most efficient but can be hard to
+      comprehend, successive counting is just the opposite - not so
+      efficient, but easier to comprehend.<br/><br/>
+
+      We are going to use both methods, calculation for the simplest
+      issues and successive counting for the rest.<br/><br/>
+
+      The general strategy is to start with the total elapsed seconds
+      and then subtract the seconds for each item in the time. We
+      start out by calculating the <slink role="mentions"
+      href="@calcTime()@e:a">year</slink> and the remainding
+      seconds. From the seconds and year we calculate the exact <slink
+      role="mentions" href="@calcTime()@e:b">day and
+      month</slink> and from the last remaining seconds <slink role="mentions" href="@calcTime()@e:c">hour, minute
+      and seconds</slink> is calculated.<br/><br/>
+
+      After each calculation the relevant item is stored in their
+      respective location, in the <slink role="mentions"
+      href="@slots">slots</slink> field, which is described <dlink role="mentions" href="/Time.edoc@slots">else where</dlink>. 
+      <br/><br/>
+
+      The internal details of the different calculations is described
+      in their own section, 
+      <dlink role="mentions" href="/Time.edoc@year">year</dlink>, 
+      <dlink role="mentions" href="/Time.edoc@daymonth">day/month</dlink>,
+      <dlink role="mentions" href="/Time.edoc@hourminsec">hour/minute/seconds</dlink>.
+    </section>
+
+    <section label="year">
+      <title>Year</title>
+        To calculate which year a given UT time occur in the <slink
+        role="describes" href="@calcYear(long)">calcYear(long)</slink> method
+        uses successive counting.<br/><br/>
+        
+        It starts out with the <slink role="describes"
+        href="@BASE_YEAR">base year</slink> and <slink role="mentions" href="@calcYear(long)@e:b">succesivly adds</slink>
+        the number of seconds for the year in the loop until it ends
+        up with <slink role="mentions" href="@calcYear(long)@e:a">less seconds</slink> than the next year contains.<br/><br/>
+
+        The length of a given year is returned by the method <slink
+        role="describes" href="@yearLength(long)">yearLength(long)</slink>,
+        which check if the year is a <dlink role="mentions" href="/Time.edoc@leapyear">leap
+        year</dlink> and returns the correct amount of seconds.
+    </section>
+
+    <section label="leapyear">
+      <title>Finding leap year</title>
+       To handle leap years, we have the method <slink role="describes"
+       href="@isLeapYear(long)">isLeapYear(long)</slink>.          
+       <br/><br/>
+
+       The method returns true if <code>year</code> is a leap year
+       and false otherwise.
+       <br/><br/>
+
+       It uses the following rules:<br/>
+       A year is only a leap year if it is divisible with 4 and
+       not divisible by 100. An exception to this rule is that if the
+       year is divisible by 400 it <em>is</em> a leap year.
+       <br/><br/>
+    </section>
+    </section>
+
+    <section label="daymonth" sbase="ugeopgave/Date">
+      <title>Month and day</title>
+        To find the month and day we have the method       
+        <slink role="describes" href="@calcDayAndMonth(long,long)">calcDayAndMonth</slink>.
+        This method receives the number of seconds elapsed since 1. January of the relevant year.
+        Hence the number of the actual day is relatively easy to calculate by 
+        <slink role="describes" href="@calcDayAndMonth(long,long)@e:div">division</slink> 
+        of a normal day length.<br/>
+        
+        The remaining seconds are saved and is later returned by this method.<br/><br/>
+        
+        The exact month is found by using a pre-calculated array that
+        contains <slink role="describes"
+        href="@calcDayAndMonth(long,long)@numOfDays">number of
+        days</slink> passed since the first in each of the twelve
+        months. There are two pre-calculated arrays, one for <slink
+        role="describes" href="@MONTH_LENGTHS">regular months</slink>  and
+        another for <slink role="describes" href="@LEAP_MONTH_LENGTHS">leap-year months</slink>.<br/><br/>
+
+        By <slink role="describes"
+        href="@calcDayAndMonth(long,long)@e:search">searching
+        through</slink> this array a month is found. The actual
+        day in the month can be calculated by 
+        <slink role="describes" href="@calcDayAndMonth(long,long)@e:subtract">subtracting</slink>
+        the days stored in the found months entry in the array.<br/><br/>
+        
+        Note, we add 1 to the actual day as the calculation is
+        based on the first day being 0(zero) and we want to deliver the result in the range from 1 to 31. 
+    </section>
+
+
+    <section label="hourminsec" sbase="ugeopgave/Date">
+      <title>Hour, minute and second</title>
+         The <slink role="describes"
+        href="@calcHourMinuteSeconds(long)">calcHourMinuteSeconds(long)</slink>
+        method receives the number of seconds elapsed in the day.
+
+        The last parts of the time is easily calculated via division and modulo.<br/><br/>
+
+        First we divide the seconds with the length of an hour to get
+        the 
+        <slink role="mentions" href="@calcHourMinuteSeconds(long)@e:a">correct hour</slink>. 
+
+        The 
+        <slink role="mentions" href="@calcHourMinuteSeconds(long)@e:b">remainder</slink> of this division is found by
+        modulo and this is used to find the <slink role="mentions" href="@calcHourMinuteSeconds(long)@e:c">minute-number</slink> by dividing
+        with the length of a minute.
+        The 
+        <slink role="mentions" href="@calcHourMinuteSeconds(long)@e:d">remainder</slink> of this division is finally stored as the 
+        <slink role="mentions" href="@calcHourMinuteSeconds(long)@e:e">second-number</slink>.
+    </section>
+
+    <section sbxase="ugeopgave/Date">
+      <title>Miscellaneous</title>
+      <!-- The topic must characterize and introduce the thematic contents of -->
+      This section contains some miscellaneous issues concerning the class.<br/><br/>
+
+      <b>Further work</b><br/>
+      The class can be extended with much more functionality, e.g. the reverse conversion would be highly relevant.
+      If the class should be used to keep track of time it would be beneficial to look at issues such as timezones,
+      leap-seconds, Gregorian vs. Julian calendar, etc.<br/><br/>
+
+      <b>Test</b><br/>
+      There also exist a class that <slink role="describes" href="ugeopgave/DateTest">tests</slink> the conversion and
+      compares it with the <slink role="mentions" href="java/util/Date">standard Date class</slink> in Java. This
+      test uses the <slink role="mentions" href="ugeopgave/Date@toString()">toString()</slink> to produce a more human readable format.<br/><br/>
+
+      <b>JavaDoc</b><br/>
+      To get a better overview of the class the automatically generated 
+      <xlink href="http://dopu.cs.auc.dk/data/maxtime/ugeopgave/apidoc/">JavaDoc</xlink> is a good place to start.
+    </section>
+
+</enode>
+</edoc>
+
+
+
+

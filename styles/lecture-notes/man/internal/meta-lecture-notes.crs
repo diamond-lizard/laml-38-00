@@ -1,0 +1,2 @@
+((internet-reference "A refence to some place on the Internet (the authors home page)" "http://www.cs.auc.dk/~normark/" (internet-reference)) (note-reference "A reference to another place in a set of lecture notes 
+                       (the page describing the title function in these notes)" ln title (note-reference)) (informal-reference "A name of a resource" "A reference to the off-line resource" (informal-reference)))

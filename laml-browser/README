@@ -1,0 +1,8 @@
+This is the directory of the LAML/Scheme Browser.
+It is made with use of the SchemeDoc Index facility.
+
+The manual index software is located in
+
+ styles/xml-in-laml/manual-index
+
+relative to the laml distribution.

@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta name = "Generator" content = "LAML">  <title>What is new in LAML</title></head> <body bgcolor = "#ffffbf" text = "#000000" link = "#0000ff" vlink = "#0000ff"> <table border = "0" cellpadding = "0" cellspacing = "0" width = "100%"><tbody><tr><td width = "33%" align = "left" valign = "top"><font size = "2">Generated: June 1, 2002, 16:17:07</font></td> <td width = "34%" align = "center" valign = "top"><font size = "2">Copyright &copy; 2002 , Kurt N&oslash;rmark</font></td> <td width = "33%" align = "right" valign = "top"><font size = "2"><a href = "../index.html" title = "The local LAML software home page" target = "_top"><img src = "../images/laml-home.gif" alt = "The local LAML software home page" border = "0"></a></font></td></tr></tbody></table> <h1>What is new in LAML</h1> <h3>News in version 17:</h3> <p> <ol><li>The most important new element in this version of LAML is the validating mirrors
+      (<a href = "../lib/html4.01-transitional-validating/man/surface.html">HTML4.01 transitional</a> and <a href = "../lib/xhtml1.0-strict/man/surface.html">XHTML1.0 strict</a>).
+       While you generate your HTML document LAML will validate the document against the DTD.
+       LAML comes with a number of examples (<a href = "../examples/simple-html4.0-loose-validating/index.html">HTML4.01</a> and <a href = "../examples/xhtml1.0-strict-validating/index.html">XHTML1.0</a>). See also
+       <a href = "../examples/jfp/index.html">additional examples</a> written for a recent paper (see below) about LAML. All examples are part of the LAML distribution, so it is easy to play with them. <p></li> <li>The new validating mirrors generate abstract syntax trees instead of strings.
+       The abstract syntax trees can be rendered as text by use of the function <a href = "../lib/html4.01-transitional-validating/man/basis.html#render">render</a>.
+       The rendering process avoids excessive string concatenation. Less garbage collection is therefore necessary.
+       The role of the ASTs relative to other formats used in LAML is illustrated in a <a href = "http://www.cs.auc.dk/~normark/scheme/tutorial/figures/laml-formats.gif">figure</a>.
+       <p></li> <li>The new procedure <a href = "../man/laml.html#write-html">write-html</a> provides a conveninent top-level abstraction for rendering and writing
+            a HTML clause to a text file.  <p></li> <li><a href = "../styles/lecture-notes/man/lecture-notes.html">LENO</a> has been extended in two directions: (1) A new surface syntax (XML-in-LAML) has been introduced via
+      the new style leno.
+      (2) Support of CSS is being introduced. <em>Both of these are in progress, so do not yet expect finished 
+      work in this area.</em> The old surface syntax is still operational via the style lecture-notes. Documentation of the new LENO work is pending. If you are interested in web-based teaching material and LENO you can consult the new paper
+       <b><em>WEB Based Lecture Notes - The LENO Approach</em></b> (<a href = "http://www.cs.auc.dk/~normark/laml/papers/leno/paper.zip">zipped postscript</a>, <a href = "http://www.cs.auc.dk/~normark/laml/papers/leno/paper.pdf">pdf</a>).
+       <p></li> <li>We have also generated new mirrors for <a href = "../lib/xhtml1.0-transitional/man/surface.html">XHMTL1.0 transitional</a>,and <a href = "../lib/xhtml1.0-frameset/man/surface.html">XHTML1.0 frameset</a> .
+      As of now the XHTML 1.0 strict validating mirror is finished (see above). XHTML 1.0 transitional and frameset
+      are still experimental (and non-validating). <p></li> <li>We are currently writing a <a href = "http://www.cs.auc.dk/~normark/scheme/tutorial/index.html">LAML tutorial</a>. There are links to the tutorial from the distributed version, but 
+       the tutorial itself is maintained at the <a href = "http://www.cs.auc.dk/~normark/scheme/index.html">development site of LAML</a> . <p></li> <li>There are two new papers about LAML. The one of most interest to the Scheme community is
+        <b><em>Web Programming in Scheme - the LAML approach</em></b> (<a href = "http://www.cs.auc.dk/~normark/laml/papers/jfp.pdf">pdf</a>, <a href = "http://www.cs.auc.dk/~normark/laml/papers/jfp.ps">ps</a>). The <a href = "../examples/jfp/index.html">accompanying examples</a> are also available. The LAML papers can be found on the <a href = "http://www.cs.auc.dk/~normark/laml/">LAML home page</a>. <p></li> <li>The web-based teaching material <a href = "http://www.cs.auc.dk/~normark/prog3-01/html/notes/index.html">Functional Programming in Scheme - A WWW-oriented approach</a> 
+            may also be of interest. The material illustrate functional programming in Scheme by means of LAML examples.
+            The material is produced by use of LENO (see above). <p></li> <li><b>Version 17.10:</b> <p></li> <li>XML-in-LAML has been introduced. XML-in-LAML is a systematic support of XML in LAML, based on a DTD which parsed
+       and processed to a mirror of the XML language in LAML. In the current version of LALM we do not include the generator
+       part of XML-in-LAML. <p></li> <li>LENO has been updated with a new XML-in-LAML front end. The new version of LENO (which depends on the old one in styles/lecture-notes/)  is
+       located in styles/xml-in-laml/lecture-notes/ <p></li></ol> <p> <em>Besides the major improvemens listed above, a lot of small improvements have been made throughout the styles, tools, and libraries. 
+        See a  <a href = "version-16-to-17.txt">more detailed log</a>  for further details. Notice however that some changes has been performed
+        without any logging...</em> <p> <p> <p> &nbsp; <p> <p> Kurt N&oslash;rmark <br> Aalborg University <br> normark@cs.auc.dk &nbsp; <p> &nbsp; <p> <font size = "1" color = "#ff0000">Generated: June 1, 2002, 16:17:07</font></body></html>
+<!-- Generated from a LAML source file. Version 17.10 (April 2, 2002) development. LAML is designed and implemented by Kurt Nørmark, normark@cs.auc.dk. -->
+

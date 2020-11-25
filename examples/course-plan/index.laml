@@ -1,0 +1,41 @@
+(load (string-append laml-dir "laml.scm"))
+
+(laml-style "simple")
+
+(generic-page
+  "A course plan example"
+  (con-par
+     (laml-top-banner)
+     (h 1 "A course plan example")
+
+    "In this directory we find an example of a course plan. At the source side we see the 
+     course description file, and course laml file, and the individual lecture side. In the course HTML directory
+     we see the generated overviews, the frame pages, and the individual lecture pages"
+
+    "Please notice that the LAML course file generates the introduction page, all the overview and calendar pages, together with
+     the two frames and the frameset page (the home page)."
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 250 200 200)
+        (list
+          (map b (list "Example" "LAML/SCM" "HTML"))
+          (list "The course description file"    (a-tag "course-description.scm")      "-")
+          (list "The LAML course file"    (a-tag "course.laml")      (a-tag "html/course-home.html"))
+          (list "The first lecture LAML file"    (a-tag "lectures/fp-intr.laml")      (a-tag "html/fp-intr-lecture.html"))
+          (list "The second lecture LAML file"    (a-tag "lectures/functions.laml")      (a-tag "html/functions-lecture.html"))
+          (list "The third lecture LAML file"    (a-tag "lectures/lists.laml")      (a-tag "html/lists-lecture.html"))
+        )))
+
+    (font-size 2 (em "If your browser will not present files with 'laml' or 'scm' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files."))
+
+
+  )
+  white black blue blue
+)
+
+(end-laml)
+

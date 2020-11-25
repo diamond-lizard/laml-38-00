@@ -1,0 +1,43 @@
+(load (string-append laml-dir "laml.scm"))
+(load (in-startup-directory "shared-front-matters-stuff.scm"))
+(laml-style "xml-in-laml/lecture-notes-themes/lecture-notes-themes")
+
+
+(leno-themes-front-matters 
+  shared-themes-front-matters-attributes  
+)
+
+
+(begin-themes)
+
+(theme 'id "sec1"
+  (leno-element 'lecture-id "multi-1" 'page-id "sec1" 'element-type "section-title" 'element-number "1" )
+
+  (theme-text "This is the thematic introduction to the material. Notice table" 
+      (ref "multi-1_themes-sec1" "multi-1" "page3" "tabular" "ta1")
+      "which is of particular importance. At least
+      it gives us a good chance to make a reference")
+
+  (leno-element 'lecture-id "multi-1" 'page-id "page1" 'element-type "title" 'element-number "1" )
+
+  (theme-text "This is the thematic introduction to the first page. The material ends
+     with" (ref "multi-3_themes-sec1" "multi-3" "page3" "title" "1") _ "." "Try go there" )
+
+  (leno-element 'lecture-id "multi-1" 'page-id "page1" 'element-type "point" 'element-id "pt1" )
+  (theme-text "Here we can set the context for the items below:")
+  (leno-element 'lecture-id "multi-1" 'page-id "page1" 'element-type "items" 'element-id "it1" )
+  (leno-element 'lecture-id "multi-1" 'page-id "page2" 'element-type "title" 'element-number "1" )
+  (theme-text "Another thematic introduction")
+  (leno-element 'lecture-id "multi-1" 'page-id "page2" 'element-type "items" 'element-id "it1" )
+
+  (leno-element 'lecture-id "multi-1" 'page-id "page3" 'element-type "title" 'element-number "1" )
+  (theme-text "And yet another thematic introduction")
+  (leno-element 'lecture-id "multi-1" 'page-id "page3" 'element-type "point" 'element-id "pt1" )
+  (leno-element 'lecture-id "multi-1" 'page-id "page3" 'element-type "tabular" 'element-id "ta1" )
+  (leno-element 'lecture-id "multi-1" 'page-id "page4" 'element-type "title" 'element-number "1" )
+  (leno-element 'lecture-id "multi-1" 'page-id "page4" 'element-type "synopsis" 'element-id "sy1" 'annotations "ignore")
+  (theme-text "Some 'thematic' end remark.")
+)
+
+
+(end-themes)

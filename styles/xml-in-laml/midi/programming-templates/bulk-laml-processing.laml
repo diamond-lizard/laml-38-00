@@ -1,0 +1,18 @@
+; Process all midi files in input dir. Makes midl files.
+; -----------------------------------------------------------------------------
+(load (string-append laml-dir "laml.scm"))
+(load (string-append laml-dir "styles/xml-in-laml/midi/midi.scm"))
+
+; -----------------------------------------------------------------------------
+; Parameters
+(define input-dir (startup-directory))
+(define outut-dir (string-append dir "data/"))
+(define mode 'deltaTime)
+
+; -----------------------------------------------------------------------------
+
+(midi-files-to-laml-files 
+ input-dir
+ (filter midi-file? (directory-list input-dir))
+ output-dir
+ mode)

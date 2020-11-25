@@ -1,0 +1,55 @@
+(load (string-append laml-dir "laml.scm"))       
+(laml-style "xml-in-laml/chords/chords")
+
+(song-front-matters
+  'transposition "0"
+  'font-size "95"   ; percentage
+  'indentation "100"  ; pixels
+  'compact-lines "false"
+  (song-title "Oh! Susanna")
+  (song-author "S.C. Foster")
+)
+
+
+(song-verses
+
+  (verse 'n 1
+    (line "I" (f "come") "from Ala_" (f "bama") "with my" (f "banjo") "on my" (c7 "knee") _ ";")
+    (line "I'm" (f "goin'") "to Lou'si_" (f "ana") (hb "my") (f "true") "love" (c7 "for") "to" (f "see") _ ".")
+    (line "It" (f "rained") "all night the" (f "day") "I left,")
+    (line "the" (f "weather") "it was" (c7 "dry") _ ";")
+    (line "The" (f "sun") "so hot I" (f "froze") "to" (hb "death") _ ",")
+    (line "Su_" (f "sanna") (c "don't") "you" (f "cry") _ ".")
+
+    (line (hb "Oh!") "Su_" (hb "sanna") (hb7) _ "," (f "don't") "you cry for" (c7 "me") _ ";")
+    (line "I" (f "come") "from Ala_" (f "bama") _ ",")
+    (line (hb "with") "my" (f "banjo") (c7 "on") "my" (f "knee") _ "."))
+
+  (verse 'chords "false" 'n 2
+    (line "I had a dream the other night,")
+    (line "When everything was still;")
+    (line "I thought I saw Susanna dear,")
+    (line "A-coming down the hill.")
+    (line "The buckwheat cake was in her mouth,")
+    (line "The tear was in her eye,")
+    (line "Said I, I'm coming from the south,")
+    (line "Susanna don't you cry.")
+
+    (line "Oh! Susanna, don't you cry for me;")
+    (line "I come from Alabama,")
+    (line "with my banjo on my knee."))
+
+  (verse 'chords "false" 'n 3
+    (line "I soon will be in New Orleans,")
+    (line "And then I'll look all 'round,")
+    (line "And when I find Susanna,")
+    (line "I'll fall upon the ground.")
+    (line "But if I do not find her,")
+    (line "This darkey'll surely die,")
+    (line "And when I'm dead and buried,")
+    (line "Susanna don't you cry.")
+
+    (line "Oh! Susanna, don't you cry for me;")
+    (line "I come from Alabama,")
+    (line "with my banjo on my knee."))
+)

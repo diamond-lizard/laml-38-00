@@ -1,0 +1,1 @@
+(((key "general") (file-location "/user/normark/scheme/examples/elucidator-2/time/scheme/general-lib.scm") (language "scheme") (group "lib") (version 1) (process t) (friendly-name "")) ((key "time") (file-location "/user/normark/scheme/examples/elucidator-2/time/scheme/time.scm") (language "scheme") (group "core") (version 1) (process t) (friendly-name "")))

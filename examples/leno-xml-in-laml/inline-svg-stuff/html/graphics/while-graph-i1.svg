@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- The material in this file is copyrighted (c) by KN, AAU.  All rights reserved.-->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800" height="800"
+     viewBox="0 0 800 800">
+   <g>
+      <defs>
+         <marker id="OpenArrowhead" viewBox="0 0 10 10" refX="10" refY="5" stroke="black" stroke-width="1"
+                 fill="white" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="15" orient="auto"
+                 preserveAspectRatio="none">
+            <path d="M 0 0 L 10 5 L 0 10 z" />
+         </marker>
+      </defs>
+      <defs>
+         <marker id="OpenDiamond" viewBox="0 -5 10 10" refX="10" refY="0" stroke="black" stroke-width="1"
+                 fill="white" markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="22.5" orient="auto"
+                 preserveAspectRatio="none">
+            <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+         </marker>
+      </defs>
+      <defs>
+         <marker id="FilledArrowhead" viewBox="0 0 10 10" refX="10" refY="5" fill="black" markerUnits="userSpaceOnUse"
+                 markerWidth="20" markerHeight="15" orient="auto" preserveAspectRatio="none">
+            <path d="M 0 0 L 10 5 L 0 10 z" />
+         </marker>
+      </defs>
+      <defs>
+         <marker id="FilledDiamond" viewBox="0 -5 10 10" refX="10" refY="0" fill="black" markerUnits="userSpaceOnUse"
+                 markerWidth="30" markerHeight="22.5" orient="auto" preserveAspectRatio="none">
+            <path d="M 0 0 L 5 -5 L 10 0 L 5 5 z" />
+         </marker>
+      </defs>
+      <g>
+         <path d="M 50 4 L 74 16 L 50 28 Z" fill="grey" id="forward-button-id-1" style="visibility:visible;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-2.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-1.click"
+                 fill="freeze" />
+         </path>
+      </g>
+      <g>
+         <path d="M 0 16 L 24 4 L 24 28 Z" fill="grey" id="backward-button-id-2" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-1.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-3.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-2.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-2.click"
+                 fill="freeze" />
+         </path>
+         <path d="M 50 4 L 74 16 L 50 28 Z" fill="grey" id="forward-button-id-2" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-1.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-3.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-2.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-2.click"
+                 fill="freeze" />
+         </path>
+      </g>
+      <g>
+         <path d="M 0 16 L 24 4 L 24 28 Z" fill="grey" id="backward-button-id-3" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-2.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-4.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-3.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-3.click"
+                 fill="freeze" />
+         </path>
+         <path d="M 50 4 L 74 16 L 50 28 Z" fill="grey" id="forward-button-id-3" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-2.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-4.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-3.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-3.click"
+                 fill="freeze" />
+         </path>
+      </g>
+      <g>
+         <path d="M 0 16 L 24 4 L 24 28 Z" fill="grey" id="backward-button-id-4" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-3.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-5.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-4.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-4.click"
+                 fill="freeze" />
+         </path>
+         <path d="M 50 4 L 74 16 L 50 28 Z" fill="grey" id="forward-button-id-4" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-3.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-5.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-4.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-4.click"
+                 fill="freeze" />
+         </path>
+      </g>
+      <g>
+         <path d="M 0 16 L 24 4 L 24 28 Z" fill="grey" id="backward-button-id-5" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-4.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-6.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-5.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-5.click"
+                 fill="freeze" />
+         </path>
+         <path d="M 50 4 L 74 16 L 50 28 Z" fill="grey" id="forward-button-id-5" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-4.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-6.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-5.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-5.click"
+                 fill="freeze" />
+         </path>
+      </g>
+      <g>
+         <path d="M 0 16 L 24 4 L 24 28 Z" fill="grey" id="backward-button-id-6" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-5.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-7.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-6.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-6.click"
+                 fill="freeze" />
+         </path>
+         <path d="M 50 4 L 74 16 L 50 28 Z" fill="grey" id="forward-button-id-6" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-5.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-7.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-6.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-6.click"
+                 fill="freeze" />
+         </path>
+      </g>
+      <g>
+         <path d="M 0 16 L 24 4 L 24 28 Z" fill="grey" id="backward-button-id-7" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-6.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-8.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-7.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-7.click"
+                 fill="freeze" />
+         </path>
+         <path d="M 50 4 L 74 16 L 50 28 Z" fill="grey" id="forward-button-id-7" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-6.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-8.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-7.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-7.click"
+                 fill="freeze" />
+         </path>
+      </g>
+      <g>
+         <path d="M 0 16 L 24 4 L 24 28 Z" fill="grey" id="backward-button-id-8" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-7.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-9.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-8.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-8.click"
+                 fill="freeze" />
+         </path>
+         <path d="M 50 4 L 74 16 L 50 28 Z" fill="grey" id="forward-button-id-8" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-7.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-9.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-8.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-8.click"
+                 fill="freeze" />
+         </path>
+      </g>
+      <g>
+         <path d="M 0 16 L 24 4 L 24 28 Z" fill="grey" id="backward-button-id-9" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-8.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-10.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-9.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-9.click"
+                 fill="freeze" />
+         </path>
+         <path d="M 50 4 L 74 16 L 50 28 Z" fill="grey" id="forward-button-id-9" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-8.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-10.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-9.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-9.click"
+                 fill="freeze" />
+         </path>
+      </g>
+      <g>
+         <path d="M 0 16 L 24 4 L 24 28 Z" fill="grey" id="backward-button-id-10" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-9.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-11.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-10.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-10.click"
+                 fill="freeze" />
+         </path>
+         <path d="M 50 4 L 74 16 L 50 28 Z" fill="grey" id="forward-button-id-10" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-9.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-11.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-10.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-10.click"
+                 fill="freeze" />
+         </path>
+      </g>
+      <g>
+         <path d="M 0 16 L 24 4 L 24 28 Z" fill="grey" id="backward-button-id-11" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-10.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-12.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-11.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-11.click"
+                 fill="freeze" />
+         </path>
+         <path d="M 50 4 L 74 16 L 50 28 Z" fill="grey" id="forward-button-id-11" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-10.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-12.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="forward-button-id-11.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-11.click"
+                 fill="freeze" />
+         </path>
+      </g>
+      <g>
+         <path d="M 0 16 L 24 4 L 24 28 Z" fill="grey" id="backward-button-id-12" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-11.click"
+                 fill="freeze" />
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="backward-button-id-12.click"
+                 fill="freeze" />
+         </path>
+      </g>
+      <g style="visibility:visible;opacity:1;">
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-0.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="backward-button-id-2.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="forward-button-id-1.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="backward-button-id-1.click" />
+         <text font-family="times-roman" font-size="18" stroke="black" color="black" fill="black" x="100"
+               y="24">
+            
+         </text>
+      </g>
+      <g style="visibility:visible;opacity:0;">
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-1.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="backward-button-id-3.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="forward-button-id-2.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="backward-button-id-2.click" />
+         <text font-family="times-roman" font-size="18" stroke="black" color="black" fill="black" x="100"
+               y="24">
+            We enter the while loop
+         </text>
+      </g>
+      <g style="visibility:visible;opacity:0;">
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-2.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="backward-button-id-4.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="forward-button-id-3.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="backward-button-id-3.click" />
+         <text font-family="times-roman" font-size="18" stroke="black" color="black" fill="black" x="100"
+               y="24">
+            The logical expression is evaluated
+         </text>
+      </g>
+      <g style="visibility:visible;opacity:0;">
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-3.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="backward-button-id-5.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="forward-button-id-4.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="backward-button-id-4.click" />
+         <text font-family="times-roman" font-size="18" stroke="black" color="black" fill="black" x="100"
+               y="24">
+            In this case the value of the expression is true...
+         </text>
+      </g>
+      <g style="visibility:visible;opacity:0;">
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-4.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="backward-button-id-6.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="forward-button-id-5.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="backward-button-id-5.click" />
+         <text font-family="times-roman" font-size="18" stroke="black" color="black" fill="black" x="100"
+               y="24">
+            ... meaning that the while body command is executed.
+         </text>
+      </g>
+      <g style="visibility:visible;opacity:0;">
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-5.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="backward-button-id-7.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="forward-button-id-6.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="backward-button-id-6.click" />
+         <text font-family="times-roman" font-size="18" stroke="black" color="black" fill="black" x="100"
+               y="24">
+            When done the control is brought back the logical expression
+         </text>
+      </g>
+      <g style="visibility:visible;opacity:0;">
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-6.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="backward-button-id-8.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="forward-button-id-7.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="backward-button-id-7.click" />
+         <text font-family="times-roman" font-size="18" stroke="black" color="black" fill="black" x="100"
+               y="24">
+            ... which now is RE-evaluated. Variables in the logical expressions may have been
+            changed
+         </text>
+      </g>
+      <g style="visibility:visible;opacity:0;">
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-7.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="backward-button-id-9.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="forward-button-id-8.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="backward-button-id-8.click" />
+         <text font-family="times-roman" font-size="18" stroke="black" color="black" fill="black" x="100"
+               y="24">
+            Let us assume that we reiterate ...
+         </text>
+      </g>
+      <g style="visibility:visible;opacity:0;">
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-8.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="backward-button-id-10.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="forward-button-id-9.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="backward-button-id-9.click" />
+         <text font-family="times-roman" font-size="18" stroke="black" color="black" fill="black" x="100"
+               y="24">
+            ... through the command yet another time ...
+         </text>
+      </g>
+      <g style="visibility:visible;opacity:0;">
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-9.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="backward-button-id-11.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="forward-button-id-10.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="backward-button-id-10.click" />
+         <text font-family="times-roman" font-size="18" stroke="black" color="black" fill="black" x="100"
+               y="24">
+            ... and back again to the controlling logical expresssion
+         </text>
+      </g>
+      <g style="visibility:visible;opacity:0;">
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-10.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="backward-button-id-12.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="forward-button-id-11.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="backward-button-id-11.click" />
+         <text font-family="times-roman" font-size="18" stroke="black" color="black" fill="black" x="100"
+               y="24">
+            ... which is RE-evaluated a third time.
+         </text>
+      </g>
+      <g style="visibility:visible;opacity:0;">
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="forward-button-id-11.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" begin="backward-button-id-13.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="forward-button-id-12.click" />
+         <animate attributeType="CSS" attributeName="opacity" from="1" to="0" dur="0.1s" fill="freeze" begin="backward-button-id-12.click" />
+         <text font-family="times-roman" font-size="18" stroke="black" color="black" fill="black" x="100"
+               y="24">
+            Now the expression becomes false. The while loop has run to the end.
+         </text>
+      </g>
+      <g>
+         <rect x="85.0" y="80.0" width="30" height="40" stroke="none" stroke-width="1" fill="white">
+            <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" fill="freeze"
+                     begin="forward-button-id-0.click" />
+            <animate attributeType="XML" attributeName="fill" to="white" from="red" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-1.click" />
+         </rect>
+         <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="100.0"
+               text-anchor="middle" y="110.0">
+            
+         </text>
+      </g>
+      <g>
+         <g>
+            <rect x="65.0" y="165.0" width="270.0" height="70" stroke-width="1" stroke="black" fill="white"
+                  style="visibility:hidden;">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" fill="freeze"
+                        begin="forward-button-id-2.click" />
+               <animate attributeType="XML" attributeName="fill" to="white" from="red" dur="0.5s" fill="freeze"
+                        begin="forward-button-id-3.click" />
+               <animate attributeType="XML" attributeName="fill" to="white" from="red" dur="0.5s" fill="freeze"
+                        begin="backward-button-id-3.click" />
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" fill="freeze"
+                        begin="backward-button-id-4.click" />
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" fill="freeze"
+                        begin="forward-button-id-6.click" />
+               <animate attributeType="XML" attributeName="fill" to="white" from="red" dur="0.5s" fill="freeze"
+                        begin="forward-button-id-7.click" />
+               <animate attributeType="XML" attributeName="fill" to="white" from="red" dur="0.5s" fill="freeze"
+                        begin="backward-button-id-7.click" />
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" fill="freeze"
+                        begin="backward-button-id-8.click" />
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" fill="freeze"
+                        begin="forward-button-id-10.click" />
+               <animate attributeType="XML" attributeName="fill" to="white" from="red" dur="0.5s" fill="freeze"
+                        begin="forward-button-id-11.click" />
+               <animate attributeType="XML" attributeName="fill" to="white" from="red" dur="0.5s" fill="freeze"
+                        begin="backward-button-id-11.click" />
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" fill="freeze"
+                        begin="backward-button-id-12.click" />
+            </rect>
+            <path stroke-width="1" stroke="black" fill="white" d="M 65.0 200.0 l 135.0 -35.0 l 135.0 35.0 l -135.0 35.0 l -135.0 -35.0 ">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" fill="freeze"
+                        begin="forward-button-id-2.click" />
+               <animate attributeType="XML" attributeName="fill" to="white" from="red" dur="0.5s" fill="freeze"
+                        begin="forward-button-id-3.click" />
+               <animate attributeType="XML" attributeName="fill" to="white" from="red" dur="0.5s" fill="freeze"
+                        begin="backward-button-id-3.click" />
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" fill="freeze"
+                        begin="backward-button-id-4.click" />
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" fill="freeze"
+                        begin="forward-button-id-6.click" />
+               <animate attributeType="XML" attributeName="fill" to="white" from="red" dur="0.5s" fill="freeze"
+                        begin="forward-button-id-7.click" />
+               <animate attributeType="XML" attributeName="fill" to="white" from="red" dur="0.5s" fill="freeze"
+                        begin="backward-button-id-7.click" />
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" fill="freeze"
+                        begin="backward-button-id-8.click" />
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" fill="freeze"
+                        begin="forward-button-id-10.click" />
+               <animate attributeType="XML" attributeName="fill" to="white" from="red" dur="0.5s" fill="freeze"
+                        begin="forward-button-id-11.click" />
+               <animate attributeType="XML" attributeName="fill" to="white" from="red" dur="0.5s" fill="freeze"
+                        begin="backward-button-id-11.click" />
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" fill="freeze"
+                        begin="backward-button-id-12.click" />
+            </path>
+         </g>
+         <text font-family="times-roman" font-size="25" stroke="black" color="black" fill="black" x="200.0"
+               text-anchor="middle" y="207.0">
+            Logical Expression
+         </text>
+      </g>
+      <g>
+         <g>
+            <rect x="425.0" y="165.0" width="150.0" height="70" stroke-width="1" stroke="black" fill="white"
+                  style="visibility:hidden;">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" fill="freeze"
+                        begin="forward-button-id-4.click" />
+               <animate attributeType="XML" attributeName="fill" to="white" from="red" dur="0.5s" fill="freeze"
+                        begin="forward-button-id-5.click" />
+               <animate attributeType="XML" attributeName="fill" to="white" from="red" dur="0.5s" fill="freeze"
+                        begin="backward-button-id-5.click" />
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" fill="freeze"
+                        begin="backward-button-id-6.click" />
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" fill="freeze"
+                        begin="forward-button-id-8.click" />
+               <animate attributeType="XML" attributeName="fill" to="white" from="red" dur="0.5s" fill="freeze"
+                        begin="forward-button-id-9.click" />
+               <animate attributeType="XML" attributeName="fill" to="white" from="red" dur="0.5s" fill="freeze"
+                        begin="backward-button-id-9.click" />
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" fill="freeze"
+                        begin="backward-button-id-10.click" />
+            </rect>
+            <path stroke-width="1" stroke="black" fill="white" d="M 425.0 200.0 q 0 -27.5 37.5 -17.5 q 0 -27.5 37.5 -17.5 q 27.5 -13.75 37.5 17.5 q 27.5 -27.5 37.5 17.5 q 27.5 27.5 -37.5 17.5 q 27.5 27.5 -37.5 17.5 q -13.75 27.5 -37.5 -17.5 q -13.75 27.5 -37.5 -17.5 ">
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" fill="freeze"
+                        begin="forward-button-id-4.click" />
+               <animate attributeType="XML" attributeName="fill" to="white" from="red" dur="0.5s" fill="freeze"
+                        begin="forward-button-id-5.click" />
+               <animate attributeType="XML" attributeName="fill" to="white" from="red" dur="0.5s" fill="freeze"
+                        begin="backward-button-id-5.click" />
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" fill="freeze"
+                        begin="backward-button-id-6.click" />
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" fill="freeze"
+                        begin="forward-button-id-8.click" />
+               <animate attributeType="XML" attributeName="fill" to="white" from="red" dur="0.5s" fill="freeze"
+                        begin="forward-button-id-9.click" />
+               <animate attributeType="XML" attributeName="fill" to="white" from="red" dur="0.5s" fill="freeze"
+                        begin="backward-button-id-9.click" />
+               <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" fill="freeze"
+                        begin="backward-button-id-10.click" />
+            </path>
+         </g>
+         <text font-family="times-roman" font-size="25" stroke="black" color="black" fill="black" x="500.0"
+               text-anchor="middle" y="207.0">
+            Command
+         </text>
+      </g>
+      <g>
+         <rect x="85.0" y="280.0" width="30" height="40" stroke="none" stroke-width="1" fill="white">
+            <animate attributeType="XML" attributeName="fill" from="white" to="red" dur="1s" fill="freeze"
+                     begin="forward-button-id-0.click" />
+            <animate attributeType="XML" attributeName="fill" to="white" from="red" dur="0.5s" fill="freeze"
+                     begin="backward-button-id-1.click" />
+         </rect>
+         <text font-family="times-roman" font-size="30" stroke="black" color="black" fill="black" x="100.0"
+               text-anchor="middle" y="310.0">
+            
+         </text>
+      </g>
+      <g>
+         <circle r="8" cx="0" cy="0" fill="red" stroke="red" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-3.click" />
+            <animateMotion id="anim-line-15" dur="3s" rotate="auto" begin="forward-button-id-3.click">
+               <mpath xlink:href="#line-15" />
+            </animateMotion>
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="anim-line-15.end" />
+         </circle>
+         <circle r="8" cx="0" cy="0" fill="red" stroke="red" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-4.click" />
+            <animateMotion id="anim-line-16" dur="3s" rotate="auto" begin="backward-button-id-4.click">
+               <mpath xlink:href="#line-16" />
+            </animateMotion>
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="anim-line-16.end" />
+         </circle>
+         <circle r="8" cx="0" cy="0" fill="red" stroke="red" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-7.click" />
+            <animateMotion id="anim-line-15" dur="3s" rotate="auto" begin="forward-button-id-7.click">
+               <mpath xlink:href="#line-15" />
+            </animateMotion>
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="anim-line-15.end" />
+         </circle>
+         <circle r="8" cx="0" cy="0" fill="red" stroke="red" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-8.click" />
+            <animateMotion id="anim-line-16" dur="3s" rotate="auto" begin="backward-button-id-8.click">
+               <mpath xlink:href="#line-16" />
+            </animateMotion>
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="anim-line-16.end" />
+         </circle>
+         <path id="line-15" stroke-width="1" stroke="black" fill="none" d="M 335.0 200.0 L 425.0 200.0 "
+               marker-end="url(#FilledArrowhead)" />
+         <path id="line-16" stroke-width="1" stroke="black" fill="none" d="M 425.0 200.0 L 335.0 200.0 "
+               marker-end="url(#FilledArrowhead)" style="visibility:hidden;" />
+         <text font-family="times-roman" font-size="22" font-style="italic" stroke="black" color="black"
+               fill="black" x="360.0" y="190.0">
+            true
+         </text>
+      </g>
+      <g>
+         <circle r="8" cx="0" cy="0" fill="red" stroke="red" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-1.click" />
+            <animateMotion id="anim-line-11" dur="3s" rotate="auto" begin="forward-button-id-1.click">
+               <mpath xlink:href="#line-11" />
+            </animateMotion>
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="anim-line-11.end" />
+         </circle>
+         <circle r="8" cx="0" cy="0" fill="red" stroke="red" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-2.click" />
+            <animateMotion id="anim-line-12" dur="3s" rotate="auto" begin="backward-button-id-2.click">
+               <mpath xlink:href="#line-12" />
+            </animateMotion>
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="anim-line-12.end" />
+         </circle>
+         <path id="line-11" stroke="black" fill="none" d="M 100.0 100.0 h 100.0 L 200.0 165.0 " stroke-width="1"
+               marker-end="url(#FilledArrowhead)" />
+         <path id="line-12" stroke="black" fill="none" d="M 200.0 165.0 h 100.0 L 100.0 100.0 " stroke-width="1"
+               marker-end="url(#FilledArrowhead)" style="visibility:hidden;" />
+         <text font-family="times-roman" font-size="22" font-style="normal" stroke="black" color="black"
+               fill="black" x="115.0" y="82.5">
+            Entrance
+         </text>
+      </g>
+      <g>
+         <circle r="8" cx="0" cy="0" fill="red" stroke="red" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-11.click" />
+            <animateMotion id="anim-line-13" dur="3s" rotate="auto" begin="forward-button-id-11.click">
+               <mpath xlink:href="#line-13" />
+            </animateMotion>
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="anim-line-13.end" />
+         </circle>
+         <circle r="8" cx="0" cy="0" fill="red" stroke="red" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-12.click" />
+            <animateMotion id="anim-line-14" dur="3s" rotate="auto" begin="backward-button-id-12.click">
+               <mpath xlink:href="#line-14" />
+            </animateMotion>
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="anim-line-14.end" />
+         </circle>
+         <path id="line-13" stroke="black" fill="none" d="M 200.0 235.0 v 65.0 L 100.0 300.0 " stroke-width="1"
+               marker-end="url(#FilledArrowhead)" />
+         <path id="line-14" stroke="black" fill="none" d="M 100.0 300.0 v 65.0 L 200.0 235.0 " stroke-width="1"
+               marker-end="url(#FilledArrowhead)" style="visibility:hidden;" />
+         <text font-family="times-roman" font-size="22" font-style="italic" stroke="black" color="black"
+               fill="black" x="150.0" y="257.5">
+            false
+         </text>
+      </g>
+      <g>
+         <circle r="8" cx="0" cy="0" fill="red" stroke="red" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-5.click" />
+            <animateMotion id="anim-line-17" dur="3s" rotate="auto" begin="forward-button-id-5.click">
+               <mpath xlink:href="#line-17" />
+            </animateMotion>
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="anim-line-17.end" />
+         </circle>
+         <circle r="8" cx="0" cy="0" fill="red" stroke="red" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-6.click" />
+            <animateMotion id="anim-line-18" dur="3s" rotate="auto" begin="backward-button-id-6.click">
+               <mpath xlink:href="#line-18" />
+            </animateMotion>
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="anim-line-18.end" />
+         </circle>
+         <circle r="8" cx="0" cy="0" fill="red" stroke="red" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="forward-button-id-9.click" />
+            <animateMotion id="anim-line-17" dur="3s" rotate="auto" begin="forward-button-id-9.click">
+               <mpath xlink:href="#line-17" />
+            </animateMotion>
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="anim-line-17.end" />
+         </circle>
+         <circle r="8" cx="0" cy="0" fill="red" stroke="red" style="visibility:hidden;">
+            <set attributeType="CSS" attributeName="visibility" to="visible" begin="backward-button-id-10.click" />
+            <animateMotion id="anim-line-18" dur="3s" rotate="auto" begin="backward-button-id-10.click">
+               <mpath xlink:href="#line-18" />
+            </animateMotion>
+            <set attributeType="CSS" attributeName="visibility" to="hidden" begin="anim-line-18.end" />
+         </circle>
+         <path id="line-17" stroke-width="1" stroke="black" fill="none" d="M 575.0 200.0 L 620.0 200.0 L 620.0 120.0 L 200.0 120.0 L 200.0 165.0 "
+               marker-end="url(#FilledArrowhead)" />
+         <path id="line-18" stroke-width="1" stroke="black" fill="none" d="M 200.0 165.0 L 620.0 200.0 L 620.0 120.0 L 200.0 120.0 L 575.0 200.0 "
+               marker-end="url(#FilledArrowhead)" style="visibility:hidden;" />
+         <text font-family="times-roman" font-size="30" font-style="normal" stroke="black" color="black"
+               fill="black" x="387.5" y="182.5" />
+      </g>
+   </g>
+</svg>

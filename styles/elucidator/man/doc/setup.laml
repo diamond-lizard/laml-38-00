@@ -1,0 +1,50 @@
+; The elucidator laml setup file
+; Change the capital names
+
+; Load the styles file, hereby defining style function
+
+(load (string-append laml-dir "laml.scm"))
+(style "elucidator/elucidator")
+
+; Set the directory in which this file resides.
+; The directory ends in a '/'
+(set-source-directory "DIRECTORY")
+
+; Set the name of this file, without extension
+(set-documentation-name "NAME")
+
+; Set the level of processing
+(process-only "FILE")
+; (process-only)
+
+; (make-no-indexes)
+(make-all-indexes)
+
+; (define make-large-source-files? #f)
+; (define toc-columns-detail 1) 
+; (define present-hidden-ids? #t)
+(define underline-program-links #f)
+(define underline-documentation-links #f)
+(define show-sectional-comment-name #f)
+
+(define (scheme-source-file f)
+  (string-append software-base-directory f))
+
+(define rs4r-url-prefix (string-append laml-absolute-url-prefix "r4rs/")) ; if possible change this to a relative URL
+
+; Define the sourcefiles in this documentation bundle
+(program-source
+ (key "FILE")
+ (file-location "SCHEME-FILE-PATH")
+ (language "scheme")
+)
+
+; Define the documentation body, here in terms of a documentation-from clause
+(begin-documentation)
+
+  (documentation-from "documentation.txt")  ; the name of the file can be changed 
+
+(end-documentation)
+
+
+

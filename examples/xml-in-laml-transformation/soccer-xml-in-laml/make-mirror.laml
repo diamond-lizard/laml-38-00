@@ -1,0 +1,26 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-tool-load "xml-in-laml/xml-in-laml.scm")
+
+;; The name of the language for which we create a mirror
+(define mirror-name "soccer")
+
+;; The full path to the parsed DTD:
+(define parsed-dtd-path (in-startup-directory "soccer.lsp"))
+
+;; The full path of the mirror target directory
+(define mirror-target-dir (startup-directory))
+
+(define action-elements '(results))
+
+(set! default-xml-represent-white-space "#f")
+
+(let ((mirror-destination-file
+        (string-append
+           mirror-target-dir mirror-name
+           "-mirror" ".scm")))
+  (generate-mirror 
+    parsed-dtd-path
+    mirror-destination-file
+    mirror-name))
+
+

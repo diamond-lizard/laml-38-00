@@ -1,0 +1,11 @@
+; Uses process-all.laml files in sub-directories.
+
+(load (string-append laml-dir "laml.scm"))
+(load (in-startup-directory "../example-processing.scm"))
+
+(laml "index")
+
+(process-part "soccer-xml-in-laml")
+(process-part "album")
+
+(end-laml)

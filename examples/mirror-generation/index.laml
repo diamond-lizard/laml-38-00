@@ -1,0 +1,59 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(define (an x)
+  (a 'href x x))
+
+(define ttl "XML Mirror Generation Example")
+
+
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title ttl)
+   (laml-shortcut-icon (laml-home-url-prefix))
+  )
+  (body 
+    (laml-top-banner)
+    (h1 ttl)
+
+    (p "The example takes its starting point in the parsed XHTML DTD from" (a 'href "../dtd-parser/index.html" "another example") _ ".")
+
+    (p "The following mirror generation examples exist in this directory.")
+
+    (indent-pixels 10
+      (table 'border "1"
+
+          (tr (map (compose td b) (list "Parsed DTD" "Mirror generation script" "Scheme Mirror Library")))
+
+          (tr (td (a 'href"../../tools/dtd-parser/dtds/xhtml10-transitional.lsp" "Parsed XHTML DTD"))
+              (td (a 'href "make-xhtml10-transitional-mirror.laml" "make-xhtml10-transitional-mirror.laml"))
+              (td (a 'href "../../lib/xml-in-laml/mirrors/xhtml10-transitional-mirror.scm" "XHTML Mirror in Scheme"))) 
+      ))
+
+    (p "All mirrors in LAML are located in the following directory of your LAML system")
+
+    (pre "   lib/xml-in-laml/mirrors/")
+
+    (p "Notice, however, that they are automatically generated, and quite hard to read.")
+
+    (p "See also the" (a 'href "../../tutorial/xml-in-laml/xml-in-laml.html" "LAML tutorial on Mirror Generation") _ ".")
+
+   (vertical-space 1) (font 'color "red" 'size "2" (when-generated))
+  )))
+
+
+
+(end-laml)
+
+

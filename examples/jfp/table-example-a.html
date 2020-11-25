@@ -1,0 +1,80 @@
+<html>
+   <head>
+      <title>Demonstration of higher order functions together with tables</title>
+   </head>
+    
+   <body>
+      <p>Original table rendering:</p>
+       
+      <table border="1">
+         <tbody>
+            <tr><td>This</td> <td>is</td> <td>row</td> <td>1</td></tr>
+             
+            <tr><td>This</td> <td>is</td> <td>row</td> <td>2</td></tr>
+             
+            <tr><td>This</td> <td>is</td> <td>row</td> <td>3</td></tr>
+             
+            <tr><td>This</td> <td>is</td> <td>row</td> <td>4</td></tr>
+         </tbody>
+      </table>
+       
+      <p>Switching the first and second column:</p>
+       
+      <table border="1">
+         <tbody>
+            <tr><td>is</td> <td>This</td> <td>row</td> <td>1</td></tr>
+             
+            <tr><td>is</td> <td>This</td> <td>row</td> <td>2</td></tr>
+             
+            <tr><td>is</td> <td>This</td> <td>row</td> <td>3</td></tr>
+             
+            <tr><td>is</td> <td>This</td> <td>row</td> <td>4</td></tr>
+         </tbody>
+      </table>
+       
+      <p>Passing certain attribute values to given cells in the table :</p>
+       
+      <table border="1">
+         <tbody>
+            <tr>
+               <td rowspan="2">This</td>
+                
+               <td>is</td>
+                
+               <td>row</td>
+                
+               <td bgcolor="#c8c8c8">1</td>
+            </tr>
+             
+            <tr><td>is</td> <td>row</td> <td bgcolor="#c8c8c8">2</td></tr>
+             
+            <tr>
+               <td>This</td>
+                
+               <td>is</td>
+                
+               <td>row</td>
+                
+               <td bgcolor="#c8c8c8">3</td>
+            </tr>
+             
+            <tr>
+               <td>This</td>
+                
+               <td>is</td>
+                
+               <td>row</td>
+                
+               <td bgcolor="#c8c8c8">4</td>
+            </tr>
+         </tbody>
+      </table>
+       
+      <p>
+         The modify-element example: 
+         <a href="http://www.dcs.glasgow.ac.uk/jfp" target="main" title="Goes to the main window">
+            JFP
+         </a>
+      </p>
+   </body>
+</html>

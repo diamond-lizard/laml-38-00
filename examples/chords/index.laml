@@ -1,0 +1,74 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+(lib-load "xhtml1.0-convenience.scm")
+
+(define laml-generation-meta (meta 'name "Generator" 'content "LAML"))
+(define meta-props (list 'http-equiv "Content-Type" 'content "text/html; charset=iso-8859-1"))
+(define html-props (list 'xmlns "http://www.w3.org/1999/xhtml"))
+
+(set! xml-validate-contents? #t)
+(set! xml-check-attributes? #t)
+
+(define (an x)
+  (a 'href x x))
+
+
+(write-html '(raw prolog)
+ (html html-props
+  (head 
+   (meta meta-props) laml-generation-meta
+   (title "LAML Chords Examples")
+   (laml-shortcut-icon (laml-home-url-prefix))
+  )
+  (body 
+    (laml-top-banner)
+    (h1 "LAML Chord Examples")
+
+    (p "There is short supply of" (em "open music") _ "."  "We are fortunate that software people are less eager to protect their work!"
+       "I have been careful to select sample songs, which are not copyright protected.") 
+
+    (p "The following LAML chords examples exist in this directory.")
+
+    (indent-pixels 10
+      (table 'border "1"
+
+          (tr (map (compose td b) (list "Song Title" "key" "LAML Chord file" "HTML File")))
+
+          (tr  (td "Op al den ting som Gud har gjort")
+               (td "C")
+               (td (an "op-al-den-ting-som-gud-har-gjort.chord"))
+               (td (an "op-al-den-ting-som-gud-har-gjort.html"))
+          )
+
+          (tr  (td "Oh! Susanna")
+               (td "F")
+               (td (an "oh-susanna.chord"))
+               (td (an "oh-susanna.html"))
+          )
+
+          (tr  (td "Oh! Susanna")
+               (td "C")
+               (td (an "oh-susanna-1.chord"))
+               (td (an "oh-susanna-1.html"))
+          )
+
+
+
+        ))
+   
+     (p "You should observe that the second version of" (string-it "Oh! Susanna") "has been automatically transposed, by means
+         of the" (kbd "transpose") "attribute of the" (kbd "song-froont-matters") "element.")
+
+     (p "See also the" (a 'href "../../styles/xml-in-laml/chords/man/chords.html" "LAML Chords reference manual") _ ".")
+
+     (vertical-space 1) (font 'color "red" 'size "2" (when-generated))
+
+
+  )
+ )
+)
+
+
+(end-laml)
+
+

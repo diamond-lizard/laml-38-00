@@ -1,0 +1,52 @@
+HOW TO MAKE MARKERS.
+
+Overview: Markers are Meta events of type 6 (markers) which can be
+entered at the keyboard in a designated channel, and subsequently
+transformed to Meta events via the Midi LAML function marker-channel.
+Only use marker-channel in a context where the counterTransposition is 0.
+
+Details:
+
+At the Keyboard:
+  * Select an unused channel, be sure that the transposition is zero, and
+    adjust volume to zero.
+    Deselect ACMP, and make sure that recording starts at the begining and that
+    it goes to the very end.
+    Be also sure to turn off harmony/echo.
+
+  * During recording, Use white keys in an arbitray octave for marking purposes:
+
+       C is marker level 0
+       D is marker level 1
+       E is marker level 2
+       ...
+       H is marker level 6
+
+    If you use black keys, these are mapped downwards to closest white key.
+
+  * Typically: 
+       C is used at the beginning of a song line
+       D is used for the beginning of a verse.
+       E is used at the beginning of a song part.
+
+  * Small errors (use of wrong keys) can relatively easy be adjusted at this point
+    in time.
+
+At the Computer with Midi LAML:
+
+  * Surround the contents of the song with the function (marker-channel ch ...),
+    where ch is the channel used for marking. This will introduce Meta markers,
+    and it will remove Control and Program events of the channels. Initially,
+    meta marker 0 of level 2, corresponding to key E, is introduced automatically.
+
+Marker Browser:
+
+  * Create a Marker Browser via the Menu (Marker Browser of Selected Track)
+    or C-c m, or M-x make-marker-region-browser. Before that, be sure to 
+    locate the point in the track which contains the markers.
+
+  * The Marker Browser allows browsing, playing a selected region, adding of
+    textual comments, and displaying the length of a region.
+
+ 
+  

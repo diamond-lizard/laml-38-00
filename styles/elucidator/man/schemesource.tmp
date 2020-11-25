@@ -1,0 +1,1509 @@
+(comment 1 "Introduce numbers of sections and subsections. 
+Introduce names (helptext) of links from program to doc. ")
+
+
+(comment 1 "--------------------------------------------------------------------------------------------------- ")
+
+
+(comment 1 "The elucidator style with Scheme source file support ")
+
+
+(comment 1 "--------------------------------------------------------------------------------------------------- 
+Scheme system definition ")
+
+
+(define scheme-system 'scm)  (comment 1 "on unix 
+(define scheme-system 'drscheme)  ; on home PC ")
+
+
+(comment 1 "--------------------------------------------------------------------------------------------------- 
+Message function and verbosity variable ")
+
+
+(comment 2 "If #t a number of messages are written on the output when processing is done. 
+If #f, nothing is written. ")
+
+(define elucidator-verbose-mode #t)
+
+(define (display-message message)
+  (if elucidator-verbose-mode
+      (begin (display (string-append message)) (newline))))
+
+(comment 1 "--------------------------------------------------------------------------------------------------- ")
+
+(comment 3 "Directory setup.  
+A number of variables and functions which gives information about relevant directories. ")
+
+
+(comment 2 "The directory in which all Scheme programs and libraries are located ")
+
+(define software-base-directory
+  (cond ((eq? scheme-system 'scm) "/user/normark/scheme/")
+        ((eq? scheme-system 'drscheme) "c:/Users/Kurt/Scheme/")))
+
+(comment 2 "The scheme library relative to software-base-library ")
+
+(define scheme-library "lib4")
+
+(comment 2 "The directory in which the libraries are located ")
+
+(define the-library (string-append software-base-directory scheme-library "/"))
+
+(comment 2 "The directory in which the elucidator is located ")
+
+(define software-directory (string-append software-base-directory "styles/elucidator/"))
+
+(comment 2 "The directory in which the documentation source is locacted. 
+Must be redefined. Ends with a slash. ")
+
+(define source-directory #f)
+
+(comment 2 "The directory in which the generated html files are located. Depends on source-directory ")
+
+(define (html-directory)
+  (string-append source-directory "html/"))
+
+(comment 1 "--------------------------------------------------------------------------------------------------- 
+Requirements and loading: ")
+
+
+(comment 1 "load file in the library determined by the global variable the-library ")
+
+(define (lib-load file-name)
+  (load (string-append  the-library file-name)))
+
+(display-message "Loading libraries")
+
+(comment 1 "Loading requirements: ")
+
+(lib-load "general.scm")
+(lib-load "file-read.scm")
+(lib-load "html.scm")
+(lib-load "html-v1.scm")
+(lib-load "time.scm")
+(lib-load "hex.scm")
+(if (eq? scheme-system 'drscheme) (lib-load "drscheme.scm") (lib-load "scm.scm"))
+
+(display-message "Loading elucidation software")
+
+(comment 1 "--------------------------------------------------------------------------------------------------- ")
+
+(comment 3 "Controlling the amount of processing.  
+There are a number of variables which control the amount of processing. 
+The user of the eludicator does not set these directly via set!. Rather 
+he or she uses a function interface, which in turn manipulates the variables. ")
+
+
+(define make-duplicated-name-index? #t)
+(define make-cross-reference-index? #t)
+(define make-defining-name-index? #t)
+(define make-large-source-files? #t)
+
+(comment 2 "make both duplicate, cross-reference and defining-name indexes ")
+
+(define (make-all-indexes)
+  (set! make-duplicated-name-index? #t)
+  (set! make-cross-reference-index? #t)
+  (set! make-defining-name-index? #t))
+
+(comment 2 "make neither duplicate, cross-reference or defining-name indexes ")
+
+(define (make-no-indexes)
+  (set! make-duplicated-name-index? #f)
+  (set! make-cross-reference-index? #f)
+  (set! make-defining-name-index? #f))
+
+(define process-only-sources #f)
+
+(comment 2 "Only process the sources whose keys are given in the parameter. 
+If no parameteres are given, process no sources 
+If this form does not appear, process all sources. ")
+
+(define (process-only . source-keys)
+  (set! process-only-sources source-keys))
+
+(comment 2 "Set variables such that minimum processing is called for ")
+
+(define (minimum-processing)
+  (make-no-indexes)
+  (process-only)
+  (set! make-large-source-files? #f))
+
+(comment 2 "Set variables such that maximum processing is called for ")
+
+(define (maximum-processing)
+  (make-all-indexes)
+  (set! make-large-source-files? #t))
+
+
+(comment 1 "--------------------------------------------------------------------------------------------------- 
+General set up, internal variables and set-functions ")
+
+
+
+(comment 1 "Variables which are setable by set- procedures ")
+
+(define documentation-filename-without-extension #f)
+(define documentation-title #f)
+(define documentation-author #f)
+(define documentation-affiliation #f)
+(define documentation-abstract #f)
+
+(comment 1 "A list of program sources of this elucidation batch. 
+An element of this variable is triple of key, file-location, and language pairs. 
+Contributions to this list are made by the program-source procedure ")
+
+(define program-source-list '())
+
+(comment 1 "A list of list parsed source forms from all source files in this documentation batch. ")
+
+(define source-list-list-process '())
+
+(comment 1 "A list of all source keys of this documentation batch ")
+
+(define source-key-list '())
+
+(comment 1 "A list of all defining name occurrences of all source files in this documentation batch. 
+Each element is a pair of the form (name . source-key). ")
+
+(define defining-name-occurences '())
+
+(comment 1 "A list of name pairs of the form (applied-name . defined-name) 
+The meaning is that the applied-name is used in a form: (define (defined-name...) ...). ")
+
+(define defined-applied-names '())
+
+(comment 1 "A list of (program-name . doc-id) pairs. Both constituents are symbols. 
+program-name is a link source (anchors) in the documentation text. 
+doc-id is the identification of the sub-section in the documentation, where the anchor occurs. ")
+
+(define documented-name-occurences '())
+
+(comment 1 "An alist which relates documentation-id to titles of sections and entries ")
+
+(define documentation-key-title-alist '())
+
+(comment 1 "A list of documentation elements, either sections or entries, kind-taged with'section or 'entry resp. ")
+
+(define documentation-elements '())
+
+
+
+
+(comment 2 "Defines the source directory to be dir. The source directory is the directory which 
+contains the documentation laml file, and the path typically ends in doc. Ends in a slash. ")
+
+(define (set-source-directory dir)
+  (set! source-directory dir))
+
+(comment 2 "Define the name of the documentation. Per convention, this is the same 
+as the file name of the laml file, without extension. ")
+
+(define (set-documentation-name name)
+  (set! documentation-filename-without-extension name))
+
+(comment 2 "Define the title, affiliation, author, affiliation-list, and the abstract ")
+
+(define (documentation-intro title author affiliation-list abstract)
+  (set! documentation-title title)
+  (set! documentation-author author)
+  (set! documentation-affiliation affiliation-list)
+  (set! documentation-abstract abstract))
+
+(comment 2 "The number of empty lines in the bottom of an html file, 
+in order to allow navigation to bottom stuf ")
+
+(define end-file-empty-lines 25)
+
+
+(comment 2 "The width (in pixels) of the browser ")
+
+(define browser-pixel-width 1100)
+
+(comment 2 "The height of the top control frame in pixels ")
+
+(define control-frame-pixel-height 100)
+
+(comment 1 "--------------------------------------------------------------------------------------------------- ")
+
+
+(define (display-warning message)
+  (if elucidator-verbose-mode
+      (begin (display (string-append "WARNING: " message)) (newline))))
+
+(comment 1 "Return the interal anchor name of id. 
+id can be a string or symbol. ")
+
+(define (internal-reference id)
+  (string-append (as-string id)))
+
+(comment 1 "--------------------------------------------------------------------------------------------------- ")
+
+(comment 3 "Top level functions ")
+
+
+(comment 2 "Define a documentation source in terms of a number of elements.  ")
+
+(define (program-source . elements)
+  (set! program-source-list
+        (cons elements program-source-list)))
+
+(comment 2 "Define a documentation-section.  
+Internally, this function collect information about a documentation section ")
+
+(define (documentation-section . elements)
+ (set! section-number (+ section-number 1))
+ (set! subsection-number 0)
+ (let ((id (get-value 'id elements))
+       (title (get-value 'title elements))
+       (numbering (section-numbering))
+      )
+  (set! documentation-elements
+        (cons (tag-kind 'section (cons (list 'numbering numbering) elements)) documentation-elements))
+  (set! documentation-key-title-alist
+        (cons (cons id title) documentation-key-title-alist)) ))
+
+(comment 2 "Define a documentation entry. 
+Internally, this function collects information about a documentation entry. ")
+
+(define (documentation-entry . elements)
+ (set! subsection-number (+ subsection-number 1))
+ (let ((id (get-value 'id elements))
+       (title (get-value 'title elements))
+       (numbering (subsection-numbering))
+      )
+  (set! documentation-elements
+        (cons (tag-kind 'entry (cons (list 'numbering numbering) elements)) documentation-elements))
+  (set! documentation-key-title-alist
+        (cons (cons id title) documentation-key-title-alist))))
+
+(comment 2 "Begin the documentation part. This ends the preamble section. ")
+
+(define (begin-documentation)
+  'empty)
+
+(comment 2 "End of documentation part. 
+Makes all the html stuff. Until now we have collected stuff. Here we generate html files 
+based on the collected stuff. ")
+
+(define (end-documentation)
+
+  (comment 1 "reversing source and documentation lists:   ")
+
+(set! program-source-list (reverse program-source-list))
+  (set! documentation-elements (reverse documentation-elements))
+
+  (let ((program-source-list-process
+          (filter process-source? program-source-list))
+        (program-source-list-non-process
+          (filter (negate process-source?) program-source-list)))
+
+
+    (comment 1 "parse source files (only those to be processed), and store the list of the results:     ")
+
+(display-message "Parsing source files")
+    (set! source-list-list-process
+          (map read-source 
+               (map (lambda (ps) (get-value 'file-location ps)) program-source-list-process)))
+  
+    (set! source-key-list
+          (map (lambda (ps) (get-value 'key ps)) program-source-list))
+
+    (let ((source-key-list-process (map (lambda (ps) (get-value 'key ps)) program-source-list-process))
+          (source-key-list-non-process (map (lambda (ps) (get-value 'key ps)) program-source-list-non-process)))
+
+     (comment 1 "make frame files, in which the program is the first mentioned program source      ")
+
+(display-message "Making frame files")
+     (make-frame-file
+        "Scheme Elucidator"
+        (elucidator-frame 
+           "control" 
+           "documentation"
+           (get-value 'key (car program-source-list)) (comment 1 "program starting point         ")
+
+)
+        "index")
+
+     (make-frame-file
+        "Scheme Elucidator"
+        (elucidator-frame-horizontal 
+           "control" 
+           "documentation"
+           (get-value 'key (car program-source-list)) (comment 1 "program starting point         ")
+
+)
+        "index-horizontal")
+
+   
+     (comment 1 "collect all defining names from all source files      
+each element is a pair of the form (name source-key).      
+store newly calculcated defined names in -.name files      ")
+
+(display-message "Collecting and reading defining name occurences")
+     (set! defining-name-occurences
+           (append
+            (accumulate-right 
+              append 
+              '()
+              (map2 (lambda (sl key) 
+                      (let ((def-names (defined-names sl)))
+                         (store-defined-names key def-names) (comment 1 "store them!                          ")
+
+(map (lambda (dn) (cons dn key)) def-names)))
+                    source-list-list-process
+                    source-key-list-process))
+            (accumulate-right
+              append
+              '()
+              (map restore-defined-names source-key-list-non-process)))
+     )
+
+     (comment 1 "make documentation file. Hereby the global variable documented-name-occurences is assigned.      ")
+
+(display-message "Making the documentation file")
+     (write-text-file
+        (page "documentation"
+              (documentation-contents))
+        (html-destination "documentation"))
+   
+     (comment 1 "make program files:      ")
+
+(display-message "Making program source files")
+     (for-each 
+        (lambda(ps source-list)
+          (display-message (string-append "  " (get-value 'key ps)))
+          (make-source-program-file (get-value 'key ps) (get-value 'file-location ps) (get-value 'language ps) 
+                                    source-list defining-name-occurences documented-name-occurences 'small))
+        program-source-list-process
+        source-list-list-process
+     )
+
+
+     (if make-large-source-files?
+       (begin
+       (comment 1 "make large source files:        ")
+
+(display-message "Making LARGE program source files")
+       (for-each 
+         (lambda(ps source-list)
+           (display-message (string-append "  " (get-value 'key ps)))
+           (make-source-program-file (get-value 'key ps) (get-value 'file-location ps) (get-value 'language ps) 
+                                     source-list defining-name-occurences documented-name-occurences 'large))
+         program-source-list-process
+         source-list-list-process
+       )))
+
+   
+     (comment 1 "make control file:      ")
+
+(display-message "Making the control file")
+     (write-text-file
+        (page "control" (icon-bar))
+        (html-destination "control"))
+
+     (if make-duplicated-name-index?
+      (begin
+       (comment 1 "make duplicate report:        ")
+
+(display-message "Making the duplicate report")
+       (write-text-file
+          (page "Duplicate report"
+            (con
+              (icon-bar)
+              (present-duplicated-definitions)
+            ) white black black black
+          )
+          (html-destination "duplicate-report")))
+       (display-message "NO duplicated name index is being generated")
+     )
+
+     (comment 1 "make index: defined names      ")
+
+(if make-defining-name-index?
+      (begin
+       (display-message "Making index of defined names")
+       (write-text-file
+          (page "Alphabetic index of defined names"
+            (con
+              (icon-bar)  
+              (present-defined-name-index)
+            ) white black black black
+          )
+          (html-destination "defining-name-index")))
+       (display-message "NO index of defined names is being generated")
+      )
+
+     (if make-cross-reference-index?
+      (comment 1 "extracting applied-defined name pairs       ")
+
+(begin
+       (display-message "Extracting applied-defined name pairs from parsed source files")
+       (set! defined-applied-names
+          (applied-names-multiple-sources
+             (append
+                source-list-list-process  (comment 1 "the list of sources processed in this run                 ")
+
+(map read-source 
+                   (map (lambda (ps) (get-value 'file-location ps)) program-source-list-non-process)) (comment 1 "the list of sources that need to be read              ")
+
+)))
+                
+       (comment 1 "make index: cross references involving applied names        ")
+
+(display-message "Presenting the extracted cross reference index")
+       (write-text-file
+          (page "Alphabetic cross reference index"
+            (con
+              (icon-bar)  
+              (present-cross-reference-index
+                defined-applied-names)
+            ) white black black black
+          )
+          (html-destination "cross-reference-index")))
+       (display-message "NO cross reference index is being generated")
+      )
+
+      (comment 1 "documentation section contents       ")
+
+(display-message "Presenting documentation contents")
+      (write-text-file
+          (page "Documentation Contents"
+            (con
+              (icon-bar)  
+              (present-documentation-contents documentation-elements)
+            ) white black black black
+          )
+          (html-destination "documentation-contents"))
+   
+ )))
+
+
+(define (icon-bar)
+  (table-3 0 (list 30 30 30   30    30 30 30    30    30     60    1000) 
+	   (list
+	    (list 
+	     (a-tag-target "index.html" (image "three-frames.gif" "Reset Elucidator to vertical layout") "_top")
+	     (a-tag-target "index-horizontal.html" (image "three-frames-horizontal.gif" "Reset Elucidator to horizontal layout") "_top")
+             (a-tag-target "control.html" (image "three-frames-top.gif" "Return to main control menu") "control-frame")
+	     " "
+	     (a-tag-target "defining-name-index.html" 
+			   (image "index.gif" "Alphabetic index of defined names in the program") "control-frame")  
+	     (a-tag-target "cross-reference-index.html" (image "cross-index.gif" "Cross reference index") "control-frame") 
+	     (a-tag-target "duplicate-report.html" (image "xx.gif" "Duplicated definitions") "control-frame")
+	     " "
+	     (a-tag-target "documentation-contents.html" (image "contents.gif" "Documentation Contents") "control-frame")
+ 
+	     " "
+
+	     (source-file-links source-key-list)
+	     ))
+	   'middle
+	   ))
+
+(comment 1 "do we have to process program-source (a triple of key, file-location and language)? ")
+
+(define (process-source? program-source)
+ (let ((source-key (get-value 'key program-source)))
+  (if process-only-sources
+    (member source-key process-only-sources)
+    #t)))
+
+(comment 1 "read the list of defined names (list of (name . source-key)) from file 
+if no file found, return the empty list ")
+
+(define (restore-defined-names source-key)
+  (let ((restore-filename (defining-names-file source-key)))
+    (if (file-exists? restore-filename)
+        (let* ((ip (open-input-file restore-filename))
+               (res (read ip)))
+          (display-message (string-append " Restoring defined names from " source-key ".names"))
+          (close-input-port ip)
+          res)
+        (begin
+          (display-warning (string-append "No defining names stored for " source-key))
+          '()))))
+
+(comment 1 "Write the list of defined names (list of (name . source-key)) to file ")
+
+(define (store-defined-names source-key defined-names)
+  (let ((store-filename (defining-names-file source-key))
+        (keyed-names (map (lambda (dn) (cons dn source-key)) defined-names)))
+    (if (file-exists? store-filename) (delete-file store-filename))
+    (with-output-to-file store-filename
+       (lambda () (write keyed-names)))))
+
+(comment 1 "return the file name (full path) of the name file for source-key ")
+
+(define (defining-names-file source-key)
+  (string-append source-directory "internal/" source-key ".names"))
+
+(define (source-file-links source-key-list)
+ (let ((lgt (length source-key-list)))
+  (table-1 1 (map (lambda (sk) (* (string-length sk) 7)) source-key-list) (make-list lgt yellow)
+    (list
+     (map
+      (lambda (sk)
+         (a-tag-target (add-file-extension sk "html") (font-size 2 sk) "program-frame"))
+      source-key-list)))))
+
+(comment 1 "--------------------------------------------------------------------------------------------------- ")
+
+
+
+(comment 1 "Syntax functions ")
+
+
+(comment 1 "Return a syntax function ")
+
+(define (make-syntax-function syntax-symbol)
+  (lambda values
+    (cons syntax-symbol values)))
+
+(comment 1 "Tag elements with a kind, defined to be kind-symbol ")
+
+(define (tag-kind kind-symbol elements)
+  (cons (list 'kind kind-symbol) elements))
+
+(comment 1 "Get the value of an element, provided that there is exactly one value ")
+
+(define (get-value key elements)
+ (let ((res (assoc key elements)))
+   (if (and (list? res) (> (length res) 1))
+       (cadr res)
+       (error (string-append "get-value in elucidator: Problems accessing a value of a syntax element: " (as-string res))))))
+
+(comment 1 "Get the list of values of an element ")
+
+(define (get-values key elements)
+  (cdr (assoc key elements)))
+
+(define key (make-syntax-function 'key))
+(define file-location (make-syntax-function 'file-location))
+(define language (make-syntax-function 'language))
+
+(define id (make-syntax-function 'id))
+(define title (make-syntax-function 'title))
+(define index-words (make-syntax-function 'index-words))
+(define intro (make-syntax-function 'intro))
+(define sources (make-syntax-function 'sources))
+(define body (make-syntax-function 'body))
+
+(comment 1 "General functions ")
+
+
+(define (html-destination filename)
+  (string-append (html-directory) filename ".html"))
+
+(comment 1 "--------------------------------------------------------------------------------------------------- 
+Color settings: ")
+
+
+(define defined-color (make-color 255 0 0))
+(comment 1 "(define comment-color (make-color 0 100 0))  ")
+
+(define comment-color (make-color 112 168 0)) 
+(define applied-color (make-color 0 0 128)) 
+(define documentation-section-color (make-color 0 204 255))
+(define documentation-entry-color (make-color 0 204 255))
+(define documentation-program-link-color red)
+
+(comment 1 "--------------------------------------------------------------------------------------------------- ")
+
+(define image-file-access 'sub-directory)
+
+(define (image file-name help-text) (html:img 'src (image-file file-name) 'alt help-text 'border 0))
+
+(comment 1 "--------------------------------------------------------------------------------------------------- ")
+
+(comment 3 "Scheme source file reading.  ")
+
+
+(comment 2 "Read the file (a lisp source file) and return a list of the lisp expressions at the source file ")
+
+(define (read-source file)
+ (let* ((ip (open-input-file file))
+        (res (read-source-1 ip '())))
+   (close-input-port ip)
+   (reverse res)))
+
+
+(define (read-source-1 input-port source-list)
+  (if (eof-object? (peek-char input-port))
+      source-list
+      (read-source-1 input-port (cons (read input-port) source-list))))
+
+
+(comment 1 "--------------------------------------------------------------------------------------------------- ")
+
+(comment 3 "Extraction of top level defined names from parsed Scheme expressions.  ")
+
+
+(comment 2 "Return the list of top-level defined names in the source list 
+Source list may be as returned by read-source. ")
+
+(define (defined-names source-list)
+  (defined-names-1 source-list '()))
+
+(define (defined-names-1 source-list res)
+  (cond ((null? source-list) (reverse res))
+        ((define-form? (car source-list)) 
+           (defined-names-1 (cdr source-list) (cons (defined-name (car source-list)) res)))
+        (else (defined-names-1 (cdr source-list) res))))
+
+(define (define-form? x)
+  (and (list? x) 
+       (> (length x) 1)
+       (eq? (car x) 'define)))
+
+(define (defined-name x)
+  (comment 1 "assume that x is a define form   ")
+
+(if (pair? (cadr x))
+      (car (cadr x))
+      (cadr x)))
+
+(define (bounded-names x)
+  (comment 1 "Return the bounded names in x, which is a define form   
+Assume as a pre-conditionthat x is a define form.     ")
+
+(cond ((pair? (cadr x))
+           (let ((call-form (cadr x)))
+             (cond ((list? call-form) (cdr call-form))
+                   ((pair? call-form) 
+                      (cond ((pair? (cdr call-form)) (append (proper-part (cdr call-form)) (list (first-improper-part (cdr call-form)))))
+                            ((symbol? (cdr call-form)) (list (cdr call-form))))
+                      ))))
+          ((symbol? (cadr x))
+           (if (> (length x) 2)
+               (let ((y (caddr x)))  (comment 1 "possible lambda form                  ")
+
+(if (and (pair? y) (eq? (car y) 'lambda))
+                     (let ((par (cadr y)))
+                       (cond ((symbol? par) (list par))
+                             ((list? par) par)
+                             ((pair? par) (append (proper-part par) (list (first-improper-part par))))))
+                     '()))
+               '()))
+         (else '())))
+
+
+(comment 1 "--------------------------------------------------------------------------------------------------- ")
+
+
+(comment 3 "Scheme dependent elucidator. ")
+
+
+(comment 2 "Decorate the Scheme source-file with anchors and links. 
+Source-path is the name of the file with the Scheme source text (full path and extension). 
+Destination-path is the name of the html file with where the decorated Scheme source is to be written (full path and extension). 
+Source-list is the list of, read Scheme expressions on source-file. 
+Defined-names is a list of name-definitions to which we link applied names. 
+A name-definition is a list of the form (name . source-key), where source-key identifies the 
+source file, in which name is a defining name occurence 
+Documented names is a list of name descriptors, which are documented in the elucidated program. 
+In this context, a name descriptor is a pair of the form (documented-name documentation-id). 
+documented-name is a program name which occurs (in curly brackets) in the documentation. 
+documentation-id is the id of the subsection, in which the name occurs. ")
+
+
+(define (elucidate-program-source source-path destination-path source-list defined-names documented-names size source-key)
+ (let ((of destination-path))
+  (if (file-exists? of) (delete-file of))
+  (let ((ip (open-input-file source-path))
+        (op (open-output-file of)))
+    (write-string-to-port
+      (pre-page (string-append "Source file") white black black black)
+      op)
+    (write-string-to-port (con (start-tag "font" 'size (if (eq? size 'small) 2 3)) (start-tag "pre")) op)
+    (elucidate-program-source-1 ip op source-list defined-names documented-names size source-key)
+    (write-string-to-port (con (end-tag "pre") (end-tag "font")) op)
+    (write-string-to-port (vertical-space end-file-empty-lines) op)
+    (write-string-to-port
+      (post-page)
+      op)
+    (close-input-port ip)
+    (close-output-port op) )))
+
+(define (add-file-extension f ext)
+  (string-append f "." ext))
+
+
+(define (elucidate-program-source-1 ip op source-list defined-names documented-names size source-key)
+ (skip-white-space ip op)
+ (if (not (eof-object? (peek-char ip)))
+     (begin
+       (elucidate-program-form ip op (car source-list) defined-names documented-names size source-key)
+       (elucidate-program-source-1 ip op (cdr source-list) defined-names documented-names size source-key))
+     ))
+
+(define (elucidate-program-form ip op f defined-names documented-names size source-key)
+  (cond ((quote-in-input? ip f)
+          (begin
+           (write-char #\' op)
+           (elucidate-program-form ip op (cadr f) defined-names documented-names size source-key)
+           (skip-white-space ip op)))
+        
+        (comment 1 "here also handle other special lexical items such as backquote ")
+
+
+        ((eof-object? f) (comment 1 "nothing         ")
+
+)
+        ((symbol? f) (match-symbol f ip op defined-names) 
+                     (skip-white-space ip op))
+        ((string? f) (match-string f ip op)
+                     (skip-white-space ip op))
+        ((number? f) (match-number f ip op)
+                     (skip-white-space ip op))
+        ((char? f) (match-char f ip op)
+                   (skip-white-space ip op))
+        ((boolean? f) (match-boolean f ip op)
+                      (skip-white-space ip op))
+        ((vector? f) (error "elucidate-program-form: vector not made yet"))
+        ((define-form? f)
+           (skip-white-space ip op)
+           (write-string-to-port (a-name (as-string (defined-name f))) op)  (comment 1 "anchor name            ")
+
+(write-string-to-port (con (total-doc-navigator (defined-name f) documented-names size source-key) (br)) op) 
+           (match-start-parenthesis ip op)
+           (skip-white-space ip op)
+           (match-symbol 'define ip op '())
+           (skip-white-space ip op)
+           (write-string-to-port (con (start-tag "b") (start-tag "font" 'color (rgb-string-list defined-color))) op)
+           (comment 1 "make sure that only the next form (no comments) is matched here:              ")
+
+(elucidate-restricted-form ip op (cadr f))
+           (write-string-to-port (con (end-tag "font") (end-tag "b")) op)
+           (skip-white-space ip op)
+           (for-each 
+              (lambda (sf)
+                 (skip-white-space ip op)
+                 (elucidate-program-form ip op sf (list-difference-2 defined-names (bounded-names f)) documented-names size source-key))
+              (cddr f))
+           (skip-white-space ip op)
+           (match-end-parenthesis ip op)
+           (skip-white-space ip op))
+        ((list? f)
+           (skip-white-space ip op)
+           (match-start-parenthesis ip op)
+           (for-each 
+              (lambda (sf)
+                 (skip-white-space ip op)
+                 (elucidate-program-form ip op sf defined-names documented-names size source-key))
+              f)
+           (skip-white-space ip op)
+           (match-end-parenthesis ip op)
+           (skip-white-space ip op))
+        ((pair? f)  (comment 1 "improper list             ")
+
+(let ((p1 (proper-part f))
+                 (p2 (first-improper-part f)))
+            (skip-white-space ip op)
+            (match-start-parenthesis ip op)
+            (for-each 
+              (lambda (sf)
+                 (skip-white-space ip op)              
+                 (elucidate-program-form ip op sf defined-names documented-names size source-key))
+              p1)
+            (skip-white-space ip op)
+            (match-dot ip op)
+            (skip-white-space ip op)
+            (elucidate-program-form ip op p2 defined-names documented-names size source-key)
+            (skip-white-space ip op)
+            (match-end-parenthesis ip op)
+            (skip-white-space ip op)
+           )
+        )
+        (else (error (string-append "elucidate-program-form: unknown kind of expression" (as-string f)))))
+  )
+
+(comment 1 "Return a link to the documentation frame ")
+
+(define (doc-navigator name documented-names)
+  (let ((res (assq name documented-names)) )
+    (if res
+        (let* ((res-docid (cdr res))
+               (res-doc-title (cdr (assq res-docid documentation-key-title-alist)))
+              )
+          (con (a-tag-target (string-append "documentation.html" "#" (as-string res-docid))
+                             (image "doc-left.gif" res-doc-title)
+                             "documentation-frame"
+               )
+               (br)))
+        "")))
+
+(define (total-doc-navigator name documented-names size source-key)
+  (let* ((doc-entries (filter (lambda (e) (eq? name (car e))) documented-names))
+         (reversed-doc-entries (reverse doc-entries))
+         (unique-reversed-doc-entries 
+           (remove-duplicates-by-predicate
+             reversed-doc-entries
+             (lambda (x y) (eq? (cdr x) (cdr y))))))
+   (con
+    (if make-large-source-files?
+     (con
+      (if (eq? size 'small) 
+          (a-tag (string-append source-key "-LARGE" ".html" "#" (as-string name)) (image "small-square.gif" "Show source file in large font"))
+          (a-tag (string-append source-key ".html" "#" (as-string name)) (image "small-square.gif" "Show source file in small font")))
+      (horizontal-space 1)
+     )
+     "")
+    (if (not (null? unique-reversed-doc-entries))
+        (string-merge
+           (map 
+             (lambda (de)
+               (let* ((doc-id (cdr de))
+                      (doc-entry-title (cdr (assq doc-id documentation-key-title-alist))))
+                 (doc-link name doc-id doc-entry-title))
+             )
+             unique-reversed-doc-entries)
+           (make-list (- (length unique-reversed-doc-entries) 1) (horizontal-space 1)))
+        ""))))
+
+(comment 1 "Return a link to the documentation frame given name (a name in the program frame) 
+a doc-id (the identification of a section or unit in the documentation frame) and 
+title (the title of the section or unit in the documentation frame). ")
+
+(define (doc-link name doc-id title)
+  (a-tag-target (string-append "documentation.html" "#" (as-string doc-id))
+		       (image "doc-left.gif" title)
+		       "documentation-frame"
+		       ))
+
+
+(comment 1 "A specialized version of list-difference, where the first parameter is a list of pairs (name . key), 
+and the second parameter is a simple list of names 
+Returns a list of pairs (a subset of defined-name-pairs ")
+
+(define (list-difference-2 defined-name-pairs bounded-names)
+  (list-difference-3 defined-name-pairs bounded-names '()))
+
+(define (list-difference-3 lst1 lst2 res)
+  (cond ((null? lst1) (reverse res))
+        ((memq (caar lst1) lst2) (list-difference-3 (cdr lst1) lst2 res))
+        (else (list-difference-3 (cdr lst1) lst2 (cons (car lst1) res)))))
+
+
+(define (elucidate-restricted-form ip op f)
+  (comment 1 "match the cadr symbol of a define form, without matching trailing comments   ")
+
+(cond ((symbol? f) (match-symbol f ip op '()))
+        ((list? f) 
+           (match-start-parenthesis ip op)
+           (for-each 
+              (lambda (sf)
+                 (skip-white-space ip op)
+                 (elucidate-restricted-form ip op sf))
+              f)
+           (skip-white-space ip op)
+           (match-end-parenthesis ip op))
+        ((pair? f)
+           (let ((p1 (proper-part f))
+                 (p2 (first-improper-part f)))
+            (skip-white-space ip op)
+            (match-start-parenthesis ip op)
+            (for-each 
+              (lambda (sf)
+                 (skip-white-space ip op)              
+                 (elucidate-restricted-form ip op sf))
+              p1)
+            (skip-white-space ip op)
+            (match-dot ip op)
+            (skip-white-space ip op)
+            (elucidate-restricted-form ip op p2)
+            (skip-white-space ip op)
+            (match-end-parenthesis ip op)
+          ))))
+
+
+(define (quote-in-input? ip form)
+  (let ((ch (peek-char ip)))
+    (if (eq? #\' ch)
+        (begin 
+          (read-char ip)
+          (if (not (and (list? form) (> (length form) 1) (eq? (car form) 'quote)))
+              (error "Lexical quote char not matched by (quote ...) form"))
+          #t)
+        #f)))
+
+
+(comment 1 "defined names is a list of (name . source-key) elements ")
+
+(define (match-symbol sym ip op defined-names)
+  (read ip)
+  (let ((source-key (name-memq sym defined-names)))
+    (if source-key
+        (write-string-to-port (a-tag (string-append source-key ".html" "#" (as-string sym)) (font-color applied-color (as-string sym))) op)
+        (write sym op))))
+
+(comment 1 "Return the source-key component of the matching sym in defined-names. 
+defined names i a list of pairs, where each pair is of the form (name . source-key). 
+If no match, return #f ")
+
+(define (name-memq sym defined-names)
+  (cond ((null? defined-names) #f)
+        ((eq? sym (caar defined-names)) (cdar defined-names))
+        (else (name-memq sym (cdr defined-names)))))
+
+
+(define (match-string str ip op)
+  (read ip)
+  (write (html-protect str) op))
+
+(define (match-char ch ip op)
+  (read ip)
+  (write ch op))
+
+(define (match-number n ip op)
+  (read ip)
+  (write n op))
+
+(define (match-boolean b ip op)
+  (read ip)
+  (write b op))
+
+(define (match-start-parenthesis ip op)
+  (let ((ch (read-char ip)))
+    (if (eq? ch #\()
+        (write-char #\( op)
+        (error (string-append "match error: start parenthesis expected:" (as-string ch))))))
+
+(define (match-end-parenthesis ip op)
+  (let ((ch (read-char ip)))
+    (if (eq? ch #\))
+        (write-char #\) op)
+        (error "match error: end parenthesis expected"))))
+
+(define (match-dot ip op)
+  (let ((ch (read-char ip)))
+    (if (eq? ch #\.)
+        (write-char #\. op)
+        (error "match error: dot expected. Problems if we deal with unnormlized dotted forms"))))
+
+(define (skip-white-space ip op)
+  (let ((ch (peek-char ip)))
+    (cond ((white-space? ch) (begin (read-char ip) (write-char ch op) (skip-white-space ip op)))
+          ((comment-begin? ch) (begin  (skip-comment ip op) (skip-white-space ip op)))
+          (else 'empty))))
+
+(define (white-space? ch)
+ (if (eof-object? ch)
+     #f
+    (let ((n (char->integer ch)))
+      (or (eq? n 32) (eq? n 9) (eq? n 10) (eq? n 12) (eq? n 13)))))
+
+(define (comment-begin? ch)
+  (eq? #\; ch))
+
+(define (skip-comment ip op)
+  (comment 1 "skip rest of line.   ")
+
+(write-string-to-port (start-tag "font" 'color (rgb-string-list comment-color)) op)
+  (skip-comment-1 ip op)
+  (write-string-to-port (end-tag "font") op))
+
+(define (skip-comment-1 ip op)
+  (comment 1 "skip rest of line.   ")
+
+(let ((ch (read-char ip)))
+    (if (not (eol? ch))
+        (begin (write-char ch op) (skip-comment-1 ip op))
+        (write-char ch op))))
+
+(define (skip-comment-1 ip op)
+  (comment 1 "skip rest of line.   ")
+
+(let ((ch (read-char ip)))
+    (cond ((eol? ch) (write-char ch op))
+          ((eq? ch #\<) (write-string-to-port "&lt;" op) (skip-comment-1 ip op))
+          ((eq? ch #\>) (write-string-to-port "&gt;" op) (skip-comment-1 ip op))
+          (else (begin (write-char ch op) (skip-comment-1 ip op))))))
+
+(define (eol? ch)
+  (eq? ch #\newline))  
+  
+
+(comment 1 "--------------------------------------------------------------------------------------------------- 
+Handy test procedure of the Scheme elucidator. ")
+
+(define (lucid file)
+  (let* ((source-list (read-source (add-file-extension file "scm")))
+         (defining-names (defined-names source-list)))
+    (elucidate-program-source (string-append file ".scm") (string-append file ".html") source-list defining-names '())))
+
+(comment 1 "--------------------------------------------------------------------------------------------------- ")
+
+
+(comment 1 "Overall frame setup. ")
+
+
+(define (elucidator-frame control-filename documentation-filename program-filename)
+  (html:frameset 
+    (con (html:frame "" 'name "control-frame" 'src (add-file-extension control-filename "html") 'scrolling "auto")
+         (html:frameset
+            (con (html:frame "" 'name "documentation-frame" 'src (add-file-extension documentation-filename "html") 'scrolling "yes")
+                 (html:frame "" 'name "program-frame" 'src (add-file-extension program-filename "html") 'scrolling "yes")
+            )
+            'cols "50%,50%" 'border 5 'bordercolor (rgb-string-list black))
+    )
+    'rows (string-append (as-string control-frame-pixel-height) ",*")  'border 5 'bordercolor (rgb-string-list black))
+)
+
+
+(define (elucidator-frame-horizontal control-filename documentation-filename program-filename)
+  (html:frameset
+    (con (html:frame "" 'name "control-frame" 'src (add-file-extension control-filename "html") 'scrolling "yes")
+	 (html:frame "" 'name "documentation-frame" 'src (add-file-extension documentation-filename "html") 'scrolling "yes")
+	 (html:frame "" 'name "program-frame" 'src (add-file-extension program-filename "html") 'scrolling "yes")
+    )
+    'rows (string-append (as-string control-frame-pixel-height) ",360,*") 'border 5 'bordercolor (rgb-string-list black))
+)
+
+
+(define (make-frame-file title frames filename)
+  (write-text-file
+    (html:html
+      (con (html:head 
+             (html:title documentation-title))
+           frames))
+    (html-destination filename)))
+
+(comment 1 "Return the body of the documentation page.  
+This function uses the global variables, such as documentation-abstract and documentation-elements. ")
+
+(define (documentation-contents)
+  (con
+    (h 1 (font-color blue (guard-text documentation-title)))
+    (present-author-info (map guard-text (cons documentation-author documentation-affiliation))) (p)
+    (present-abstract (guard-text documentation-abstract)) (vertical-space 1)
+
+    (accumulate-right
+       string-append 
+       ""
+      (map present-documentation-element documentation-elements))
+
+    (vertical-space end-file-empty-lines)
+  ))
+
+(define (present-documentation-element doc-el)
+  (let ((kind (get-value 'kind doc-el)))
+    (cond ((eq? kind 'section) (present-documentation-section doc-el))
+          ((eq? kind 'entry) (present-documentation-entry doc-el))
+          (else (error "present-documentation-element: unknown kind of documentation element")))))
+
+(define section-number 0)
+(define subsection-number 0)
+
+(define (section-numbering)
+  (string-append (as-string section-number)))
+
+(define (subsection-numbering)
+  (string-append (as-string section-number) "." (as-string subsection-number)))
+
+(define (present-documentation-section doc-el)
+ (let* ((title (get-value 'title doc-el))
+        (section-numbering (get-value 'numbering doc-el))
+        (title-1 (con section-numbering (horizontal-space 2) title))
+        (intro (get-value 'intro doc-el))
+        (id (get-value 'id doc-el)))
+   (con
+    (a-name (internal-reference id))
+    (color-frame-width
+      (con (b (font-size 5 title-1)) (br) 
+           intro
+           )
+      documentation-section-color
+      "1200")
+    (vertical-space 1))))
+
+
+(define (present-documentation-entry doc-el)
+ (let* ((title (get-value 'title doc-el))
+        (entry-numbering (get-value 'numbering doc-el))
+        (title-1 (con entry-numbering (horizontal-space 2) title))
+        (body (get-value 'body doc-el))
+        (id (get-value 'id doc-el))
+        )
+    (con 
+      (a-name (internal-reference id))
+      (color-frame-width (b (font-size 4 title-1)) documentation-entry-color "1200")
+      (do-program-link-documentation body id)
+      (vertical-space 2))))
+
+(define (present-author-info au)
+ (let ((au1 (if (not (null? au)) (cons (copyright-owner (car au)) (cdr au)) au)))
+   (h 3
+      (con 
+       (apply con
+	      (map (lambda (e) (con e (horizontal-space 4))) au1))
+       ))))
+
+(define (present-abstract abstr)
+ (let ((width 1200))
+   (con (color-frame-width (em (con (b "Abstract. ") abstr)) grey2 width) (p)) ))
+
+(define (guard-text str)
+  (if str str "???"))
+
+
+(define (make-source-program-file source-key source-file language source-list defining-names documented-names size)
+  (elucidate-program-source
+    source-file
+    (string-append (html-directory) source-key (if (eq? size 'large) "-LARGE" "") ".html")
+    source-list
+    defining-names
+    documented-names
+    size
+    source-key))
+
+(comment 1 "--------------------------------------------------------------------------------------------------- ")
+
+
+(comment 1 "transform words surrounded by curly brackets (or more correctly, link-prefix-char and link-suffix-char) 
+to links to one of the source programs. Use the information in the global variable 
+defining-name-occurences to do so. ")
+
+
+(define link-prefix-char "{")
+(define link-suffix-char "}")
+
+(define (do-program-link-documentation str doc-id)
+ (let* ((strlgt (string-length str))
+        (outmax (+ 500 (* 2 strlgt)))
+        (res-str (make-string outmax #\space))   (comment 1 "estimate - perhaps not enough        ")
+
+)
+  (set! state-list '())
+  (do-program-link-documentation-1 doc-id str 0 strlgt res-str 0 outmax 'normal-text "")))
+
+
+(define state-list '()) (comment 1 "for debugging purposes ")
+
+(define debugging-program-linking #f)
+
+
+(define (do-program-link-documentation-1 doc-id instr inptr inlength outstr outptr outlength current-state collected-word)
+  (if (> outptr outlength)
+      (error "do-program-link-documentation-1: Output string overflow. Not enough room for linking within entry body string"))
+  (if (= inptr inlength)
+      (substring outstr 0 outptr)
+      (let* ((inch (string-ref instr inptr))
+             (trans-res (program-linking-transition current-state inch collected-word doc-id))
+             (next-state (car trans-res))
+             (toput (as-string (cadr trans-res)))
+             (collected-word (caddr trans-res))
+            )
+       (if debugging-program-linking
+            (set! state-list (cons (list (as-string inch) next-state collected-word) state-list)))
+       (put-into-string! outstr outptr toput)
+       (do-program-link-documentation-1 doc-id instr (+ 1 inptr) inlength outstr  (+ outptr (string-length toput))
+                                        outlength next-state collected-word)
+  )))
+
+
+(comment 1 "STATES  
+normal-text:        We are outside a name from which to link 
+inside-link-word:   We are inside a word from which to link 
+entering-link-word 
+leaving-link-word ")
+
+
+(define (program-linking-transition in-state ch collected-word doc-id)
+ (let ((char (as-string ch)))
+   (cond ((and (symbol? in-state) (eq? in-state 'normal-text))
+            (cond ((equal? char link-prefix-char)                        (list 'entering-link-word "" collected-word))
+                  ((equal? char link-suffix-char)  (display-warning "Misplaced end-of-link char") 
+                                                                         (list 'normal-text "" collected-word))
+                  (else                                                  (list 'normal-text char collected-word))))
+
+
+         ((and (symbol? in-state) (eq? in-state 'entering-link-word))
+            (cond ((equal? char link-suffix-char)  (display-warning "Empty link word")
+                                                                         (list 'leaving-link-word ""  collected-word))
+                  ((equal? char link-prefix-char)  (display-warning "Misplaced begin-of-link char") 
+                                                                         (list 'inside-link-word "" collected-word))
+                  (else                                                  (list 'inside-link-word "" char))))
+
+         ((and (symbol? in-state) (eq? in-state 'inside-link-word))
+            (cond ((equal? char link-suffix-char)                        (list 'leaving-link-word (linking-from collected-word doc-id) ""))
+                  ((equal? char link-prefix-char)  (display-warning "Misplaced begin-of-link char") 
+                                                                         (list 'inside-link-word "" collected-word))
+                  (else                                                  (list 'inside-link-word "" (string-append collected-word char)))))
+
+         ((and (symbol? in-state) (eq? in-state 'leaving-link-word))
+            (cond ((equal? char link-suffix-char)  (display-warning "Misplaced end-of-link char")
+                                                                         (list 'leaving-link-word "" collected-word))
+                  ((equal? char link-prefix-char)                        (list 'inside-link-word "" collected-word))
+                  (else                                                  (list 'normal-text char collected-word))))
+         (else                                                           (error "rebreak-transition error: unknown state"))
+
+  )))
+
+(comment 2 "This function is called during the traversal of a documentation body. 
+It returns the a-tag'ed and fonted link word. 
+As a side-effect, it collects the documented names in the list documented-name-occurences. ")
+
+(define (linking-from word doc-id)
+  (let ((link-targets (filter (lambda (dno) (equal? word (as-string (car dno)))) defining-name-occurences)))
+     (cond ((= (length link-targets) 0)
+              (display-warning (string-append "Documentation to program linking: Cannot find linking target of " word))
+              word)
+           ((= (length link-targets) 1)
+              (let ((source-key (cdr (car link-targets))))
+                 (set! documented-name-occurences (cons (cons (as-symbol word) doc-id) documented-name-occurences))
+                 (a-tag-target 
+                    (string-append source-key ".html" "#" word)
+                    (font-color documentation-program-link-color word)
+                    "program-frame")))
+           ((>= (length link-targets) 1)
+              (let ((source-key (cdr (car link-targets))))
+                 (set! documented-name-occurences (cons (cons (as-symbol word) doc-id) documented-name-occurences))
+                 (display-warning (string-append "Documentation to program linking: Multiple targets of " word))
+                 (a-tag-target 
+                    (string-append source-key ".html" "#" word)
+                    (font-color documentation-program-link-color word)
+                    "program-frame"))))))
+                    
+         
+(comment 1 "--------------------------------------------------------------------------------------------------- ")
+
+
+(comment 1 "Return a list of duplicates in name-def-list. 
+Name-def-list is a list of name-entries. A name entry is of the  
+form (name-symbol source-key-string). ")
+
+
+(define (duplicated-definitions name-def-list)
+  (let* ((sorted-names (sort-list name-def-list name-entry-leq?))
+         (paired-names (if (null? sorted-names) '() (pair-up sorted-names (cdr sorted-names))))
+         (filtered-pairs (filter (lambda (p) (eq? (car (car p)) (car (cdr p)))) paired-names))
+         (duplicate-names (map caar filtered-pairs)))
+    (filter (lambda (ne) (memq (car ne) duplicate-names)) sorted-names)))
+
+
+(define (present-duplicated-definitions)
+  (let ((dd (duplicated-definitions defining-name-occurences)))
+    (con
+      (indent-pixels 10 
+        (multi-column-list 4 (map present-a-duplicate dd) browser-pixel-width)) 
+
+      (font-size 1 (em "Navigation to duplicates in the same source file is not supported")))))
+
+(comment 1 "Present a single duplicate. d is a pair of (name . source-key) ")
+
+(define (present-a-duplicate d)
+ (con
+  (a-tag-target
+      (string-append (cdr d) ".html" "#" (as-string (car d)))
+      (font-size 2 (con (as-string (car d))))
+      "program-frame")
+  (font-size 2 (con " in file " (cdr d)))))
+      
+
+(define (name-entry-leq? x y)
+  (string<=?  (as-string (car x))  (as-string (car y))))
+
+
+
+(comment 1 "--------------------------------------------------------------------------------------------------- ")
+
+
+(comment 2 "Index support: total index of all defining name occurences. ")
+
+
+(define (present-defined-name-index)
+ (let ((sorted-defining-name-occurences (sort-list defining-name-occurences name-entry-leq?)))
+  (con
+      (indent-pixels 10 
+        (multi-column-list 6
+           (map present-a-defining-name-entry sorted-defining-name-occurences) browser-pixel-width)) 
+  )))
+
+
+(define (present-a-defining-name-entry d)
+ (a-tag-target
+      (string-append (cdr d) ".html" "#" (as-string (car d)))
+      (font 2 defined-color (con (as-string (car d))))
+      "program-frame"))
+
+
+(comment 1 "--------------------------------------------------------------------------------------------------- ")
+
+
+(comment 2 "Index support: cross references involving both applied and defining name occurences ")
+
+
+(define (applied-names-multiple-sources source-list-list)
+  (sort-list
+   (accumulate-right
+     append
+     '()
+     (map applied-names source-list-list))
+   name-entry-leq?))
+
+(define (applied-names source-list)
+  (applied-names-1 source-list '()))
+
+(define (applied-names-1 source-list res)
+  (cond ((null? source-list) res)
+
+        ((define-form? (car source-list)) 
+           (let* ((define-form (car source-list))
+                  (def-name (defined-name define-form))
+                  (this-contribution (map (lambda (appl-name) (cons appl-name def-name)) (applied-names-one-form define-form))))
+             (applied-names-1 (cdr source-list) (append this-contribution res))))
+
+        (else (applied-names-1 (cdr source-list) res)) (comment 1 "drop (car source-list) because it is a non-define form ")
+
+))
+
+(define (applied-names-one-form f)
+ (cond ((eof-object? f)			(comment 1 "nothing         ")
+
+)
+       ((symbol? f) (if (defining-in-batch? f) (list f) '()))
+       ((string? f) '())
+       ((number? f) '())
+       ((char? f) '())
+       ((boolean? f) '())
+       ((vector? f) (error "applied-names-one-form: vector not supported yet"))
+       ((and (list? f) (null? f)) '())
+
+       (comment 1 "special processing of forms with defining names:        ")
+
+((and (list? f) (function-define-form? f)) (applied-names-one-form (cdddr f)))
+       ((and (list? f) (define-form? f)) (applied-names-one-form (cddr f)))
+       ((and (list? f) (lambda-form? f)) (applied-names-one-form (cddr f)))
+       ((and (list? f) (let-form? f)) (append (applied-names-one-form (let-vals f)) (applied-names-one-form (cddr f))))
+
+       ((list? f) (append (applied-names-one-form (car f)) (applied-names-one-form (cdr f))))
+       ((pair? f)			(comment 1 "improper list   ")
+
+(let ((p1 (proper-part f))
+	      (p2 (first-improper-part f)))
+          (append (applied-names-one-form p1) (applied-names-one-form p2))
+        ))
+       (else (error (string-append "applied-names-one-form: unknown kind of expression" (as-string f))))))
+
+(define (defining-in-batch? name)
+  (if (assq name defining-name-occurences) #t #f))
+
+(define (function-define-form? x)
+  (and (list? x) 
+       (> (length x) 2)
+       (eq? (car x) 'define)
+       (symbol? (cadr x))
+       (pair? (caddr x))))
+
+(define (lambda-form? x)
+  (and (list? x) 
+       (> (length x) 2)
+       (eq? (car x) 'lambda)))
+
+(define (let-form? x)
+  (and (list? x) 
+       (> (length x) 2)
+       (or (eq? (car x) 'let) (eq? (car x) 'let*) (eq? (car x) 'letrec))))
+
+(define (let-vals let-form)
+  (let ((binding-forms (cadr let-form)))
+    (accumulate-right append '() (map cdr binding-forms))))
+
+
+
+(comment 1 "--------------------------------------------------------------------------------------------------- 
+Presentation of cross references ")
+
+
+
+(define (present-cross-reference-index appl-def-name-list)
+ (let* ((appl-def-name-sublisted (sublist-by-predicate appl-def-name-list (lambda (x y n) (not (eq? (car x) (car y))))))
+        (appl-def-name-sublisted-1 
+           (map (lambda (sublist) 
+                   (remove-duplicates-by-predicate
+                     sublist
+                     (lambda (x y) (eq? (cdr x) (cdr y)))))
+           appl-def-name-sublisted))
+       )
+  (indent-pixels 5 
+    (table-3 0 
+             (list 200 1000)
+             (map present-applied-sublist appl-def-name-sublisted-1)))))
+
+(define (present-applied-sublist sl)
+  (let* ((appl-name (car (car sl))) (comment 1 "take the first element of an arbitrary entry, the first          ")
+
+(def-table 
+           (multi-column-list 5
+             (map present-defined-entry sl) (- browser-pixel-width 200)))
+         (sourcefile (source-key-of-defining-name appl-name)))
+   (list (a-tag-target 
+            (string-append sourcefile ".html" "#" (as-string appl-name))
+            (b (font 2 defined-color (as-string appl-name)))
+            "program-frame")
+         def-table)))
+
+
+(define (present-defined-entry appl-def-entry)
+ (let* ((appl-name (car appl-def-entry))
+        (def-name (cdr appl-def-entry))
+        (sourcefile (source-key-of-defining-name def-name))
+       )
+   (a-tag-target
+      (string-append sourcefile ".html" "#" (as-string def-name))
+      (font-size 2 (con (as-string def-name)))
+      "program-frame")))
+
+
+(comment 1 "lookup the source key (file name information) of the name in defining-name-occurences. ")
+
+(define (source-key-of-defining-name name)
+ (let ((res (filter (lambda (dno) (eq? name (car dno)))  defining-name-occurences)))
+   (cond ((= (length res) 0) "??")            (comment 1 "question mark, leading to undefined link          ")
+
+((= (length res) 1) (cdr (car res))) (comment 1 "the normal case          ")
+
+((> (length res) 1) (cdr (car res))) (comment 1 "we take the first    ")
+
+)))
+
+
+(comment 1 "--------------------------------------------------------------------------------------------------- 
+Contents of the documentation frame: ")
+
+
+(comment 1 "(define (present-documentation-contents doc-elements) 
+  (accumulate-right 
+     string-append 
+     \"\" 
+     (map (lambda (de) (con (present-documentation-content-element de) (br))) doc-elements))) ")
+
+
+(comment 1 "(define (present-documentation-contents doc-elements) 
+ (let ((two-column-rep (sublist-by-2columns (map present-documentation-content-element doc-elements) \" \"))) 
+   (multi-column-list 2 two-column-rep browser-pixel-width)))  ")
+
+
+(define (present-documentation-contents doc-elements)
+  (two-column-list (map present-documentation-content-element doc-elements) browser-pixel-width))
+
+(define (present-documentation-content-element element)
+  (let ((kind (get-value 'kind element))
+        (doc-id (get-value 'id element))
+        (n (get-value 'numbering element))
+        (ttl (get-value 'title element)))
+   (con 
+     (cond ((eq? kind 'entry) (horizontal-space 4))
+           ((eq? kind 'section)  "")
+           (else (error "present-documentation-content-element: unknown kind of documentation element")))
+     n (horizontal-space 2)
+     (a-tag-target (string-append "documentation.html" "#" (as-string doc-id))
+		       ttl
+		       "documentation-frame"
+		       ))))
+
+
+
+
+

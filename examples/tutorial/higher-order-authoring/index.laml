@@ -1,0 +1,50 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-html4.01-transitional-validating")
+(define language-preference 'english)
+
+(load (in-startup-directory "../tutorial-common.scm"))
+
+(generic-page
+  "XML-in-LAML examples"
+  (con-par
+    (laml-top-banner)
+    (h 1 "Examples with higher-order functions")
+    
+    (p "The following examples exist in this directory:")
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 250 200 200 )
+        (list
+          (map b (list "Example"   "LAML"  "HTML" ))
+          (list "Ordered and unordered lists" (a-tag "ol-ul-list.laml") (a-tag "ol-ul-list.html"))
+          (list "Factorial table - higher-order" (a-tag "fac-3.laml") (a-tag "fac-3.html"))
+          (list "Element modification" (a-tag "element-mod.laml") (a-tag "element-mod.html"))
+          (list "Advanced table example" (a-tag "table-example-a.laml") (a-tag "table-example-a.html"))
+          (list "Color frame example" (a-tag "color-frame.laml") (a-tag "color-frame.html"))
+          (list "List item abstractions" (a-tag ".laml") (a-tag "li-item.html"))
+
+          
+        )))
+
+    (p (a 'href (laml-tutorial-url "higher-order-authoring") "The accompanying part of the LAML tutorial"))
+
+
+    (p "The examples are available in the LAML distribution in 
+        the directory" (kbd "examples/tutorial/higher-order-authoring/") )
+
+    (p (a 'href "../index.html" "Index of tutorial examples."))
+
+    (p (em "If you modify the examples in this directory, or in one of the subdirectories, you may break or destroy
+       your local copy of the LAML tutorial. Therefore you are encouraged to make a copy of the examples
+       before modifying them."))
+
+    (font-size 2 (em "If your browser will not present files with 'laml' or 'scm' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files."))
+  )
+  white black blue blue
+)
+
+(end-laml)

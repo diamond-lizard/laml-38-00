@@ -1,0 +1,29 @@
+(load (string-append laml-dir "laml.scm"))
+(laml-style "simple-xhtml1.0-transitional-validating")
+
+(define map (curry-generalized map))
+
+(define (fac n)
+  (if (= 0 n) 1 (* n (fac (- n 1)))))
+
+(define table-with-border (xml-modify-element table 'border "1"))
+
+(define (make-n-fac-n h)
+ (map 
+   (lambda (i) (list i (fac i)))
+   (number-interval 1 h)))
+
+; ::write-clause::
+(write-html '(raw)
+ (html 
+  (head 
+    (title "Factorials"))
+  (body
+    (h1 "Factorials")
+
+    (table-with-border
+      (map  ; @a
+        (compose tr (map (compose td as-string)))
+        (make-n-fac-n 55))))))
+
+(end-laml)

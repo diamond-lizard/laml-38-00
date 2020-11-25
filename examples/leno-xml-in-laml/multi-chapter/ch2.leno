@@ -1,0 +1,105 @@
+(load (string-append laml-dir "laml.scm"))       
+(laml-style "xml-in-laml/lecture-notes/lecture-notes")
+
+(load (in-startup-directory "common-front-matter-stuff"))
+
+(leno-front-matters
+  (front-title "Chapter two")           
+
+  (front-author "Kurt Normark")           
+  (front-affiliation "Institut for Datalogi, Aalborg Universitet")  
+  (front-abstract "Abstract of chapter 2. We have just reversed the two pages of chapter 1.")  
+
+  common-attributes
+)
+
+(begin-notes)
+
+(note-page 'id "p2"
+  (title (main-text "Second page")
+         (annotation "Comments to second page")
+  )
+
+  (concept-list
+   (concept 'concept-name "LAML" 
+             (main-text "LAML is a system for web programming in Scheme"
+                        ) 
+             (annotation "Comments about LAML"
+                         ))
+   (concept 'concept-name "XML-in-LAML" 
+             (main-text "XML-in-LAML is a set of conventions via which is possible to work in XML via Scheme"
+                        ) 
+             (annotation "Comments about XML-in-LAML"
+  )))
+
+  (opposing
+   (opposing-item 
+    (left-item "First left item"
+               ) 
+    (right-item "First right item"
+                ))
+   (opposing-item 
+    (left-item "Second left item"
+               ) 
+    (right-item "Second righ item"
+  )))
+
+  (point 'margin-top "2ex"
+   (main-text
+    "That is all for now"
+    )
+   (annotation
+    ""
+    )
+  )
+
+  (index-words (index-word "concepts") (index-word "opposing items")
+  )
+)
+
+
+(note-page 'id "p1"
+  (title (main-text "First Page")
+         (annotation "This is an annotation of the first page")
+  )
+
+  (point
+   (main-text
+    "Main point of first page"
+    )
+   (annotation
+    "Annotation of first page"
+    )
+  )
+
+  (items 
+   (item 
+    (main-text "First item"
+               ) 
+    (annotation "Comments to first item"
+                )
+    (items 
+     (item 
+      (main-text "Subitem 1"
+                 ) 
+      (annotation "Comment to first subitem"
+                  ))
+     (item 
+      (main-text "Subitem 2"
+                 ) 
+      (annotation "Comment to second subitem"
+                  ))
+     (item 
+      (main-text "Subitem 3"
+                 ) 
+      (annotation "Comment to third subitem"
+  )))))
+
+  (index-words (index-word "first page") (index-word "items")
+  )
+)
+
+
+(end-notes)
+
+

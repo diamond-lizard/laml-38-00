@@ -1,0 +1,41 @@
+(load (string-append laml-dir "laml.scm"))
+
+(laml-style "simple")
+
+(set-file-name! "index")
+
+(generic-page
+  "Index of manual examples"
+  (con-par
+    (laml-top-banner)
+    (h 1 "Manual page examples")
+
+    "The following manual examples exists in this directory:"
+
+    (indent-pixels 10
+      (table-3 
+        1
+        (list 250 200 200)
+        (list
+          (map b (list "Example" "LAML" "HTML"))
+          (list "A very simple manual page"    (a-tag "manual-page-1.laml")      (a-tag "manual-page-1.html"))
+        )))
+
+
+    "There exists relevant templates of the entire manual page (M-x insert-laml-template) and of sections (M-x insert-manual-section)
+         and pages (M-x insert-manual-page) such that it is very easy and safe to construct the example page above from Emacs."
+
+    (con-space "In addition, the source files of several manual pages in this distribution are available
+     in the directory " (a-tag "../../lib/man/" "laml/lib/man/") ". By studying these you can see how the Schemedoc tool can 
+     be used together with the manual style.")
+
+    (font-size 2 (em "If your browser will not present files with 'laml' or 'scm' extensions 
+                      you should disable any special handling of these extensions on your system.
+                      In that way they are treated as pure text files."))
+
+  )
+  white black blue blue
+)
+
+(end-laml)
+

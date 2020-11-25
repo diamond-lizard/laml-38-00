@@ -1,0 +1,36 @@
+(load (string-append laml-dir "laml.scm"))
+
+(laml-style "questionnaire/questionnaire")
+
+(define language-preference 'english)
+
+(questionnaire
+  "An example questionnaire"
+  "http://www.cs.auc.dk/~normark/cgi-bin/questionnaires/generic-form-registrator.cgi"
+  'sample-questionnaire
+
+  (identification-question 'q1 "Do you like LAML?")
+
+  (free-style-question 'q2 "What do you think?")
+
+  (multi-choice-question 'q3
+     "What is your favorite color(s)?"
+     (list "red" "green" "blue")
+  )
+
+  (single-choice-question 'q4
+     "Do you like Bill Clinton"
+     (list "yes" "no")
+  )
+
+  (rating-question 'q5
+     "What do you think about the weather?"
+     (list "Bad" "OK" "Good")
+  )
+
+)
+
+
+
+
+
